@@ -1,0 +1,79 @@
+% !TeX root = anexo_semana02.tex
+% !TeX program = pdflatex
+% Anexo independiente de la semana 02: demostraciones directas.
+\documentclass[10pt,a5paper]{article}
+\newif\ifmostrarSoluciones
+\mostrarSolucionestrue
+\usepackage{estilo_apuntes}
+\encabezado{Semana 2}{Anexo: demostraciones}
+
+\begin{document}
+\tituloclase{Primeros pasos en demostraciones}{Guía para demostrar implicaciones}{Anexo · Semana 2}
+
+\begin{resumen}
+Demostrar una afirmación de la forma $P\Longrightarrow Q$ significa justificar que, siempre que se cumple la hipótesis $P$, también se cumple la conclusión $Q$. Una \textbf{demostración directa} parte de $P$ y llega a $Q$ mediante pasos justificados.
+\end{resumen}
+
+\begin{nota}[: guía para escribir una demostración directa]
+\begin{enumerate}
+  \item \textbf{Identifique los objetos y su dominio.} Si la afirmación se refiere a cualesquiera $x_1,x_2\in A$, tome dos elementos arbitrarios de $A$; no elija valores particulares.
+  \item \textbf{Distinga hipótesis y conclusión.} Escriba qué afirma $P$ y qué debe obtener para probar $Q$.
+  \item \textbf{Suponga $P$.} Esta es la información de partida; todavía no puede dar por cierta la conclusión.
+  \item \textbf{Use definiciones y operaciones válidas.} Explique cómo cada paso se obtiene del anterior. Para dividir, compruebe que el divisor no es cero.
+  \item \textbf{Concluya $Q$.} Indique qué ha demostrado y por qué el argumento vale para todos los elementos considerados.
+\end{enumerate}
+\end{nota}
+
+\begin{ejemplo}[Probar inyectividad de una función]
+Demuestre que $f:\mathbb{R}\to\mathbb{R}$, $f(x)=3x+1$, es inyectiva. Por definición, debemos probar que, para cualesquiera $x_1,x_2\in\mathbb{R}$,
+\[
+\underbrace{f(x_1)=f(x_2)}_{P:\ \text{hipótesis}}
+\quad\Longrightarrow\quad
+\underbrace{x_1=x_2}_{Q:\ \text{conclusión}}.
+\]
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+Sean $x_1,x_2\in\mathbb{R}$ arbitrarios y supongamos que $f(x_1)=f(x_2)$. En cada fila, la indicación de la derecha explica cómo pasar a la siguiente igualdad:
+\[
+\renewcommand{\arraystretch}{1.5}
+\begin{array}{rcl@{\qquad}r}
+f(x_1) & = & f(x_2)
+  & \text{Usamos la ley de asignación de }f. \\
+3x_1+1 & = & 3x_2+1
+  & \text{Restamos }1\text{ a ambos lados.} \\
+3x_1 & = & 3x_2
+  & \text{Dividimos entre }3\neq0. \\
+x_1 & = & x_2
+  & \text{Obtenemos la conclusión }Q.
+\end{array}
+\]
+
+Así, la hipótesis $P$ implica la conclusión $Q$. Como $x_1$ y $x_2$ eran arbitrarios, la implicación vale para todos los pares del dominio; por tanto, $f$ es inyectiva.
+\end{solucion}
+\else\vspace{28mm}\fi
+
+\begin{nota}[errores que conviene evitar]
+Comprobar algunos pares de números no demuestra una afirmación para todos los pares. Tampoco basta partir de $x_1=x_2$ y obtener $f(x_1)=f(x_2)$: eso prueba la implicación en sentido contrario, que toda función satisface. Para demostrar inyectividad, se parte de la igualdad de imágenes y se deduce la igualdad de entradas.
+\end{nota}
+
+\begin{ejercicios}[práctica de implicaciones]
+En cada ejercicio, identifique $P$ y $Q$, escriba la hipótesis y justifique los pasos hasta la conclusión.
+\begin{enumerate}
+  \item Demuestre que $g:\mathbb{R}\to\mathbb{R}$, $g(x)=5x-2$, es inyectiva.
+  \item Sean $a,b\in\mathbb{R}$ con $a\neq0$. Demuestre que $h:\mathbb{R}\to\mathbb{R}$, $h(x)=ax+b$, es inyectiva. ¿Dónde utiliza $a\neq0$?
+  \item Para $x_1,x_2\in\mathbb{R}$, demuestre la implicación $x_1<x_2\Longrightarrow3x_1+1<3x_2+1$.
+\end{enumerate}
+\end{ejercicios}
+\ifmostrarSoluciones
+\begin{solucion}[de los ejercicios]
+\begin{enumerate}
+  \item Sean $x_1,x_2\in\mathbb{R}$. Si $g(x_1)=g(x_2)$, entonces $5x_1-2=5x_2-2$. Sumando $2$ y dividiendo entre $5$, obtenemos $x_1=x_2$; luego $g$ es inyectiva.
+  \item Sean $x_1,x_2\in\mathbb{R}$. Si $h(x_1)=h(x_2)$, entonces $ax_1+b=ax_2+b$. Restamos $b$ y dividimos entre $a$, operación válida porque $a\neq0$. Resulta $x_1=x_2$; luego $h$ es inyectiva.
+  \item Sean $x_1,x_2\in\mathbb{R}$ y supongamos $x_1<x_2$. Multiplicar por $3>0$ conserva la desigualdad: $3x_1<3x_2$. Sumar $1$ en ambos miembros da $3x_1+1<3x_2+1$, como se quería demostrar.
+\end{enumerate}
+\end{solucion}
+\fi
+
+
+\end{document}

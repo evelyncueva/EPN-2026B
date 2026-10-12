@@ -1,0 +1,490 @@
+% !TeX root = semana03.tex
+% !TeX program = pdflatex
+% Material de la semana 03, ajustado al avance real del curso.
+\documentclass[10pt,a5paper]{article}
+\newif\ifmostrarSoluciones
+\mostrarSolucionestrue
+\usepackage{tikz}
+\usepackage{estilo_apuntes}
+\usetikzlibrary{arrows.meta,positioning,babel}
+\encabezado{Semana 3}{Apunte semanal}
+
+\begin{document}
+\tituloclase{Límites: aproximación y cálculo}{Límites básicos, comparación y teorema del Sanduche}{Semana 3 · 5 horas}
+
+\begin{objetivos}
+\begin{itemize}
+  \item Interpretar límites mediante tablas, gráficas y sucesiones de entradas.
+  \item Distinguir el límite del valor de la función y reconocer su unicidad.
+  \item Utilizar funciones localmente iguales y el álgebra de límites.
+  \item Calcular límites polinómicos, racionales y radicales mediante sustitución, factorización y racionalización.
+  \item Aplicar comparación, preservación del signo y el teorema del Sanduche a funciones acotadas y oscilatorias.
+\end{itemize}
+\end{objetivos}
+
+\begin{resumen}
+El límite describe el comportamiento de una función cerca de un punto, sin depender de su valor en ese punto. Primero exploramos ese comportamiento; después lo justificamos mediante reglas algebraicas y comparaciones. Este material retoma los contenidos de límites pendientes de la semana 2.
+\end{resumen}
+
+\section*{Aproximación a un punto}
+
+\begin{definicion}[noción intuitiva de límite]
+Escribimos
+\[
+\lim_{x\to a}f(x)=L
+\]
+cuando los valores $f(x)$ pueden hacerse tan próximos a $L$ como se desee al tomar $x$ suficientemente próximo a $a$, con $x\neq a$. El límite estudia valores en un entorno alrededor de $a$ del que se excluye el propio punto $a$.
+\end{definicion}
+
+\begin{nota}
+La expresión $x\to a$ no significa que $x$ llegue a ser igual a $a$. Las afirmaciones $\lim_{x\to a}f(x)=L$ y $f(a)=L$ son diferentes y ninguna implica por sí sola la otra.
+\end{nota}
+
+\begin{ejemplo}[exploración mediante una tabla]
+Para $x\neq1$, considere
+\[
+f(x)=\frac{x^2-1}{x-1}.
+\]
+Complete o verifique la tabla y conjeture el límite cuando $x\to1$.
+\[
+\begin{array}{c|cccccc}
+x&0.9&0.99&0.999&1.001&1.01&1.1\\ \hline
+f(x)&1.9&1.99&1.999&2.001&2.01&2.1
+\end{array}
+\]
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+Los valores se aproximan a $2$ desde ambos lados. Como $x^2-1=(x-1)(x+1)$,
+\[
+f(x)=x+1\quad(x\neq1),
+\]
+y la evidencia sugiere $\lim_{x\to1}f(x)=2$, aunque $f(1)$ no está definida.
+\end{solucion}
+\else\vspace{12mm}\fi
+
+\begin{center}
+\begin{tikzpicture}[x=1.05cm,y=0.8cm,every node/.style={font=\scriptsize}]
+  \draw[Gris!70] (-0.4,0)--(3.1,0) node[right] {$x$};
+  \draw[Gris!70] (0,-0.3)--(0,3.4) node[above] {$y$};
+  \draw[Azul,very thick,domain=-0.1:2.8,samples=2] plot (\x,{\x+1});
+  \draw[fill=white,draw=Rojo,thick] (1,2) circle (2.2pt);
+  \draw[Gris,dashed] (1,0)--(1,2);
+  \node[below] at (1,0) {$1$};
+  \node[left] at (0,2) {$2$};
+  \node[right] at (1,2) {valor al que se aproxima};
+\end{tikzpicture}
+\end{center}
+
+\begin{definicion}[límites laterales]
+El \textbf{límite por la izquierda}, $\lim_{x\to a^-}f(x)$, utiliza valores $x<a$. El \textbf{límite por la derecha}, $\lim_{x\to a^+}f(x)$, utiliza valores $x>a$.
+\end{definicion}
+
+\begin{teorema}[criterio de los límites laterales]
+El límite existe y vale $L$ si y solo si existen los dos límites laterales y coinciden:
+\[
+\lim_{x\to a}f(x)=L
+\iff
+\lim_{x\to a^-}f(x)=L=\lim_{x\to a^+}f(x).
+\]
+Si los límites laterales son distintos, el límite no existe.
+\end{teorema}
+
+\begin{ejemplo}[salto]
+Considere la función $s:\mathbb{R}\to\mathbb{R}$ definida por
+\[
+s(x)=
+\begin{cases}
+  -1, & x<0,\\
+  2, & x\geq0.
+\end{cases}
+\]
+Determine los límites laterales de $s$ cuando $x$ se aproxima a $0$ y decida si existe $\lim_{x\to0}s(x)$.
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+\[
+\lim_{x\to0^-}s(x)=-1,\qquad
+\lim_{x\to0^+}s(x)=2.
+\]
+Como son distintos, $\lim_{x\to0}s(x)$ no existe, aunque $s(0)=2$ sí está definido.
+\end{solucion}
+\else\vspace{13mm}\fi
+
+\section*{Unicidad y valor de la función en el punto}
+
+\begin{teorema}[unicidad del límite]
+Si $\lim_{x\to a}f(x)$ existe, su valor es único. En consecuencia, una misma función no puede aproximarse simultáneamente a dos números distintos cuando $x\to a$.
+\end{teorema}
+
+\begin{ejercicios}[noción intuitiva de límite]
+\begin{enumerate}
+  \item Construya una tabla para estimar $\lim_{x\to2}(x^2+1)$.
+  \item Estime $\lim_{x\to3}\dfrac{x^2-9}{x-3}$ con tres valores a cada lado de $3$.
+  \item Dibuje una función con $f(2)=4$ y $\lim_{x\to2}f(x)=1$.
+  \item Explique si existe el límite en $0$ de $f(x)=|x|/x$.
+\end{enumerate}
+\end{ejercicios}
+
+\ifmostrarSoluciones
+\begin{solucion}[de los ejercicios]
+\begin{enumerate}
+  \item Los valores se aproximan a $5$.
+  \item Para $x\neq3$, el cociente es $x+3$; la tabla se aproxima a $6$.
+  \item Por ejemplo, $f(x)=1$ si $x\neq2$ y $f(2)=4$.
+  \item No existe: los límites laterales son $-1$ y $1$.
+\end{enumerate}
+\end{solucion}
+\fi
+\section*{Aproximación mediante sucesiones}
+
+\begin{definicion}[sucesión de entradas]
+Una sucesión $(x_n)$ es una lista ordenada de números, indexada por $n=1,2,\ldots$. Escribimos $x_n\to a$ cuando sus términos se acercan tanto como se desee a $a$ al aumentar $n$.
+\end{definicion}
+
+\begin{proposicion}[interpretación secuencial del límite]
+Sea $a$ un punto de acumulación del dominio de $f$, es decir, existen entradas distintas de $a$ arbitrariamente próximas a él. Entonces $\lim_{x\to a}f(x)=L$ si y solo si, para toda sucesión de entradas $x_n$ del dominio con $x_n\neq a$ y $x_n\to a$, se cumple $f(x_n)\to L$.
+\end{proposicion}
+
+\begin{ejemplo}[dos caminos hacia el mismo punto]
+Para $f(x)=(x^2-1)/(x-1)$, considere $x_n=1-1/n$ y $y_n=1+1/n$. Determine hacia dónde se acercan sus imágenes.
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+Como $f(x)=x+1$ para $x\neq1$, tenemos $f(x_n)=2-1/n\to2$ y $f(y_n)=2+1/n\to2$. Además, para cualquier sucesión admisible $z_n\to1$, $f(z_n)=z_n+1\to2$.
+\end{solucion}
+\else\vspace{15mm}\fi
+
+\begin{nota}
+Una tabla finita o unas pocas sucesiones sugieren un límite, pero no lo demuestran en general. Dos sucesiones con imágenes que tienden a valores diferentes bastan para descartar un límite único.
+\end{nota}
+
+\section*{Funciones localmente iguales}
+
+\begin{proposicion}[igualdad en un entorno perforado]
+Si $f(x)=g(x)$ para todas las entradas consideradas suficientemente próximas a $a$, excepto posiblemente $x=a$, entonces sus límites en $a$ coinciden cuando existen. La comparación se hace sobre el mismo dominio local.
+\end{proposicion}
+
+\begin{ejemplo}[el valor aislado no determina el límite]
+Compare $g(x)=x+1$ con $h(x)=x+1$ si $x\neq1$ y $h(1)=7$. Determine sus límites en $1$ y sus valores en ese punto.
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+Ambas funciones tienen límite $2$ en $1$, porque coinciden cerca de ese punto cuando $x\neq1$. Sin embargo, $g(1)=2$ y $h(1)=7$.
+\end{solucion}
+\else\vspace{12mm}\fi
+
+\section*{Límites básicos}
+
+\begin{proposicion}[límites fundamentales]
+Sean $a,c\in\mathbb{R}$ y $n\in\mathbb{N}^{*}$. Entonces
+\[
+\lim_{x\to a}c=c,\qquad
+\lim_{x\to a}x=a,\qquad
+\lim_{x\to a}x^n=a^n.
+\]
+Cuando $a>0$,
+\[
+\lim_{x\to a}\sqrt[n]{x}=\sqrt[n]{a}.
+\]
+Para $n$ par y $a=0$, esta última afirmación se interpreta como límite por la derecha.
+\end{proposicion}
+
+\begin{teorema}[álgebra de límites]
+Suponga que $\lim_{x\to a}f(x)=L$, $\lim_{x\to a}g(x)=M$ y $\lambda\in\mathbb{R}$. Entonces:
+\begin{align*}
+\lim_{x\to a}(f(x)+g(x))&=L+M,\\
+\lim_{x\to a}(f(x)-g(x))&=L-M,\\
+\lim_{x\to a}\lambda f(x)&=\lambda L,\\
+\lim_{x\to a}f(x)g(x)&=LM.
+\end{align*}
+Si $M\neq0$, también
+\[
+\lim_{x\to a}\frac{f(x)}{g(x)}=\frac{L}{M}.
+\]
+Además, si $n\in\mathbb{N}^{*}$, entonces
+\[
+\lim_{x\to a}\bigl(f(x)\bigr)^n=L^n.
+\]
+Si $m\in\mathbb{N}^{*}$ y la expresión radical está definida para los valores de $x$ cercanos a $a$, entonces
+\[
+\lim_{x\to a}\sqrt[m]{f(x)}=\sqrt[m]{L}.
+\]
+\end{teorema}
+
+\begin{nota}
+La condición $M\neq0$ en la regla del cociente es indispensable. Una forma $0/0$ es \textbf{indeterminada}: distintos cocientes pueden presentar esa forma y tener límites diferentes o no tener límite.
+\end{nota}
+
+\section*{Sustitución directa}
+
+\begin{proposicion}[funciones algebraicas]
+Sea $a\in\mathbb{R}$.
+\begin{enumerate}
+  \item Si $p$ es un polinomio, entonces $\lim_{x\to a}p(x)=p(a)$.
+  \item Si $r=p/q$ es racional y $q(a)\neq0$, entonces $\lim_{x\to a}r(x)=r(a)$.
+  \item Para expresiones radicales, la sustitución es válida cuando $a$ y los valores próximos considerados pertenecen al dominio de la raíz.
+\end{enumerate}
+\end{proposicion}
+
+\begin{ejemplo}[sustitución directa]
+Calcule
+\[
+\lim_{x\to-2}(3x^3-x+4),\qquad
+\lim_{x\to1}\frac{x^2+2}{x+3},\qquad
+\lim_{x\to5}\sqrt{x+4}.
+\]
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+Los denominadores y radicales son admisibles en los puntos indicados. Por sustitución,
+\[
+-18,\qquad \frac34,\qquad 3,
+\]
+respectivamente.
+\end{solucion}
+\else\vspace{15mm}\fi
+
+\section*{Indeterminaciones algebraicas}
+
+\begin{proposicion}[estrategia de simplificación local]
+Si la sustitución produce $0/0$:
+\begin{enumerate}
+  \item factorice numerador y denominador o racionalice la expresión;
+  \item simplifique solamente para $x\neq a$;
+  \item calcule el límite de la expresión simplificada;
+  \item conserve las restricciones del problema original.
+\end{enumerate}
+La justificación es que ambas expresiones son localmente iguales alrededor de $a$.
+\end{proposicion}
+
+\begin{ejemplo}[factorización]
+Calcule
+\[
+\lim_{x\to3}\frac{x^2-9}{x-3}.
+\]
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+La sustitución produce $0/0$. Para $x\neq3$,
+\[
+\frac{x^2-9}{x-3}=\frac{(x-3)(x+3)}{x-3}=x+3.
+\]
+Las funciones son localmente iguales alrededor de $3$; por tanto, el límite es $6$.
+\end{solucion}
+\else\vspace{16mm}\fi
+
+\begin{ejemplo}[racionalización del numerador]
+Calcule
+\[
+\lim_{x\to0}\frac{\sqrt{x+4}-2}{x}.
+\]
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+Se multiplica por el conjugado:
+\begin{align*}
+\frac{\sqrt{x+4}-2}{x}
+&=\frac{(\sqrt{x+4}-2)(\sqrt{x+4}+2)}{x(\sqrt{x+4}+2)}\\
+&=\frac{1}{\sqrt{x+4}+2},\qquad x\neq0.
+\end{align*}
+En consecuencia, el límite es $1/4$.
+\end{solucion}
+\else\vspace{18mm}\fi
+
+\begin{ejemplo}[racionalización del denominador]
+Calcule
+\[
+\lim_{x\to4}\frac{x-4}{\sqrt{x}-2}.
+\]
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+Para $x\neq4$,
+\[
+\frac{x-4}{\sqrt{x}-2}
+=\frac{(\sqrt{x}-2)(\sqrt{x}+2)}{\sqrt{x}-2}
+=\sqrt{x}+2.
+\]
+Luego el límite es $4$.
+\end{solucion}
+\else\vspace{15mm}\fi
+
+\begin{nota}
+No debe cancelarse un sumando. Solo pueden cancelarse factores no nulos. Por ejemplo, en $(x^2-9)/(x-3)$ se factoriza primero y se cancela el factor $x-3$ bajo la condición $x\neq3$.
+\end{nota}
+
+\begin{ejercicios}[álgebra y cálculo de límites]
+Calcule los siguientes límites e indique la técnica principal.
+\begin{enumerate}
+  \item $\displaystyle\lim_{x\to2}(4x^3-3x+1)$.
+  \item $\displaystyle\lim_{x\to-1}\frac{x^2+3x+5}{x^2+4}$.
+  \item $\displaystyle\lim_{x\to4}\sqrt{2x+1}$.
+  \item $\displaystyle\lim_{x\to2}\frac{x^2-4}{x-2}$.
+  \item $\displaystyle\lim_{x\to-3}\frac{x^2+5x+6}{x+3}$.
+  \item $\displaystyle\lim_{x\to1}\frac{x^3-1}{x-1}$.
+  \item $\displaystyle\lim_{x\to0}\frac{\sqrt{1+x}-1}{x}$.
+  \item $\displaystyle\lim_{x\to5}\frac{x-5}{\sqrt{x-1}-2}$.
+  \item $\displaystyle\lim_{x\to2}\frac{\sqrt{x+2}-2}{x-2}$.
+  \item $\displaystyle\lim_{x\to0^+}\sqrt{x}$.
+\end{enumerate}
+\end{ejercicios}
+
+\ifmostrarSoluciones
+\begin{solucion}[de los ejercicios]
+\begin{enumerate}
+  \item $27$, por sustitución directa.
+  \item $3/5$, por sustitución directa.
+  \item $3$, por sustitución directa.
+  \item $4$, pues $(x^2-4)/(x-2)=x+2$ para $x\neq2$.
+  \item $-1$, pues $(x+2)(x+3)/(x+3)=x+2$ para $x\neq-3$.
+  \item $3$, usando $x^3-1=(x-1)(x^2+x+1)$.
+  \item $1/2$, al racionalizar el numerador.
+  \item $4$, porque el cociente se simplifica a $\sqrt{x-1}+2$.
+  \item $1/4$, al racionalizar el numerador.
+  \item $0$; solo se considera la aproximación por la derecha.
+\end{enumerate}
+\end{solucion}
+\fi
+
+\section*{Monotonía del límite y preservación del signo}
+
+En los siguientes resultados, $a$ es un punto de acumulación del dominio común. Las desigualdades se exigen para entradas suficientemente próximas a $a$, con $x\neq a$, y los límites indicados son finitos.
+
+\begin{teorema}[monotonía o comparación de límites]
+Si $f(x)\leq g(x)$ cerca de $a$, y
+\[
+\lim_{x\to a}f(x)=L,\qquad \lim_{x\to a}g(x)=M,
+\]
+entonces $L\leq M$. En particular, si $m\leq f(x)\leq M$ y el límite de $f$ existe, también pertenece a $[m,M]$.
+\end{teorema}
+
+\begin{nota}
+Aquí monotonía del límite significa que el paso al límite conserva el orden; no exige que las funciones sean crecientes o decrecientes. Una desigualdad estricta puede convertirse en igualdad: $0<x^2$ para $x\neq0$, pero ambas expresiones tienen límite $0$.
+\end{nota}
+
+\begin{teorema}[preservación del signo]
+Si $\lim_{x\to a}f(x)=L>0$, entonces $f(x)>0$ para todas las entradas suficientemente próximas a $a$, distintas de $a$. Si $L<0$, entonces $f(x)<0$ cerca de $a$.
+\end{teorema}
+
+\begin{nota}
+Si $L>0$, basta que las imágenes estén a una distancia menor que $L/2$ de $L$: así $f(x)>L/2>0$. Para $L<0$ se razona de manera análoga. Si $L=0$, no puede concluirse un signo fijo. Recíprocamente, si $f(x)\geq0$ cerca de $a$ y su límite existe, este es no negativo, aunque puede ser cero.
+\end{nota}
+
+\begin{ejemplo}[signo cerca de un punto]
+Sin resolver una desigualdad completa, justifique que $p(x)=x^2-3$ es positiva cerca de $2$. ¿Qué sucede con $q(x)=x-2$ cerca de $2$?
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+Como $\lim_{x\to2}p(x)=1>0$, el signo de $p$ es positivo cerca de $2$. En cambio, $\lim_{x\to2}q(x)=0$: $q$ es negativa a la izquierda y positiva a la derecha. Un límite nulo no garantiza preservación de un signo estricto.
+\end{solucion}
+\else\vspace{18mm}\fi
+
+\section*{Teorema del Sanduche}
+
+\begin{teorema}[del Sanduche o del encaje]
+Suponga que, para $x$ suficientemente próximo a $a$ y $x\neq a$,
+\[
+g(x)\leq f(x)\leq h(x).
+\]
+Si $\lim_{x\to a}g(x)=\lim_{x\to a}h(x)=L$, entonces
+\[
+\lim_{x\to a}f(x)=L.
+\]
+\end{teorema}
+
+\begin{nota}
+Las dos cotas deben acercarse al mismo número. El teorema permite establecer la existencia del límite de $f$ sin suponerla previamente. No se necesita que cada factor de una expresión tenga límite.
+\end{nota}
+
+\begin{ejemplo}[una oscilación amortiguada]
+Calcule $\displaystyle\lim_{x\to0}x^2\sin(1/x)$.
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+Para $x\neq0$, $-1\leq\sin(1/x)\leq1$. Al multiplicar por $x^2\geq0$,
+\[
+-x^2\leq x^2\sin(1/x)\leq x^2.
+\]
+Las dos cotas tienden a $0$, de modo que el límite es $0$. La oscilación permanece, pero su amplitud disminuye.
+\end{solucion}
+\else\vspace{18mm}\fi
+
+\begin{center}
+\begin{tikzpicture}[x=4.1cm,y=2.4cm,every node/.style={font=\scriptsize}]
+  \draw[->,Gris] (-1.1,0)--(1.15,0) node[right] {$x$};
+  \draw[->,Gris] (0,-1.1)--(0,1.2) node[above] {$y$};
+  \draw[Rojo,dashed,domain=-1:1,samples=60] plot (\x,{\x*\x});
+  \draw[Rojo,dashed,domain=-1:1,samples=60] plot (\x,{-\x*\x});
+  % Muestreo ilustrativo: las cotas justifican el límite, no el dibujo.
+  \draw[Azul,thick,domain=-1:-0.025,samples=350] plot (\x,{\x*\x*sin(deg(1/\x))});
+  \draw[Azul,thick,domain=0.025:1,samples=350] plot (\x,{\x*\x*sin(deg(1/\x))});
+  \node[Rojo,right] at (0.8,0.75) {$y=x^2$};
+  \node[Rojo,right] at (0.8,-0.75) {$y=-x^2$};
+\end{tikzpicture}
+\end{center}
+La gráfica ilustra las cotas; cerca del origen, las oscilaciones quedan encerradas en una franja cada vez más estrecha.
+
+\begin{ejemplo}[acotada no significa convergente]
+Explique por qué $\sin(1/x)$ está acotada cerca de $0$ pero no tiene límite allí.
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+Sus valores están entre $-1$ y $1$, pero esas cotas tienen límites diferentes. Además, las sucesiones
+\[
+u_n=\frac{1}{\pi/2+2\pi n},\qquad
+v_n=\frac{1}{3\pi/2+2\pi n}
+\]
+tienden a $0$, mientras que $\sin(1/u_n)=1$ y $\sin(1/v_n)=-1$. Por el criterio secuencial, el límite no existe. Los argumentos trigonométricos se expresan en radianes.
+\end{solucion}
+\else\vspace{22mm}\fi
+
+\begin{proposicion}[factor que tiende a cero por factor acotado]
+Si $u(x)\to0$ cuando $x\to a$ y existe una constante $C\geq0$ tal que $|v(x)|\leq C$ cerca de $a$, entonces $u(x)v(x)\to0$.
+\end{proposicion}
+En efecto, $-C|u(x)|\leq u(x)v(x)\leq C|u(x)|$, y ambas cotas tienden a cero. No es necesario que $v$ tenga límite.
+
+\begin{ejemplo}[uso de una cota absoluta]
+Calcule $\displaystyle\lim_{x\to0}x\cos(1/x)$.
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+Como $|\cos(1/x)|\leq1$, se cumple
+\[
+-|x|\leq x\cos(1/x)\leq |x|.
+\]
+El límite es $0$. Usar $|x|$ evita invertir incorrectamente desigualdades cuando $x<0$.
+\end{solucion}
+\else\vspace{15mm}\fi
+
+\begin{ejercicios}[comparación, signo y encaje]
+\begin{enumerate}
+  \item Si $2-x^2\leq f(x)\leq2+x^2$ cerca de $0$, determine $\lim_{x\to0}f(x)$.
+  \item Calcule $\displaystyle\lim_{x\to0}x^2\cos(3/x)$.
+  \item Calcule $\displaystyle\lim_{x\to0}(x-1)x\sin(1/x)$.
+  \item Si $|b(x)|\leq5$ cerca de $2$, calcule $\displaystyle\lim_{x\to2}(x-2)b(x)$.
+  \item Si $\lim_{x\to a}f(x)=-3$, ¿qué signo tiene $f$ suficientemente cerca de $a$? Justifique.
+  \item Si $f(x)>g(x)$ cerca de $a$ y ambos límites existen, ¿se deduce que $\lim f>\lim g$? Dé un contraejemplo.
+  \item ¿Basta saber que $-1\leq f(x)\leq1$ para afirmar que $\lim_{x\to0}f(x)$ existe?
+  \item Si $f(x)\geq4$ cerca de $a$ y su límite existe, ¿puede ese límite ser $3$?
+\end{enumerate}
+\end{ejercicios}
+
+\ifmostrarSoluciones
+\begin{solucion}[de los ejercicios]
+\begin{enumerate}
+  \item $2$, por el teorema del Sanduche.
+  \item $0$, pues $-x^2\leq x^2\cos(3/x)\leq x^2$.
+  \item $0$, pues el valor absoluto está acotado por $|x-1||x|\to0$.
+  \item $0$, pues el valor absoluto está acotado por $5|x-2|\to0$.
+  \item Negativo: las imágenes pueden mantenerse a distancia menor que $3/2$ de $-3$.
+  \item No; $f(x)=x^2>g(x)=0$ para $x\neq0$, pero ambos límites en $0$ son $0$.
+  \item No. $\sin(1/x)$ es un contraejemplo.
+  \item No; la comparación implica $\lim_{x\to a}f(x)\geq4$.
+\end{enumerate}
+\end{solucion}
+\fi
+
+\fuentes{\textbf{Para ampliar:} \emph{Cálculo en una variable: notas de clase 2018-B}, apartados de límites; J. Stewart, \emph{Cálculo de una variable: trascendentes tempranas}, §§2.2--2.3; y G. Strang--E. Herman, \emph{Cálculo, volumen 1}, OpenStax, §§2.2--2.3.}
+
+\end{document}
