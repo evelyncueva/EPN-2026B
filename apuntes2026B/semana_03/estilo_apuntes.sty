@@ -63,7 +63,8 @@
   #1~#2\if\relax\detokenize{#3}\relax\else: #3\fi}
 \newtcolorbox[auto counter]{definicion}[1][]{breakable,colback=AzulClaro!55,colframe=Azul,title={\titulonumerado{Definición}{\thetcbcounter}{#1}},fonttitle=\bfseries,arc=2mm,boxrule=0.7pt}
 \newtcolorbox[auto counter]{teorema}[1][]{breakable,colback=GrisClaro,colframe=Azul!75,title={\titulonumerado{Teorema}{\thetcbcounter}{#1}},fonttitle=\bfseries,arc=2mm,boxrule=0.6pt}
-\newtcolorbox[auto counter]{proposicion}[1][]{breakable,colback=GrisClaro,colframe=Azul!75,title={\titulonumerado{Proposición o criterio}{\thetcbcounter}{#1}},fonttitle=\bfseries,arc=2mm,boxrule=0.6pt}
+\newtcolorbox[auto counter]{proposicion}[1][]{breakable,colback=GrisClaro,colframe=Azul!75,title={\titulonumerado{Proposición}{\thetcbcounter}{#1}},fonttitle=\bfseries,arc=2mm,boxrule=0.6pt}
+\newtcolorbox[auto counter]{criterio}[1][]{breakable,colback=GrisClaro,colframe=Azul!75,title={\titulonumerado{Criterio}{\thetcbcounter}{#1}},fonttitle=\bfseries,arc=2mm,boxrule=0.6pt}
 \newcounter{ejemplo}
 \newtcolorbox[use counter=ejemplo]{ejemplo}[1][]{enhanced,breakable,blanker,borderline west={1pt}{0pt}{Gris!70},title={\titulonumerado{Ejemplo}{\theejemplo}{#1}},coltitle=Azul,fonttitle=\bfseries,left=3mm,right=0mm,top=1mm,bottom=1mm,before skip=5pt,after skip=5pt}
 \newtcolorbox[auto counter]{ejercicios}[1][]{breakable,colback=GrisClaro,colframe=Azul,title={\titulonumerado{Ejercicios propuestos}{\thetcbcounter}{#1}},fonttitle=\bfseries,arc=2mm,boxrule=0.7pt}

@@ -14,7 +14,7 @@
 
 \begin{objetivos}
 \begin{itemize}
-  \item Interpretar límites mediante tablas, gráficas y sucesiones de entradas.
+  \item Interpretar límites mediante tablas y gráficas.
   \item Distinguir el límite del valor de la función y reconocer su unicidad.
   \item Utilizar funciones localmente iguales y el álgebra de límites.
   \item Calcular límites polinómicos, racionales y radicales mediante sustitución, factorización y racionalización.
@@ -23,7 +23,7 @@
 \end{objetivos}
 
 \begin{resumen}
-El límite describe el comportamiento de una función cerca de un punto, sin depender de su valor en ese punto. Primero exploramos ese comportamiento; después lo justificamos mediante reglas algebraicas y comparaciones. Este material retoma los contenidos de límites pendientes de la semana 2.
+El límite describe el comportamiento de una función cerca de un punto, sin depender de su valor en ese punto. Primero exploramos ese comportamiento; después lo justificamos mediante reglas algebraicas y comparaciones. 
 \end{resumen}
 
 \section*{Aproximación a un punto}
@@ -37,11 +37,17 @@ cuando los valores $f(x)$ pueden hacerse tan próximos a $L$ como se desee al to
 \end{definicion}
 
 \begin{nota}
-La expresión $x\to a$ no significa que $x$ llegue a ser igual a $a$. Las afirmaciones $\lim_{x\to a}f(x)=L$ y $f(a)=L$ son diferentes y ninguna implica por sí sola la otra.
+La expresión $x\to a$ no significa que $x$ llegue a ser igual a $a$. Las afirmaciones
+\[
+  \lim_{x\to a}f(x)=L
+  \qquad\text{y}\qquad
+  f(a)=L
+\]
+son diferentes y ninguna implica por sí sola la otra.
 \end{nota}
 
 \begin{ejemplo}[exploración mediante una tabla]
-Para $x\neq1$, considere
+Considere la función $f\colon\mathbb{R}\setminus\{1\}\to\mathbb{R}$ definida por
 \[
 f(x)=\frac{x^2-1}{x-1}.
 \]
@@ -59,7 +65,11 @@ Los valores se aproximan a $2$ desde ambos lados. Como $x^2-1=(x-1)(x+1)$,
 \[
 f(x)=x+1\quad(x\neq1),
 \]
-y la evidencia sugiere $\lim_{x\to1}f(x)=2$, aunque $f(1)$ no está definida.
+y la evidencia sugiere
+\[
+  \lim_{x\to1}f(x)=2,
+\]
+aunque $f(1)$ no está definida.
 \end{solucion}
 \else\vspace{12mm}\fi
 
@@ -77,10 +87,18 @@ y la evidencia sugiere $\lim_{x\to1}f(x)=2$, aunque $f(1)$ no está definida.
 \end{center}
 
 \begin{definicion}[límites laterales]
-El \textbf{límite por la izquierda}, $\lim_{x\to a^-}f(x)$, utiliza valores $x<a$. El \textbf{límite por la derecha}, $\lim_{x\to a^+}f(x)$, utiliza valores $x>a$.
+El \textbf{límite por la izquierda}
+\[
+  \lim_{x\to a^-}f(x)
+\]
+utiliza valores $x<a$. El \textbf{límite por la derecha}
+\[
+  \lim_{x\to a^+}f(x)
+\]
+utiliza valores $x>a$.
 \end{definicion}
 
-\begin{teorema}[criterio de los límites laterales]
+\begin{proposicion}[límites laterales]
 El límite existe y vale $L$ si y solo si existen los dos límites laterales y coinciden:
 \[
 \lim_{x\to a}f(x)=L
@@ -88,7 +106,7 @@ El límite existe y vale $L$ si y solo si existen los dos límites laterales y c
 \lim_{x\to a^-}f(x)=L=\lim_{x\to a^+}f(x).
 \]
 Si los límites laterales son distintos, el límite no existe.
-\end{teorema}
+\end{proposicion}
 
 \begin{ejemplo}[salto]
 Considere la función $s:\mathbb{R}\to\mathbb{R}$ definida por
@@ -99,7 +117,10 @@ s(x)=
   2, & x\geq0.
 \end{cases}
 \]
-Determine los límites laterales de $s$ cuando $x$ se aproxima a $0$ y decida si existe $\lim_{x\to0}s(x)$.
+Determine los límites laterales de $s$ cuando $x$ se aproxima a $0$ y decida si existe
+\[
+  \lim_{x\to0}s(x).
+\]
 \end{ejemplo}
 \ifmostrarSoluciones
 \begin{solucion}
@@ -107,22 +128,30 @@ Determine los límites laterales de $s$ cuando $x$ se aproxima a $0$ y decida si
 \lim_{x\to0^-}s(x)=-1,\qquad
 \lim_{x\to0^+}s(x)=2.
 \]
-Como son distintos, $\lim_{x\to0}s(x)$ no existe, aunque $s(0)=2$ sí está definido.
+Como son distintos,
+\[
+  \lim_{x\to0}s(x)
+\]
+no existe, aunque $s(0)=2$ sí está definido.
 \end{solucion}
 \else\vspace{13mm}\fi
 
 \section*{Unicidad y valor de la función en el punto}
 
 \begin{teorema}[unicidad del límite]
-Si $\lim_{x\to a}f(x)$ existe, su valor es único. En consecuencia, una misma función no puede aproximarse simultáneamente a dos números distintos cuando $x\to a$.
+Si
+\[
+  \lim_{x\to a}f(x)
+\]
+existe, su valor es único. En consecuencia, una misma función no puede aproximarse simultáneamente a dos números distintos cuando $x\to a$.
 \end{teorema}
 
 \begin{ejercicios}[noción intuitiva de límite]
 \begin{enumerate}
-  \item Construya una tabla para estimar $\lim_{x\to2}(x^2+1)$.
-  \item Estime $\lim_{x\to3}\dfrac{x^2-9}{x-3}$ con tres valores a cada lado de $3$.
-  \item Dibuje una función con $f(2)=4$ y $\lim_{x\to2}f(x)=1$.
-  \item Explique si existe el límite en $0$ de $f(x)=|x|/x$.
+  \item Construya una tabla para estimar $\displaystyle\lim_{x\to2}(x^2+1)$.
+  \item Estime $\displaystyle\lim_{x\to3}\dfrac{x^2-9}{x-3}$ con tres valores a cada lado de $3$.
+  \item Dibuje una función con $f(2)=4$ y $\displaystyle\lim_{x\to2}f(x)=1$.
+  \item Sea $f\colon\mathbb{R}\setminus\{0\}\to\mathbb{R}$, definida por $f(x)=|x|/x$. Explique si existe el límite de $f$ en $0$.
 \end{enumerate}
 \end{ejercicios}
 
@@ -131,42 +160,49 @@ Si $\lim_{x\to a}f(x)$ existe, su valor es único. En consecuencia, una misma fu
 \begin{enumerate}
   \item Los valores se aproximan a $5$.
   \item Para $x\neq3$, el cociente es $x+3$; la tabla se aproxima a $6$.
-  \item Por ejemplo, $f(x)=1$ si $x\neq2$ y $f(2)=4$.
+  \item Por ejemplo, $f\colon\mathbb{R}\to\mathbb{R}$, definida por
+  \[
+    f(x)=
+    \begin{cases}
+      1, & x\neq2,\\
+      4, & x=2.
+    \end{cases}
+  \]
   \item No existe: los límites laterales son $-1$ y $1$.
 \end{enumerate}
 \end{solucion}
 \fi
-\section*{Aproximación mediante sucesiones}
-
-\begin{definicion}[sucesión de entradas]
-Una sucesión $(x_n)$ es una lista ordenada de números, indexada por $n=1,2,\ldots$. Escribimos $x_n\to a$ cuando sus términos se acercan tanto como se desee a $a$ al aumentar $n$.
-\end{definicion}
-
-\begin{proposicion}[interpretación secuencial del límite]
-Sea $a$ un punto de acumulación del dominio de $f$, es decir, existen entradas distintas de $a$ arbitrariamente próximas a él. Entonces $\lim_{x\to a}f(x)=L$ si y solo si, para toda sucesión de entradas $x_n$ del dominio con $x_n\neq a$ y $x_n\to a$, se cumple $f(x_n)\to L$.
-\end{proposicion}
-
-\begin{ejemplo}[dos caminos hacia el mismo punto]
-Para $f(x)=(x^2-1)/(x-1)$, considere $x_n=1-1/n$ y $y_n=1+1/n$. Determine hacia dónde se acercan sus imágenes.
-\end{ejemplo}
-\ifmostrarSoluciones
-\begin{solucion}
-Como $f(x)=x+1$ para $x\neq1$, tenemos $f(x_n)=2-1/n\to2$ y $f(y_n)=2+1/n\to2$. Además, para cualquier sucesión admisible $z_n\to1$, $f(z_n)=z_n+1\to2$.
-\end{solucion}
-\else\vspace{15mm}\fi
-
-\begin{nota}
-Una tabla finita o unas pocas sucesiones sugieren un límite, pero no lo demuestran en general. Dos sucesiones con imágenes que tienden a valores diferentes bastan para descartar un límite único.
-\end{nota}
-
 \section*{Funciones localmente iguales}
 
-\begin{proposicion}[igualdad en un entorno perforado]
-Si $f(x)=g(x)$ para todas las entradas consideradas suficientemente próximas a $a$, excepto posiblemente $x=a$, entonces sus límites en $a$ coinciden cuando existen. La comparación se hace sobre el mismo dominio local.
+\begin{proposicion}[igualdad en un entorno]
+Suponga que existe un intervalo abierto $I$ que contiene a $a$, tal que $f$ y $g$ están definidas en $I\setminus\{a\}$ y satisfacen
+\[
+  f(x)=g(x)\qquad\text{para todo }x\in I\setminus\{a\}.
+\]
+Entonces
+\[
+  \lim_{x\to a}f(x)
+  \quad\text{existe si y solo si}\quad
+  \lim_{x\to a}g(x)
+  \quad\text{existe}.
+\]
+En tal caso,
+\[
+  \lim_{x\to a}f(x)=\lim_{x\to a}g(x).
+\]
+Los valores $f(a)$ y $g(a)$ no intervienen: pueden ser distintos o incluso no estar definidos.
 \end{proposicion}
 
 \begin{ejemplo}[el valor aislado no determina el límite]
-Compare $g(x)=x+1$ con $h(x)=x+1$ si $x\neq1$ y $h(1)=7$. Determine sus límites en $1$ y sus valores en ese punto.
+Sean $g,h\colon\mathbb{R}\to\mathbb{R}$, definidas por $g(x)=x+1$ y
+\[
+  h(x)=
+  \begin{cases}
+    x+1, & x\neq1,\\
+    7, & x=1.
+  \end{cases}
+\]
+Compare sus límites en $1$ y sus valores en ese punto.
 \end{ejemplo}
 \ifmostrarSoluciones
 \begin{solucion}
@@ -191,24 +227,50 @@ Para $n$ par y $a=0$, esta última afirmación se interpreta como límite por la
 \end{proposicion}
 
 \begin{teorema}[álgebra de límites]
-Suponga que $\lim_{x\to a}f(x)=L$, $\lim_{x\to a}g(x)=M$ y $\lambda\in\mathbb{R}$. Entonces:
+Suponga que
+\[
+  \displaystyle \lim_{x\to a}f(x)=L,
+  \qquad
+  \displaystyle \lim_{x\to a}g(x)=M,
+  \qquad
+  \lambda\in\mathbb{R}.
+\]
+Entonces:
 \begin{align*}
-\lim_{x\to a}(f(x)+g(x))&=L+M,\\
-\lim_{x\to a}(f(x)-g(x))&=L-M,\\
-\lim_{x\to a}\lambda f(x)&=\lambda L,\\
-\lim_{x\to a}f(x)g(x)&=LM.
+\displaystyle \lim_{x\to a}\bigl(f(x)+g(x)\bigr)
+  &=\displaystyle \lim_{x\to a}f(x)
+    +\displaystyle \lim_{x\to a}g(x)
+    =L+M,\\
+\displaystyle \lim_{x\to a}\bigl(f(x)-g(x)\bigr)
+  &=\displaystyle \lim_{x\to a}f(x)
+    -\displaystyle \lim_{x\to a}g(x)
+    =L-M,\\
+\displaystyle \lim_{x\to a}\bigl(\lambda f(x)\bigr)
+  &=\lambda\displaystyle \lim_{x\to a}f(x)
+    =\lambda L,\\
+\displaystyle \lim_{x\to a}\bigl(f(x)g(x)\bigr)
+  &=\left(\displaystyle \lim_{x\to a}f(x)\right)
+    \left(\displaystyle \lim_{x\to a}g(x)\right)
+    =LM.
 \end{align*}
 Si $M\neq0$, también
 \[
-\lim_{x\to a}\frac{f(x)}{g(x)}=\frac{L}{M}.
+  \displaystyle \lim_{x\to a}\frac{f(x)}{g(x)}
+  =\frac{\displaystyle \lim_{x\to a}f(x)}
+         {\displaystyle \lim_{x\to a}g(x)}
+  =\frac{L}{M}.
 \]
 Además, si $n\in\mathbb{N}^{*}$, entonces
 \[
-\lim_{x\to a}\bigl(f(x)\bigr)^n=L^n.
+  \displaystyle \lim_{x\to a}\bigl(f(x)\bigr)^n
+  =\left(\displaystyle \lim_{x\to a}f(x)\right)^n
+  =L^n.
 \]
 Si $m\in\mathbb{N}^{*}$ y la expresión radical está definida para los valores de $x$ cercanos a $a$, entonces
 \[
-\lim_{x\to a}\sqrt[m]{f(x)}=\sqrt[m]{L}.
+  \displaystyle \lim_{x\to a}\sqrt[m]{f(x)}
+  =\sqrt[m]{\displaystyle \lim_{x\to a}f(x)}
+  =\sqrt[m]{L}.
 \]
 \end{teorema}
 
@@ -221,8 +283,14 @@ La condición $M\neq0$ en la regla del cociente es indispensable. Una forma $0/0
 \begin{proposicion}[funciones algebraicas]
 Sea $a\in\mathbb{R}$.
 \begin{enumerate}
-  \item Si $p$ es un polinomio, entonces $\lim_{x\to a}p(x)=p(a)$.
-  \item Si $r=p/q$ es racional y $q(a)\neq0$, entonces $\lim_{x\to a}r(x)=r(a)$.
+  \item Si $p$ es un polinomio, entonces
+  \[
+    \lim_{x\to a}p(x)=p(a).
+  \]
+  \item Si $r=p/q$ es racional y $q(a)\neq0$, entonces
+  \[
+    \lim_{x\to a}r(x)=r(a).
+  \]
   \item Para expresiones radicales, la sustitución es válida cuando $a$ y los valores próximos considerados pertenecen al dominio de la raíz.
 \end{enumerate}
 \end{proposicion}
@@ -247,7 +315,7 @@ respectivamente.
 
 \section*{Indeterminaciones algebraicas}
 
-\begin{proposicion}[estrategia de simplificación local]
+\begin{criterio}[simplificación local]
 Si la sustitución produce $0/0$:
 \begin{enumerate}
   \item factorice numerador y denominador o racionalice la expresión;
@@ -256,7 +324,7 @@ Si la sustitución produce $0/0$:
   \item conserve las restricciones del problema original.
 \end{enumerate}
 La justificación es que ambas expresiones son localmente iguales alrededor de $a$.
-\end{proposicion}
+\end{criterio}
 
 \begin{ejemplo}[factorización]
 Calcule
@@ -349,7 +417,7 @@ Calcule los siguientes límites e indique la técnica principal.
 
 \section*{Monotonía del límite y preservación del signo}
 
-En los siguientes resultados, $a$ es un punto de acumulación del dominio común. Las desigualdades se exigen para entradas suficientemente próximas a $a$, con $x\neq a$, y los límites indicados son finitos.
+En los siguientes resultados, suponemos que existen puntos en el dominio común de las funciones, distintos de $a$, tan próximos a $a$ como se desee. Las desigualdades se exigen para puntos del dominio suficientemente próximos a $a$, con $x\neq a$, y los límites indicados son finitos.
 
 \begin{teorema}[monotonía o comparación de límites]
 Si $f(x)\leq g(x)$ cerca de $a$, y
@@ -360,25 +428,61 @@ entonces $L\leq M$. En particular, si $m\leq f(x)\leq M$ y el límite de $f$ exi
 \end{teorema}
 
 \begin{nota}
-Aquí monotonía del límite significa que el paso al límite conserva el orden; no exige que las funciones sean crecientes o decrecientes. Una desigualdad estricta puede convertirse en igualdad: $0<x^2$ para $x\neq0$, pero ambas expresiones tienen límite $0$.
+Aquí monotonía del límite significa que el paso al límite conserva el orden; no exige que las funciones sean crecientes o decrecientes. Considere las funciones $f,g\colon\mathbb{R}\to\mathbb{R}$ definidas por $f(x)=0$ y $g(x)=x^2$. Para todo $x\neq0$ se cumple la desigualdad estricta
+\[
+  f(x)<g(x),
+  \qquad\text{es decir,}\qquad
+  0<x^2.
+\]
+Sin embargo, los valores positivos de $x^2$ pueden aproximarse tanto como se desee a $0$ cuando $x\to0$. Por ello,
+\[
+  \lim_{x\to0}f(x)
+  =\lim_{x\to0}g(x)
+  =0.
+\]
+Así, una desigualdad estricta entre los valores de dos funciones puede convertirse en una igualdad entre sus límites. En general, de $f(x)<g(x)$ cerca de $a$ solo se puede concluir
+\[
+  \lim_{x\to a}f(x)
+  \leq
+  \lim_{x\to a}g(x),
+\]
+si ambos límites existen; no necesariamente se obtiene una desigualdad estricta.
 \end{nota}
 
 \begin{teorema}[preservación del signo]
-Si $\lim_{x\to a}f(x)=L>0$, entonces $f(x)>0$ para todas las entradas suficientemente próximas a $a$, distintas de $a$. Si $L<0$, entonces $f(x)<0$ cerca de $a$.
+Si
+\[
+  \lim_{x\to a}f(x)=L>0,
+\]
+entonces $f(x)>0$ para todas las entradas suficientemente próximas a $a$, distintas de $a$. Si $L<0$, entonces $f(x)<0$ cerca de $a$.
 \end{teorema}
 
-\begin{nota}
-Si $L>0$, basta que las imágenes estén a una distancia menor que $L/2$ de $L$: así $f(x)>L/2>0$. Para $L<0$ se razona de manera análoga. Si $L=0$, no puede concluirse un signo fijo. Recíprocamente, si $f(x)\geq0$ cerca de $a$ y su límite existe, este es no negativo, aunque puede ser cero.
-\end{nota}
-
 \begin{ejemplo}[signo cerca de un punto]
-Sin resolver una desigualdad completa, justifique que $p(x)=x^2-3$ es positiva cerca de $2$. ¿Qué sucede con $q(x)=x-2$ cerca de $2$?
+Sean $p,q\colon\mathbb{R}\to\mathbb{R}$, definidas por $p(x)=x^2-3$ y $q(x)=x-2$. Sin resolver una desigualdad completa, justifique que $p$ es positiva cerca de $2$. ¿Qué sucede con $q$ cerca de $2$?
 \end{ejemplo}
 \ifmostrarSoluciones
 \begin{solucion}
-Como $\lim_{x\to2}p(x)=1>0$, el signo de $p$ es positivo cerca de $2$. En cambio, $\lim_{x\to2}q(x)=0$: $q$ es negativa a la izquierda y positiva a la derecha. Un límite nulo no garantiza preservación de un signo estricto.
+Como
+\[
+  \lim_{x\to2}p(x)=1>0,
+\]
+el signo de $p$ es positivo cerca de $2$. En cambio,
+\[
+  \lim_{x\to2}q(x)=0:
+\]
+$q$ es negativa a la izquierda y positiva a la derecha. Un límite nulo no garantiza preservación de un signo estricto.
 \end{solucion}
 \else\vspace{18mm}\fi
+
+\begin{nota}[ material complementario]
+El dominio, el recorrido y las gráficas de las funciones seno y coseno se presentan en \emph{Las funciones seno y coseno}, material complementario de esta semana. En los ejemplos siguientes se utilizarán las cotas
+\[
+  -1\leq\sin(t)\leq1,
+  \qquad
+  -1\leq\cos(t)\leq1
+  \qquad (t\in\mathbb{R}).
+\]
+\end{nota}
 
 \section*{Teorema del Sanduche}
 
@@ -387,7 +491,11 @@ Suponga que, para $x$ suficientemente próximo a $a$ y $x\neq a$,
 \[
 g(x)\leq f(x)\leq h(x).
 \]
-Si $\lim_{x\to a}g(x)=\lim_{x\to a}h(x)=L$, entonces
+Si
+\[
+  \lim_{x\to a}g(x)=\lim_{x\to a}h(x)=L,
+\]
+entonces
 \[
 \lim_{x\to a}f(x)=L.
 \]
@@ -398,7 +506,10 @@ Las dos cotas deben acercarse al mismo número. El teorema permite establecer la
 \end{nota}
 
 \begin{ejemplo}[una oscilación amortiguada]
-Calcule $\displaystyle\lim_{x\to0}x^2\sin(1/x)$.
+Calcule
+\[
+  \lim_{x\to0}x^2\sin(1/x).
+\]
 \end{ejemplo}
 \ifmostrarSoluciones
 \begin{solucion}
@@ -411,61 +522,69 @@ Las dos cotas tienden a $0$, de modo que el límite es $0$. La oscilación perma
 \else\vspace{18mm}\fi
 
 \begin{center}
-\begin{tikzpicture}[x=4.1cm,y=2.4cm,every node/.style={font=\scriptsize}]
-  \draw[->,Gris] (-1.1,0)--(1.15,0) node[right] {$x$};
-  \draw[->,Gris] (0,-1.1)--(0,1.2) node[above] {$y$};
-  \draw[Rojo,dashed,domain=-1:1,samples=60] plot (\x,{\x*\x});
-  \draw[Rojo,dashed,domain=-1:1,samples=60] plot (\x,{-\x*\x});
+\begin{tikzpicture}[x=11.5cm,y=22cm,every node/.style={font=\scriptsize}]
+  \draw[->,Gris] (-0.37,0)--(0.38,0) node[right] {$x$};
+  \draw[->,Gris] (0,-0.12)--(0,0.125) node[above] {$y$};
+  \draw[Rojo,dashed,domain=-0.35:0.35,samples=100] plot (\x,{\x*\x});
+  \draw[Rojo,dashed,domain=-0.35:0.35,samples=100] plot (\x,{-\x*\x});
   % Muestreo ilustrativo: las cotas justifican el límite, no el dibujo.
-  \draw[Azul,thick,domain=-1:-0.025,samples=350] plot (\x,{\x*\x*sin(deg(1/\x))});
-  \draw[Azul,thick,domain=0.025:1,samples=350] plot (\x,{\x*\x*sin(deg(1/\x))});
-  \node[Rojo,right] at (0.8,0.75) {$y=x^2$};
-  \node[Rojo,right] at (0.8,-0.75) {$y=-x^2$};
+  \draw[Azul,thick,domain=-0.35:-0.012,samples=650] plot (\x,{\x*\x*sin(deg(1/\x))});
+  \draw[Azul,thick,domain=0.012:0.35,samples=650] plot (\x,{\x*\x*sin(deg(1/\x))});
+  \foreach \x/\etiqueta in {-0.3/$-0.3$,-0.2/$-0.2$,-0.1/$-0.1$,0.1/$0.1$,0.2/$0.2$,0.3/$0.3$}
+    \draw (\x,0.002)--(\x,-0.002) node[below] {\etiqueta};
+  \node[Rojo,right] at (0.27,0.073) {$y=x^2$};
+  \node[Rojo,right] at (0.27,-0.073) {$y=-x^2$};
 \end{tikzpicture}
 \end{center}
-La gráfica ilustra las cotas; cerca del origen, las oscilaciones quedan encerradas en una franja cada vez más estrecha.
-
-\begin{ejemplo}[acotada no significa convergente]
-Explique por qué $\sin(1/x)$ está acotada cerca de $0$ pero no tiene límite allí.
-\end{ejemplo}
-\ifmostrarSoluciones
-\begin{solucion}
-Sus valores están entre $-1$ y $1$, pero esas cotas tienen límites diferentes. Además, las sucesiones
-\[
-u_n=\frac{1}{\pi/2+2\pi n},\qquad
-v_n=\frac{1}{3\pi/2+2\pi n}
-\]
-tienden a $0$, mientras que $\sin(1/u_n)=1$ y $\sin(1/v_n)=-1$. Por el criterio secuencial, el límite no existe. Los argumentos trigonométricos se expresan en radianes.
-\end{solucion}
-\else\vspace{22mm}\fi
-
-\begin{proposicion}[factor que tiende a cero por factor acotado]
-Si $u(x)\to0$ cuando $x\to a$ y existe una constante $C\geq0$ tal que $|v(x)|\leq C$ cerca de $a$, entonces $u(x)v(x)\to0$.
-\end{proposicion}
-En efecto, $-C|u(x)|\leq u(x)v(x)\leq C|u(x)|$, y ambas cotas tienden a cero. No es necesario que $v$ tenga límite.
+La gráfica muestra el intervalo $-0.35\leq x\leq0.35$. En este acercamiento se observa que las oscilaciones se hacen más rápidas cerca de $0$, mientras quedan encerradas entre $y=-x^2$ y $y=x^2$, una franja cada vez más estrecha.
 
 \begin{ejemplo}[uso de una cota absoluta]
-Calcule $\displaystyle\lim_{x\to0}x\cos(1/x)$.
+Calcule
+\[
+  \lim_{x\to0}x\cos(1/x).
+\]
 \end{ejemplo}
 \ifmostrarSoluciones
 \begin{solucion}
-Como $|\cos(1/x)|\leq1$, se cumple
+Como
 \[
--|x|\leq x\cos(1/x)\leq |x|.
+  |\cos(1/x)|\leq1,
 \]
-El límite es $0$. Usar $|x|$ evita invertir incorrectamente desigualdades cuando $x<0$.
+al multiplicar por $|x|\geq0$ obtenemos
+\[
+  |x\cos(1/x)|
+  =|x|\,|\cos(1/x)|
+  \leq |x|.
+\]
+Por tanto,
+\[
+  -|x|
+  \leq x\cos(1/x)
+  \leq |x|.
+\]
+Como
+\[
+  \lim_{x\to0}-|x|
+  =\lim_{x\to0}|x|
+  =0,
+\]
+el teorema del Sanduche permite concluir que
+\[
+  \lim_{x\to0}x\cos(1/x)=0.
+\]
+Usar $|x|$ evita invertir incorrectamente las desigualdades cuando $x<0$.
 \end{solucion}
 \else\vspace{15mm}\fi
 
 \begin{ejercicios}[comparación, signo y encaje]
 \begin{enumerate}
-  \item Si $2-x^2\leq f(x)\leq2+x^2$ cerca de $0$, determine $\lim_{x\to0}f(x)$.
+  \item Si $2-x^2\leq f(x)\leq2+x^2$ cerca de $0$, determine $\displaystyle\lim_{x\to0}f(x)$.
   \item Calcule $\displaystyle\lim_{x\to0}x^2\cos(3/x)$.
   \item Calcule $\displaystyle\lim_{x\to0}(x-1)x\sin(1/x)$.
   \item Si $|b(x)|\leq5$ cerca de $2$, calcule $\displaystyle\lim_{x\to2}(x-2)b(x)$.
-  \item Si $\lim_{x\to a}f(x)=-3$, ¿qué signo tiene $f$ suficientemente cerca de $a$? Justifique.
-  \item Si $f(x)>g(x)$ cerca de $a$ y ambos límites existen, ¿se deduce que $\lim f>\lim g$? Dé un contraejemplo.
-  \item ¿Basta saber que $-1\leq f(x)\leq1$ para afirmar que $\lim_{x\to0}f(x)$ existe?
+  \item Si $\displaystyle\lim_{x\to a}f(x)=-3$, ¿qué signo tiene $f$ suficientemente cerca de $a$? Justifique.
+  \item Si $f(x)>g(x)$ cerca de $a$ y ambos límites existen, ¿se deduce que $\displaystyle\lim_{x\to a}f(x)>\displaystyle\lim_{x\to a}g(x)$? Dé un contraejemplo.
+  \item ¿Basta saber que $-1\leq f(x)\leq1$ para afirmar que $\displaystyle\lim_{x\to0}f(x)$ existe?
   \item Si $f(x)\geq4$ cerca de $a$ y su límite existe, ¿puede ese límite ser $3$?
 \end{enumerate}
 \end{ejercicios}
@@ -478,9 +597,9 @@ El límite es $0$. Usar $|x|$ evita invertir incorrectamente desigualdades cuand
   \item $0$, pues el valor absoluto está acotado por $|x-1||x|\to0$.
   \item $0$, pues el valor absoluto está acotado por $5|x-2|\to0$.
   \item Negativo: las imágenes pueden mantenerse a distancia menor que $3/2$ de $-3$.
-  \item No; $f(x)=x^2>g(x)=0$ para $x\neq0$, pero ambos límites en $0$ son $0$.
-  \item No. $\sin(1/x)$ es un contraejemplo.
-  \item No; la comparación implica $\lim_{x\to a}f(x)\geq4$.
+  \item No. Por ejemplo, sean $f,g\colon\mathbb{R}\to\mathbb{R}$, definidas por $f(x)=x^2$ y $g(x)=0$. Se cumple $f(x)>g(x)$ para $x\neq0$, pero ambas funciones tienen límite $0$ en $0$.
+  \item No. La función $f\colon\mathbb{R}\setminus\{0\}\to\mathbb{R}$, definida por $f(x)=|x|/x$, satisface $-1\leq f(x)\leq1$, pero sus límites laterales en $0$ son distintos.
+  \item No; la comparación implica $\displaystyle\lim_{x\to a}f(x)\geq4$.
 \end{enumerate}
 \end{solucion}
 \fi

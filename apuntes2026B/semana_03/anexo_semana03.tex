@@ -1,0 +1,171 @@
+% !TeX root = anexo_semana03.tex
+% !TeX program = pdflatex
+% Material complementario de la semana 03: funciones seno y coseno.
+\documentclass[10pt,a5paper]{article}
+\newif\ifmostrarSoluciones
+\mostrarSolucionestrue
+\usepackage{tikz}
+\usepackage{estilo_apuntes}
+\usetikzlibrary{arrows.meta,positioning,babel}
+\encabezado{Semana 3}{Material complementario}
+
+\begin{document}
+\tituloclase{Las funciones seno y coseno}{Definición geométrica, dominio, recorrido y gráficas}{Material complementario · Semana 3}
+
+\begin{objetivos}
+\begin{itemize}
+  \item Interpretar el seno y el coseno como coordenadas de un punto del círculo unitario.
+  \item Identificar su dominio, recorrido, periodicidad y cotas.
+  \item Reconocer estas propiedades en las gráficas de ambas funciones.
+\end{itemize}
+\end{objetivos}
+
+\begin{resumen}
+Las funciones seno y coseno permiten describir un movimiento alrededor del círculo unitario. Sus gráficas muestran que ambas funciones son periódicas y que sus valores siempre permanecen entre $-1$ y $1$.
+\end{resumen}
+
+\section*{Definición mediante el círculo unitario}
+
+Los ángulos se medirán en \textbf{radianes}. Para cada $t\in\mathbb{R}$, partimos del punto $(1,0)$ y recorremos una distancia $|t|$ sobre el círculo unitario, en sentido antihorario si $t>0$ y horario si $t<0$. Si el punto obtenido es
+\[
+  P(t)=(u,v),
+\]
+definimos
+\[
+  \cos(t)=u
+  \qquad\text{y}\qquad
+  \sin(t)=v.
+\]
+Así, el coseno es la primera coordenada de $P(t)$ y el seno es la segunda.
+
+La siguiente figura representa el caso $0<t<\pi/2$. Las líneas punteadas proyectan el punto $P(t)$ sobre los ejes y permiten leer sus dos coordenadas.
+\begin{center}
+\begin{tikzpicture}[x=2.15cm,y=2.15cm,every node/.style={font=\scriptsize}]
+  \draw[->,Gris] (-1.25,0)--(1.35,0) node[right] {$u$};
+  \draw[->,Gris] (0,-1.25)--(0,1.35) node[above] {$v$};
+  \draw[Azul!75,thick] (0,0) circle (1);
+  \node[Azul!75,below left] at (-0.72,-0.70) {$u^2+v^2=1$};
+  \coordinate (P) at (50:1);
+  \coordinate (A) at (0.6428,0);
+  \coordinate (B) at (0,0.7660);
+  \draw[Rojo,very thick] (0,0)--(P);
+  \draw[Gris,dashed] (P)--(A);
+  \draw[Gris,dashed] (P)--(B);
+  \draw[->,Rojo,thick] (0.30,0) arc[start angle=0,end angle=50,radius=0.30];
+  \node[Rojo] at (0.38,0.16) {$t$};
+  \fill[Rojo] (P) circle (1.5pt);
+  \node[above right] at (P) {$P(t)=(\cos(t),\sin(t))$};
+  \fill[Gris] (1,0) circle (1.1pt);
+  \node[below right] at (1,0) {$(1,0)$};
+  \node[below] at (A) {$\cos(t)$};
+  \node[left] at (B) {$\sin(t)$};
+  \node[below left] at (0,0) {$O$};
+\end{tikzpicture}
+\end{center}
+
+\begin{definicion}[seno y coseno]
+Las funciones seno y coseno son
+\[
+  \sin\colon\mathbb{R}\longrightarrow[-1,1],
+  \qquad
+  \cos\colon\mathbb{R}\longrightarrow[-1,1].
+\]
+Ambas tienen dominio $\mathbb{R}$ y recorrido $[-1,1]$.
+\end{definicion}
+
+Al dar una vuelta completa se recorren $2\pi$ radianes y se regresa al mismo punto. Por tanto,
+\[
+  \sin(t+2\pi)=\sin(t),
+  \qquad
+  \cos(t+2\pi)=\cos(t).
+\]
+Además, como las coordenadas de un punto del círculo unitario están entre $-1$ y $1$,
+\[
+  -1\leq\sin(t)\leq1,
+  \qquad
+  -1\leq\cos(t)\leq1
+  \qquad (t\in\mathbb{R}).
+\]
+Los valores correspondientes a una vuelta completa son:
+\[
+\begin{array}{c|ccccc}
+  t & 0 & \dfrac{\pi}{2} & \pi & \dfrac{3\pi}{2} & 2\pi \\ \hline
+  \sin(t) & 0 & 1 & 0 & -1 & 0 \\
+  \cos(t) & 1 & 0 & -1 & 0 & 1
+\end{array}
+\]
+
+\section*{Gráficas}
+
+\begin{center}
+\begin{tikzpicture}[x=0.68cm,y=1.05cm,every node/.style={font=\scriptsize}]
+  \draw[->,Gris] (-6.7,0)--(6.8,0) node[right] {$t$};
+  \draw[->,Gris] (0,-1.35)--(0,1.4) node[above] {$y$};
+  \draw[Gris!55,dashed] (-6.4,1)--(6.4,1);
+  \draw[Gris!55,dashed] (-6.4,-1)--(6.4,-1);
+  \draw[Azul,very thick,domain=-6.283:6.283,samples=220]
+    plot (\x,{sin(deg(\x))});
+  \foreach \x/\etiqueta in {-6.283/$-2\pi$,-3.142/$-\pi$,3.142/$\pi$,6.283/$2\pi$}
+    \draw (\x,0.06)--(\x,-0.06) node[below] {\etiqueta};
+  \node[left] at (0,1) {$1$};
+  \node[left] at (0,-1) {$-1$};
+  \node[Azul,above right] at (4.7,-1) {$y=\sin(t)$};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[x=0.68cm,y=1.05cm,every node/.style={font=\scriptsize}]
+  \draw[->,Gris] (-6.7,0)--(6.8,0) node[right] {$t$};
+  \draw[->,Gris] (0,-1.35)--(0,1.4) node[above] {$y$};
+  \draw[Gris!55,dashed] (-6.4,1)--(6.4,1);
+  \draw[Gris!55,dashed] (-6.4,-1)--(6.4,-1);
+  \draw[Rojo,very thick,domain=-6.283:6.283,samples=220]
+    plot (\x,{cos(deg(\x))});
+  \foreach \x/\etiqueta in {-6.283/$-2\pi$,-3.142/$-\pi$,3.142/$\pi$,6.283/$2\pi$}
+    \draw (\x,0.06)--(\x,-0.06) node[below] {\etiqueta};
+  \node[left] at (0,1) {$1$};
+  \node[left] at (0,-1) {$-1$};
+  \node[Rojo,above right] at (5.0,0.25) {$y=\cos(t)$};
+\end{tikzpicture}
+\end{center}
+
+Las gráficas muestran que ambas funciones permanecen entre $-1$ y $1$, y que sus valores se repiten indefinidamente.
+
+\section*{La función $\sin(1/x)$}
+
+Considere la función
+\[
+  f\colon\mathbb{R}\setminus\{0\}\longrightarrow[-1,1],
+  \qquad
+  f(x)=\sin(1/x).
+\]
+La función no está definida en $x=0$. Sin embargo, para todo punto $x$ en el dominio de la función se cumple
+\[
+  -1\leq\sin(1/x)\leq1.
+\]
+Por tanto, la función permanece acotada entre $-1$ y $1$.
+
+\begin{center}
+\begin{tikzpicture}[x=4.1cm,y=1.55cm,every node/.style={font=\scriptsize}]
+  \draw[->,Gris] (-1.08,0)--(1.10,0) node[right] {$x$};
+  \draw[->,Gris] (0,-1.35)--(0,1.38) node[above] {$y$};
+  \draw[Rojo,dashed] (-1.03,1)--(1.03,1);
+  \draw[Rojo,dashed] (-1.03,-1)--(1.03,-1);
+  \draw[Azul,thick,domain=-1:-0.015,samples=900]
+    plot (\x,{sin(deg(1/\x))});
+  \draw[Azul,thick,domain=0.015:1,samples=900]
+    plot (\x,{sin(deg(1/\x))});
+  \foreach \x/\etiqueta in {-1/$-1$,-0.5/$-0.5$,0.5/$0.5$,1/$1$}
+    \draw (\x,0.04)--(\x,-0.04) node[below] {\etiqueta};
+  \node[left,Rojo] at (0,1) {$1$};
+  \node[left,Rojo] at (0,-1) {$-1$};
+  \node[below right] at (0,-0.08) {$x=0$};
+  \node[Azul,above right] at (0.62,1) {$y=\sin(1/x)$};
+\end{tikzpicture}
+\end{center}
+
+La altura de la gráfica nunca sale de la franja comprendida entre $y=-1$ y $y=1$. En cambio, las oscilaciones se hacen cada vez más rápidas al acercarse a $x=0$: un pequeño cambio en $x$ produce un cambio grande en $1/x$ y hace que el seno recorra repetidamente sus valores entre $-1$ y $1$. Estar acotada no significa que la función se aproxime a un único número.
+
+\fuentes{J. Stewart, \emph{Cálculo de una variable: trascendentes tempranas}, apartados sobre funciones trigonométricas y límites.}
+
+\end{document}

@@ -13,3 +13,6 @@
 # Excluir completamente la carpeta de libros, incluso si contiene archivos TeX.
 libros/
 **/libros/
+
+# Excluir la carpeta de inicialización local.
+/Calculo_diferencial_init/
