@@ -30,6 +30,38 @@ Un límite infinito describe valores de la función que crecen o decrecen sin co
 La primera evaluación ocupa dos horas de la semana. Este material está diseñado para las tres horas restantes: aproximadamente 40 minutos para límites infinitos y asíntotas verticales, 35 minutos para límites al infinito y asíntotas horizontales, 40 minutos para comparación de grados, 30 minutos para crecimiento no acotado y el caso especial con raíces, y 35 minutos para práctica y cierre.
 \end{nota}
 
+\section*{Funciones acotadas}
+
+\begin{definicion}[función acotada]
+Sea $f$ una función real con dominio no vacío $\operatorname{Dom}(f)$. Decimos que $f$ está \textbf{acotada superiormente} si existe un número real $M$ tal que
+\[
+  f(x)\leq M\qquad\text{para todo }x\in\operatorname{Dom}(f).
+\]
+El número $M$ se llama \textbf{cota superior}. Análogamente, $f$ está \textbf{acotada inferiormente} si existe un número real $m$ tal que
+\[
+  m\leq f(x)\qquad\text{para todo }x\in\operatorname{Dom}(f).
+\]
+El número $m$ se llama \textbf{cota inferior}.
+
+La función está \textbf{acotada} si está acotada tanto superior como inferiormente; es decir, si existen $m,M\in\mathbb{R}$ tales que
+\[
+  m\leq f(x)\leq M\qquad\text{para todo }x\in\operatorname{Dom}(f).
+\]
+Equivalentemente, existe un número real $K>0$ tal que $|f(x)|\leq K$ para todo $x\in\operatorname{Dom}(f)$. Estas desigualdades deben cumplirse en todo el dominio de la función.
+\end{definicion}
+
+\begin{ejemplo}[función acotada]
+La función $f(x)=\sin x$, con dominio $\mathbb{R}$, es acotada porque
+\[
+  -1\leq\sin x\leq1\qquad\text{para todo }x\in\mathbb{R}.
+\]
+Por tanto, $-1$ es una cota inferior y $1$ es una cota superior.
+\end{ejemplo}
+
+\begin{ejemplo}[función que no es acotada]
+La función $g(x)=\dfrac{1}{x}$, con dominio $\mathbb{R}\setminus\{0\}$, no está acotada superiormente ni inferiormente. Al tomar valores positivos de $x$ cada vez más próximos a $0$, sus valores crecen sin cota; al tomar valores negativos de $x$ cada vez más próximos a $0$, sus valores decrecen sin cota. Por tanto, no es una función acotada.
+\end{ejemplo}
+
 \section*{Dos comportamientos diferentes}
 
 Las expresiones
@@ -58,50 +90,53 @@ cuando los valores de $f(x)$ pueden hacerse positivos y tan grandes como se dese
 significa que los valores de $f(x)$ pueden hacerse negativos y tan grandes en valor absoluto como se desee.
 \end{definicion}
 
-Los límites infinitos también pueden ser laterales. El signo debe analizarse a cada lado del punto, pues una misma función puede tender a $-\infty$ por un lado y a $+\infty$ por el otro.
+Aunque en la definición anterior se escribe el límite bilateral $x\to a$, también se puede hablar de un límite infinito cuando este comportamiento ocurre por un solo lado, es decir, cuando alguno de los límites laterales es $+\infty$ o $-\infty$.
 
 \begin{definicion}[asíntota vertical]
 La recta $x=a$ es una \textbf{asíntota vertical} de la gráfica de $f$ si al menos uno de los límites laterales de $f$ en $a$ es $+\infty$ o $-\infty$.
 \end{definicion}
 
+Para que exista una asíntota vertical, basta con uno de estos límites laterales; no se requiere que exista el límite bilateral.
+
 \begin{ejemplo}[signos diferentes a cada lado]
 Sea
 \[
-  f\colon\mathbb{R}\setminus\{2\}\longrightarrow\mathbb{R},
+  f\colon\mathbb{R}\setminus\{0\}\longrightarrow\mathbb{R},
   \qquad
-  f(x)=\frac{1}{x-2}.
+  f(x)=\frac{1}{x}.
 \]
-Determine el comportamiento de $f$ cerca de $2$.
+Determine el comportamiento de $f$ cerca de $0$.
 \end{ejemplo}
 \ifmostrarSoluciones
 \begin{solucion}
-Cuando $x<2$, el número $x-2$ es negativo y se aproxima a $0$; por tanto, su recíproco decrece sin cota. Cuando $x>2$, el número $x-2$ es positivo y se aproxima a $0$; por tanto, su recíproco crece sin cota. Así,
+Cuando $x<0$, el número $x$ es negativo y se aproxima a $0$; por tanto, su recíproco decrece sin cota. Cuando $x>0$, el número $x$ es positivo y se aproxima a $0$; por tanto, su recíproco crece sin cota. Así,
 \[
-  \lim_{x\to2^-}\frac{1}{x-2}=-\infty,
+  \lim_{x\to0^-}\frac{1}{x}=-\infty,
   \qquad
-  \lim_{x\to2^+}\frac{1}{x-2}=+\infty.
+  \lim_{x\to0^+}\frac{1}{x}=+\infty.
 \]
-La recta $x=2$ es una asíntota vertical. Como los comportamientos laterales tienen signos diferentes, no se escribe un único límite bilateral igual a $+\infty$ o a $-\infty$.
+La recta $x=0$ es una asíntota vertical. Como los comportamientos laterales tienen signos diferentes, no se escribe un único límite bilateral igual a $+\infty$ o a $-\infty$.
 \end{solucion}
 \else\vspace{20mm}\fi
 
 \begin{center}
 \begin{tikzpicture}[x=1.25cm,y=0.72cm,every node/.style={font=\scriptsize}]
-  \draw[->,Gris] (-1.2,0)--(5.2,0) node[right] {$x$};
+  \draw[->,Gris] (-3.2,0)--(3.2,0) node[right] {$x$};
   \draw[->,Gris] (0,-5.2)--(0,5.4) node[above] {$y$};
-  \draw[Rojo,dashed,thick] (2,-5)--(2,5) node[above] {$x=2$};
-  \draw[Azul,very thick,domain=-1:1.8,samples=120]
-    plot (\x,{1/(\x-2)});
-  \draw[Azul,very thick,domain=2.2:5,samples=120]
-    plot (\x,{1/(\x-2)});
-  \node[Azul,right] at (3.3,0.85) {$y=1/(x-2)$};
+  \draw[Rojo,dashed,thick] (0,-5)--(0,5) node[above] {$x=0$};
+  \draw[Azul,very thick,domain=-3:-0.2,samples=120]
+    plot (\x,{1/\x});
+  \draw[Azul,very thick,domain=0.2:3,samples=120]
+    plot (\x,{1/\x});
+  \node[Azul,right] at (1.3,1.1) {$y=1/x$};
 \end{tikzpicture}
 \end{center}
 
 \begin{ejemplo}[el mismo signo a ambos lados]
 Calcule los límites laterales de
 \[
-  g(x)=\frac{1}{(x+1)^2}
+  g(x)=\frac{1}{(x+1)^2},\qquad
+  \operatorname{Dom}(g)=\mathbb{R}\setminus\{-1\}.
 \]
 cuando $x$ se aproxima a $-1$ e identifique la asíntota vertical.
 \end{ejemplo}
@@ -155,12 +190,23 @@ La recta $y=L$ es una \textbf{asíntota horizontal} de la gráfica de $f$ si se 
   \qquad\text{o}\qquad
   \lim_{x\to-\infty}f(x)=L.
 \]
-Una función puede tener asíntotas horizontales diferentes hacia $+\infty$ y hacia $-\infty$.
 \end{definicion}
 
-\begin{nota}
-Una asíntota horizontal describe el comportamiento de la función cuando $x$ se aleja indefinidamente. La gráfica puede cruzar la recta $y=L$ una o varias veces para valores finitos de $x$ y, aun así, aproximarse a ella cuando $x\to+\infty$ o $x\to-\infty$.
-\end{nota}
+
+\begin{ejemplo}[límites al infinito de la función recíproca]
+Sea $f(x)=\dfrac{1}{x}$, con dominio $\mathbb{R}\setminus\{0\}$. Calcule sus límites cuando $x\to+\infty$ y cuando $x\to-\infty$, e identifique su asíntota horizontal.
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+Cuando $x$ crece en valor absoluto, $1/x$ se aproxima a $0$: toma valores positivos si $x>0$ y negativos si $x<0$. Por tanto,
+\[
+  \lim_{x\to+\infty}\frac{1}{x}=0,
+  \qquad
+  \lim_{x\to-\infty}\frac{1}{x}=0.
+\]
+La recta $y=0$ es una asíntota horizontal.
+\end{solucion}
+\else\vspace{18mm}\fi
 
 \begin{ejemplo}[una asíntota horizontal]
 Sea
@@ -219,7 +265,7 @@ Considere una función racional
   \quad
   b_m\neq0.
 \]
-Los términos de mayor grado determinan el comportamiento cuando $x\to+\infty$ o $x\to-\infty$.
+Su dominio es $\operatorname{Dom}(r)=\{x\in\mathbb{R}:b_mx^m+\cdots+b_1x+b_0\neq0\}$. Los términos de mayor grado determinan el comportamiento cuando $x\to+\infty$ o $x\to-\infty$.
 
 \begin{proposicion}[límites al infinito de funciones racionales]
 Para la función racional anterior se tienen los siguientes casos:
@@ -234,76 +280,76 @@ Para la función racional anterior se tienen los siguientes casos:
     \lim_{x\to\pm\infty}r(x)=\frac{a_n}{b_m}.
   \]
   La recta $y=a_n/b_m$ es una asíntota horizontal.
-  \item Si $n>m$, la función no tiene asíntota horizontal. En este caso,
+  \item Si $n>m$, estudiar el límite de $r(x)$ cuando $x\to+\infty$ o $x\to-\infty$ equivale a estudiar el límite de $cx^k$, donde
   \[
-    \lim_{x\to\pm\infty}
-    \frac{r(x)}{x^{n-m}}
-    =\frac{a_n}{b_m},
+    c=\frac{a_n}{b_m},\qquad k=n-m>0.
   \]
-  de modo que $r(x)$ tiene el mismo comportamiento dominante que $(a_n/b_m)x^{n-m}$. El signo hacia cada extremo depende del cociente $a_n/b_m$ y de si $n-m$ es par o impar.
+  Es decir,
+  \[
+    \lim_{x\to+\infty}r(x)=\lim_{x\to+\infty}cx^k,
+    \qquad
+    \lim_{x\to-\infty}r(x)=\lim_{x\to-\infty}cx^k.
+  \]
+  Para calcular estos límites, usamos que, para todo entero positivo $k$,
+  \[
+    \lim_{x\to+\infty}x^k=+\infty,
+  \]
+  mientras que
+  \[
+    \lim_{x\to-\infty}x^k=
+    \begin{cases}
+      +\infty, & k\text{ es par},\\
+      -\infty, & k\text{ es impar}.
+    \end{cases}
+  \]
+  Al multiplicar por $c$, el signo del infinito se conserva si $c>0$ y se invierte si $c<0$. En este caso, la función no tiene asíntota horizontal.
 \end{enumerate}
 \end{proposicion}
 
 \begin{ejemplo}[tres comparaciones de grados]
 Calcule los límites al infinito de las siguientes funciones e identifique sus asíntotas horizontales:
 \[
-  f(x)=\frac{2x+1}{x^2+4},
+  f(x)=\frac{2x+1}{5x^2+4},
   \qquad
   g(x)=\frac{3x^2-x+1}{2x^2+5},
   \qquad
-  q(x)=\frac{x^3+1}{x^2+1}.
+  q(x)=\frac{6x^3+1}{2x^2+1}.
 \]
+Las tres funciones tienen dominio $\mathbb{R}$, pues sus denominadores son positivos para todo número real.
 \end{ejemplo}
 \ifmostrarSoluciones
 \begin{solucion}
-En $f$, el grado del numerador es menor que el del denominador; por tanto,
+En $f$, estudiar el límite equivale a estudiar el cociente de sus términos de mayor grado:
 \[
-  \lim_{x\to\pm\infty}f(x)=0,
+  \lim_{x\to\pm\infty}f(x)
+  =\lim_{x\to\pm\infty}\frac{2x}{5x^2}
+  =\lim_{x\to\pm\infty}\frac{2}{5x}=0.
 \]
-y $y=0$ es una asíntota horizontal. En $g$, los grados son iguales y el cociente de los coeficientes principales es $3/2$; por tanto,
+Por tanto, $y=0$ es una asíntota horizontal. En $g$, el estudio del límite equivale al del cociente $3x^2/(2x^2)$:
 \[
-  \lim_{x\to\pm\infty}g(x)=\frac{3}{2},
+  \lim_{x\to\pm\infty}g(x)
+  =\lim_{x\to\pm\infty}\frac{3x^2}{2x^2}
+  =\frac{3}{2}.
 \]
-y $y=3/2$ es una asíntota horizontal. En $q$, el grado del numerador es mayor. Como
+Así, $y=3/2$ es una asíntota horizontal. En $q$, tenemos la equivalencia asintótica
 \[
-  \frac{x^3+1}{x^2+1}
-  =x+\frac{1-x}{x^2+1},
+  q(x)=\frac{6x^3+1}{2x^2+1}\sim\frac{6x^3}{2x^2}=3x
+  \qquad (x\to\pm\infty).
 \]
-la función se comporta como $x$ y no tiene asíntota horizontal.
+Por tanto,
+\[
+  \lim_{x\to+\infty}q(x)=\lim_{x\to+\infty}3x=+\infty,
+\]
+\[
+  \lim_{x\to-\infty}q(x)=\lim_{x\to-\infty}3x=-\infty.
+\]
+Por tanto, $q$ no tiene asíntota horizontal.
 \end{solucion}
 \else\vspace{24mm}\fi
 
 \section*{Crecimiento no acotado cuando $x\to\pm\infty$}
 
-También puede ocurrir que tanto la variable como los valores de la función crezcan sin cota. Por ejemplo,
-\[
-  \lim_{x\to+\infty}x^2=+\infty.
-\]
-Esta expresión significa que $x^2$ puede hacerse tan grande como se desee al tomar valores positivos de $x$ suficientemente grandes.
-
-\begin{proposicion}[comportamiento de las potencias]
-Sea $k$ un entero positivo. Entonces
-\[
-  \lim_{x\to+\infty}x^k=+\infty.
-\]
-Hacia $-\infty$, el resultado depende de la paridad de $k$:
-\[
-  \lim_{x\to-\infty}x^k=
-  \begin{cases}
-    +\infty, & k\text{ es par},\\
-    -\infty, & k\text{ es impar}.
-  \end{cases}
-\]
-Además,
-\[
-  \lim_{x\to\pm\infty}\frac{1}{x^k}=0.
-\]
-\end{proposicion}
-
-Para un polinomio, el término de mayor grado determina el comportamiento en ambos extremos. Para una función racional con mayor grado en el numerador, se compara el cociente con
-\[
-  \frac{a_n}{b_m}x^{n-m}.
-\]
+Como se evidenció en la proposición anterior, cuando $x\to+\infty$ o $x\to-\infty$, los valores de una función pueden tender a $+\infty$ o a $-\infty$. En estos casos, la función presenta un crecimiento o decrecimiento no acotado. El signo del límite se determina a partir del coeficiente y de la paridad de la potencia dominante, como se muestra a continuación.
 
 \begin{ejemplo}[signo y paridad del término dominante]
 Calcule los límites al infinito de
@@ -312,6 +358,7 @@ Calcule los límites al infinito de
   \qquad\text{y}\qquad
   g(x)=\frac{-2x^4+x}{x^2+3}.
 \]
+Ambas funciones tienen dominio $\mathbb{R}$.
 \end{ejemplo}
 \ifmostrarSoluciones
 \begin{solucion}
@@ -338,6 +385,20 @@ La identidad correcta es
   \sqrt{x^2}=|x|,
 \]
 no $\sqrt{x^2}=x$ para todo número real $x$. Esta diferencia es esencial cuando se estudian los dos extremos del eje real.
+
+\begin{nota}[: propiedades y teoremas para límites al infinito]
+Las propiedades de los límites estudiadas cuando $x\to a$, con $a$ finito, también se aplican cuando $x\to+\infty$ o $x\to-\infty$, siempre que se cumplan sus respectivas hipótesis. En particular, si los límites de las funciones son números reales, se conservan las reglas de suma, resta, producto y cociente (con límite del denominador distinto de cero), así como las de potencias y raíces en los casos en que estén definidas. Por ejemplo, si $u(x)\to L\geq0$ y $u(x)\geq0$ para los valores de $x$ considerados, entonces
+\[
+  \lim_{x\to\pm\infty}\sqrt{u(x)}=\sqrt{L}.
+\]
+Estas reglas no permiten operar con $+\infty$ y $-\infty$ como si fueran números reales.
+
+También se extienden los teoremas de comparación, como el \textbf{teorema del sánduche}: si
+\[
+  g(x)\leq f(x)\leq h(x)
+\]
+para todo $x$ suficientemente grande (hacia $+\infty$), o suficientemente negativo (hacia $-\infty$), y los límites de $g$ y $h$ en ese mismo extremo son iguales a $L$, entonces el límite de $f$ también es $L$.
+\end{nota}
 
 \begin{ejemplo}[dos asíntotas horizontales]
 Calcule
@@ -367,9 +428,9 @@ La gráfica tiene dos asíntotas horizontales: $y=1$ hacia la derecha y $y=-1$ h
 
 \begin{ejercicios}[práctica de la sesión]
 \begin{enumerate}
-  \item Calcule los límites laterales de $\displaystyle f(x)=\frac{1}{x+3}$ cuando $x\to-3$ e identifique la asíntota vertical.
+  \item Calcule los límites laterales de $\displaystyle f(x)=\frac{1}{x+3}$, con dominio $\mathbb{R}\setminus\{-3\}$, cuando $x\to-3$ e identifique la asíntota vertical.
   \item Calcule $\displaystyle\lim_{x\to1}\frac{1}{(x-1)^2}$ e interprete el resultado gráficamente.
-  \item Decida si $x=2$ es una asíntota vertical de $\displaystyle g(x)=\frac{x^2-4}{x-2}$.
+  \item Decida si $x=0$ es una asíntota vertical de $\displaystyle g(x)=\frac{1}{x}$, con dominio $\mathbb{R}\setminus\{0\}$.
   \item Calcule los límites cuando $x\to\pm\infty$ e identifique las asíntotas horizontales, si existen:
   \begin{enumerate}
     \item $\displaystyle\frac{5x-1}{x^2+2}$,
@@ -382,8 +443,9 @@ La gráfica tiene dos asíntotas horizontales: $y=1$ hacia la derecha y $y=-1$ h
     \qquad\text{y}\qquad
     r(x)=\frac{x^4+1}{-x^2+2}.
   \]
+  Sus dominios son $\operatorname{Dom}(p)=\mathbb{R}$ y $\operatorname{Dom}(r)=\mathbb{R}\setminus\{-\sqrt{2},\sqrt{2}\}$.
   \item Calcule $\displaystyle\lim_{x\to+\infty}\frac{2x+1}{\sqrt{x^2+4}}$ y $\displaystyle\lim_{x\to-\infty}\frac{2x+1}{\sqrt{x^2+4}}$.
-  \item Una función satisface
+  \item Una función $f$, con dominio $\mathbb{R}\setminus\{2\}$, satisface
   \[
     \lim_{x\to2^-}f(x)=+\infty,
     \qquad
@@ -410,7 +472,7 @@ La gráfica tiene dos asíntotas horizontales: $y=1$ hacia la derecha y $y=-1$ h
     \lim_{x\to1}\frac{1}{(x-1)^2}=+\infty.
   \]
   La gráfica crece sin cota a ambos lados de la asíntota vertical $x=1$.
-  \item No. Para $x\neq2$ se cumple $g(x)=x+2$ y el límite en $2$ es $4$.
+  \item Sí. Como $\displaystyle\lim_{x\to0^-}\frac{1}{x}=-\infty$ y $\displaystyle\lim_{x\to0^+}\frac{1}{x}=+\infty$, la recta $x=0$ es una asíntota vertical.
   \item
   \begin{enumerate}
     \item Los límites hacia $+\infty$ y $-\infty$ son $0$; la asíntota horizontal es $y=0$.
