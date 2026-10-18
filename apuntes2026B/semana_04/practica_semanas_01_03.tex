@@ -1,0 +1,151 @@
+% !TeX root = practica_semanas_01_03.tex
+% !TeX program = pdflatex
+% Práctica acumulativa de las semanas 01 a 03.
+\documentclass[10pt,a5paper]{article}
+\newif\ifmostrarSoluciones
+\mostrarSolucionestrue
+\usepackage{estilo_apuntes}
+\encabezado{Semana 4}{Práctica acumulativa}
+
+\begin{document}
+\tituloclase{Práctica de las semanas 1 a 3}{Funciones, composición y límites}{Semana 4 · 1 hora}
+
+\begin{objetivos}
+\begin{itemize}
+  \item Integrar el análisis de dominios, composiciones, transformaciones y biyectividad.
+  \item Utilizar límites laterales, simplificación algebraica, racionalización y el teorema del Sanduche.
+  \item Justificar cada respuesta indicando las restricciones y propiedades empleadas.
+\end{itemize}
+\end{objetivos}
+
+\begin{nota}[organización sugerida]
+Trabaje aproximadamente 12 minutos en cada ejercicio y reserve los últimos 12 minutos para comparar estrategias y corregir los pasos principales. No basta escribir una respuesta final: deben justificarse los dominios, las simplificaciones y las conclusiones sobre límites.
+\end{nota}
+
+\begin{ejercicios}[práctica acumulativa]
+\begin{enumerate}
+  \item Sean
+  \[
+    f\colon(-\infty,4]\longrightarrow[0,\infty),
+    \qquad
+    f(x)=\sqrt{4-x},
+  \]
+  y
+  \[
+    g\colon\mathbb{R}\setminus\{1\}\longrightarrow\mathbb{R},
+    \qquad
+    g(x)=\frac{1}{x-1}.
+  \]
+  Halle las leyes de asignación de $g\circ f$ y $f\circ g$, y determine cuidadosamente el dominio de cada composición.
+
+  \item Considere la función
+  \[
+    h\colon[1,\infty)\longrightarrow[-3,\infty),
+    \qquad
+    h(x)=2(x-1)^2-3.
+  \]
+  Describa las transformaciones que permiten obtener su gráfica a partir de $y=x^2$. Analice si $h$ es biyectiva.
+
+  \item Sea
+  \[
+    F\colon[-3,1)\cup(1,\infty)\longrightarrow\mathbb{R}
+  \]
+  la función definida por
+  \[
+    F(x)=
+    \begin{cases}
+      \dfrac{\sqrt{x+3}-2}{x-1}, & x<1,\\[4mm]
+      \dfrac{x^2+x-2}{x-1}, & x>1.
+    \end{cases}
+  \]
+  Decida si existe $\displaystyle\lim_{x\to1}F(x)$.
+
+  \item Calcule, justificando cada simplificación,
+  \[
+    \lim_{x\to4}
+    \frac{\sqrt{x+5}-3}{x^2-16}.
+  \]
+  Indique por qué no es válido sustituir directamente.
+\end{enumerate}
+\end{ejercicios}
+
+\ifmostrarSoluciones
+\begin{solucion}[de la práctica acumulativa]
+\begin{enumerate}
+  \item La primera composición tiene ley
+  \[
+    (g\circ f)(x)
+    =\frac{1}{\sqrt{4-x}-1}.
+  \]
+  Se requiere $x\leq4$ para evaluar $f(x)$ y $f(x)\neq1$ para poder aplicar $g$. Como
+  \[
+    \sqrt{4-x}=1
+    \iff x=3,
+  \]
+  resulta
+  \[
+    D_{g\circ f}=(-\infty,4]\setminus\{3\}.
+  \]
+  Para la segunda composición,
+  \[
+    (f\circ g)(x)
+    =\sqrt{4-\frac{1}{x-1}}.
+  \]
+  Se requiere $x\neq1$ y
+  \[
+    4-\frac{1}{x-1}
+    =\frac{4x-5}{x-1}
+    \geq0.
+  \]
+  El análisis de signos en los puntos $1$ y $5/4$ da
+  \[
+    D_{f\circ g}
+    =(-\infty,1)\cup\left[\frac54,\infty\right).
+  \]
+
+  \item A partir de $y=x^2$, la gráfica se traslada una unidad a la derecha, se estira verticalmente por un factor de $2$ y se traslada tres unidades hacia abajo. En el dominio $[1,\infty)$, la función es estrictamente creciente y su imagen es $[-3,\infty)$; por tanto, es inyectiva y sobreyectiva sobre el codominio declarado.
+
+  \item Para $x<1$ y $x\neq1$, racionalizamos:
+  \[
+    \frac{\sqrt{x+3}-2}{x-1}
+    =\frac{1}{\sqrt{x+3}+2}.
+  \]
+  Por tanto,
+  \[
+    \lim_{x\to1^-}F(x)=\frac14.
+  \]
+  Para $x>1$, factorizamos:
+  \[
+    \frac{x^2+x-2}{x-1}
+    =\frac{(x-1)(x+2)}{x-1}
+    =x+2.
+  \]
+  En consecuencia,
+  \[
+    \lim_{x\to1^+}F(x)=3.
+  \]
+  Como los límites laterales son diferentes, el límite bilateral no existe.
+
+  \item La sustitución directa produce la forma indeterminada $0/0$. Para $x\neq4$, racionalizamos y factorizamos:
+  \begin{align*}
+    \frac{\sqrt{x+5}-3}{x^2-16}
+    &=\frac{x-4}
+      {(\sqrt{x+5}+3)(x^2-16)}\\
+    &=\frac{x-4}
+      {(\sqrt{x+5}+3)(x-4)(x+4)}\\
+    &=\frac{1}
+      {(\sqrt{x+5}+3)(x+4)}.
+  \end{align*}
+  La última expresión es localmente igual a la original alrededor de $4$, excepto en $x=4$. Por sustitución,
+  \[
+    \lim_{x\to4}
+    \frac{\sqrt{x+5}-3}{x^2-16}
+    =\frac{1}{(3+3)(4+4)}
+    =\frac{1}{48}.
+  \]
+
+\end{enumerate}
+\end{solucion}
+\fi
+
+\end{document}

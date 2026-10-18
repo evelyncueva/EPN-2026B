@@ -1,0 +1,183 @@
+% !TeX root = propuesta_prueba_semana04_curso_2.tex
+% !TeX program = pdflatex
+\documentclass[10pt,a5paper]{article}
+\newif\ifmostrarSoluciones
+\mostrarSolucionestrue
+\usepackage{estilo_apuntes}
+\encabezado{Semana 4}{Primera evaluación -- versión B}
+
+\begin{document}
+\tituloclase{Primera evaluación}{Propuesta para el segundo curso}{Semanas 1 a 3}
+
+\noindent
+\textbf{Nombre:} \rule{7cm}{0.4pt}
+
+\medskip
+\noindent
+\textbf{Fecha:} \rule{3cm}{0.4pt}
+\hfill
+\textbf{Puntaje:} \rule{1.5cm}{0.4pt}
+
+\begin{nota}[indicaciones]
+Justifique cada procedimiento. Una respuesta sin el análisis de los límites
+laterales, las restricciones algebraicas o las cotas utilizadas recibirá
+únicamente crédito parcial. Puntaje sugerido: 10 puntos por ejercicio.
+\end{nota}
+
+\begin{ejercicios}[propuesta paralela]
+\begin{enumerate}
+  \item Para $a\in\mathbb{R}$, considere la función
+  \[
+    F_a\colon\mathbb{R}\to\mathbb{R},
+    \qquad
+    F_a(x)=
+    \begin{cases}
+      \dfrac{x^2+ax-2a-4}{|x-2|}, & x\neq2,\\[2mm]
+      7, & x=2.
+    \end{cases}
+  \]
+  Calcule los límites laterales de $F_a$ cuando $x$ tiende a $2$ y determine
+  todos los valores de $a$ para los cuales existe
+  \[
+    \lim_{x\to2}F_a(x).
+  \]
+  Para esos valores, calcule el límite y compárelo con $F_a(2)$.
+
+  \item Sea $A$ una función definida cerca de $0$, excepto posiblemente en
+  $0$, que satisface
+  \[
+    |A(x)|\leq3.
+  \]
+  Sin suponer que $A$ tiene límite, calcule mediante el teorema del Sanduche
+  \[
+    \lim_{x\to0}
+    \frac{x^2}{\sqrt{x^2}+x^2}\,A(x).
+  \]
+
+  \item Considere las funciones
+  \[
+    f\colon\mathbb{R}\setminus\{-1\}
+    \to\mathbb{R}\setminus\{2\},
+    \qquad
+    f(x)=\frac{2x+1}{x+1},
+  \]
+  y
+  \[
+    g\colon\mathbb{R}\setminus\{2\}
+    \to\mathbb{R}\setminus\{-1\},
+    \qquad
+    g(x)=\frac{1-x}{x-2}.
+  \]
+  \begin{enumerate}
+    \item Verifique que las leyes de asignación producen valores en los
+    codominios indicados.
+    \item Determine si cada función es inyectiva, sobreyectiva o biyectiva.
+    \item Halle la ley de asignación y el dominio de $g\circ f$ y de
+    $f\circ g$. Decida si $f$ y $g$ son funciones inversas.
+  \end{enumerate}
+\end{enumerate}
+\end{ejercicios}
+
+\ifmostrarSoluciones
+\begin{solucion}[de la propuesta paralela]
+\begin{enumerate}
+  \item El numerador se factoriza como
+  \[
+    x^2+ax-2a-4=(x-2)(x+a+2).
+  \]
+  Si $x<2$, entonces $|x-2|=-(x-2)$ y
+  \[
+    F_a(x)=-(x+a+2).
+  \]
+  Si $x>2$, entonces $|x-2|=x-2$ y
+  \[
+    F_a(x)=x+a+2.
+  \]
+  Por tanto,
+  \[
+    \lim_{x\to2^-}F_a(x)=-(a+4),
+    \qquad
+    \lim_{x\to2^+}F_a(x)=a+4.
+  \]
+  El límite bilateral existe si y solo si
+  \[
+    -(a+4)=a+4,
+  \]
+  de donde $a=-4$. En ese caso,
+  \[
+    \lim_{x\to2}F_{-4}(x)=0,
+    \qquad
+    F_{-4}(2)=7.
+  \]
+  El límite y el valor de la función en el punto son diferentes.
+
+  \item Para $x\neq0$, se tiene $\sqrt{x^2}=|x|$. Entonces
+  \[
+    \left|
+      \frac{x^2}{\sqrt{x^2}+x^2}A(x)
+    \right|
+    \leq
+    3\frac{x^2}{|x|+x^2}
+    =3\frac{|x|}{1+|x|}
+    \leq3|x|.
+  \]
+  En consecuencia,
+  \[
+    -3|x|
+    \leq
+    \frac{x^2}{\sqrt{x^2}+x^2}A(x)
+    \leq
+    3|x|.
+  \]
+  Como ambas cotas tienden a $0$, el teorema del Sanduche permite concluir que
+  \[
+    \lim_{x\to0}
+    \frac{x^2}{\sqrt{x^2}+x^2}A(x)=0.
+  \]
+
+  \item Si $f(x)=2$, entonces $2x+1=2(x+1)$, lo cual implicaría $1=2$.
+  Por tanto, $f(x)\neq2$. De manera análoga, si $g(x)=-1$, se obtendría
+  $1-x=-(x-2)$, que también implicaría $1=2$. Las dos leyes producen valores
+  en sus codominios.
+
+  Para estudiar $f$, sea $y\in\mathbb{R}\setminus\{2\}$. Al resolver
+  \[
+    y=\frac{2x+1}{x+1}
+  \]
+  para $x$, se obtiene el único valor
+  \[
+    x=\frac{1-y}{y-2}.
+  \]
+  Este valor no es $-1$, por lo que pertenece al dominio de $f$. Así, cada
+  elemento del codominio tiene una única preimagen y $f$ es biyectiva. El mismo
+  argumento, o la simetría de las expresiones, muestra que $g$ es biyectiva.
+
+  Para todo $x\in\mathbb{R}\setminus\{-1\}$,
+  \begin{align*}
+    (g\circ f)(x)
+    &=\frac{1-\dfrac{2x+1}{x+1}}
+            {\dfrac{2x+1}{x+1}-2}\\
+    &=x.
+  \end{align*}
+  Por tanto,
+  \[
+    \operatorname{Dom}(g\circ f)=\mathbb{R}\setminus\{-1\}.
+  \]
+  Para todo $x\in\mathbb{R}\setminus\{2\}$,
+  \begin{align*}
+    (f\circ g)(x)
+    &=\frac{2\dfrac{1-x}{x-2}+1}
+            {\dfrac{1-x}{x-2}+1}\\
+    &=x.
+  \end{align*}
+  Por tanto,
+  \[
+    \operatorname{Dom}(f\circ g)=\mathbb{R}\setminus\{2\}.
+  \]
+  Las dos composiciones son las identidades en los dominios correspondientes;
+  en consecuencia, $f$ y $g$ son funciones inversas.
+\end{enumerate}
+\end{solucion}
+\fi
+
+\end{document}

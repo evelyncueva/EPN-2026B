@@ -1,0 +1,188 @@
+% !TeX root = propuesta_prueba_semana04.tex
+% !TeX program = pdflatex
+% Propuesta parcial de la primera evaluación.
+\documentclass[10pt,a5paper]{article}
+\newif\ifmostrarSoluciones
+\mostrarSolucionestrue
+\usepackage{estilo_apuntes}
+\encabezado{Semana 4}{Propuesta de evaluación}
+
+\begin{document}
+\tituloclase{Primera evaluación}{Propuesta parcial de ejercicios}{Semanas 1 a 3}
+
+\noindent
+\textbf{Nombre:} \rule{7cm}{0.4pt}
+
+\medskip
+\noindent
+\textbf{Fecha:} \rule{3cm}{0.4pt}
+\hfill
+\textbf{Puntaje:} \rule{1.5cm}{0.4pt}
+
+\begin{nota}[indicaciones]
+Justifique cada procedimiento. Una respuesta sin el análisis de los límites laterales, las restricciones algebraicas o las cotas utilizadas recibirá únicamente crédito parcial. Puntaje sugerido: 10 puntos por ejercicio.
+\end{nota}
+
+\begin{ejercicios}[propuesta parcial]
+\begin{enumerate}
+  \item Sean $a,b\in\mathbb{R}$ y sea $F\colon\mathbb{R}\to\mathbb{R}$ la función definida por
+  \[
+    F(x)=
+    \begin{cases}
+      \dfrac{x^2-1}{x-1}, & x<1,\\[2mm]
+      5, & x=1,\\
+      ax+b, & x>1.
+    \end{cases}
+  \]
+  Determine $a$ y $b$ para que exista
+  \[
+    \lim_{x\to1}F(x)
+  \]
+  y, además, se cumpla $F(2)=5$. Calcule el límite y compárelo con $F(1)$.
+
+  \item Sea $B$ una función definida cerca de $0$, excepto posiblemente en $0$, que satisface
+  \[
+    |B(x)|\leq4.
+  \]
+  Calcule mediante el teorema del Sanduche
+  \[
+    \lim_{x\to0}
+    \frac{\sqrt{1+x^2}-1}{x}\,B(x).
+  \]
+  No suponga que $B$ tiene límite.
+
+  \item Considere las funciones
+  \[
+    f\colon[1,\infty)\to[0,\infty),
+    \qquad
+    f(x)=\sqrt{x-1},
+  \]
+  y
+  \[
+    g\colon\mathbb{R}\to[1,\infty),
+    \qquad
+    g(x)=x^2+1.
+  \]
+  \begin{enumerate}
+    \item Determine si cada función es inyectiva, sobreyectiva o biyectiva.
+    \item Halle la ley de asignación y el dominio de $g\circ f$ y de $f\circ g$.
+    \item Decida si $f$ y $g$ son funciones inversas. Justifique su respuesta.
+  \end{enumerate}
+\end{enumerate}
+\end{ejercicios}
+
+\ifmostrarSoluciones
+\begin{solucion}[de la propuesta]
+\begin{enumerate}
+  \item Para $x<1$ y $x\neq1$,
+  \[
+    \frac{x^2-1}{x-1}=x+1.
+  \]
+  Por ello,
+  \[
+    \lim_{x\to1^-}F(x)=2.
+  \]
+  Por la derecha,
+  \[
+    \lim_{x\to1^+}F(x)=a+b.
+  \]
+  La existencia del límite exige
+  \[
+    a+b=2.
+  \]
+  Además, la condición $F(2)=5$ implica
+  \[
+    2a+b=5.
+  \]
+  Al resolver el sistema se obtiene
+  \[
+    a=3,
+    \qquad
+    b=-1.
+  \]
+  En consecuencia,
+  \[
+    \lim_{x\to1}F(x)=2,
+    \qquad
+    F(1)=5.
+  \]
+  El límite y el valor de la función en el punto son diferentes.
+
+  \item Para $x\neq0$, racionalizamos el factor algebraico:
+  \[
+    \frac{\sqrt{1+x^2}-1}{x}
+    =\frac{x}{\sqrt{1+x^2}+1}.
+  \]
+  Entonces
+  \begin{align*}
+    \left|
+      \frac{\sqrt{1+x^2}-1}{x}B(x)
+    \right|
+    &=\frac{|x|}{\sqrt{1+x^2}+1}|B(x)|\\
+    &\leq\frac{4|x|}{\sqrt{1+x^2}+1}\\
+    &\leq2|x|.
+  \end{align*}
+  Por tanto,
+  \[
+    -2|x|
+    \leq
+    \frac{\sqrt{1+x^2}-1}{x}B(x)
+    \leq
+    2|x|.
+  \]
+  Como ambas cotas tienden a $0$, el teorema del Sanduche permite concluir que
+  \[
+    \lim_{x\to0}
+    \frac{\sqrt{1+x^2}-1}{x}B(x)=0.
+  \]
+
+  \item La función $f$ es estrictamente creciente en $[1,\infty)$, por lo que es
+  inyectiva. Además, para cada $y\in[0,\infty)$, el punto
+  \[
+    x=y^2+1
+  \]
+  pertenece a $[1,\infty)$ y satisface $f(x)=y$. Por tanto, $f$ es sobreyectiva
+  y, en consecuencia, biyectiva.
+
+  La función $g$ es sobreyectiva sobre $[1,\infty)$: dado $y\geq1$, basta tomar
+  \[
+    x=\sqrt{y-1}.
+  \]
+  Sin embargo, no es inyectiva porque, por ejemplo,
+  \[
+    g(1)=g(-1)=2.
+  \]
+  Por ello, $g$ no es biyectiva.
+
+  Como $f(x)\in[0,\infty)\subseteq\mathbb{R}$, la composición $g\circ f$ está
+  definida para todo $x\in[1,\infty)$ y
+  \[
+    (g\circ f)(x)
+    =\left(\sqrt{x-1}\right)^2+1
+    =x.
+  \]
+  Por tanto,
+  \[
+    \operatorname{Dom}(g\circ f)=[1,\infty).
+  \]
+
+  Como $g(x)\in[1,\infty)$ para todo $x\in\mathbb{R}$, la composición
+  $f\circ g$ está definida en $\mathbb{R}$ y
+  \[
+    (f\circ g)(x)
+    =\sqrt{x^2}
+    =|x|.
+  \]
+  Así,
+  \[
+    \operatorname{Dom}(f\circ g)=\mathbb{R}.
+  \]
+  Aunque $g\circ f$ es la identidad en $[1,\infty)$, $f\circ g$ no es la
+  identidad en $\mathbb{R}$. Por tanto, $f$ y $g$ no son inversas con los
+  dominios dados. Si se restringe el dominio de $g$ a $[0,\infty)$, entonces sí
+  son funciones inversas.
+\end{enumerate}
+\end{solucion}
+\fi
+
+\end{document}

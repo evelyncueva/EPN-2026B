@@ -1,0 +1,455 @@
+% !TeX root = semana04.tex
+% !TeX program = pdflatex
+% Material de la semana 04: sesión de 3 horas después de la evaluación.
+\documentclass[10pt,a5paper]{article}
+\newif\ifmostrarSoluciones
+\mostrarSolucionestrue
+\usepackage{tikz}
+\usepackage{estilo_apuntes}
+\usetikzlibrary{arrows.meta,positioning,babel}
+\encabezado{Semana 4}{Apunte semanal}
+
+\begin{document}
+\tituloclase{Límites infinitos y al infinito}{Asíntotas verticales y horizontales}{Semana 4 · 3 horas}
+
+\begin{objetivos}
+\begin{itemize}
+  \item Interpretar límites infinitos y límites al infinito mediante expresiones y gráficas.
+  \item Identificar asíntotas verticales y horizontales a partir de límites.
+  \item Calcular límites al infinito de funciones racionales mediante comparación de grados.
+  \item Determinar el crecimiento no acotado de polinomios y funciones racionales cuando $x\to\pm\infty$.
+  \item Reconocer casos en los que un denominador nulo no produce una asíntota vertical y casos que requieren usar $\sqrt{x^2}=|x|$.
+\end{itemize}
+\end{objetivos}
+
+\begin{resumen}
+Un límite infinito describe valores de la función que crecen o decrecen sin cota cuando $x$ se aproxima a un número. Un límite al infinito describe el comportamiento de la función cuando $x$ toma valores positivos o negativos cada vez mayores en valor absoluto. Estas dos ideas permiten identificar asíntotas verticales y horizontales.
+\end{resumen}
+
+\begin{nota}[organización de la sesión]
+La primera evaluación ocupa dos horas de la semana. Este material está diseñado para las tres horas restantes: aproximadamente 40 minutos para límites infinitos y asíntotas verticales, 35 minutos para límites al infinito y asíntotas horizontales, 40 minutos para comparación de grados, 30 minutos para crecimiento no acotado y el caso especial con raíces, y 35 minutos para práctica y cierre.
+\end{nota}
+
+\section*{Dos comportamientos diferentes}
+
+Las expresiones
+\[
+  \lim_{x\to a}f(x)=+\infty
+  \qquad\text{y}\qquad
+  \lim_{x\to+\infty}f(x)=L
+\]
+responden preguntas distintas. En la primera, $x$ se aproxima al número $a$ y los valores de $f(x)$ crecen sin cota. En la segunda, $x$ crece sin cota y los valores de $f(x)$ se aproximan al número real $L$.
+
+\begin{nota}
+Los símbolos $+\infty$ y $-\infty$ no representan números reales. Por ello, un límite infinito describe un comportamiento no acotado; no afirma que la función alcance el valor infinito.
+\end{nota}
+
+\section*{Límites infinitos y asíntotas verticales}
+
+\begin{definicion}[límite infinito]
+Escribimos
+\[
+  \lim_{x\to a}f(x)=+\infty
+\]
+cuando los valores de $f(x)$ pueden hacerse positivos y tan grandes como se desee al tomar puntos $x$ del dominio suficientemente próximos a $a$, con $x\neq a$. De manera análoga,
+\[
+  \lim_{x\to a}f(x)=-\infty
+\]
+significa que los valores de $f(x)$ pueden hacerse negativos y tan grandes en valor absoluto como se desee.
+\end{definicion}
+
+Los límites infinitos también pueden ser laterales. El signo debe analizarse a cada lado del punto, pues una misma función puede tender a $-\infty$ por un lado y a $+\infty$ por el otro.
+
+\begin{definicion}[asíntota vertical]
+La recta $x=a$ es una \textbf{asíntota vertical} de la gráfica de $f$ si al menos uno de los límites laterales de $f$ en $a$ es $+\infty$ o $-\infty$.
+\end{definicion}
+
+\begin{ejemplo}[signos diferentes a cada lado]
+Sea
+\[
+  f\colon\mathbb{R}\setminus\{2\}\longrightarrow\mathbb{R},
+  \qquad
+  f(x)=\frac{1}{x-2}.
+\]
+Determine el comportamiento de $f$ cerca de $2$.
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+Cuando $x<2$, el número $x-2$ es negativo y se aproxima a $0$; por tanto, su recíproco decrece sin cota. Cuando $x>2$, el número $x-2$ es positivo y se aproxima a $0$; por tanto, su recíproco crece sin cota. Así,
+\[
+  \lim_{x\to2^-}\frac{1}{x-2}=-\infty,
+  \qquad
+  \lim_{x\to2^+}\frac{1}{x-2}=+\infty.
+\]
+La recta $x=2$ es una asíntota vertical. Como los comportamientos laterales tienen signos diferentes, no se escribe un único límite bilateral igual a $+\infty$ o a $-\infty$.
+\end{solucion}
+\else\vspace{20mm}\fi
+
+\begin{center}
+\begin{tikzpicture}[x=1.25cm,y=0.72cm,every node/.style={font=\scriptsize}]
+  \draw[->,Gris] (-1.2,0)--(5.2,0) node[right] {$x$};
+  \draw[->,Gris] (0,-5.2)--(0,5.4) node[above] {$y$};
+  \draw[Rojo,dashed,thick] (2,-5)--(2,5) node[above] {$x=2$};
+  \draw[Azul,very thick,domain=-1:1.8,samples=120]
+    plot (\x,{1/(\x-2)});
+  \draw[Azul,very thick,domain=2.2:5,samples=120]
+    plot (\x,{1/(\x-2)});
+  \node[Azul,right] at (3.3,0.85) {$y=1/(x-2)$};
+\end{tikzpicture}
+\end{center}
+
+\begin{ejemplo}[el mismo signo a ambos lados]
+Calcule los límites laterales de
+\[
+  g(x)=\frac{1}{(x+1)^2}
+\]
+cuando $x$ se aproxima a $-1$ e identifique la asíntota vertical.
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+Para $x\neq-1$, el denominador $(x+1)^2$ es positivo. Al aproximarse $x$ a $-1$ por cualquiera de los dos lados, el denominador se aproxima a $0$ mediante valores positivos. En consecuencia,
+\[
+  \lim_{x\to-1^-}\frac{1}{(x+1)^2}
+  =\lim_{x\to-1^+}\frac{1}{(x+1)^2}
+  =+\infty.
+\]
+En este caso también podemos escribir
+\[
+  \lim_{x\to-1}\frac{1}{(x+1)^2}=+\infty.
+\]
+La recta $x=-1$ es una asíntota vertical.
+\end{solucion}
+\else\vspace{18mm}\fi
+
+\begin{nota}[un denominador nulo no es suficiente]
+Que el denominador se anule en $x=a$ no garantiza una asíntota vertical. Por ejemplo,
+\[
+  \frac{x^2-4}{x-2}=x+2
+  \qquad (x\neq2).
+\]
+Por tanto,
+\[
+  \lim_{x\to2}\frac{x^2-4}{x-2}=4,
+\]
+y la recta $x=2$ no es una asíntota vertical. Antes de decidir, se deben simplificar los factores comunes y estudiar el límite.
+\end{nota}
+
+\section*{Límites al infinito y asíntotas horizontales}
+
+\begin{definicion}[límite al infinito]
+Escribimos
+\[
+  \lim_{x\to+\infty}f(x)=L
+\]
+cuando los valores de $f(x)$ se aproximan a $L$ al tomar valores positivos de $x$ cada vez mayores. La expresión
+\[
+  \lim_{x\to-\infty}f(x)=L
+\]
+describe el comportamiento de $f(x)$ cuando $x$ toma valores negativos cuyo valor absoluto es cada vez mayor.
+\end{definicion}
+
+\begin{definicion}[asíntota horizontal]
+La recta $y=L$ es una \textbf{asíntota horizontal} de la gráfica de $f$ si se cumple al menos una de las igualdades
+\[
+  \lim_{x\to+\infty}f(x)=L
+  \qquad\text{o}\qquad
+  \lim_{x\to-\infty}f(x)=L.
+\]
+Una función puede tener asíntotas horizontales diferentes hacia $+\infty$ y hacia $-\infty$.
+\end{definicion}
+
+\begin{nota}
+Una asíntota horizontal describe el comportamiento de la función cuando $x$ se aleja indefinidamente. La gráfica puede cruzar la recta $y=L$ una o varias veces para valores finitos de $x$ y, aun así, aproximarse a ella cuando $x\to+\infty$ o $x\to-\infty$.
+\end{nota}
+
+\begin{ejemplo}[una asíntota horizontal]
+Sea
+\[
+  h\colon\mathbb{R}\setminus\{-1\}\longrightarrow\mathbb{R},
+  \qquad
+  h(x)=\frac{2x+3}{x+1}.
+\]
+Determine su comportamiento cuando $x\to+\infty$ y cuando $x\to-\infty$.
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+Dividimos el numerador y el denominador entre $x$:
+\[
+  \frac{2x+3}{x+1}
+  =\frac{2+3/x}{1+1/x}.
+\]
+Como
+\[
+  \lim_{x\to+\infty}\frac{1}{x}
+  =\lim_{x\to-\infty}\frac{1}{x}
+  =0,
+\]
+obtenemos
+\[
+  \lim_{x\to+\infty}\frac{2x+3}{x+1}
+  =\lim_{x\to-\infty}\frac{2x+3}{x+1}
+  =2.
+\]
+La recta $y=2$ es una asíntota horizontal.
+\end{solucion}
+\else\vspace{18mm}\fi
+
+\begin{center}
+\begin{tikzpicture}[x=0.85cm,y=0.85cm,every node/.style={font=\scriptsize}]
+  \draw[->,Gris] (-5.2,0)--(5.4,0) node[right] {$x$};
+  \draw[->,Gris] (0,-2.0)--(0,5.2) node[above] {$y$};
+  \draw[Rojo,dashed,thick] (-5,2)--(5.2,2) node[right] {$y=2$};
+  \draw[Rojo,dashed] (-1,-1.8)--(-1,5) node[above] {$x=-1$};
+  \draw[Azul,very thick,domain=-5:-1.35,samples=120]
+    plot (\x,{(2*\x+3)/(\x+1)});
+  \draw[Azul,very thick,domain=-0.65:5,samples=140]
+    plot (\x,{(2*\x+3)/(\x+1)});
+  \node[Azul,right] at (2.3,2.6) {$y=(2x+3)/(x+1)$};
+\end{tikzpicture}
+\end{center}
+
+\section*{Comparación de grados}
+
+Considere una función racional
+\[
+  r(x)=\frac{a_nx^n+\cdots+a_1x+a_0}
+             {b_mx^m+\cdots+b_1x+b_0},
+  \qquad
+  a_n\neq0,
+  \quad
+  b_m\neq0.
+\]
+Los términos de mayor grado determinan el comportamiento cuando $x\to+\infty$ o $x\to-\infty$.
+
+\begin{proposicion}[límites al infinito de funciones racionales]
+Para la función racional anterior se tienen los siguientes casos:
+\begin{enumerate}
+  \item Si $n<m$, entonces
+  \[
+    \lim_{x\to\pm\infty}r(x)=0.
+  \]
+  La recta $y=0$ es una asíntota horizontal.
+  \item Si $n=m$, entonces
+  \[
+    \lim_{x\to\pm\infty}r(x)=\frac{a_n}{b_m}.
+  \]
+  La recta $y=a_n/b_m$ es una asíntota horizontal.
+  \item Si $n>m$, la función no tiene asíntota horizontal. En este caso,
+  \[
+    \lim_{x\to\pm\infty}
+    \frac{r(x)}{x^{n-m}}
+    =\frac{a_n}{b_m},
+  \]
+  de modo que $r(x)$ tiene el mismo comportamiento dominante que $(a_n/b_m)x^{n-m}$. El signo hacia cada extremo depende del cociente $a_n/b_m$ y de si $n-m$ es par o impar.
+\end{enumerate}
+\end{proposicion}
+
+\begin{ejemplo}[tres comparaciones de grados]
+Calcule los límites al infinito de las siguientes funciones e identifique sus asíntotas horizontales:
+\[
+  f(x)=\frac{2x+1}{x^2+4},
+  \qquad
+  g(x)=\frac{3x^2-x+1}{2x^2+5},
+  \qquad
+  q(x)=\frac{x^3+1}{x^2+1}.
+\]
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+En $f$, el grado del numerador es menor que el del denominador; por tanto,
+\[
+  \lim_{x\to\pm\infty}f(x)=0,
+\]
+y $y=0$ es una asíntota horizontal. En $g$, los grados son iguales y el cociente de los coeficientes principales es $3/2$; por tanto,
+\[
+  \lim_{x\to\pm\infty}g(x)=\frac{3}{2},
+\]
+y $y=3/2$ es una asíntota horizontal. En $q$, el grado del numerador es mayor. Como
+\[
+  \frac{x^3+1}{x^2+1}
+  =x+\frac{1-x}{x^2+1},
+\]
+la función se comporta como $x$ y no tiene asíntota horizontal.
+\end{solucion}
+\else\vspace{24mm}\fi
+
+\section*{Crecimiento no acotado cuando $x\to\pm\infty$}
+
+También puede ocurrir que tanto la variable como los valores de la función crezcan sin cota. Por ejemplo,
+\[
+  \lim_{x\to+\infty}x^2=+\infty.
+\]
+Esta expresión significa que $x^2$ puede hacerse tan grande como se desee al tomar valores positivos de $x$ suficientemente grandes.
+
+\begin{proposicion}[comportamiento de las potencias]
+Sea $k$ un entero positivo. Entonces
+\[
+  \lim_{x\to+\infty}x^k=+\infty.
+\]
+Hacia $-\infty$, el resultado depende de la paridad de $k$:
+\[
+  \lim_{x\to-\infty}x^k=
+  \begin{cases}
+    +\infty, & k\text{ es par},\\
+    -\infty, & k\text{ es impar}.
+  \end{cases}
+\]
+Además,
+\[
+  \lim_{x\to\pm\infty}\frac{1}{x^k}=0.
+\]
+\end{proposicion}
+
+Para un polinomio, el término de mayor grado determina el comportamiento en ambos extremos. Para una función racional con mayor grado en el numerador, se compara el cociente con
+\[
+  \frac{a_n}{b_m}x^{n-m}.
+\]
+
+\begin{ejemplo}[signo y paridad del término dominante]
+Calcule los límites al infinito de
+\[
+  f(x)=\frac{3x^3-x}{x^2+1}
+  \qquad\text{y}\qquad
+  g(x)=\frac{-2x^4+x}{x^2+3}.
+\]
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+La función $f$ se comporta como $3x$. Como la potencia dominante es impar y su coeficiente es positivo,
+\[
+  \lim_{x\to+\infty}f(x)=+\infty,
+  \qquad
+  \lim_{x\to-\infty}f(x)=-\infty.
+\]
+La función $g$ se comporta como $-2x^2$. La potencia dominante es par, por lo que $x^2$ es positivo en ambos extremos; el coeficiente negativo determina el signo final:
+\[
+  \lim_{x\to+\infty}g(x)=-\infty,
+  \qquad
+  \lim_{x\to-\infty}g(x)=-\infty.
+\]
+Ninguna de las dos funciones tiene asíntota horizontal.
+\end{solucion}
+\else\vspace{22mm}\fi
+
+\section*{Caso especial: raíces con $x^2$}
+
+La identidad correcta es
+\[
+  \sqrt{x^2}=|x|,
+\]
+no $\sqrt{x^2}=x$ para todo número real $x$. Esta diferencia es esencial cuando se estudian los dos extremos del eje real.
+
+\begin{ejemplo}[dos asíntotas horizontales]
+Calcule
+\[
+  \lim_{x\to+\infty}\frac{\sqrt{x^2+1}}{x}
+  \qquad\text{y}\qquad
+  \lim_{x\to-\infty}\frac{\sqrt{x^2+1}}{x}.
+\]
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+Factorizamos $x^2$ dentro de la raíz:
+\[
+  \frac{\sqrt{x^2+1}}{x}
+  =\frac{\sqrt{x^2\left(1+1/x^2\right)}}{x}
+  =\frac{|x|}{x}\sqrt{1+\frac{1}{x^2}}.
+\]
+Si $x\to+\infty$, entonces $|x|/x=1$; si $x\to-\infty$, entonces $|x|/x=-1$. Por tanto,
+\[
+  \lim_{x\to+\infty}\frac{\sqrt{x^2+1}}{x}=1,
+  \qquad
+  \lim_{x\to-\infty}\frac{\sqrt{x^2+1}}{x}=-1.
+\]
+La gráfica tiene dos asíntotas horizontales: $y=1$ hacia la derecha y $y=-1$ hacia la izquierda.
+\end{solucion}
+\else\vspace{22mm}\fi
+
+\begin{ejercicios}[práctica de la sesión]
+\begin{enumerate}
+  \item Calcule los límites laterales de $\displaystyle f(x)=\frac{1}{x+3}$ cuando $x\to-3$ e identifique la asíntota vertical.
+  \item Calcule $\displaystyle\lim_{x\to1}\frac{1}{(x-1)^2}$ e interprete el resultado gráficamente.
+  \item Decida si $x=2$ es una asíntota vertical de $\displaystyle g(x)=\frac{x^2-4}{x-2}$.
+  \item Calcule los límites cuando $x\to\pm\infty$ e identifique las asíntotas horizontales, si existen:
+  \begin{enumerate}
+    \item $\displaystyle\frac{5x-1}{x^2+2}$,
+    \item $\displaystyle\frac{4x^2+3}{2x^2-x}$,
+    \item $\displaystyle\frac{x^3-2}{x^2+1}$.
+  \end{enumerate}
+  \item Determine los límites cuando $x\to+\infty$ y cuando $x\to-\infty$ de
+  \[
+    p(x)=-3x^5+2x^2-1
+    \qquad\text{y}\qquad
+    r(x)=\frac{x^4+1}{-x^2+2}.
+  \]
+  \item Calcule $\displaystyle\lim_{x\to+\infty}\frac{2x+1}{\sqrt{x^2+4}}$ y $\displaystyle\lim_{x\to-\infty}\frac{2x+1}{\sqrt{x^2+4}}$.
+  \item Una función satisface
+  \[
+    \lim_{x\to2^-}f(x)=+\infty,
+    \qquad
+    \lim_{x\to2^+}f(x)=-\infty,
+    \qquad
+    \lim_{x\to+\infty}f(x)=3.
+  \]
+  Indique sus asíntotas verticales y horizontales.
+\end{enumerate}
+\end{ejercicios}
+
+\ifmostrarSoluciones
+\begin{solucion}[de los ejercicios]
+\begin{enumerate}
+  \item
+  \[
+    \lim_{x\to-3^-}\frac{1}{x+3}=-\infty,
+    \qquad
+    \lim_{x\to-3^+}\frac{1}{x+3}=+\infty.
+  \]
+  La asíntota vertical es $x=-3$.
+  \item El denominador se aproxima a $0$ mediante valores positivos desde ambos lados; por tanto,
+  \[
+    \lim_{x\to1}\frac{1}{(x-1)^2}=+\infty.
+  \]
+  La gráfica crece sin cota a ambos lados de la asíntota vertical $x=1$.
+  \item No. Para $x\neq2$ se cumple $g(x)=x+2$ y el límite en $2$ es $4$.
+  \item
+  \begin{enumerate}
+    \item Los límites hacia $+\infty$ y $-\infty$ son $0$; la asíntota horizontal es $y=0$.
+    \item Los dos límites son $4/2=2$; la asíntota horizontal es $y=2$.
+    \item No existe una asíntota horizontal. La función se comporta como $x$; por tanto, el límite hacia $+\infty$ es $+\infty$ y el límite hacia $-\infty$ es $-\infty$.
+  \end{enumerate}
+  \item El término dominante de $p$ es $-3x^5$. Como la potencia es impar,
+  \[
+    \lim_{x\to+\infty}p(x)=-\infty,
+    \qquad
+    \lim_{x\to-\infty}p(x)=+\infty.
+  \]
+  La función $r$ se comporta como $-x^2$; por tanto,
+  \[
+    \lim_{x\to+\infty}r(x)
+    =\lim_{x\to-\infty}r(x)
+    =-\infty.
+  \]
+  \item Como $\sqrt{x^2+4}=|x|\sqrt{1+4/x^2}$, los límites son
+  \[
+    \lim_{x\to+\infty}\frac{2x+1}{\sqrt{x^2+4}}=2,
+    \qquad
+    \lim_{x\to-\infty}\frac{2x+1}{\sqrt{x^2+4}}=-2.
+  \]
+  \item La asíntota vertical es $x=2$. La información dada garantiza la asíntota horizontal $y=3$ hacia $+\infty$; no se dispone de información sobre el comportamiento cuando $x\to-\infty$.
+\end{enumerate}
+\end{solucion}
+\fi
+
+\begin{nota}[ideas que deben quedar claras]
+\begin{itemize}
+  \item Una asíntota vertical se decide mediante límites cerca de un número; una asíntota horizontal se decide mediante límites cuando $x\to\pm\infty$.
+  \item Un cero del denominador no garantiza una asíntota vertical: primero se revisan factores comunes.
+  \item La comparación de grados permite decidir rápidamente los límites al infinito de una función racional.
+  \item Cuando domina una potencia, la paridad del exponente y el signo del coeficiente determinan el comportamiento hacia $+\infty$ y $-\infty$.
+  \item En expresiones con raíces, debe recordarse que $\sqrt{x^2}=|x|$.
+\end{itemize}
+\end{nota}
+
+\fuentes{J. Stewart, \emph{Cálculo de una variable: trascendentes tempranas}, apartados sobre límites infinitos, límites al infinito y asíntotas; G. Strang--E. Herman, \emph{Cálculo, volumen 1}, secciones sobre límites al infinito.}
+
+\end{document}
