@@ -5,6 +5,21 @@
 \newif\ifmostrarSoluciones
 \mostrarSolucionestrue
 \usepackage{estilo_apuntes}
+\newtcolorbox[auto counter]{ejerciciopractica}[1][]{
+  breakable,
+  colback=GrisClaro,
+  colframe=Azul,
+  title={\titulonumerado{Ejercicio}{\thetcbcounter}{#1}},
+  fonttitle=\bfseries,
+  arc=2mm,
+  boxrule=0.7pt
+}
+\newenvironment{solucionejercicio}[1]{%
+  \par\medskip\noindent\textbf{Solución del ejercicio #1.}%
+  \enspace\ignorespaces
+}{%
+  \par\medskip
+}
 \encabezado{Semana 4}{Práctica acumulativa}
 
 \begin{document}
@@ -18,13 +33,8 @@
 \end{itemize}
 \end{objetivos}
 
-\begin{nota}[organización sugerida]
-Trabaje aproximadamente 12 minutos en cada ejercicio y reserve los últimos 12 minutos para comparar estrategias y corregir los pasos principales. No basta escribir una respuesta final: deben justificarse los dominios, las simplificaciones y las conclusiones sobre límites.
-\end{nota}
-
-\begin{ejercicios}[práctica acumulativa]
-\begin{enumerate}
-  \item Sean
+\begin{ejerciciopractica}[composición y dominio]
+  Sean
   \[
     f\colon(-\infty,4]\longrightarrow[0,\infty),
     \qquad
@@ -37,16 +47,138 @@ Trabaje aproximadamente 12 minutos en cada ejercicio y reserve los últimos 12 m
     g(x)=\frac{1}{x-1}.
   \]
   Halle las leyes de asignación de $g\circ f$ y $f\circ g$, y determine cuidadosamente el dominio de cada composición.
+\end{ejerciciopractica}
 
-  \item Considere la función
+\ifmostrarSoluciones
+\begin{solucionejercicio}{1}
+  Recordemos que un punto $x$ pertenece al dominio de $g\circ f$ si se
+  cumplen simultáneamente las dos condiciones
+  \[
+    x\in D_f
+    \qquad\text{y}\qquad
+    f(x)\in D_g.
+  \]
+  Al sustituir la ley de $f$ en la ley de $g$, obtenemos
+  \[
+    (g\circ f)(x)
+    =g\bigl(f(x)\bigr)
+    =\frac{1}{\sqrt{4-x}-1}.
+  \]
+  La primera condición exige
+  \[
+    x\leq4.
+  \]
+  Como el dominio de $g$ excluye al número $1$, la segunda condición exige
+  \[
+    f(x)\neq1.
+  \]
+  Para determinar qué punto debe excluirse, resolvemos
+  \[
+    \sqrt{4-x}=1
+    \iff 4-x=1
+    \iff x=3.
+  \]
+  Por tanto,
+  \[
+    D_{g\circ f}=(-\infty,4]\setminus\{3\}.
+  \]
+
+  Para estudiar $f\circ g$, usamos ahora las condiciones
+  \[
+    x\in D_g
+    \qquad\text{y}\qquad
+    g(x)\in D_f.
+  \]
+  Su ley de asignación es
+  \[
+    (f\circ g)(x)
+    =f\bigl(g(x)\bigr)
+    =\sqrt{4-\frac{1}{x-1}}.
+  \]
+  La primera condición exige $x\neq1$. La segunda exige que la entrada de la
+  raíz sea no negativa:
+  \[
+    4-\frac{1}{x-1}
+    =\frac{4x-5}{x-1}
+    \geq0.
+  \]
+  Los puntos que separan los intervalos del análisis de signos son
+  \[
+    x=1
+    \qquad\text{y}\qquad
+    x=\frac54.
+  \]
+  El cociente es positivo en $(-\infty,1)$, negativo en
+  $(1,5/4)$ y no negativo en $[5/4,\infty)$. El punto $x=1$ no se incluye
+  porque anula el denominador; el punto $x=5/4$ sí se incluye porque produce
+  un radicando igual a cero. Concluimos que
+  \[
+    D_{f\circ g}
+    =(-\infty,1)\cup\left[\frac54,\infty\right).
+  \]
+\end{solucionejercicio}
+\fi
+
+\begin{ejerciciopractica}[transformaciones y biyectividad]
+  Considere la función
   \[
     h\colon[1,\infty)\longrightarrow[-3,\infty),
     \qquad
     h(x)=2(x-1)^2-3.
   \]
   Describa las transformaciones que permiten obtener su gráfica a partir de $y=x^2$. Analice si $h$ es biyectiva.
+\end{ejerciciopractica}
 
-  \item Sea
+\ifmostrarSoluciones
+\begin{solucionejercicio}{2}
+  Partimos de la función básica
+  \[
+    y=x^2.
+  \]
+  Al reemplazar $x$ por $x-1$, su gráfica se traslada una unidad hacia la
+  derecha. La multiplicación por $2$ produce un estiramiento vertical de factor
+  $2$, y la resta de $3$ traslada la gráfica tres unidades hacia abajo. En
+  consecuencia, el vértice es
+  \[
+    (1,-3),
+  \]
+  y solo se considera la rama correspondiente a $x\geq1$.
+
+  Probemos primero la inyectividad. Sean $x_1,x_2\in[1,\infty)$ y supongamos
+  que
+  \[
+    h(x_1)=h(x_2).
+  \]
+  Entonces
+  \begin{align*}
+    2(x_1-1)^2-3&=2(x_2-1)^2-3,\\
+    (x_1-1)^2&=(x_2-1)^2.
+  \end{align*}
+  Como $x_1-1$ y $x_2-1$ son no negativos, se sigue que
+  \[
+    x_1-1=x_2-1,
+  \]
+  y, por tanto, $x_1=x_2$. Esto demuestra que $h$ es inyectiva.
+
+  Para probar la sobreyectividad, sea $y\in[-3,\infty)$. Buscamos
+  $x\in[1,\infty)$ tal que $h(x)=y$. Al resolver esta ecuación obtenemos
+  \[
+    2(x-1)^2-3=y
+    \iff
+    x=1+\sqrt{\frac{y+3}{2}}.
+  \]
+  Esta elección está bien definida porque $y+3\geq0$, pertenece a
+  $[1,\infty)$ y satisface $h(x)=y$. Por ello, $h$ es sobreyectiva sobre el
+  codominio declarado. Como es inyectiva y sobreyectiva, concluimos que
+  \[
+    h\colon[1,\infty)\to[-3,\infty)
+  \]
+  es biyectiva.
+\end{solucionejercicio}
+\fi
+
+\begin{ejerciciopractica}[límites laterales]
+  Sea
   \[
     F\colon[-3,1)\cup(1,\infty)\longrightarrow\mathbb{R}
   \]
@@ -59,62 +191,34 @@ Trabaje aproximadamente 12 minutos en cada ejercicio y reserve los últimos 12 m
     \end{cases}
   \]
   Decida si existe $\displaystyle\lim_{x\to1}F(x)$.
-
-  \item Calcule, justificando cada simplificación,
-  \[
-    \lim_{x\to4}
-    \frac{\sqrt{x+5}-3}{x^2-16}.
-  \]
-  Indique por qué no es válido sustituir directamente.
-\end{enumerate}
-\end{ejercicios}
+\end{ejerciciopractica}
 
 \ifmostrarSoluciones
-\begin{solucion}[de la práctica acumulativa]
-\begin{enumerate}
-  \item La primera composición tiene ley
-  \[
-    (g\circ f)(x)
-    =\frac{1}{\sqrt{4-x}-1}.
-  \]
-  Se requiere $x\leq4$ para evaluar $f(x)$ y $f(x)\neq1$ para poder aplicar $g$. Como
-  \[
-    \sqrt{4-x}=1
-    \iff x=3,
-  \]
-  resulta
-  \[
-    D_{g\circ f}=(-\infty,4]\setminus\{3\}.
-  \]
-  Para la segunda composición,
-  \[
-    (f\circ g)(x)
-    =\sqrt{4-\frac{1}{x-1}}.
-  \]
-  Se requiere $x\neq1$ y
-  \[
-    4-\frac{1}{x-1}
-    =\frac{4x-5}{x-1}
-    \geq0.
-  \]
-  El análisis de signos en los puntos $1$ y $5/4$ da
-  \[
-    D_{f\circ g}
-    =(-\infty,1)\cup\left[\frac54,\infty\right).
-  \]
-
-  \item A partir de $y=x^2$, la gráfica se traslada una unidad a la derecha, se estira verticalmente por un factor de $2$ y se traslada tres unidades hacia abajo. En el dominio $[1,\infty)$, la función es estrictamente creciente y su imagen es $[-3,\infty)$; por tanto, es inyectiva y sobreyectiva sobre el codominio declarado.
-
-  \item Para $x<1$ y $x\neq1$, racionalizamos:
-  \[
+\begin{solucionejercicio}{3}
+  Para decidir si existe el límite bilateral, debemos calcular por separado
+  los límites laterales. Cuando $x<1$, utilizamos la primera ley de asignación.
+  Para $x\neq1$, multiplicamos por el conjugado:
+  \begin{align*}
     \frac{\sqrt{x+3}-2}{x-1}
-    =\frac{1}{\sqrt{x+3}+2}.
-  \]
-  Por tanto,
+    &=\frac{\sqrt{x+3}-2}{x-1}
+      \frac{\sqrt{x+3}+2}{\sqrt{x+3}+2}\\
+    &=\frac{x+3-4}{(x-1)(\sqrt{x+3}+2)}\\
+    &=\frac{1}{\sqrt{x+3}+2}.
+  \end{align*}
+  La simplificación es válida para los puntos del dominio cercanos a $1$,
+  aunque no en $x=1$. Como la expresión simplificada tiene denominador no nulo
+  en $1$, obtenemos
   \[
-    \lim_{x\to1^-}F(x)=\frac14.
+    \lim_{x\to1^-}F(x)
+    =\frac{1}{\sqrt{1+3}+2}
+    =\frac14.
   \]
-  Para $x>1$, factorizamos:
+
+  Cuando $x>1$, utilizamos la segunda ley. Factorizamos el numerador:
+  \[
+    x^2+x-2=(x-1)(x+2).
+  \]
+  Por ello, para $x\neq1$,
   \[
     \frac{x^2+x-2}{x-1}
     =\frac{(x-1)(x+2)}{x-1}
@@ -122,30 +226,81 @@ Trabaje aproximadamente 12 minutos en cada ejercicio y reserve los últimos 12 m
   \]
   En consecuencia,
   \[
+    \lim_{x\to1^+}F(x)
+    =1+2
+    =3.
+  \]
+  Hemos obtenido
+  \[
+    \lim_{x\to1^-}F(x)=\frac14
+    \qquad\text{y}\qquad
     \lim_{x\to1^+}F(x)=3.
   \]
-  Como los límites laterales son diferentes, el límite bilateral no existe.
+  Como los límites laterales existen pero son diferentes, el criterio de
+  existencia del límite bilateral permite concluir que
+  \[
+    \lim_{x\to1}F(x)
+  \]
+  no existe.
+\end{solucionejercicio}
+\fi
 
-  \item La sustitución directa produce la forma indeterminada $0/0$. Para $x\neq4$, racionalizamos y factorizamos:
+\begin{ejerciciopractica}[racionalización]
+  Calcule, justificando cada simplificación,
+  \[
+    \lim_{x\to4}
+    \frac{\sqrt{x+5}-3}{x^2-16}.
+  \]
+  Indique por qué no es válido sustituir directamente.
+\end{ejerciciopractica}
+
+\ifmostrarSoluciones
+\begin{solucionejercicio}{4}
+  Si sustituimos $x=4$ en el numerador y en el denominador, obtenemos
+  \[
+    \sqrt{4+5}-3=0
+    \qquad\text{y}\qquad
+    4^2-16=0.
+  \]
+  Por tanto, la sustitución directa produce la forma indeterminada
+  \[
+    \frac00.
+  \]
+  Esta expresión no es un número ni determina por sí sola el valor del
+  límite; indica que debemos transformar algebraicamente el cociente.
+
+  Para $x\neq4$, multiplicamos el numerador y el denominador por el conjugado
+  del numerador y factorizamos la diferencia de cuadrados:
   \begin{align*}
     \frac{\sqrt{x+5}-3}{x^2-16}
-    &=\frac{x-4}
+    &=\frac{\sqrt{x+5}-3}{x^2-16}
+      \frac{\sqrt{x+5}+3}{\sqrt{x+5}+3}\\
+    &=\frac{x+5-9}
       {(\sqrt{x+5}+3)(x^2-16)}\\
     &=\frac{x-4}
       {(\sqrt{x+5}+3)(x-4)(x+4)}\\
     &=\frac{1}
       {(\sqrt{x+5}+3)(x+4)}.
   \end{align*}
-  La última expresión es localmente igual a la original alrededor de $4$, excepto en $x=4$. Por sustitución,
+  La cancelación de $x-4$ es válida porque en el cálculo del límite
+  consideramos puntos $x$ cercanos a $4$, pero distintos de $4$. De este modo,
+  la función original y la expresión simplificada son iguales en un entorno de
+  $4$, salvo posiblemente en el propio punto.
+
+  El denominador de la expresión simplificada no se anula en $x=4$. Por las
+  propiedades de los límites, podemos sustituir y obtener
   \[
     \lim_{x\to4}
     \frac{\sqrt{x+5}-3}{x^2-16}
+    =\frac{1}{(\sqrt{4+5}+3)(4+4)}
     =\frac{1}{(3+3)(4+4)}
     =\frac{1}{48}.
   \]
-
-\end{enumerate}
-\end{solucion}
+  Por tanto, el límite solicitado es
+  \[
+    \boxed{\frac{1}{48}}.
+  \]
+\end{solucionejercicio}
 \fi
 
 \end{document}
