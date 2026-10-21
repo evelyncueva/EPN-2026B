@@ -1,0 +1,158 @@
+\documentclass[10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,shorthands=off]{babel}
+\usepackage{aleph-comandos}
+\usepackage{moodle}
+\usepackage{amssymb}
+\usepackage{mathpazo}
+\usepackage[margin=2cm]{geometry}
+
+\title{Reactivos adicionales de Cálculo Diferencial}
+\author{Propuesta para revisión docente}
+\date{}
+
+\begin{document}
+\maketitle
+Se proponen seis preguntas alternativas para MATD124. Cada pregunta tiene
+cuatro opciones y una sola respuesta correcta. Se aprobaron las sustituciones
+A6 por la pregunta 6, A2 por la 7 y A1 por la 9 del banco principal.
+Las justificaciones para revisión
+docente aparecen al final del PDF, fuera del banco exportado a Moodle.
+
+\begin{quiz}{Calculo-Diferencial-MATD124-Adicionales-Conceptuales}
+
+% A1. Signo de la derivada, monotonía y extremos. Dificultad estimada: básica.
+\begin{multi}[single=true,shuffle=false]{calculo-MATD124-adicional-01}
+Una función $f$ es continua en $[0,3]$ y diferenciable en $(0,3)$.
+Se sabe que $f'(x)<0$ para $0<x<1$ y que $f'(x)>0$ para $1<x<3$.
+Sin conocer una fórmula para $f$, ¿cuál de las siguientes afirmaciones
+es necesariamente verdadera?
+    \item[fraction=0] $f$ alcanza su máximo absoluto en $x=1$.
+    \item* $f$ alcanza su mínimo absoluto en $x=1$.
+    \item[fraction=0] $f(0)<f(1)$.
+    \item[fraction=0] $f(3)<f(1)$.
+\end{multi}
+
+% A2. Diferencia entre monotonía estricta y no estricta. Dificultad: intermedia.
+\begin{multi}[single=true,shuffle=false]{calculo-MATD124-adicional-02}
+Sea $f$ diferenciable en un intervalo abierto $I$. Si $f'(x)\geq0$
+para todo $x\in I$, ¿cuál de las siguientes conclusiones está garantizada?
+    \item[fraction=0] Para cualesquiera $x_1,x_2\in I$ con $x_1<x_2$,
+    se cumple $f(x_1)<f(x_2)$.
+    \item[fraction=0] $f$ es constante en $I$.
+    \item[fraction=0] $f$ no puede ser constante en ningún subintervalo de $I$.
+    \item* Para cualesquiera $x_1,x_2\in I$ con $x_1<x_2$,
+    se cumple $f(x_1)\leq f(x_2)$.
+\end{multi}
+
+% A3. Interpretación geométrica del valor medio. Dificultad: básica/intermedia.
+\begin{multi}[single=true,shuffle=false]{calculo-MATD124-adicional-03}
+Una función $f$ es continua en $[1,4]$ y diferenciable en $(1,4)$,
+con $f(1)=2$ y $f(4)=8$. ¿Qué afirmación está garantizada por estas
+condiciones?
+    \item* Existe al menos un $c\in(1,4)$ en el que la recta tangente
+    a la gráfica de $f$ es paralela a la recta que une $(1,2)$ y $(4,8)$.
+    \item[fraction=0] La derivada de $f$ es igual a $2$ en todos los
+    puntos de $(1,4)$.
+    \item[fraction=0] $f$ es estrictamente creciente en todo $[1,4]$.
+    \item[fraction=0] Existe exactamente un $c\in(1,4)$ tal que $f'(c)=2$.
+\end{multi}
+
+% A4. Papel de la diferenciabilidad en Rolle. Dificultad: intermedia.
+\begin{multi}[single=true,shuffle=false]{calculo-MATD124-adicional-04}
+Considere $f(x)=|x|$ en $[-1,1]$. Aunque $f(-1)=f(1)$, no existe
+un $c\in(-1,1)$ tal que $f'(c)=0$. ¿Cuál de las siguientes afirmaciones
+explica por qué este ejemplo no contradice el resultado que garantiza
+una tangente horizontal entre extremos de igual altura?
+    \item[fraction=0] La función no es continua en $x=0$.
+    \item[fraction=0] El intervalo $[-1,1]$ no es cerrado.
+    \item* La función no es diferenciable en $x=0$, que es un punto interior.
+    \item[fraction=0] La función no tiene un mínimo en $[-1,1]$.
+\end{multi}
+
+% A5. Acotación de incrementos por la derivada. Dificultad: intermedia.
+\begin{multi}[single=true,shuffle=false]{calculo-MATD124-adicional-05}
+Una función $f$ es continua en $[1,3]$ y diferenciable en $(1,3)$.
+Además, $f(1)=3$ y $2\leq f'(x)\leq4$ para todo $x\in(1,3)$.
+¿Cuál de las siguientes afirmaciones sobre $f(3)$ está garantizada?
+    \item[fraction=0] $4\leq f(3)\leq8$.
+    \item* $7\leq f(3)\leq11$.
+    \item[fraction=0] $5\leq f(3)\leq7$.
+    \item[fraction=0] $f(3)=9$.
+\end{multi}
+
+% A6. Existencia y unicidad de un cero. Dificultad: intermedia.
+\begin{multi}[single=true,shuffle=false]{calculo-MATD124-adicional-06}
+Una función $f$ es continua en $[0,2]$ y diferenciable en $(0,2)$.
+Se sabe que $f(0)=-1$, $f(2)=3$ y $f'(x)>0$ para todo $x\in(0,2)$.
+¿Qué se puede concluir sobre las soluciones de $f(x)=0$ en $(0,2)$?
+    \item[fraction=0] No existe ninguna solución.
+    \item[fraction=0] Existe al menos una solución, pero las condiciones
+    no permiten determinar si es única.
+    \item[fraction=0] Existen al menos dos soluciones distintas.
+    \item* Existe exactamente una solución.
+\end{multi}
+
+\end{quiz}
+
+\clearpage
+\section*{Clave y justificaciones para revisión docente}
+\textbf{Clave:} A1: B; A2: D; A3: A; A4: C; A5: B; A6: D.
+
+\begin{enumerate}
+\item[\textbf{A1.}] \textbf{B.} El signo negativo de $f'$ implica que $f$
+es estrictamente decreciente en $[0,1]$; el signo positivo implica que es
+estrictamente creciente en $[1,3]$. Ambas afirmaciones se justifican
+aplicando el teorema del valor medio a pares de puntos de cada intervalo.
+Por tanto, $f(1)<f(x)$ para todo $x\in[0,3]$ distinto de $1$.
+
+\item[\textbf{A2.}] \textbf{D.} Para $x_1<x_2$, el teorema del valor medio
+da $f(x_2)-f(x_1)=f'(c)(x_2-x_1)\geq0$ para algún $c\in(x_1,x_2)$.
+Esto garantiza que $f$ es no decreciente. No garantiza crecimiento
+estricto: una función constante satisface la hipótesis. Tampoco obliga
+a que $f$ sea constante, como muestra $f(x)=x$.
+
+\item[\textbf{A3.}] \textbf{A.} La pendiente de la secante es
+$(8-2)/(4-1)=2$. Por el teorema del valor medio, existe $c\in(1,4)$
+con $f'(c)=2$. El resultado no exige que la derivada sea constante ni
+que ese punto sea único: $f(x)=2x$ cumple las hipótesis y su derivada
+vale $2$ en todos los puntos. Tampoco garantiza monotonía en todo el
+intervalo. Por ejemplo, $g(x)=2x+2(x-1)(x-4)$ cumple los valores de los
+extremos y $g'(x)=4x-8<0$ en $(1,2)$.
+
+\item[\textbf{A4.}] \textbf{C.} La continuidad y la igualdad de los valores
+en los extremos no bastan para aplicar el teorema de Rolle: se requiere
+diferenciabilidad en todos los puntos interiores. En $0$, las derivadas
+laterales son $-1$ y $1$, por lo que $f'(0)$ no existe. En los demás
+puntos interiores, la derivada vale $-1$ o $1$, nunca $0$.
+
+\item[\textbf{A5.}] \textbf{B.} Por el teorema del valor medio,
+$f(3)-f(1)=f'(c)(3-1)=2f'(c)$ para algún $c\in(1,3)$. Así,
+$4\leq f(3)-3\leq8$, y por tanto $7\leq f(3)\leq11$.
+Las hipótesis acotan el incremento, pero no fijan un valor único.
+Las funciones $f(x)=3+2(x-1)$ y $f(x)=3+4(x-1)$ alcanzan los extremos
+permitidos y descartan las otras alternativas como conclusiones necesarias.
+
+\item[\textbf{A6.}] \textbf{D.} La continuidad y el cambio de signo
+garantizan al menos un cero interior. Como $f'>0$, el teorema del valor
+medio implica que $f$ es estrictamente creciente y no puede tomar el
+valor $0$ en dos puntos distintos. Así, el cero existe y es único.
+\end{enumerate}
+
+\section*{Sustituciones y alternativas}
+\begin{itemize}
+\item A1 reemplaza al reactivo original 9: evalúa extremos a
+partir del signo de la derivada, sin pedir calcularla.
+\item A3 puede reemplazar al original 2 o 4 si se desea reducir el peso
+del cálculo de límites y evaluar el significado geométrico de la derivada.
+\item A6 reemplaza al original 6: añade el análisis de unicidad
+mediante monotonía a la existencia de un cero por continuidad.
+\item A2 reemplaza al original 7 y evalúa la diferencia entre monotonía
+estricta y no estricta. A4 y A5 siguen como alternativas para evaluar
+la necesidad de las hipótesis y la estimación de cambios.
+\end{itemize}
+Las sustituciones aprobadas ya están incorporadas en el banco principal.
+Este documento conserva las seis propuestas adicionales para consulta.
+
+\end{document}

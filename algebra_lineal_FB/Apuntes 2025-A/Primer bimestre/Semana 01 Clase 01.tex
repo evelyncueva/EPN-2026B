@@ -1,0 +1,324 @@
+\documentclass[compacto,10pt]{pubciencias-notas}
+
+% -- Paquetes adicionales
+\usepackage{comandosEPN}
+
+% -- Datos del libro
+\autor{Departamento de Formación Básica}
+\materia{Álgebra Lineal}
+\nota{Clase1}
+\fecha{Semestre 2025-A}
+
+\logouno[1.1cm]{Logo_EPN.eps}
+\logodos[1.7cm]{Logo_DFB.eps}
+
+\definecolor{colordef}{cmyk}{0.81,0.62,0.00,0.22}
+
+\begin{document}
+
+\encabezado
+
+
+\vspace{-8mm}
+
+\section{Matrices}
+\subsection{Definiciones y conceptos fundamentales}
+
+\begin{defi}[Matriz]
+    Una matriz sobre un cuerpo $\K$ es una función 
+    \[
+        \funcion{A}{I\times J}{\K}
+        %{(i,j)}{A(i,j)=a_{ij},}
+        {(i,j)}{a_{ij},}
+    \]
+    la cual se representa por
+    \[
+        A = 
+        \begin{pmatrix}
+        a_{11} & a_{12} & \cdots & a_{1n} \\ 
+        a_{21} & a_{22} & \cdots & a_{2n} \\ 
+        \vdots & \vdots & \ddots & \vdots\\ 
+        a_{m1} & a_{m2} & \cdots & a_{mn}
+        \end{pmatrix}.
+    \]
+    Con esto, se dice que $A$ es de orden $m \times n$ y que tiene $m$ filas y $n$ columnas. 
+    
+    Al conjunto de todas las matrices de orden $m \times n$ sobre el campo $\K$ se denota por $\Mat[\K]{m}{n}$.
+\end{defi}
+
+\begin{obs} 
+A $a_{ij}$ se lo denomina elemento o componente $ij$ de $A$, el número que aparece en la fila $i$ y la columna $j$.
+\end{obs}
+
+\begin{advertencia}
+    Dada una matriz $A$, esta se la representa también por $A=\l(a_{ij}\r)$.
+\end{advertencia}
+
+\begin{advertencia}
+    Otras notaciones usuales para el conjunto de las matrices, que se puede encontrar en la literatura, son $\M_{m\times n}$ o $M_{mn}$.
+\end{advertencia}
+
+\begin{ejem}\hspace{0pt} Considere las matrices
+\[
+    A = \begin{pmatrix}1&0\\-2&-5\\0&3\end{pmatrix}
+    \texty
+    B = \begin{pmatrix}8&1&5\\5&7&-8\end{pmatrix}.
+\]
+La matriz $A$ es de orden $3 \times 2$ y la matriz $B$ es de orden $2 \times 3$. El elemento en la fila 1 y columna 2 de $A$ es, $a_{12} = 0$ y el elemento de la fila 2 y columna 3 de $B$ es, $b_{23} = -8$.
+\end{ejem}
+
+\begin{ejem} \hspace{0pt} Considere la matriz $A = \l(a_{ij}\r)\in\Mat[\R]{m}{n}$ donde
+\[
+    a_{ij} = 0
+\]
+para cada $i\in I$ y $j\in J$. 
+
+Esta matriz, donde todos sus elementos son igual a 0, se denomina matriz nula o cero de orden $m\times n$ y suele notarse por matriz $0$.  
+    
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} Dada la matriz $A = \l(a_{ij}\r)\in\Mat[\R]{2}{3}$ donde
+\[
+    a_{ij} = 2i - j
+\]
+para cada $i\in\{1,2\}$ y $j\in\{1,2,3\}$. Escriba a la matriz con todos sus elementos.
+\end{ejer}
+
+\begin{defi}[Filas y columnas]
+    Sean $A\in\Mat[\K]{m}{n}$, $i\in I$ y $j\in J$. A la matriz
+    \[
+        \begin{pmatrix}
+        a_{1j} \\ 
+        a_{2j} \\ 
+        \vdots \\ 
+        a_{mj} 
+        \end{pmatrix}
+    \]
+    se la llama la $j$-ésima columna de $A$ que notaremos $A^j$ y a la matriz
+    \[
+        \begin{pmatrix}
+        a_{i1}& a_{i2}&\cdots& a_{in}
+        \end{pmatrix}
+    \]
+    se la llama la $i$-ésima fila de $A$ que notaremos $A_i$.
+\end{defi}
+
+\begin{ejem}
+Considere la matriz
+\[
+    A = \begin{pmatrix}1&0&6\\-2&-5&3\\0&3&0\end{pmatrix}.
+\]
+La 3-ésima columna de $A$, es
+\[
+    \begin{pmatrix}6\\3\\0\end{pmatrix}.
+\]
+La 1-ésima fila de $A$ es
+\[
+    \begin{pmatrix}1&0&6\end{pmatrix}.
+\]
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} Dada la matriz $A = \begin{pmatrix}1&2&-1&0&3\\1&2&0&1&3\\3&3&3&3&3\end{pmatrix}$. Indique a su 2-ésima fila, 3-ésima columna y 5-ésima columna.
+\end{ejer}
+
+\begin{defi}[Igualdad de matrices]
+    Sean $A \in \Mat[\K]{m}{n}$ y $B \in \Mat[\K]{p}{q}$. Se dice que las matrices $A$ y $B$ son iguales, y se representa por $A=B$, si:
+    \begin{itemize}
+    \item[$a)$] 
+        $m=p$ y $n=q$; y
+    \item[$b)$] 
+        $a_{ij}=b_{ij}$ para todo $i\in I$ y $j \in J$.
+    \end{itemize}
+\end{defi}
+
+\begin{ejem} Dados $x,y,z\in\R$, considere las matrices $A$ y $B$, 
+\[
+    A = \begin{pmatrix}1&6\\-8&3\\0&7\end{pmatrix}
+    \texty
+    B = \begin{pmatrix}x&6\\y&3\\0&z\end{pmatrix}.
+\]
+Notando que $A$ y $B$ tienen el mismo orden, para que sean iguales los valores de $x$, $y$ y $z$ deben ser $1$, $-8$ y $7$, respectivamente.
+\end{ejem}
+
+%\begin{ejer}\hspace{0pt} Dadas las matrices %$A, B, C\in\Mat[\R]{2}{2}$ donde 
+%\[
+%    a_{ij} = \max\{i,j\}, \qquad b_{ij} = \min\{i,j\} \texty c_{ij} = - \max\{-i,-j\}
+%\]
+%para cada $i,j\in\{1,2\}$. Indique cuáles matrices son iguales y cuáles no lo son.
+%\end{ejer}
+
+\begin{comment}
+\begin{defi}[Vectores]
+    El conjunto $\K^n$ es:
+    \[
+        \K^n=\underbrace{\K\times\K\times\cdots\times\K}_{n\text{ veces}},
+    \]
+    es decir,
+    \[
+        \K^n=\{(a_1,a_2,\ldots,a_n):a_i\in\K\text{ para todo }i \in J\}.
+    \]
+\end{defi}
+
+\begin{advertencia}
+    Por notación, si $a\in\K^n$, se asumirá $a=(a_1,a_2,\ldots,a_n)$.
+\end{advertencia}
+
+\begin{advertencia}
+    Podemos identificar cada elemento de $\K^n$ con una matriz de $\Mat[\K]{n}{1}$ de la siguiente manera: si
+    \[
+        a = (a_1,a_2,\ldots,a_n) \in \K^n,
+    \]
+    entonces, visto como matriz es
+    \[
+        a = 
+        \begin{pmatrix}
+            a_1\\a_2\\
+            \vdots\\a_n
+        \end{pmatrix}
+        \in \Mat[\K]{n}{1}.
+    \]
+\end{advertencia}
+
+\begin{ejem} El vector $u = (1, 2, y)$ donde $y\in\R$, visto como matriz es
+\[
+    u = \begin{pmatrix}1\\2\\y\end{pmatrix}\in\Mat[\K]{3}{1}.
+\]
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} Dada la matriz $A = \begin{pmatrix}1&3\\2&2\\2&1\end{pmatrix}$, escriba a sus columnas cómo elementos de $\R^{3}$ y sus filas como elementos de $\Mat{2}{1}$ y de $\R^{2}$.
+\end{ejer}
+\end{comment}
+
+\newpage
+\subsection{Operaciones entre matrices}
+
+En esta sección consideramos  $p,q\in \N$ con $p>0$ y $q>0$.
+
+\begin{defi}[Suma de matrices]
+    Sean $A, B \in \Mat[\K]{m}{n}$. La suma de las matrices $A$ y $B$ es la matriz $C\in \Mat[\K]{m}{n}$ tal que:
+    \[ 
+        c_{ij} = a_{ij} + b_{ij}
+    \]
+    para todo $i \in I$ y $j \in J$. A esta matriz se la denota por $A+B$.
+\end{defi}
+
+\begin{advertencia}
+    Con esto, tenemos que $\l(a_{ij}\r)+\l(b_{ij}\r)=\l(a_{ij} + b_{ij}\r)$.
+\end{advertencia}
+
+\begin{ejem}\label{Ejem:Sem01Clas01SumaMat}
+Considere las matrices
+\[ 
+    A = 
+    \begin{pmatrix}
+    1&\dfrac{1}{2}&\dfrac{1}{4}\\
+    -2&-5&6\\
+    0&\dfrac{7}{3}&20
+    \end{pmatrix}
+    \texty
+    B = 
+    \begin{pmatrix}
+    8&-\dfrac{1}{2}&-\dfrac{1}{4}\\
+    5&7&-8\\
+    -1&-\dfrac{1}{3}& 2
+    \end{pmatrix}.
+\]
+La suma de las matrices $A$ y $B$ se calcula sumando los elementos que ocupan la misma posición, es decir, si $C = A + B$ para calcular al elemento $c_{12}$ se tiene que
+\[
+    c_{12} = a_{12} + b_{12} = \dfrac{1}{2} + \l(- \dfrac{1}{2}\r) = 0.
+\]
+Finalmente
+\[
+A+B = 
+\begin{pmatrix}
+9 & 0 &0 \\
+3 & 2 & -2 \\
+-1 &2 & 22
+\end{pmatrix}.
+\]
+\end{ejem}
+
+\begin{ejer}\hspace{0pt}\label{Ejer:Sem01Clas01SumaMat} Dada la matriz
+\[
+    A = 
+    \begin{pmatrix}
+    1&\dfrac{1}{2}&\dfrac{1}{4}\\
+    -2&-5&6\\
+    0&\dfrac{7}{3}&20
+    \end{pmatrix}   
+\] 
+Calcular $A + A$.
+\end{ejer}
+\begin{teo}\label{Teo:Sem01Clas01PropSum}
+    Sean $A,B,C\in\Mat[\K]{m}{n}$. Se tiene que:
+    
+    \begin{itemize}
+    \item[$a)$]    
+        $A + B = B + A$.        
+    \item[$b)$]    
+        $A + (B+C) = (A + B)+C$.
+    \item[$c)$] 
+        Existe una única matriz $0$ de orden $m \times n$ tal que 
+        \[ 
+            A + 0 =  A 
+        \]
+        para cualquier matriz $A$ de orden $m \times n$. La matriz $0$ se denomina neutro aditivo de orden $m \times n$, también llamada la matriz nula.
+    \item[$d)$] 
+        Para cada matriz $A$ de orden $m \times n$, existe una única matriz, denotada por $-A$, de orden $m \times n$ tal que:
+        
+        \[
+            A + (-A) = 0.
+        \]
+        
+        A la matriz $-A$ se la denomina el inverso aditivo de $A$.
+    \end{itemize}
+\end{teo}
+
+\begin{defi}[Multiplicación por un escalar]
+Sean $A\in \Mat[\K]{m}{n}$ y $\alpha \in \K$. El producto del escalar $\alpha$ por la matriz $A$ es la matriz $B\in \Mat[\K]{m}{n}$ tal que:
+\[ 
+    b_{ij} = \alpha a_{ij}
+\]
+para todo $i \in I$ y $j \in J$. A esta matriz se la denota por $\alpha A$.
+\end{defi}
+
+\begin{advertencia}
+Con esto, tenemos que $\alpha \l(a_{ij}\r) =\l(\alpha a_{ij}\r)$.
+\end{advertencia}
+
+\begin{ejem} Multiplicación de un escalar con una matriz. Se tiene que
+\[ 
+    9\cdot
+    \begin{pmatrix}9&0&0\\3&2&-2\\-1&\dfrac{7}{3}&22\end{pmatrix}
+    =
+    \begin{pmatrix}81&0&0\\27&18&-18\\-9&21&198\end{pmatrix}.
+\]
+Notemos que $9$ multiplica a cada elemento de $A$.
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} Dada la matriz 
+\[
+    A = 
+    \begin{pmatrix}
+    1&\dfrac{1}{2}&\dfrac{1}{4}\\
+    -2&-5&6\\
+    0&\dfrac{7}{3}&20
+    \end{pmatrix}
+\]
+Calcular   $2A$ y $A + A$, comparar.
+\end{ejer}
+
+\begin{teo}[Propiedades de la multiplicación por un escalar]\label{Teo:Sem01Cla01PropMult}
+    Sean $\alpha,\beta \in \K$ y $A,B\in\Mat[\K]{m}{n}$. Se tiene que
+    \begin{itemize}
+    \item[$a)$] 
+        $\alpha(\beta A) = (\alpha\beta)A$;
+    \item[$b)$] 
+        $(\alpha+\beta)A = \alpha A + \beta A$; y
+    \item[$c)$] 
+        $\alpha(A+B) = \alpha A + \alpha B$.
+    \end{itemize}
+\end{teo}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}

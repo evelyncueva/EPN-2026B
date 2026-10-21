@@ -1,0 +1,74 @@
+\documentclass[10pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+
+\usepackage{aleph-comandos}
+\usepackage{moodle}
+% Se recomienda leer la documentación de estos
+% paquetes en https://www.alephsub0.org/recursos/
+
+% -- Paquetes adicionales
+\usepackage{amssymb}
+\usepackage{mathpazo}
+
+% -- Datos
+\title{Reactivos Álgebra Lineal}
+\author{Evelyn Cueva}
+
+\usepackage[margin=2cm]{geometry}
+
+\begin{document}
+\maketitle
+
+\begin{quiz}{Algebra-Lineal-Examen-Media-Carrera-2024B}
+
+% Ejercicio de cálculo para evaluar núcleo e imagen de una transformación lineal. Matriz transpuesta y composición de transformaciones 
+
+\begin{multi}{algebra-lineal-2024B-01}
+    Considere $T$ una tranformaci\'on lineal que transpone cualquier matriz de $2\times 2.$
+    Indique cu\'al de las siguientes afirmaciones es falsa:
+    \item[fraction=0] $T\circ T$ es la transformaci\'on identidad. 
+    \item[fraction=0] $T(A)=\begin{pmatrix}
+        0&0\\
+        0&0
+    \end{pmatrix}$ si y solo si $A$ es la matriz nula.
+    \item[fraction=0] La dimensión del espacio imagen de $T$ es 4. 
+    \item* Si $M$ es una matriz de $2\times 2$, $T(M)=-M$ no puede ocurrir. 
+\end{multi}
+
+
+
+% Ejercicio de cálculo para evaluar propiedades de determinantes.
+
+\begin{multi}{algebra-lineal-2024B-02}
+Si $A$ y $B$ son dos matrices de $3\times 3$ tales que $|A| = 4$ y $|B|=3$, donde $|A|$ denota el determinante de $A$. ¿Cu\'al es el determinante de $A^{-1}B$?
+     \item* $\frac 34$
+     \item[fraction=0]  12
+     \item[fraction=0] 7
+     \item[fraction=0] $\frac 43$
+\end{multi}
+
+% Pregunta conceptual y de calculo para evaluar independencia lineal y espacios generados por listas de diferentes tamaños.
+
+\begin{multi}{algebra-lineal-2024B-03}
+De los siguientes conjuntos de vectores en $\Rbb^3$, determine cu\'al no genera todo el espacio $\R^3$.
+    \item[fraction=0]  $\left\lbrace(1,-1,1),(-1,-1,1),(0,1,1)\right\rbrace$
+    \item[fraction=0]  $\left\lbrace (1,-1,1),(-1,-1,1),(0,1,1),(0,-1,3) \right\rbrace$
+    \item*  $\left\lbrace(8,-3,4),(0,3,0),(8,0,4)\right\rbrace$
+    \item[fraction=0] $\left\lbrace (1,0,0),(0,1,0),(0,0,1) \right\rbrace$
+\end{multi}
+
+% Pregunta conceptual para identificar la relacion entre propiedades de matriz inversa, sistemas de ecuaciones y sistemas homogeneos
+
+\begin{multi}{algebra-lineal-2024B-04}
+Sea $A$ una matriz de tama\~no $n\times n$. De las siguientes afirmaciones, seleccione aquella que no sea equivalente con las dem\'as:
+    \item[fraction=0] $A$ es no singular.
+    \item[fraction=0] El sistema $Ax=0$ tiene soluci\'on \'unica trivial.
+    \item* $A^{-1}$ no existe. 
+    \item[fraction=0] El determinante de $A$ es no nulo.
+\end{multi} 
+\end{quiz}
+
+\end{document}

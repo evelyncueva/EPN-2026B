@@ -1,0 +1,443 @@
+\documentclass[compacto,10pt]{pubciencias-notas}
+
+% -- Paquetes adicionales
+\usepackage{comandosEPN}
+
+% -- Datos del libro
+\autor{Departamento de Formación Básica}
+\materia{Álgebra Lineal}
+\nota{Semana 11 Clase 01}
+\fecha{Semestre 2026-A}
+
+\logouno[1.1cm]{Logo_EPN.eps}
+\logodos[1.7cm]{Logo_DFB.eps}
+
+\definecolor{colordef}{cmyk}{0.81,0.62,0.00,0.22}
+
+\begin{document}
+
+\encabezado
+\vspace*{-8mm}
+
+\setcounter{section}{5}
+\section{Aplicaciones lineales}
+
+\subsection{Definición de Aplicación lineal}
+\setcounter{defi}{0}
+\begin{defi}[Aplicación lineal]
+    Sean $(E,+_1,\cdot_1,\K)$ y $(F,+_2,\cdot_2,\K)$ espacios vectoriales. A una función
+    
+    \noindent $\func{T}{E}{F}$ se le llama aplicación lineal (transformación lineal) si para todo $\alpha \in \K$, y todo $u,v \in E$ se cumple:
+    \begin{enumerate}
+    \item 
+        $T(u +_1 v) = T(u) +_2 T(v)\quad$ y
+    \item 
+        $T(\alpha \cdot_1 v ) = \alpha \cdot_2 T(v)$.
+    \end{enumerate}
+\end{defi}
+
+\begin{obs}
+En adelante, consideraremos $(E,+,\cdot,\K)$ y $(F,+,\cdot,\K)$ espacios vectoriales, ya que, si bien se están notando de la misma manera las operaciones suma y producto de los dos espacios vectoriales, estamos claros que no tiene por qué ser así. Con esto conseguimos simplificar la escritura de la definición de aplicación lineal.
+\end{obs}
+
+\begin{advertencia}
+    Se denotará
+    \begin{enumerate}
+    \item 
+        $T(u + v) = T(u) + T(v)\quad$ y
+    \item 
+        $T(\alpha v ) = \alpha T(v)$,
+    \end{enumerate}
+    para $\alpha \in \K$ y $u,v \in E$.
+\end{advertencia}
+
+\begin{obs}
+    Al conjunto de todas las aplicaciones lineales del espacio vectorial $E$ en el espacio vectorial $F$, lo designaremos por $\mathscr{L}(E,F)$.
+\end{obs}
+
+\begin{ejem}\hspace{0pt} \label{ejem1}
+Las siguientes funciones, son ejemplos de transformaciones lineales.
+\begin{enumerate}
+\item
+    Aplicación lineal nula.
+    \[
+        \funcion{T}{E}{E}{v}{0_{E}}
+    \]
+\item
+    Aplicación lineal identidad.
+    \[
+        \funcion{T}{E}{E}{v}{v}
+    \]
+    \item
+    \[
+        \funcion{T}{\R^3}{\R^2}{(x,y,z)}{(x-2z,y-z)}
+    \]
+    \item
+    \[
+        \funcion{T}{\R^3}{\R^3}{(x,y,z)}{(x + y,y + z,x)}
+    \]
+\end{enumerate}
+\end{ejem}
+
+\begin{ejem}
+En la aplicación lineal
+\[
+        \funcion{T}{\R^3}{\R^2}{(x,y,z)}{(x-2z,y-z)}
+\]
+se tiene que
+\[
+    T(0,0,0)=(0,0) \quad \text{y} \quad T(-1,2,3)=(-7,-1).
+\]
+\end{ejem}
+
+\begin{ejer}\label{Ejercicio1}
+Dada la aplicación lineal 
+    \[
+        \funcion{T}{\R^3}{\R^3}{(a,b,c)}{(a,a-b,c)}
+    \]
+Hallar $T(0,0,0)$, $T(1,-2,3)$ y $T(0,-6,1)$.
+\end{ejer}
+
+
+\begin{ejem}
+Demostremos que la función definida en el Ejercicio \ref{Ejercicio1} es una aplicación lineal.
+\[
+    \funcion{T}{\R^3}{\R^3}{(a,b,c)}{(a,a-b,c)}
+\]
+\begin{enumerate}
+\item
+    Para todo $u, v \in \R^{3}$, vamos a demostrar que $T(u+v) = T(u) + T(v)$.
+
+    \noindent Sean $u = (a, b, c), v = (d, e, f) \in \R^{3}$, tenemos
+    \begin{align*}
+        T(u) & = (a,a-b,c) \\
+        T(v) & = (d,d-e,f), \text{ luego} \\
+        T(u) + T(v) & = (a,a-b,c) + (d,d-e,f).
+    \end{align*}
+    Por otra parte, $u+v = (a+d, b+e, c+f)$, se sigue que
+    \begin{align*}
+        T(u+v) & = (a + d,(a+d) - (b+e), c+f) \\
+        & = (a,a-b, c) + (d,d-e,f).
+    \end{align*}
+    Por lo tanto:
+    \[
+        T(u+v) = T(u) + T(v)
+    \]
+    
+\item
+    Para todo $\alpha \in \R$ y para todo $u \in \R^{3}$, vamos a demostrar que $T(\alpha u) = \alpha T(u)$.
+    
+    Sean $\alpha \in \R$ y $u = (a, b, c) \in \R^{3}$. 
+    Tenemos que $\alpha u = (\alpha a, \alpha b, \alpha c)$, luego
+    \begin{align*}
+    T(\alpha u) & = (\alpha a,(\alpha a - \alpha b) , \alpha c) \\
+    & = \alpha (a, a-b, c)
+    \end{align*}
+    Por otra parte
+    \[
+        \alpha T(u) = \alpha (a ,a-b,c)
+    \]
+    Por lo tanto:
+    \[
+        T(\alpha u) = \alpha T(u)
+    \]
+    De $1.$ y $2.$ se sigue que $T$ es una aplicación lineal.
+\end{enumerate}
+\end{ejem}
+
+\begin{ejer} 
+Demuestre que la siguiente función es una aplicación lineal:
+   \[
+        \funcion{T}{\R^3}{\R^2}{(x,y,z)}{(x-2z,y-z)}
+    \]
+\end{ejer}
+
+\begin{teo}
+     Sea $T \in \mathscr{L}(E,F)$. Para todo $u,v, v_1, v_2, \ldots, v_n \in E$ y $\alpha_1, \alpha_2, \ldots, \alpha_n \in \K$, se tiene que:
+     \begin{enumerate}
+         \item $T(0_E) = 0_F$.
+         %\item $T(u-v) = T(u) - T(v)$.
+         \item $T\left(\displaystyle \sum_{k=1}^n \alpha_k v_k \right)= 
+         \displaystyle \sum_{k=1}^n \alpha_k T\left(v_k \right)$.
+     \end{enumerate}
+\end{teo}
+
+%\begin{teo}
+  %  $(\mathscr{L}(E,F), +, \cdot, \K)$ es un espacio vectorial. Siendo $+$ la suma usual entre funciones y $\cdot$ la multiplicación de un elemento del campo por una función.
+%\end{teo}
+
+\newpage
+
+\subsection{Propiedades de las aplicaciones lineales}
+
+% \begin{prop}
+% Sean $T_1,T_2 \in \mathscr{L}(E,F)$ y $B= \{v_1, v_2, \ldots, v_n\}$ una base para $E$. Si
+% \[
+%     T_1(v_i) = T_2(v_i)
+% \]
+% para todo $i \in \{1, 2, \ldots, n\}$, entonces $T_1(v)=T_2(v)$, para todo $v\in E$, es decir, 
+% \[
+%     T_1 = T_2.
+% \]
+% \end{prop}
+
+
+\begin{prop}
+Si $B = \{v_1, v_2, \ldots, v_n\}$ es una base del espacio vectorial $E$ y se tiene un conjunto de vectores $\{w_1, w_2, \ldots, w_n\} \subset F$, entonces existe una única transformación lineal $T \in \mathscr{L}(E,F)$ tal que
+\[
+    T(v_i) = w_i
+\]
+para todo $i\in \{1, 2, \ldots, n\}$.
+\end{prop}
+
+%\begin{prop}
+%Si $\{v_1, v_2, \ldots, v_n\}$ es una base del espacio vectorial $E$ %y 
+%$\l\{ w_1, w_2, \ldots, w_n \r\} \subset F$, entonces existe una única transformación lineal
+%$T \in \mathscr{L}(E,F)$ tal que
+%\[
+ %   T(v_i) = w_i
+%\]
+%para todo $i\in \{1, 2, \ldots, n\}$.
+%\end{prop}
+
+\begin{prop}
+    Sean $T \in \mathscr{L}(E,F)$ y $\{u_1,u_2,\ldots,u_n\}$ una base del espacio vectorial $E$. Si $T(u_1),T(u_2),\ldots,T(u_n)$ se conocen, entonces $T$ está determinada.
+\end{prop}
+
+\begin{obs}
+    Una aplicación lineal está determinada cuando se conocen las imágenes de los vectores de una base del espacio vectorial de salida. Para encontrar la aplicación lineal de manera explícita, se debe hallar la imagen del elemento genérico del espacio vectorial de salida.
+    
+    \textbf{Pasos para obtener una Transformación Lineal de forma explícita:}
+    \begin{enumerate}
+    \item
+        Demostrar que $T$ está determinada. Es decir, comprobar que se tiene una base del espacio vectorial de salida y la imagen de cada vector de dicha base.
+    \item
+        Escribir la ecuación generadora. Es decir, expresar el vector genérico del espacio vectorial de salida como combinación lineal de los vectores de su base.
+    \item
+        Obtener y resolver el sistema de Ecuaciones Lineales (obtener los escalares).
+    \item
+        Reemplazar los escalares en la ecuación generadora.
+    \item
+        Aplicar la Transformación Lineal en la ecuación generadora.
+    \item
+        Obtener la Transformación Lineal.
+    \end{enumerate}
+\end{obs}
+
+\begin{ejem}
+    Sean $T \in \mathscr{L}(\R^{2}, \R^{3})$, $B=\left\{(1, -1), (-3, 2) \right\}$ una base de $\R^2$, $T(1, -1)=(0, 2, 0)$ y $T(-3, 2) = (-3, 2, 0)$.
+\begin{enumerate}
+    \item ¿La aplicación lineal, $T$ está determinada?.\\
+    Dado que $B$ es una base del espacio vectorial de salida $\R^2$ y se conocen las imágenes de los vectores de la base, entonces $T$ está determinada. 
+    \item La aplicación lineal de manera explícita es
+    \[
+        T(x, y) = (3x+3y, -6x-8y, 0), \;\;\; \text{para todo}\;\; (x, y) \in \R^{2}.
+    \]
+En efecto, sean $(x,y)\in\R^2$ y $\alpha_1,\alpha_2\in\K$. Como $B$ es una base de $\R^2$ se tiene que:
+\begin{align*}
+(x,y) &= \alpha_1(1,-1)+\alpha_2(-3,2)\\
+      &= (\alpha_1-3\alpha_2,-\alpha_1+2\alpha_2).
+\end{align*}
+Al igualar ambos vectores, se obtiene el siguiente sistema de ecuaciones lineales, en las incógnitas $\alpha_1$ y $\alpha_2$:
+\begin{align*}
+\alpha_1-3\alpha_2 &= x \\
+-\alpha_1+2\alpha_2 &= y.
+\end{align*}
+La matriz ampliada de este sistema es:
+\[(A|b)=\begin{pmatrix}1&-3&|&x\\-1&2&|&y\end{pmatrix}\sim\begin{pmatrix}1&-3&|&x\\0&-1&|&x+y\end{pmatrix}, \quad F_2\to F_1+F_2.\]
+Como $\text{rang}(A|b)=\text{rang}(A)=2$ es igual al número de incógnitas, por el Teorema de Rouché-Frobenius, el sistema tiene solución única dada por $\alpha_2=-(x+y)$ y $\alpha_1=x+3\alpha_2=x-3(x+y)=-2x-3y$.
+
+De donde
+\begin{equation}
+(x,y) = (-2x-3y)(1,-1)-(x+y)(-3,2). \label{ec2}
+\end{equation}
+Al aplicar la transformación $T$ a la ecuación (\ref{ec2}) y de la definición de aplicación lineal, se sigue que
+\begin{align*}
+T(x,y) &= (-2x-3y)T(1,-1)-(x+y)T(-3,2)\\
+       &= (-2x-3y)(0,2,0)-(x+y)(-3,2,0)\\
+       &= (0,-4x-6y,0)+(3x+3y,-2x-2y,0)\\
+       &= (3x+3y,-6x-8y,0)
+\end{align*}
+para todo $(x, y) \in \R^{2}$.
+\end{enumerate}
+\end{ejem}
+
+\begin{ejer}
+Determine de manera explícita $f \in \mathscr{L}(\R^{3}, \R^3)$ tal que:
+\[
+    f(1, 0, 0) = (0,-1,1), \;\;\; f(1, 1, 0) = (1,0,-3), \;\;\; f(1, 1, 1) = (0,0,-1).
+\]
+\end{ejer}
+
+\setcounter{subsection}{2}
+\subsection{Núcleo e imagen}
+
+\begin{defi}[Núcleo e imagen de una aplicación lineal]
+    Sea $T \in \mathscr{L}(E,F)$.
+    \begin{enumerate}
+    \item 
+        El núcleo de $T$, denotado por $\ker(T)$, está definido por:
+        \[
+            \ker(T) = \{v \in E: T(v) = 0_{F}\}.
+        \]
+    \item 
+        La imagen de $T$, denotada por $\text{img}(T)$, está definida por:
+        \[
+            \text{img}(T) = \{ w \in F: w = T(v) \text{ para algún } v \in E\}.
+        \]
+    \end{enumerate}
+\end{defi}
+
+\begin{prop}
+    Sea $T \in \mathscr{L}(E,F)$, entonces
+    \begin{enumerate}
+    \item 
+        $\ker(T)$ es un subespacio vectorial del espacio vectorial $E$.
+    \item 
+        $\text{img}(T)$ es un subespacio vectorial del espacio vectorial $F$.
+    \end{enumerate}
+\end{prop}
+
+\begin{ejem}\hspace{0pt}\label{AplicacionLineal}
+Sea $T\in \mathscr{L}(\R^3,\R^2)$ definida por $T(x,y,z) = (x-2z,y-z)$ para todo $(x,y,z)\in\R^{3}$, entonces
+\begin{align*}
+ \ker(T) &= \l\{(x,y,z)\in \R^3:T(x,y,z)=(0,0)\r\}\\
+ &= \l\{(x,y,z)\in \R^3:(x-2z,y-z)=(0,0)\r\}\\
+ &=\l\{(x,y,z)\in \R^3:x=2z, y=z\r\}\\
+ &=\l\{(2z,z,z)\in \R^3:z\in\R\r\}
+\end{align*}
+y
+\begin{align*}
+    \text{img}(T) &= \l\{(u,v)\in \R^2: T(x,y,z)=(u,v), \text{ para algún } (x,y,z)\in\R^{3}\r\}\\
+    &= \l\{(u,v)\in \R^2: (x-2z,y-z)=(u,v), \text{ con }x,y,z\in\R\r\}\\
+    &= \l\{(u,v)\in \R^2: x-2z=u, y-z=v, \text{ con }x,y,z\in\R\r\}.
+\end{align*}
+Ahora, sea $(u,v)\in\R^{2}$, tenemos que $(u,v)\in\text{img}(T)$ si y solo si se verifica el sistema de ecuaciones lineales en las incógnitas $x$, $y$ y $z$:
+\[
+\systeme[xyz]{x-2z=u,y-z=v.}
+\]
+con $x$, $y$, $z\in\R$, cuya matriz ampliada es:
+\[
+    \begin{pmatrix}
+    1&0&-2&|&u\\
+    0&1&-1&|&v\\
+    \end{pmatrix}.
+\]
+Como $\text{rang}(A|b)=\text{rang}(A)=2$, por el Teorema de Rouché-Frobenius, el sistema es consistente para todo $u$ y $v\in\R$. Por lo tanto:
+\[
+    \text{img}(T)= \R^{2}.
+\]
+\end{ejem}
+
+\begin{ejer}
+Considere la aplicación lineal $T\in \mathscr{L}(\R^{2\times 2},\R^2)$ definida por 
+\[
+    T\begin{pmatrix}a&b\\c&d\end{pmatrix}=(a+b,-d)
+\]
+para todo $\begin{pmatrix}a&b\\c&d\end{pmatrix}\in\Mat{2}{2}$. Determine el $\ker(T)$ y la $\text{img}(T)$.
+\end{ejer}
+
+\begin{prop}
+Sea $T \in \mathscr{L}(E,F)$.
+\begin{enumerate}
+\item $T$ es inyectiva si y solo si $\ker(T)=\{0_{E}\}$.
+\item $T$ es sobreyectiva si y solo si $\text{img}(T)=F$.
+\end{enumerate}
+\end{prop}
+
+\begin{obs}
+Dado que la $\text{img}(T)\subset F$, si $\dim(\text{img}(T))=\dim(F)$, entonces $\text{img}(T)=F$, por lo tanto $T$ es sobreyectiva.
+\end{obs}
+
+\begin{ejem}\label{ejem1_revisado}
+Para la aplicación lineal 
+\[
+ \funcion{T}{\R^3}{\R^2}{(x,y,z)}{(x-2z,y-z)}
+\]
+se tiene que $\ker(T)=\l\{(2z,z,z)\in \R^3:z\in\R\r\}\neq\{0_{\R^3}\}$. Por lo tanto, $T$ no es inyectiva.\\
+Además, $\text{img}(T) =\R^2$, luego, $T$ es sobreyectiva.
+\end{ejem}
+
+\begin{ejer}\label{ejer1}
+Dada la aplicación lineal 
+\[
+ \funcion{T}{\R^2}{\R^3}{(x,y)}{(x-y,2x,x+y)}
+\]
+Indique si la aplicación lineal es:
+\begin{enumerate}
+\item[$a)$] Inyectiva.
+\item[$b)$] Sobreyectiva.
+\end{enumerate}
+\end{ejer}
+
+\begin{defi}[Nulidad y rango de una aplicación lineal]
+    Sea $T \in \mathscr{L}(E,F)$.
+    \begin{enumerate}
+    \item 
+        Se llama nulidad de $T$ a la $\dim(\ker(T))$.
+    \item 
+        Se llama rango de $T$ a la $\dim(\text{img}(T))$.
+    \end{enumerate}
+\end{defi}
+
+\begin{ejem}\hspace{0pt}\label{NulidadRango}\label{ejem2}
+Considerando la aplicación lineal del Ejemplo \ref{ejem1_revisado}, se tiene que 
+\begin{align*}
+ \ker(T) &= \l\{(2z,z,z)\in \R^3:z\in\R\r\} \\
+         &= \l\{z(2,1,1)\in \R^3:z\in\R\r\}.
+\end{align*}
+Una base del $\ker(T)$ es $B_{\ker(T)}=\{(2,1,1)\}$, de donde $\dim(\ker(T))=1$. Por lo tanto, la nulidad de $T$ es igual a 1.\\
+Por otro lado, como $\text{img}(T)=\R^2$, entonces $\dim(\text{img}(T))=\dim(\R^2)=2$. Así, el rango de $T$ es igual a $2$.
+\end{ejem}
+
+\begin{ejer}
+De la aplicación lineal:
+\[
+ \funcion{T}{\R^2}{\R^3}{(x,y)}{(x-y,2x,x+y)}
+\] 
+Indique:
+\begin{enumerate}
+    \item[$a)$] La nulidad de $T$.
+    \item[$b)$] El rango de $T$.
+\end{enumerate}
+\end{ejer}
+
+\begin{teo}
+    Si $T \in \mathscr{L}(E,F)$ y la dimensión del espacio vectorial $E$ es finita, entonces
+    \[
+        \dim(E) = \dim(\ker(T)) + \dim(\text{img}(T)).
+    \]
+\end{teo}  
+
+\begin{ejem}\hspace{0pt}
+Considerando la aplicación lineal del Ejemplo \ref{ejem1_revisado} y los resultados del Ejemplo \ref{ejem2}, se tiene que $\dim(\ker(T)) = 1$ y que $\dim(\text{img}(T)) = 2$, a partir de lo cual se verifica que 
+    \[
+        \dim(\R^{3}) = \dim(\ker(T)) + \dim(\text{img}(T)).
+    \]
+\end{ejem}
+
+\begin{teo}
+Sean $T\in\mathscr{L}(E,F)$, $\dim(E)=n$ y $\dim(F)=m$. Si:
+\begin{enumerate}
+    \item $n>m$, entonces $T$ no es inyectiva.
+    \item $m>n$, entonces $T$ no es sobreyectiva.
+\end{enumerate}
+\end{teo}
+
+\begin{ejem}\hspace{0pt}
+La aplicación
+\[
+    \funcion{T}{\R^3}{\R^2}{(x,y,z)}{(x,y)}
+\]
+no es inyectiva, pues $\dim(\R^{3}) > \dim(\R^{2})$. 
+\end{ejem}
+
+\begin{ejem}\hspace{0pt}
+La aplicación
+\[
+    \funcion{T}{\R^2}{\Mat{2}{2}}{(x,y)}{\begin{pmatrix}x&0\\0&y\end{pmatrix}}
+\]
+no es sobreyectiva, pues $\dim(\Mat{2}{2}) > \dim(\R^{2})$.
+\end{ejem}
+
+\end{document}

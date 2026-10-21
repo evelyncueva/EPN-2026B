@@ -1,0 +1,290 @@
+
+\documentclass[compacto,10pt]{pubciencias-notas}
+
+% -- Paquetes adicionales
+\usepackage{comandosEPN}
+
+% -- Datos del libro
+\autor{Departamento de Formación Básica}
+\materia{Álgebra Lineal}
+\nota{Semana 12 Clase 02}
+\fecha{Semestre 2024-B}
+
+\logouno[1.1cm]{Logo_EPN.eps}
+\logodos[1.7cm]{Logo_DFB.eps}
+
+\definecolor{colordef}{cmyk}{0.81,0.62,0.00,0.22}
+
+\begin{document}
+
+\encabezado
+\vspace*{-8mm}
+
+\setcounter{section}{5}
+\section{Aplicaciones lineales}
+\setcounter{prop}{3}
+\begin{prop}
+    Sean $T \in \mathscr{L}(E,F)$ y $\{u_1,u_2,\ldots,u_n\}$ una base del espacio vectorial $E$. Si $T(u_1),T(u_2),\ldots,T(u_n)$ se conocen, entonces $T$ está determinada. %Es decir, si $T(u_1),T(u_2),\ldots,T(u_n)$ se conocen, entonces $T(u)$ se conoce, para todo $u\in E$.
+\end{prop}
+
+\begin{obs}
+    Una aplicación lineal está determinada cuando se conocen las imágenes de los vectores  de una base del espacio vectorial de salida. Para encontrar la aplicaci\'on lineal de manera expl\'icita, se debe hallar la imagen del elemento genérico del espacio vectorial de salida.
+    
+    \textbf{Pasos para obtener una Transformación Lineal de forma explícita:}
+    \begin{enumerate}
+    \item
+        Demostrar que $T$ está determinada. Es decir, comprobar que se tiene una base del espacio vectorial de salida y la imagen de cada vector de dicha base.
+    \item
+        Escribir la ecuación generadora. Es decir, expresar el vector genérico del espacio vectorial de salida como combinación lineal de los vectores de su base.
+    \item
+        Obtener y resolver el sistema de Ecuaciones Lineales (obtener los escalares).
+    \item
+        Reemplazar los escalares en la ecuación generadora.
+    \item
+        Aplicar la Transformación Lineal en la ecuación generadora.
+    \item
+        Obtener la Transformación Lineal.
+    \end{enumerate}
+
+\end{obs}
+
+\begin{ejem}
+    Sean $T \in \mathscr{L}(\R^{2}, \R^{3})$,  $B=\left\{(1, -1), (-3, 2) \right\}$ una base de $\R^2$,  $T(1, -1)=(0, 2, 0)$ y $T(-3, 2) = (-3, 2, 0)$.
+\begin{enumerate}
+    \item ¿La aplicación lineal, $T$ está determinada?.\\
+    Dado que $B$ es una base  del espacio vectorial de salida $\R^2$ y se conocen las im\'agenes de los vectores de la base, entonces $T$ está determinada. 
+    \item La aplicaci\'on lineal de manera expl\'icta es
+    \[
+        T(x, y) = (3x+3y, -6x-8y, 0), \;\;\; \text{para todo}\;\; (x, y) \in \R^{2}.
+    \]
+En efecto, sean $(x,y)\in\R^2$ y $\alpha_1,\alpha_2\in\K$. Como $B$ es una base de $\R^2$ se tiene que:
+\begin{eqnarray*}
+(x,y)&=&\alpha_1(1,-1)+\alpha_2(-3,2)\\
+&=&(\alpha_1-3\alpha_2,-\alpha_1+2\alpha_2).
+\end{eqnarray*}
+Al igualar ambos vectores, se obtiene el siguiente sistema de ecuaciones lineales, en las inc\'ognitas $\alpha_1$ y $\alpha_2$:
+\begin{eqnarray*}
+\alpha_1-3\alpha_2&=&x\\
+-\alpha_1+2\alpha_2&=&y.
+\end{eqnarray*}
+La matriz ampliada de este sistema es:
+\[(A|b)=\begin{pmatrix}1&-3&|&x\\-1&2&|&y\end{pmatrix}\sim\begin{pmatrix}1&-3&|&x\\0&-1&|&x+y\end{pmatrix}, \quad F_2\to F_1+F_2.\]
+Como $rang(A|b)=rang(A)=2$ es igual n\'umero de inc\'ognitas, por el Teorema de Rouch\'e-Frobenius, el sistema tiene soluci\'on \'unica dada por $\alpha_2=-(x+y)$ y $\alpha_1=x+3\alpha_2=x-3(x+y)=-2x-3y$.
+
+De donde
+\begin{eqnarray}
+(x,y)&=&\alpha_1(1,-1)+\alpha_2(-3,2) \nonumber\\
+&=&(-2x-3y)(1,-1)-(x+y)(-3,2).\label{ec2}
+\end{eqnarray}
+Al aplicar la transformaci\'on $T$ a la ecuaci\'on (\ref{ec2}) y de la definici\'on de aplicaci\'on lineal, se sigue que
+\begin{eqnarray*}
+T(x,y)&=&(-2x-3y)T(1,-1)-(x+y)T(-3,2)\\
+&=&(-2x-3y)(0,2,0)-(x+y)(-3,2,0)\\
+&=&(0,-4x-6y,0)+(3x+3y,-2x-2y,0)\\
+&=&(3x+3y,-6x-8y,0)
+\end{eqnarray*}
+para todo $(x, y) \in \R^{2}$.
+\end{enumerate}
+
+\end{ejem}
+
+
+\begin{ejer}
+Determine de manera explícita $f \in \mathscr{L}(\R^{3}, \R^3)$ tal que:
+\[
+    f(1, 0, 0) = (0,-1,1), \;\;\; f(1, 1, 0) = (1,0,-3), \;\;\; f(1, 1, 1) = (0,0,-1).
+\]
+\end{ejer}
+\setcounter{subsection}{2}
+\subsection{Núcleo e imagen}
+
+\begin{defi}[Núcleo e imagen de una aplicación lineal]
+    Sea $T \in \mathscr{L}(E,F)$.
+    \begin{enumerate}
+    \item 
+        El núcleo de $T$, denotado por $\ker(T)$, está definida por:
+        \[
+            \ker(T) = \{v \in E: T(v) = 0_{F}\}.
+        \]
+    \item 
+        La imagen de $T$, denotada por $\img(T)$, está definida por:
+        \[
+            \img(T) = \{ w \in F: w = T(v) \text{ para algún } v \in E\}.
+        \]
+    \end{enumerate}
+\end{defi}
+
+\begin{prop}
+    Sea $T \in \mathscr{L}(E,F)$, entonces
+    \begin{enumerate}
+    \item 
+        $\ker(T)$ es un subespacio vectorial del espacio vectorial $E$.
+    \item 
+        $\img(T)$ es un subespacio vectorial del espacio vectorial $F$.
+    \end{enumerate}
+\end{prop}
+
+\begin{ejem}\hspace{0pt}\label{AplicacionLineal}
+Sea $T\in \mathscr{L}(\R^3,\R^2)$ definida por $T(x,y,z) = (x-2z,y-z)$ para todo $(x,y,z)\in\R^{3}$, entonces
+\begin{align*}
+ \ker(T) &= \l\{(x,y,z)\in \R^3:T(x,y,z)=(0,0)\r\}\\
+ &= \l\{(x,y,z)\in \R^3:(x-2z,y-z)=(0,0)\r\}\\
+ &=\l\{(x,y,z)\in \R^3:x=2z, y=z\r\}\\
+ &=\l\{(2z,z,z)\in \R^3:z\in\R\r\}
+\end{align*}
+\texty
+\begin{align*}
+    \img(T) &= \l\{(u,v)\in \R^2: T(x,y,z)=(u,v), \text{ para algún } (x,y,z)\in\R^{3}\r\}\\
+    &= \l\{(u,v)\in \R^2: (x-2z,y-z)=(u,v), \text{ con }x,y,z\in\R\r\}\\
+    &= \l\{(u,v)\in \R^2: x-2z=u, y-z=v, \text{ con }x,y,z\in\R\r\}.
+\end{align*}
+Ahora, sea $(u,v)\in\R^{2}$, tenemos que $(u,v)\in\img(T)$ si y solo si se verifica el sistema ecuaciones lineales en las incógnitas $x$, $y$ y $z$:
+\[
+\systeme[xyz]{x-2z=u,y-z=v.}
+\]
+con $x$, $y$, $z\in\R$, cuya matriz ampliada es:
+\[
+    \begin{pmatrix}
+    1&0&-2&|&u\\
+    0&1&-1&|&v\\
+    \end{pmatrix}.
+\]
+Como $\rang(A|b)=\rang(A)=2$, por el Teorema de Rouch\'e-Frobenius, el sistema es consistente para todo $u$ y $v\in\R$. Por lo tanto:
+\[
+    \img(T)= \R^{2}.
+\]
+\end{ejem}
+
+\begin{ejer}
+Considere la aplicaci\'on lineal $T\in \mathscr{L}(\R^{2\times 2},\R^2)$ definida por 
+\[
+    T\begin{pmatrix}a&b\\c&d\end{pmatrix}=(a+b,-d)
+\]
+para todo $\begin{pmatrix}a&b\\c&d\end{pmatrix}\in\Mat{2}{2}$. Determine el $\ker(T)$  y la $\img(T)$.
+\end{ejer}
+
+\begin{prop}
+Sea $T \in \mathscr{L}(E,F)$.
+\begin{enumerate}
+\item $T$ es inyectiva si y solo si $\ker(T)=\{0_{E}\}$.
+\item $T$ es sobreyectiva si y solo si $\img(T)=F$.
+\end{enumerate}
+\end{prop}
+
+\begin{obs}
+Dado que la $\img(T)\subset F$, si $\dim(\img(T))=\dim(F)$, entonces $\img(T)=F$, por lo tanto $T$ es sobreyectiva.
+\end{obs}
+\begin{ejem}\label{ejem1}
+Para la aplicaci\'on lineal 
+\[
+ \funcion{T}{\R^3}{\R^2}{(x,y,z)}{(x-2z,y-z)}
+\]
+se tiene que $\ker(T)=\l\{(2z,z,z)\in \R^3:z\in\R\r\}\neq\{0_{\R^3}\}$. Por lo tanto, $T$ no es inyectiva.\\
+Además, $\img(T) =\R^2$, luego, $T$ es sobreyectiva.
+\end{ejem}
+\begin{ejer}\label{ejer1}
+Dada la aplicaci\'on lineal 
+\[
+ \funcion{T}{\R^2}{\R^3}{(x,y)}{(x-y,2x,x+y)}
+\]
+Indique si la aplicaci\'on lineal es:
+\begin{enumerate}
+\item[$a)$] Inyectiva.
+\item[$b)$] Sobreyectiva.
+\end{enumerate}
+\end{ejer}
+\begin{defi}[Nulidad y rango de una aplicación lineal]
+    Sea $T \in \mathscr{L}(E,F)$.
+    \begin{enumerate}
+    \item 
+        Se llama nulidad de $T$ a la $\dim(\ker(T))$.
+    \item 
+        Se llama rango de $T$ a la $\dim(\img(T))$.
+    \end{enumerate}
+\end{defi}
+\begin{ejem}\hspace{0pt}\label{NulidadRango}\label{ejem2}
+Considerando la aplicación lineal del Ejemplo \ref{ejem1}, se tiene que 
+\begin{eqnarray*}
+ \ker(T)&=&\l\{(2z,z,z)\in \R^3:z\in\R\r\}\\
+ &=&\l\{z(2,1,1)\in \R^3:z\in\R\r\}.
+\end{eqnarray*}
+Una base del $\ker(T)$ es $B_{\ker(T)}=\{(2,1,1)\}$, de donde $\dim(\ker(T))=1$. Por lo tanto, la nulidad de $T$ es igual a 1.\\
+Por otro lado, como $\img(T)=\R^2$,  entonces $\dim(\img(T))=\dim(\R^2)=2$. As\'i, el rango de $T$ es igual a $2$.
+\end{ejem}
+
+\begin{ejer}
+De la aplicación lineal.
+\[
+ \funcion{T}{\R^2}{\R^3}{(x,y)}{(x-y,2x,x+y)}
+\] Indique:
+\begin{enumerate}
+    \item[$a)$] La nulidad de $T$.
+    \item[$b)$] El rango de $T$.
+\end{enumerate}
+\end{ejer}
+\begin{teo}
+    Si $T \in \mathscr{L}(E,F)$ y la dimensión del espacio vectorial $E$ es finita, entonces
+    \[
+        \dim(E) = \dim(\ker(T)) +  \dim(\img(T)).
+    \]
+\end{teo}  
+
+\begin{ejem}\hspace{0pt}
+Considerando la aplicación lineal del Ejemplo \ref{ejem1} y los resultados del Ejemplo \ref{ejem2}, se tiene que $\dim(\ker(T)) = 1$ y que $\dim(\img(T)) = 2$, a partir de lo cual se verifica que 
+\[
+    \dim(\R^{3}) = \dim(\ker(T)) +  \dim(\img(T)).
+\]
+\end{ejem}
+
+
+
+%\begin{proof}
+%Vamos a demostrar que si $T$ es sobreyectiva, entonces $T$ es inyectiva sabiendo que $\dim(E)=\dim(F)$. En efecto, dado que $T$ es sobreyectiva, entonces $\img(T)=F$, por lo tanto $\dim(\img(T))=\dim(F)$. Adem\'as, $ \dim(E) = \dim(\ker(T)) +  \dim(\img(T))$, de donde, $\dim(\ker(T))=0$, por lo tanto $\ker(T)=\{0_E\}$, quedando demostrado que $T$ es inyectiva.
+%\end{proof}
+
+%\begin{ejer}
+%Demostrar que si $T$ es inyectiva, entonces $T$ es sobreyectiva sabiendo que $\dim(E)=\dim(F)$.
+%\end{ejer}
+
+\begin{comment}
+\begin{ejem}
+Sea $T \in \mathscr{L}(\R^2,\R^2)$. Dado que $B=\{u_1, u_2\} = \l\{(1,- 1), (- 3, 2)\r\}$ es una base de $\R^{2}$ junto con 
+\[
+    \l\{ T(u_1) = (0, 2),\, T(u_2) = (- 3, 2)\r\}
+\]
+se puede verificar que la aplicación lineal $T$ está dada por
+\[
+    T(x, y) = (3x + 3y, - 6x - 8y)
+\]
+para todo $(x, y)\in\R^{2}$.
+\end{ejem}
+\end{comment}
+
+
+
+\begin{teo}
+Sean $T\in\mathscr{L}(E,F)$, $\dim(E)=n$ y $\dim(F)=m$. Si:
+\begin{enumerate}
+    \item $n>m$, entonces $T$ no es inyectiva.
+    \item $m>n$, entonces $T$ no es sobreyectiva.
+\end{enumerate}
+\end{teo}
+
+\begin{ejem}\hspace{0pt}
+La aplicación
+\[
+    \funcion{T}{\R^3}{\R^2}{(x,y,z)}{(x,y)}
+\]
+no es inyectiva, pues $\dim(\R^{3}) > \dim(\R^{2})$. 
+\end{ejem}
+
+\begin{ejem}\hspace{0pt}
+La aplicación
+\[
+    \funcion{T}{\R^2}{\Mat{2}{2}}{(x,y)}{\begin{pmatrix}x&0\\0&y\end{pmatrix}}
+\]
+no es sobreyectiva, pues $\dim(\Mat{2}{2}) > \dim(\R^{2})$.
+\end{ejem}
+
+
+\end{document}

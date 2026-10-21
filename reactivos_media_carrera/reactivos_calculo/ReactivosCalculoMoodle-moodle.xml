@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- This is a question bank made for Moodle -->
+<!-- It was generated on 2026-10-14 11:39 by pdfLaTeX running -->
+<!-- on Windows with the package moodle v1.0 (2023/01/28) -->
+
+<quiz>
+ 
+<question type="category">
+  <category>
+    <text>$course$/top/Calculo-Diferencial-Examen-Media-Carrera-MATD124</text>
+  </category>
+</question>
+ 
+<question type="multichoice">
+  <name format="html">
+    <text><![CDATA[calculo-diferencial-MATD124-01]]></text>
+  </name>
+  <questiontext format="html">
+    <text><![CDATA[<p>Sea \(S=\{1-1/n:n\in \mathbb {N}\}\). ¿Cuál es la afirmación correcta? </p>]]></text>
+  </questiontext>
+  <defaultgrade>1.0</defaultgrade>
+  <generalfeedback format="html"><text/></generalfeedback>
+  <penalty>0.10</penalty>
+  <hidden>0</hidden>
+  <single>true</single>
+  <shuffleanswers>0</shuffleanswers>
+  <answernumbering>abc</answernumbering>
+  <answer fraction="0" format="html">
+    <text><![CDATA[<p>\(\inf S=0\) y \(\max S=1\).</p>]]></text>
+  </answer>
+  <answer fraction="100" format="html">
+    <text><![CDATA[<p>\(\min S=0\), \(\sup S=1\) y \(S\) no tiene máximo.</p>]]></text>
+  </answer>
+  <answer fraction="0" format="html">
+    <text><![CDATA[<p>\(\inf S=-1\) y \(\sup S=1\).</p>]]></text>
+  </answer>
+  <answer fraction="0" format="html">
+    <text><![CDATA[<p>\(\min S=0\) y \(\sup S=0\).</p>]]></text>
+  </answer>
+</question>
+<question type="multichoice">
+  <name format="html">
+    <text><![CDATA[calculo-diferencial-MATD124-02]]></text>
+  </name>
+  <questiontext format="html">
+    <text><![CDATA[<p>Para la sucesión \(a_n=(3n^2+1)/(2n^2+n)\), ¿cuál es el valor de \(\displaystyle \lim _{n\to \infty }a_n\)? </p>]]></text>
+  </questiontext>
+  <defaultgrade>1.0</defaultgrade>
+  <generalfeedback format="html"><text/></generalfeedback>
+  <penalty>0.10</penalty>
+  <hidden>0</hidden>
+  <single>true</single>
+  <shuffleanswers>0</shuffleanswers>
+  <answernumbering>abc</answernumbering>
+  <answer fraction="0" format="html">
+    <text><![CDATA[<p>\(0\).</p>]]></text>
+  </answer>
+  <answer fraction="0" format="html">
+    <text><![CDATA[<p>\(1\).</p>]]></text>
+  </answer>
+  <answer fraction="0" format="html">
+    <text><![CDATA[<p>\(3\).</p>]]></text>
+  </answer>
+  <answer fraction="100" format="html">
+    <text><![CDATA[<p>\(\dfrac {3}{2}\).</p>]]></text>
+  </answer>
+</question>
+<question type="multichoice">
+  <name format="html">
+    <text><![CDATA[calculo-diferencial-MATD124-03]]></text>
+  </name>
+  <questiontext format="html">
+    <text><![CDATA[<p>¿Cuál de las siguientes condiciones define que una sucesión real \((a_n)\) es de Cauchy? </p>]]></text>
+  </questiontext>
+  <defaultgrade>1.0</defaultgrade>
+  <generalfeedback format="html"><text/></generalfeedback>
+  <penalty>0.10</penalty>
+  <hidden>0</hidden>
+  <single>true</single>
+  <shuffleanswers>0</shuffleanswers>
+  <answernumbering>abc</answernumbering>
+  <answer fraction="100" format="html">
+    <text><![CDATA[<p>Para todo \(\varepsilon &gt;0\), existe \(N\in \mathbb {N}\) tal que \(|a_n-a_m|&lt;\varepsilon \) para todos \(n,m\geq N\).</p>]]></text>
+  </answer>
+  <answer fraction="0" format="html">
+    <text><![CDATA[<p>Existe \(\varepsilon &gt;0\) tal que \(|a_n-a_m|&lt;\varepsilon \) para todos \(n,m\in \mathbb {N}\).</p>]]></text>
+  </answer>
+  <answer fraction="0" format="html">
+    <text><![CDATA[<p>Para todo \(\varepsilon &gt;0\), existe \(N\in \mathbb {N}\) tal que \(|a_n|&lt;\varepsilon \) para todo \(n\geq N\).</p>]]></text>
+  </answer>
+  <answer fraction="0" format="html">
+    <text><![CDATA[<p>Existe \(N\in \mathbb {N}\) tal que \(a_n=a_m\) para todos \(n,m\geq N\).</p>]]></text>
+  </answer>
+</question>
+<question type="multichoice">
+  <name format="html">
+    <text><![CDATA[calculo-diferencial-MATD124-04]]></text>
+  </name>
+  <questiontext format="html">
+    <text><![CDATA[<p>¿Cuál es el valor de \(\displaystyle \lim _{x\to 0}\frac {e^{2x}-1}{x}\)? </p>]]></text>
+  </questiontext>
+  <defaultgrade>1.0</defaultgrade>
+  <generalfeedback format="html"><text/></generalfeedback>
+  <penalty>0.10</penalty>
+  <hidden>0</hidden>
+  <single>true</single>
+  <shuffleanswers>0</shuffleanswers>
+  <answernumbering>abc</answernumbering>
+  <answer fraction="0" format="html">
+    <text><![CDATA[<p>\(0\).</p>]]></text>
+  </answer>
+  <answer fraction="0" format="html">
+    <text><![CDATA[<p>\(1\).</p>]]></text>
+  </answer>
+  <answer fraction="100" format="html">
+    <text><![CDATA[<p>\(2\).</p>]]></text>
+  </answer>
+  <answer fraction="0" format="html">
+    <text><![CDATA[<p>El límite no existe.</p>]]></text>
+  </answer>
+</question>
+<question type="multichoice">
+  <name format="html">
+    <text><![CDATA[calculo-diferencial-MATD124-05]]></text>
+  </name>
+  <questiontext format="html">
+    <text><![CDATA[<p>Sea <CENTER>\[ f(x)=\begin {cases} \dfrac {x^2-4}{x-2},&x\neq 2,\\ k,&x=2. \end {cases} \]</CENTER> ¿Para qué valor de \(k\) es continua \(f\) en \(x=2\)? </p>]]></text>
+  </questiontext>
+  <defaultgrade>1.0</defaultgrade>
+  <generalfeedback format="html"><text/></generalfeedback>
+  <penalty>0.10</penalty>
+  <hidden>0</hidden>
+  <single>true</single>
+  <shuffleanswers>0</shuffleanswers>
+  <answernumbering>abc</answernumbering>
+  <answer fraction="0" format="html">
+    <text><![CDATA[<p>\(k=0\).</p>]]></text>
+  </answer>
+  <answer fraction="100" format="html">
+    <text><![CDATA[<p>\(k=4\).</p>]]></text>
+  </answer>
+  <answer fraction="0" format="html">
+    <text><![CDATA[<p>\(k=2\).</p>]]></text>
+  </answer>
+  <answer fraction="0" format="html">
+    <text><![CDATA[<p>No existe un valor de \(k\) que haga continua a \(f\) en \(x=2\).</p>]]></text>
+  </answer>
+</question>
+<question type="multichoice">
+  <name format="html">
+    <text><![CDATA[calculo-diferencial-MATD124-06]]></text>
+  </name>
+  <questiontext format="html">
+    <text><![CDATA[<p>Una función \(f\) es continua en \([0,2]\) y diferenciable en \((0,2)\). Se sabe que \(f(0)=-1\), \(f(2)=3\) y \(f'(x)&gt;0\) para todo \(x\in (0,2)\). ¿Qué se puede concluir sobre las soluciones de \(f(x)=0\) en \((0,2)\)? </p>]]></text>
+  </questiontext>
+  <defaultgrade>1.0</defaultgrade>
+  <generalfeedback format="html"><text/></generalfeedback>
+  <penalty>0.10</penalty>
+  <hidden>0</hidden>
+  <single>true</single>
+  <shuffleanswers>0</shuffleanswers>
+  <answernumbering>abc</answernumbering>
+  <answer fraction="0" format="html">
+    <text><![CDATA[<p>No existe ninguna solución.</p>]]></text>
+  </answer>
+  <answer fraction="0" format="html">
+    <text><![CDATA[<p>Existe al menos una solución, pero las condiciones no permiten determinar si es única.</p>]]></text>
+  </answer>
+  <answer fraction="0" format="html">
+    <text><![CDATA[<p>Existen al menos dos soluciones distintas.</p>]]></text>
+  </answer>
+  <answer fraction="100" format="html">
+    <text><![CDATA[<p>Existe exactamente una solución.</p>]]></text>
+  </answer>
+</question>
+<question type="multichoice">
+  <name format="html">
+    <text><![CDATA[calculo-diferencial-MATD124-07]]></text>
+  </name>
+  <questiontext format="html">
+    <text><![CDATA[<p>Sea \(f\) diferenciable en un intervalo abierto \(I\). Si \(f'(x)\geq 0\) para todo \(x\in I\), ¿cuál de las siguientes conclusiones está garantizada? </p>]]></text>
+  </questiontext>
+  <defaultgrade>1.0</defaultgrade>
+  <generalfeedback format="html"><text/></generalfeedback>
+  <penalty>0.10</penalty>
+  <hidden>0</hidden>
+  <single>true</single>
+  <shuffleanswers>0</shuffleanswers>
+  <answernumbering>abc</answernumbering>
+  <answer fraction="0" format="html">
+    <text><![CDATA[<p>Para cualesquiera \(x_1,x_2\in I\) con \(x_1&lt;x_2\), se cumple \(f(x_1)&lt;f(x_2)\).</p>]]></text>
+  </answer>
+  <answer fraction="0" format="html">
+    <text><![CDATA[<p>\(f\) es constante en \(I\).</p>]]></text>
+  </answer>
+  <answer fraction="0" format="html">
+    <text><![CDATA[<p>\(f\) no puede ser constante en ningún subintervalo de \(I\).</p>]]></text>
+  </answer>
+  <answer fraction="100" format="html">
+    <text><![CDATA[<p>Para cualesquiera \(x_1,x_2\in I\) con \(x_1&lt;x_2\), se cumple \(f(x_1)\leq f(x_2)\).</p>]]></text>
+  </answer>
+</question>
+<question type="multichoice">
+  <name format="html">
+    <text><![CDATA[calculo-diferencial-MATD124-08]]></text>
+  </name>
+  <questiontext format="html">
+    <text><![CDATA[<p>La ecuación \(x^2+xy+y^2=3\) define localmente a \(y\) como una función diferenciable de \(x\) alrededor de \((1,1)\). ¿Cuál es la pendiente de la recta tangente en ese punto? </p>]]></text>
+  </questiontext>
+  <defaultgrade>1.0</defaultgrade>
+  <generalfeedback format="html"><text/></generalfeedback>
+  <penalty>0.10</penalty>
+  <hidden>0</hidden>
+  <single>true</single>
+  <shuffleanswers>0</shuffleanswers>
+  <answernumbering>abc</answernumbering>
+  <answer fraction="0" format="html">
+    <text><![CDATA[<p>\(1\).</p>]]></text>
+  </answer>
+  <answer fraction="0" format="html">
+    <text><![CDATA[<p>\(-\dfrac {1}{2}\).</p>]]></text>
+  </answer>
+  <answer fraction="100" format="html">
+    <text><![CDATA[<p>\(-1\).</p>]]></text>
+  </answer>
+  <answer fraction="0" format="html">
+    <text><![CDATA[<p>\(0\).</p>]]></text>
+  </answer>
+</question>
+<question type="multichoice">
+  <name format="html">
+    <text><![CDATA[calculo-diferencial-MATD124-09]]></text>
+  </name>
+  <questiontext format="html">
+    <text><![CDATA[<p>Una función \(f\) es continua en \([0,3]\) y diferenciable en \((0,3)\). Se sabe que \(f'(x)&lt;0\) para \(0&lt;x&lt;1\) y que \(f'(x)&gt;0\) para \(1&lt;x&lt;3\). Sin conocer una fórmula para \(f\), ¿cuál de las siguientes afirmaciones es necesariamente verdadera? </p>]]></text>
+  </questiontext>
+  <defaultgrade>1.0</defaultgrade>
+  <generalfeedback format="html"><text/></generalfeedback>
+  <penalty>0.10</penalty>
+  <hidden>0</hidden>
+  <single>true</single>
+  <shuffleanswers>0</shuffleanswers>
+  <answernumbering>abc</answernumbering>
+  <answer fraction="0" format="html">
+    <text><![CDATA[<p>\(f\) alcanza su máximo absoluto en \(x=1\).</p>]]></text>
+  </answer>
+  <answer fraction="100" format="html">
+    <text><![CDATA[<p>\(f\) alcanza su mínimo absoluto en \(x=1\).</p>]]></text>
+  </answer>
+  <answer fraction="0" format="html">
+    <text><![CDATA[<p>\(f(0)&lt;f(1)\).</p>]]></text>
+  </answer>
+  <answer fraction="0" format="html">
+    <text><![CDATA[<p>\(f(3)&lt;f(1)\).</p>]]></text>
+  </answer>
+</question>
+<question type="multichoice">
+  <name format="html">
+    <text><![CDATA[calculo-diferencial-MATD124-10]]></text>
+  </name>
+  <questiontext format="html">
+    <text><![CDATA[<p>¿Cuál es el polinomio de Taylor de grado dos de \(f(x)=e^x\) centrado en \(x=0\)? </p>]]></text>
+  </questiontext>
+  <defaultgrade>1.0</defaultgrade>
+  <generalfeedback format="html"><text/></generalfeedback>
+  <penalty>0.10</penalty>
+  <hidden>0</hidden>
+  <single>true</single>
+  <shuffleanswers>0</shuffleanswers>
+  <answernumbering>abc</answernumbering>
+  <answer fraction="0" format="html">
+    <text><![CDATA[<p>\(1+x+x^2\).</p>]]></text>
+  </answer>
+  <answer fraction="0" format="html">
+    <text><![CDATA[<p>\(x+\dfrac {x^2}{2}\).</p>]]></text>
+  </answer>
+  <answer fraction="0" format="html">
+    <text><![CDATA[<p>\(1+\dfrac {x^2}{2}\).</p>]]></text>
+  </answer>
+  <answer fraction="100" format="html">
+    <text><![CDATA[<p>\(1+x+\dfrac {x^2}{2}\).</p>]]></text>
+  </answer>
+</question>
+ 
+</quiz>

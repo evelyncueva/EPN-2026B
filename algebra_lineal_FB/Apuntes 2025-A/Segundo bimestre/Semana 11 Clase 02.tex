@@ -1,0 +1,389 @@
+\documentclass[compacto,10pt]{pubciencias-notas}
+
+% -- Paquetes adicionales
+\usepackage{comandosEPN}
+
+% -- Datos del libro
+\autor{Departamento de Formación Básica}
+\materia{Álgebra Lineal}
+\nota{Semana 11 Clase 02}
+\fecha{Semestre 2026-A}
+
+\logouno[1.1cm]{Logo_EPN.eps}
+\logodos[1.7cm]{Logo_DFB.eps}
+
+\definecolor{colordef}{cmyk}{0.81,0.62,0.00,0.22}
+
+\begin{document}
+
+\encabezado
+\vspace*{-8mm}
+
+\setcounter{section}{4}
+\section{Espacios con producto interno}
+\subsection{Conjunto ortogonal y ortonormal}
+
+
+\begin{defi}[Conjunto ortogonal]
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial con producto interno  y
+    \[C=\{v_1, v_2, \ldots, v_k\}\subseteq E.\] Se dice que $C$ es un conjunto ortogonal en $E$ si
+    \[
+        \langle  v_i, v_j \rangle  = 0
+    \]
+    para todo $i \neq j$.
+\end{defi}
+
+\begin{ejem}\hspace{0pt}\label{Sem08:EjemConjOrt} En el espacio vectorial $\R^{3}$ con el producto interno usual, el conjunto 
+\[
+    C = \l\{(1,1,1), (1,0,-1), (-1,2,-1)\r\}
+\]
+es un conjunto ortogonal. En efecto, notemos que
+\[
+\begin{array}{l}
+    \langle (1,1,1), (1,0,-1)\rangle  = (1)(1) + (1)(0) + (1)(-1) = 0,\\
+    \langle (1,1,1), (-1,2,-1)\rangle  = (1)(-1) + (1)(2) + (1)(-1) = 0,\text{ y}\\
+    \langle (1,0,-1), (-1,2,-1)\rangle  = (1)(-1) + (0)(2) + (-1)(-1) = 0.
+\end{array}
+\]
+Luego, $C$ es un conjunto ortogonal.
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} En el espacio vectorial $\R^{4}$ con el producto interno usual, demuestre que el conjunto 
+\[
+    C = \l\{(1,1,-2,2), (0,2,2,1), (0,-2,1,2)\r\}
+\]
+es ortogonal.
+\end{ejer}
+
+\begin{defi}[Conjunto ortonormal]
+Sean $(E,+,\cdot,\K)$ un espacio vectorial provisto de producto interno y
+\[C = \{v_1, v_2, \ldots, v_k\} \subseteq E.\] Se dice que $C$ es un conjunto ortonormal en $E$ si es ortogonal y 
+\[
+    \| v_i\| =  1
+\]
+para todo $i \in \{1, \ldots, k\}$.
+\end{defi}
+
+\begin{ejem}\hspace{0pt}\label{ConjuntoOrtonormal} En el espacio vectorial $\R^{3}$ con el producto interno usual, a partir del conjunto ortogonal del ejemplo \ref{Sem08:EjemConjOrt} 
+\[
+    C = \l\{(1,1,1), (1,0,-1), (-1,2,-1)\r\}
+\]
+determinamos a un conjunto ortonormal. Para esto, calculamos las normas de los vectores:
+\[
+\begin{array}{l}
+    \|(1,1,1)\| = \sqrt{\langle (1,1,1), (1,1,1)\rangle } = \sqrt{3}\\
+    \|(1,0,-1)\| = \sqrt{\langle (1,0,-1), (1,0,-1)\rangle } = \sqrt{2}\\
+    \|(-1,2,-1)\| = \sqrt{\langle (-1,2,-1), (-1,2,-1)\rangle } = \sqrt{6}.
+\end{array}
+\]
+Luego, el conjunto ortonormal es
+\[
+    D = \l\{\dfrac{1}{\sqrt{3}}(1,1,1), \dfrac{1}{\sqrt{2}}(1,0,-1), \dfrac{1}{\sqrt{6}}(-1,2,-1)\r\}.
+\]
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} En el espacio vectorial $\R^{4}$ con el producto interno usual, dado el conjunto ortogonal
+\[
+    C = \l\{(1,1,-2,2), (0,2,2,1), (0,-2,1,2)\r\}
+\]
+obtenga un conjunto ortonormal.
+\end{ejer}
+
+%\begin{prop}\label{PropOrtNor}
+%Sea $(E,+,\cdot,\K)$ un espacio vectorial provisto de producto interno. Si $\{v_1, v_2, \ldots, v_k\}$ es un conjunto ortonormal entonces 
+%\begin{equation*}
+ %   \| \alpha_1 v_1 + \alpha_2 v_2 + \ldots + \alpha_n v_k \|^2 =
+  %  |\alpha_1|^2 + |\alpha_2|^2 + \ldots + |\alpha_k|^2
+%\end{equation*}
+%donde $\alpha_1, \alpha_2, \ldots, \alpha_k \in \K$. 
+%\end{prop}
+
+%\begin{ejem}\hspace{0pt} Considere el espacio y el conjunto ortonormal $D$ del ejemplo \ref{ConjuntoOrtonormal}, tenemos que si $\alpha_{1} = - 2\sqrt{3}$, $\alpha_{2} = \sqrt{2}$, $\alpha_{3} = - \sqrt{6}$, $v_{1} = (1,1,1)$, $v_{2} = (1,0,-1)$ y $v_{3} = (-1,2,-1)$, entonces
+%\[
+ %   \alpha_1 v_1 + \alpha_2 v_2 + \alpha_3 v_3 = (0, - 4, - 2).
+%\]
+%Aplicando la definición de norma:
+%\begin{equation}\label{EjeProLadIzq}
+ %   \| \alpha_1 v_1 + \alpha_2 v_2 + \alpha_3 v_3 \|^2 = \|\l(0, - 4, - 2\r)\|^{2} = 20.
+%\end{equation}
+%Además, se tiene que:
+%\begin{equation}\label{EjeProLadDer}
+ %   |\alpha_1|^2 + |\alpha_2|^2 + |\alpha_3|^2 = (- 2\sqrt{3})^{2} + (\sqrt{2})^{2} + (-\sqrt{6})^{2} = 20.
+%\end{equation}
+%Finalmente, a partir de \eqref{EjeProLadIzq} y de \eqref{EjeProLadDer} se verifica la Proposición \ref{PropOrtNor}.
+%\end{ejem}
+
+\begin{cor}
+    Sea $(E,+,\cdot,\K)$ un espacio vectorial provisto de producto interno. Si $C \subseteq E$ es un conjunto ortogonal de vectores no nulos, entonces $C$ es linealmente independiente.
+\end{cor}
+
+\subsection{Bases ortogonales y ortonormales}
+%A partir de aquí, siempre consideraremos espacios vectoriales provistos con un producto interno.
+
+\begin{defi}[Base ortogonal (ortonormal)]
+    En un espacio vectorial con producto interno, una base ortogonal (ortonormal) es una base cuyos vectores forman un conjunto ortogonal (ortonormal). 
+\end{defi}
+
+%\begin{teo}
+%    Sea $(E,+,\cdot,\K)$ un espacio vectorial provisto de producto interno y sea 
+    
+ %   \noindent $\{u_1, u_2, \ldots, u_n\}$ una base ortogonal para $E$; entonces, para todo $v \in E:$
+  %  \[
+   %     v = \alpha_1 u_1 + \alpha_2 u_2 +\cdots + \alpha_n u_n
+    %\]
+    %donde:
+    %\[
+     %   \alpha_k = \dfrac{\langle  v, u_k \rangle }{\langle  u_k, u_k \rangle }
+    %\]
+    %para todo $k \in \{1, 2, \ldots, n\}$.
+%\end{teo}
+
+%\begin{ejem}\hspace{0pt} En el espacio vectorial $\R^{2}$ con el producto interno usual, consideramos la base ortogonal $\l\{u_{1}, u_{2}\r\} = \l\{(1, 1), \l(\dfrac{1}{2}, - \dfrac{1}{2}\r)\r\}$. Sea $v = (1, 2)$, tenemos que
+%\[
+ %   \alpha_1 = \dfrac{\langle  v, u_1 \rangle }{\langle  u_1, u_1 \rangle } = \dfrac{3}{2}
+  %  \texty
+   % \alpha_2 = \dfrac{\langle  v, u_2 \rangle }{\langle  u_2, u_2 \rangle } = - 1
+%\]
+%de lo cual
+%\[
+ %   v = \dfrac{3}{2}(1, 1) - \l(\dfrac{1}{2}, - \dfrac{1}{2}\r).
+%\]
+%\end{ejem}
+
+%\begin{teo}
+ %   Sea $(E,+,\cdot,\K)$ un espacio vectorial provisto de producto interno y sea 
+    
+  %  \noindent $\{u_1, u_2, \ldots, u_n\}$ una base ortonormal para $E$; entonces,  para todo $v \in E:$
+   % \[
+    %    v = \alpha_1 u_1 + \alpha_2 u_2 +\cdots + \alpha_n u_n
+    %\]
+    %donde:
+    %\[
+     %   \alpha_k = \langle  v, u_k \rangle  
+    %\]
+    %para todo $k \in \{1, 2, \ldots, n\}$.
+%\end{teo}
+
+\begin{teo}[Proceso de Gram-Schmidt]
+Sea $(E,+,\cdot,\K)$ un espacio vectorial provisto de producto interno y sea 
+
+\noindent $S = \{u_1, u_2, \ldots, u_n\}$ un conjunto linealmente independiente que genera a un subespacio $W$, es decir, $W = \gen(S)$. Entonces, los vectores:
+\begin{enumerate}
+\item 
+    $v_1 = u_1$, y
+\item
+    $\displaystyle v_k = 
+        u_k 
+        - \sum_{i=1}^{k-1} \dfrac{\langle  u_k, v_i\rangle }{\langle  v_i,v_i\rangle } v_i$, para $k=2,\ldots,n$
+\end{enumerate}
+forman una base ortogonal $\{v_{1}, v_{2}, \ldots, v_{n}\}$ de $W$.
+
+\noindent Además, los vectores:
+\[
+    w_{k} = \dfrac{v_{k}}{\|v_{k}\|}
+\]
+para $k=1,\ldots,n$ forman una base ortonormal $\{w_{1}, w_{2}, \ldots, w_{n}\}$ de $W$.
+\end{teo}
+
+\begin{ejem}\hspace{0pt} En el espacio vectorial $\R^{4}$ consideremos al conjunto linealmente independiente  
+\[
+    S = \{u_{1}, u_{2}, u_{3}\} = \{(1,0,0,0), (0,2,2,0), (0, 3, 3, - 3)\}
+\]
+y el subespacio $W = \gen(S)$. Utilizando el Proceso de Gram-Schmidt, queremos encontrar una base ortogonal $\{v_{1}, v_{2}, v_{3}\}$  de $W$, de modo que \[
+\begin{cases}
+    v_1=u_1\\
+    v_2=u_2-\frac{\langle u_2,v_1\rangle}{\langle v_1,v_1\rangle}v_1\\
+    v_3=u_3-\frac{\langle u_3,v_1\rangle}{\langle v_1,v_1\rangle}v_1-\frac{\langle u_3,v_2\rangle}{\langle v_2,v_2\rangle}v_2
+\end{cases}
+\] 
+Reemplazando con los valores de $u_{1}, u_{2}, u_{3}$, tenemos que 
+\[
+v_1=(1,0,0,0)
+\]
+luego \[
+v_2=(0,2,2,0)-\frac{\langle (0,2,2,0),(1,0,0,0)\rangle}{\langle (1,0,0,0),(1,0,0,0)\rangle}(1,0,0,0)
+\]
+sabemos que $\langle (0,2,2,0),(1,0,0,0)\rangle=0$ así,
+\[
+v_2=(0,2,2,0)-\frac{0}{\langle (1,0,0,0),(1,0,0,0)\rangle}(1,0,0,0)=(0,2,2,0)
+\]
+Finalmente 
+\[
+v_3=(0, 3, 3, - 3)-\frac{\langle (0, 3, 3, - 3),(1,0,0,0)\rangle}{\langle (1,0,0,0),(1,0,0,0)\rangle}(1,0,0,0)-\frac{\langle (0, 3, 3, - 3),(0,2,2,0)\rangle}{\langle (0,2,2,0),(0,2,2,0)\rangle}(0,2,2,0)
+\]
+sabemos que 
+\begin{align*}
+    \langle (0, 3, 3, - 3),(1,0,0,0)\rangle&=0\\
+    \langle (1,0,0,0),(1,0,0,0)\rangle&=1\\
+    \langle (0, 3, 3, - 3),(0,2,2,0)\rangle&=12\\
+    \langle (0,2,2,0),(0,2,2,0)\rangle&=8
+\end{align*}
+de este modo
+\begin{align*}
+v_3&=(0, 3, 3, - 3)-\frac{0}{1}(1,0,0,0)-\frac{12}{8}(0,2,2,0)\\
+&=(0, 3, 3, - 3)-(0,3,3,0)\\
+&=(0,0,0,-3)
+\end{align*}
+De este modo, nos queda que 
+\[
+    \{v_{1}, v_{2}, v_{3}\} = \{(1,0,0,0), (0,2,2,0), (0,0,0,- 3)\}
+\]
+es una base ortogonal. Además, al dividir estos vectores para sus respectivas normas, obtenemos una base ortonormal de $W$:
+\[
+    \{w_{1}, w_{2}, w_{3}\} = \l\{(1, 0, 0, 0), \l(0,\dfrac{\sqrt{2}}{2},\dfrac{\sqrt{2}}{2},0\r), \l(0,0,0, - 1\r)\r\}.
+\]
+\end{ejem}
+
+\begin{teo}
+    Todo espacio vectorial de dimensión finita tiene una base ortogonal y una base ortonormal.
+\end{teo}
+
+
+\begin{ejem}
+    Considere la base $S = \{u_1, u_2, u_3\}$ de $\R^3$, donde 
+    \[
+        u_1 = (1,1,0), \qquad u_2 = (0, 1,1), \qquad u_3 = (1,0,1)
+    \]
+    mediante el proceso de Gram-Schmidt, queremos encontrar una base ortonormal, para ello primero encontraremos una base ortogonal $\{v_{1}, v_{2}, v_{3}\}$  de $W$, de modo que \[
+\begin{cases}
+    v_1=u_1\\
+    v_2=u_2-\frac{\langle u_2,v_1\rangle}{\langle v_1,v_1\rangle}v_1\\
+    v_3=u_3-\frac{\langle u_3,v_1\rangle}{\langle v_1,v_1\rangle}v_1-\frac{\langle u_3,v_2\rangle}{\langle v_2,v_2\rangle}v_2
+\end{cases}
+\] 
+Reemplazando con los valores de $u_{1}, u_{2}, u_{3}$, tenemos que 
+\[
+v_1=(1,1,0)
+\]
+luego \[
+v_2=(0,1,1)-\frac{\langle (0,1,1),(1,1,0)\rangle}{\langle (1,1,0),(1,1,0)\rangle}(1,1,0)
+\]
+sabemos que $\langle (0,1,1),(1,1,0)\rangle=1$ y $ \langle (1,1,0),(1,1,0)\rangle=2 $ así,
+\[
+v_2=(0,1,1)-\frac{1}{ 2}(1,1,0)=\left(-\frac{1}{2},\frac{1}{2},1\right)
+\]
+Finalmente 
+\[
+v_3=(1,0,1)-\frac{\langle (1,0,1),(1,1,0)\rangle}{\langle (1,1,0),(1,1,0)\rangle}(1,1,0)-\frac{\langle (1,0,1),\left(-\frac{1}{2},\frac{1}{2},1\right)\rangle}{\langle \left(-\frac{1}{2},\frac{1}{2},1\right),\left(-\frac{1}{2},\frac{1}{2},1\right)\rangle}\left(-\frac{1}{2},\frac{1}{2},1\right)
+\]
+sabemos que 
+\begin{align*}
+    \langle (1,0,1),(1,1,0)\rangle&=1\\
+    \langle (1,1,0),(1,1,0)\rangle&=2\\
+    \left\langle (1,0,1),\left(-\frac{1}{2},\frac{1}{2},1\right)\right\rangle&=\frac{1}{2}\\
+    \left\langle \left(-\frac{1}{2},\frac{1}{2},1\right),\left(-\frac{1}{2},\frac{1}{2},1\right)\right\rangle&=\frac{3}{2}
+\end{align*}
+de este modo
+\begin{align*}
+v_3&=(1,0,1)-\frac{1}{2}(1,1,0)-\frac{1}{3}\left(-\frac{1}{2},\frac{1}{2},1\right)\\
+&=\left(\frac{1}{2},-\frac{1}{2},1\right)-\left(-\frac{1}{6},\frac{1}{6},\frac{1}{3}\right)\\
+&=\left(\frac{2}{3},-\frac{2}{3},\frac{2}{3}\right)
+\end{align*}
+De este modo, nos queda que 
+\[
+    \{v_{1}, v_{2}, v_{3}\} = \left\{(1,1,0), \left(-\frac{1}{2},\frac{1}{2},1\right), \left(\frac{2}{3},-\frac{2}{3},\frac{2}{3}\right)\right\}
+\]
+es una base ortogonal. Además, al dividir estos vectores para sus respectivas normas, se obtiene la base ortonormal $T=\{w_1, w_2, w_2\}$ para $\R^3$ donde
+    \[
+        w_1 = \left(\dfrac{\sqrt{2}}{2},\dfrac{\sqrt{2}}{2},0\right), \qquad
+        w_2 = \left(-\dfrac{\sqrt{6}}{6},\dfrac{\sqrt{6}}{6},
+        \dfrac{\sqrt{6}}{3}\right), \qquad
+        w_3 = \left(\dfrac{\sqrt{3}}{3},-\dfrac{\sqrt{3}}{3},
+        \dfrac{\sqrt{3}}{3}\right).
+    \]
+\end{ejem}
+
+\begin{defi}[Complemento ortogonal]
+Sean $(E,+,\cdot,\K)$ un espacio vectorial provisto de producto interno y
+$W$ un subespacio de $E$. El complemento ortogonal de $W$, denotado por $W^\perp$, se define por:
+\[
+    W^\perp = \{ x \in E: \l< x, w \r> = 0, \text{ para todo } w \in W\}.
+\]
+\end{defi}
+
+%\begin{ejem}\hspace{0pt}\label{Complemento1} En el espacio vectorial $\R_{1}[x]$ con el producto interno usual, considere el subespacio $W = \gen(\{1 + 2x\})$, su complemento ortogonal es
+%\[
+ %   W^{\perp} = \{a_{0} + a_{1}x\in\R_{1}[x]\,:\,a_{0} + 2a_{1} = 0\} = \spn(\{- 2 + x\}).
+%\]
+%\end{ejem}
+
+\begin{ejem}\hspace{0pt}\label{Complemento2} En el espacio vectorial $\Mat{2}{2}$ con el producto interno usual, consideremos al subespacio vectorial
+\[
+    W = \l\{\begin{pmatrix}a&- a\\a&b\end{pmatrix}\,:\,a,b\in\R\r\}
+\]
+su complemento ortogonal es
+\[
+    W^{\perp} = \l\{\begin{pmatrix}a&a+c\\c&0 \end{pmatrix}\,:\,a,c\in\R\r\}.
+\]
+\end{ejem}
+
+\begin{prop}
+Sean $(E,+,\cdot,\K)$ un espacio vectorial provisto de producto interno , 
+$W \subset E$ un subespacio vectorial de $E$ de dimensión finita y $B$ una base de $W$, se tiene que
+\[
+    W^\perp = \{ x \in E: \l< x, w_{i} \r> = 0, \text{ para todo } w_{i} \in B\}.
+\]
+\end{prop}
+
+\begin{ejem}\hspace{0pt}\label{Complemento3} Considere el ejemplo \ref{Complemento2}, tenemos que el conjunto:
+\[
+    B = \l\{\begin{pmatrix}1&- 1\\1&0\end{pmatrix}, \begin{pmatrix}0&0\\0&1\end{pmatrix}\r\}
+\]
+es una base de $W$, por lo tanto:
+\begin{align*}
+    W^{\perp} 
+    &= \l\{\begin{pmatrix}a&b\\c&d\end{pmatrix}\in\Mat{2}{2}\,:\,
+    \l<\begin{pmatrix}a&b\\c&d\end{pmatrix}, \begin{pmatrix}1& -1\\1&0\end{pmatrix}\r> = 0,
+    \l<\begin{pmatrix}a&b\\c&d\end{pmatrix}, \begin{pmatrix}0&0\\0&1\end{pmatrix}\r> = 0\r\}\\
+    &= \l\{\begin{pmatrix}a&b\\c&d\end{pmatrix}\in\Mat{2}{2}\,:\,
+    \Tr\begin{pmatrix}a + c& -a\\b + d&- b\end{pmatrix} = 0,
+    \Tr\begin{pmatrix}0&c\\0&d\end{pmatrix} = 0\r\}\\
+    &= \l\{\begin{pmatrix}a&b\\c&d\end{pmatrix}\in\Mat{2}{2}\,:\,
+    a - b + c = 0, d = 0\r\}\\
+    &= \l\{\begin{pmatrix}a&b\\c&d\end{pmatrix}\in\Mat{2}{2}\,:\,
+    b = a + c, d = 0\r\}\\
+    &= \l\{\begin{pmatrix}a&a + c\\c&0\end{pmatrix}\in\Mat{2}{2}\,:\,
+    a, c \in \R\r\}.
+\end{align*}
+\end{ejem}
+\begin{ejer}
+    Sea $W=\{(x,y,z)\in\R^3: x=2y\}$, hallar $W^\perp$
+\end{ejer}
+\begin{teo}
+Sean $(E,+,\cdot,\K)$ un espacio vectorial provisto de producto interno y
+$W$ subespacio vectorial de $E$, entonces:
+\begin{enumerate}
+\item $W^\perp$ es un subespacio vectorial de $E$.
+\item $W \cap W^\perp = \{0_{E}\}$.
+\end{enumerate}
+\end{teo}
+
+\begin{teo}
+Sean $(E,+,\cdot,\K)$ un espacio vectorial de dimensión finita con producto interno y $W$ un subespacio vectorial de $E$, entonces:
+\begin{enumerate}
+    \item $\dim(E) = \dim(W) + \dim(W^\perp)$.
+    \item $E = W \oplus W^\perp$.
+\end{enumerate}
+\end{teo}
+
+%\begin{ejem}\hspace{0pt} En el espacio vectorial $\R_{1}[x]$ se define al subespacio vectorial $W = \gen(\{1 + 2x\})$, se tiene que una base de $W$ es $B_{1} = \{1 + 2x\}$, y una base de su complemento ortogonal $W^{\perp}$ está dada por $B_{2} = \{- 2 + x\}$, entonces:
+%\[
+ %   \dim(\R_{1}[x]) = \dim(W) + \dim(W^{\perp})
+  %  \texty
+   % \R_{1}[x] = W \oplus W^{\perp}.
+%\]
+%\end{ejem}
+
+\begin{ejem}\hspace{0pt} Considere el ejemplo \ref{Complemento3}, al aplicar el teorema 3 se concluye que:
+\[
+    \Mat{2}{2} = W \oplus W^{\perp}.
+\]
+\end{ejem}
+
+\begin{teo}
+Sean $(E,+,\cdot,\K)$ un espacio vectorial de dimensión finita provisto de producto interno y $W$ un subespacio vectorial de $E$, entonces 
+\[
+    \left(W^{\perp}\right)^{\perp} =  W.
+\]
+\end{teo}
+\end{document}

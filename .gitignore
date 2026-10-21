@@ -1,18 +1,28 @@
-# Ignorar todos los archivos por defecto.
-*
+# Archivos temporales de LaTeX.
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.nav
+*.snm
+*.vrb
+*.xdv
+*.bbl
+*.blg
+*.bcf
+*.run.xml
 
-# Permitir recorrer las carpetas para encontrar archivos TeX.
-!*/
+# Configuracion local y archivos del sistema.
+.vscode/
+.idea/
+.latex-local/
+Thumbs.db
+.DS_Store
 
-# Conservar este archivo, las fuentes LaTeX, sus estilos y los PDF generados.
-!.gitignore
-!*.tex
-!*.sty
-!*.pdf
-
-# Excluir completamente la carpeta de libros, incluso si contiene archivos TeX.
+# Mantener la exclusion de libros del repositorio original.
 libros/
-**/libros/
-
-# Excluir la carpeta de inicialización local.
-/Calculo_diferencial_init/

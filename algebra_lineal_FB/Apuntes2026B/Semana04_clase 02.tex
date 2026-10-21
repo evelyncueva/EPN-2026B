@@ -1,0 +1,398 @@
+\documentclass[compacto,10pt]{pubciencias-notas}
+
+% -- Paquetes adicionales
+\usepackage{comandosEPN}
+
+% -- Datos del libro
+\autor{Departamento de Formación Básica}
+\materia{Álgebra Lineal}
+\nota{Semana 04 Clase 02}
+\fecha{Semestre 2026-B}
+
+\logouno[1.1cm]{Logo_EPN.eps}
+\logodos[1.7cm]{Logo_DFB.eps}
+
+\definecolor{colordef}{cmyk}{0.81,0.62,0.00,0.22}
+
+\begin{document}
+
+\encabezado
+
+\vspace*{-8mm}
+
+\setcounter{section}{2}
+\section{Determinantes}
+
+\begin{defi}[Cofactor]
+    Sea $A\in \Mat[\R]{n}{n}$ e $i,j\in I$. El cofactor $ij$ de $A$ denotado $C_{ij}$, está dado por
+    \[
+        C_{ij} = (-1)^{i+j} \det (A_{ij})
+    \]
+     donde $A_{ij}$ es el menor $ij$ de $A$.
+\end{defi}
+
+\begin{advertencia}
+    Para determinar de manera ágil el signo $(-1)^{i+j}$ de un cofactor, se puede utilizar la matriz de signos alternados correspondiente al tamaño de la matriz original, comenzando siempre con un signo positivo ($+$) en la posición $(1,1)$:
+    \[
+    \begin{pmatrix}
+    + & - & + & \cdots \\
+    - & + & - & \cdots \\
+    + & - & + & \cdots \\
+    \vdots & \vdots & \vdots & \ddots
+    \end{pmatrix}
+    \]
+\end{advertencia}
+
+\begin{ejem} Dada la matriz $A = 
+\begin{pmatrix}
+-2 & -1 & -3 \\
+0 & 1 & -1 \\
+3 & 3 & 2
+\end{pmatrix}$, se tiene que:
+\begin{itemize}
+\item El cofactor $32$ de A es:
+\[C_{32} = (-1)^{3+2}
+\begin{vmatrix}
+-2 & -3 \\
+0 & -1
+\end{vmatrix} = -1(2)=-2\]
+\item El cofactor $13$ de A es:
+\[C_{13} = (-1)^{1+3}
+\begin{vmatrix}
+0 & 1 \\
+3 & 3
+\end{vmatrix} = 1(-3) = -3\]
+\end{itemize}
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} Dada la matriz 
+\[
+    A = 
+    \begin{pmatrix}
+        -1 & 1 & 0 \\
+        0 & 2 & -1 \\
+        3 & 2 & 5
+    \end{pmatrix}.
+\]
+Determinar los cofactores $C_{23}$, $C_{13}$, $C_{21}$ y $C_{32}$.
+\end{ejer}
+
+\begin{teo}[Generalización cálculo del determinante]
+    Sea $A \in \Mat[\R]{n}{n}$. El determinante de $A$ se puede calcular mediante la suma de los productos de los elementos de cualquier fila o columna por sus cofactores correspondientes.
+    
+    \noindent Para cualquier fila $i \in I$ fija (Desarrollo por la fila $i$):
+    \[
+        \det(A) = a_{i1}C_{i1} + a_{i2}C_{i2} + \ldots + a_{in}C_{in}
+    \]
+    
+    \noindent Para cualquier columna $i \in I$ fija (Desarrollo por la columna $i$):
+    \[
+        \det(A) = a_{1i}C_{1i} + a_{2i}C_{2i} + \ldots + a_{ni}C_{ni}.
+    \]
+\end{teo}
+
+\begin{advertencia}
+    El lado derecho de estas igualdades toma el nombre de expansión o desarrollo por cofactores del determinante de $A$, con respecto a la fila $i$ o con respecto a la columna $i$.
+\end{advertencia}
+
+\begin{ejem}\hspace{0pt}\label{Det_Ej1}
+    Sea $A =
+    \begin{pmatrix}
+        -2 & -1 & -3 \\
+        0 & 1 & -1 \\
+        3 & 3 & 2
+    \end{pmatrix}$.
+    
+    \noindent Calculemos el determinante de $A$ mediante la expansión por cofactores con respecto a la fila $1$. Se tiene:
+    \[
+        \det(A) = a_{11}C_{11} + a_{12}C_{12} + a_{13}C_{13}
+    \]
+    \[
+        \det(A) = -2 
+        \begin{vmatrix}
+            1 & -1 \\
+            3 & 2
+        \end{vmatrix} - (-1)
+        \begin{vmatrix}
+            0 & -1 \\
+            3 & 2
+        \end{vmatrix} -3
+        \begin{vmatrix}
+            0 & 1 \\
+            3 & 3
+        \end{vmatrix} = -2(5) + 1(3) - 3(-3) = 2
+    \]
+    
+    Ahora, calculemos el determinante de $A$ seleccionando una línea con ceros para simplificar el cálculo de determinantes grandes. Desarrollando por cofactores con respecto a la columna 1:
+    \[
+        \det(A) = a_{11}C_{11} + a_{21}C_{21} + a_{31}C_{31}
+    \]
+    \[
+        \det(A) = -2 
+        \begin{vmatrix}
+            1 & -1 \\
+            3 & 2
+        \end{vmatrix} - 0
+        \begin{vmatrix}
+            -1 & -3 \\
+            3 & 2
+        \end{vmatrix} + 3
+        \begin{vmatrix}
+            -1 & -3 \\
+            1 & -1
+        \end{vmatrix} = -2(5) - 0 + 3(4) = 2
+    \]
+\end{ejem}
+    
+\begin{ejer}\hspace{0pt} Considere la matriz del ejemplo \ref{Det_Ej1}. Calcule su determinante eligiendo de manera justificada la fila o columna que requiera el menor número de operaciones aritméticas posibles.
+\end{ejer}
+
+\subsection{Propiedades fundamentales}
+
+\begin{teo}[Determinante de una matriz triangular]
+    Sea $A \in \Mat[\K]{n}{n}$ una matriz triangular superior o triangular inferior, entonces
+    \[
+        \det(A) = a_{11}a_{22} \cdots a_{nn},
+    \]
+    es decir, el determinante de una matriz triangular es el producto de los elementos de su diagonal principal.
+\end{teo}
+
+\begin{ejem}
+    Consideremos la matriz
+    $A = \begin{pmatrix}
+    2 & 0 & 0 & 0 & 0 & 0 \\
+    8 & -1 & 0 & 0 & 0 & 0 \\
+    -7 & 6 & 2 & 0 & 0 & 0 \\
+    4 & 0 & 3 & -2 & 0 & 0 \\
+    -5 & 2 & 3 & 5 & 1 & 0 \\
+    1 & -3 & 7 & -6 & 2 & 3
+    \end{pmatrix}
+    $.
+    
+    \noindent Se sigue que $\det(A) = (2)(-1)(2)(-2)(1)(3) = 24$
+\end{ejem}
+
+\begin{ejer}
+    Calcular el determinante de la siguiente matriz
+    \[
+        B =
+        \begin{pmatrix}
+            -2 & 0 & 3 & 5 & -1 \\
+            0 & 5 & -1 & 4 & 0 \\
+            0 & 0 & -1 & 7 & -2 \\
+            0 & 0 & 0 & 3 & -1 \\
+            0 & 0 & 0 & 0 & 1
+        \end{pmatrix}.
+    \]
+\end{ejer}
+
+% \begin{prop}
+%     Sea $E\in\Mat[\K]{n}{n}$ una matriz elemental, $i,j\in I$ y $\alpha\in\K$, con $\alpha\neq 0$. Se tiene que
+%     \begin{itemize}
+%     \item   
+%         si la operación es $F_i \leftrightarrow F_j$, entonces $\det(E) = - 1$;
+%     \item 
+%         si la operación es $\alpha F_i \rightarrow F_i$, entonces $\det(E) = \alpha$; y
+%     \item 
+%         si la operación es $\alpha F_i + F_j\rightarrow F_j$, entonces $\det(E) = 1$.
+%     \end{itemize}
+% \end{prop}
+
+% \begin{ejem}
+%     Consideremos la matriz $
+%     \begin{pmatrix}
+%         1 & 0 \\
+%         0 & 1
+%     \end{pmatrix}$, cuyo determinante es $1$.
+    
+%     \begin{itemize}
+%     \item
+%         Si hacemos $F_{1} \leftrightarrow F_{2}$,  obtenemos $ E =
+%         \begin{pmatrix}
+%             0 & 1 \\
+%             1 & 0
+%         \end{pmatrix}$. Se sigue que $\det(E) = -1$.
+        
+%     \item
+%         Si hacemos $3F_{1} \rightarrow F_{1}$, obtenemos $ E =
+%         \begin{pmatrix}
+%             3 & 0 \\
+%             0 & 1
+%         \end{pmatrix}$. Se sigue que $\det(E) = 3$.
+        
+%     \item
+%         Si hacemos $-2F_{2} + F_{1} \rightarrow F_{1} $, obtenemos $ E =
+%         \begin{pmatrix}
+%             1 & -2 \\
+%             0 & 1
+%         \end{pmatrix}$.
+        
+%         \noindent Se sigue que $\det(E) = 1$.
+%     \end{itemize}
+% \end{ejem}
+
+% \begin{ejer}
+%     Considere la matriz $ 
+%     \begin{pmatrix}
+%         1 & 0 & 0 \\
+%         0 & 1 & 0 \\
+%         0 & 0 & 1
+%     \end{pmatrix}$, cuyo determinante es $1$. Para cada operación por fila determine a la correspondiente matriz elemental y a su determinante.
+%     \begin{enumerate}
+%         \item[$a)$] $F_{3} \leftrightarrow F_{1}$
+%         \item[$b)$] $-2F_{2} \rightarrow F_{2}$
+%         \item[$c)$] $3F_{3} + F2 \rightarrow F_{2}$
+%     \end{enumerate}
+% \end{ejer}
+
+\begin{prop}
+    Sea $A \in \Mat[\R]{n}{n}$. El determinante de la matriz $A$ y de su transpuesta son iguales, es decir, 
+    \[
+        \det(A^\intercal) = \det(A).
+    \]
+\end{prop}
+
+\begin{obs}
+    Por esta proposición, cuando se \textbf{calcula el valor de un determinante}, da lo mismo trabajar por filas que trabajar por columnas.
+\end{obs}
+
+\begin{teo}[Determinante del producto de matrices]\label{DetProd}
+    Sean $A, B\in \Mat[\R]{n}{n}$, se tiene que:
+    \[
+        \det(AB) = \det(A)\det(B).
+    \]
+    es decir, el determinante de un producto de matrices es igual al producto de los determinantes de las matrices.
+\end{teo}
+
+\begin{ejem} Dadas las matrices 
+\[
+A = 
+    \begin{pmatrix}
+        -2 & 3 \\
+        1 & 1
+    \end{pmatrix}
+\texty
+B=
+    \begin{pmatrix}
+        1 & -1 \\
+        2 & 4
+    \end{pmatrix}.
+\]
+Se sigue que $AB = 
+    \begin{pmatrix}
+        4 & 14 \\
+        3 & 3
+    \end{pmatrix}$ y ya que $\det(A) = -5$, $\det(B) = 6$ y $\det(AB) = -30$, la igualdad del teorema \ref{DetProd} se verifica.
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} Dadas las matrices
+\[
+A = 
+    \begin{pmatrix}
+        3 & 0 & 3 \\
+        0 & 3 & 0 \\
+        3 & 0 & 3
+    \end{pmatrix}
+\texty    
+B = 
+    \begin{pmatrix}
+        -2 & 0 & -2 \\
+        0 & -2 & 0 \\
+        2 & 0 & 2
+    \end{pmatrix}.
+\]
+Calcular $AB$, $\det(AB)$, $\det(A)$, $\det(B)$ y compruebe la igualdad del teorema \ref{DetProd}.
+\end{ejer}
+
+\begin{prop}
+    Sea $A \in \Mat[\R]{n}{n}$. Si una fila o columna de $A$ contiene solo ceros, entonces $\det (A) =0$.
+\end{prop}
+
+\begin{ejem}
+    Sea $A =
+    \begin{pmatrix}
+        3 & -1 & 11 & 0 \\
+        9 & 7 & -5 & 0 \\
+        -2 & -6 & -8 & 0 \\
+        4 & 1 & -5 & 0
+    \end{pmatrix}$. Realizamos el cálculo del determinante de $A$ mediante la expansión por cofactores de $A$, con respecto a la columna $4$. Obtenemos,
+    \begin{align*}
+        \det(A) &= \sum_{k=1}^{4} a_{k4} C_{k4}\\
+                &= \sum_{k=1}^{4} 0\cdot C_{k4}\\
+                &= 0
+    \end{align*}
+    
+\end{ejem}
+
+\begin{prop}
+    Sea $A \in \Mat[\R]{n}{n}$. Si dos filas o columnas de $A$ son iguales, entonces 
+    \[
+        \det(A) = 0
+    \]
+\end{prop}
+
+\begin{ejem}
+    Sea $A = 
+    \begin{pmatrix}
+        1 & 3 & 1 & 2 \\
+        -1 & 1 & -1 & 3 \\
+        2 & 3 & 2 & 1 \\
+        -2 & 1 & -2 & 3
+    \end{pmatrix}$, calculemos su determinante mediante la expansión por cofactores con respecto a la primera columna.
+    \begin{align*}
+        \det(A) = & 1
+        \begin{vmatrix}
+            1 & -1 & 3 \\
+            3 & 2 & 1 \\
+            1 & -2 & 3
+        \end{vmatrix} + 1
+        \begin{vmatrix}
+            3 & 1 & 2 \\
+            3 & 2 & 1 \\
+            1 & -2 & 3
+        \end{vmatrix} +2
+        \begin{vmatrix}
+            3 & 1 & 2 \\
+            1 & -1 & 3 \\
+            1 & -2 & 3
+        \end{vmatrix} +2
+        \begin{vmatrix}
+            3 & 1 & 2 \\
+            1 & -1 & 3 \\
+            3 & 2 & 1
+        \end{vmatrix} \\
+        = & -8 + 0 + 2(7) + 2(-3) \\
+        = & \, 0.
+    \end{align*}
+\end{ejem}
+
+\begin{ejer} Calcular el determinante de la matriz $B = 
+    \begin{pmatrix}
+        1 & -1 & 1 \\
+        0 & 5 & 0 \\
+        2 & 3 & 2
+    \end{pmatrix}$.
+\end{ejer}
+
+\begin{prop}
+    Sea $A \in \Mat[\R]{n}{n}$. Si una  fila o columna de $A$ es múltiplo de otra, entonces 
+    \[
+        \det(A) = 0
+    \]
+\end{prop}
+
+\begin{ejem}
+    El determinante de la matriz $A =
+\begin{pmatrix}1 & 2 & -1 \\-2 & 5 & -2 \\3 & 6 & -3\end{pmatrix}$ es nulo. Pues la fila $3$ es múltiplo de la fila $1$. Por tanto, $\det(A)=0$
+\end{ejem}
+
+\begin{ejer} Calcular el determinante de la matriz $B = 
+    \begin{pmatrix}
+        2 & -6 & 4 \\
+        -1 & 3 & 1 \\
+        3 & -9 & 3
+    \end{pmatrix}$.
+\end{ejer}
+
+
+\end{document}

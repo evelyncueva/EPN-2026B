@@ -1,0 +1,252 @@
+\documentclass[compacto,10pt]{pubciencias-notas}
+
+% -- Paquetes adicionales
+\usepackage{comandosEPN}
+
+% -- Datos del libro
+\autor{Departamento de Formación Básica}
+\materia{Álgebra Lineal}
+\nota{Semana 02 Clase 02}
+\fecha{Semestre 2026-B}
+
+\logouno[1.1cm]{Logo_EPN.eps}
+\logodos[1.7cm]{Logo_DFB.eps}
+
+\definecolor{colordef}{cmyk}{0.81,0.62,0.00,0.22}
+
+\begin{document}
+
+\encabezado
+
+\vspace{-8mm}
+
+\section{Sistemas de ecuaciones lineales}
+
+\begin{ejem}[Un problema que guiará la clase]\label{ej:sistema}
+En una cafetería, Ana, Luis y Sofía realizan las siguientes compras.
+Los precios de los productos son iguales en todas las compras y no hay descuentos.
+\begin{center}
+\begin{tabular}{lrrrr}
+\hline
+Estudiante & Sándwiches & Jugos & Porciones de fruta & Total (\$)\\
+\hline
+Ana & 1 & 1 & 1 & 6\\
+Luis & 2 & 3 & 1 & 11\\
+Sofía & 1 & 2 & 3 & 14\\
+\hline
+\end{tabular}
+\end{center}
+\textbf{¿Cuál es el precio de cada producto?}
+Si $x_1$, $x_2$ y $x_3$ son los precios, en dólares, del sándwich, del jugo
+y de la porción de fruta, respectivamente, cada compra proporciona una ecuación:
+\[
+\left\{\begin{aligned}
+x_1+x_2+x_3&=6,\\
+2x_1+3x_2+x_3&=11,\\
+x_1+2x_2+3x_3&=14.
+\end{aligned}\right.
+\]
+Resolver este sistema consiste en encontrar valores para las incógnitas que
+satisfagan las tres ecuaciones simultáneamente.
+Buscaremos estos precios mediante un procedimiento sistemático.
+\end{ejem}
+
+\subsection{Representación matricial}
+Podemos organizar los coeficientes del sistema en una matriz $A$, las
+incógnitas en una columna $x$ y las constantes en una columna $b$.
+Para el ejemplo anterior,
+\[
+A=\begin{pmatrix}1&1&1\\2&3&1\\1&2&3\end{pmatrix},
+\qquad x=\begin{pmatrix}x_1\\x_2\\x_3\end{pmatrix},
+\qquad b=\begin{pmatrix}6\\11\\14\end{pmatrix}.
+\]
+El sistema se escribe entonces como $Ax=b$.
+La \textbf{matriz ampliada} $(A\mid b)$ reúne los coeficientes y las constantes;
+la línea vertical separa ambas partes:
+\[
+(A\mid b)=\left(\begin{array}{ccc|c}
+1&1&1&6\\2&3&1&11\\1&2&3&14
+\end{array}\right).
+\]
+En general, para un sistema de $m$ ecuaciones con $n$ incógnitas, se escribe de la forma $Ax=b$, más explícitamente:
+\[
+\underbrace{\begin{pmatrix}
+a_{11}&\cdots&a_{1n}\\
+\vdots&\ddots&\vdots\\
+a_{m1}&\cdots&a_{mn}
+\end{pmatrix}}_{A}
+\underbrace{\begin{pmatrix}x_1\\\vdots\\x_n\end{pmatrix}}_{x}
+=\underbrace{\begin{pmatrix}b_1\\\vdots\\b_m\end{pmatrix}}_{b}.
+\]
+Cada fila de $A$ contiene los coeficientes de una ecuación, en el mismo
+orden que las incógnitas de $x$; si una incógnita no aparece, su coeficiente es cero.
+
+\section{Operaciones por fila y conservación de las soluciones}
+\begin{defi}[Solución y conjunto solución de un sistema]
+Sean $A\in\R^{m\times n}$ y $b\in\R^{m\times1}$. Una \textbf{solución}
+del sistema $Ax=b$ es un vector columna $z\in\R^{n\times1}$ que satisface
+$Az=b$.
+
+El \textbf{conjunto solución} reúne todos los vectores que satisfacen el
+sistema y se escribe
+\[
+S=\{z\in\R^{n\times1}:Az=b\}.
+\]
+En particular, si el sistema tiene más de una solución, todas ellas
+pertenecen a $S$; si tiene una única solución, $S$ contiene un solo vector,
+y si no tiene solución, $S=\varnothing$.
+\end{defi}
+En la clase anterior vimos las operaciones elementales
+por fila. Las retomamos ahora para simplificar la matriz ampliada de un sistema:
+\begin{enumerate}
+\item Intercambiar dos filas: $F_i\leftrightarrow F_j$.
+\item Multiplicar una fila por un escalar no nulo: $F_i\leftarrow cF_i$, con $c\ne0$.
+\item Sumar a una fila un múltiplo de otra: $F_i\leftarrow F_i+cF_j$, con $i\ne j$.
+\end{enumerate}
+Aplicadas a la matriz ampliada, estas operaciones corresponden a intercambiar
+ecuaciones, multiplicar una ecuación por un escalar no nulo o sumar a una
+ecuación un múltiplo de otra. La operación debe aplicarse a toda la fila, incluida la constante. 
+
+Recordemos además que dos matrices son \textbf{equivalentes por filas} si una se obtiene de la otra mediante una sucesión de operaciones elementales por fila.
+
+
+
+
+\begin{prop}
+Si las matrices ampliadas asociadas a dos sistemas de ecuaciones lineales
+con las mismas incógnitas son equivalentes por filas, entonces los sistemas
+tienen el mismo conjunto solución.
+\end{prop}
+
+A continuación, partiremos de la matriz ampliada de un sistema y buscaremos una matriz equivalente por filas cuyo sistema asociado permita obtener con mayor facilidad el conjunto solución. Para ello, presentaremos los métodos de eliminación de Gauss y de reducción de Gauss-Jordan.
+\section{Eliminación de Gauss}
+La eliminación de Gauss transforma la matriz ampliada en una forma escalonada.
+Se elige un pivote, se intercambian filas si hace falta y se eliminan las
+entradas debajo de él. Se continúa en las filas inferiores y las columnas
+a la derecha. Finalmente, se resuelve por \textbf{sustitución regresiva},
+desde la última ecuación hacia la primera.
+
+\begin{ejem}[Continuación del ejemplo \ref{ej:sistema}]\label{ej:gauss}
+Agrupando las operaciones sobre filas distintas, obtenemos
+\begin{align*}
+\left(\begin{array}{ccc|c}1&1&1&6\\2&3&1&11\\1&2&3&14\end{array}\right)
+&\sim
+\left(\begin{array}{ccc|c}1&1&1&6\\0&1&-1&-1\\0&1&2&8\end{array}\right)
+&&\begin{array}{l}F_2\leftarrow F_2-2F_1\\F_3\leftarrow F_3-F_1\end{array}\\
+&\sim
+\left(\begin{array}{ccc|c}1&1&1&6\\0&1&-1&-1\\0&0&3&9\end{array}\right)
+&&F_3\leftarrow F_3-F_2.
+\end{align*}
+La última fila da $3x_3=9$, de donde $x_3=3$. Luego,
+\[
+x_2-x_3=-1\ \Rightarrow\ x_2=2,
+\qquad
+x_1+x_2+x_3=6\ \Rightarrow\ x_1=1.
+\]
+Los precios son: sándwich, \$1; jugo, \$2; porción de fruta, \$3.
+Se comprueban los totales de las tres compras:
+\[
+1+2+3=6,\qquad 2(1)+3(2)+3=11,\qquad 1+2(2)+3(3)=14.
+\]
+\end{ejem}
+\newpage
+\section{Reducción de Gauss-Jordan}
+Toda matriz tiene una única forma escalonada reducida equivalente por filas.
+
+Gauss-Jordan continúa la eliminación: normaliza los pivotes y elimina las
+entradas sobre ellos. Así, las ecuaciones finales permiten leer directamente
+las incógnitas principales en función de las variables libres, si las hay.
+
+\begin{ejem}[Continuación del ejemplo \ref{ej:gauss}]
+Partimos de la forma escalonada ya obtenida, sin repetir la eliminación:
+\begin{align*}
+\left(\begin{array}{ccc|c}1&1&1&6\\0&1&-1&-1\\0&0&3&9\end{array}\right)
+&\sim
+\left(\begin{array}{ccc|c}1&1&1&6\\0&1&-1&-1\\0&0&1&3\end{array}\right)
+&&F_3\leftarrow\frac{1}{3}F_3\\
+&\sim
+\left(\begin{array}{ccc|c}1&1&0&3\\0&1&0&2\\0&0&1&3\end{array}\right)
+&&\begin{array}{l}F_1\leftarrow F_1-F_3\\F_2\leftarrow F_2+F_3\end{array}\\
+&\sim
+\left(\begin{array}{ccc|c}1&0&0&1\\0&1&0&2\\0&0&1&3\end{array}\right)
+&&F_1\leftarrow F_1-F_2.
+\end{align*}
+Se lee directamente $x_1=1$, $x_2=2$ y $x_3=3$.
+\end{ejem}
+
+\noindent\textbf{Síntesis.} La eliminación de Gauss llega a una forma escalonada y usa sustitución regresiva;
+Gauss-Jordan llega a la forma reducida y permite leer directamente las soluciones.
+
+\section{Rango de una matriz}
+\begin{defi}[Rango]
+El rango de una matriz $A$, denotado por $\rang(A)$, es el número de filas
+no nulas de una matriz escalonada equivalente por filas a $A$.
+\end{defi}
+
+En el ejemplo central, la matriz de coeficientes se transforma en
+\[
+A\sim\begin{pmatrix}1&1&1\\0&1&-1\\0&0&3\end{pmatrix}.
+\]
+La matriz escalonada tiene tres filas no nulas; por tanto, $\rang(A)=3$.
+La matriz ampliada del mismo ejemplo se transforma en
+\[
+(A\mid b)\sim
+\left(\begin{array}{ccc|c}
+1&1&1&6\\0&1&-1&-1\\0&0&3&9
+\end{array}\right).
+\]
+También tiene tres filas no nulas, de modo que $\rang(A\mid b)=3$.
+Más adelante analizaremos la relación entre ambos rangos mediante el
+\textbf{teorema de Rouché-Frobenius} y su vínculo con las soluciones del sistema.
+
+\section{Ejercicios}
+\begin{ejer}[Representación y eliminación]
+Considere el sistema
+\[
+\left\{\begin{aligned}x_1+x_2&=2,\\3x_1-5x_2&=-2.\end{aligned}\right.
+\]
+Escriba $A$, $x$, $b$ y $(A\mid b)$. Resuelva por Gauss y compruebe la
+solución sustituyéndola en las ecuaciones originales.
+\end{ejer}
+
+\begin{ejer}[Formas escalonadas y rango]
+Para la matriz
+\[
+B=\begin{pmatrix}1&5&-4\\1&-2&1\\3&1&-2\end{pmatrix},
+\]
+obtenga una forma escalonada y luego la forma escalonada reducida. Anote
+las operaciones empleadas, identifique los pivotes y determine $\rang(B)$.
+\end{ejer}
+
+\begin{ejer}[Reducción y rango]
+Para cada sistema, escriba su matriz ampliada y obtenga su forma escalonada
+reducida mediante Gauss-Jordan. Determine el rango de la matriz de
+coeficientes y el de la matriz ampliada.
+\[
+\text{a)}\quad\left\{\begin{aligned}
+x_1+x_2+x_3&=0,\\x_1-6x_2+2x_3&=-1;
+\end{aligned}\right.
+\qquad
+\text{b)}\quad\left\{\begin{aligned}
+x_1+x_2&=\alpha,\\2x_1+2x_2&=6,
+\end{aligned}\right. \quad \alpha\in\R
+\]
+\end{ejer}
+
+\begin{ejer}[Aplicación]
+Hallar la ecuación (forma $y=mx+b$) de la recta que contiene a los puntos $(1,3)$ y $(2,1)$    
+\end{ejer}
+
+\begin{ejer}[Aplicación]
+En una línea de producción automatizada, un brazo robótico debe trasladar un componente electrónico desde el punto de inicio $(0,0)$ hasta la posición \textbf{$P = (8, 9)$}.
+
+Para cumplir su tarea, el robot cuenta con dos mecanismos independientes de rieles motorizados que ejecutan desplazamientos fijos cada vez que se activan:
+
+\begin{itemize}
+    \item \textbf{Mecanismo A:} Cada vez que se activa, desplaza el componente \textbf{2 unidades a la derecha y 1 unidad hacia arriba}. En el plano cartesiano, este movimiento se entiende como el desplazamiento \textbf{$(2, 1)$}.
+    \item \textbf{Mecanismo B:} Cada vez que se activa, desplaza el componente \textbf{1 unidad a la derecha y 3 unidades hacia arriba}. En el plano cartesiano, este movimiento se entiende como el desplazamiento \textbf{$(1, 3)$}.
+\end{itemize}
+
+El objetivo es determinar cuántas veces debe activarse cada mecanismo para trasladar el componente electrónico a la posición deseada.
+\end{ejer}
+\end{document}

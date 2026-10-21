@@ -1,0 +1,79 @@
+\documentclass[10pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+
+\usepackage{aleph-comandos}
+\usepackage{moodle}
+% Se recomienda leer la documentación de estos
+% paquetes en https://www.alephsub0.org/recursos/
+
+% -- Paquetes adicionales
+\usepackage{amssymb}
+\usepackage{mathpazo}
+
+% -- Datos
+\title{Reactivos Álgebra Lineal}
+\author{Evelyn Cueva}
+
+\usepackage[margin=2cm]{geometry}
+
+\begin{document}
+\maketitle
+
+\begin{quiz}{Algebra-Lineal-Examen-Media-Carrera-2023B}
+
+% Ejercicio de cálculo para evaluar núcleo e imagen de una transformación lineal. Matriz transpuesta y composición de transformaciones 
+
+\begin{multi}{algebra-lineal-2023B-01}
+    Considere $T$ una tranformaci\'on lineal que transpone cualquier matriz de $2\times 2.$
+    Indique cu\'al de las siguientes afirmaciones es falsa:
+    \item[fraction=0] $T^2$ es la transformaci\'on identidad. 
+    \item[fraction=0] El n\'ucleo de $T$ es la matriz cero. 
+    \item[fraction=0] Toda matriz de $2\times 2$ est\'a en la imagen de $T.$
+    \item* Si $M$ es una matriz de $2\times 2$, $T(M)=-M$ no puede ocurrir. 
+\end{multi}
+
+% Pregunta conceptual para evaluar las propiedades basicas de determinantes. 
+
+\begin{multi}{algebra-lineal-2023B-02}
+    Sean $A,B,C$ matrices de tama\~no $n\times n$. Si $|A|$ denota el determinante de $A$, identifique cu\'al de las siguientes afirmaciones es verdadera: 
+    \item[fraction=0] El determinante de $I+A$ es $1+|A|.$
+    \item[fraction=0] Sean $A,B,C$ matrices de $n\times n$. El determinante de $ABC$ es $|A||B||C|,$ 
+    \item[fraction=0] El determinante de $4A$ es $4|A|.$
+    \item* El determinante de $AB-BA$ siempre es cero.  
+\end{multi}
+
+% Pregunta conceptual para evaluar conocimientos de tranformaciones lineales respecto de las dimensiones del espacio vectorial, espacio nulo e imagen. 
+
+\begin{multi}{algebra-lineal-2023B-03}
+Sean $V$ y $W$ dos espacios de dimensi\'on finita, $\mathcal L(V,W)$ el espacio de todas las transformaciones lineales de $V$ en $W$. Para $T\in\mathcal L(V,W)$, notamos por $\mathcal N(T)$. Seleccione la afirmaci\'on que no es siempre verdadera:
+     \item[fraction=0]  $T$ es inyectiva si y solo si $\mathcal N(T)=\{0\}.$
+     \item* Si $\dim V$ es menor que $\dim W,$ entonces $T$ no es inyectiva. 
+     \item[fraction=0] Si $\dim V$ es menor que $\dim W,$ entonces $T$ no es sobreyectiva. 
+     \item[fraction=0] $T(0)=0.$
+\end{multi}
+
+% Pregunta conceptual y de calculo para evaluar independencia lineal y espacios generados por listas de diferentes tamaños.
+
+\begin{multi}{algebra-lineal-2023B-04}
+De los siguientes conjuntos de vectores en $\Rbb^3$, determine cu\'al no genera todo el espacio $\R^3$.
+    \item[fraction=0]  $\left\lbrace(1,-1,1),(-1,-1,1),(0,1,1)\right\rbrace$
+    \item[fraction=0]  $\left\lbrace (1,-1,1),(-1,-1,1),(0,1,1),(0,-1,3) \right\rbrace$
+    \item*  $\left\lbrace(8,-3,4),(0,3,0),(8,0,4)\right\rbrace$
+    \item[fraction=0] $\left\lbrace (1,0,0),(0,1,0),(0,0,1) \right\rbrace$
+\end{multi}
+
+% Pregunta conceptual para identificar la relacion entre propiedades de matriz inversa, sistemas de ecuaciones y sistemas homogeneos
+
+\begin{multi}{algebra-lineal-2023B-05}
+Sea $A$ una matriz de tama\~no $n\times n$. De las siguientes afirmaciones, seleccione aquella que no sea equivalente con las dem\'as:
+    \item[fraction=0] $A$ es no singular.
+    \item[fraction=0] El sistema $Ax=0$ tiene soluci\'on \'unica trivial.
+    \item* $A$ no es equivalente por filas con la matriz identidad. 
+    \item[fraction=0] El determinante de $A$ es no nulo.
+\end{multi} 
+\end{quiz}
+
+\end{document}

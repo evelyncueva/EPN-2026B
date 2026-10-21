@@ -1,0 +1,99 @@
+\documentclass[compacto,10pt]{pubciencias-notas}
+
+% -- Paquetes adicionales
+\usepackage{comandosEPN}
+
+% -- Datos del libro
+\autor{Departamento de Formación Básica}
+\materia{Álgebra Lineal}
+\nota{Semana 15 Clase 02}
+\fecha{Semestre 2024-B}
+
+\logouno[1.1cm]{Logo_EPN.eps}
+\logodos[1.7cm]{Logo_DFB.eps}
+
+\definecolor{colordef}{cmyk}{0.81,0.62,0.00,0.22}
+
+\begin{document}
+
+\encabezado
+\vspace*{-8mm}
+
+\setcounter{section}{6}
+\section{Valores y vectores propios}
+\setcounter{subsection}{3}
+\subsection{Diagonalización de matrices simétricas}
+
+\begin{teo}
+Todos los valores propios de una matriz simétrica son números reales.
+\end{teo}
+
+\begin{teo}
+Si $A\in\Mat{n}{n}$ es una matriz simétrica, los vectores propios correspondientes a valores propios distintos de $A$ son ortogonales.
+\end{teo}
+
+\begin{ejem}\hspace{0pt}\label{Cap7:ejem05} Considere a la matriz simétrica $A=\begin{pmatrix}2&2\\2&2\end{pmatrix}$, el valor propio $\lambda_1=0$ tiene a $u_{1} =\begin{pmatrix}-1\\1\end{pmatrix}$ como vector propio asociado mientras que el valor propio $\lambda_2=4$ tiene a $u_{2} =\begin{pmatrix}1\\1\end{pmatrix}$ como vector propio asociado. Notemos que con el producto interno usual se tiene que $\langle u_{1}, u_{2}\rangle = 0$.
+\end{ejem}
+
+\begin{prop}
+Una matriz $A\in\Mat{n}{n}$ es ortogonal ($A^{T} = A^{-1}$) si y solo si las columnas (y las filas) de $A$ forman un conjunto ortonormal de vectores en $\R^{n}$.
+\end{prop}
+
+\begin{teo}
+Si $A\in\Mat{n}{n}$ una matriz simétrica, entonces existe una matriz ortogonal $P$ tal que $P^{-1}AP = D$, es una matriz diagonal. Los valores propios de $A$ están sobre la diagonal principal de $D$.
+\end{teo}
+
+\begin{ejem}\hspace{0pt} Considere a la matriz $A$ del ejemplo  \ref{Cap7:ejem05} y a sus vectores propios asociados dados. Considerando el conjunto $\{u_{1}, u_{2}\}$, formado por los vectores propios de $A$, obtenemos al conjunto ortonormal $\l\{\dfrac{1}{\|u_{1}\|}u_{1}, \dfrac{1}{\|u_{2}\|}u_{2}\r\}$, luego, la matriz $P$ está dada por:
+\[
+    P = \begin{pmatrix}
+-\frac{\sqrt{2}}{2}&\frac{\sqrt{2}}{2}\\
+    \frac{\sqrt{2}}{2}&\frac{\sqrt{2}}{2}
+    \end{pmatrix}
+\]
+que verifica ser ortogonal y que $P^{-1}AP=D$, es decir:
+\begin{eqnarray*}
+\begin{pmatrix}
+-\frac{\sqrt{2}}{2}&\frac{\sqrt{2}}{2}\\
+\frac{\sqrt{2}}{2}&\frac{\sqrt{2}}{2}
+\end{pmatrix}
+ \begin{pmatrix}2&2\\2&2\end{pmatrix}
+ \begin{pmatrix}
+-\frac{\sqrt{2}}{2}&\frac{\sqrt{2}}{2}\\
+\frac{\sqrt{2}}{2}&\frac{\sqrt{2}}{2}
+\end{pmatrix}&=&
+\begin{pmatrix}0&0\\0&4\end{pmatrix}.
+\end{eqnarray*}
+\end{ejem}
+
+\begin{teo}
+Una matriz $A\in\R^{n\times n}$ es ortogonalmente diagonalizable si y solo si $A$ es sim\'etrica.
+\end{teo}
+
+\begin{obs}
+Notemos que una matriz simétrica siempre es diagonalizable, además, lo es por medio de una matriz ortogonal, es decir, $P^{-1}=P^{T}$. En tal caso, decimos que $A$ es ortogonalmente diagonalizable.
+\end{obs}
+
+\begin{obs}
+Si una matriz simétrica $A$ tiene un valor propio $\lambda_{j}$ con multiplicidad $k_{j}$, el espacio propio asociado tiene dimensión $k_{j}$. Esto es, existen $k_{j}$ vectores propios de $A$ linealmente independientes , asociados al valor propio $\lambda_{j}$. Con el proceso de Gram-Schmidt, podemos construir una base ortonormal para el espacio propio asociado a $\lambda_{j}$.
+\end{obs}
+
+\begin{advertencia}
+\textbf{Proceso para diagonalizar una matriz simétrica $A\in\Mat[\K]{n}{n}$ mediante una matriz ortogonal $P$.}
+
+\begin{description}
+    \item[Paso 1.] Hallar el polinomio característico $p(\lambda)$ de $A$.
+    \item[Paso 2.] Hallar las raíces de $p(\lambda)$.
+    \item[Paso 3.] Para cada valor propio $\lambda_{j}$ de A, con multiplicidad algebraica $k_{j}$, determinar una base de $k_{j}$ vectores propios para el espacio solución de $(A - \lambda_{j}I_{n})v = 0$ (el espacio propio asociado con $\lambda_{j}$).
+    \item[Paso 4.] Para cada espacio propio, transformamos la base obtenida en el paso 3 en una base ortonormal mediante el proceso de Gram-Schmidt.
+    \item[Paso 5.] Sea $P$ la matriz cuyas columnas son los $n$ vectores propios linealmente independientes determinados en el paso 4. Entonces $P$ es una matriz ortogonal, y
+    \[  
+        P^{T}AP = D,
+    \]
+    es una matriz diagonal cuyos elementos de la diagonal son los valores propios de $A$ correspondientes a las columnas de $P$.
+\end{description}
+\end{advertencia}
+
+\begin{ejer}\hspace{0pt} Diagonalizar ortogonalmente a la matriz $A = \begin{pmatrix} 1&0&1\\0&2&0\\1&0&1\end{pmatrix}$.
+\end{ejer}
+
+\end{document}

@@ -1,0 +1,716 @@
+\documentclass[compacto,10pt]{pubciencias-notas}
+
+% -- Paquetes adicionales
+\usepackage{comandosEPN}
+
+% -- Datos del libro
+\autor{Departamento de Formación Básica}
+\materia{Álgebra Lineal}
+\nota{Semana 04 Clase 01}
+\fecha{Semestre 2026-B}
+
+\logouno[1.1cm]{Logo_EPN.eps}
+\logodos[1.7cm]{Logo_DFB.eps}
+
+\definecolor{colordef}{cmyk}{0.81,0.62,0.00,0.22}
+
+\begin{document}
+
+\encabezado
+
+\vspace*{-8mm}
+
+\setcounter{section}{1}
+\section{Sistemas de ecuaciones}
+\setcounter{subsection}{3}
+\subsection{Matriz Inversa}
+
+\begin{defi}\label{Sem03Clas02DefInv}
+    Sea $A\in \Mat[\K]{n}{n}$. Se dice que $A$ es no singular o invertible si existe una matriz $B\in \Mat[\K]{n}{n}$ tal que 
+    \[
+        AB = BA = I_n
+    \]
+    la matriz $B$ se denomina inversa de $A$ y se la denota por $A^{-1}$. 
+    
+    \noindent Si no existe tal matriz, entonces se dice que $A$ es singular o no invertible. 
+\end{defi}
+
+\begin{ejem}
+    Verificar que
+\[
+B = \begin{pmatrix} 1 & -1 \\ -1 & 2 \end{pmatrix}
+\]
+es la inversa de
+\[
+A = \begin{pmatrix} 2 & 1 \\ 1 & 1 \end{pmatrix}.
+\]
+\end{ejem}
+
+\begin{proof}[Solución.]\hspace{0pt} Debemos comprobar que $AB = BA = I_2$.
+
+\textbf{Producto $AB$:}
+\[
+AB = \begin{pmatrix} 2 & 1 \\ 1 & 1 \end{pmatrix}
+     \begin{pmatrix} 1 & -1 \\ -1 & 2 \end{pmatrix}
+   = \begin{pmatrix} 2(1)+1(-1) & 2(-1)+1(2) \\ 1(1)+1(-1) & 1(-1)+1(2) \end{pmatrix}
+   = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}
+   = I_2. \quad 
+\]
+
+\textbf{Producto $BA$:}
+\[
+BA = \begin{pmatrix} 1 & -1 \\ -1 & 2 \end{pmatrix}
+     \begin{pmatrix} 2 & 1 \\ 1 & 1 \end{pmatrix}
+   = \begin{pmatrix} 1(2)+(-1)(1) & 1(1)+(-1)(1) \\ -1(2)+2(1) & -1(1)+2(1) \end{pmatrix}
+   = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}
+   = I_2. \quad 
+\]
+
+\textbf{Conclusión:} Como $AB = BA = I_2$, se tiene que $B = A^{-1}$.    
+\end{proof}
+
+\begin{ejer}
+Verificar que
+\[
+B = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & -2 \\ 0 & 0 & 1 \end{pmatrix}
+\]
+es la inversa de
+\[
+A = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 2 \\ 0 & 0 & 1 \end{pmatrix}.
+\]
+\end{ejer}
+
+
+\begin{ejem}[Matriz singular]
+Mostrar que
+\[
+A = \begin{pmatrix} 1 & 2 \\ 2 & 4 \end{pmatrix}
+\]
+no tiene inversa.
+\end{ejem}
+
+\begin{proof}[Solución.]\hspace{0pt}
+Supongamos que existe una matriz
+\[
+B = \begin{pmatrix} a & b \\ c & d \end{pmatrix}
+\]
+tal que $AB = I_2$. Entonces:
+\[
+\begin{pmatrix} 1 & 2 \\ 2 & 4 \end{pmatrix}
+\begin{pmatrix} a & b \\ c & d \end{pmatrix}
+=
+\begin{pmatrix}
+a + 2c & b + 2d \\
+2a + 4c & 2b + 4d
+\end{pmatrix}
+=
+\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}.
+\]
+
+Esto genera los siguientes sistemas de ecuaciones:
+\[
+\begin{cases}
+a + 2c = 1 \\[2pt]
+2a + 4c = 0
+\end{cases}
+\qquad \text{y} \qquad
+\begin{cases}
+b + 2d = 0 \\[2pt]
+2b + 4d = 1
+\end{cases}
+\]
+
+De la primera ecuación del primer sistema se tiene $a = 1 - 2c$. Sustituyendo en la segunda ecuación:
+\[
+2(1 - 2c) + 4c = 0
+\;\Longrightarrow\;
+2 - 4c + 4c = 0
+\;\Longrightarrow\;
+2 = 0,
+\]
+lo cual es una \textbf{contradicción}.
+
+De manera análoga, el segundo sistema también conduce a una contradicción (se obtiene $0 = 1$).
+
+\textbf{Conclusión:} No existe tal matriz $B$. Por lo tanto, $A$ es \textbf{singular} (no invertible).
+\end{proof}
+
+
+
+
+
+\begin{prop}
+    Si una matriz tiene inversa, la inversa es única. 
+\end{prop}
+
+
+\begin{comment}
+\begin{proof}\hspace{0pt} Sea $A\in\Mat[\K]{n}{n}$ una matriz invertible y supongamos que $B$ y $C$ son dos inversas de $A$, por la definición \ref{Sem03Clas02DefInv} se tiene que
+\[
+    AB = BA = I_{n}
+    \texty
+    AC = CA = I_{n}.
+\]
+Se tiene, además, que
+\begin{align*}
+    B 
+    &= BI_{n}\\
+    &= B(AC)\\
+    &= (BA)C\\
+    &= I_{n}C\\
+    &= C
+\end{align*}
+lo que muestra que $B = C$, y, por tanto, si la inversa de $A$ existe, es única.\qedhere
+\end{proof}
+\end{comment}
+
+
+
+\begin{teo} [Propiedades de la inversa]\label{Sem03Clas02PropInv}
+    Sea $A, B \in \Mat[\K]{n}{n}$. 
+    \begin{enumerate}
+    \item[$a)$] 
+        Si $A$ es una matriz no singular, entonces $A^{-1}$ es no singular y 
+        \[ 
+            (A^{-1})^{-1} = A.
+        \]
+    \item[$b)$] 
+        Si $A$ y $B$ son matrices no singulares, entonces $AB$ es no singular y 
+        \[ 
+            (AB)^{-1} = B^{-1}A^{-1}.
+        \]
+    \item[$c)$] 
+        Si $A$ es una matriz no singular, entonces
+        \[
+            {(A^\intercal)}^{-1} = {(A^{-1})}^\intercal.
+        \]
+    \item[$d)$] La matriz identidad $I_n$ es no singular y $I_n^{-1}=I_n$.
+     \item[$e)$] 
+        Si $A$ es una matriz no singular y $k$ es un entero positivo, entonces
+        \[
+            {(A^{k}})^{-1} = {(A^{-1})}^{k}.
+        \]
+    \end{enumerate}
+\end{teo}
+
+El siguiente teorema generaliza la propiedad del producto, parte $b)$ del teorema anterior.
+
+%\begin{teo}
+%    Sean $p\in\N^*$ y $A_1, A_2, \ldots, A_p \in \Mat[\K]{n}{n}$ matrices no singulares. Se tiene que $A_1 A_2 \cdots A_p$ es no singular y 
+%    \[
+%        (A_1 A_2 \cdots A_p)^{-1} = A_p^{-1} A_{p-1}^{-1} \cdots A_1^{-1}.
+ %   \]
+%\end{teo}
+
+
+ 
+\begin{teo}\label{Sem03Clas01CarcInv}
+    Sean $A, B \in \Mat[\K]{n}{n}$. Se tiene que si $AB=I_n$, entonces $BA=I_n$.
+\end{teo}
+
+Este teorema nos dice que en el ejemplo 1 basta con verificar que $AB=I_2$ para mostrar que $B=A^{-1}$.
+
+
+
+El siguiente resultado nos da una primera herramienta para hacer el calculo de la inversa de una matriz no singular. 
+
+
+
+
+\begin{teo}
+    Sea $A \in \Mat[\K]{n}{n}$, se tiene que $A$ es no singular si y solo si es equivalente por filas a $I_n$. Además,
+    \[
+        (A|I_n) \sim (I_n|A^{-1}).
+    \]
+\end{teo}
+\begin{ejem} 
+Dada la matriz $A = \begin{pmatrix}2&1\\1&1\end{pmatrix}$, su inversa es $A^{- 1} = \begin{pmatrix}1&-1\\-1&2\end{pmatrix}$.
+
+\begin{proof}[Solución.]\hspace{0pt} Supongamos que $A^{- 1}$ existe, escribamos $A$ seguido de $I_{2}$ en la forma de matriz aumentada
+\[
+    (A|I_{2}) =
+    \begin{pmatrix}
+    2&1&|&1&0\\
+    1&1&|&0&1
+    \end{pmatrix}
+\]
+y después realizamos operaciones elementales por fila.
+\begin{align*}
+    \begin{pmatrix}
+    2&1&|&1&0\\
+    1&1&|&0&1
+    \end{pmatrix}
+    &\sim
+    \begin{pmatrix}
+    1&1&|&0&1\\
+    2&1&|&1&0
+    \end{pmatrix}
+    && F_{1} \leftrightarrow F_{2}\\
+    &\sim
+    \begin{pmatrix}
+    1&1&|&0&1\\
+    0&-1&|&1&-2
+    \end{pmatrix}
+    &&-2F_{1} + F_{2} \to F_{2}\\
+    &\sim
+    \begin{pmatrix}
+    1&1&|&0&1\\
+    0&1&|&-1&2
+    \end{pmatrix}
+    &&-F_{2} \to F_{2}\\
+    &\sim
+    \begin{pmatrix}
+    1&0&|&1&-1\\
+    0&1&|&-1&2
+    \end{pmatrix}
+    &&-F_{2} + F_{1}\to F_{1}
+\end{align*}
+Dado que $A$ se redujo a $I_{2}$ se tiene que
+\[
+    A^{- 1} = 
+    \begin{pmatrix}
+    1&-1\\
+    -1&2
+    \end{pmatrix}.\qedhere
+\]
+\end{proof}
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} 
+Dada la matriz $A = \begin{pmatrix}1&2&0\\0&1&2\\0&0&1\end{pmatrix}$. Calcule $A^{- 1}$ si existe.
+\end{ejer}
+
+
+El siguiente ejercicio nos da una estrategia para resolver sistemas de ecuaciones usando la inversa (si existe) de la matriz asociada al sistema.
+
+
+
+\begin{ejem}\hspace{0pt} 
+Sean $A\in\Mat[\K]{n}{n}$ una matriz no singular y sean $x, b \in \Mat[\K]{n}{1}$.
+\begin{center}
+    Si $Ax = b$, entonces $x = A^{- 1}b$.
+\end{center}
+
+
+\begin{proof}[Solución.]\hspace{0pt} Por hipótesis sobre $A$ se tiene que $A^{-1}$ existe, entonces
+\begin{align*}
+    Ax = b
+    &\Longleftrightarrow A^{-1}(Ax) = A^{-1}b
+    && \text{Multiplicando $A^{- 1}$ en ambos lados}\\
+    &\Longleftrightarrow (A^{-1}A)x = A^{-1}b
+    && \text{Propiedad asociativa}\\
+    &\Longleftrightarrow I_{n}x = A^{-1}b
+    && \text{Definición de matriz inversa}\\
+    &\Longleftrightarrow x = A^{-1}b
+    && \text{Multiplicación por la matriz identidad}\qedhere
+\end{align*}
+luego, $x = A^{-1}b$ es la solución del sistema $Ax = b$.
+\end{proof}
+\end{ejem}
+
+Este ejercicio se formaliza en el siguiente teorema:
+
+\begin{teo}\label{Sem03Clas02InvCat}
+    Sea $A \in \Mat[\K]{n}{n}$. Se tiene que $A$ es no singular si y solo si el sistema lineal $Ax=b$ tiene una solución única para cada $b \in \Mat[\K]{n}{1}$.
+\end{teo}
+
+\begin{ejem}
+Resolver
+\[
+\begin{pmatrix} 2 & 1 \\ 1 & 1 \end{pmatrix}
+\begin{pmatrix} x_1 \\ x_2 \end{pmatrix}
+=
+\begin{pmatrix} 5 \\ 3 \end{pmatrix}.
+\]
+\end{ejem}
+
+\begin{proof}[Solución.]\hspace{0pt}
+
+Como
+\[
+A^{-1} = \begin{pmatrix} 1 & -1 \\ -1 & 2 \end{pmatrix}
+\]
+(verificar usando teorema \ref{Sem03Clas01CarcInv}), entonces
+\[
+\begin{pmatrix} x_1 \\ x_2 \end{pmatrix}
+=
+\begin{pmatrix} 1 & -1 \\ -1 & 2 \end{pmatrix}
+\begin{pmatrix} 5 \\ 3 \end{pmatrix}
+=
+\begin{pmatrix} 1(5) + (-1)(3) \\ -1(5) + 2(3) \end{pmatrix}
+=
+\begin{pmatrix} 5 - 3 \\ -5 + 6 \end{pmatrix}
+=
+\begin{pmatrix} 2 \\ 1 \end{pmatrix}.
+\]
+
+Por lo tanto, la solución del sistema es
+\[
+\boxed{x_1 = 2, \quad x_2 = 1.}
+\]
+\end{proof}
+
+\begin{ejer}\hspace{0pt} 
+Considere al sistema de ecuaciones lineales
+\[
+    \systeme[x_1 x_2 x_3]{x_1 +2x_2 =1,
+        x_2 +2x_3 = 1,
+        x_3 = 1}
+\]
+Utilizando la inversa de la matriz de coeficientes muestre que el sistema posee solución única y encuéntrela.
+\end{ejer}
+
+
+
+Observe que el teorema \ref{Sem03Clas02InvCat} también nos da una estrategia para identificar si una matriz es no singular.
+
+\begin{ejem}\hspace{0pt}\label{Sem03Clas02EjemPartB}
+Verifique que la matriz  
+$A = \begin{pmatrix}2&1\\1&1\end{pmatrix}$ es no singular.
+
+Consideremos el sistema de ecuaciones lineales
+\[
+    \systeme[x_1 x_2]{2x_1 +x_2 =b_{1},
+        x_1 +x_2 =b_{2}}
+\]
+y verificamos que tiene solución única para todo $\begin{pmatrix}b_{1}\\b_{2}\end{pmatrix}\in\Mat{2}{1}$. En efecto, notemos que 
+\[
+    \begin{pmatrix}
+    2&1&|&b_{1}\\
+    1&1&|&b_{2}
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+    1&1&|&b_{2}\\
+    0&-1&|&b_{1} - 2b_{2}
+    \end{pmatrix}
+\]
+luego, $\rang(A) = \rang(A|b) = 2$, y, por tanto, el sistema $Ax = b$ posee solución única, que junto con el teorema \ref{Sem03Clas02InvCat} implica que $A$ es no singular.
+\end{ejem}
+
+\begin{teo}\label{Sem03Clas02CarcSisHom}
+    Sea $A \in \Mat[\K]{n}{n}$, el sistema homogéneo 
+    \[
+        Ax = 0
+    \]
+    tiene una solución no trivial si y solo si $A$ es singular. 
+\end{teo}
+
+
+
+\begin{ejem}
+Determinar si el sistema homogéneo
+\[
+\begin{pmatrix} 1 & 2 & 3 \\ 2 & 4 & 6 \\ 1 & 1 & 1 \end{pmatrix}
+\begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix}
+=
+\begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix}
+\]
+tiene soluciones no triviales. En cuyo caso la matriz asociada sería singular.
+\end{ejem}
+
+
+El siguiente teorema resume los resultados que ya hemos estudiado. 
+
+
+
+\begin{teo}\label{Sem03Clas02EquivInv}
+    Sea $A \in \Mat[\K]{n}{n}$, se tienen que las siguientes proposiciones son equivalentes:
+    \begin{enumerate}
+    \item[$a)$] 
+        $A$ es no singular;
+    \item[$b)$] 
+        el sistema $Ax=0$ solamente tiene la solución trivial;
+    \item[$c)$] 
+        $A$ es equivalente por filas a $I_n$;
+    \item[$d)$] 
+        $\rang(A)=n$; y 
+    \item[$e)$] 
+        el sistema lineal $Ax=b$ tiene una solución única para cada $b \in \Mat[\K]{n}{1}$. 
+    \end{enumerate}
+\end{teo}
+
+
+\subsection{Ejemplos}
+
+
+
+\begin{ejem}\hspace{0pt} 
+Sean $A, X\in\Mat[\K]{n}{n}$ matrices no singulares. Si $AA^{\intercal}X^{- 1} = A$ entonces $X = A^{\intercal}$.
+
+\begin{proof}[Solución.]\hspace{0pt} Supongamos que $A$ y $X$ son matrices no singulares y que $AA^{\intercal}X^{- 1} = A$, vamos a mostrar que $X = A^{\intercal}$. Se tiene que
+\begin{align*}
+    AA^{\intercal}X^{- 1} = A
+    &\Rightarrow A^{- 1}(AA^{\intercal}X^{- 1}) = A^{- 1}A
+    && \text{Multiplicando por $A^{- 1}$ en}\\
+    &\phantom{\Rightarrow A^{- 1}(AA^{\intercal}X^{- 1}) = A^{- 1}A}
+    && \text{ambos lados}\\
+    &\Rightarrow (A^{- 1}A)(A^{\intercal}X^{- 1}) = A^{- 1}A
+    && \text{Propiedad asociativa}\\
+    &\Rightarrow A^{\intercal}X^{- 1} = I_{n}
+    && \text{Definición de matriz inversa}\\
+    &\Rightarrow ((A^{\intercal})^{-1}A^{\intercal})X^{- 1} = (A^{\intercal})^{-1}I_{n}
+    && \text{Multiplicando por $(A^{\intercal})^{-1}$ en}\\
+    &\phantom{\Rightarrow ((A^{\intercal})^{-1}A^{\intercal})X^{- 1} = (A^{\intercal})^{-1}I_{n}}
+    && \text{ambos lados y propiedad asociativa}\\
+    &\Rightarrow X^{- 1} = (A^{\intercal})^{-1}
+    && \text{Definición de matriz inversa}\\
+    &\Rightarrow X = A^{\intercal}
+    && \text{Teorema \ref{Sem03Clas02PropInv}}\qedhere
+\end{align*}
+\end{proof}
+\end{ejem}
+
+
+\begin{ejem}\hspace{0pt} 
+Sean $A,B\in\Mat[\K]{n}{n}$ tales que $AB = I_{n}$, entonces $B^{2}A^{2} = I_{n}$.
+
+\begin{proof}[Solución.]\hspace{0pt} Supongamos que $A,B\in\Mat[\K]{n}{n}$ son tales que $AB = I_{n}$, se tiene que
+\begin{align*}
+    B^{2}A^{2}
+    &= (BB)(AA)
+    && \text{Definición de $A$ a la $r$}\\
+    &= B((BA)A)
+    && \text{Propiedad asociativa}\\
+    &= B(I_{n}A)
+    && \text{Hipótesis sobre $AB$ y teorema \ref{Sem03Clas01CarcInv}}\\
+    &= BA
+    && \text{Multiplicar por $I_{n}$}\\
+    &= I_{n}
+    && \text{Hipótesis sobre $AB$ y teorema \ref{Sem03Clas01CarcInv}}\qedhere
+\end{align*}
+\end{proof}
+\end{ejem}
+
+
+
+\subsection{Ejercicios}
+
+
+\begin{ejer}\hspace{0pt} 
+Sean $A, X\in\Mat[\K]{n}{n}$ matrices no singulares tales que $(A^{\intercal})^{-1} + X^{- 1}$ es no singular. Si $2((A^{\intercal})^{-1} + X^{- 1})^{- 1} = A^{\intercal}$, entonces $X = A^{\intercal}$.
+\end{ejer}
+
+
+
+
+\begin{ejer}\hspace{0pt} 
+Sean $A\in\Mat[\K]{n}{n}$ una matriz no singular y sean $x, b \in \Mat[\K]{n}{1}$. Si $x^{\intercal}A^{2} + b^{\intercal}A = 0$, entonces $x^{\intercal} = - b^{\intercal}A^{- 1}$.
+\end{ejer}
+
+\begin{ejer}\hspace{0pt} 
+Sean $A,B\in\Mat[\K]{n}{n}$ tales que $AB = I_{n}$, entonces $B^{3}A^{3} = I_{n}$.
+\end{ejer}
+
+
+
+
+
+
+
+\begin{comment}
+\begin{proof}\hspace{0pt} 
+Supongamos que $A$ es singular, entonces $\rang(A)  = \rang(A|0) < n$, lo que implica el sistema $Ax = 0$ es consistente con infinitas soluciones, por tanto, el sistema tiene al menos una solución no trivial.
+
+Para el recíproco razonemos por reducción al absurdo, esto es, supongamos que $Ax = 0$ tiene una solución no trivial y que $A$ es no singular, lo que implica que $A^{-1}$ existe, de lo cual
+\[
+    Ax = 0 \Longleftrightarrow A^{- 1}(Ax) = A^{- 1}0 \Longleftrightarrow x = 0
+\]
+lo que contradice lo supuesto.
+\end{proof}
+\end{comment}
+
+
+
+
+\begin{comment}
+\begin{ejem} Dada la matriz 
+\[
+    A = \begin{pmatrix}
+    2&1\\
+    1&1
+    \end{pmatrix}
+\]
+La matriz $A$ verifica a la proposición \ref{Sem03Clas02EquivInv}.
+
+\begin{proof}\hspace{0pt} Considerando al ejemplo \ref{Sem03Clas02EjemPartA} notemos que los literales $a)$, $c)$ y $d)$ se verifican. Considerando al ejemplo \ref{Sem03Clas02EjemPartB} notemos que se cumple el literal $e)$. Por el literal $a)$ junto con el teorema \ref{Sem03Clas02CarcSisHom}, el literal $b)$ se verifica. Por lo tanto, la matriz $A$ verifica a la proposición \ref{Sem03Clas02EquivInv}.\qedhere
+\end{proof}
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} Construya un ejemplo de un sistema de ecuaciones lineales $3 \times 3$ que tenga solución, y compruebe que su matriz de coeficientes es singular.
+\end{ejer}
+\end{comment}
+
+\begin{ejer}\hspace{0pt} 
+Dada la matriz $A = \begin{pmatrix}a&b\\c&d\end{pmatrix}$, verificar que su inversa es  
+\[
+    A^{-1} = \dfrac{1}{ad - bc}\begin{pmatrix}d&-b\\-c&a\end{pmatrix} \text{   siempre que   } ad - bc \neq 0.
+\]
+\end{ejer}
+
+
+\setcounter{section}{2}
+\section{Determinantes}
+
+En esta sección tomaremos $n\in \N$, con $n>0$, e $I = \{ 1, 2, \ldots, n\}$.
+
+\subsection{Definiciones fundamentales}
+
+\begin{defi}[Menor]
+    Sea $A\in \Mat[\R]{n}{n}$ e $i,j\in I$. A la matriz de $\Mat[\R]{(n-1)}{(n-1)}$ que se obtiene luego de eliminar la fila $i$ y la columna $j$ de $A$ se la llama el menor $ij$ de $A$, y se denota por $A_{ij}$.
+\end{defi}
+
+\begin{advertencia}
+    En la literatura se puede encontrar la notación de $M_{ij}$ para el menor de $ij$ de $A$.
+\end{advertencia}
+
+\begin{ejem}\hspace{0pt}
+\begin{itemize}
+\item
+    Sea
+    $A = \begin{pmatrix}
+        1 & 5 \\
+        2 & 3
+    \end{pmatrix}$, se tiene que:
+    
+    \[A_{21} = \begin{pmatrix}
+        5
+    \end{pmatrix} \quad \text{y}\quad
+    A_{22} = \begin{pmatrix}
+        1
+    \end{pmatrix}\]
+    
+\item
+    Sea
+    $A = \begin{pmatrix}
+        -1 & 4 & 0 \\
+        2 & 1 & -2 \\
+        0 & 3 & 5
+    \end{pmatrix}$, se tiene que:
+    
+    \[A_{12} = \begin{pmatrix}
+        2 & -2 \\
+        0 & 5
+    \end{pmatrix}, \quad 
+    A_{23} = \begin{pmatrix}
+        -1 & 4 \\
+        0 & 3
+    \end{pmatrix} \quad \text{y} \quad 
+    A_{31} = \begin{pmatrix}
+        4 & 0 \\
+        1 & -2
+    \end{pmatrix}
+    \]
+\end{itemize}
+\end{ejem}
+
+\begin{ejer}
+\item Sea
+$B = \begin{pmatrix}
+    1 & -3 & -1 \\
+    0 & 1 & -5 \\
+    4 & 2 & 0
+\end{pmatrix}$. Determine los menores $B_{11}$, $B_{32}$ y $B_{21}$.
+\end{ejer}
+
+\begin{defi}[Determinante] 
+    Sea $A\in \Mat[\R]{n}{n}$ se define el determinante de $A$, denotado por $\det(A)$ (o por $|A|$), de manera inductiva, como sigue:
+    \begin{itemize}
+    \item 
+        Si $n=1$ y $A=(a_{11})$, entonces $\det(A) = a_{11}$.
+    \item
+        Si $n>1$, la definición se realiza mediante el desarrollo explícito por cofactores a lo largo de su primera fila:
+        \begin{align*}
+            \det(A) = a_{11}\det(A_{11}) - a_{12}\det(A_{12}) + a_{13}\det(A_{13}) - \ldots + (-1)^{1+n} a_{1n}\det(A_{1n}).
+        \end{align*}
+    \end{itemize}
+\end{defi}
+
+\begin{ejem}\hspace{0pt} \label{determinante3por3}
+\begin{itemize}
+\item 
+    Sea $A$ una matriz de orden $2 \times 2$ de la forma
+    \[ 
+        A=
+        \begin{pmatrix}
+         a_{11} & a_{12}\\
+         a_{21} & a_{22}
+        \end{pmatrix},
+    \]
+    se tiene que $A_{11} = (a_{22})$ y $A_{12} = (a_{21})$, por lo tanto $\det(A_{11}) = a_{22}$ y $\det(A_{12}) = a_{21}$. 
+    
+    De esta forma, expandiendo por la primera fila:
+    \begin{align*}
+        \det(A) &= a_{11}(-1)^{1+1}\det(A_{11}) + a_{12}(-1)^{1+2}\det(A_{12})\\
+        & = a_{11}a_{22} - a_{12}a_{21}
+    \end{align*}
+    es decir,
+    \[
+        \det(A) = \begin{vmatrix}
+        a_{11} & a_{12} \\
+        a_{21} & a_{22}
+        \end{vmatrix}
+        = a_{11}a_{22} - a_{12}a_{21}.
+    \]
+    
+\item Sea $B = \begin{pmatrix}
+        1 & 5 \\
+        2 & 6
+    \end{pmatrix}$, se tiene que $\det(B) = 1(6) - 5(2) = 6-10 = -4$.
+
+\item Sea $C$ una matriz de orden $3 \times 3$ de la forma
+         \[ C=
+        \begin{pmatrix}
+         c_{11} & c_{12} & c_{13}\\
+         c_{21} & c_{22} & c_{23}\\
+         c_{31} & c_{32} & c_{33}\\
+        \end{pmatrix}
+        \]
+        el determinante desarrollado de forma explícita por la primera fila está dado por:
+        \begin{align*}
+        \det(C) &= c_{11}(-1)^{1+1}\det(C_{11}) + c_{12}(-1)^{1+2}\det(C_{12}) + c_{13}(-1)^{1+3}\det(C_{13})\\
+        &= c_{11}
+        \begin{vmatrix}
+        c_{22} & c_{23} \\
+        c_{32} & c_{33}
+        \end{vmatrix} - c_{12}
+        \begin{vmatrix}
+        c_{21} & c_{23} \\
+        c_{31} & c_{33} \\
+        \end{vmatrix}+ c_{13}
+        \begin{vmatrix}
+        c_{21} & c_{22} \\
+        c_{31} & c_{32}
+        \end{vmatrix}.
+    \end{align*}
+\item
+    Sea $D = \begin{pmatrix}
+        -1 & 1 & 0 \\
+        0 & 1 & -2 \\
+        2 & 2 & 1
+    \end{pmatrix}$, aplicando el desarrollo explícito por la primera fila se tiene que:
+    \[
+        \det(D) = -1 
+        \begin{vmatrix}
+            1 & -2 \\
+            2 & 1
+        \end{vmatrix} -1
+        \begin{vmatrix}
+            0 & -2 \\
+            2 & 1
+        \end{vmatrix} +0
+        \begin{vmatrix}
+            0 & 1 \\
+            2 & 2
+        \end{vmatrix} = -1(5) -1(4) + 0 = -9.
+    \]
+\end{itemize}
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} Calcular el determinante de las siguientes matrices utilizando el desarrollo por la primera fila:
+\begin{enumerate}
+\item[$a)$] $A = \begin{pmatrix}-4 & 2 \\-1 & 3\end{pmatrix}$
+\item[$b)$] $B = \begin{pmatrix}1&-3&-1\\-2&1&-2\\0&5&0\end{pmatrix}$
+\end{enumerate}
+\end{ejer}
+\end{document}

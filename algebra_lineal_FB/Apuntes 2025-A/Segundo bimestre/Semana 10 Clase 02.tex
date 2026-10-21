@@ -1,0 +1,73 @@
+\documentclass[compacto,10pt]{pubciencias-notas}
+
+% -- Paquetes adicionales
+\usepackage{comandosEPN}
+
+% -- Datos del libro
+\autor{Departamento de Formación Básica}
+\materia{Álgebra Lineal}
+\nota{Semana 10 Clase 02}
+\fecha{Semestre 2025-A}
+
+\logouno[1.1cm]{Logo_EPN.eps}
+\logodos[1.7cm]{Logo_DFB.eps}
+
+\definecolor{colordef}{cmyk}{0.81,0.62,0.00,0.22}
+
+\begin{document}
+
+\encabezado
+
+\vspace*{-4mm}
+
+\setcounter{section}{3}
+\section{Espacios Vectoriales}
+\setcounter{subsection}{7}
+\subsection{Suma de espacios vectoriales}
+
+\begin{teo}
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial de dimensión finita. Para todo $S$ subespacio vectorial de $E$, existe un subespacio vectorial $T$ de $E$ tal que 
+    \[
+        E = S \oplus T.
+    \]
+    Se dice que $T$ es el subespacio complementario de $S$ en $E$.
+\end{teo}
+\begin{ejem}\hspace{0pt}\label{EjemDirecta2} En el espacio vectorial $\R^{3}$ considere los subespacios vectoriales
+\[
+    W_{1} = \{(x,y,0)\in \R^3: x,y \in \R \}
+    \texty 
+    W_{2} = \{(0,0,z)\in \R^3: z \in \R\}.
+\]
+Se tiene que $W_2$, es el subespacio vectorial complementario de $W_1$ en $\R^{3}$.
+\end{ejem}
+
+\begin{ejer}\label{EjercicioSumaDirecta1}\hspace{0pt} Sea $W=\left\{(a,b,c,d)\in \mathbb{R}^{4} : a+b+c=0 \right\}$ un subespacio vectorial de $\mathbb{R}^{4}$. Encuentre un subespacio vectorial $U$ tal que:
+\[\mathbb{R}^{4} = W \oplus U\]
+\end{ejer}
+
+
+\begin{teo}\label{TeoremaSumaDimensión}
+Sean $(E,+,\cdot,\K)$ un espacio vectorial de dimensión finita y $S,T\subseteq E$ subespacios vectoriales de $E$. Si $E$ es la suma directa de $S$ y $T$, entonces
+\[
+    \dim(E) = \dim(S) + \dim(T).
+\]
+\end{teo}
+
+\begin{ejem}\hspace{0pt} Considere el ejemplo \ref{EjemDirecta2}, de acuerdo con el teorema anterior se verifica que:
+\[
+    \dim(\R^{3}) = \dim(W_{1}) + \dim(W_{2}).
+\]
+En efecto, se puede verificar que:
+\[
+    \dim(W_{1}) = 2
+    \texty
+    \dim(W_{2}) = 1.
+\]
+Notemos además que $W_{1} \cap W_{2} = \{0_{\R^{3}}\}$.
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} Verifique que se satisface el Teorema~\ref{TeoremaSumaDimensión} para el Ejercicio~\ref{EjercicioSumaDirecta1}.
+    
+\end{ejer}
+
+\end{document}

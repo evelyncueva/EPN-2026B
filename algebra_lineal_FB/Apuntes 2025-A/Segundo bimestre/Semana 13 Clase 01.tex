@@ -1,0 +1,310 @@
+\documentclass[compacto,10pt]{pubciencias-notas}
+
+% -- Paquetes adicionales
+\usepackage{comandosEPN}
+
+% -- Datos del libro
+\autor{Departamento de Formación Básica}
+\materia{Álgebra Lineal}
+\nota{Semana 13
+Clase 01}
+\fecha{Semestre 2024-B}
+
+\logouno[1.1cm]{Logo_EPN.eps}
+\logodos[1.7cm]{Logo_DFB.eps}
+
+\definecolor{colordef}{cmyk}{0.81,0.62,0.00,0.22}
+
+\begin{document}
+
+\encabezado
+\vspace*{-8mm}
+\setcounter{section}{5}
+\section{Aplicaciones lineales}
+\setcounter{subsection}{4}
+\subsection{Vector de coordenadas}
+
+\begin{defi}[Base ordenada]
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial y $B$ una base del espacio vectorial $E$. Si $B$ es una sucesión, es decir,
+    \[
+        B = \{v_1,v_2,\ldots,v_n\},
+    \]
+    se la llama base ordenada.
+\end{defi}
+
+\begin{defi}[Vector de coordenadas]
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial, $B = \{v_1,v_2,\ldots,v_n\}$ una base ordenada del espacio vectorial $E$ y $u\in E$. El vector de componentes de $u$ en la base $B$ es:
+    \[
+    [u]_{B}=    \begin{pmatrix}
+            \alpha_1\\\alpha_2\\\vdots\\\alpha_n
+        \end{pmatrix}
+    \]
+    donde
+    \[
+        u = \alpha_1 v_1+\alpha_2 v_2+\ldots+\alpha_n v_n
+    \]
+    con $\alpha_{i} \in \K$ para todo $i\in\{1,\ldots,n\}$.
+\end{defi}
+
+\begin{advertencia}
+    En la literatura, también se puede encontrar la definición anterior bajo el nombre de vector de componentes.
+\end{advertencia}
+
+\begin{ejem}\hspace{0pt}
+Considere el espacio vectorial $\R^{3}$. Sea $B_{1} = \l\{(2,0,1), (1,2,0), (1,1,1)\r\}$ una base ordenada de $\R^{3}$, para hallar las coordenadas del vector $v=(4,-9,5)$ en la base $B_1$, realizamos la combinaci\'on lineal 
+\[
+v=(4,-9,5)=\alpha(2,0,1)+\beta(1,2,0)+\gamma(1,1,1)
+\]
+de donde $\alpha=4$, $\beta=-5$ y $\gamma=1$,
+entonces las coordenadas del vector $v = (4,- 9,5)$ en la base $B_{1}$ es
+    \[
+        [v]_{B_{1}} = \begin{pmatrix}4\\-5\\1\end{pmatrix}
+    \]
+ puesto que    
+\[
+v=(4,-9,5)=4(2,0,1)-5(1,2,0)+(1,1,1)
+\]
+ \end{ejem}
+\begin{ejem}
+Considere el espacio vectorial $\R_1[x]$, sea $C=\{1,x\}$ la base can\'onica de $\R_1[x]$, entonces las coordenadas del vector $p(x)=-3+2x$ en la base $C$ son
+    \[
+        [p(x)]_{C} = \begin{pmatrix}-3\\2\end{pmatrix}
+    \]
+puesto que $p(x)=-3+2x=-3(1)+2(x)$
+\end{ejem}
+
+\begin{ejer}
+Considere el espacio vectorial $\R^{3}$ hallar el vector de coordenadas $u=(-6,2,4)$:
+\begin{enumerate}
+    \item En la base can\'onica $C=\{(1,0,0),(0,1,0),(0,0,1)\}$.
+    \item  En la base  $B=\{(1,1,1),(1,1,0),(1,0,0)\}$.
+\end{enumerate}
+\end{ejer}
+
+\setcounter{subsection}{5}
+\subsection{Matriz asociada}
+
+En adelante, consideraremos que la dimensión 
+del espacio vectorial $E$ es $n$ y la dimensión del espacio vectorial $F$ es $m$. Además, cuando se haga referencia a una base, ésta se asumirá que es ordenada.
+
+
+\begin{defi}
+    Sean $T \in \mathscr{L}(E,F)$, $B_{1} = \{ v_{1}, \ldots, v_{n} \}$ y $B_{2} = \{ u_{1}, \ldots, u_{m} \}$ bases de los espacios vectoriales $E$ y $F$ respectivamente. La matriz asociada a la aplicación lineal $T$ en las bases $B_{1}$ y $B_{2}$, que se denota por $[T]^{B_{1}}_{B_{2}}$, es aquella cuya $j-$ ésima columna es $[T(v_{j})]_{B_{2}}$. Es decir,
+    \[
+        [T]_{B_{2}}^{B_{1}} =
+        \begin{pmatrix}
+            [T(v_{1})]_{B_{2}} & \cdots & [T(v_{n})]_{B_{2}}
+        \end{pmatrix}
+    \]
+\end{defi}
+
+\begin{ejem}\hspace{0pt}\label{Eje:S15MatAL}
+Dada la aplicación lineal:
+\[
+    \funcion{T}{\R^3}{\R^2}{(x,y,z)}{(x + y,y - z)}
+\]
+Sean $ B_{1} = \l\{(1,0,1), (0,1,1), (1,1,1)\r\}$ y $B_{2} = \l\{(1,2), (- 1,1)\r\}$
+bases de los espacios vectoriales $\R^{3}$ y $\R^{2}$; vamos a calcular a  $[T]^{B_{1}}_{B_{2}}$.
+
+\noindent Como $[T]^{B_{1}}_{B_{2}} = \begin{pmatrix}
+    [T(1, 0, 1)]_{B_{2}} & [T(0, 1, 1)]_{B_{2}} & [T(1, 1, 1)]_{B_{2}}
+\end{pmatrix}$
+primero calcularemos las imágenes de la base de salida y luego los vectores de coordenadas en la base de llegada.
+
+\noindent Las imágenes de los elementos de la base de salida son:
+\[
+    \begin{array}{cccc}
+        T(1,0,1) = (1,- 1), & 
+        T(0,1,1) = (1,0) &
+        \text{y} &
+        T(1,1,1) = (2,0).
+    \end{array}
+\]
+Ahora, a estas imágenes las expresamos como combinación lineal de los elementos de la base de llegada, tenemos:
+\begin{align*}
+    (1, -1) & = 0 (1, 2) + (-1) (-1, 1), \\
+    (1, 0) & = \dfrac{1}{3} (1, 2) + \begin{pmatrix}
+        -\dfrac{2}{3}
+    \end{pmatrix}
+    (-1, 1) \texty \\
+    (2, 0) & = \dfrac{2}{3} (1, 2) + \begin{pmatrix}
+        -\dfrac{4}{3}
+    \end{pmatrix}
+    (-1, 1).
+\end{align*}
+Entonces los vectores de coordenadas son:
+\[
+    \begin{array}{cccc}
+        \l[T(1,0,1)\r]_{B_{2}} =\begin{pmatrix}0\\-1\end{pmatrix}, &
+        \l[T(0,1,1)\r]_{B_{2}} =\begin{pmatrix}\dfrac{1}{3}\\-\dfrac{2}{3}\end{pmatrix} &
+        \text{y} &
+        \l[T(1,1,1)\r]_{B_{2}} =\begin{pmatrix}\dfrac{2}{3}\\-\dfrac{4}{3}\end{pmatrix}.
+    \end{array}
+\]
+Por la definición, estos vectores son las columnas de la matriz asociada. Es decir,
+\[
+    [T]^{B_{1}}_{B_{2}} = 
+    \begin{pmatrix}
+        0&  \dfrac{1}{3}& \dfrac{2}{3}\\
+        -1& -\dfrac{2}{3}& -\dfrac{4}{3}
+    \end{pmatrix}.
+\]
+\end{ejem}
+
+\begin{obs}
+    Otra posibilidad en el cálculo de los vectores de coordenadas de las imágenes consiste en encontrar el vector de coordenadas del vector genérico del espacio vectorial de llegada (en el ejemplo anterior $\R^{2}$) y luego reemplazar las imágenes de la base de salida.
+
+    \noindent El vector genérico expresado como combinación lineal de los elementos de una base se llama ecuación generadora.
+\end{obs}
+
+\begin{advertencia}
+En caso de no existir riesgo de confusión en las bases que se utiliza, se nota simplemente por $[T]$ a la matriz asociada a la aplicación lineal $T$. 
+\end{advertencia}
+
+\begin{prop}
+    Sean $T \in \mathscr{L}(E,F)$, $v \in E$, $B_{1} = \{v_1,v_2,\ldots,v_n\}$ y 
+    \noindent $B_{2} = \{u_1,u_2,\ldots,u_m\}$ bases de los espacios vectoriales $E$ y $F$, respectivamente, entonces
+    \[
+        [T(v)]_{B_{2}} = [T]^{B_{1}}_{B_{2}} [v]_{B_{1}}.
+    \]
+\end{prop}
+
+\begin{ejem}\hspace{0pt} Considerando el ejemplo \ref{Eje:S15MatAL}, sea $(-2,2,8)\in\R^3$, se tiene que:
+\[
+    \l[\begin{pmatrix}-2\\2\\8\end{pmatrix}\r]_{B_{1}} = \begin{pmatrix}6\\10\\-8\end{pmatrix}.
+\]
+Además, se tiene que $T(-2,2,8) = (0,-6)$, de lo cual:
+\[
+    [T(-2,2,8)]_{B_{2}} = \l[\begin{pmatrix}0\\-6\end{pmatrix}\r]_{B_{2}} = \begin{pmatrix}-2\\-2\end{pmatrix}.
+\]
+Notemos que verifica que:
+\[
+    [T(-2,2,8)]_{B_{2}} = [T]^{B_{1}}_{B_{2}} [(-2,2,8)]_{B_{1}}.
+\]
+\end{ejem}
+
+\begin{prop}\label{Prop:inv}
+    Sean $T \in \mathscr{L}(E,F)$, $B_{1} = \{ v_{1}, \ldots, v_{n} \}$ y $B_{2} = \{ u_{1}, \ldots, u_{m} \}$ bases de los espacios vectoriales $E$ y $F$, respectivamente. $T$ es biyectiva si y solo si $[T]^{B_{1}}_{B_{2}}$ es invertible.
+\end{prop}
+
+\begin{ejem}\hspace{0pt} Considerando el ejemplo \ref{Eje:S15MatAL} notemos que ya que $\dim(\R^{3}) \neq \dim(\R^{2})$ la aplicación lineal no será biyectiva, además, la matriz $[T]^{B_{1}}_{B_{2}}$ no es invertible.
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} Dada la aplicación lineal:
+\[
+    \funcion{T}{\R^3}{\Mat[\R]{3}{1}}{(x_1,x_2,x_3)}{\begin{pmatrix}
+        x_1 - x_2\\x_2-x_1\\x_3\end{pmatrix}.}
+\]
+Sean 
+\[
+    B_{1} = \l\{(1,0,0), (1,1,0), (1,1,1)\r\}
+\]
+y 
+\[
+    B_{2} = \l\{\begin{pmatrix}1\\0\\0\end{pmatrix},\begin{pmatrix}1\\1\\0\end{pmatrix},\begin{pmatrix}1\\1\\1\end{pmatrix}\r\}
+\]
+bases de los espacios vectoriales $\R^{3}$ y $\Mat[\R]{3}{1}$.
+\begin{enumerate}
+    \item Determine a $[T]^{B_{1}}_{B_{2}}$.
+    \item Sea $(1,0,0)\in\R^3$ verifique que se cumple que:
+    \[
+        [T(1,0,0)]_{B_{2}} = [T]^{B_{1}}_{B_{2}} [(1,0,0)]_{B_{1}}.
+    \]
+    \item Calcule el determinante de $[T]^{B_{1}}_{B_{2}}$.
+    \item Utilizando a la proposición \ref{Prop:inv} indique si la aplicación lineal $T$ es biyectiva.
+\end{enumerate}
+\end{ejer}
+\subsection{Matriz de cambio de base}
+
+\begin{defi}[Matriz de cambio de base]
+    Sean $E$ un espacio vectorial sobre el cuerpo $\K$, $B_{1}$ y $B_{2}$ bases del espacio vectorial $E$. A la matriz asociada a la aplicación lineal identidad en las bases $B_{1}$ de salida y $B_{2}$ de llegada se le llama matriz de cambio de base de la base $B_{1}$ a la base $B_{2}$.
+\end{defi}
+
+
+
+%\begin{obs}
+%    Queda claro por qué a $[I]^{B_{1}}_{B_{2}}$ se le llama matriz de cambio de base.
+%\end{obs}
+
+\begin{advertencia}
+En la literatura, también se puede encontrar la definición anterior bajo el nombre de matriz de transición y se utiliza también la notación $ P_{B_{2}\gets B_{1}}$.
+\end{advertencia}
+
+\begin{ejem}
+Una matriz de cambio de base en el espacio vectorial $\R^2$.
+
+\noindent Para obtener a la matriz de cambio de base $[I]^{B_{1}}_{B_{2}}$, sean 
+\[
+    B_{1} = \l\{(1,1),(2,-1)\r\}
+    \texty
+    B_{2} = \l\{(0,1),(1,-1)\r\}
+\]
+dos bases para el espacio vectorial $\R^2$.
+
+\noindent Primero, calculemos las imágenes de la base de salida, tenemos:
+\[
+    I(1,1)=(1,1) \texty I(2,-1)=(2,-1).
+\]
+\noindent Segundo, encontremos los respectivos vectores de coordenadas en la base $B_{2}$ de estas imágenes, para un $(a,b)\in \mathbb{R}^2$. Es decir, hay que calcular los valores de $\alpha$ y $\beta$ tales que
+\[
+    (a,b) = \alpha (0,1) + \beta (1,-1).
+\]
+Resolviendo el sistema de ecuaciones se tiene que
+\[
+    \alpha = a + b \texty \beta = a.
+\]
+Por ende
+
+\[
+    [(a,b)]_{B_{2}} =
+    \begin{pmatrix}
+        a + b \\
+        a
+    \end{pmatrix}.
+\]
+Para determinar los vectores de coordenadas de las imágenes de la base de salida, reemplazamos los valores de $a$ y $b$, tenemos:
+\[
+    [(1,1)]_{B_{2}} =
+    \begin{pmatrix}
+        2 \\
+        1
+    \end{pmatrix}
+    \texty
+    [(2,-1)]_{B_{2}} =
+    \begin{pmatrix}
+        1 \\
+        2
+    \end{pmatrix}.
+\]
+Finalmente
+\[
+    [I]^{B_{1}}_{B_{2}} = \begin{pmatrix}2&1\\1&2\end{pmatrix}.
+\]
+\end{ejem}
+
+
+
+\begin{teo}
+    Si $B_{1}$ y $B_{2}$ son bases del espacio vectorial $E$, entonces
+    \[
+         [I]^{B_{2}}_{B_{1}} = \l([I]^{B_{1}}_{B_{2}}\r)^{-1}.
+    \]
+\end{teo}
+
+\begin{ejem}
+Usando las mismas bases del ejemplo $1$, calcular la $[I]^{B_{2}}_{B_{1}}$.
+
+\noindent Como ya conocemos a $[I]^{B_{1}}_{B_{2}}$, usamos el teorema.
+\[
+    [I]^{B_{2}}_{B_{1}} = \l([I]^{B_{1}}_{B_{2}}\r)^{-1} = 
+    \frac{1}{3}\begin{pmatrix}2&-1\\-1&2\end{pmatrix}.
+\]
+\end{ejem}
+
+
+
+
+
+
+
+\end{document}

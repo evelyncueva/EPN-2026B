@@ -1,0 +1,121 @@
+%\documentclass[10pt,respuestas,a4]{examenEPN}
+\documentclass[10pt,a4]{examenEPN0}
+\usepackage[T1]{fontenc}
+\usepackage{multicol}
+\usepackage{blindtext}
+
+%\documentclass[10pt,a4]{examenEPN0}
+\examen{Prueba 01}
+
+\input{ComandoLocales}
+
+%\imprimirDoble
+
+\begin{document}
+\encabezado
+\datosAlgebra{GR5M}{21/10/2026}
+
+%Poner el grupo y la fecha, o dejar las llaves vacías.
+\indicacionesPrueba
+
+\begin{preguntas}
+
+% PREGUNTA 1
+
+\item Considere el sistema homogéneo $Ax=\mathbf{0}$, donde
+\[
+    A = \begin{pmatrix} 1 & 0 \\ 1 & 1 \\ 0 & 1 \end{pmatrix},
+    \qquad x = \begin{pmatrix} x_1 \\ x_2 \end{pmatrix}.
+\]
+Calcule el rango de $A$ y compárelo con el número de incógnitas para determinar si el sistema tiene solución única o infinitas soluciones. Justifique su respuesta y escriba el conjunto solución.
+    
+
+
+\puntaje{5}
+% Espacio de respuesta hasta el final de la página.
+\par\vfill\newpage
+
+
+\item Un estudiante quiere demostrar o refutar que $(AB)^2 = A^2 B^2$ para toda pareja de matrices cuadradas $A$ y $B$ del mismo orden. Para esto escribe el siguiente razonamiento:
+\par\medskip
+\noindent\colorbox{gray!15}{%
+    \begin{minipage}{\dimexpr\linewidth-2\fboxsep\relax}
+        \normalfont\normalsize\raggedright
+        \textbf{Demostración propuesta por el estudiante}
+        \begin{enumerate}[label=\arabic*.,leftmargin=*,topsep=4pt,itemsep=2pt,parsep=0pt]
+            \item $(AB)^2 = (AB)(AB)$.
+            \item $(AB)(AB)=A(BA)B$.
+            \item $A(BA)B= A(AB)B$.
+            \item $A(AB)B = A^2 B^2$.
+        \end{enumerate}
+        \textbf{Conclusión del estudiante:} Por lo tanto, la propiedad
+        $(AB)^2 = A^2 B^2$ siempre es verdadera para matrices cuadradas
+        del mismo orden.
+    \end{minipage}%
+}
+\par\medskip
+
+
+    
+    Determine si la demostración es correcta. Si lo es, justifique cada paso. Si no lo es, identifique el paso incorrecto y presente un ejemplo con matrices de orden $2\times2$ que refute la afirmación inicial.
+
+
+\puntaje{5}
+% Espacio de respuesta hasta el final de la página.
+\par\vfill\newpage
+
+\item 
+
+Considere el siguiente sistema de ecuaciones, donde $k \in \mathbb{R}$ es un parámetro:
+\[
+\begin{cases}
+x_1 + x_2 + x_3 = 1 \\
+x_2 + kx_3 = 2 \\
+x_1 + 2x_2 + 2x_3 = 3
+\end{cases}
+\]
+\begin{enumerate}
+    \item Escriba la matriz ampliada $(A \mid b)$ asociada al sistema y aplique, en ese orden, las operaciones elementales por fila $F_3 \leftarrow F_3-F_1$ y $F_3 \leftarrow F_3-F_2$. En la segunda operación, utilice la fila $F_3$ obtenida en la primera. \puntaje{1}
+
+    \item Determine los rangos de $A$ y de $(A \mid b)$ según el valor de $k$. Aplique el teorema de Rouché--Frobenius para indicar, en cada caso, si el sistema tiene solución única, infinitas soluciones o ninguna solución. \puntaje{4}
+\end{enumerate}
+
+
+% Espacio de respuesta hasta el final de la página.
+\par\vfill\newpage
+
+
+\item En un modelo simplificado para una obra, se necesitan $100\,\text{m}^3$ de una mezcla de cemento, arena y grava. Suponga que los volúmenes se suman al combinar los materiales. La mezcla final debe contener exactamente $28\,\text{m}^3$ de cemento, $42\,\text{m}^3$ de arena y $30\,\text{m}^3$ de grava.
+
+Se dispone de tres mezclas ya preparadas, llamadas $M_1$, $M_2$ y $M_3$, con la siguiente composición en volumen:
+\begin{itemize}
+    \item Mezcla $M_1$: $30\%$ de cemento, $40\%$ de arena y $30\%$ de grava.
+    \item Mezcla $M_2$: $20\%$ de cemento, $50\%$ de arena y $30\%$ de grava.
+    \item Mezcla $M_3$: $40\%$ de cemento, $30\%$ de arena y $30\%$ de grava.
+\end{itemize}
+Se desea establecer cuántos metros cúbicos de cada mezcla preparada se deben utilizar para obtener la mezcla final con las cantidades requeridas de cemento, arena y grava.
+
+\begin{enumerate}
+    \item Defina las tres incógnitas e indique qué representa cada una y en qué unidad se mide. Considere que las cantidades utilizadas deben ser no negativas. \puntaje{1}
+    \item Plantee una ecuación para la cantidad de cemento, otra para la cantidad de arena y otra para la cantidad de grava. \puntaje{3}
+    \item Escriba el sistema en la forma matricial $Ax=b$ e identifique la matriz $A$ y los vectores $x$ y $b$. \puntaje{1}
+\end{enumerate}
+No es necesario resolver el sistema.
+
+
+
+% El espacio restante de la última página queda disponible para responder.
+
+
+
+
+
+
+\vfill
+
+\end{preguntas}
+
+
+
+\final
+\end{document}

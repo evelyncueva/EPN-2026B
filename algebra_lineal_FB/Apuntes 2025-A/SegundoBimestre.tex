@@ -1,0 +1,3661 @@
+\documentclass[compacto,10pt]{pubciencias-notas}
+
+% -- Paquetes adicionales
+\usepackage{comandosEPN}
+
+% -- Datos del libro
+\autor{Departamento de Formación Básica}
+\materia{Álgebra Lineal}
+\nota{Semana 09 Clase 01}
+\fecha{Semestre 2024-B}
+
+\logouno[1.1cm]{Logo_EPN.eps}
+\logodos[1.7cm]{Logo_DFB.eps}
+
+\definecolor{colordef}{cmyk}{0.81,0.62,0.00,0.22}
+
+\begin{document}
+
+\encabezado
+
+\section{Espacios Vectoriales}
+\subsection{Espacio Vectorial}
+
+\begin{defi}[Espacio Vectorial]
+    Dados un campo $\K$, un conjunto no vacío $E$ y dos operaciones:
+    \[
+        \funcion{\oplus}{E\times E}{E}{(x,y)}{x\oplus y,}
+        \texty
+        \funcion{\odot}{\K\times E}{E}{(\alpha,x)}{\alpha\odot x}
+    \]
+    llamadas suma y producto, respectivamente; se dice que $(E,\oplus,\odot,\K)$ es un espacio vectorial si cumplen las siguientes propiedades:
+    \begin{enumerate}
+    \item \textbf{Asociativa de la suma:}
+        para todo $x,y,z\in E$ se tiene que
+        \[
+            (x \oplus y) \oplus z = x \oplus (y \oplus z);
+        \]
+    \item \textbf{Conmutativa de la suma:}
+        para todo $x,y\in E$ se tiene que
+        \[
+            x \oplus y = y \oplus x;
+        \]
+    \item \textbf{Elemento neutro de la suma:}
+        existe un elemento de $E$, denotado por $0_E$ o simplemente $0$, tal que para todo $x\in E$ se tiene que 
+        \[
+            x \oplus 0_E = 0_E \oplus x = x;
+        \]
+    \item \textbf{Inverso de la suma:}
+        para todo $x\in E$, existe un elemento de $E$, denotado por $-x$, tal que
+        \[
+            x \oplus (-x)= 0_E;
+        \]
+    \item \textbf{Distributiva del producto I:}
+        para todo $x,y\in E$ y todo $\alpha\in \K$ se tiene que
+        \[
+            \alpha\odot (x \oplus y)=\alpha\odot x \oplus \alpha\odot y
+        \]
+        
+    \item \textbf{Distributiva del producto II:}
+        para todo $x\in E$ y todo $\alpha,\beta\in \K$ se tiene que
+        \[
+            (\alpha+\beta)\odot x=\alpha\odot x \oplus \beta\odot x;
+        \]
+    \item \textbf{Asociativa del producto:}
+        para todo $x\in E$ y todo $\alpha,\beta\in \K$ se tiene que
+        \[
+            (\alpha\cdot \beta)\odot x=\alpha\odot(\beta\odot x);
+        \]
+    \item \textbf{Elemento neutro del producto:}
+        para todo $x\in E$ se tiene que
+        \[
+            1\odot x=x,
+        \]
+        donde $1\in\K$ es el elemento neutro multiplicativo de $\K$
+    \end{enumerate}
+\end{defi}
+
+% \begin{advertencia}
+%     De la definición de las operaciones suma y producto en el espacio vectorial observamos que necesariamente el resultado de sumar dos elementos del conjunto debe pertenecer al conjunto. Se tiene también que el producto de un escalar por un elemento del conjunto debe pertenecer al conjunto.
+% \end{advertencia}
+
+\begin{advertencia}
+    Note que de la definición de espacio vectorial es necesario que las operaciones suma y producto sean cerradas. Esto es que, para el espacio vectorial $(E,\oplus,\odot,\K)$ además de las 8 propiedades de la definición se debe cumplir:
+
+    \begin{itemize}[leftmargin=*]
+        \item[] \textbf{Clausura de la suma:} Si $x,y\in E$ entonces $x\oplus y\in E$. 
+        \item[] \textbf{Clausura del producto:} Si $x\in E$ y $\alpha\in\K$, entonces $\alpha\odot x\in E$.
+    \end{itemize}
+\end{advertencia}
+
+\textbf{Nota:}
+A los elementos del espacio vectorial $E$ se les denomina \emph{vectores} y a los elementos del campo $\K$ se les denomina \emph{escalares}.
+
+\begin{ejem}\hspace{0pt} Verifique si el conjunto de ternas ordenadas de números reales
+\[\R^{3} =\{(x_1, x_2, x_3) : x_1\in \R \wedge x_2\in \R \wedge x_3\in \R\}\]
+es un espacio vectorial sobre el campo $\R$ si se definen las operaciones $\oplus$ y $\odot$ de la siguiente manera: dados $a=(a_1,a_2,a_3)\in \R^{3}$ y $b=(b_1,b_2,b_3)\in \R^{3}$, y dado $\lambda\in \R$, se define:
+\[a\oplus b = (a_1, a_2, a_3) \oplus (b_1, b_2, b_3) = (a_1+b_1, a_2+b_2, a_3+b_3)\]
+\[\lambda \odot a = \lambda \odot (a_1,a_2,a_3) = (\lambda\cdot a_1, \lambda\cdot a_2, \lambda\cdot a_3)\]
+a continuación, ilustraremos la demostración de cada una de las propiedades:
+
+\begin{enumerate}
+\item Asociativa de la suma
+    
+Suponga que $a=(a_1,a_2,a_3)\in \R^{3}$, $b=(b_1,b_2,b_3)\in \R^{3}$ y $c=(c_1,c_2,c_3)\in \R^{3}$. Entonces:
+    
+$(a \oplus b) \oplus c$
+\begin{align*}
+    \phantom{abc}&= [(a_1,a_2,a_3) \oplus (b_1,b_2,b_3)] \oplus (c_1,c_2,c_3) & \text{Definiciones de $a$, $b$ y $c$}\\
+    &= (a_1+b_1, a_2+b_2, a_3+b_3) \oplus (c_1,c_2,c_3) & \text{Definición de $\oplus$ en $\R^{3}$}\\
+    &= ([a_1+b_1]+c_1, [a_2+b_2]+c_2, [a_3+b_3]+c_3) & \text{Definición de $\oplus$ en $\R^{3}$}\\
+    &= (a_1+[b_1+c_1], a_2+[b_2+c_2], a_3+[b_3+c_3]) & \text{Propiedad asociativa en $\R$}\\
+    &= (a_1,a_2,a_3) \oplus (b_1+c_1, b_2+c_2, b_3+c_3) & \text{Definición de $\oplus$ en $\R^{3}$}\\
+    &= (a_1,a_2,a_3) \oplus [(b_1,b_2,b_3) \oplus (c_1,c_2,c_3)] & \text{Definición de $\oplus$ en $\R^{3}$}\\
+    &= a\oplus (b\oplus c) & \text{Definiciones de $a$, $b$ y $c$}
+\end{align*}
+    
+\item Conmutativa de la suma
+    
+Suponga que $a=(a_1,a_2,a_3)\in \R^{3}$ y $b=(b_1,b_2,b_3)\in \R^{3}$. Entonces:
+\begin{align*}
+    a \oplus b &= (a_1, a_2, a_3) \oplus (b_1, b_2, b_3) & \text{Definiciones de a y b}\\
+    &= (a_1+b_1, a_2+b_2, a_3+b_3) & \text{Definición de $\oplus$ en $\R^{3}$}\\
+    &= (b_1+a_1, b_2+a_2, b_3+a_3) & \text{Conmutativa de $+$ en $\R$}\\
+    &= (b_1, b_2, b_3) \oplus (a_1, a_2, a_3) & \text{Definición de $\oplus$ en $\R^{3}$}\\
+    &= b\oplus a & \text{Definiciones de a y b}
+\end{align*}
+    
+\item Elemento neutro de la suma
+    
+Se debe probar que la siguiente proposición es verdadera:
+\[(\exists 0_E\in \R^{3})(\forall a\in \R^{3})(a\oplus 0_E=0_E\oplus a=a)\]
+Esta demostración es de existencia, por lo que se debe exhibir un elemento $0_E\in \R^{3}$ que satisfaga la definición de elemento neutro.\newline
+
+Sea $0_E=(0,0,0)$. Se debe probar que para todo $a=(a_1,a_2,a_3)\in \R^{3}$ se cumpla que:
+\[a\oplus 0_E = 0_E \oplus a = a\]
+En efecto:
+\begin{align*}
+    a \oplus 0_E &= (a_1, a_2, a_3) \oplus (0,0,0) & \text{Definiciones de $a$ y $0_E$}\\
+    &= (a_1+0,a_2+0, a_3+0) & \text{Definición de $\oplus$ en $\R^{3}$}\\
+    &= (a_1,a_2,a_3) & \text{Neutro aditivo en $\R$}\\
+    &= a & \text{Definición de $a$}
+\end{align*}
+por la propiedad conmutativa, se tiene que $a\oplus 0_E= 0_E\oplus a$. Por tanto, se ha demostrado también que:
+\[0_E \oplus a = a\]
+    
+\item Inverso de la suma
+    
+Se debe probar que la siguiente proposición es verdadera:
+\[(\forall a\in \R^{3})(\exists \hat{a}\in \R^{3})(\hat{a}\oplus a=a\oplus \hat{a}=0_E)\]
+
+Esta también es una demostración de existencia, en este caso, por el orden de los cuantificadores, el elemento $\hat{a}$ depende de $a$.\newline
+
+Sea $a=(a_1,a_2,a_3)\in \R^{3}$. Se prueba que el vector buscado $\hat{a}$ se define del siguiente modo:
+\[\hat{a}=(-a_1, -a_2, -a_3)\]
+donde cada $-a_i$ es el inverso aditivo de $a_i\in \R$, para $i=1,2,3$.\newline
+Entonces, tenemos que:
+\begin{align*}
+    a\oplus \hat{a} &= (a_1, a_2, a_3) \oplus (-a_1, -a_2, -a_3) & \text{Definiciones de $a$ y $\hat{a}$}\\
+    &= (a_1+(-a_1), a_2+(-a_2), a_3+(-a_3)) & \text{Definición de $\oplus$ en $\R^{3}$}\\
+    &= (0,0,0) & \text{Inverso aditivo en $\R$}\\
+    &= 0_E & \text{Definición de $0_E$}
+\end{align*}
+por la propiedad conmutativa de $\oplus$, se tiene también que:
+\[\hat{a} \oplus a = 0_E\]
+    
+\item Distributiva del producto I
+    
+Suponga que $a=(a_1,a_2,a_3)\in \R^{3}$, $b=(b_1,b_2,b_3)\in \R^{3}$ y $\lambda\in \R$. Entonces:
+
+$\lambda \odot (a\oplus b)$
+\begin{align*}
+    \phantom{abc} &= \lambda \odot ((a_1,a_2,a_3)\oplus (b_1,b_2,b_3)) & \text{Definiciones de $a$ y $b$}\\
+    &= \lambda \odot (a_1+b_1,a_2+b_2,a_3+b_3) & \text{Definición de $\oplus$ en $\R^{3}$}\\
+    &= (\lambda\cdot[a_1+b_1],\lambda\cdot[a_2+b_2],\lambda\cdot[a_3+b_3]) & \text{Definición de $\odot$ en $\R^{3}$}\\
+    &= (\lambda\cdot a_1, \lambda\cdot a_2, \lambda\cdot a_3) \oplus (\lambda\cdot b_1, \lambda\cdot b_2, \lambda\cdot b_3) & \text{Definición de $\oplus$ en $\R^{3}$}\\
+    &= \lambda \odot (a_1,a_2,a_3) \oplus \lambda \odot (b_1,b_2,b_3) & \text{Definición de $\odot$ en $\R^{3}$}\\
+    &= \lambda \odot a \oplus \lambda \odot b &  \text{Definiciones de $a$ y $b$}
+\end{align*}
+    
+\item Distributiva del producto II
+    
+Suponga que $a=(a_1,a_2,a_3)\in \R^{3}$ y $\lambda, \beta\in \R$. Entonces:
+
+$(\lambda + \beta)\odot a$
+\begin{align*}
+    \phantom{abc} &= (\lambda + \beta)\odot (a_1, a_2, a_3) & \text{Definición de $a$}\\
+    &= ((\lambda + \beta)\cdot a_1, (\lambda + \beta)\cdot a_2, (\lambda + \beta)\cdot a_3) & \text{Definición de $\odot$ en $\R^{3}$}\\
+    &= (\lambda a_1 + \beta a_1, \lambda a_2 + \beta a_2, \lambda a_3 + \beta a_3) & \text{Distributiva del producto en $\R$}\\
+    &= (\lambda a_1, \lambda a_2, \lambda a_3) \oplus (\beta a_1, \beta a_2, \beta a_3) & \text{Definición de $\oplus$ en $\R^{3}$}\\
+    &= \lambda \odot (a_1, a_2, a_3) \oplus \beta\odot (a_1,a_2,a_3) & \text{Definición de $\odot$ en $\R^{3}$}\\
+    &= \lambda \odot a \oplus \beta \odot a & \text{Definición de $a$}
+\end{align*}
+    
+\item Asociativa del producto
+    
+Suponga que $a=(a_1,a_2,a_3)\in \R^{3}$ y $\lambda, \beta\in \R$. Entonces:
+\begin{align*}
+    (\lambda\cdot \beta) \odot a &= (\lambda\cdot \beta) \odot (a_1,a_2,a_3) & \text{Definición de $a$}\\
+    &= ((\lambda\cdot \beta)\cdot a_1, (\lambda\cdot \beta)\cdot a_2, (\lambda\cdot \beta)\cdot a_3) & \text{Definición de $\odot$ en $\R^{3}$}\\
+    &= (\lambda\cdot(\beta\cdot a_1), \lambda\cdot(\beta\cdot a_2), \lambda\cdot(\beta\cdot a_3)) & \text{Asociativa $\cdot$ en $\R$}\\
+    &= \lambda \odot (\beta\cdot a_1, \beta\cdot a_2, \beta\cdot a_3) & \text{Definición de $\odot$ en $\R^{3}$}\\
+    &= \lambda \odot (\beta \odot (a_1, a_2, a_3)) & \text{Definición de $\odot$ en $\R^{3}$}\\
+    &= \lambda \odot (\beta \odot a) & \text{Definición de $a$}
+\end{align*}
+    
+\item Elemento neutro del producto
+    
+Se debe probar que la siguiente proposición es verdadera:
+\[(\forall a\in \R^{3})(1\odot a = a), \quad \text{donde } 1\in \R\]
+Suponga que $a=(a_1,a_2,a_3)\in\R^{3}$. Entonces:
+\begin{align*}
+    1 \odot a &= 1\odot (a_1,a_2,a_3) & \text{Definición de $a$}\\
+    &= (1\cdot a_1, 1\cdot a_2, 1\cdot a_3) & \text{Definición de $\odot$ en $\R^{3}$}\\
+    &= (a_1,a_2,a_3) & \text{Neutro multiplicativo en $\R$}\\
+    &= a & \text{Definición de $a$}
+\end{align*}
+
+En vista que se satisfacen todas las propiedades de la \emph{definición 1}, se concluye que $(\R^{3}, \oplus, \odot, \R)$ es un espacio vectorial.
+\end{enumerate}
+\end{ejem}
+
+% \begin{ejer}\hspace{0pt} Verifique si el conjunto de polinomios con coeficientes reales de grado menor o igual que $2$
+% \[\R_{2}[x]=\{p(x)=a_0 + a_1x + a_2x^2 : a_i\in \R, 0\leq i\leq 2 \}\]
+% es un espacio vectorial sobre $\R$ si la operación $\oplus$ es la suma usual entre polinomios y $\odot$ es el producto usual entre un número real y un polinomio.\newline 
+% Es decir: si $p\in\R_{2}[x]$ y $q\in\R_{2}[x]$, y $\alpha\in \R$, entonces:
+% \[p(x)\oplus q(x) = (p+q)(x)\]
+% \[\alpha \odot p(x) = (\alpha p)(x)\]
+% para todo $x\in \R$.
+% \end{ejer}
+
+\begin{ejer}\hspace{0pt} Verifique si el conjunto $V$ definido por:
+\[V=\left\{\left(\begin{array}{cc}
+    a & b \\
+    c & d
+\end{array}\right)\in\mathbb{R}^{2\times 2} : ad-cb=0\right\},\]
+junto a las operaciones usuales de suma de matrices y producto de un escalar por matriz es un espacio vectorial real.
+\end{ejer}
+
+\begin{ejer} Verifique si el conjunto 
+\[V=\left\lbrace (x,y,3,w)\in\R^4 : 2x-y=0 \right\rbrace\]
+junto a las operaciones usuales de suma y producto por un escalar en $\R^4$ es un espacio vectorial real.
+\end{ejer}
+
+\begin{obs}
+    Utilizamos los símbolos $\oplus$ y $\odot$ para enfatizar el hecho de que, en general, las operaciones definidas no son la suma y el producto estándar que utilizamos. Si no existe riesgo de confusión, utilizaremos la notación
+    \[
+        x\oplus y = x+y
+        \texty
+        \alpha \odot x = \alpha x
+    \]
+    y diremos que el espacio vectorial es $(E,+,\cdot,\K)$.
+    En caso de que no exista ambigüedad en las operaciones utilizadas se dirá que $E$ es un espacio vectorial sobre $\K$. Además, si el campo está sobre entendido diremos que $E$ es un espacio vectorial.
+\end{obs}
+
+\begin{advertencia}
+Un error común es pensar que el elemento neutro es siempre el cero, ya que, dependiendo del espacio vectorial, se tiene un determinado elemento neutro. Por ejemplo:
+\begin{itemize}
+\item Para el espacio vectorial $(\R, +, \cdot, \R)$ tenemos que su elemento neutro es justamente el 0.
+\item Para el espacio $(\R^{+}, \oplus , \odot, \R)$ donde 
+\[
+    x \oplus y = xy
+    \texty
+    \alpha \odot x = x^{\alpha}
+\]
+para todo $x,y\in\R^{+}$ y todo $\alpha\in\R$, el elemento neutro es 1, esto es, $0_{E} = 1$. Notemos que $0\notin\R^{+}$.
+\end{itemize}
+\end{advertencia}
+
+\begin{prop}
+    Los siguientes conjuntos con sus operaciones usuales de suma y producto son espacios vectoriales:
+    \begin{itemize}
+    \item
+        $(\R^n, +, \cdot, \R$), con $n\in \N^*$.
+        
+    \item
+        $(\Mat[\R]{m}{n}, +, \cdot, \R)$, con $m,n\in \N^*$.
+        
+    \item
+        $(\mathcal{F}(I), +, \cdot, \R)$
+        
+    \item
+        $(\mathcal{C}(I), +, \cdot, \R)$
+    
+    \begin{comment}
+    \item
+        $(\mathcal{C}^{k}(I), +, \cdot, \R)$, donde
+        \[
+            \mathcal{C}^k(I)=\{\func{f}{I}{\R}: f\text{ es $k$ - veces derivable en }I\text{ y }f^{k}\in\mathcal{C}(I)\}, \text{con } I\subseteq \R.
+        \]
+    \end{comment}
+    
+    \item
+        $(\R_n[x], +, \cdot, \R)$
+    \end{itemize}
+\end{prop}
+
+\begin{obs}
+Es importante mencionar respecto a esta proposición que:
+\begin{itemize}
+\item $\R^{n}= \{ (x_{1},\ldots, x_{n}): x_{i} \in \R \; \text{para } i = 1,\ldots, n \}$ y sus operaciones están definidos mediante
+%\[
+%\R^{n}  = \{ (x_{1}, ..., x_{n}): x_{i} \in \R \; \text{para } i = 1, ..., n \}
+%\]
+\begin{align*}
+(x_{1}, x_{2}, \ldots, x_{n})+(y_{1}, y_{2}, \ldots, y_{n}) & = (x_{1}+y_{1}, x_{2}+y_{2}, \ldots, x_{n}+y_{n}) \\
+\alpha \cdot (x_{1}, x_{2}, \ldots, x_{n}) & = (\alpha \cdot x_{1}, \alpha \cdot x_{2}, \ldots, \alpha \cdot x_{n}).
+\end{align*}
+\item $\mathcal{F}(I)=\{\func{f}{I}{\R}: f\text{ es una función}\}$, siendo $I$ un intervalo de $\R$.
+            
+$+$ es la suma usual de dos funciones y $\cdot$ es la multiplicación de un número real por una función.
+\item $\mathcal{C}(I)=\{\func{f}{I}{\R}: f\text{ es una función continua} \}$, siendo $I$ un intervalo de $\R$.
+            
+$+$ es la suma usual de dos funciones y $\cdot$ es la multiplicación de un número real por una función.
+\item $ \R_n[x] = \{ p : p(x) = a_{0} + a_{1}x + \cdots + a_{n}x^{n}, \, a_{i} \in \R \text{ para } i = 0, 1, \cdots, n \}$.
+            
+$+$ representa la suma usual de dos polinomios de grado menor o igual a $n$ y $\cdot$ representa el producto de un número real por un polinomio.
+\end{itemize}
+\end{obs}
+
+\begin{prop}
+Sea $(E, +, \cdot, \K)$ un espacio vectorial, el elemento neutro es único.
+\end{prop}
+
+%\begin{ejem}\hspace{0pt} Para cada espacio de la observación anterior su elemento neutro es:
+\begin{ejem}\hspace{0pt} Para los espacios definidos con anterioridad su elemento neutro es:
+\begin{itemize}
+\item $0_{\R^{n}} = (0, 0, \ldots, 0)$.
+\item $0_{\Mat{m}{n}} = 0_{m \times n}$.
+\item $0_{\mathcal{F}(I)} = 0_{\mathcal{C}(I)} = 0_{f}$, donde
+\[
+    \funcion{0_{f}}{I}{\R}{x}{0}
+\]
+con $I\subseteq\R$.
+\item $0_{\R_{n}[x]} = 0 + 0x + \cdots + 0x^{n-1} + 0x^{n},$ para todo $x\in\R$.
+\end{itemize}
+\end{ejem}
+
+\begin{prop}
+Sea $(E, +, \cdot, \K)$ un espacio vectorial, para todo $u\in E$ su inverso es único.
+\end{prop}
+
+\begin{ejer}\hspace{0pt} Sea $E$ el conjunto de todos los números reales positivos. Considere las operaciones:
+\[
+    \funcion{\oplus}{E \times E}{E}{(x, y)}{xy}
+    \texty
+    \funcion{\odot}{\R \times E}{E}{(\alpha, x)}{x^{\alpha}.}
+\]
+Muestre que con las operaciones definidas sobre $E,$ es un espacio vectorial real cuyo elemento neutro es $1$ y tal que si $u\in E$ su inverso está dado por $u^{-1}$.
+\end{ejer}
+
+\setcounter{section}{3}
+\section{Espacios Vectoriales}
+\setcounter{subsection}{1}
+\subsection{Propiedades}
+
+\begin{teo}
+Sea $(E,+,\cdot,\K)$ un espacio vectorial, para todo $u \in E$ y todo $\alpha \in \K$, se tiene que:
+\begin{enumerate}
+\item $0\cdot u = 0_{E}$;
+\item $\alpha \cdot 0_{E} = 0_{E}$;
+\item Si $\alpha \cdot u=0_{E}$, entonces $\alpha  = 0$ o $u = 0_{E}$;
+\item $(-1) \cdot u = -u$.
+\end{enumerate}
+\end{teo}
+
+\begin{prop}
+Sea $(E,+,\cdot,\K)$ un espacio vectorial, para todo $u, v, w \in E$ y todo $\alpha, \beta \in \K$, se tiene que:
+    \begin{enumerate}
+        \item $-(-u) = u$;
+        \item Si $u + v = u + w$, entonces $v = w$;
+        \item Si $u \neq 0$ y $\alpha u = \beta u$, entonces $\alpha  = \beta$;
+    \end{enumerate}
+\end{prop}
+
+\begin{ejer}\hspace{0pt} Dado el conjunto $E = \{(x_{1},x_{2})\in\R^{2}\,:\,x_{1}>0,\,x_{2}>0\}$. Considere la operación
+\[
+    (x_{1},x_{2}) \oplus (y_{1},y_{2}) = (x_{1}+y_{1},x_{2}+y_{2}).
+\]
+Dotando a $E$ de está operación, verifique que no existe el elemento neutro.
+\end{ejer}
+
+\begin{ejem}\hspace{0pt} Sea $E=\{1\}$ el conjunto formado solamente por el elemento 1. Definimos $1 \oplus 1 = 1$ y $\alpha \odot 1 = 1,$ para todo $\alpha\in\R$. Con estas operaciones $E$ es un espacio vectorial real, verifique que las propiedades se cumplen trivialmente.
+\end{ejem}
+
+
+\begin{ejer}\hspace{0pt} Sea $E$ el conjunto de todos los números reales. Se definen a las operaciones:
+\[
+    \funcion{\oplus}{E \times E}{E}{(u, v)}{2u - v}
+    \texty
+    \funcion{\odot}{\R \times E}{E}{(\alpha, u)}{\alpha u.}
+\]
+\begin{enumerate}
+\item ¿Qué se puede decir sobre la existencia y unicidad del elemento neutro?
+\item ¿Es $E$ un espacio vectorial?
+\end{enumerate}
+\end{ejer}
+
+% \begin{ejer}\hspace{0pt} Sea $E = \mathbb{R}^{2}$. Se define a la operación $\oplus$ por \[
+%     (x_{1},x_{2}) \oplus (y_{1},y_{2}) = (x_{1} + x_{2}, y_{1}y_{2})
+% \]
+% para todo $(x_{1},x_{2}), (y_{1},y_{2})\in E$.
+% \begin{enumerate}
+% \item ¿Qué se puede decir sobre la existencia y unicidad del elemento neutro?
+% \item ¿Qué se puede decir sobre la existencia y unicidad del elemento inverso de cualquier elemento de $E$?
+% \end{enumerate}
+% \end{ejer}
+
+\subsection{Subespacios}
+
+\begin{defi}[Subespacio Vectorial]
+    Sea $(E,+,\cdot,\K)$ un espacio vectorial y $W$ un subconjunto no vacío de $E$. Se dice que $W$ es un subespacio vectorial del espacio vectorial $E$ si $(W, +|_{W}, \cdot|_{W}, \K)$ es un espacio vectorial.
+\end{defi}
+
+\begin{teo}\label{Teosev}
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial y $W$ un subconjunto no vacío de $E$. Se tiene que $W$ es un subespacio vectorial de $E$ si y sólo si se cumplen las siguientes condiciones:
+    \vspace{-5pt}
+    \begin{itemize}
+    \item 
+        si $u,v \in W$, entonces $u + v \in W$; y
+    \item 
+        si $\alpha \in \K$ y $u \in W$, entonces $\alpha u \in W$.
+    \end{itemize}
+\end{teo}
+
+\begin{obs}
+Notemos que dados $E$ un espacio vectorial sobre el cuerpo $\K$ y $W\subseteq E$ mostrar las condiciones del teorema anterior es equivalente a mostrar que 
+\[
+    \alpha u + v \in W 
+\]
+para todo $u, v \in W$ y todo $\alpha\in\K$.
+\end{obs}
+
+%\begin{obs}
+%Dado $E$ un espacio vectorial sobre el cuerpo $\K$ se tiene que $\{0_{E}\}$ y $E$ son subespacios vectoriales de $E$.
+%\end{obs}
+
+\begin{advertencia}
+Si vamos a mostrar que $W$ es un subespacio del espacio vectorial $E$, una de las condiciones a ser verificada es que $W\neq\emptyset$, para lo cual es suficiente mostrar que $0_{E}\in W$.
+\end{advertencia}
+
+\begin{ejem}\hspace{0pt} \textbf{El subespacio trivial.} Para cualquier espacio vectorial $E$, el subconjunto $\{0_{E}\}$
+que consiste únicamente en el vector neutro es un subespacio vectorial ya que:
+\[
+   0_{E} + 0_{E}=0_{E}
+   \texty
+   \alpha 0_{E}=0_{E}
+\]
+para todo $\alpha\in\K$. Luego, a $\{0_{E}\}$ se lo denomina como el subespacio trivial de $E$.
+\end{ejem}
+
+\begin{ejem}\hspace{0pt} Un espacio vectorial es un subespacio en sí mismo. En efecto, para cada espacio vectorial $E$, $E$ es un subespacio en sí mismo.
+\end{ejem}
+
+\begin{obs}
+Los subespacios de $E$ distintos a $\{0_{E}\}$ y $E$ se denominan subespacios propios. 
+\end{obs}
+
+\begin{ejem}\label{Ejsev}\hspace{0pt} \textbf{Un subespacio propio de $\mathbb{R}^{2}$.} Consideremos al espacio vectorial $\mathbb{R}^{2}$ con sus operaciones usuales de suma y producto por un escalar. Considere el conjunto:
+\[
+    W= \{(x,y)\in \mathbb{R}^{2} : y=2x \}.
+\]
+Se tiene que $W$ es un subespacio vectorial de $\R^{2}$. Para mostrarlo utilizamos al teorema \ref{Teosev}.
+\begin{enumerate}
+\item[$i)$] Notemos que $0 = 2(0)$, lo que implica que $(0,0)\in W$, luego, $W\neq\emptyset$.
+\item[$ii)$] Sean $(x_{1},x_{2}), (y_{1}, y_{2})\in W$, vamos a mostrar que $(x_{1},x_{2}) + (y_{1}, y_{2})\in W$.
+
+Por hipótesis tenemos que: 
+\[
+    x_{2} = 2x_{1} \texty y_{2} = 2y_{1}.
+\]
+Además, notemos que:
+\[
+    (x_{1},x_{2}) + (y_{1}, y_{2}) = (x_{1} + y_{1}, x_{2} + y_{2}).
+\]
+Luego, 
+\[
+    x_{2} + y_{2} = 2x_{1} + 2y_{1} = 2(x_{1} + y_{1})
+\]
+lo que implica que $(x_{1},x_{2})+(y_{1}, y_{2})\in W$.
+\item[$iii)$] Sean $\alpha\in\R$ y $(x_{1},x_{2})\in W$, vamos a mostrar que $\alpha(x_{1},x_{2})\in W$.
+
+Por hipótesis tenemos que: 
+\[
+    x_{2} = 2x_{1}.
+\]
+Además, notemos que: 
+\[
+    \alpha(x_{1},x_{2}) = (\alpha x_{1}, \alpha x_{2}).
+\]
+Luego, 
+\[
+    \alpha x_{2}  = \alpha(2x_{1}) = 2(\alpha x_{1})
+\]
+lo que implica que $\alpha (x_{1},x_{2})\in W$.
+\end{enumerate}
+Por $i)$, $ii)$ y $iii)$ junto con el teorema \ref{Teosev} se concluye que $W$ es un subespacio vectorial de $\R^{2}$. Finalmente, notemos que $(1,1)\notin W$ y que $(1,1)\in\R^{2}$, lo que implica que $W$ es un subespacio vectorial propio de $\R^{2}$.
+\begin{comment}
+Observe que $W$ es no vacío porque $0_{E}=(0,0)\in W$. Mostremos que es un subespacio vectorial para ello sean
+$(x_{1},2x_{1}) \in W$  y $(x_{2},2x_{2}) \in W$ por lo tanto,
+\[
+(x_{1},2x_{1})+(x_{2},2x_{2})=(x_{1}+x_{2},2(x_{1}+x_{2})) \in W
+\]
+y
+\[
+\alpha(x_{1},2x_{1})=(\alpha x_{1},2\alpha x_{1}) \in W
+\]
+de modo que $W$ es cerrado bajo la suma y el producto con un escalar por lo tanto es un subespacio de $\mathbb{R}^{2}$. 
+
+Finalmente observemos que $W\neq \{0_{E}\}$ ya que $(1,2)\in W$ y $W\neq \mathbb{R}^{2} $ ya que $(1,3)\notin W$ de modo que W es un subespacio vectorial propio de $\mathbb{R}^{2}$. \end{comment}
+\end{ejem}
+
+\begin{comment}
+\begin{ejem}
+Un subespacio propio de $\mathbb{R}^{3}$. De manera similar al ejemplo anterior se puede mostrar que dado $t\in\R$ el conjunto:
+\[
+    W= \{(x,y,z)\in \mathbb{R}^{3}\,:\,x=at,\,y=bt,\,z=ct,\,a,\,b,\,c\in\mathbb{R}\}
+\]
+es un subespacio de $\mathbb{R}^{3}$.
+\end{ejem}
+\end{comment}
+
+\begin{ejem}\hspace{0pt} Sean $E=\mathbb{R}^{2}$ y $W=\{(x,1)\in \mathbb{R}^{2}\,:\, x \in \mathbb{R}\}$, considerando a las operaciones usuales para la suma y producto con un escalar en $E$, tenemos que $W$ no es un subespacio vectorial de $E$. En efecto, notemos que $(5,1)\in W$ y $(2,1)\in W$ y que su suma
+\[
+    (5,1)+(2,1)=(7,2) \notin W,
+\]
+por lo tanto, $W$ no es un subespacio vectorial de $\mathbb{R}^{2}$, dado que no cumple la primera propiedad del teorema \ref{Teosev}.
+\end{ejem}
+
+\begin{ejem}
+Sean $E=\mathbb{R}^{2}$ y $W=\{(x,y)\in \mathbb{R}^{2}\,:\,x>0\}$, considerando a las operaciones usuales para la suma y producto con un escalar en $E$, tenemos que $W$ no es un subespacio vectorial de $E$. En efecto, notemos que $(3,1)\in W$ y que:
+\[
+    -2(3,1)=(-6,-2)\notin W
+\]
+por lo tanto, $W$ no es un subespacio vectorial de $\mathbb{R}^{2}$, dado que no cumple la segunda propiedad del teorema \ref{Teosev}.
+\end{ejem}
+
+\begin{teo}
+    Sea $(E, +, \cdot, \K)$ un espacio vectorial. Si $W_{1}$ y $W_{2}$ son subespacios vectoriales de E, entonces $W_{1} \cap W_{2}$ es un subespacio vectorial de E.
+\end{teo}
+
+\begin{comment}
+\begin{advertencia}
+Veamos una demostración:
+
+Observe que $W_{1} \cap W_{2}$ es no vacío porque contiene al $0_{E}$.
+
+Sea $x_{1}\in W_{1} \cap W_{2} $ y $x_{2}\in W_{1} \cap W_{2} $
+entonces como $W_{1}$ y $W_{2}$ son subespacios vectoriales de E, $x_{1}+x_{2}\in W_{1}  $ y $x_{1}+x_{2}\in W_{2}  $; esto significa que $x_{1}+x_{2}\in W_{1} \cap W_{2} $.
+
+De manera similar se muestra que, $\alpha x_{1}\in  W_{1} \cap W_{2} $.
+
+por lo tanto, se cumplen los axiomas de cerradura y así $W_{1} \cap W_{2}$ es un subespacio vectorial de E.
+\end{advertencia}
+\end{comment}
+
+\begin{ejem}\hspace{0pt} En el espacio vectorial $\mathbb{R}^{3}$ consideremos los subespacios:
+\[
+    W_{1}=\left\{(x,y,z):x-y=0\right\}
+    \texty
+    W_{2}=\left\{(x,y,z):y-z=0\right\}.\]
+Se tiene que $W_{1}\cap W_{2}$ es un subespacio vectorial de $\R^{3}$. En efecto, por la definición de intersección de conjuntos tenemos que:
+\[
+    W_{1} \cap W_{2} = \{(x,y,z)\in\R^{3}\,:\,x-y=0,\,y-z=0\}.
+\]
+Ahora, si $(x,y,z)\in W_{1} \cap W_{2}$ se tiene que se verifica al sistema de ecuaciones lineales:
+\[
+    \systeme[xyz]{x-y=0,y-z=0}
+\]
+a partir de lo cual se tiene que:
+\[
+    x= z \texty y = z
+\]
+con $z\in\R$. Luego, 
+\[
+    W_{1}\cap W_{2}=\left\{(x,y,z)\in \mathbb{R}^{3}\,:\,x=z,\,y=z\right\}.
+\]
+Finalmente, se tiene que $W_{1} \cap W_{2}$ es un subespacio vectorial de $\mathbb{R}^{3}$, para mostrarlo considere el ejemplo \ref{Ejsev}, además, muestre que se tiene a un subespacio vectorial propio.
+\end{ejem}
+
+\begin{cor}
+    Sea $(E, +, \cdot, \K)$ un espacio vectorial. Si $W_{1}, W_{2}, \cdots, W_{n}$ son subespacios vectoriales de E, entonces $W_{1} \cap W_{2} \cap \cdots \cap W_{n}$ es un subespacio vectorial de E.
+\end{cor}
+
+\begin{advertencia}
+La unión de dos subespacios vectoriales NO necesariamente es un subespacio vectorial.
+\end{advertencia}
+
+\begin{ejem}\hspace{0pt} En el espacio vectorial $\R^{2}$ con las operaciones usuales de suma y producto con un escalar, sean los subespacios vectoriales:
+\[
+    W_{1} = \{(x,y)\in\R^{2}\,:\,x=y\}
+    \texty
+    W_{2} = \{(x,y)\in\R^{2}\,:\,x+2y=0\}.
+\]
+Se tiene que $W_{1} \cup W_{2}$ no es un subespacio vectorial de $\R^{2}$. En efecto, notemos que $(1,1)\in W_{1} \subseteq W_{1} \cup W_{2}$ y que $(2,-1)\in W_{2} \subseteq W_{1} \cup W_{2}$, sin embargo, $(1,1) + (2,-1) = (3,0) \notin W_{1} \cup W_{2}$, lo que implica que $W_{1} \cup W_{2}$ no es un subespacio vectorial de $\R^{2}$ dado que no se cumple la primera propiedad del teorema \ref{Teosev}.
+\end{ejem}
+
+\begin{defi}[Combinación lineal]
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial, $k\in\N^*$ y $v_1, v_2, \ldots, v_k \in E$. Se dice que un vector $v \in E$ es una combinación lineal de 
+    $v_1, v_2, \ldots, v_k$ si 
+    \[
+        v = \alpha_1 v_1 + \alpha_2 v_2 + \cdots + \alpha_k v_k
+    \]
+    para algunos $\alpha_1, \alpha_2, \ldots, \alpha_k \in \K$.
+\end{defi}
+
+\begin{ejem}\hspace{0pt} En el espacio vectorial $(\R^{2}, +, \cdot, \R)$ con las operaciones usuales, sean $u, v, w\in \R^{2}$ donde $u = (1, 2)$, $v = (2, 4)$ y $w = (0,0)$, se tiene que
+\begin{gather}
+\label{Comb_Lin1}
+u = \dfrac{1}{2}v + 5w,
+\end{gather}
+esto implica que $u$ es combinación lineal de $v$ y de $w$ donde se han utilizado los escalares $\alpha_{1} = \dfrac{1}{2}$ y $\alpha_{2} = 5$.
+
+\noindent Además,
+\begin{gather}
+\label{Comb_Lin2}
+    w = 2u - v,
+\end{gather}
+entonces $w$ es combinación lineal de $u$ y de $v$ donde se han utilizado los escalares $\alpha_{1} = 2$ y $\alpha_{2} = - 1$.
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} En el espacio vectorial $(\R^{3},+,\cdot,\R)$ con las operaciones usuales, sean $v_{1} = (3,0,-2),$ $v_{2}= (2,-1,-5)\}$ y $v=(1,-2,-5)$.
+\begin{enumerate}
+    \item ¿Para qué valores de $k$ el vector $(1,-2,k)$, se expresa como combinación lineal de $v_{1}$ y $v_{2}$?
+    \item ¿Se puede expresar $v$ como combinación lineal de $v_{1}$ y $v_{2}$?
+\end{enumerate}
+\end{ejer}
+
+\setcounter{section}{3}
+\section{Espacios Vectoriales}
+\setcounter{subsection}{3}
+\subsection{Combinación lineal y cápsula}
+
+\begin{defi}
+Sean $(E,+,\cdot,\K)$ un espacio vectorial, $k\in\N^{*}$ y $S = \{v_1, v_2, \ldots, v_k\} \subset E$. Al conjunto de todos los vectores en $E$ que son combinaciones lineales de los vectores de $S$ se lo llama cápsula de $S$ y se denota por $\spn(S)$, es decir
+    \[
+        \spn(S) = \{\alpha_1 v_1 + \alpha_2 v_2 + \cdots + \alpha_k v_k:\alpha_1, \alpha_2, \ldots, \alpha_k \in \K\}.
+    \]
+\end{defi}
+
+\begin{advertencia}
+A este conjunto también se lo conoce como \emph{cápsula lineal} y su notación viene de su nombre en inglés, \emph{linear span}. También se utiliza la notación $\langle S\rangle$.
+\end{advertencia}
+
+\begin{ejem}\label{S07C01:EJ_Cap_lin}
+En el espacio vectorial $(\R^{2}, +, \cdot, \R)$ con las operaciones usuales, sean $v_{1}, v_{2}\in \R^{2}$ donde $v_{1} = (2, 3)$ y $v_{2} = (4, 6)$. Se define el conjunto $S = \{v_{1}, v_{2}\}$ su cápsula lineal está dada por:
+\begin{align*}
+    \spn(S) &= \{(x, y)\in\R^{2}\,:\,(x, y) = \alpha_{1}v_{1}+\alpha_{2}v_{2},\alpha_{1}, \alpha_{2}\in\R\}\\
+    &= \{(x, y)\in\R^{2}\,:\,(x, y) = \alpha_{1}(2, 3)+\alpha_{2}(4, 6),\alpha_{1}, \alpha_{2}\in\R\}\\
+    &= \{(x, y)\in\R^{2}\,:\,(x, y) = (2\alpha_{1}, 3\alpha_{1})+(4\alpha_{2}, 6\alpha_{2}),\alpha_{1}, \alpha_{2}\in\R\}\\
+    &= \{(x, y)\in\R^{2}\,:\,(x, y) = (2\alpha_{1}+4\alpha_{2}, 3\alpha_{1}+6\alpha_{2}),\alpha_{1}, \alpha_{2}\in\R\}\\
+    &= \{(x, y)\in\R^{2}\,:\,2\alpha_{1}+4\alpha_{2} = x, 3\alpha_{1}+6\alpha_{2} = y,\alpha_{1}, \alpha_{2}\in\R\}\\
+    &= \{(x, y)\in\R^{2}\,:\,3x - 2y = 0\}.
+\end{align*}
+En efecto, sea $(x, y)\in\R^{2}$ se tiene que $(x,y)\in\spn(S)$ si y solo si se verifica el sistema de ecuaciones lineales
+\[
+    \systeme[\alpha_{1}\alpha_{2}]{2\alpha_{1}+4\alpha_{2} = x, 3\alpha_{1}+6\alpha_{2} = y}
+\]
+donde $\alpha_{1}, \alpha_{2}\in\R$. La matriz ampliada del sistema verifica la equivalencia siguiente:
+\[
+    \begin{pNiceArray}{cc|c}
+    2&4&x\\
+    3&6&y
+    \end{pNiceArray}
+    \sim
+    \begin{pNiceArray}{cc|c}
+    2&4&x\\
+    0&0&-3x+2y
+    \end{pNiceArray}.
+\]
+Luego, para que el sistema tenga solución se debe tener que $-3x+2y=0$, lo que implica que:
+\[
+    \spn(S) = \{(x, y)\in\R^{2}\,:\,3x - 2y = 0\}.
+\]
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} En el espacio vectorial $(\R^{3},+,\cdot,\R)$ encontrar la cápsula del conjunto \[S=\{(1,-1,0),(-2,3,-1),(2,1,-3)\}.\]
+\end{ejer}
+
+\begin{teo}
+Sean $(E,+,\cdot,\K)$ un espacio vectorial y $S\subset E$. Se tiene que $\spn(S)$ es un subespacio vectorial de $E$.
+\end{teo}
+
+\begin{comment}
+    \begin{advertencia}
+        Si $S = \emptyset$, definimos $\spn(S)$ como $\{0\}$.
+    \end{advertencia}
+\end{comment}
+
+% \subsection{Conjunto generador}
+% \begin{defi}
+%     Sean $(E,+,\cdot,\K)$ un espacio vectorial y $S\subseteq E$. Al subespacio vectorial más pequeño que contiene a $S$ (es decir, la intersección de todos los subespacios que contienen a $S$) se lo denomina espacio generado por $S$ y se denota por $\gen(S)$.
+% \end{defi}
+
+% \begin{obs}
+%     Si $S = \emptyset$, definimos $\gen(\emptyset)=\{0_{E}\}$.
+% \end{obs}
+
+% \begin{prop}\label{S07C02:Gen_Cap}
+%     Sean $(E,+,\cdot,\K)$ un espacio vectorial y $S\subseteq E$. Se tiene que $\spn(S)=\gen(S)$.
+% \end{prop}
+
+\begin{obs}
+    Si $S = \emptyset$, entonces
+    $\spn(\emptyset) = \{ 0_{E} \}$.
+\end{obs}
+
+% \begin{obs}
+%     Si $S = \emptyset$, entonces
+%     $\spn(\emptyset) = \gen(\emptyset) = \{ 0_{E} \}$.
+% \end{obs}
+
+\begin{defi} 
+Sean $(E,+,\cdot,\K)$ un espacio vectorial, $k\in\N^{*}$ y $S=\{v_1,v_2,\ldots,v_k\}\subseteq E$. 
+Se dice que $S$ genera el espacio vectorial $E$ si cada vector en $E$ es una combinación lineal de los 
+elementos de $S$, es decir, si para todo $v\in E$, existen  $\alpha_1, \alpha_2, \ldots, \alpha_k\in \K$ 
+tales que 
+    \[
+        v = \alpha_1v_1+ \alpha_2v_2+ \cdots+ \alpha_k v_k.
+    \]
+\end{defi}
+
+\begin{ejem}\label{S07C02:Ej_Conj_gen}
+En el espacio vectorial $(\R^2,+,\cdot,\R)$ con las operaciones usuales, considere el conjunto $S=\{(1,0), (0,2)\}$. Tenemos que $S$ genera el espacio vectorial $\R^2$. En efecto, sean $(x,y)\in\mathbb{R}^2$ y $\alpha_1,\alpha_2\in\R$ tal que $(x,y)$ es combinación lineal de los elementos de $S$, es decir:
+\[
+\alpha_1 (1,0)+\alpha_2 (0,2)=(x,y)
+\]
+o equivalentemente
+\[
+(\alpha_1,2\alpha_2)=(x,y).
+\]
+Igualando ambos vectores se obtiene el siguiente sistema de ecuaciones:
+\[
+\systeme[\alpha_1 \alpha_2]{\alpha_1=x,2\alpha_2=y}
+\]
+este sistema tiene solución única $\alpha_1=x$ y $\alpha_2=\dfrac{y}{2}$. Por lo tanto, cada vector de $\mathbb{R}^2$ se puede  escribir como combinación lineal de los elementos de $S$. Por ejemplo, el vector $v=(-1,4)\in\mathbb{R}^2$ se puede escribir como:
+\[
+    (-1,4)=(-1)(1,0)+\dfrac{4}{2}(0,2).
+\]
+Finalmente, notemos que $\gen(S) = \R^{2}$.
+\end{ejem}
+
+% \begin{ejer}
+% En el espacio vectorial $(\R_1[t],+,\cdot,\R)$ con las operaciones usuales, considere el subconjunto $S=\{1,-t\}$ verifique que $S$ genera $\R_1[t]$.
+% \end{ejer}
+
+\begin{prop}
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial, $k\in\N^{*}$ y 
+ \[S=\{v_1,v_2,\ldots,v_k\}\subseteq E.\]
+Se tiene que $S$ genera el espacio vectorial $E$ si y solo si
+    \[
+        E = \gen(S) = \spn(S).
+    \]
+\end{prop}
+
+\begin{ejem}\label{Semana6: ejem1}
+En el espacio vectorial $(\R^{2},+,\cdot,\R)$ con las operaciones usuales, dado el conjunto $S = \{u_{1}\} = \{(2, 3)\}$ se tiene que el espacio generado por $S$ está dada por $\gen(S) = \spn(S) = \{(x,y)\in\R^{2}\,:\,3x-2y=0\}$, además, el espacio generado se representa gráficamente como una recta en el plano, en la figura \ref{GeneradoR2} se puede observar a dicho espacio.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.45\linewidth]{Graficos/GeneradoR2.eps}
+    \caption{Espacio generado por $S = \{u_{1}\}$.}
+    \label{GeneradoR2}
+\end{figure}
+\end{ejem}
+
+\begin{ejem}
+En el espacio vectorial $(\R^{3},+,\cdot,\R)$ con las operaciones usuales, dado el conjunto $S = \{v_{1}, v_{2}\} = \{(0, 2, 2), (0, 1, - 2)\}$ se tiene que el espacio generado por $S$ está dado por $\gen(S) = \spn(S) = \{(x,y,z)\in\R^{3}\,:\,x=0\}$, además, el espacio generado se representa gráficamente como un plano en el espacio.
+
+% . en la figura \ref{GeneradoR3} se puede observar a dicho espacio.
+
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=1.0\linewidth]{Graficos/GeneradorR3.eps}
+%     \caption{Espacio generado por $S = \{v_{1}, v_{2}\}$.}
+%     \label{GeneradoR3}
+% \end{figure}
+\end{ejem}
+
+\begin{obs}
+Un espacio vectorial puede ser generado por distintos conjuntos. Por ejemplo, el espacio $\R^{2}$ está generado por los conjuntos $\{(1, 0), (0, 1)\}$, $\{(1, 1), (1, - 1)\}$, $\{(1, 2), (2, -1), (4, 3)\}$ y $\{(0, 0), (1, 2), (4, 5), (5, 7), (- 3, - 3)\}$, entre otros.
+\end{obs}
+
+\begin{prop}\label{S07C02:Cap_com_lin}
+Sean $(E,+,\cdot,\K)$ un espacio vectorial, $k\in\N^{*}$ y
+
+\noindent$S=\{v_1,v_2,\ldots,v_k\}\subseteq E$. Si algún $v_{j}$ es combinación lineal de los demás elementos de $S$, entonces
+\[
+    \spn(S) = \spn\{v_{1}, v_{2}, \ldots, v_{j - 1}, v_{j + 1}, \ldots, v_{k}\}.
+\]
+\end{prop}
+
+\begin{ejem}\hspace{0pt} En el espacio vectorial $(\mathbb{R}^2,+,\cdot,\R)$ con las operaciones usuales, considere el subconjunto:
+\[
+    S=\{(2,-2), (1,0), (3,2), (0,2)\}.
+\]
+Notemos que se tiene la siguiente combinación lineal:
+\[
+    (3,2)=0(2,-2)+3(1,0)+(0,2),
+\]
+lo que junto con la proposición \ref{S07C02:Cap_com_lin} implica que:
+\[
+    \spn(S) = \spn\{(2,-2), (1,0), (0,2)\}.
+\]
+Además, notemos que dado que se tiene a la combinación lineal:
+\[
+    (2,-2)=2(1,0)-(0,2),
+\]
+por la proposición \ref{S07C02:Cap_com_lin} se tiene que:
+\[
+    \spn(S) = \spn\{(1,0), (0,2)\}.
+\]
+Considerando al ejemplo \ref{S07C02:Ej_Conj_gen} se concluye que:
+\[
+     \spn(S) = \R^{2}.
+\]
+\end{ejem}
+
+\begin{ejer}
+En el espacio vectorial $(\Mat[\R]{2}{3},+,\cdot,\R)$ con las operaciones usuales, considere el subconjunto:
+\[S=\left\lbrace \begin{pmatrix} 1 & 0 & 2\\ 0 & 0 & 1 \end{pmatrix}, \begin{pmatrix} 1 & 0 & 0\\ 1 & 0 & 1 \end{pmatrix}, \begin{pmatrix} 2 & 1 & 0\\ 4 & 1 & 2 \end{pmatrix}, \begin{pmatrix} 0 & 1 & 0\\ 2 & 1 & 0 \end{pmatrix} \right\rbrace.\]
+Verifique que existe alguna matriz $v_j$ combinación lineal de los demás elementos de $S$ tal que:
+\[
+    \spn(S) = \spn(\{v_{k}\in S: k\neq j\}).
+\]
+\end{ejer}
+
+% \begin{ejer}
+% En el espacio vectorial $(\R_2[t],+,\cdot,\R)$ con las operaciones usuales, considere el subconjunto:
+% \[S=\{1,t,t^2,1-2t\}.\]
+% Verifique que existe algún $v_j$ combinación lineal de los demás elementos de $S$ tal que:
+% \[
+%     \spn(S) = \spn(\{v_{k}\in S: k\neq j\}).
+% \]
+% \end{ejer}
+
+\begin{defi}[Independencia lineal]
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial, $k\in\N^{*}$ y $S=\{v_1,v_2,\ldots,v_k\}\subseteq E$. Se dice que $S$ es un conjunto linealmente independiente si y solo si
+    \[ \alpha_1 v_1 + \alpha_2 v_2 + \cdots + \alpha_k v_k = 0 \]
+    implica que 
+    \[ \alpha_1=\alpha_2=\ldots= \alpha_k=0 \]
+    es solución única.
+\end{defi}
+\begin{advertencia}
+    Decimos que un conjunto de vectores $\{v_1,v_2,\ldots,v_k\}$ es linealmente dependiente si existen $\alpha_1, \alpha_2, \ldots, \alpha_k \in \K$, \textbf{no todos iguales a cero}, tales que:
+    \[
+        \alpha_1 v_1 + \alpha_2 v_2 + \cdots + \alpha_k v_k = 0.
+    \]
+\end{advertencia}
+
+% \begin{defi}
+%     Sean $(E,+,\cdot,\K)$ un espacio vectorial, $k\in\N^{*}$ y $S=\{v_1,v_2,\ldots,v_k\}\subseteq E$. Se dice que $S$ es un conjunto linealmente dependiente si existen $\alpha_1, \alpha_2, \ldots, \alpha_k \in \K$, no todos iguales a cero, tales que:
+%     \[
+%         \alpha_1 v_1 + \alpha_2 v_2 + \cdots + \alpha_k v_k = 0
+%     \]
+%     en caso contrario, se dice que $S$ es un conjunto linealmente independiente. 
+% \end{defi}
+
+% \begin{advertencia}
+%     De esta definición, se tiene que $\{v_1,v_2,\ldots,v_k\}$ es linealmente independiente si y solo si
+%     \[
+%         \alpha_1 v_1 + \alpha_2 v_2 + \cdots + \alpha_k v_k = 0
+%     \]
+%     implica que
+%     \[
+%         \alpha_1 = \alpha_2 = \cdots = \alpha_k = 0.
+%     \]
+%     es solución única.
+% \end{advertencia}
+
+\begin{ejem}\label{Semana6: ejem2}
+En el espacio vectorial $(\R^{2},+,\cdot,\R)$, sean $v_{1} = (1,2)$ y $v_{2} = (2,4)$. El conjunto $S = \{v_{1}, v_{2}\}$ es linealmente dependiente. 
+
+\noindent En efecto, sean $\alpha_1, \alpha_2\in\R$, formemos a la combinación lineal nula:
+\[
+    \alpha_1(1,2)+\alpha_2(2,4)=(0,0).
+\]
+o equivalentemente, 
+\begin{equation}\label{Semana6: ec1}
+    (\alpha_1+2\alpha_2,2\alpha_1+4\alpha_2)=(0,0).
+\end{equation}
+A partir de la igualdad de pares ordenados en (\ref{Semana6: ec1}), se obtiene el siguiente sistema de ecuaciones lineales:
+\[
+    \systeme[\alpha_{1} \alpha_{2}]{\alpha_1+2\alpha_2=0,2\alpha_1+4\alpha_2=0.}
+\]
+Este sistema tiene infinitas soluciones donde $\alpha_{1} = -2\alpha_{2}$ con $\alpha_{2}\in\R$. Por lo tanto, el conjunto $S$ es linealmente dependiente.
+\end{ejem}
+
+\begin{ejer}\label{Semana6: ejem3}
+En el espacio vectorial $(\R^2,+,\cdot,\R)$, sean $v_{1} = (1, 3)$ y $v_{2} = (-2,4)$. Se define el conjunto $S = \{v_{1}, v_{2}\}$. Muestre que el conjunto $S$ es linealmente independiente.
+\end{ejer}
+
+\begin{ejer}\hspace{0pt}
+Considerando el Ejemplo \ref{Semana6: ejem3}, sea $T=\{2v_{1} + v_{2}, 4v_{1} - 3v_{2}\}$, ¿es $T$ un conjunto linealmente independiente? Justifique su respuesta.
+\end{ejer}
+
+\begin{prop}
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial y $S\subseteq E$. Si $0_{E}\in S$, entonces $S$ es linealmente dependiente.
+\end{prop}
+
+% \begin{advertencia}
+%     Se puede extender esta definición para conjuntos infinitos diciendo que $S$ es linealmente independiente si todo subconjunto finito de $S$ es linealmente independiente.
+% \end{advertencia}
+
+
+
+
+\setcounter{section}{3}
+\section{Espacios Vectoriales}
+\setcounter{subsection}{5}
+\subsection{Independencia lineal}
+
+\begin{prop}\label{prop_ld}
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial, $k\in\N^{*}$ y
+    
+    \noindent $S=\{v_1,v_2,\ldots,v_k\}\subseteq E$. Se tiene que $S$ es un conjunto linealmente dependiente si y sólo si alguno de los vectores $v_j\in S$ es una combinación lineal de otros elementos de $S$.
+\end{prop}
+
+\begin{ejem}\hspace{0pt} En el espacio vectorial $(\R^{2},+,\cdot,\R)$ considere el conjunto 
+
+\noindent $S = \{(1, 2), (2, -1), (4, 3)\}$, se tiene que $S$ es linealmente dependiente. En efecto, notemos que el vector $(4, 3)$ se puede escribir como combinación lineal de los vectores $(1, 2)$ y  $(2, -1)$, lo que junto con la proposición \ref{prop_ld} implica que $S$ es linealmente dependiente.
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} En el espacio vectorial $(\Mat[\R]{2}{2}, +, \cdot, \R)$, 
+¿es el conjunto \[\left\{\begin{pmatrix} 1 & 0\\ 2 & 0 \end{pmatrix}, \begin{pmatrix} 1 & 1\\ 0 & 0 \end{pmatrix}, \begin{pmatrix} 0 & 1\\ 2 & 0 \end{pmatrix} \right\},\] linealmente dependiente o independiente? Justifique su respuesta.
+\end{ejer}
+
+\begin{prop}
+Sean $(E, +, \cdot, \K)$ un espacio vectorial, $k\in\N^{*}$ y $S$ un conjunto de $E$ con $k$ elementos. Si $S$ es un conjunto linealmente independiente, entonces todo conjunto de $k + 1$ elementos de $\gen(S)$ es linealmente dependiente.
+\end{prop}
+
+\begin{ejem}\hspace{0pt}
+En el espacio vectorial $(\R^4,+,\cdot,\R)$ el conjunto \[S = \{(1,0,-1,0), (1,0,1,0)\}\] es linealmente \emph{independiente}, mientras que el conjunto \[\{(1,0,-1,0), (1,0,1,0), (3,0,1,0)\}\] es linealmente \emph{dependiente}.
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} 
+En el espacio vectorial $(\R^3,+,\cdot,\R)$ considere el conjunto linealmente independiente $S=\{(1,0,2), (0,0,1)\}$. Determine $\gen(S)$ y un conjunto linealmente dependiente a partir de $S$.
+\end{ejer}
+
+
+\begin{prop}
+    Sean $(E, +, \cdot, \K)$ un espacio vectorial, $k \in \N^{*}$ y
+    
+    \noindent $S = \{v_{1}, v_{2}, \cdots, v_{k} \} \subset E$. Si $S$ es linealmente dependiente, entonces
+    \[
+        \gen(S) = \gen(S \setminus \{ v_{j} \})
+    \]
+    donde $v_{j}$ es combinación lineal de los demás elementos de $S$.
+\end{prop}
+
+\begin{ejem}\hspace{0pt} En el espacio vectorial $(\R^{2},+,\cdot,\R)$, considere el conjunto 
+
+\noindent $S = \{(1, 0), (0, 1), (4, -3)\}$, se tiene que $S$ es linealmente dependiente y que 
+\[
+    \gen(S) = \gen(S \setminus \{ (4,3) \}).
+\]
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} En el espacio vectorial $(\R^{4},+,\cdot,\R)$, sean $v_1=(1,1,0,0)$, $v_2=(1,0,1,-1)$ y $v_3=(1,2,-1,1)$. Muestre que $S=\{v_1, v_2, v_3\}$ es linealmente dependiente y encuentre $ \gen(S)$. 
+\end{ejer}
+
+\begin{prop}
+    Sean $(E, +, \cdot, \K)$ un espacio vectorial, $S \subset E$ y $v \in E$. Si $S$ es linealmente independiente y $\gen(S) \not = E$, entonces $S \cup \{ v \}$ es linealmente independiente, siempre y cuando $v \not \in \gen(S)$
+\end{prop}
+
+\begin{ejem}\hspace{0pt} En el espacio vectorial $(\R^{3},+,\cdot,\R)$, el conjunto $S = \{(1,0,-1), (1,0,1)\} $ es linealmente independiente y $ \gen(S) \not = \R^{3}$. Notemos que $(0,1,0) \in \R^{3}$, y que $(0,1,0) \notin \gen(S)$. Por lo tanto $S_{1} = \{ (1,0,-1), (1,0,1), (0,1,0)\}$ es linealmente independiente.
+\end{ejem}
+
+\begin{ejer}\hspace{0pt}
+En el espacio vectorial $(\Mat[\R]{2}{2},+,\cdot,\R)$, considere el conjunto:
+\[
+S=\left\lbrace 
+\begin{pmatrix}
+1&0\\
+2&-1
+\end{pmatrix},
+\begin{pmatrix}
+0&1\\
+-1&3
+\end{pmatrix},
+\begin{pmatrix}
+2&0\\
+3&1
+\end{pmatrix}
+\right\rbrace.
+\]
+Determine $\gen(S)$ y un conjunto linealmente independiente con 4 elementos a partir de $S$.
+\end{ejer}
+
+% \begin{advertencia}
+% Un error común cuando se trabaja la independencia lineal en el espacio de polinomios, por ejemplo en $\R_{2}[x]$, consiste en que si se desea mostrar que el conjunto $S = \{1 + x, 2x + x^{2}\} \subseteq \R_{2}[x]$ es linealmente independiente, al formar la combinación lineal nula con estos elementos tomando $\alpha_{1}, \alpha_{2}\in\R$ se escribe que:
+% \[
+%     \alpha_{1}(1 + x) + \alpha_{2}(2x + x^{2}) = (0, 0x, 0x^{2}).
+% \]
+% Como se puede apreciar se confunde entre el elemento neutro de $\R_{2}[x]$ con $(0, 0, 0)$ el neutro de $\R^{3}$, lo correcto es
+% \[
+%     \alpha_{1}(1 + x) + \alpha_{2}(2x + x^{2}) = 0 + 0x + 0x^{2}.
+% \]
+% Otro error que se comete es asegurar que:
+% \[
+%     1 + x = (1, x, 0)
+% \]
+% en donde nuevamente se confunden a los espacios con los que se trabaja.
+% \end{advertencia}
+
+\setcounter{subsection}{6}
+\subsection{Base y dimensión}
+
+\begin{defi}
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial y $B\subseteq E$. Se dice que $B$ es una base de $E$ si 
+    \begin{enumerate}
+        \item $B$ genera a $E$; y 
+        \item $B$ es linealmente independiente. 
+    \end{enumerate}
+    
+\end{defi}
+
+\begin{ejem}
+Dado el subespacio vectorial  
+\[W=\left\lbrace \begin{pmatrix} a & b\\ b & c \end{pmatrix}\in \mathbb{R}^{2\times2}:
+\left|    
+     \begin{matrix}
+     a & b & 0\\
+     2 & 0 & 1 \\
+     1 & 3 &0
+     \end{matrix}
+\right|=0: a,b,c\in\Rbb
+\right\rbrace \]
+
+    Hallar una base $B$ para el conjunto $W$.
+Primero hallamos la restricción del conjunto
+
+\[
+\left|    
+     \begin{matrix}
+     a & b & 0\\
+     2 & 0 & 1 \\
+     1 & 3 &0
+     \end{matrix}
+\right|=-3a+b=0 
+\]
+Entonces, tenemos que:
+\begin{align*}
+W &=\left\lbrace \begin{pmatrix} a & b\\ b & c \end{pmatrix}\in \mathbb{R}^{2\times2}:
+-3a+b=0: a,b,c\in\Rbb 
+\right\rbrace\\
+&=\left\lbrace \begin{pmatrix} a & b\\ b & c \end{pmatrix}\in \mathbb{R}^{2\times2}:
+b=3a: a,c\in\Rbb 
+\right\rbrace\\
+&=\left\lbrace \begin{pmatrix} a & 3a\\ 3a & c \end{pmatrix}\in \mathbb{R}^{2\times2}: a,c\in\Rbb \right\rbrace\\
+&=\left\lbrace \begin{pmatrix} a & 3a\\ 3a & 0 \end{pmatrix}+\begin{pmatrix} 0 & 0\\ 0 & c \end{pmatrix}\in \mathbb{R}^{2\times2}: a,c\in\Rbb \right\rbrace\\
+&=\left\lbrace a\begin{pmatrix} 1 & 3\\ 3 & 0 \end{pmatrix}+c\begin{pmatrix} 0 & 0\\ 0 & 1 \end{pmatrix}\in \mathbb{R}^{2\times2}: a,c\in\Rbb \right\rbrace\\
+&=\text{gen}\left\lbrace \begin{pmatrix} 1 & 3\\ 3 & 0 \end{pmatrix},\begin{pmatrix} 0 & 0\\ 0 & 1 \end{pmatrix}\right\rbrace
+\end{align*}
+Luego, tomamos $B=\left\lbrace \begin{pmatrix} 1 & 3\\ 3 & 0 \end{pmatrix},\begin{pmatrix} 0 & 0\\ 0 & 1 \end{pmatrix}\right\rbrace$ se tiene que $W=$ gen$(B)=\langle B \rangle$. Entonces, $B$ genera a $W$.
+Ahora, verificamos si $B$ es LI.
+Hacemos la combinación lineal nula. Supongamos que existe $\alpha_1, \alpha_2 \in \mathbb{K} $ tales que:
+\begin{align*}
+\begin{pmatrix} 0 & 0\\ 0 & 0 \end{pmatrix} &=\alpha_1\begin{pmatrix} 1 & 3\\ 3 & 0 \end{pmatrix}+\alpha_2\begin{pmatrix} 0 & 0\\ 0 & 1 \end{pmatrix}\\
+&=\begin{pmatrix} \alpha_1 & 3\alpha_1\\ 3\alpha_1 & 0 \end{pmatrix}+\begin{pmatrix} 0 & 0\\ 0 & \alpha_2 \end{pmatrix}\\
+&=\begin{pmatrix} \alpha_1 & 3\alpha_1\\ 3\alpha_1 & \alpha_2 \end{pmatrix}
+\end{align*}
+A partir de lo cual se obtiene el siguiente sistema de ecuaciones:
+\[
+\systeme[\alpha_1  \alpha_2]{\alpha_1=0,
+3\alpha_1=0,3\alpha_1=0,\hspace{0.5cm}\alpha_2=0}
+\]
+Como $\alpha_1=\alpha_2=0$. Entonces $B$ es LI.\\
+
+Por lo tanto, $B$ es base de $W$.
+\end{ejem}
+
+\begin{teo}[Base canónica de $\R^n$]
+    En $\R^n$, el conjunto $\{e^1,e^2,\ldots,e^n\}\subset\R^n$, definidos por 
+    \[
+        e^i_j=
+        \begin{cases}
+            0& \text{si }i\neq j,\\
+            1& \text{si }i= j,
+        \end{cases}
+    \]
+    para todo $i,j\in\{1,2,\ldots,n\}$, es una base de $\R^n$, conocida como la base canónica de $\R^{n}$.
+\end{teo}
+
+\begin{ejem}\hspace{0pt}
+Para el espacio vectorial $\R^{3}$ se tiene que su base canónica está dada por:
+\[
+    B = \{e^{1}, e^{2}, e^{3}\} = \{(1, 0, 0), (0, 1, 0), (0, 0, 1)\}.
+\]
+\end{ejem}
+
+\begin{ejer}\hspace{0pt}
+Considere el espacio vectorial $\R^{4}$, identifique a los vectores de su  base canónica:
+\[
+    B = \{e^{1}, e^{2}, e^{3}, e^4\}.
+\]
+\end{ejer}
+
+% \begin{teo}[Base canónica de {$\R_n[x]$}]
+%     En $\R_n[x]$, el conjunto $\{1,x,\ldots,x^{n-1},x^n\}$ es una base de $\R_n[x]$. A esta base se la denomina la base canónica de $\R_n[x]$.
+% \end{teo}
+
+% \begin{ejem}\hspace{0pt}
+% Para el espacio vectorial $\R_2[x]$ se tiene que su base canónica es $\{1,x,x^2\}$.
+% \end{ejem}
+
+% \begin{ejer}\hspace{0pt}
+% Identifique a la base canónica del espacio vectorial  $\R_4[x]$.
+% \end{ejer}
+
+\begin{teo}
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial y $B\subseteq E$ una base de $E$. Se tiene que todo elemento de $E$ se puede escribir, de manera única, como combinación lineal de elementos de $B$.
+\end{teo}
+
+\begin{ejem}\hspace{0pt}
+En el espacio vectorial $\Mat{2}{2}$ tenemos que su base canónica está dada por:
+\[
+    B = \l\{\begin{pmatrix}1&0\\0&0\end{pmatrix}, 
+            \begin{pmatrix}0&1\\0&0\end{pmatrix},
+            \begin{pmatrix}0&0\\1&0\end{pmatrix},
+            \begin{pmatrix}0&0\\0&1\end{pmatrix}\r\}.
+\]
+Además, se tiene que:
+\[
+    \begin{pmatrix}a&b\\c&d\end{pmatrix} = 
+    a\begin{pmatrix}1&0\\0&0\end{pmatrix} +
+    b\begin{pmatrix}0&1\\0&0\end{pmatrix} +
+    c\begin{pmatrix}0&0\\1&0\end{pmatrix} +
+    d\begin{pmatrix}0&0\\0&1\end{pmatrix}
+\]
+para todo $\begin{pmatrix}a&b\\c&d\end{pmatrix}\in\Mat{2}{2}$ es única, ya que una base es un conjunto linealmente independiente.
+\end{ejem}
+
+% \begin{ejer}\hspace{0pt}
+% Para el espacio vectorial $\R_2[x]$ se tiene que el conjunto
+% \[
+%     B = \l\{1+x+x^2,1+x,1\r\}
+% \]
+% es una base. Verifique que la combinación lineal
+% \[
+%     a+bx+cx^2=c(1+x+x)^2+(b-c)(1+x)+(a-b)
+% \]
+% es única, para todo $ a+bx+cx^2\in\R_2[x]$.
+% \end{ejer}
+\begin{teo}
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial y $B\subseteq E$. Si todo elemento de $E$ se puede escribir, de manera única, como combinación lineal de elementos de $B$, entonces $B$ es una base de $E$.
+\end{teo}
+
+% \begin{ejem}\hspace{0pt}
+% En el espacio vectorial $\R_{1}[t]$ considere el conjunto 
+% \[
+%     B = \{1 - t, 1 + t\}.
+% \]
+% Notemos que todo elemento de $\R_{1}[t]$ se escribe como combinación lineal de los elementos de $B$ y esta combinación es única. En efecto, sean $a_0+a_1t\in\R_1[t]$, $\alpha_1,\alpha_2\in\K$ tales que
+% \[
+% \alpha_1(1-t)+\alpha_2(1+t)=a_0+a_1t
+% \]
+% o equivalentemente
+% \[
+% (\alpha_1+\alpha_2)+(-\alpha_1+\alpha_2)t=a_0+a_1t
+% \]
+% para todo $t\in\R$. Igualando polinomios se obtiene al sistema de ecuaciones lineales:
+% \[
+% \systeme[\alpha_1 \alpha_2]{\alpha_1+\alpha_2=a_0,
+% -\alpha_1+\alpha_2=a_1}
+% \]
+% la matriz ampliada asociada a este sistema verifica la siguiente equivalencia por filas:
+% \[
+%     (A|b) = 
+%     \begin{pNiceArray}{cc|c}
+%     1&1&a_0\\
+%     -1&1&a_1    
+%     \end{pNiceArray}
+%     \sim
+%     \begin{pNiceArray}{cc|c}
+%     1&1&a_0\\
+%     0&2&a_0+a_1
+%     \end{pNiceArray}
+% \]
+% Dado que $\mbox{ran}(A)=\mbox{ran}(A|b)$=2 es igual al número de incógnitas, por el Teorema de Rouché Frobenius, el sistema tiene solución única, y en virtud del teorema anterior, concluimos que $B$ es una base de $\R_{1}[t]$.
+% \end{ejem}
+
+\begin{ejer}\hspace{0pt}
+En el espacio vectorial $\mathbb{R}^3$ determine si el conjunto \[B=\{(1,1,0),(1,0,1),(0,1,1)\}\] forma una base de $\mathbb{R}^3$.
+\end{ejer}
+
+\begin{prop}
+Sean $(E,+,\cdot,\K)$ un espacio vectorial y $S\subseteq E$ un conjunto que genera a $E$. Se tiene que algún subconjunto de $S$ es base de $E$.
+\end{prop}
+
+\begin{ejem}\hspace{0pt}
+En el espacio vectorial $\Mat{2}{2}$, considere al conjunto 
+\[
+    S = \l\{\begin{pmatrix}1&0\\0&1\end{pmatrix}, 
+            \begin{pmatrix}0&1\\1&0\end{pmatrix},
+            \begin{pmatrix}0&- 1\\0&0\end{pmatrix},
+            \begin{pmatrix}0&0\\1&1\end{pmatrix},
+            \begin{pmatrix}1&0\\1&- 1\end{pmatrix}\r\}.
+\]
+Notemos que $\gen(S) = \Mat{2}{2}$ y que el subconjunto $B$ de $S$ es una base de $\Mat{2}{2}$, donde
+\[
+    B = \l\{\begin{pmatrix}1&0\\0&1\end{pmatrix}, 
+            \begin{pmatrix}0&1\\1&0\end{pmatrix},
+            \begin{pmatrix}0&- 1\\0&0\end{pmatrix},
+            \begin{pmatrix}0&0\\1&1\end{pmatrix}\r\}.
+\]
+\end{ejem}
+
+% \begin{ejer}\hspace{0pt}
+% En el espacio vectorial $\R_{2}[x]$, sean los vectores $v_1(x)=-5+4x$, $v_2(x)=5-2x-x^2$, $v_3(x)=2-x+2x^2$,  $v_4(x)=6-2x-6x^2$. Suponga que
+% \[
+% W=\gen(\{v_1(x),v_2(x),v_3(x),v_4(x)\}).
+% \]
+% Encuentre una base de $W$.
+% \end{ejer}
+
+\begin{teo}
+Todo espacio vectorial tiene una base.
+\end{teo}
+
+\begin{ejem}\hspace{0pt}
+En el espacio vectorial $\R^{3}$, consideremos al subespacio vectorial 
+\[
+    W = \{(x_{1}, x_{2}, x_{3})\in\R^{3}\,:\,x_{1} + x_{2} = x_{3}\}.
+\]
+El conjunto $B = \{(1, 0, 1), (0, 1, 1)\}$ es una base de $W$. En efecto:
+\begin{enumerate}
+\item Sean $\alpha_1,\alpha_2\in\R$ tales que:
+\[
+\alpha_1(1, 0, 1)+\alpha_2(0, 1, 1)=(0,0,0)
+\]
+o equivalentemente
+\[
+(\alpha_1,\alpha_2,\alpha_1+\alpha_2)=(0,0,0).
+\]
+Igualando vectores obtenemos que $\alpha_1=\alpha_2=0$. Por lo tanto, $B$ es un conjunto linealmente independiente.
+\item Sean $\alpha_1,\alpha_2\in\R$ y $(x_{1}, x_{2}, x_{3})\in\R^{3}$ tales que 
+\[
+\alpha_1(1, 0, 1)+\alpha_2(0, 1, 1)=(x_{1}, x_{2}, x_{3})
+\]
+o equivalentemente
+\[
+(\alpha_1,\alpha_2,\alpha_1+\alpha_2)=(x_{1}, x_{2}, x_{3}).
+\]
+Igualando vectores se obtiene el sistema de ecuaciones:
+\[
+\systeme[\alpha_1 \alpha_2 \alpha_3]{\alpha_1=x_1,
+\alpha_2=x_2,\alpha_1+\alpha_2=x_3}
+\]
+La matriz ampliada $(A|b)$ asociada a este sistema verifica la siguiente equivalencia por filas:
+\[
+(A|b)=
+\begin{pNiceArray}{cc|c}
+1&0&x_1\\
+0&1&x_2\\
+1&1&x_3\\
+\end{pNiceArray}
+\sim
+\begin{pNiceArray}{cc|c}
+1&0&x_1\\
+0&1&x_2\\
+0&0&x_3-x_1-x_2.
+\end{pNiceArray}
+\]
+Luego, el sistema tiene solución si  $x_3-x_1-x_2=0$.  Por lo tanto,
+\[\gen(B)=\{(x_{1}, x_{2}, x_{3})\in\R^{3}\,:\,x_{1} + x_{2} = x_{3}\} = W.\]
+\end{enumerate}
+De 1. y 2. se sigue que $B$ es una base para $W$.
+\end{ejem}
+% \begin{ejer}\hspace{0pt}
+% En el espacio vectorial $\R_{2}[x]$, considere al subespacio vectorial
+% \[
+% W=\{p(x)\in\R_{2}[x]: p(0)+p'(0)=0\}.
+% \]
+% Determine una base para $W$.
+% \end{ejer}
+
+\begin{obs}\label{Obs1}\hspace{0pt}
+Si $\{v_{1}, v_{2}, \ldots, v_{n}\}$ es una base de un espacio vectorial $E$, entonces para todo $c\neq0$, se tiene que $\{cv_{1}, v_{2}, \ldots, v_{n}\}$ también es una base de $E$, es decir, un espacio vectorial no nulo tiene muchas bases.
+\end{obs}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setcounter{section}{3}
+\section{Espacios Vectoriales}
+\setcounter{subsection}{6}
+\subsection{Base y dimensión}
+
+\begin{prop}
+Sean $(E,+,\cdot,\K)$ un espacio vectorial y $B\subseteq E$ una base de $E$. Si $S\subseteq E$ es un conjunto linealmente independiente, entonces
+    \[
+        \card(S)\leq \card(B).
+    \]
+\end{prop}
+
+\begin{ejem}\hspace{0pt} 
+En el espacio vectorial $\R^{3}$, el conjunto $B = \{(1, 1, 0),(0, 1, 1),(1, 0, 1)\}$ es una de sus bases. Considere al conjunto $S$ dado por:
+\[
+    S= \{(1, 0, 0),(0, 1, 0)\}.
+\]
+Notemos que $S$ es un conjunto linealmente independiente con $\card(S) = 2$, además, $\card(B) = 3$, luego, 
+\[
+2=\card(S)\leq \card(B)=3.
+\]
+\end{ejem}
+
+\begin{ejer}\hspace{0pt}
+En el espacio vectorial $(\R^{3},+,\cdot,\R)$, el conjunto $B=\lbrace(0,-1,0), (0,1,2),$ $(3,0,-5)\rbrace$ forma una base. A partir de $B$ obtenga un conjunto $C$ linealmente independiente tal que: $\card(C) < \card(B)$.
+\end{ejer}
+
+% \begin{ejer}\hspace{0pt}
+% En el espacio vectorial $(\R^{3},+,\cdot,\R)$, el conjunto $B=\{1-x, x+2x^2, 3-5x^2 \}$ forma una base. A partir de $B$ obtenga un conjunto $C$ linealmente independiente tal que: $\card(C) < \card(B)$.
+% \end{ejer}
+
+\begin{prop}
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial y $B\subseteq E$ una base de $E$. Si $S\subseteq E$ es un conjunto que genera a $E$, entonces 
+    \[
+        \card(B)\leq \card(S).
+    \]
+\end{prop}
+
+\begin{ejem}\hspace{0pt}
+Sea el espacio vectorial $\R^{2}$, y $B = \{(1,-2),(2, 1)\}\subseteq\R^{2}$ es una base de $\R^{2}$. Donde:
+    \[
+        S= \{(1, 0),(0, 1),(1,1)\}\subseteq\R^{2}.
+    \]
+Tal que $S$ es genera a $\R^{2}$. Entonces:
+     \[
+        \card(B)=2\leq \card(S)=3.
+    \]
+\end{ejem}
+
+% \begin{ejer}\hspace{0pt}
+% En el espacio vectorial $(\R^{1}[x],+,\cdot,\R)$, el conjunto $B=\{3, 1-2x\}$ forma una base. A partir de $B$ obtenga un conjunto $D$ que genere a $\R_{2}[x]$ y además verifique que $\card(D) > \card(B)$: 
+% \end{ejer}
+
+\begin{ejer}\hspace{0pt}
+En el espacio vectorial $(\R^{2},+,\cdot,\R)$, el conjunto $B=\{(3,0), (1,-2\}$ forma una base. A partir de $B$ obtenga un conjunto $D$ que genere a $\R^{3}$ y además verifique que $\card(D) > \card(B)$.
+\end{ejer}
+
+\begin{obs}\label{ObsBase}
+De acuerdo con las proposiciones anteriores, en un espacio vectorial, una base es el conjunto linealmente independiente con el mayor número de elementos, además, es el conjunto generador del espacio vectorial con el menor número de elementos.
+\end{obs}
+
+\begin{prop}
+Sean $(E,+,\cdot,\K)$ un espacio vectorial y $B,T\subseteq E$ bases de $E$. Se tiene que
+    \[
+        \card(B) = \card(T).
+    \]
+\end{prop}
+
+\begin{ejem}\hspace{0pt}
+En el espacio vectorial $\R_1 [t]$, notemos que 
+\[
+    B = \{1+t,1-t\} \texty T = \{1,t\}
+\]
+son bases de $\R_1 [t]$, con:
+\[
+    \card(B) = \card(T)=2.
+\]
+\end{ejem}
+
+\begin{ejer}\hspace{0pt}
+Considere el subespacio vectorial:
+\[W=\left\{\begin{pmatrix} a & b\\ c & d\end{pmatrix} \in \mathbb{R}^{2\times 2} : a -2b -c = 0, a+3d=0 \right\}\]
+Obtenga dos bases distintas para $W$ y verifique la proposición 3.
+\end{ejer}
+
+\begin{obs}
+La observación \ref{ObsBase} establece que un espacio vectorial no nulo tiene muchas bases, pero la proposición anterior indica que todas las bases del mismo espacio vectorial tienen el mismo número de elementos.
+\end{obs}
+
+\begin{defi}[Dimensión]
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial y $B\subseteq E$ una base de $E$. Se define la dimensión de $E$, denotado por $\dim(E)$, como la cardinalidad de $B$. Es decir,
+    \[
+        \dim(E) = \card(B).
+    \]
+\end{defi}
+
+\begin{ejem}\hspace{0pt}
+En el espacio vectorial $\R^{2}$, se tiene que $B = \{(1,0),(0, 1)\}$ es una base de $\R^{2}$. Entonces:
+\[
+    \text{dim}(\R^{2})= \text{card}(B)=2,
+\]
+es decir, la dimensión de $\R^{2}$ es 2.
+\end{ejem} 
+
+
+\begin{obs}
+Para el espacio vectorial $\{0\}$ se define su dimensión como 0.
+\end{obs}
+
+\begin{ejem}\hspace{0pt}
+Sean $m, n\in\N^{*}$, se tiene que:
+    \begin{itemize}
+    \item
+        $\dim(\R^n)=n$;
+    \item
+        $\dim(\Mat[\R]{m}{n})=mn$;
+    \item
+        $\dim(\R_n[x])=n+1$;
+    \end{itemize}
+\end{ejem}
+
+\begin{ejem}\hspace{0pt}
+En el espacio vectorial $\R^{3}$, para el subespacio vectorial 
+\[
+    W = \{(x_{1}, x_{2}, x_{3})\in\R^{3}\,:\,x_{1} + x_{2} = x_{3}\}
+\]
+una base es
+\[
+    B = \{(1,0,1),(0, 1,1)\}
+\]
+Luego,
+\[
+    \text{dim}(W)= \text{card}(B)=2,
+\]
+es decir, la dimensión de $W$ es 2.
+\end{ejem}
+
+\begin{ejer}\hspace{0pt}
+Considere el subespacio vectorial:
+\[W=\left\{ (a,b,c,d) \in \mathbb{R}^{4} : a+2b=0,\;\; c-d=0 \right\}\]
+Calcule la dimensión de $W$.
+\end{ejer}
+
+\begin{prop}
+Sean $(E,+,\cdot,\K)$ un espacio vectorial y $S\subseteq E$ un conjunto linealmente independiente. Se tiene que existe una base $B$ de $E$ que contiene a $S$.
+\end{prop}
+
+\begin{teo}
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial, $B\subseteq E$ y $n\in\N^*$ tal que $\dim(E)=n$ y $\card(B)=n$. Se tiene que:
+    \begin{itemize}
+    \item
+        Si $B$ es linealmente independiente, entonces $B$ es una base de $E$.
+    \item
+        Si $B$ genera a $E$, entonces $B$ es una base de $E$.
+    \end{itemize}
+\end{teo}
+
+\begin{ejem}\hspace{0pt}
+En el espacio vectorial $\R^{3}$, considere al conjunto $S$ dado por:
+\[
+    S = \{(1, 0, 1), (0, 1, 1),(0, 0, 1)\}.
+\]
+Se tiene que dim$(\R^{3})=3$ y que la $\card(S)=3$.
+Dado que $S$ es un conjunto linealmente independiente, por el teorema anterior, concluimos que $S$ es una base de $\R^{3}$.
+\end{ejem}
+
+\begin{ejer}\hspace{0pt}
+En el espacio vectorial $(\mathbb{R}^{2\times 2}, +, ., \mathbb{R})$, verifique si el conjunto:
+\[B=\left\{\begin{pmatrix} 1 & 2\\ 0 & 1\end{pmatrix}, \begin{pmatrix} 0 & -1\\ 1 & 2\end{pmatrix}, \begin{pmatrix} 1 & 0\\ -1 & 1\end{pmatrix}, \begin{pmatrix} 1 & -2\\ 1 & 0\end{pmatrix}  \right\}\]
+forma una base para el espacio.
+\end{ejer}
+
+
+\begin{teo}
+Sean $(E,+,\cdot,\K)$ un espacio vectorial con $\dim(E)=n$ y sea $m<n$. Sean $B=\{v_1, v_2, v_3, v_4, \dots, v_m\}\subseteq E$ un conjunto linealmente independiente y $u\not\in \spn(B)$, entonces el conjunto $B \cup \{u\} $ es linealmente independiente.
+\end{teo}
+
+\begin{ejem}\hspace{0pt}
+En el espacio vectorial $\R^{3}$, considere al conjunto $B$, dado por:
+\[
+    B = \{(1, 0, 1), (1, -1, 0)\}.
+\]
+Obtengamos un conjunto $B'$ de tal forma que $B \subseteq B'$ y que $B'$ sea una base para $\R^{3}$.
+
+Calculemos la cápsula de $B$, tenemos que:
+\begin{align*}
+\spn(B) &= 
+    \{(a, b, c) \in \R^{3}:(a, b, c)=\alpha (1, 0, 1)+\beta (1, -1, 0), \alpha, \beta\in\R\}\\
+    &=\{(a, b, c) \in \R^{3}:(a, b, c)=(\alpha , 0, \alpha)+ (\beta, -\beta, 0), \alpha, \beta\in\R \}\\
+    &=\{(a, b, c) \in \R^{3}:(a, b, c)=(\alpha +\beta,-\beta , \alpha), \alpha, \beta\in\R\}\\
+    &=\{(a, b, c) \in \R^{3}:\alpha +\beta=a,-\beta =b, \alpha=c \}.
+\end{align*}
+Ahora, si $(a,b,c)\in\R^{3}$, se tiene que $(a,b,c)\in\spn(B)$ si y solo si se verifica el sistema de ecuaciones:
+\[
+    \systeme[\alpha \beta]{\alpha + \beta =a{,}, -\beta=b{,},\alpha=c}
+\]
+con $\alpha, \beta \in\R$. La matriz ampliada asociada al sistema verifica la siguiente equivalencia por filas:
+\[
+\begin{pmatrix}
+1&1&|&a\\
+0&-1&|&b\\
+1&0&|&c
+\end{pmatrix}
+\sim 
+\begin{pmatrix}
+1&0&|&c\\
+0&1&|&-b\\
+0&0&|&a+b-c
+\end{pmatrix}
+\]
+Luego, para que el sistema tenga solución se debe tener que $a+b-c=0$, entonces
+\[
+    \spn(B) = \{(a,b,c)\in\R^{3}\,:\,a+b-c=0\}.
+\]
+Ahora, notemos que $(1,0,0)\notin\spn(B)$, por tanto,
+\[
+    B' = B \cup \{(1,0,0)\}
+\]
+es un conjunto linealmente independiente tal que $B\subseteq B'$, además, ya que $\card(B')=3 = \dim(R^{3})$, se concluye que $B'$ también es base de $\R^{3}$.
+\end{ejem}
+% \begin{ejer}\hspace{0pt}
+% \item
+%     Sea $W = \{ p(x) \in \R_4[x] : p''(-1) = 0\}$
+%     \begin{enumerate}
+%     \item
+%         Calcule una base para $W$
+%     \item
+%         Completar la base del literal anterior a una base para $\R_4[x]$
+    
+%     \end{enumerate}
+% \end{ejer}
+\begin{ejer}\hspace{0pt}
+\item
+    Sea $W = \{(a,b,c,d,e) \in \R^5 : 6a+c=3b\}$
+    \begin{enumerate}
+    \item
+        Calcule una base para $W$
+    \item
+        Completar la base del literal anterior a una base para $\R^5$
+    
+    \end{enumerate}
+\end{ejer}
+
+\setcounter{section}{3}
+\section{Espacios Vectoriales}
+\setcounter{subsection}{7}
+\subsection{Suma de espacios vectoriales}
+
+\begin{defi}[Suma de subespacios]
+    Sea $(E,+,\cdot,\K)$ un espacio vectorial y $W_1,W_2\subseteq E$ subespacios vectoriales de $E$. Se define la suma $W_1+W_2$ por:
+    \[
+        W_1 + W_2 =\left\{v\in E: v=w_1+w_2, \, \text{ con }\, w_1\in W_1, w_2\in W_2\right\}. 
+    \]
+\end{defi}
+\begin{prop}
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial y $W_1,W_2\subseteq E$ subespacios vectoriales de $E$. Se tiene que $W_1 + W_2$ es un subespacio vectorial de $E$.
+\end{prop}
+
+\begin{proof}[Demostración.]\hspace{0pt} De forma inmediata se tiene que $W_1+W_2$ es diferente del vacío, pues $0_E\in W_1+W_2$, dado que:
+\[0_E = 0_E + 0_E\]
+donde $0_E\in W_1$ y $0_E\in W_2$ (por ser subespacios vectoriales de E).\newline
+
+Por otro lado, para $\lambda\in\mathbb{K}$, $a\in W_1+W_2$ y $b\in W_1+W_2$ existen $a_1\in W_1$, $a_2\in W_2$, $b_1\in W_1$, $b_2\in W_2$ tales que:
+\[
+a = a_1 + a_2\quad \text{ y }\quad b = b_1 + b_2
+\]
+entonces,
+\begin{align*}
+    \lambda a + b &= \lambda(a_1+a_2) + (b_1+b_2)\\
+                  &= (\lambda a_1 + b_1) + (\lambda a_2 + b_2)
+\end{align*}    
+Lo que muestra la proposición.
+\end{proof}
+
+
+\begin{prop}
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial y $W_1,W_2\subseteq E$ dos subespacios vectoriales de $E$. Sean $B_1$ y $B_2$ bases de $W_1$ y $W_2$, respectivamente, se tiene que:
+    \[
+        W_1 + W_2 = \spn(B_1 \cup B_2).
+    \]
+\end{prop}
+
+\begin{ejem}\hspace{0pt} Considere el espacio vectorial $\R^{3}$, donde:
+\[
+    W_{1} = \{(x,0,0)\in \R^3: x \in \R \} 
+    \texty
+    W_{2} = \{(0,y,0)\in \R^3: y \in \R\}
+\]
+son subespacios vectoriales, se tiene que: 
+\[
+    B_{1} = \{(1, 0, 0)\}
+    \texty
+    B_{2} = \{(0, 1, 0)\}
+\]
+son bases de $W_{1}$ y $W_{2}$, respectivamente. Entonces:
+\begin{align*}
+    W_1+W_2
+    &=\spn(B_{1} \cup B_{2})\\
+    &= \spn(\{(1,0,0), (0,1,0)\})\\
+    &= \{(x,y,z)\in\R^{3}\,:\, (x,y,z) = \alpha_{1}(1,0,0) + \alpha_{2}(0,1,0),\, \alpha_{1},\alpha_{2}\in\R \}\\
+    &= \{(x,y,z)\in\R^{3}\,:\, (x,y,z) = (\alpha_{1},\alpha_{2},0),\, \alpha_{1},\alpha_{2}\in\R \}\\
+    &= \{(x,y,z)\in\R^{3}\,:\, \alpha_{1} = x, \alpha_{2} = y, z=0,\, \alpha_{1},\alpha_{2}\in\R \}\\
+    &= \{(x,y,z)\in \R^3:  z = 0\}\\
+    &= \{(x,y,0)\in \R^3:  x,y\in \R \}
+\end{align*}
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} Considere el espacio vectorial $\mathbb{R}^{2\times 2}$ y los subespacios vectoriales:
+\[S=\left\{\begin{pmatrix} a & b\\ c & d \end{pmatrix} : a+2c=0\right\}\]
+\[T=\left\{\begin{pmatrix} a & b\\ c & d \end{pmatrix} : d-a=0\right\}\]
+Halle $S+T$ y su dimensión.
+\end{ejer}
+
+\begin{teo}[Teorema de Grassmann]
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial de dimensión finita y $W_1,W_2\subseteq E$ dos subespacios vectoriales de $E$. Se tiene que
+    \[
+        \dim(W_1 + W_2) = \dim(W_1) + \dim(W_2) - \dim(W_1 \cap W_2).
+    \]
+\end{teo}
+
+\begin{obs}
+De acuerdo con el teorema anterior concluimos que en un espacio vectorial $E$ de dimensión finita, cualquier subespacio $W$ verifica que
+\[
+\dim(W) \leq \dim(E).
+\]
+\end{obs}
+
+\begin{ejem}\hspace{0pt} Considere los subespacios vectoriales:
+\[
+    W_{1} = \{(x,0,0)\in \R^3: x \in \R \} 
+    \texty
+    W_{2} = \{(0,y,0)\in \R^3: y \in \R\}.
+\]
+
+Se tiene que $\dim(E) = \dim(\R^{3}) = 3$ y que $\dim(W_{1}) = \dim(W_{2}) = 1$ con $\dim(W_{1} + W_{2}) = 2$, por el teorema anterior, concluimos que $\dim(W_{1} \cap W_{2}) = 0$, lo que implica que $W_{1} \cap W_{2} = \{0_{\R^{3}}\}$.
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} Para el Ejercicio 1, obtenga la $\dim(S\cap T)$.
+\end{ejer}
+
+\begin{defi}[Suma directa]
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial y $W_1, W_2\subseteq E$ subespacios vectoriales de $E$. La suma directa de $W_1$ y $W_2$, denotada por $W_1\oplus W_2$ se define por:
+    \[
+        W_1 \oplus W_2 =\left\{v\in E : (\exists !w_1\in W_1)(\exists !w_2\in W_2)\, \, v=w_1+w_2 \right\} 
+    \]
+\end{defi}
+
+\begin{advertencia}
+Se dice que un espacio vectorial $E$ está en suma directa de dos subespacios $W_1$ y $W_2$ si cualquier elemento de $E$ se puede escribir de manera única como la suma de elementos de $W_1$ y $W_2$.
+\end{advertencia}
+
+
+\begin{teo}
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial y  $W_1,W_2\subseteq E$ subespacios vectoriales de $E$, se tiene que:
+    \[
+        E = W_1 \oplus W_2
+    \]
+    si y sólo si:
+    \[
+        E = W_1 + W_2 \texty
+        W_1 \cap W_2 = \{0_{E}\}.
+    \]
+\end{teo}
+\begin{ejem}\hspace{0pt}\label{EjemDirecta1} En el espacio vectorial $\R^{3}$ considere los subespacios vectoriales:
+\[
+    W_{1} = \{(x,y,z)\in \R^3: x+y+z=0\}
+    \texty 
+    W_{2} = \{(x,y,z)\in \R^3: x=z=0\}.
+\]
+Se tiene que:
+\begin{align*}
+    W_{1} &= \{(x,y,-x-y): x,y\in\R\}\\
+    &= \{x(1,0,-1)+y(0,1,-1): x,y\in\R\}\\
+    &= \langle \{\underbrace{(1,0,-1), (0,1,-1)}_{:=B_1}\}\rangle
+\end{align*}
+con $B_1$ un conjunto linealmente independiente, es decir, $B_1=\{(1,0,-1), (0,1,-1)\}$ es una base de $W_1$. Además,
+\begin{align*}
+    W_{2} &= \{(0,y,0): y\in\R\}\\
+    &= \{y(0,1,0): y\in\R\}\\
+    &= \langle \{\underbrace{(0,1,0)}_{:=B_2}\}\rangle
+\end{align*}
+con $B_2$ un conjunto linealmente independiente, es decir, $B_2=\{(0,1,0)\}$ es una base de $W_2$.
+Por tanto:
+\begin{align*}
+    W_1+W_2 &= \spn(B_1\cup B_2)\\
+    &= \{(x,y,z)\in\R^3 : (x,y,z)=\lambda_1 (1,0,-1) + \lambda_2 (0,1,-1) + \lambda_3 (0,1,0) \}\\
+    &= \{(x,y,z)\in\R^3 : (\lambda_1, \lambda_2+\lambda_3, -\lambda_1-\lambda_2)=(x,y,z)\}\\
+    &= \R^{3}
+\end{align*}
+además,
+\begin{align*}
+    W_1 \cap W_2 &= \{(x,y,z)\in\R^3 : x+y+z=0, x=z=0\}\\
+    &= \{(x,y,z)\in\R^3 : x=y=z=0\}\\
+    &= (0,0,0)
+\end{align*}
+de lo anterior se concluye:
+\[
+    \R^{3} = W_{1} \oplus W_{2}.
+\]
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} En el espacio vectorial $\mathbb{R}^{2\times 2}$ considere los subespacios vectoriales:
+\[W_1 = \left\{A\in \mathbb{R}^{2\times 2} : A=A^T\right\}\]
+\[W_2 = \left\{A\in \mathbb{R}^{2\times 2} : A=-A^T\right\}\]
+Verifique que: $\mathbb{R}^{2\times 2} = W_1 \oplus W_2$.
+\end{ejer}
+
+\setcounter{section}{3}
+\section{Espacios Vectoriales}
+\setcounter{subsection}{7}
+\subsection{Suma de espacios vectoriales}
+
+\begin{teo}
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial de dimensión finita. Para todo $S$ subespacio vectorial de $E$, existe un subespacio vectorial $T$ de $E$ tal que 
+    \[
+        E = S \oplus T.
+    \]
+    Se dice que $T$ es el subespacio complementario de $S$ en $E$.
+\end{teo}
+\begin{ejem}\hspace{0pt}\label{EjemDirecta2} En el espacio vectorial $\R^{3}$ considere los subespacios vectoriales
+\[
+    W_{1} = \{(x,y,0)\in \R^3: x,y \in \R \}
+    \texty 
+    W_{2} = \{(0,0,z)\in \R^3: z \in \R\}.
+\]
+Se tiene que $W_2$, es el subespacio vectorial complementario de $W_1$ en $\R^{3}$.
+\end{ejem}
+
+\begin{ejer}\label{EjercicioSumaDirecta1}\hspace{0pt} Sea $W=\left\{(a,b,c,d)\in \mathbb{R}^{4} : a+b+c=0 \right\}$ un subespacio vectorial de $\mathbb{R}^{4}$. Encuentre un subespacio vectorial $U$ tal que:
+\[\mathbb{R}^{4} = W \oplus U\]
+\end{ejer}
+
+
+\begin{teo}\label{TeoremaSumaDimensión}
+Sean $(E,+,\cdot,\K)$ un espacio vectorial de dimensión finita y $S,T\subseteq E$ subespacios vectoriales de $E$. Si $E$ es la suma directa de $S$ y $T$, entonces
+\[
+    \dim(E) = \dim(S) + \dim(T).
+\]
+\end{teo}
+
+\begin{ejem}\hspace{0pt} Considere el ejemplo \ref{EjemDirecta2}, de acuerdo con el teorema anterior se verifica que:
+\[
+    \dim(\R^{3}) = \dim(W_{1}) + \dim(W_{2}).
+\]
+En efecto, se puede verificar que:
+\[
+    \dim(W_{1}) = 2
+    \texty
+    \dim(W_{2}) = 1.
+\]
+Notemos además que $W_{1} \cap W_{2} = \{0_{\R^{3}}\}$.
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} Verifique que se satisface el Teorema~\ref{TeoremaSumaDimensión} para el Ejercicio~\ref{EjercicioSumaDirecta1}.
+    
+\end{ejer}
+
+\setcounter{section}{4}
+\section{Espacios con producto interno}
+\subsection{Producto interno}
+
+\begin{defi}[Producto interno]
+    Sea $(E,+,\cdot,\K)$ un espacio vectorial. Un producto interno sobre $E$ es una función
+    \[
+        \funcion{\langle  \cdot, \cdot \rangle }{E\times E}{\K}{(u,v)}{\langle  u, v \rangle }
+    \]
+    tal que cumple:
+    \begin{enumerate}
+        \item 
+            $\langle  v, v \rangle  \geq 0$ para todo $ v \in E$;
+        \item 
+            $\langle  v,v \rangle  = 0$ si y solo si $ v = 0$;
+        \item 
+            $\langle  u + v, w \rangle  = \langle  u,w \rangle  + \langle  v,w\rangle  $ para todo $u,v,w \in E$;
+        \item
+            $\langle  \alpha v,w \rangle  = \alpha \langle  v,w \rangle $ para todo $v,w \in E$ y $\alpha\in\K$.
+        \item
+            $\langle  v,w \rangle  = \overline{\langle w, v \rangle}$ para todo $v,w \in E$.
+    \end{enumerate}
+\end{defi}
+
+
+\begin{advertencia}
+    En caso de tratarse de un espacio vectorial sobre el campo de los números reales, la propiedad 5 equivale a
+    \begin{enumerate}[start=5]
+        \item
+            $\langle  v,w \rangle  = \langle  w, v \rangle $ para todo $v,w \in E$.
+    \end{enumerate}
+\end{advertencia}
+
+
+\begin{advertencia}
+    Se puede demostrar utilizando la propiedad 4 que
+    \begin{itemize}
+        \item
+            si $v = 0$, entonces $\langle  v,v \rangle  = 0$;
+    \end{itemize}
+    por lo cual, podríamos cambiar la propiedad 2 por
+    \begin{enumerate}[start=2]
+        \item
+            si $\langle  v,v \rangle  = 0$, entonces $ v = 0$
+    \end{enumerate}
+\end{advertencia}
+
+\begin{advertencia}
+    Si se define un producto interno sobre un espacio vectorial $E$, a este se lo denomina espacio con producto interno o prehilbertiano.
+\end{advertencia}
+
+%\begin{ejem}\hspace{0pt} En el espacio vectorial $\R^3$ definimos a la función 
+%\[
+%    \funcion{\langle \cdot,\cdot\rangle }{\R^{3} \times \R^{3}}{\R}{(u, v)}{u_1 v_1}
+%\]
+%donde $u = (u_1, u_2, u_3)$ y $v  = (v_1,v_2,v_3)$. Tomando $u = (0,2,3)$, se tiene que
+%\[
+%    \langle u,u\rangle  = \langle (0,2,3),(0,2,3)\rangle  = 0,
+%\]
+%sin embargo, $u \neq (0,0,0)$, por tanto, $\langle \cdot,\cdot\rangle $ no es un producto interno.
+%\end{ejem}
+
+%\begin{ejem}\hspace{0pt} En el espacio vectorial $\R_1[x]$ definimos la función $$\func{\langle \cdot,\cdot\rangle }{\R_1[x] \times \R_1[x]}{\R}$$ por
+%\[
+ %   \langle  p, q \rangle  = a_0 b_0 + 2 a_1b_1 
+%\]
+%para todo $p(x) = a_0 + a_1 x\in\R_1[x]$ y todo $q(x) = b_0 + b_1x\in\R_1[x]$. La función $\langle \cdot,\cdot\rangle $ es un producto interno.
+
+%\begin{proof}[Demostración.]\hspace{0pt}
+%Sean $p,q,r\in\R_{1}[x]$ y sea $\alpha\in\R$.
+%\begin{enumerate}
+%\item Tenemos que $p(x) = a_{0} + a_{1}x$, y que
+%\[
+ %   \langle p,p\rangle  = a^{2}_{0} + 2a^{2}_{1} \geq 0.
+%\]
+%\item Se tiene que
+%\begin{align*}
+ %   \langle p,p\rangle  = 0
+  %  &\Longleftrightarrow 
+   % a^{2}_{0} + 2a^{2}_{1} = 0.
+%\end{align*}
+%Lo cual se verifica si y solo si $a_{0} = a_{1} = 0$, o equivalentemente $p(x) = 0 + 0x$.
+%\item Notemos que $q(x) = b_{0} + b_{1}x$ y $r(x) = c_{0} + c_{1}x$, entonces
+%\begin{align*}
+ %   \langle p + q, r\rangle  
+  %  &= (a_{0} + b_{0})c_{0} + 2(a_{1} + b_{1})c_{1}\\
+   % &= (a_{0}c_{0} + 2a_{1}c_{1}) + (b_{0}c_{0} + 2b_{1}c_{1})\\
+    %&= \langle p, r\rangle   + \langle q, r\rangle .
+%\end{align*}
+%\item Tenemos que
+%\begin{align*}
+ %   \langle \alpha p, q\rangle  = (\alpha a_{0})b_{0} + 2(\alpha a_{1})b_{1} = \alpha(a_{0}b_{0} + 2a_{1}b_{1}) = \alpha\langle p,q\rangle .
+%\end{align*}
+%\item Se tiene que
+%\begin{align*}
+ %   \langle p,q\rangle  = a_{0}b_{0} + 2a_{1}b_{1} = b_{0}a_{0} + 2b_{1}a_{1} = \langle q,p\rangle .
+%\end{align*}
+%\end{enumerate}
+%Por 1, 2, 3, 4 y 5 concluimos que $\langle \cdot,\cdot\rangle $ es un producto interno.\qedhere
+%\end{proof}
+%\end{ejem}
+
+%\begin{ejer}\hspace{0pt} En el espacio vectorial $\Mat{2}{2}$ se define a la función
+%\[
+ %   \func{\langle \cdot,\cdot\rangle }{\Mat{2}{2}\times\Mat{2}{2}}{\R}
+%\]
+%por 
+%\[
+ %   \langle A,B\rangle  = a_{11}b_{11} + 2a_{12}b_{12} + 2a_{21}b_{21} + a_{22}b_{22}
+%\]
+%para toda $A = \begin{pmatrix}a_{11}&a_{12}\\a_{21}&a_{22}\end{pmatrix}\in\Mat{2}{2}$ y toda $B = \begin{pmatrix}b_{11}&b_{12}\\b_{21}&b_{22}\end{pmatrix}\in\Mat{2}{2}$. Determine si $\langle \cdot,\cdot\rangle $ es un producto interno.
+%\end{ejer}
+
+%\begin{ejer}\hspace{0pt} En el espacio vectorial $\R^2$, verifique si la función
+%\[
+ %   \func{\langle \cdot,\cdot\rangle }{\R^2\times\R^2}{\R}
+%\]
+%definida por
+%\[
+ %   \langle u,v\rangle  = u^{T}Av = (u_1,u_2)\begin{pmatrix}1 & 0\\ 2 & 0\end{pmatrix}\begin{pmatrix}v_1\\v_2\end{pmatrix}
+%\]
+%para $u^{T}=(u_1,u_2)$ y $v^{T}=(v_1,v_2)$, es un producto interno. 
+%\end{ejer}
+
+A continuación, se indican los productos internos usuales en los espacios vectoriales que hemos trabajado durante el curso.
+\begin{enumerate}
+\item En $(\R^n,+, \cdot, \R)$, para $x,y\in \R^n$:
+\[
+    \langle  x, y \rangle  = \dsum_{k=1}^{n}{x_k y_k}.
+\]
+\item En $(\C^n,+, \cdot, \C)$, para $x,y\in \C^n$:
+\[
+    \langle  x, y \rangle  = \dsum_{k=1}^{n}{x_k \overline{y_k}}.
+\]
+\item En $(\R_{n}[x], +, \cdot, \R)$, para $p(x),q(x)\in \R_{n}[x]$, si 
+\[  
+    p(x) = a_0 + a_1x + \cdots + a_nx^n
+    \texty
+    q(x) = b_0 + b_1x + \cdots + b_nx^n
+\]
+entonces
+\[
+    \langle  p(x), q(x) \rangle  = \dsum_{k=0}^{n}{a_k b_k}.
+\]
+\item En $(\Mat[\R]{n}{n},+, \cdot, \R)$, para $A,B\in \Mat[\R]{n}{n}$:
+\[
+    \langle  A, B \rangle  = \Tr(AB^{T}).
+\]
+%\item En $(\mathcal{C}([a,b]),+, \cdot, \R)$, para $f,g\in \mathcal{C}([a,b])$:
+%\[
+ %   \langle  f, g \rangle  = \int_{a}^{b}{f(x) g(x)\,dx}.
+%\]
+\end{enumerate}
+
+\begin{teo}\label{te12:01}
+    Sea $(E,+,\cdot,\K)$ un espacio vectorial provisto de producto interno, entonces:
+    \begin{enumerate}
+        \item 
+            Para todo $u,v,w \in E$ se verifica que:
+            \[\langle  u, v+w\rangle  = \langle  u,v\rangle  + \langle  u, w \rangle .\]
+        \item 
+            Para todo $u,v \in E$ y $\alpha \in \K$ se verifica que:
+            \[\langle  u, \alpha v\rangle  =  \overline{\alpha}\langle  u,v\rangle .\]
+        \item
+            Para todo $u\in E$ se cumple que:
+            \[\langle  u, 0 \rangle  =  \langle  0, u \rangle   = 0.\]
+    \end{enumerate}
+\end{teo}
+
+\begin{advertencia}
+    En caso de tratarse de un espacio vectorial sobre el campo de los números reales, la propiedad 2 del Teorema \ref{te12:01} implica
+    \begin{enumerate}[start=2]
+        \item
+            Para todo $u,v \in E$ y $\alpha \in \R$
+            \[\langle  u, \alpha v\rangle  =  \alpha\langle  u,v\rangle \]
+    \end{enumerate}
+\end{advertencia}
+
+\begin{proof}[Demostración de la propiedad 2 del Teorema \ref{te12:01}.]\hspace{0pt} Sean $u,v\in E$ y $\alpha\in\K$, tenemos que
+\begin{align*}
+    \langle u,\alpha v\rangle  &= \overline{\langle \alpha v,u\rangle }\\
+    &= \overline{\alpha\langle v,u\rangle }\\
+    &= \overline{\alpha}\overline{\langle v,u\rangle }\\
+    &= \overline{\alpha}\langle u,v\rangle .
+\end{align*}
+Lo que muestra al enunciado.
+\end{proof}
+
+\begin{ejer}\hspace{0pt} Sea $(E,+,\cdot,\R)$ un espacio vectorial provisto de producto interno, sean $u,v,w\in E$, demuestre que $\langle u - v,v - w\rangle  = \langle v,u - v\rangle  + \langle w,v-u\rangle .$
+\end{ejer}
+
+\begin{defi}[Vectores ortogonales]
+Sean $(E,+,\cdot,\K)$ un espacio vectorial provisto de producto interno y $u, v \in E$. Se dice que $u$ y $v$ son ortogonales si $\langle  u, v \rangle  = 0$.
+\end{defi}
+
+\begin{ejem}\hspace{0pt}\label{Sem08:EjemOrt} En el espacio vectorial $\R^{3}$ con el producto interno usual, los vectores $u=(1,1,2)$ y $v=(2,0,-1)$ son ortogonales. En efecto, notemos que
+\[
+    \langle u,v\rangle  = \langle (1,1,2),(2,0,-1)\rangle  = (1)(2) + (1)(0) + (2)(-1) = 0.
+\]
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} En el espacio vectorial $\Mat{2}{2}$ con producto interno usual, considere a los vectores $A = \begin{pmatrix}-1&0\\-1&0\end{pmatrix}$ y $B = \begin{pmatrix}0&1\\1&1\end{pmatrix}$. Determine si $A$ y $B$ son ortogonales.
+\end{ejer}
+
+\begin{defi}[Norma]
+Sea $(E,+,\cdot,\K)$ un espacio vectorial provisto de producto interno. Sea $u\in E$, la norma de $u$, denotada por $\|u \|$, está definida por:
+\[
+    \| u\| = \sqrt{\langle  u, u \rangle .}
+\]
+\end{defi}
+
+\begin{ejem}\hspace{0pt} En el espacio vectorial $\mathbb{R}^{3}$ considere el vector $u=(2,3,-4)$ y halle su norma.\newline
+
+Considerando el producto interno se tiene que:
+\[
+\| u\| = \sqrt{\langle  (2,3,-4), (2,3,-4) \rangle } = \sqrt{29}
+\]
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} En el espacio vectorial $\mathbb{R}^{2\times 2}$ considere la matriz $v=\begin{pmatrix}0&2\\1&-1\end{pmatrix}$ y halle su norma.
+\end{ejer}
+
+\begin{defi}[Distancia]
+Sea $(E,+,\cdot,\K)$ un espacio vectorial con producto interno. La distancia en el espacio se define por
+\[
+    \funcion{d}{E\times E}{\R}{(u,v)}{\| u - v\|.}
+\]
+\end{defi}
+
+\begin{ejem}\hspace{0pt} En el espacio vectorial $\R^{3}$ con el producto interno usual se tiene que la distancia en $\R^{3}$ es:
+\[
+    d(u, v) = \|u - v\| = \sqrt{(u_{1} - v_{1})^{2} + (u_{2} - v_{2})^{2} + (u_{3} - v_{3})^{2}}
+\]
+para todo $u = (u_{1}, u_{2}, u_{3}), v = (v_{1}, v_{2}, v_{3})\in\R^{3}$.
+\end{ejem}
+
+
+\begin{ejer}\hspace{0pt} En el espacio vectorial $\R^{3}$ considere los vectores:
+\[u=(2,1,3)\]
+\[v=(0,1,-2)\]
+obtenga la distancia entre $u$ y $v$.
+
+%En el espacio vectorial $\R_{2}[t]$ considere los vectores:
+%\[p(t)=2+t+3t^2\]
+%\[q(t)=t-2t^2\]
+%obtenga la distancia entre $p$ y $q$.
+\end{ejer}
+
+%\begin{defi}[Norma]
+%Sea $(E,+,\cdot,\K)$ un espacio vectorial provisto de producto interno. Sea %$u\in E$, la norma de $u$, denotada por $\|u \|$, está definida por:
+%\[
+%    \| u\| = \sqrt{\langle  u, u \rangle .}
+%\]
+%\end{defi}
+
+%\begin{ejem}\hspace{0pt}\label{Sem08:EjemNorm} En el espacio vectorial %$\R^{3}$ con el producto interno usual, los vectores $u=(1,1,2)$ y %$v=(2,0,-1)$ tienen norma $\sqrt{6}$ y $\sqrt{5}$, respectivamente. En %efecto, notemos que
+%\[
+ %   \|u\| = \sqrt{\langle u,u\rangle } = \sqrt{\langle (1,1,2),(1,1,2)\rangle } = \sqrt{(1)^{2} + %(1)^{2} + (2)^{2}} = \sqrt{6}
+%\]
+%y
+%\[
+ %   \|v\| = \sqrt{\langle v,v\rangle } = \sqrt{\langle (2,0,-1),(2,0,-1)\rangle } = \sqrt{(2)^{2} %+ (0)^{2} + (-1)^{2}} = \sqrt{5}.
+%\]
+%\end{ejem}
+
+%\begin{ejer}\hspace{0pt} En el espacio vectorial $\Mat{2}{2}$ con producto %interno, considere a los vectores $A = %\begin{pmatrix}-1&0\\-1&0\end{pmatrix}$ y $B = %\begin{pmatrix}0&1\\1&1\end{pmatrix}$. Determine sus normas.
+%\end{ejer}
+
+%\begin{defi}[Distancia]
+%Sea $(E,+,\cdot,\K)$ un espacio vectorial con producto interno. La distancia %en el espacio se define por
+%\[
+ %   \funcion{d}{E\times E}{\R}{(u,v)}{\| u - v\|.}
+%\]
+%\end{defi}
+
+%\begin{ejem}\hspace{0pt} En el espacio vectorial $\R^{3}$ con el producto %interno usual se tiene que la distancia en $\R^{3}$ es:
+%\[
+%    d(u, v) = \|u - v\| = \sqrt{(u_{1} - v_{1})^{2} + (u_{2} - v_{2})^{2} + %(u_{3} - v_{3})^{2}}
+%\]
+%para todo $u = (u_{1}, u_{2}, u_{3}), v = (v_{1}, v_{2}, v_{3})\in\R^{3}$. %Además, sean $u=(1,1,2)$ y $v=(2,0,-1)$ su distancia es $\sqrt{11}$. En %efecto, notemos que
+%\[
+ %   d(u, v) = \|u - v\| = \sqrt{(1 - 2)^{2} + (1 - 0)^{2} + (2 - (-1))^{2}} = %\sqrt{11}.
+%\]
+%\end{ejem}
+
+%\begin{ejer}\hspace{0pt} En el espacio vectorial $\Mat{2}{2}$ con producto %interno, considere a los vectores $A = %\begin{pmatrix}-1&0\\-1&0\end{pmatrix}$ y $B = %\begin{pmatrix}0&1\\1&1\end{pmatrix}$. Determine su distancia.
+%\end{ejer}
+
+\begin{teo}[Teorema de Pitágoras]
+    Sea $(E,+,\cdot,\K)$ un espacio vectorial con producto interno.
+    Si $u,v$ son vectores ortogonales de $E$, entonces
+    \[
+        \| u + v \|^2 = \|u\|^2 + \|v\|^2.
+    \]
+\end{teo}
+\begin{proof}
+    Sea $(E,+,\cdot,\K)$ un espacio vectorial con producto interno.
+    Tal que  $u,v$ son vectores ortogonales de $E$, por definición de norma sabemos que 
+    \[
+    \| u + v \|^2 =\langle u+v,u+v\rangle.
+    \]
+    Por teorema \ref{te12:01} se tiene que 
+    \begin{align*}
+         \| u + v \|^2 &=\langle u+v,u+v\rangle\\
+         &=\langle u+v,u\rangle+\langle u+v,v\rangle\\
+         &=\langle u,u\rangle+\langle v,u\rangle+\langle u,v\rangle+\langle v,v\rangle.\\
+    \end{align*}
+    Además como $u,v$ son vectores ortogonales sabemos que $\langle v,u\rangle = \langle u,v\rangle =0 $, así reemplazando en la anterior ecuación tenemos que 
+    \[
+    \| u + v \|^2=\langle u,u\rangle+\langle v,v\rangle.
+    \]
+    Finalmente, usando la definición de norma se sigue que
+    \[
+    \| u + v \|^2 = \|u\|^2 + \|v\|^2.
+    \]
+\end{proof}
+
+\begin{ejem}\hspace{0pt}\label{Sem08:EjemPit} En el espacio vectorial $\R^{3}$ con el producto interno usual, los vectores $u=(1,1,2)$ y $v=(2,0,-1)$ son ortogonales y son tales que 
+\[
+    \| u + v \|^2 = \|u\|^2 + \|v\|^2.
+\]
+En efecto, por el ejemplo de vectores ortogonales, $u$ y $v$ son ortogonales y por el ejemplo de norma, sus normas son tales que $\|u\|^{2}=6$ y $\|v\|^{2}=5$, además,
+\[
+    \|u + v\|^{2} = \|(3,1,1)\|^{2} = (3)^{2} + (1)^{2} + (1)^{2} = 11=\|u\|^{2}+\|v\|^{2}.
+\]
+Lo que verifica el resultado.
+\end{ejem}
+
+\begin{ejem}
+    Sea $(E,+,\cdot,\K)$ un espacio vectorial con producto interno.
+    Si $u,v$ son vectores ortogonales de $E$, tales que 
+    \[
+    \|u\|=\|v\|=1
+    \]
+    Hallar $\|u+v\|$.
+
+    Por hipótesis sabemos que $u,v$ son ortogonales, por tanto 
+    \begin{align*}
+        \|u+v\|^2&=\|u\|^2+\|v\|^2\\
+        &=1^2+1^2\\
+        &=1+1\\
+        &=2
+    \end{align*}
+    Finalmente, 
+    \[
+    \|u+v\|=\sqrt{2}
+    \]
+\end{ejem}
+\begin{ejer}
+    Sea $(E,+,\cdot,\K)$ un espacio vectorial con producto interno.
+    Si $u,v$ son vectores ortogonales de $E$, tales que 
+    \[
+    \|u\|=\|v\|=2
+    \]
+    Hallar $\|u-v\|$.
+\end{ejer}
+%\begin{teo}[Desigualdad de Cauchy-Schwartz]
+ %   Sea $(E,+,\cdot,\K)$ un espacio vectorial provisto de producto interno.
+  %  Para todo $u,v\in E$ se cumple que
+   % \[
+    %    | \langle  u , v \rangle  | \leq \|u\|  \|v\|.
+    %\]
+%\end{teo}
+%\begin{advertencia}
+ %   Esta desigualdad es una igualdad si y solo si $u$ es un múltiplo escalar de $v$.
+%\end{advertencia}
+%\comentario{Opción 1) para demostrar en CD.}
+\begin{comment}
+\begin{proof}%Demostración (opcion 1)
+Sean $u,v \in E$. 
+
+Si $v=0$ entonces la desigualdad se cumple pues ambos lados de la desigualdad son cero.
+
+Si $ v\neq 0$, considere la descomposición ortogonal
+\begin{equation*}\label{eq12:03}
+    u = \dfrac{\langle  u , v \rangle }{\|v\|^2} v + w
+\end{equation*}
+donde $w\in E$ es ortogonal a $v$. Aplicando el Teorema de Pitágoras a la desigualdad a \eqref{eq12:03} se obtiene
+\begin{align*}
+    \|u\|^2 
+&= \left| \dfrac{\langle  u,v \rangle }{\|v\|^2} v \right\| + \|w\|^2 \\
+&= \dfrac{\|\langle  u , v \rangle  |^2 \|v\|^2}{\|v\|^4 + \|w\|^2}\\
+&= \dfrac{|\langle  u,v \rangle  | }{\|v\|^2} + \|w\|^2 \\
+&\geq \dfrac{| \langle  u,v \rangle  |^2}{ \|v\|^2 }
+\end{align*}
+luego tomando la raíz cuadrada a cada lado se obtiene la desigualdad de Cauchy-Schwartz. 
+\end{proof}
+\end{comment}
+
+\setcounter{section}{4}
+\section{Espacios con producto interno}
+\subsection{Conjunto ortogonal y ortonormal}
+
+
+\begin{defi}[Conjunto ortogonal]
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial con producto interno  y
+    \[C=\{v_1, v_2, \ldots, v_k\}\subseteq E.\] Se dice que $C$ es un conjunto ortogonal en $E$ si
+    \[
+        \langle  v_i, v_j \rangle  = 0
+    \]
+    para todo $i \neq j$.
+\end{defi}
+
+\begin{ejem}\hspace{0pt}\label{Sem08:EjemConjOrt} En el espacio vectorial $\R^{3}$ con el producto interno usual, el conjunto 
+\[
+    C = \l\{(1,1,1), (1,0,-1), (-1,2,-1)\r\}
+\]
+es un conjunto ortogonal. En efecto, notemos que
+\[
+\begin{array}{l}
+    \langle (1,1,1), (1,0,-1)\rangle  = (1)(1) + (1)(0) + (1)(-1) = 0,\\
+    \langle (1,1,1), (-1,2,-1)\rangle  = (1)(-1) + (1)(2) + (1)(-1) = 0,\text{ y}\\
+    \langle (1,0,-1), (-1,2,-1)\rangle  = (1)(-1) + (0)(2) + (-1)(-1) = 0.
+\end{array}
+\]
+Luego, $C$ es un conjunto ortogonal.
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} En el espacio vectorial $\R^{4}$ con el producto interno usual, demuestre que el conjunto 
+\[
+    C = \l\{(1,1,-2,2), (0,2,2,1), (0,-2,1,2)\r\}
+\]
+es ortogonal.
+\end{ejer}
+
+\begin{defi}[Conjunto ortonormal]
+Sean $(E,+,\cdot,\K)$ un espacio vectorial provisto de producto interno y
+\[C = \{v_1, v_2, \ldots, v_k\} \subseteq E.\] Se dice que $C$ es un conjunto ortonormal en $E$ si es ortogonal y 
+\[
+    \| v_i\| =  1
+\]
+para todo $i \in \{1, \ldots, k\}$.
+\end{defi}
+
+\begin{ejem}\hspace{0pt}\label{ConjuntoOrtonormal} En el espacio vectorial $\R^{3}$ con el producto interno usual, a partir del conjunto ortogonal del ejemplo \ref{Sem08:EjemConjOrt} 
+\[
+    C = \l\{(1,1,1), (1,0,-1), (-1,2,-1)\r\}
+\]
+determinamos a un conjunto ortonormal. Para esto, calculamos las normas de los vectores:
+\[
+\begin{array}{l}
+    \|(1,1,1)\| = \sqrt{\langle (1,1,1), (1,1,1)\rangle } = \sqrt{3}\\
+    \|(1,0,-1)\| = \sqrt{\langle (1,0,-1), (1,0,-1)\rangle } = \sqrt{2}\\
+    \|(-1,2,-1)\| = \sqrt{\langle (-1,2,-1), (-1,2,-1)\rangle } = \sqrt{6}.
+\end{array}
+\]
+Luego, el conjunto ortonormal es
+\[
+    D = \l\{\dfrac{1}{\sqrt{3}}(1,1,1), \dfrac{1}{\sqrt{2}}(1,0,-1), \dfrac{1}{\sqrt{6}}(-1,2,-1)\r\}.
+\]
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} En el espacio vectorial $\R^{4}$ con el producto interno usual, dado el conjunto ortogonal
+\[
+    C = \l\{(1,1,-2,2), (0,2,2,1), (0,-2,1,2)\r\}
+\]
+obtenga un conjunto ortonormal.
+\end{ejer}
+
+%\begin{prop}\label{PropOrtNor}
+%Sea $(E,+,\cdot,\K)$ un espacio vectorial provisto de producto interno. Si $\{v_1, v_2, \ldots, v_k\}$ es un conjunto ortonormal entonces 
+%\begin{equation*}
+ %   \| \alpha_1 v_1 + \alpha_2 v_2 + \ldots + \alpha_n v_k \|^2 =
+  %  |\alpha_1|^2 + |\alpha_2|^2 + \ldots + |\alpha_k|^2
+%\end{equation*}
+%donde $\alpha_1, \alpha_2, \ldots, \alpha_k \in \K$. 
+%\end{prop}
+
+%\begin{ejem}\hspace{0pt} Considere el espacio y el conjunto ortonormal $D$ del ejemplo \ref{ConjuntoOrtonormal}, tenemos que si $\alpha_{1} = - 2\sqrt{3}$, $\alpha_{2} = \sqrt{2}$, $\alpha_{3} = - \sqrt{6}$, $v_{1} = (1,1,1)$, $v_{2} = (1,0,-1)$ y $v_{3} = (-1,2,-1)$, entonces
+%\[
+ %   \alpha_1 v_1 + \alpha_2 v_2 + \alpha_3 v_3 = (0, - 4, - 2).
+%\]
+%Aplicando la definición de norma:
+%\begin{equation}\label{EjeProLadIzq}
+ %   \| \alpha_1 v_1 + \alpha_2 v_2 + \alpha_3 v_3 \|^2 = \|\l(0, - 4, - 2\r)\|^{2} = 20.
+%\end{equation}
+%Además, se tiene que:
+%\begin{equation}\label{EjeProLadDer}
+ %   |\alpha_1|^2 + |\alpha_2|^2 + |\alpha_3|^2 = (- 2\sqrt{3})^{2} + (\sqrt{2})^{2} + (-\sqrt{6})^{2} = 20.
+%\end{equation}
+%Finalmente, a partir de \eqref{EjeProLadIzq} y de \eqref{EjeProLadDer} se verifica la Proposición \ref{PropOrtNor}.
+%\end{ejem}
+
+\begin{cor}
+    Sea $(E,+,\cdot,\K)$ un espacio vectorial provisto de producto interno. Si $C \subseteq E$ es un conjunto ortogonal de vectores no nulos, entonces $C$ es linealmente independiente.
+\end{cor}
+
+\subsection{Bases ortogonales y ortonormales}
+%A partir de aquí, siempre consideraremos espacios vectoriales provistos con un producto interno.
+
+\begin{defi}[Base ortogonal (ortonormal)]
+    En un espacio vectorial con producto interno, una base ortogonal (ortonormal) es una base cuyos vectores forman un conjunto ortogonal (ortonormal). 
+\end{defi}
+
+%\begin{teo}
+%    Sea $(E,+,\cdot,\K)$ un espacio vectorial provisto de producto interno y sea 
+    
+ %   \noindent $\{u_1, u_2, \ldots, u_n\}$ una base ortogonal para $E$; entonces, para todo $v \in E:$
+  %  \[
+   %     v = \alpha_1 u_1 + \alpha_2 u_2 +\cdots + \alpha_n u_n
+    %\]
+    %donde:
+    %\[
+     %   \alpha_k = \dfrac{\langle  v, u_k \rangle }{\langle  u_k, u_k \rangle }
+    %\]
+    %para todo $k \in \{1, 2, \ldots, n\}$.
+%\end{teo}
+
+%\begin{ejem}\hspace{0pt} En el espacio vectorial $\R^{2}$ con el producto interno usual, consideramos la base ortogonal $\l\{u_{1}, u_{2}\r\} = \l\{(1, 1), \l(\dfrac{1}{2}, - \dfrac{1}{2}\r)\r\}$. Sea $v = (1, 2)$, tenemos que
+%\[
+ %   \alpha_1 = \dfrac{\langle  v, u_1 \rangle }{\langle  u_1, u_1 \rangle } = \dfrac{3}{2}
+  %  \texty
+   % \alpha_2 = \dfrac{\langle  v, u_2 \rangle }{\langle  u_2, u_2 \rangle } = - 1
+%\]
+%de lo cual
+%\[
+ %   v = \dfrac{3}{2}(1, 1) - \l(\dfrac{1}{2}, - \dfrac{1}{2}\r).
+%\]
+%\end{ejem}
+
+%\begin{teo}
+ %   Sea $(E,+,\cdot,\K)$ un espacio vectorial provisto de producto interno y sea 
+    
+  %  \noindent $\{u_1, u_2, \ldots, u_n\}$ una base ortonormal para $E$; entonces,  para todo $v \in E:$
+   % \[
+    %    v = \alpha_1 u_1 + \alpha_2 u_2 +\cdots + \alpha_n u_n
+    %\]
+    %donde:
+    %\[
+     %   \alpha_k = \langle  v, u_k \rangle  
+    %\]
+    %para todo $k \in \{1, 2, \ldots, n\}$.
+%\end{teo}
+
+\begin{teo}[Proceso de Gram-Schmidt]
+Sea $(E,+,\cdot,\K)$ un espacio vectorial provisto de producto interno y sea 
+
+\noindent $S = \{u_1, u_2, \ldots, u_n\}$ un conjunto linealmente independiente que genera a un subespacio $W$, es decir, $W = \gen(S)$. Entonces, los vectores:
+\begin{enumerate}
+\item 
+    $v_1 = u_1$, y
+\item
+    $\displaystyle v_k = 
+        u_k 
+        - \sum_{i=1}^{k-1} \dfrac{\langle  u_k, v_i\rangle }{\langle  v_i,v_i\rangle } v_i$, para $k=2,\ldots,n$
+\end{enumerate}
+forman una base ortogonal $\{v_{1}, v_{2}, \ldots, v_{n}\}$ de $W$.
+
+\noindent Además, los vectores:
+\[
+    w_{k} = \dfrac{v_{k}}{\|v_{k}\|}
+\]
+para $k=1,\ldots,n$ forman una base ortonormal $\{w_{1}, w_{2}, \ldots, w_{n}\}$ de $W$.
+\end{teo}
+
+\begin{ejem}\hspace{0pt} En el espacio vectorial $\R^{4}$ consideremos al conjunto linealmente independiente  
+\[
+    S = \{u_{1}, u_{2}, u_{3}\} = \{(1,0,0,0), (0,2,2,0), (0, 3, 3, - 3)\}
+\]
+y el subespacio $W = \gen(S)$. Utilizando el Proceso de Gram-Schmidt, queremos encontrar una base ortogonal $\{v_{1}, v_{2}, v_{3}\}$  de $W$, de modo que \[
+\begin{cases}
+    v_1=u_1\\
+    v_2=u_2-\frac{\langle u_2,v_1\rangle}{\langle v_1,v_1\rangle}v_1\\
+    v_3=u_3-\frac{\langle u_3,v_1\rangle}{\langle v_1,v_1\rangle}v_1-\frac{\langle u_3,v_2\rangle}{\langle v_2,v_2\rangle}v_2
+\end{cases}
+\] 
+Reemplazando con los valores de $u_{1}, u_{2}, u_{3}$, tenemos que 
+\[
+v_1=(1,0,0,0)
+\]
+luego \[
+v_2=(0,2,2,0)-\frac{\langle (0,2,2,0),(1,0,0,0)\rangle}{\langle (1,0,0,0),(1,0,0,0)\rangle}(1,0,0,0)
+\]
+sabemos que $\langle (0,2,2,0),(1,0,0,0)\rangle=0$ así,
+\[
+v_2=(0,2,2,0)-\frac{0}{\langle (1,0,0,0),(1,0,0,0)\rangle}(1,0,0,0)=(0,2,2,0)
+\]
+Finalmente 
+\[
+v_3=(0, 3, 3, - 3)-\frac{\langle (0, 3, 3, - 3),(1,0,0,0)\rangle}{\langle (1,0,0,0),(1,0,0,0)\rangle}(1,0,0,0)-\frac{\langle (0, 3, 3, - 3),(0,2,2,0)\rangle}{\langle (0,2,2,0),(0,2,2,0)\rangle}(0,2,2,0)
+\]
+sabemos que 
+\begin{align*}
+    \langle (0, 3, 3, - 3),(1,0,0,0)\rangle&=0\\
+    \langle (1,0,0,0),(1,0,0,0)\rangle&=1\\
+    \langle (0, 3, 3, - 3),(0,2,2,0)\rangle&=12\\
+    \langle (0,2,2,0),(0,2,2,0)\rangle&=8
+\end{align*}
+de este modo
+\begin{align*}
+v_3&=(0, 3, 3, - 3)-\frac{0}{1}(1,0,0,0)-\frac{12}{8}(0,2,2,0)\\
+&=(0, 3, 3, - 3)-(0,3,3,0)\\
+&=(0,0,0,-3)
+\end{align*}
+De este modo, nos queda que 
+\[
+    \{v_{1}, v_{2}, v_{3}\} = \{(1,0,0,0), (0,2,2,0), (0,0,0,- 3)\}
+\]
+es una base ortogonal. Además, al dividir estos vectores para sus respectivas normas, obtenemos una base ortonormal de $W$:
+\[
+    \{w_{1}, w_{2}, w_{3}\} = \l\{(1, 0, 0, 0), \l(0,\dfrac{\sqrt{2}}{2},\dfrac{\sqrt{2}}{2},0\r), \l(0,0,0, - 1\r)\r\}.
+\]
+\end{ejem}
+
+\begin{teo}
+    Todo espacio vectorial de dimensión finita tiene una base ortogonal y una base ortonormal.
+\end{teo}
+
+
+\begin{ejem}
+    Considere la base $S = \{u_1, u_2, u_3\}$ de $\R^3$, donde 
+    \[
+        u_1 = (1,1,0), \qquad u_2 = (0, 1,1), \qquad u_3 = (1,0,1)
+    \]
+    mediante el proceso de Gram-Schmidt, queremos encontrar una base ortonormal, para ello primero encontraremos una base ortogonal $\{v_{1}, v_{2}, v_{3}\}$  de $W$, de modo que \[
+\begin{cases}
+    v_1=u_1\\
+    v_2=u_2-\frac{\langle u_2,v_1\rangle}{\langle v_1,v_1\rangle}v_1\\
+    v_3=u_3-\frac{\langle u_3,v_1\rangle}{\langle v_1,v_1\rangle}v_1-\frac{\langle u_3,v_2\rangle}{\langle v_2,v_2\rangle}v_2
+\end{cases}
+\] 
+Reemplazando con los valores de $u_{1}, u_{2}, u_{3}$, tenemos que 
+\[
+v_1=(1,1,0)
+\]
+luego \[
+v_2=(0,1,1)-\frac{\langle (0,1,1),(1,1,0)\rangle}{\langle (1,1,0),(1,1,0)\rangle}(1,1,0)
+\]
+sabemos que $\langle (0,1,1),(1,1,0)\rangle=1$ y $ \langle (1,1,0),(1,1,0)\rangle=2 $ así,
+\[
+v_2=(0,1,1)-\frac{1}{ 2}(1,1,0)=\left(-\frac{1}{2},\frac{1}{2},1\right)
+\]
+Finalmente 
+\[
+v_3=(1,0,1)-\frac{\langle (1,0,1),(1,1,0)\rangle}{\langle (1,1,0),(1,1,0)\rangle}(1,1,0)-\frac{\langle (1,0,1),\left(-\frac{1}{2},\frac{1}{2},1\right)\rangle}{\langle \left(-\frac{1}{2},\frac{1}{2},1\right),\left(-\frac{1}{2},\frac{1}{2},1\right)\rangle}\left(-\frac{1}{2},\frac{1}{2},1\right)
+\]
+sabemos que 
+\begin{align*}
+    \langle (1,0,1),(1,1,0)\rangle&=1\\
+    \langle (1,1,0),(1,1,0)\rangle&=2\\
+    \left\langle (1,0,1),\left(-\frac{1}{2},\frac{1}{2},1\right)\right\rangle&=\frac{1}{2}\\
+    \left\langle \left(-\frac{1}{2},\frac{1}{2},1\right),\left(-\frac{1}{2},\frac{1}{2},1\right)\right\rangle&=\frac{3}{2}
+\end{align*}
+de este modo
+\begin{align*}
+v_3&=(1,0,1)-\frac{1}{2}(1,1,0)-\frac{1}{3}\left(-\frac{1}{2},\frac{1}{2},1\right)\\
+&=\left(\frac{1}{2},-\frac{1}{2},1\right)-\left(-\frac{1}{6},\frac{1}{6},\frac{1}{3}\right)\\
+&=\left(\frac{2}{3},-\frac{2}{3},\frac{2}{3}\right)
+\end{align*}
+De este modo, nos queda que 
+\[
+    \{v_{1}, v_{2}, v_{3}\} = \left\{(1,1,0), \left(-\frac{1}{2},\frac{1}{2},1\right), \left(\frac{2}{3},-\frac{2}{3},\frac{2}{3}\right)\right\}
+\]
+es una base ortogonal. Además, al dividir estos vectores para sus respectivas normas, se obtiene la base ortonormal $T=\{w_1, w_2, w_2\}$ para $\R^3$ donde
+    \[
+        w_1 = \left(\dfrac{\sqrt{2}}{2},\dfrac{\sqrt{2}}{2},0\right), \qquad
+        w_2 = \left(-\dfrac{\sqrt{6}}{6},\dfrac{\sqrt{6}}{6},
+        \dfrac{\sqrt{6}}{3}\right), \qquad
+        w_3 = \left(\dfrac{\sqrt{3}}{3},-\dfrac{\sqrt{3}}{3},
+        \dfrac{\sqrt{3}}{3}\right).
+    \]
+\end{ejem}
+
+\begin{defi}[Complemento ortogonal]
+Sean $(E,+,\cdot,\K)$ un espacio vectorial provisto de producto interno y
+$W$ un subespacio de $E$. El complemento ortogonal de $W$, denotado por $W^\perp$, se define por:
+\[
+    W^\perp = \{ x \in E: \l< x, w \r> = 0, \text{ para todo } w \in W\}.
+\]
+\end{defi}
+
+%\begin{ejem}\hspace{0pt}\label{Complemento1} En el espacio vectorial $\R_{1}[x]$ con el producto interno usual, considere el subespacio $W = \gen(\{1 + 2x\})$, su complemento ortogonal es
+%\[
+ %   W^{\perp} = \{a_{0} + a_{1}x\in\R_{1}[x]\,:\,a_{0} + 2a_{1} = 0\} = \spn(\{- 2 + x\}).
+%\]
+%\end{ejem}
+
+\begin{ejem}\hspace{0pt}\label{Complemento2} En el espacio vectorial $\Mat{2}{2}$ con el producto interno usual, consideremos al subespacio vectorial
+\[
+    W = \l\{\begin{pmatrix}a&- a\\a&b\end{pmatrix}\,:\,a,b\in\R\r\}
+\]
+su complemento ortogonal es
+\[
+    W^{\perp} = \l\{\begin{pmatrix}a&a+c\\c&0 \end{pmatrix}\,:\,a,c\in\R\r\}.
+\]
+\end{ejem}
+
+\begin{prop}
+Sean $(E,+,\cdot,\K)$ un espacio vectorial provisto de producto interno , 
+$W \subset E$ un subespacio vectorial de $E$ de dimensión finita y $B$ una base de $W$, se tiene que
+\[
+    W^\perp = \{ x \in E: \l< x, w_{i} \r> = 0, \text{ para todo } w_{i} \in B\}.
+\]
+\end{prop}
+
+\begin{ejem}\hspace{0pt}\label{Complemento3} Considere el ejemplo \ref{Complemento2}, tenemos que el conjunto:
+\[
+    B = \l\{\begin{pmatrix}1&- 1\\1&0\end{pmatrix}, \begin{pmatrix}0&0\\0&1\end{pmatrix}\r\}
+\]
+es una base de $W$, por lo tanto:
+\begin{align*}
+    W^{\perp} 
+    &= \l\{\begin{pmatrix}a&b\\c&d\end{pmatrix}\in\Mat{2}{2}\,:\,
+    \l<\begin{pmatrix}a&b\\c&d\end{pmatrix}, \begin{pmatrix}1& -1\\1&0\end{pmatrix}\r> = 0,
+    \l<\begin{pmatrix}a&b\\c&d\end{pmatrix}, \begin{pmatrix}0&0\\0&1\end{pmatrix}\r> = 0\r\}\\
+    &= \l\{\begin{pmatrix}a&b\\c&d\end{pmatrix}\in\Mat{2}{2}\,:\,
+    \Tr\begin{pmatrix}a + c& -a\\b + d&- b\end{pmatrix} = 0,
+    \Tr\begin{pmatrix}0&c\\0&d\end{pmatrix} = 0\r\}\\
+    &= \l\{\begin{pmatrix}a&b\\c&d\end{pmatrix}\in\Mat{2}{2}\,:\,
+    a - b + c = 0, d = 0\r\}\\
+    &= \l\{\begin{pmatrix}a&b\\c&d\end{pmatrix}\in\Mat{2}{2}\,:\,
+    b = a + c, d = 0\r\}\\
+    &= \l\{\begin{pmatrix}a&a + c\\c&0\end{pmatrix}\in\Mat{2}{2}\,:\,
+    a, c \in \R\r\}.
+\end{align*}
+\end{ejem}
+\begin{ejer}
+    Sea $W=\{(x,y,z)\in\R^3: x=2y\}$, hallar $W^\perp$
+\end{ejer}
+\begin{teo}
+Sean $(E,+,\cdot,\K)$ un espacio vectorial provisto de producto interno y
+$W$ subespacio vectorial de $E$, entonces:
+\begin{enumerate}
+\item $W^\perp$ es un subespacio vectorial de $E$.
+\item $W \cap W^\perp = \{0_{E}\}$.
+\end{enumerate}
+\end{teo}
+
+\begin{teo}
+Sean $(E,+,\cdot,\K)$ un espacio vectorial de dimensión finita con producto interno y $W$ un subespacio vectorial de $E$, entonces:
+\begin{enumerate}
+    \item $\dim(E) = \dim(W) + \dim(W^\perp)$.
+    \item $E = W \oplus W^\perp$.
+\end{enumerate}
+\end{teo}
+
+%\begin{ejem}\hspace{0pt} En el espacio vectorial $\R_{1}[x]$ se define al subespacio vectorial $W = \gen(\{1 + 2x\})$, se tiene que una base de $W$ es $B_{1} = \{1 + 2x\}$, y una base de su complemento ortogonal $W^{\perp}$ está dada por $B_{2} = \{- 2 + x\}$, entonces:
+%\[
+ %   \dim(\R_{1}[x]) = \dim(W) + \dim(W^{\perp})
+  %  \texty
+   % \R_{1}[x] = W \oplus W^{\perp}.
+%\]
+%\end{ejem}
+
+\begin{ejem}\hspace{0pt} Considere el ejemplo \ref{Complemento3}, al aplicar el teorema 3 se concluye que:
+\[
+    \Mat{2}{2} = W \oplus W^{\perp}.
+\]
+\end{ejem}
+
+\begin{teo}
+Sean $(E,+,\cdot,\K)$ un espacio vectorial de dimensión finita provisto de producto interno y $W$ un subespacio vectorial de $E$, entonces 
+\[
+    \left(W^{\perp}\right)^{\perp} =  W.
+\]
+\end{teo}
+
+\setcounter{section}{4}
+\section{Espacios con producto interno}
+\setcounter{subsection}{2}
+\subsection{Proyección ortogonal}
+\setcounter{defi}{8}
+\begin{defi}[Proyección ortogonal]
+Sean $(E,+,\cdot,\K)$ un espacio vectorial con producto interno, 
+$W$ un subespacio vectorial de $E$ y  $\{u_1, u_2, \ldots, u_k \}$ una base ortogonal de $W$. Para $v \in E$, la proyección ortogonal de $v$ sobre $W$, denotado por $\proy_W (v)$, se define por:
+
+\[   \proy_W(v) = \dfrac{\left<v,u_1 \right>}{\left<u_1, u_1 \right\rangle }u_1 +
+   \dfrac{\left<v,u_2 \right\rangle}{\left<u_2, u_2 \right\rangle}u_2 +
+   \cdots +
+   \dfrac{\left<v,u_k \right\rangle}{\left<u_k, u_k \right\rangle}u_k,
+\]
+donde $\proy_W (v) \in W$.
+\end{defi}
+\begin{ejem}\hspace{0pt}\label{ProyeccionOrtogonal} En el espacio vectorial $\R^{3}$ considere a $B=\{u_1, u_2\}$ una base ortonormal de un subespacio $W$ de $\R^3$, donde
+\[
+    u_1 = \l(\dfrac{\sqrt{2}}{2},\dfrac{\sqrt{2}}{2},0\r)
+    \texty
+    u_2 = \l(- \dfrac{\sqrt{6}}{6},\dfrac{\sqrt{6}}{6}, \dfrac{\sqrt{6}}{3}\r)
+\]
+y sea $v = (1,1,1)$, entonces
+\begin{align*}
+\proy_W(v)
+&= \l<v, u_1\r> u_1 + \l<v, u_2\r> u_2\\
+&= \l<(1, 1, 1), \l(\dfrac{\sqrt{2}}{2},\dfrac{\sqrt{2}}{2},0\r)\r> \l(\dfrac{\sqrt{2}}{2},\dfrac{\sqrt{2}}{2},0\r) +\\
+&\phantom{= } \l<(1, 1, 1), 
+\l(- \dfrac{\sqrt{6}}{6},\dfrac{\sqrt{6}}{6}, \dfrac{\sqrt{6}}{3}\r)\r> \l(- \dfrac{\sqrt{6}}{6},\dfrac{\sqrt{6}}{6}, \dfrac{\sqrt{6}}{3}\r)\\
+&= \sqrt{2}\l(\dfrac{\sqrt{2}}{2},\dfrac{\sqrt{2}}{2},0\r) + \dfrac{\sqrt{6}}{3} 
+\l(- \dfrac{\sqrt{6}}{6},\dfrac{\sqrt{6}}{6}, \dfrac{\sqrt{6}}{3}\r)\\
+&= \l(1, 1, 0\r) + \l(- \dfrac{1}{3}, \dfrac{1}{3}, \dfrac{2}{3}\r)\\
+&= \l(\dfrac{2}{3}, \dfrac{4}{3}, \dfrac{2}{3}\r)
+\end{align*}
+donde $\proy_W(v) \in W = \{(x_{1}, x_{2}, x_{3})\in\R^{3}\,:\,x_{1} - x_{2} + x_{3} = 0\}$.
+\end{ejem}
+\begin{teo}[Teorema de la proyección]\label{TeoProyec}
+Sean $(E,+,\cdot,\K)$ un espacio vectorial de dimensión finita provisto de producto interno, $W$ un subespacio vectorial de $E$ y $v \in E$. Se tiene que
+\[
+    v = \proy_W( v) + \proy_{W^\perp}( v).
+\]
+\end{teo}
+
+\begin{ejem}\hspace{0pt} Considere el ejemplo \ref{ProyeccionOrtogonal}, se puede encontrar directamente la proyección ortogonal de $v$ sobre $W^{\perp}$, aplicando el teorema \ref{TeoProyec}:
+\begin{align*}
+\proy_{W^\perp}(v) 
+    &=  v -\proy_{W}(v)\\
+    &= (1,1,1) - \l(\dfrac{2}{3}, \dfrac{4}{3}, \dfrac{2}{3}\r)\\
+    &= \l(\dfrac{1}{3}, - \dfrac{1}{3}, \dfrac{1}{3}\r)
+\end{align*}
+sin necesidad de determinar previamente que:
+\[
+W^{\perp} = \{(x_{1}, x_{2}, x_{3})\in\R^{3}\,:\,x_{1} + x_{2} = 0, x_{2} + x_{3} = 0\}.
+\]
+\end{ejem}
+\begin{teo}
+Sean $(E,+,\cdot,\K)$ un espacio vectorial de dimensión finita provisto de producto interno, $W$ un subespacio vectorial de $E$ y $v \in E$. Se tiene que el vector en $W$ más cercano a $v$ es $\proy_W(v)$, es decir,
+\[
+\|v-w\| \quad \text{ es mínima cuando } \quad w = \proy_W(v).
+\]
+Equivale a afirmar que, para todo $w\in W$ se verifica la desigualdad:
+\[
+    \|v - \proy_{W}(v)\| \leq \|v - w\|,
+\]
+y se cumple la igualdad solo en el caso en que $w = \proy_{W}(v)$.
+\end{teo}
+
+\begin{ejem}\hspace{0pt} Considere el ejemplo \ref{ProyeccionOrtogonal}, se tiene que tomando $w = \proy_{W}(v)$ el valor de $\|v - w\| = \|\proy_{W^{\perp}}(v)\| = \dfrac{\sqrt{3}}{3}$ es la distancia mínima de $v = (1,1,1)$ a $W = \{(x_{1}, x_{2}, x_{3})\in\R^{3}\,:\,x_{1} - x_{2} + x_{3} = 0\}$.
+\end{ejem}
+
+\newpage
+\section{Aplicaciones lineales}
+
+\subsection{Definición de Aplicación lineal}
+\setcounter{defi}{0}
+\begin{defi}[Aplicación lineal]
+    Sean $(E,+_1,\cdot_1,\K)$ y $(F,+_2,\cdot_2,\K)$ espacios vectoriales. A una función
+    
+    \noindent $\func{T}{E}{F}$ se le llama aplicación lineal (transformación lineal) si para todo $\alpha \in \K$, y todo $u,v \in E$ se cumple:
+    \begin{enumerate}
+    \item 
+        $T(u +_1 v) = T(u) +_2 T(v)\quad$ y
+    \item 
+        $T(\alpha \cdot_1 v ) = \alpha \cdot_2 T(v)$.
+    \end{enumerate}
+\end{defi}
+
+\begin{obs}
+En adelante, consideraremos $(E,+,\cdot,\K)$ y $(F,+,\cdot,\K)$ espacios vectoriales, ya que, si bien se están notando de la misma manera las operaciones suma y producto de los dos espacios vectoriales, estamos claros que no tiene por qué ser así. Con esto conseguimos simplificar la escritura de la definición de aplicación lineal.
+\end{obs}
+
+\begin{advertencia}
+    Se denotará
+    \begin{enumerate}
+    \item 
+        $T(u + v) = T(u) + T(v)\quad$ y
+    \item 
+        $T(\alpha v ) = \alpha T(v)$,
+    \end{enumerate}
+    para $\alpha \in \K$ y $u,v \in E$.
+\end{advertencia}
+
+\begin{obs}
+    Al conjunto de todas las aplicaciones lineales del espacio vectorial $E$ en el espacio vectorial $F$, lo designaremos por $\mathscr{L}(E,F)$.
+\end{obs}
+
+\begin{ejem}\hspace{0pt} \label{ejem1}
+Las siguientes funciones, son ejemplos de transformaciones lineales.
+\begin{enumerate}
+\item
+    Aplicación lineal nula.
+    \[
+        \funcion{T}{E}{E}{v}{0_{E}}
+    \]
+\item
+    Aplicación lineal identidad.
+    \[
+        \funcion{T}{E}{E}{v}{v}
+    \]
+    \item
+    \[
+        \funcion{T}{\R^3}{\R^2}{(x,y,z)}{(x-2z,y-z)}
+    \]
+      \item
+    \[
+        \funcion{T}{\R^3}{\R^3}{(x,y,z)}{(x + y,y + z,x)}
+    \]
+  
+    
+   
+    
+  
+\end{enumerate}
+\end{ejem}
+\begin{ejem}
+En la aplicaci\'on lineal
+\[
+        \funcion{T}{\R^3}{\R^2}{(x,y,z)}{(x-2z,y-z)}
+\]
+se tiene que
+\[
+    T(0,0,0)=(0,0) \texty T(-1,2,3)=(-7,-1).
+\]
+\end{ejem}
+
+\begin{ejer}\label{Ejercicio1}
+Dada la aplicaci\'on lineal 
+    \[
+        \funcion{T}{\R^3}{\R^3}{(a,b,c)}{(a,a-b,c)}
+    \]
+Hallar  $T(0,0,0)$, $T(1,-2,3)$ y $T(0,-6,1)$.
+\end{ejer}
+
+
+\begin{ejem}
+Demostremos que la función definida en el Ejercicio \ref{Ejercicio1} es una aplicación lineal.
+\[
+    \funcion{T}{\R^3}{\R^3}{(a,b,c)}{(a,a-b,c)}
+\]
+\begin{enumerate}
+\item
+    Para todo $u, v \in \R^{3}$, vamos a demostrar que $T(u+v) = T(u) + T(v)$.
+
+    \noindent Sean $u = (a, b, c), v = (d, e, f) \in \R^{3}$, tenemos
+    \begin{align*}
+        T(u) & = (a,a-b,c) \\
+        T(v) & = (d,d-e,f) \text{, luego} \\
+        T(u) + T(v) & = (a,a-b,c) + (d,d-e,f).
+    \end{align*}
+    Por otra parte, $u+v = (a+d, b+e, c+f)$, se sigue que
+    \begin{align*}
+        T(u+v) & = (a + d,(a+d) - (b+e), c+f) \\
+        & = (a,a-b, c) + (d,d-e,f).
+    \end{align*}
+    Por lo tanto:
+    \[
+        T(u+v) = T(u) + T(v)
+    \]
+    
+\item
+    Para todo $\alpha \in \R$ y para todo $u \in \R^{3}$, vamos a demostrar que $T(\alpha u) = \alpha T(u)$.
+    
+    Sean $\alpha \in \R$ y $u = (a, b, c) \in \R^{3}$. 
+    Tenemos que $\alpha u = (\alpha a, \alpha b, \alpha c)$, luego
+    \begin{align*}
+    T(\alpha u) & = (\alpha a,(\alpha a - \alpha b) , \alpha c) \\
+    & = \alpha (a, a-b, c)
+    \end{align*}
+    Por otra parte
+    \[
+        \alpha T(u) = \alpha (a ,a-b,c)
+    \]
+    Por lo tanto:
+    \[
+        T(\alpha u) = \alpha T(u)
+    \]
+    De $1.$ y $2.$ se sigue que $T$ es una aplicación lineal.
+\end{enumerate}
+\end{ejem}
+
+\begin{ejer} 
+Demuestre que la siguiente funci\'on es una aplicaci\'on lineal:
+   \[
+        \funcion{T}{\R^3}{\R^2}{(x,y,z)}{(x-2z,y-z)}
+    \]
+\end{ejer}
+\begin{teo}
+     Sea $T \in \mathscr{L}(E,F)$. Para todo $u,v, v_1, v_2, \ldots, v_n \in E$ y $\alpha_1, \alpha_2, \ldots, \alpha_n \in \K$, se tiene que:
+     \begin{enumerate}
+         \item $T(0_E) = 0_F$.
+         \item $T(u-v) = T(u) - T(v)$.
+         \item $T\left(\displaystyle \sum_{k=1}^n \alpha_k v_k \right)= 
+         \displaystyle \sum_{k=1}^n \alpha_k T\left(v_k \right)$.
+     \end{enumerate}
+\end{teo}
+
+\begin{teo}
+    $(\mathscr{L}(E,F), +, \cdot, \K)$ es un espacio vectorial. Siendo $+$ la suma usual entre funciones y $\cdot$ la multiplicación de un elemento del campo por una función.
+\end{teo}
+\subsection{Propiedades de las aplicaciones lineales}
+
+\begin{prop}
+Sean $T_1,T_2 \in \mathscr{L}(E,F)$ y $B= \{v_1, v_2, \ldots, v_n\}$ una base para $E$. Si
+\[
+    T_1(v_i) = T_2(v_i)
+\]
+para todo $i \in \{1, 2, \ldots, n\}$, entonces $T_1(v)=T_2(v)$, para todo $v\in E$, es decir, 
+\[
+    T_1 = T_2.
+\]
+\end{prop}
+
+\begin{prop}
+Si $\{v_1, v_2, \ldots, v_n\}$ es una base del espacio vectorial $E$ y 
+
+\noindent \{ $w_1, w_2, \ldots, w_n \} \subset F$, entonces existe una única transformación lineal
+
+\noindent $T \in \mathscr{L}(E,F)$ tal que
+\[
+    T(v_i) = w_i
+\]
+para todo $i\in \{1, 2, \ldots, n\}$.
+\end{prop}
+
+\setcounter{section}{5}
+\section{Aplicaciones lineales}
+\setcounter{prop}{3}
+\begin{prop}
+    Sean $T \in \mathscr{L}(E,F)$ y $\{u_1,u_2,\ldots,u_n\}$ una base del espacio vectorial $E$. Si $T(u_1),T(u_2),\ldots,T(u_n)$ se conocen, entonces $T$ está determinada. %Es decir, si $T(u_1),T(u_2),\ldots,T(u_n)$ se conocen, entonces $T(u)$ se conoce, para todo $u\in E$.
+\end{prop}
+
+\begin{obs}
+    Una aplicación lineal está determinada cuando se conocen las imágenes de los vectores  de una base del espacio vectorial de salida. Para encontrar la aplicaci\'on lineal de manera expl\'icita, se debe hallar la imagen del elemento genérico del espacio vectorial de salida.
+    
+    \textbf{Pasos para obtener una Transformación Lineal de forma explícita:}
+    \begin{enumerate}
+    \item
+        Demostrar que $T$ está determinada. Es decir, comprobar que se tiene una base del espacio vectorial de salida y la imagen de cada vector de dicha base.
+    \item
+        Escribir la ecuación generadora. Es decir, expresar el vector genérico del espacio vectorial de salida como combinación lineal de los vectores de su base.
+    \item
+        Obtener y resolver el sistema de Ecuaciones Lineales (obtener los escalares).
+    \item
+        Reemplazar los escalares en la ecuación generadora.
+    \item
+        Aplicar la Transformación Lineal en la ecuación generadora.
+    \item
+        Obtener la Transformación Lineal.
+    \end{enumerate}
+
+\end{obs}
+
+\begin{ejem}
+    Sean $T \in \mathscr{L}(\R^{2}, \R^{3})$,  $B=\left\{(1, -1), (-3, 2) \right\}$ una base de $\R^2$,  $T(1, -1)=(0, 2, 0)$ y $T(-3, 2) = (-3, 2, 0)$.
+\begin{enumerate}
+    \item ¿La aplicación lineal, $T$ está determinada?.\\
+    Dado que $B$ es una base  del espacio vectorial de salida $\R^2$ y se conocen las im\'agenes de los vectores de la base, entonces $T$ está determinada. 
+    \item La aplicaci\'on lineal de manera expl\'icta es
+    \[
+        T(x, y) = (3x+3y, -6x-8y, 0), \;\;\; \text{para todo}\;\; (x, y) \in \R^{2}.
+    \]
+En efecto, sean $(x,y)\in\R^2$ y $\alpha_1,\alpha_2\in\K$. Como $B$ es una base de $\R^2$ se tiene que:
+\begin{eqnarray*}
+(x,y)&=&\alpha_1(1,-1)+\alpha_2(-3,2)\\
+&=&(\alpha_1-3\alpha_2,-\alpha_1+2\alpha_2).
+\end{eqnarray*}
+Al igualar ambos vectores, se obtiene el siguiente sistema de ecuaciones lineales, en las inc\'ognitas $\alpha_1$ y $\alpha_2$:
+\begin{eqnarray*}
+\alpha_1-3\alpha_2&=&x\\
+-\alpha_1+2\alpha_2&=&y.
+\end{eqnarray*}
+La matriz ampliada de este sistema es:
+\[(A|b)=\begin{pmatrix}1&-3&|&x\\-1&2&|&y\end{pmatrix}\sim\begin{pmatrix}1&-3&|&x\\0&-1&|&x+y\end{pmatrix}, \quad F_2\to F_1+F_2.\]
+Como $rang(A|b)=rang(A)=2$ es igual n\'umero de inc\'ognitas, por el Teorema de Rouch\'e-Frobenius, el sistema tiene soluci\'on \'unica dada por $\alpha_2=-(x+y)$ y $\alpha_1=x+3\alpha_2=x-3(x+y)=-2x-3y$.
+
+De donde
+\begin{eqnarray}
+(x,y)&=&\alpha_1(1,-1)+\alpha_2(-3,2) \nonumber\\
+&=&(-2x-3y)(1,-1)-(x+y)(-3,2).\label{ec2}
+\end{eqnarray}
+Al aplicar la transformaci\'on $T$ a la ecuaci\'on (\ref{ec2}) y de la definici\'on de aplicaci\'on lineal, se sigue que
+\begin{eqnarray*}
+T(x,y)&=&(-2x-3y)T(1,-1)-(x+y)T(-3,2)\\
+&=&(-2x-3y)(0,2,0)-(x+y)(-3,2,0)\\
+&=&(0,-4x-6y,0)+(3x+3y,-2x-2y,0)\\
+&=&(3x+3y,-6x-8y,0)
+\end{eqnarray*}
+para todo $(x, y) \in \R^{2}$.
+\end{enumerate}
+
+\end{ejem}
+
+
+\begin{ejer}
+Determine de manera explícita $f \in \mathscr{L}(\R^{3}, \R^3)$ tal que:
+\[
+    f(1, 0, 0) = (0,-1,1), \;\;\; f(1, 1, 0) = (1,0,-3), \;\;\; f(1, 1, 1) = (0,0,-1).
+\]
+\end{ejer}
+\setcounter{subsection}{2}
+\subsection{Núcleo e imagen}
+
+\begin{defi}[Núcleo e imagen de una aplicación lineal]
+    Sea $T \in \mathscr{L}(E,F)$.
+    \begin{enumerate}
+    \item 
+        El núcleo de $T$, denotado por $\ker(T)$, está definida por:
+        \[
+            \ker(T) = \{v \in E: T(v) = 0_{F}\}.
+        \]
+    \item 
+        La imagen de $T$, denotada por $\img(T)$, está definida por:
+        \[
+            \img(T) = \{ w \in F: w = T(v) \text{ para algún } v \in E\}.
+        \]
+    \end{enumerate}
+\end{defi}
+
+\begin{prop}
+    Sea $T \in \mathscr{L}(E,F)$, entonces
+    \begin{enumerate}
+    \item 
+        $\ker(T)$ es un subespacio vectorial del espacio vectorial $E$.
+    \item 
+        $\img(T)$ es un subespacio vectorial del espacio vectorial $F$.
+    \end{enumerate}
+\end{prop}
+
+\begin{ejem}\hspace{0pt}\label{AplicacionLineal}
+Sea $T\in \mathscr{L}(\R^3,\R^2)$ definida por $T(x,y,z) = (x-2z,y-z)$ para todo $(x,y,z)\in\R^{3}$, entonces
+\begin{align*}
+ \ker(T) &= \l\{(x,y,z)\in \R^3:T(x,y,z)=(0,0)\r\}\\
+ &= \l\{(x,y,z)\in \R^3:(x-2z,y-z)=(0,0)\r\}\\
+ &=\l\{(x,y,z)\in \R^3:x=2z, y=z\r\}\\
+ &=\l\{(2z,z,z)\in \R^3:z\in\R\r\}
+\end{align*}
+\texty
+\begin{align*}
+    \img(T) &= \l\{(u,v)\in \R^2: T(x,y,z)=(u,v), \text{ para algún } (x,y,z)\in\R^{3}\r\}\\
+    &= \l\{(u,v)\in \R^2: (x-2z,y-z)=(u,v), \text{ con }x,y,z\in\R\r\}\\
+    &= \l\{(u,v)\in \R^2: x-2z=u, y-z=v, \text{ con }x,y,z\in\R\r\}.
+\end{align*}
+Ahora, sea $(u,v)\in\R^{2}$, tenemos que $(u,v)\in\img(T)$ si y solo si se verifica el sistema ecuaciones lineales en las incógnitas $x$, $y$ y $z$:
+\[
+\systeme[xyz]{x-2z=u,y-z=v.}
+\]
+con $x$, $y$, $z\in\R$, cuya matriz ampliada es:
+\[
+    \begin{pmatrix}
+    1&0&-2&|&u\\
+    0&1&-1&|&v\\
+    \end{pmatrix}.
+\]
+Como $\rang(A|b)=\rang(A)=2$, por el Teorema de Rouch\'e-Frobenius, el sistema es consistente para todo $u$ y $v\in\R$. Por lo tanto:
+\[
+    \img(T)= \R^{2}.
+\]
+\end{ejem}
+
+\begin{ejer}
+Considere la aplicaci\'on lineal $T\in \mathscr{L}(\R^{2\times 2},\R^2)$ definida por 
+\[
+    T\begin{pmatrix}a&b\\c&d\end{pmatrix}=(a+b,-d)
+\]
+para todo $\begin{pmatrix}a&b\\c&d\end{pmatrix}\in\Mat{2}{2}$. Determine el $\ker(T)$  y la $\img(T)$.
+\end{ejer}
+
+\begin{prop}
+Sea $T \in \mathscr{L}(E,F)$.
+\begin{enumerate}
+\item $T$ es inyectiva si y solo si $\ker(T)=\{0_{E}\}$.
+\item $T$ es sobreyectiva si y solo si $\img(T)=F$.
+\end{enumerate}
+\end{prop}
+
+\begin{obs}
+Dado que la $\img(T)\subset F$, si $\dim(\img(T))=\dim(F)$, entonces $\img(T)=F$, por lo tanto $T$ es sobreyectiva.
+\end{obs}
+\begin{ejem}\label{ejem1}
+Para la aplicaci\'on lineal 
+\[
+ \funcion{T}{\R^3}{\R^2}{(x,y,z)}{(x-2z,y-z)}
+\]
+se tiene que $\ker(T)=\l\{(2z,z,z)\in \R^3:z\in\R\r\}\neq\{0_{\R^3}\}$. Por lo tanto, $T$ no es inyectiva.\\
+Además, $\img(T) =\R^2$, luego, $T$ es sobreyectiva.
+\end{ejem}
+\begin{ejer}\label{ejer1}
+Dada la aplicaci\'on lineal 
+\[
+ \funcion{T}{\R^2}{\R^3}{(x,y)}{(x-y,2x,x+y)}
+\]
+Indique si la aplicaci\'on lineal es:
+\begin{enumerate}
+\item[$a)$] Inyectiva.
+\item[$b)$] Sobreyectiva.
+\end{enumerate}
+\end{ejer}
+\begin{defi}[Nulidad y rango de una aplicación lineal]
+    Sea $T \in \mathscr{L}(E,F)$.
+    \begin{enumerate}
+    \item 
+        Se llama nulidad de $T$ a la $\dim(\ker(T))$.
+    \item 
+        Se llama rango de $T$ a la $\dim(\img(T))$.
+    \end{enumerate}
+\end{defi}
+\begin{ejem}\hspace{0pt}\label{NulidadRango}\label{ejem2}
+Considerando la aplicación lineal del Ejemplo \ref{ejem1}, se tiene que 
+\begin{eqnarray*}
+ \ker(T)&=&\l\{(2z,z,z)\in \R^3:z\in\R\r\}\\
+ &=&\l\{z(2,1,1)\in \R^3:z\in\R\r\}.
+\end{eqnarray*}
+Una base del $\ker(T)$ es $B_{\ker(T)}=\{(2,1,1)\}$, de donde $\dim(\ker(T))=1$. Por lo tanto, la nulidad de $T$ es igual a 1.\\
+Por otro lado, como $\img(T)=\R^2$,  entonces $\dim(\img(T))=\dim(\R^2)=2$. As\'i, el rango de $T$ es igual a $2$.
+\end{ejem}
+
+\begin{ejer}
+De la aplicación lineal.
+\[
+ \funcion{T}{\R^2}{\R^3}{(x,y)}{(x-y,2x,x+y)}
+\] Indique:
+\begin{enumerate}
+    \item[$a)$] La nulidad de $T$.
+    \item[$b)$] El rango de $T$.
+\end{enumerate}
+\end{ejer}
+\begin{teo}
+    Si $T \in \mathscr{L}(E,F)$ y la dimensión del espacio vectorial $E$ es finita, entonces
+    \[
+        \dim(E) = \dim(\ker(T)) +  \dim(\img(T)).
+    \]
+\end{teo}  
+
+\begin{ejem}\hspace{0pt}
+Considerando la aplicación lineal del Ejemplo \ref{ejem1} y los resultados del Ejemplo \ref{ejem2}, se tiene que $\dim(\ker(T)) = 1$ y que $\dim(\img(T)) = 2$, a partir de lo cual se verifica que 
+\[
+    \dim(\R^{3}) = \dim(\ker(T)) +  \dim(\img(T)).
+\]
+\end{ejem}
+
+
+
+%\begin{proof}
+%Vamos a demostrar que si $T$ es sobreyectiva, entonces $T$ es inyectiva sabiendo que $\dim(E)=\dim(F)$. En efecto, dado que $T$ es sobreyectiva, entonces $\img(T)=F$, por lo tanto $\dim(\img(T))=\dim(F)$. Adem\'as, $ \dim(E) = \dim(\ker(T)) +  \dim(\img(T))$, de donde, $\dim(\ker(T))=0$, por lo tanto $\ker(T)=\{0_E\}$, quedando demostrado que $T$ es inyectiva.
+%\end{proof}
+
+%\begin{ejer}
+%Demostrar que si $T$ es inyectiva, entonces $T$ es sobreyectiva sabiendo que $\dim(E)=\dim(F)$.
+%\end{ejer}
+
+\begin{comment}
+\begin{ejem}
+Sea $T \in \mathscr{L}(\R^2,\R^2)$. Dado que $B=\{u_1, u_2\} = \l\{(1,- 1), (- 3, 2)\r\}$ es una base de $\R^{2}$ junto con 
+\[
+    \l\{ T(u_1) = (0, 2),\, T(u_2) = (- 3, 2)\r\}
+\]
+se puede verificar que la aplicación lineal $T$ está dada por
+\[
+    T(x, y) = (3x + 3y, - 6x - 8y)
+\]
+para todo $(x, y)\in\R^{2}$.
+\end{ejem}
+\end{comment}
+
+
+
+\begin{teo}
+Sean $T\in\mathscr{L}(E,F)$, $\dim(E)=n$ y $\dim(F)=m$. Si:
+\begin{enumerate}
+    \item $n>m$, entonces $T$ no es inyectiva.
+    \item $m>n$, entonces $T$ no es sobreyectiva.
+\end{enumerate}
+\end{teo}
+
+\begin{ejem}\hspace{0pt}
+La aplicación
+\[
+    \funcion{T}{\R^3}{\R^2}{(x,y,z)}{(x,y)}
+\]
+no es inyectiva, pues $\dim(\R^{3}) > \dim(\R^{2})$. 
+\end{ejem}
+
+\begin{ejem}\hspace{0pt}
+La aplicación
+\[
+    \funcion{T}{\R^2}{\Mat{2}{2}}{(x,y)}{\begin{pmatrix}x&0\\0&y\end{pmatrix}}
+\]
+no es sobreyectiva, pues $\dim(\Mat{2}{2}) > \dim(\R^{2})$.
+\end{ejem}
+
+\setcounter{section}{5}
+\section{Aplicaciones lineales}
+\setcounter{subsection}{4}
+\subsection{Vector de coordenadas}
+
+\begin{defi}[Base ordenada]
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial y $B$ una base del espacio vectorial $E$. Si $B$ es una sucesión, es decir,
+    \[
+        B = \{v_1,v_2,\ldots,v_n\},
+    \]
+    se la llama base ordenada.
+\end{defi}
+
+\begin{defi}[Vector de coordenadas]
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial, $B = \{v_1,v_2,\ldots,v_n\}$ una base ordenada del espacio vectorial $E$ y $u\in E$. El vector de componentes de $u$ en la base $B$ es:
+    \[
+    [u]_{B}=    \begin{pmatrix}
+            \alpha_1\\\alpha_2\\\vdots\\\alpha_n
+        \end{pmatrix}
+    \]
+    donde
+    \[
+        u = \alpha_1 v_1+\alpha_2 v_2+\ldots+\alpha_n v_n
+    \]
+    con $\alpha_{i} \in \K$ para todo $i\in\{1,\ldots,n\}$.
+\end{defi}
+
+\begin{advertencia}
+    En la literatura, también se puede encontrar la definición anterior bajo el nombre de vector de componentes.
+\end{advertencia}
+
+\begin{ejem}\hspace{0pt}
+Considere el espacio vectorial $\R^{3}$. Sea $B_{1} = \l\{(2,0,1), (1,2,0), (1,1,1)\r\}$ una base ordenada de $\R^{3}$, para hallar las coordenadas del vector $v=(4,-9,5)$ en la base $B_1$, realizamos la combinaci\'on lineal 
+\[
+v=(4,-9,5)=\alpha(2,0,1)+\beta(1,2,0)+\gamma(1,1,1)
+\]
+de donde $\alpha=4$, $\beta=-5$ y $\gamma=1$,
+entonces las coordenadas del vector $v = (4,- 9,5)$ en la base $B_{1}$ es
+    \[
+        [v]_{B_{1}} = \begin{pmatrix}4\\-5\\1\end{pmatrix}
+    \]
+ puesto que    
+\[
+v=(4,-9,5)=4(2,0,1)-5(1,2,0)+(1,1,1)
+\]
+ \end{ejem}
+\begin{ejem}
+Considere el espacio vectorial $\R_1[x]$, sea $C=\{1,x\}$ la base can\'onica de $\R_1[x]$, entonces las coordenadas del vector $p(x)=-3+2x$ en la base $C$ son
+    \[
+        [p(x)]_{C} = \begin{pmatrix}-3\\2\end{pmatrix}
+    \]
+puesto que $p(x)=-3+2x=-3(1)+2(x)$
+\end{ejem}
+
+\begin{ejer}
+Considere el espacio vectorial $\R^{3}$ hallar el vector de coordenadas $u=(-6,2,4)$:
+\begin{enumerate}
+    \item En la base can\'onica $C=\{(1,0,0),(0,1,0),(0,0,1)\}$.
+    \item  En la base  $B=\{(1,1,1),(1,1,0),(1,0,0)\}$.
+\end{enumerate}
+\end{ejer}
+
+\setcounter{subsection}{5}
+\subsection{Matriz asociada}
+
+En adelante, consideraremos que la dimensión 
+del espacio vectorial $E$ es $n$ y la dimensión del espacio vectorial $F$ es $m$. Además, cuando se haga referencia a una base, ésta se asumirá que es ordenada.
+
+
+\begin{defi}
+    Sean $T \in \mathscr{L}(E,F)$, $B_{1} = \{ v_{1}, \ldots, v_{n} \}$ y $B_{2} = \{ u_{1}, \ldots, u_{m} \}$ bases de los espacios vectoriales $E$ y $F$ respectivamente. La matriz asociada a la aplicación lineal $T$ en las bases $B_{1}$ y $B_{2}$, que se denota por $[T]^{B_{1}}_{B_{2}}$, es aquella cuya $j-$ ésima columna es $[T(v_{j})]_{B_{2}}$. Es decir,
+    \[
+        [T]_{B_{2}}^{B_{1}} =
+        \begin{pmatrix}
+            [T(v_{1})]_{B_{2}} & \cdots & [T(v_{n})]_{B_{2}}
+        \end{pmatrix}
+    \]
+\end{defi}
+
+\begin{ejem}\hspace{0pt}\label{Eje:S15MatAL}
+Dada la aplicación lineal:
+\[
+    \funcion{T}{\R^3}{\R^2}{(x,y,z)}{(x + y,y - z)}
+\]
+Sean $ B_{1} = \l\{(1,0,1), (0,1,1), (1,1,1)\r\}$ y $B_{2} = \l\{(1,2), (- 1,1)\r\}$
+bases de los espacios vectoriales $\R^{3}$ y $\R^{2}$; vamos a calcular a  $[T]^{B_{1}}_{B_{2}}$.
+
+\noindent Como $[T]^{B_{1}}_{B_{2}} = \begin{pmatrix}
+    [T(1, 0, 1)]_{B_{2}} & [T(0, 1, 1)]_{B_{2}} & [T(1, 1, 1)]_{B_{2}}
+\end{pmatrix}$
+primero calcularemos las imágenes de la base de salida y luego los vectores de coordenadas en la base de llegada.
+
+\noindent Las imágenes de los elementos de la base de salida son:
+\[
+    \begin{array}{cccc}
+        T(1,0,1) = (1,- 1), & 
+        T(0,1,1) = (1,0) &
+        \text{y} &
+        T(1,1,1) = (2,0).
+    \end{array}
+\]
+Ahora, a estas imágenes las expresamos como combinación lineal de los elementos de la base de llegada, tenemos:
+\begin{align*}
+    (1, -1) & = 0 (1, 2) + (-1) (-1, 1), \\
+    (1, 0) & = \dfrac{1}{3} (1, 2) + \begin{pmatrix}
+        -\dfrac{2}{3}
+    \end{pmatrix}
+    (-1, 1) \texty \\
+    (2, 0) & = \dfrac{2}{3} (1, 2) + \begin{pmatrix}
+        -\dfrac{4}{3}
+    \end{pmatrix}
+    (-1, 1).
+\end{align*}
+Entonces los vectores de coordenadas son:
+\[
+    \begin{array}{cccc}
+        \l[T(1,0,1)\r]_{B_{2}} =\begin{pmatrix}0\\-1\end{pmatrix}, &
+        \l[T(0,1,1)\r]_{B_{2}} =\begin{pmatrix}\dfrac{1}{3}\\-\dfrac{2}{3}\end{pmatrix} &
+        \text{y} &
+        \l[T(1,1,1)\r]_{B_{2}} =\begin{pmatrix}\dfrac{2}{3}\\-\dfrac{4}{3}\end{pmatrix}.
+    \end{array}
+\]
+Por la definición, estos vectores son las columnas de la matriz asociada. Es decir,
+\[
+    [T]^{B_{1}}_{B_{2}} = 
+    \begin{pmatrix}
+        0&  \dfrac{1}{3}& \dfrac{2}{3}\\
+        -1& -\dfrac{2}{3}& -\dfrac{4}{3}
+    \end{pmatrix}.
+\]
+\end{ejem}
+
+\begin{obs}
+    Otra posibilidad en el cálculo de los vectores de coordenadas de las imágenes consiste en encontrar el vector de coordenadas del vector genérico del espacio vectorial de llegada (en el ejemplo anterior $\R^{2}$) y luego reemplazar las imágenes de la base de salida.
+
+    \noindent El vector genérico expresado como combinación lineal de los elementos de una base se llama ecuación generadora.
+\end{obs}
+
+\begin{advertencia}
+En caso de no existir riesgo de confusión en las bases que se utiliza, se nota simplemente por $[T]$ a la matriz asociada a la aplicación lineal $T$. 
+\end{advertencia}
+
+\begin{prop}
+    Sean $T \in \mathscr{L}(E,F)$, $v \in E$, $B_{1} = \{v_1,v_2,\ldots,v_n\}$ y 
+    \noindent $B_{2} = \{u_1,u_2,\ldots,u_m\}$ bases de los espacios vectoriales $E$ y $F$, respectivamente, entonces
+    \[
+        [T(v)]_{B_{2}} = [T]^{B_{1}}_{B_{2}} [v]_{B_{1}}.
+    \]
+\end{prop}
+
+\begin{ejem}\hspace{0pt} Considerando el ejemplo \ref{Eje:S15MatAL}, sea $(-2,2,8)\in\R^3$, se tiene que:
+\[
+    \l[\begin{pmatrix}-2\\2\\8\end{pmatrix}\r]_{B_{1}} = \begin{pmatrix}6\\10\\-8\end{pmatrix}.
+\]
+Además, se tiene que $T(-2,2,8) = (0,-6)$, de lo cual:
+\[
+    [T(-2,2,8)]_{B_{2}} = \l[\begin{pmatrix}0\\-6\end{pmatrix}\r]_{B_{2}} = \begin{pmatrix}-2\\-2\end{pmatrix}.
+\]
+Notemos que verifica que:
+\[
+    [T(-2,2,8)]_{B_{2}} = [T]^{B_{1}}_{B_{2}} [(-2,2,8)]_{B_{1}}.
+\]
+\end{ejem}
+
+\begin{prop}\label{Prop:inv}
+    Sean $T \in \mathscr{L}(E,F)$, $B_{1} = \{ v_{1}, \ldots, v_{n} \}$ y $B_{2} = \{ u_{1}, \ldots, u_{m} \}$ bases de los espacios vectoriales $E$ y $F$, respectivamente. $T$ es biyectiva si y solo si $[T]^{B_{1}}_{B_{2}}$ es invertible.
+\end{prop}
+
+\begin{ejem}\hspace{0pt} Considerando el ejemplo \ref{Eje:S15MatAL} notemos que ya que $\dim(\R^{3}) \neq \dim(\R^{2})$ la aplicación lineal no será biyectiva, además, la matriz $[T]^{B_{1}}_{B_{2}}$ no es invertible.
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} Dada la aplicación lineal:
+\[
+    \funcion{T}{\R^3}{\Mat[\R]{3}{1}}{(x_1,x_2,x_3)}{\begin{pmatrix}
+        x_1 - x_2\\x_2-x_1\\x_3\end{pmatrix}.}
+\]
+Sean 
+\[
+    B_{1} = \l\{(1,0,0), (1,1,0), (1,1,1)\r\}
+\]
+y 
+\[
+    B_{2} = \l\{\begin{pmatrix}1\\0\\0\end{pmatrix},\begin{pmatrix}1\\1\\0\end{pmatrix},\begin{pmatrix}1\\1\\1\end{pmatrix}\r\}
+\]
+bases de los espacios vectoriales $\R^{3}$ y $\Mat[\R]{3}{1}$.
+\begin{enumerate}
+    \item Determine a $[T]^{B_{1}}_{B_{2}}$.
+    \item Sea $(1,0,0)\in\R^3$ verifique que se cumple que:
+    \[
+        [T(1,0,0)]_{B_{2}} = [T]^{B_{1}}_{B_{2}} [(1,0,0)]_{B_{1}}.
+    \]
+    \item Calcule el determinante de $[T]^{B_{1}}_{B_{2}}$.
+    \item Utilizando a la proposición \ref{Prop:inv} indique si la aplicación lineal $T$ es biyectiva.
+\end{enumerate}
+\end{ejer}
+\subsection{Matriz de cambio de base}
+
+\begin{defi}[Matriz de cambio de base]
+    Sean $E$ un espacio vectorial sobre el cuerpo $\K$, $B_{1}$ y $B_{2}$ bases del espacio vectorial $E$. A la matriz asociada a la aplicación lineal identidad en las bases $B_{1}$ de salida y $B_{2}$ de llegada se le llama matriz de cambio de base de la base $B_{1}$ a la base $B_{2}$.
+\end{defi}
+
+
+
+%\begin{obs}
+%    Queda claro por qué a $[I]^{B_{1}}_{B_{2}}$ se le llama matriz de cambio de base.
+%\end{obs}
+
+\begin{advertencia}
+En la literatura, también se puede encontrar la definición anterior bajo el nombre de matriz de transición y se utiliza también la notación $ P_{B_{2}\gets B_{1}}$.
+\end{advertencia}
+
+\begin{ejem}
+Una matriz de cambio de base en el espacio vectorial $\R^2$.
+
+\noindent Para obtener a la matriz de cambio de base $[I]^{B_{1}}_{B_{2}}$, sean 
+\[
+    B_{1} = \l\{(1,1),(2,-1)\r\}
+    \texty
+    B_{2} = \l\{(0,1),(1,-1)\r\}
+\]
+dos bases para el espacio vectorial $\R^2$.
+
+\noindent Primero, calculemos las imágenes de la base de salida, tenemos:
+\[
+    I(1,1)=(1,1) \texty I(2,-1)=(2,-1).
+\]
+\noindent Segundo, encontremos los respectivos vectores de coordenadas en la base $B_{2}$ de estas imágenes, para un $(a,b)\in \mathbb{R}^2$. Es decir, hay que calcular los valores de $\alpha$ y $\beta$ tales que
+\[
+    (a,b) = \alpha (0,1) + \beta (1,-1).
+\]
+Resolviendo el sistema de ecuaciones se tiene que
+\[
+    \alpha = a + b \texty \beta = a.
+\]
+Por ende
+
+\[
+    [(a,b)]_{B_{2}} =
+    \begin{pmatrix}
+        a + b \\
+        a
+    \end{pmatrix}.
+\]
+Para determinar los vectores de coordenadas de las imágenes de la base de salida, reemplazamos los valores de $a$ y $b$, tenemos:
+\[
+    [(1,1)]_{B_{2}} =
+    \begin{pmatrix}
+        2 \\
+        1
+    \end{pmatrix}
+    \texty
+    [(2,-1)]_{B_{2}} =
+    \begin{pmatrix}
+        1 \\
+        2
+    \end{pmatrix}.
+\]
+Finalmente
+\[
+    [I]^{B_{1}}_{B_{2}} = \begin{pmatrix}2&1\\1&2\end{pmatrix}.
+\]
+\end{ejem}
+
+
+
+\begin{teo}
+    Si $B_{1}$ y $B_{2}$ son bases del espacio vectorial $E$, entonces
+    \[
+         [I]^{B_{2}}_{B_{1}} = \l([I]^{B_{1}}_{B_{2}}\r)^{-1}.
+    \]
+\end{teo}
+
+\begin{ejem}
+Usando las mismas bases del ejemplo $1$, calcular la $[I]^{B_{2}}_{B_{1}}$.
+
+\noindent Como ya conocemos a $[I]^{B_{1}}_{B_{2}}$, usamos el teorema.
+\[
+    [I]^{B_{2}}_{B_{1}} = \l([I]^{B_{1}}_{B_{2}}\r)^{-1} = 
+    \frac{1}{3}\begin{pmatrix}2&-1\\-1&2\end{pmatrix}.
+\]
+\end{ejem}
+
+
+\setcounter{section}{6}
+\section{Valores y vectores propios}
+
+
+\subsection{Valores y vectores propios}
+\begin{defi}
+Sean $T \in \mathscr{L}(E,E)$ y $\lambda \in\K$. Se dice que $\lambda$ es un valor propio de $T$ si existe $v\in E$, con $v\neq 0_{E}$, tal que
+\[
+    T(v) = \lambda v.
+\]
+A este vector $v$ se lo llama vector propio de $T$ asociado al valor propio $\lambda$.
+\end{defi}
+
+
+
+\begin{ejem}\hspace{0pt} Dada la aplicación lineal
+\[
+    \funcion{T}{\R^2}{\R^2}{(x,y)}{(10x-18y,6x-11y).}
+\]
+Notemos que:
+\[
+T(2,1) = (10(2) -18(1), 6(2) -11(1)) = (20-18,12-11)=(2,1) = 1 (2,1)
+\]
+por lo tanto, $\lambda_{1}=1$ es un valor propio de $T$ y $v=(2,1)$ es un vector propio de $T$ asociado a $\lambda_{1}$.
+Por otro lado,
+\[
+T(3,2) = (10(3) -18(2), 6(3) -11(2)) = (30-36,18-22)=(-6,-4) = -2 (3,2)
+\]
+por lo tanto, $\lambda_{2}=-2$ es un valor propio de $T$ y $v=(3,2)$ es un vector propio de $T$ asociado a $\lambda_{2}$.
+
+\end{ejem}
+
+
+\begin{advertencia}
+Se puede demostrar que un vector propio se asocia con un único valor propio, además, el vector $0_{E}$ puede ser asociado a cualquier valor propio, por tanto, el vector $0_{E}$ no puede ser considerado como un vector propio.
+\end{advertencia}
+
+
+
+
+\newpage
+\begin{prop}
+Sean $T \in \mathscr{L}(E,E)$ y $\lambda \in\K$ un valor propio de $T$. Se tiene que el conjunto
+\[
+    E_\lambda = \{ v\in E : T(v) = \lambda v\} 
+\]
+es un subespacio vectorial de $E$. A $E_{\lambda}$ se lo denomina el espacio propio de $T$ asociado al valor propio $\lambda$.
+\end{prop}
+
+\begin{ejem}\hspace{0pt}\label{Cap7:ejem01} Dada la aplicación lineal
+\[
+    \funcion{T}{\R^2}{\R^2}{(x,y)}{(x+2y,4x+3y).}
+\]
+Notemos que:
+\[
+T(1,2) = (1 + 2(2), 4(1) + 3(2)) = (1+4, 4+6) = (5,10) = 5 (1,2)
+\]
+Lo que nos permite concluir que $5$ es un valor propio de $T$ y que $(1,2)$ es un vector propio asociado a $5$, además, el espacio propio asociado a $5$ es: 
+\[
+    E_5 = \l\{(x,y)\in\R^2\,:\,y=2x\r\}.
+\]
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} Considere a la aplicación lineal del ejemplo \ref{Cap7:ejem01}, verifique que para el valor propio $-1$ un vector propio asociado es $(-1,1)$, ¿cuál será el espacio propio asociado a $-1$?
+\end{ejer}
+
+\begin{defi}
+Supongamos que $\dim(E) = n$ y que $T\in\mathscr{L}(E,E)$. El espectro de $T$ es el conjunto de todos sus valores propios.
+\end{defi}
+
+\begin{ejem}\hspace{0pt} Considere a la aplicación lineal del ejemplo \ref{Cap7:ejem01}, su espectro es igual a $\{-1,5\}$.
+\end{ejem}
+
+En adelante, consideraremos a $E$ como un espacio vectorial de dimensión finita igual a $n$.
+
+\begin{teo}
+Sean $T \in \mathscr{L}(E,E)$ y $\lambda_1, \lambda_2, \ldots, \lambda_n$ valores propios de $T$ distintos entre sí. Si tomamos $v_1, v_2, \ldots, v_n$ vectores propios asociados a los valores propios $\lambda_1, \lambda_2, \ldots, \lambda_n$, respectivamente, entonces el conjunto $\{v_1, v_2, \ldots, v_n\}$ es linealmente independiente.
+\end{teo}
+
+\begin{ejem}\hspace{0pt} Considerando a la aplicación lineal del ejemplo \ref{Cap7:ejem01} tenemos que si $\lambda_{1} = -1$ y $\lambda_{2} = 5$ con $v_{1} = (-1,1)$ y $v_{2} = (1,2)$, entonces el conjunto $\{v_{1}, v_{2}\}$ es linealmente independiente.
+\end{ejem}
+
+\begin{defi}
+Sea $A\in \Mat[\K]{n}{n}$,
+se define la aplicación lineal
+\[
+    \funcion{T_A}{\Mat[\K]{n}{1}}{\Mat[\K]{n}{1}}{u}{Au.}
+\]
+A los valores propios de $T_A$ se los denomina valores propios de $A$, a los vectores propios de $T_A$ se los denomina vectores propios de $A$ y a los espacios propios de $T_A$ se los denomina espacios propios de $A$. Además, se denomina espectro de $A$ al espectro de $T_A$.
+\end{defi}
+
+\begin{ejem}\hspace{0pt}\label{Cap7:ejem02} Dada la matriz $A = \begin{pmatrix}1&2\\4&3\end{pmatrix}$, se tiene que $T_{A}$ está dada por:
+\[
+    \funcion{T_A}{\Mat[\R]{2}{1}}{\Mat[\R]{2}{1}}{\begin{pmatrix}
+     x\\y\end{pmatrix}}{\begin{pmatrix}x+2y\\4x+3y\end{pmatrix}.}
+\]
+Se tiene que los valores propios de $T_{A}$ son $\lambda_{1} = -1$ y $\lambda_{2} = 5$ con vectores propios asociados $u_{1} = \begin{pmatrix}-1\\1\end{pmatrix}$ y $u_{2} = \begin{pmatrix}1\\2\end{pmatrix}$, respectivamente. Además, los espacios propios de $T_{A}$ son:
+\[
+    E_{-1} = \l\{\begin{pmatrix}v_{1}\\v_{2}\end{pmatrix}\in\Mat[\R]{2}{1}\,:\,v_{1}+v_{2}=0\r\}
+\]
+y 
+\[
+    E_{5} = \l\{\begin{pmatrix}v_{1}\\v_{2}\end{pmatrix}\in\Mat[\R]{2}{1}\,:\,-2v_{1}+v_{2}=0\r\}.
+\]
+\end{ejem}
+
+\begin{prop}
+Sean $T \in \mathscr{L}(E,E)$ y $B$ una base de $E$. Se tiene que
+\begin{enumerate}
+\item
+    $\lambda\in\K$ es un valor propio de $T$ si y solo si es un valor propio de $[T]_B^B$; y,
+\item
+    $v\in E$ es un vector propio de $T$ si y solo si $[v]_{B}\in\K^{n\times1}$ es un vector propio de $[T]_B^B$.
+\end{enumerate}
+\end{prop}
+
+\begin{ejem}\hspace{0pt} Considere a la aplicación lineal del ejemplo \ref{Cap7:ejem01} y la matriz del ejemplo \ref{Cap7:ejem02}. Tomando a $B$ como la base canónica de $\R^{2}$ se tiene que $A = [T]_{B}^{B}$, notemos que:
+\begin{enumerate}
+    \item Tanto $-1$ como $5$ son valores propios de $T$ y de $A$.
+    \item El vector $v_{1} = (-1,1)$ es un vector propio de $T$ y que $u_{1} = \begin{pmatrix}-1\\1\end{pmatrix}$ es un vector propio de $A$, siendo 
+    $u_{1} = [v_{1}]_{B}$.
+    \item El vector $v_{2} = (1,2)$ es un vector propio de $T$ y que $u_{2} = \begin{pmatrix}1\\2\end{pmatrix}$ es un vector propio de $A$, siendo 
+    $u_{2} = [v_{2}]_{B}$.
+\end{enumerate}
+\end{ejem}
+
+\begin{obs}
+Si consideramos una aplicación lineal $T\in\mathscr{L}(E, E)$, con $\dim(E)=n$. De este resultado, se sigue que, para determinar los valores, vectores y espacios propios de $T$, basta determinar los valores, vectores y espacios propios de una matriz de representación de esta.
+\end{obs}
+
+\begin{prop}
+Sea $A\in \Mat[\K]{n}{n}$, se tiene que $\lambda\in \K$ es un valor propio de $A$ si y solo si existe $v\in \Mat[\K]{n}{1}$, con $v\neq 0$, tal que
+\[
+    Av = \lambda v,
+\]
+además, a $v$ se lo denomina como vector propio de $A$ asociado al valor propio $\lambda$.
+\end{prop}
+
+
+\setcounter{section}{6}
+\section{Valores y vectores propios}
+
+
+\setcounter{subsection}{1}
+\subsection{Polinomio caracter\'istico}
+
+
+\begin{defi}
+Sea $A\in \Mat[\K]{n}{n}$. Al polinomio
+\[
+    p(\lambda) = \det(A - \lambda I_{n})
+\]
+se lo denomina polinomio característico de $A$, donde $I_{n}$ es la matriz identidad.
+\end{defi}
+
+\begin{ejem}\hspace{0pt} Dada la matriz $A = \begin{pmatrix} 1&2\\4&3 \end{pmatrix}$, su polinomio característico es:
+\begin{align*}
+    p(\lambda)  &=  \det(A - \lambda I_{2})\\
+                &=  \det\l(\begin{pmatrix}1&2\\4&3\end{pmatrix}-\lambda\begin{pmatrix}1&0\\0&1\end{pmatrix}\r)\\
+                &=  \det\begin{pmatrix}1-\lambda &2 \\ 4 & 3-\lambda \end{pmatrix}\\
+                &= \lambda^2 - 4\lambda - 5.\\
+%                &= (\lambda + 1) (\lambda - 5).
+\end{align*}
+Por lo tanto, $p(\lambda)= \lambda^2 - 4\lambda - 5$ es el polinomio característico de $A$.
+\end{ejem}
+
+
+\begin{prop}
+Sean $A\in \Mat[\K]{n}{n}$ y $\lambda \in \K$. Se tiene que $\lambda$ es un valor propio de $A$ si y solo si
+\[
+    \det(A - \lambda I_{n}) = 0,
+\]
+donde $I_{n}$ es la matriz identidad.
+\end{prop}
+
+\begin{advertencia}
+Notemos que todo valor propio de $A\in\Mat[\K]{n}{n}$, es raíz del polinomio característico de $A$.
+\end{advertencia}
+
+\begin{ejem}\hspace{0pt} Dada la matriz $A = \begin{pmatrix} 1&2\\4&3 \end{pmatrix}$, del ejemplo anterior su polinomio característico es:
+\begin{align*}
+    p(\lambda)  &=  \det(A - \lambda I_{2})\\
+%                &=  \det\l(\begin{pmatrix}1&2\\4&3\end{pmatrix}-\lambda\begin{pmatrix}1&0\\0&1\end{pmatrix}\r)\\
+%                &=  \det\begin{pmatrix}1-\lambda &2 \\ 4 & 3-\lambda \end{pmatrix}\\
+                &= \lambda^2 - 4\lambda - 5\\
+                &= (\lambda + 1) (\lambda - 5).
+\end{align*}
+Por lo tanto, $\lambda_1 = -1$ y $\lambda_2 = 5$ son los valores propios de $A$.
+\end{ejem}
+
+\begin{prop}
+Los valores propios de una matriz triangular son los elementos de la diagonal principal de la matriz. 
+\end{prop}
+%
+%\begin{teo}[Teorema de Cayley–Hamilton]
+%Sea $A\in \Mat[\K]{n}{n}$ y $p(\lambda)$ su polinomio característico. Se tiene que
+%\[
+ %   p(A) = 0.
+%\]
+%\end{teo}
+
+%\begin{advertencia}
+%Es decir, toda matriz es un cero de su polinomio característico, esto es,
+%si $A\in\Mat[\K]{n}{n}$ y si su polinomio característico es
+%\[
+%   p(\lambda) =  \lambda^{n} + c_{n-1}\lambda^{n-1} + \cdots + c_{1}\lambda + c_{0}
+%\]
+%entonces,
+%\[
+%   p(A) =  A^{n} + c_{n-1}A^{n-1} + \cdots + c_{1}A + c_{0}I_{n} = 0.
+%\]
+%\end{advertencia}
+
+%\begin{ejem}\hspace{0pt} 
+%Para la matriz $A = \begin{pmatrix} 1&2\\4&3 \end{pmatrix}$, sabemos que su polinomio característico es:
+%\[
+%    p(\lambda)  = \lambda^2 - 4\lambda - 5.
+%\]
+%Luego, se tiene que:
+%\[
+%    p(A)  = A^2 - 4A - 5I_{2} = \begin{pmatrix}9&8\\16&17\end{pmatrix} - 4\begin{pmatrix}1&2\\4&3\end{pmatrix} - 5\begin{pmatrix}1&0\\0&1\end{pmatrix} = \begin{pmatrix}0&0\\0&0\end{pmatrix}.
+%\]
+%\end{ejem}
+
+\begin{advertencia}
+\textbf{Algoritmo para encontrar los valores y vectores propios de una matriz.}
+
+Sea $A\in\Mat[\K]{n}{n}$.
+\begin{description}
+    \item[Paso 1.] Hallar el polinomio característico $p(\lambda)$ de $A$.
+    \item[Paso 2.] Hallar las raíces de $p(\lambda)$.
+    \item[Paso 3.] Repetir los pasos $a)$ y $b)$ para cada valor propio $\lambda$ de $A$:
+        \begin{enumerate}
+            \item[$a)$] Construir $M = A - \lambda I_{n}$ restando $\lambda$ a los elementos diagonales de $A$.
+            \item[$b)$] Encontrar una base para el espacio solución de $Mv = 0$. Los vectores de la base son vectores propios linealmente independientes de $A$ asociados a $\lambda$.
+        \end{enumerate}
+\end{description}
+\end{advertencia}
+
+
+
+
+\begin{ejem}\hspace{0pt} Dada la matriz $A = \begin{pmatrix}
+1&-1&4 \\ 3&2&-1 \\ 2&1&-1 \end{pmatrix}$. 
+
+Paso 1. Su polinomio característico es:
+\begin{align*}
+    p(\lambda)  &=  \det(A - \lambda I_{3})\\
+                &=  \det\l(\begin{pmatrix}
+1&-1&4 \\ 3&2&-1 \\ 2&1&-1 \end{pmatrix}-\lambda\begin{pmatrix} 1&0&0 \\ 0&1&0 \\ 0&0&1 \end{pmatrix}\r)\\
+                &=  \det\begin{pmatrix} 1-\lambda &-1&4 \\ 3&2-\lambda &-1 \\ 2&1&-1-\lambda  \end{pmatrix}\\
+                &= -\lambda^3+2\lambda^2 + 5\lambda - 6.\\
+%                &= (\lambda + 1) (\lambda - 5).
+\end{align*}
+Por lo tanto, $p(\lambda)=-\lambda^3+2\lambda^2 + 5\lambda - 6$.
+
+Paso 2. Las raíces de $p(\lambda)$ son:
+
+
+\begin{align*}
+    p(\lambda)  &=  0\\
+%                &=  \det\l(\begin{pmatrix}1&2\\4&3\end{pmatrix}-\lambda\begin{pmatrix}1&0\\0&1\end{pmatrix}\r)\\
+%                &=  \det\begin{pmatrix}1-\lambda &2 \\ 4 & 3-\lambda \end{pmatrix}\\
+              -\lambda^3+2\lambda^2 + 5\lambda - 6 &=0 \\
+               -(\lambda-1)(\lambda+2)(\lambda -3) &=0 .
+\end{align*}
+
+
+
+
+por lo tanto las raíces de $p(\lambda)$ son $\lambda_{1}=1,\lambda_{2}=-2$ y $\lambda_{3}=3$.
+
+
+Paso 3.
+
+Para $\lambda_{1}=1$.
+
+\[
+A-\lambda_{1}I_{3}=\begin{pmatrix}
+1&-1&4 \\ 3&2&-1 \\ 2&1&-1 \end{pmatrix} -\begin{pmatrix}
+1&0&0 \\ 0&1&0 \\ 0&0&1 \end{pmatrix}=\begin{pmatrix}
+0&-1&4 \\ 3&1&-1 \\ 2&1&-2 \end{pmatrix}.
+\]
+
+Encontremos la solución de $(A-\lambda_{1}I_{3})v=0$
+
+\[
+(A-\lambda_{1}I_{3})v= \begin{pmatrix}
+0&-1&4 \\ 3&1&-1 \\ 2&1&-2 \end{pmatrix}\begin{pmatrix} x_{1}\\ x_{2}\\ x_{3}\end{pmatrix}=\begin{pmatrix} 0\\ 0\\ 0\end{pmatrix}
+\]
+
+por lo que la matriz ampliada del sistema es
+
+
+\begin{align*}
+\begin{pmatrix}0 & -1 & 4 & | & 0\\ 3 & 1 & -1 & | & 0\\ 2 & 1 & -2 & | & 0\end{pmatrix}
+& \sim 
+\begin{pmatrix}0 & -1 & 4 & | & 0\\ 3 & 0 & 3 & | & 0\\ 2 & 0 & 2 & | & 0\end{pmatrix}
+&& \begin{array}{c}
+    F_1+F_2\rightarrow F_2\\
+    F_1+F_3\rightarrow F_3
+\end{array}\\
+& \sim 
+\begin{pmatrix}0 & -1 & 4 & | & 0\\ 1 & 0 & 1 & | & 0\\ 2 & 0 & 2 & | & 0\end{pmatrix}
+&& \frac{1}{3}F_2\rightarrow F_2\\
+& \sim 
+\begin{pmatrix}0 & -1 & 4 & | & 0\\ 1 & 0 & 1 & | & 0\\ 0 & 0 & 0 & | & 0\end{pmatrix}
+&& -2F_2+F_3\rightarrow F_3
+\end{align*}
+
+de donde se tiene que $x_{1}=-x_{3}$; $x_{2}=4x_{3}$ y
+\[
+    E_1 = \left \langle (-1,4,1) \right \rangle.
+\]
+
+Verifique que $ E_{-2} =\left  \langle (1,-1,-1)  \right \rangle$ y $ E_3=\left \langle (1,2,1)  \right \rangle.$
+
+
+
+% y $ E_3 \right \rangle
+% =\left \langle  \right \rangle gen\l\{(1,2,1)\r\}.$
+
+En conclusión $\lambda_{1}=1,\lambda_{2}=-2$ y $\lambda_{3}=3$ son los valores propios de $A$ y $(-1,4,1),(1,-1,-1),(1,2,1)$ son vectores propios de
+$\lambda_{1},\lambda_{2}$ y $\lambda_{3}$, respectivamente. 
+
+\end{ejem}
+
+
+
+
+
+
+\begin{ejer}\hspace{0pt}
+Dada la aplicación lineal:
+\[
+    \funcion{T}{\R^2}{\R^2}{(a,b)}{(6a-b,3a+2b)}
+\]
+Hallar los valores y vectores propios de $T$.
+\end{ejer}
+
+\begin{teo}
+Cualquier polinomio de grado $n$ tiene exactamente $n$ raíces (contando con las veces que una determinada raíz se repite) en los complejos.
+\end{teo}
+
+\begin{defi}
+Sea $\lambda$ un valor propio de la matriz $A$, el número de veces que un valor propio $\lambda$ se repite como raíz del polinomio característico $\rho(\lambda)$ se llama multiplicidad algebraica, notada $m_a(\lambda)$.
+\end{defi}
+
+\begin{defi}
+Sea $\lambda$ un valor propio de la matriz $A$, entonces la multiplicidad geométrica de $\lambda$, notada $m_g(\lambda)$ está dada por
+\[ m_g(\lambda) = \dim(E_\lambda)\]
+\end{defi}
+
+\begin{teo}
+Sea $\lambda$ valor propio de la matriz $A$, entonces
+\begin{center}
+ $m_g(\lambda) \leq m_a(\lambda)$
+\end{center}
+\end{teo}
+
+\begin{teo}
+Contando multiplicidades, toda matriz $A \in \Mat[\K]{n}{n} $ tiene exactamente $n$ valores propios en los complejos.
+\end{teo}
+
+\begin{ejem}\hspace{0pt}\label{Cap7:ejem03} La matriz $A = \begin{pmatrix}1&0&0&1\\0&2&0&0\\0&0&2&0\\1&0&0&1\end{pmatrix}$ tiene como valores propios a $\lambda_{1} = 0$ y $\lambda_{2}=2$ con $m_a(\lambda_{1})=1$, $m_a(\lambda_{2})=3$, $m_g(\lambda_{1})=1$ y $m_g(\lambda_{2})=3$.
+\end{ejem}
+
+
+
+
+
+\end{document}

@@ -1,0 +1,63 @@
+\documentclass[10pt,respuestas,a4]{examenEPN}
+
+\usepackage{float}
+\usepackage{comandosEPN}
+
+\materia{Álgebra Lineal}
+\examen{Concurso para Técnico Docente}
+%\tema{Integrales}
+\autor{\textbf{Elaborado por:} Evelyn Cueva}
+\fecha{08 de agosto de 2022}
+\logouno[1.6cm]{Logo_EPN.eps}
+%\logodos[2.6cm]{}
+\spanishdecimal{.}
+
+\begin{document}
+
+\encabezado
+
+\begin{preguntas}
+
+\item Sea $\mathcal M_{2\times 2}(\R)$ el espacio vectorial de matrices de tamaño $2\times 2$ con coeficientes reales y sea $\func T{\mathcal M_{2\times 2}(\R)}{\mathcal M_{2\times 2}(\R)}$ la transformación definida por 
+\[
+T(A) = MA +AM,\quad \text{donde }M =\begin{pmatrix}0&1\\ 1&0\end{pmatrix}.
+\]
+\begin{enumerate}
+    \item Enuncie la definición de linealidad para una transformación y pruebe que $T$ es lineal.
+    \item Defina el concepto de matriz asociada a una transformación lineal y encuentre dicha matriz para la transformación $T$ utilizando la base canónica de $\mathcal M_{2\times 2}(\R)$.
+    \item Escriba la definición del espacio nulo de una transformación $T$, y denótelo por $\mathcal N(T).$ Encuentre explícitamente dicho espacio para la transfromación $T$ dada.
+    \item Escriba la definición del espacio imagen de una transformación $T$ y denótelo por $\Img(T).$ Determine la imagen de la transformación $T$ dada.     
+    \item Defina el concepto de base y dimensión de un espacio vectorial de dimensión finita. A continuación, calcule una base y la dimensión para los espacios $\mathcal N(T)$ e $\Img(T)$. 
+    \item Escriba la definición de inyectividad y sobreyectividad para una función cualquiera. Caracterice la inyectividad en el caso de transformaciones lineales y analice si $T$ es inyectiva y/o sobreyectiva.
+    \item Pruebe que $\mathcal M_{2\times 2}(\R)=\mathcal N(T)\oplus\Img(T)$, es decir, pruebe que $\mathcal N(T)\cap\Img(T)=\{\mathbf 0\}$ y que $\mathcal M_{2\times 2}(\R)=\mathcal N(T)+\Img(T).$
+\end{enumerate}
+\item Sea $\mathcal M_{2\times 2}(\R)$ el espacio vectorial de matrices de tamaño $2\times 2$ con coeficientes reales y considere la función $\func T{\R^4}{\mathcal M_{22}(\R)}$, definida por 
+\[
+T(x,y,z,w)= 
+\begin{pmatrix}
+x & y+w\\
+2x+2y+z+w & x+y+z
+\end{pmatrix}
+\]
+\begin{enumerate}
+    \item Enuncie la definición de linealidad para una transformación y pruebe que $T$ es lineal.
+    \item Escriba la definición del espacio nulo de una transformación $T$, y denótelo por $\mathcal N(T).$ Encuentre explícitamente dicho espacio para la transformación $T$ dada.
+    \item Escriba la definición del espacio imagen de una transformación $T$ y denótelo por $\Img(T).$ Determine la imagen de la transformación $T$ dada.     
+    \item Defina el concepto de base y dimensión de un espacio vectorial de dimensión finita. A continuación, calcule una base y la dimensión para los espacios $\mathcal N(T)$ e $\Img(T)$. 
+    \item Escriba la definición de inyectividad y sobreyectividad para una función cualquiera. Caracterice la inyectividad en el caso de transformaciones lineales y analice si $T$ es inyectiva y/o sobreyectiva.
+\end{enumerate}
+\item Sea $\mathcal P_3(\Rbb)$ es el espacio vectorial de todos los polinomios con coeficientes en $\Rbb$ de grado menor o igual a 3. Considere el subespacio vectorial  $U=\left\{ p\in \mathcal P_3(\Rbb)\colon p(1)=p'(1)=0\right\}$, donde $p'$ representa la derivada de orden 1 del polinomio $p.$
+\begin{enumerate}
+    \item Encuentre una base $B_U$ de $U$ y su dimensión.
+    \item Extienda la base de la parte anterior a una base de $\mathcal P_3(\Rbb)$. Para esto, agregue a la base $B_U$ la base canónica de $\mathcal P_3(\Rbb)$ y luego elimine (de ser necesario) los polinomios que afectan la independencia  lineal de la lista.
+    % \item Considere ahora el subespacio vectorial $W=\{p\in \mathcal P_3(\Rbb)\colon p''(0)=0\}$. 
+    % \begin{enumerate}
+    %    \item[i)] Encuentre una base para $W$ y su dimensión.
+    %    \item[ii)] Encuentre una base para $U\cap W$ y su dimensión.
+    %    \item[iii)] Pruebe que $\mathcal P_3(\Rbb)=U+W$.
+    %\end{enumerate}
+ \end{enumerate}
+\final
+ \end{preguntas}
+
+\end{document}

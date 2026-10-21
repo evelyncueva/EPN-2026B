@@ -1,0 +1,91 @@
+\usepackage{comandosEPN}
+
+\usepackage{empheq}
+
+\input{Comandos.tex}
+
+
+\materia{Álgebra Lineal}
+%\autor{Departamento de Formación Básica}
+\autor{GR \hspace{1cm}.}
+%\fecha{Semestre 2026-A}
+\fecha{Nombre: \hspace{9cm} Cédula:}
+\logouno[1.6cm]{Logo_EPN.eps}
+\logodos[2.6cm]{Logo_DFB.eps}
+
+\newcommand{\la}{\lambda}
+
+%Datos
+\newcommand{\datosAlgebra}[2]{
+\EnExamen
+{
+\vspace{5mm}
+    \noindent
+    Nombres: \hrulefill\
+    Carrera: \rule{4.5cm}{0.4pt}\
+    \ifthenelse{\equal{#1}{}}%
+    {Paralelo: \underline{\parbox{1.8cm}{\parbox{1cm}{}}}\\[3mm]}
+    {Paralelo: \underline{\parbox{1.8cm}{\centering #1}}\\[3mm]}
+    C\'edula: \rule{5cm}{0.4pt}\
+    Firma: \hrulefill\
+    Fecha: \underline{\parbox{2.1cm}{\centering #2}}
+}}
+
+
+% \newcommand{\indicacionesPrueba}{%
+% \EnExamen{
+% \begin{indicaciones}
+%     \item La prueba tiene una duraci\'on  de \textbf{120 minutos.}
+%     \item No se permite la utilizaci\'on de dispositivos electr\'onicos (celular, tablets, calculadora, etc.)
+%     \item Leer detenidamente los enunciados, \textbf{justificar la respuesta para acceder al puntaje total}.
+%     \item La prueba es completamente individual. Los estudiantes deberán dejar sus teléfonos celulares guardados y no podrán tenerlos consigo (por ejemplo, en los bolsillos de su ropa) durante toda la evaluación. En caso de detectarse algún acto de deshonestidad académica o el incumplimiento de esta norma, no podrán seguir rindiendo la prueba y su calificación será \textbf{cero}.
+% \end{indicaciones}
+% \pagestyle{empty}
+% }}
+
+\newcommand{\indicacionesPrueba}{%
+\EnExamen{
+\begin{indicaciones}
+    \item La prueba tiene una duraci\'on  de \textbf{60 minutos.}
+    \item Leer detenidamente los enunciados, \textbf{justificar la respuesta} para acceder al puntaje total.
+    \item No se permite la utilizaci\'on de dispositivos electr\'onicos (celular, tablets, calculadora, etc.)
+    \item La prueba es completamente individual
+    \item No se permite portar teléfonos celulares, relojes inteligentes ni otros dispositivos electrónicos durante el examen, aun cuando permanezcan en los bolsillos. Estos dispositivos deberán guardarse en la mochila antes del inicio de la evaluación y esta deberá mantenerse cerrada durante todo el examen.
+    \item He leído las indicaciones y acepto que el incumplimiento de estas se penaliza con \textbf{cero}. Firma:...................................
+
+    
+\end{indicaciones}
+\pagestyle{empty}
+}}
+
+\newcommand{\indicacionesExamen}{
+\EnExamen{\begin{indicaciones}
+    \item La evaluación tiene una duraci\'on  de \textbf{120 minutos.}
+    \item No se permite la utilizaci\'on de dispositivos electr\'onicos (celular, tablets, calculadora, etc.)
+    %\item Leer detenidamente los enunciados, justificar la respuesta para acceder al puntaje total.
+    \item El examen es completamente individual. En caso de detectarse alg\'un acto de deshonestidad acad\'emica no podr\'a seguir rindiendo la prueba y su calificaci\'on ser\'a \textbf{cero}.
+\end{indicaciones}
+}\pagestyle{empty}
+}
+
+%% Imprimir las una hoja A4, dos veces en A5
+\newcommand{\imprimirDoble}
+{%
+\usepackage{pgfmorepages}
+\pgfmorepagesloadextralayouts
+\pgfpagesuselayout{repeated 2-up}[a4paper,landscape]
+\thispagestyle{empty}
+}
+
+
+%Este sí se puede comentar
+\newenvironment{solucion}{\color{blue}\proof[Solución]}{\endproof\color{black}}
+
+
+
+
+% \renewcommand{\@autor}{
+% ---\\
+% \phantom{.} 
+% ...}
+% \makeatother

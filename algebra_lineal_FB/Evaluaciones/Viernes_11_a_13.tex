@@ -1,0 +1,91 @@
+% \documentclass[10pt,respuestas,a4]{examenEPN}
+\documentclass[10pt,a4]{examenEPN0}
+\usepackage[T1]{fontenc}
+\examen{Prueba 01}
+\input{ComandoLocales}
+\begin{document}
+\encabezado
+\datosAlgebra{GR6M}{23/10/2026}
+%Poner el grupo y la fecha, o dejar las llaves vacías.
+\indicacionesPrueba
+\begin{preguntas}
+\item Responda:
+\begin{enumerate}
+    \item Sean \(A\in \mathbb R^{3\times 4}, B\in \mathbb R^{3\times 2}\). Determine la cantidad de filas y columnas que deben tener las matrices \(C\) y \(D\) para que la siguiente ecuación tenga sentido: 
+    \(A^TB = DC^TB+D\) \puntaje{2}
+    \item Calcule \(\text{Tr}(B^TA)\) donde:\puntaje{3}
+    \[A = \left(\begin{array}{cc}
+         -3&5  \\
+         4&0 
+    \end{array}\right),\quad B = \left(\begin{array}{cc}
+         1&0  \\
+         2&-1 
+    \end{array} \right).\]
+\end{enumerate}
+% Espacio de respuesta hasta el final de la página.
+\par\vfill\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\item Plantee un sistema lineal de la forma \(Ax = b\) que permita modelar la siguiente situación (No es necesario resolver el sistema, pero sí se debe especificar la matriz \(A\) y el vector \(b\)).
+
+\textit{Se llevó a cabo un concierto en un estadio con capacidad para \(21.000\) personas, donde todas las entradas fueron vendidas. Según la localidad, los boletos tenían un costo de: General (\(50\$\)), Tribuna (\(75\$\)), VIP (\(150\$\)), y la recaudación total fue de \(1.375.000\$\) . La cantidad de asistentes a la localidad general es el doble de asistentes de las otras localidades juntas. ¿Cuántas personas asistieron a cada localidad?
+}
+\puntaje{5}
+% Espacio de respuesta hasta el final de la página.
+\par\vfill\newpage
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item Considere el siguiente sistema de ecuaciones lineales, donde \(\alpha\) es un parámetro:
+\[
+\begin{aligned} 
+x - (2\alpha)y + 4z &= 6 \\ 
+-x + (12+4\alpha)y  -12z &= -10 \\ 
+ -3x-36y 
+ + (\alpha^2+\alpha-18)z &= 6\alpha+30
+\end{aligned}
+\]
+
+\begin{enumerate}
+    \item Halle la matriz ampliada asociada al sistema y utilice los siguientes pasos para escalonarla.  \puntaje{1}
+    \begin{itemize}
+        \item \( F_1+F_2 \rightarrow F_2 \)
+        \item \( 3F_1+F_3 \rightarrow F_3 \)
+        \item \( 3F_2+F_3 \rightarrow F_3 \)
+    \end{itemize}
+
+    \item ¿Para qué valor de \(\alpha\) el sistema no tiene solución y para qué valor tiene infinitas soluciones? En el caso de infinitas soluciones, halle el conjunto solución. \puntaje{4}
+    
+\end{enumerate}
+% Espacio de respuesta hasta el final de la página.
+\par\vfill\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item (Ejercicio del deber) Dado el siguiente sistema:
+\[
+\left\{
+\begin{aligned}
+x + y + z &= 6 \\
+2x - y + 3z &= 9 \\
+x + 2y - z &= 2
+\end{aligned}
+\right.
+\]
+
+ Resuelva el sistema utilizando el método de \textbf{Gauss}. Determine $\operatorname{rang}(A)$ y $\operatorname{rang}(A|b)$. \puntaje{5}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    
+% El espacio restante de la última página queda disponible para responder.
+\par\vfill
+\end{preguntas}
+\final
+\end{document}

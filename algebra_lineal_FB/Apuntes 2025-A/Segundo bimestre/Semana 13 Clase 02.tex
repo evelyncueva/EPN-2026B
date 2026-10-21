@@ -1,0 +1,162 @@
+\documentclass[compacto,10pt]{pubciencias-notas}
+
+% -- Paquetes adicionales
+\usepackage{comandosEPN}
+
+% -- Datos del libro
+\autor{Departamento de Formación Básica}
+\materia{Álgebra Lineal}
+\nota{Semana 13 Clase 02}
+\fecha{Semestre 2024-B}
+
+\logouno[1.1cm]{Logo_EPN.eps}
+\logodos[1.7cm]{Logo_DFB.eps}
+
+\definecolor{colordef}{cmyk}{0.81,0.62,0.00,0.22}
+
+\begin{document}
+
+\encabezado
+\vspace*{-8mm}
+
+\setcounter{section}{6}
+\section{Valores y vectores propios}
+
+
+\subsection{Valores y vectores propios}
+\begin{defi}
+Sean $T \in \mathscr{L}(E,E)$ y $\lambda \in\K$. Se dice que $\lambda$ es un valor propio de $T$ si existe $v\in E$, con $v\neq 0_{E}$, tal que
+\[
+    T(v) = \lambda v.
+\]
+A este vector $v$ se lo llama vector propio de $T$ asociado al valor propio $\lambda$.
+\end{defi}
+
+
+
+\begin{ejem}\hspace{0pt} Dada la aplicación lineal
+\[
+    \funcion{T}{\R^2}{\R^2}{(x,y)}{(10x-18y,6x-11y).}
+\]
+Notemos que:
+\[
+T(2,1) = (10(2) -18(1), 6(2) -11(1)) = (20-18,12-11)=(2,1) = 1 (2,1)
+\]
+por lo tanto, $\lambda_{1}=1$ es un valor propio de $T$ y $v=(2,1)$ es un vector propio de $T$ asociado a $\lambda_{1}$.
+Por otro lado,
+\[
+T(3,2) = (10(3) -18(2), 6(3) -11(2)) = (30-36,18-22)=(-6,-4) = -2 (3,2)
+\]
+por lo tanto, $\lambda_{2}=-2$ es un valor propio de $T$ y $v=(3,2)$ es un vector propio de $T$ asociado a $\lambda_{2}$.
+
+\end{ejem}
+
+
+\begin{advertencia}
+Se puede demostrar que un vector propio se asocia con un único valor propio, además, el vector $0_{E}$ puede ser asociado a cualquier valor propio, por tanto, el vector $0_{E}$ no puede ser considerado como un vector propio.
+\end{advertencia}
+
+
+
+
+\newpage
+\begin{prop}
+Sean $T \in \mathscr{L}(E,E)$ y $\lambda \in\K$ un valor propio de $T$. Se tiene que el conjunto
+\[
+    E_\lambda = \{ v\in E : T(v) = \lambda v\} 
+\]
+es un subespacio vectorial de $E$. A $E_{\lambda}$ se lo denomina el espacio propio de $T$ asociado al valor propio $\lambda$.
+\end{prop}
+
+\begin{ejem}\hspace{0pt}\label{Cap7:ejem01} Dada la aplicación lineal
+\[
+    \funcion{T}{\R^2}{\R^2}{(x,y)}{(x+2y,4x+3y).}
+\]
+Notemos que:
+\[
+T(1,2) = (1 + 2(2), 4(1) + 3(2)) = (1+4, 4+6) = (5,10) = 5 (1,2)
+\]
+Lo que nos permite concluir que $5$ es un valor propio de $T$ y que $(1,2)$ es un vector propio asociado a $5$, además, el espacio propio asociado a $5$ es: 
+\[
+    E_5 = \l\{(x,y)\in\R^2\,:\,y=2x\r\}.
+\]
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} Considere a la aplicación lineal del ejemplo \ref{Cap7:ejem01}, verifique que para el valor propio $-1$ un vector propio asociado es $(-1,1)$, ¿cuál será el espacio propio asociado a $-1$?
+\end{ejer}
+
+\begin{defi}
+Supongamos que $\dim(E) = n$ y que $T\in\mathscr{L}(E,E)$. El espectro de $T$ es el conjunto de todos sus valores propios.
+\end{defi}
+
+\begin{ejem}\hspace{0pt} Considere a la aplicación lineal del ejemplo \ref{Cap7:ejem01}, su espectro es igual a $\{-1,5\}$.
+\end{ejem}
+
+En adelante, consideraremos a $E$ como un espacio vectorial de dimensión finita igual a $n$.
+
+\begin{teo}
+Sean $T \in \mathscr{L}(E,E)$ y $\lambda_1, \lambda_2, \ldots, \lambda_n$ valores propios de $T$ distintos entre sí. Si tomamos $v_1, v_2, \ldots, v_n$ vectores propios asociados a los valores propios $\lambda_1, \lambda_2, \ldots, \lambda_n$, respectivamente, entonces el conjunto $\{v_1, v_2, \ldots, v_n\}$ es linealmente independiente.
+\end{teo}
+
+\begin{ejem}\hspace{0pt} Considerando a la aplicación lineal del ejemplo \ref{Cap7:ejem01} tenemos que si $\lambda_{1} = -1$ y $\lambda_{2} = 5$ con $v_{1} = (-1,1)$ y $v_{2} = (1,2)$, entonces el conjunto $\{v_{1}, v_{2}\}$ es linealmente independiente.
+\end{ejem}
+
+\begin{defi}
+Sea $A\in \Mat[\K]{n}{n}$,
+se define la aplicación lineal
+\[
+    \funcion{T_A}{\Mat[\K]{n}{1}}{\Mat[\K]{n}{1}}{u}{Au.}
+\]
+A los valores propios de $T_A$ se los denomina valores propios de $A$, a los vectores propios de $T_A$ se los denomina vectores propios de $A$ y a los espacios propios de $T_A$ se los denomina espacios propios de $A$. Además, se denomina espectro de $A$ al espectro de $T_A$.
+\end{defi}
+
+\begin{ejem}\hspace{0pt}\label{Cap7:ejem02} Dada la matriz $A = \begin{pmatrix}1&2\\4&3\end{pmatrix}$, se tiene que $T_{A}$ está dada por:
+\[
+    \funcion{T_A}{\Mat[\R]{2}{1}}{\Mat[\R]{2}{1}}{\begin{pmatrix}
+     x\\y\end{pmatrix}}{\begin{pmatrix}x+2y\\4x+3y\end{pmatrix}.}
+\]
+Se tiene que los valores propios de $T_{A}$ son $\lambda_{1} = -1$ y $\lambda_{2} = 5$ con vectores propios asociados $u_{1} = \begin{pmatrix}-1\\1\end{pmatrix}$ y $u_{2} = \begin{pmatrix}1\\2\end{pmatrix}$, respectivamente. Además, los espacios propios de $T_{A}$ son:
+\[
+    E_{-1} = \l\{\begin{pmatrix}v_{1}\\v_{2}\end{pmatrix}\in\Mat[\R]{2}{1}\,:\,v_{1}+v_{2}=0\r\}
+\]
+y 
+\[
+    E_{5} = \l\{\begin{pmatrix}v_{1}\\v_{2}\end{pmatrix}\in\Mat[\R]{2}{1}\,:\,-2v_{1}+v_{2}=0\r\}.
+\]
+\end{ejem}
+
+\begin{prop}
+Sean $T \in \mathscr{L}(E,E)$ y $B$ una base de $E$. Se tiene que
+\begin{enumerate}
+\item
+    $\lambda\in\K$ es un valor propio de $T$ si y solo si es un valor propio de $[T]_B^B$; y,
+\item
+    $v\in E$ es un vector propio de $T$ si y solo si $[v]_{B}\in\K^{n\times1}$ es un vector propio de $[T]_B^B$.
+\end{enumerate}
+\end{prop}
+
+\begin{ejem}\hspace{0pt} Considere a la aplicación lineal del ejemplo \ref{Cap7:ejem01} y la matriz del ejemplo \ref{Cap7:ejem02}. Tomando a $B$ como la base canónica de $\R^{2}$ se tiene que $A = [T]_{B}^{B}$, notemos que:
+\begin{enumerate}
+    \item Tanto $-1$ como $5$ son valores propios de $T$ y de $A$.
+    \item El vector $v_{1} = (-1,1)$ es un vector propio de $T$ y que $u_{1} = \begin{pmatrix}-1\\1\end{pmatrix}$ es un vector propio de $A$, siendo 
+    $u_{1} = [v_{1}]_{B}$.
+    \item El vector $v_{2} = (1,2)$ es un vector propio de $T$ y que $u_{2} = \begin{pmatrix}1\\2\end{pmatrix}$ es un vector propio de $A$, siendo 
+    $u_{2} = [v_{2}]_{B}$.
+\end{enumerate}
+\end{ejem}
+
+\begin{obs}
+Si consideramos una aplicación lineal $T\in\mathscr{L}(E, E)$, con $\dim(E)=n$. De este resultado, se sigue que, para determinar los valores, vectores y espacios propios de $T$, basta determinar los valores, vectores y espacios propios de una matriz de representación de esta.
+\end{obs}
+
+\begin{prop}
+Sea $A\in \Mat[\K]{n}{n}$, se tiene que $\lambda\in \K$ es un valor propio de $A$ si y solo si existe $v\in \Mat[\K]{n}{1}$, con $v\neq 0$, tal que
+\[
+    Av = \lambda v,
+\]
+además, a $v$ se lo denomina como vector propio de $A$ asociado al valor propio $\lambda$.
+\end{prop}
+
+
+
+\end{document}

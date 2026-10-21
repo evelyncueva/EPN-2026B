@@ -1,0 +1,159 @@
+\documentclass[compacto,10pt]{pubciencias-notas}
+
+% -- Paquetes adicionales
+\usepackage{comandosEPN}
+
+% -- Datos del libro
+\autor{Departamento de Formación Básica}
+\materia{Álgebra Lineal}
+\nota{Semana 06 Clase 02}
+\fecha{Semestre 2025-A}
+
+\logouno[1.1cm]{Logo_EPN.eps}
+\logodos[1.7cm]{Logo_DFB.eps}
+
+\definecolor{colordef}{cmyk}{0.81,0.62,0.00,0.22}
+
+\begin{document}
+
+\encabezado
+
+\vspace*{-8mm}
+
+\setcounter{section}{2}
+\section{Determinantes}
+\setcounter{subsection}{1}
+\subsection{Resolución de sistemas de ecuaciones}
+
+\begin{teo}[Equivalencias no singulares]
+Sea $A\in\Mat[\K]{n}{n}$, los siguientes enunciados son equivalentes.
+\begin{enumerate}
+\item $A$ es no singular;
+\item el sistema $Ax=0$ tiene solamente la solución trivial;
+\item $A$ es equivalente por filas a $I_{n}$;
+\item $\rang(A)=n$;
+\item el sistema lineal $Ax=b$ tiene una solución única para cada $b\in\Mat[\K]{n}{1}$; y
+\item $\det(A)\neq0$.
+\end{enumerate}
+\end{teo}
+\begin{ejer}
+    Sea $\alpha\in\mathbb{R}$. Resuelva el sistema de ecuaciones:
+     \[
+        \l\{
+        \begin{array}{c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c}
+        \alpha x_1  & + & 2x_2 &= & 0 \\
+        2x_1  & + & \alpha x_2 &= & 0
+        \end{array}
+        \r.
+    \]
+    ¿Para qué valores de $\alpha$ el sistema tiene solución trivial?
+\end{ejer}
+\begin{ejer}
+    Sea $\alpha\in\mathbb{R}$. Dada la matriz
+     \[
+        A=\begin{pmatrix}
+            1&2&3\\
+            \alpha&1&0\\
+            -1&2&1
+        \end{pmatrix}
+    \]
+    ¿Para qué valores de $\alpha$ la matriz $A$ es no singular?
+\end{ejer}
+\subsection{Regla de Cramer}
+\begin{teo}[Regla de Cramer]
+    Sean $A\in\Mat[\K]{n}{n}$ y $b\in\Mat[\K]{n}{1}$. Consideremos el sistema de ecuaciones
+    \[
+        \l\{
+        \begin{array}{c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c}
+        a_{11} x_1 & + & a_{12} x_2 & + \, \cdots \, + & a_{1n} x_n & = & b_1, \\
+        a_{21} x_1 & + & a_{22} x_2 & + \, \cdots \, + & a_{2n} x_n & = & b_2, \\
+        \vdots &    &     \vdots & & \vdots & &  \vdots \\
+        a_{n1} x_1 & + & a_{n2} x_2 & + \, \cdots \, + & a_{nn} x_n & = & b_n, \\
+        \end{array}
+        \r.
+    \]
+    y denotemos por $A$ a su matriz de coeficientes y $b$ a su matriz de constantes. Si $\det(A) \neq 0$, el sistema tiene solución única y está dada por:
+    \[
+        x_j = \dfrac{\det(A_j)}{\det(A)},
+    \]
+    para $j\in I$ y donde $A_j$ es la matriz que se obtiene reemplazando la $j$-ésima columna de $A$ por $b$.
+\end{teo}
+
+\begin{ejem}
+    Consideremos el sistema de ecuaciones:
+    \[
+        \l\{
+        \begin{array}{c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c}
+        2x_1 & + & x_2  & - & x_3  & = & 3 \\
+        x_1  & + & x_2  & + & x_3  & = & 1 \\
+        x_1  & - & 2x_2 & - & 3x_3 & = & 4 \\
+        \end{array}
+        \r.
+    \]
+    En donde:
+    \[
+        A = 
+        \begin{pmatrix}
+            2 & 1 & -1 \\
+            1 & 1 & 1 \\
+            1 & -2 & -3
+        \end{pmatrix} \qquad y \qquad b =
+        \begin{pmatrix}
+            3 \\
+            1 \\
+            4
+        \end{pmatrix}
+    \]
+    Se sigue que $\det(A) = 5$. Puesto que $\det(A) \not = 0$, el sistema tiene solución única, la cual está determinada por:
+    \[
+        x_1 = \dfrac{
+        \begin{vmatrix}
+            3 & 1 & -1 \\
+            1 & 1 & 1 \\
+            4 & -2 & -3
+        \end{vmatrix}}{5} = 2
+    \]
+    \[
+        x_2 = \dfrac{
+        \begin{vmatrix}
+            2 & 3 & -1 \\
+            1 & 1 & 1 \\
+            1 & 4 & -3
+        \end{vmatrix}}{5} = -1
+    \]
+    \[
+        x_3 = \dfrac{
+        \begin{vmatrix}
+            2 & 1 & 3 \\
+            1 & 1 & 1 \\
+            1 & -2 & 4
+        \end{vmatrix}}{5} = 0
+    \]
+    Así, la solución única del sistema es $x = \begin{pmatrix}2&-1&0\end{pmatrix}^{\intercal}$.
+\end{ejem}
+
+\begin{ejer}
+    Resuelva el sistema de ecuaciones:
+ %   \[
+  %      \l\{
+   %     \begin{array}{c@{\,}c@{\,}c@{\,}c@{\,}c}
+    %    -ax_1  & + & 2bx_2 & = & c \\
+     %   2ax_1 & - & 5bx_2 & = & 3c
+      %  \end{array}
+     %   \r.
+    %\]
+    %donde $a$, $b$ y $c$ son números reales, con $a b \not = 0$
+
+     \[
+        \l\{
+        \begin{array}{c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c}
+        3x  & + & 2y & + & z &= & 2 \\
+        2x  & + & 2y & + & z &= & 2\\
+        x  & + & y & + & z &= & 1
+        \end{array}
+        \r.
+    \]
+
+
+\end{ejer}
+\end{document}

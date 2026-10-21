@@ -1,0 +1,352 @@
+\documentclass[compacto,10pt]{pubciencias-notas}
+
+% -- Paquetes adicionales
+\usepackage{comandosEPN}
+
+% -- Datos del libro
+\autor{Departamento de Formación Básica}
+\materia{Álgebra Lineal}
+\nota{Semana 06 Clase 01}
+\fecha{Semestre 2025-A}
+
+\logouno[1.1cm]{Logo_EPN.eps}
+\logodos[1.7cm]{Logo_DFB.eps}
+
+\definecolor{colordef}{cmyk}{0.81,0.62,0.00,0.22}
+
+\begin{document}
+
+\encabezado
+
+\vspace*{-8mm}
+
+\setcounter{section}{2}
+\section{Determinantes}
+\setcounter{subsection}{1}
+\subsection{Resolución de sistemas de ecuaciones}
+
+\begin{defi}[Matriz de cofactores]
+Sea $A\in\Mat[\K]{n}{n}$. La matriz de cofactores de $A$, que se denota por $\cof(A)$, es la matriz de orden $n \times n$ que está formada por los cofactores de $A$, es decir:
+\[
+\cof(A) = (C_{ij}) = 
+\begin{pmatrix}
+C_{11}&C_{12}&\ldots&C_{1n}\\
+C_{21}&C_{22}&\ldots&C_{2n}\\
+\vdots&\vdots&\ddots&\vdots\\
+C_{n1}&C_{n2}&\ldots&C_{nn}
+\end{pmatrix}.
+\]
+donde, $C_{ij} = (-1)^{i+j} \det (A_{ij})$.
+\end{defi}
+
+\begin{ejem}\label{matrizcofactores}
+    Sea $A = 
+    \begin{pmatrix}
+    0 & 1 & 3 \\
+    2 & -1 & 0 \\
+    -1 & 2 & -1
+    \end{pmatrix}$, determinemos sus cofactores correspondientes a la primera columna.
+    \begin{itemize}
+    \item
+        $C_{11} = (-1)^{2} 
+        \begin{vmatrix}
+            -1 & 0 \\
+            2 & -1
+        \end{vmatrix} = 1$.
+        
+    \item
+        $C_{21} = (-1)^{3}
+        \begin{vmatrix}
+            1 & 3 \\
+            2 & -1
+        \end{vmatrix} = 7$.
+        
+    \item
+        $C_{31} = (-1)^{4}
+        \begin{vmatrix}
+            1 & 3 \\
+            -1 & 0
+        \end{vmatrix} = 3$.
+    \end{itemize}
+\end{ejem}
+
+\begin{ejer}
+    Verifique que la matriz de los cofactores de la matriz $A$ del ejemplo \ref{matrizcofactores} es: \[ \cof(A) = 
+    \begin{pmatrix}
+            1 & 2 & 3\\
+            7 & 3 & -1 \\
+            3 & 6 & -2
+        \end{pmatrix}
+    \]
+\end{ejer}
+
+\begin{defi}[Matriz adjunta]
+Sea $A\in\Mat[\K]{n}{n}$. La matriz adjunta de $A$, que se denota por $\adj(A)$, es la matriz de orden $n \times n$ igual a la transpuesta de la matriz de cofactores de $A$, es decir:
+\[
+    \adj(A) = \cof(A)^{T}.
+\]
+\end{defi}
+
+\begin{ejem}
+    Consideramos la matriz $A$, planteada en el ejemplo \ref{matrizcofactores}. Se tiene:
+    \[
+        \adj(A) = \cof(A)^{T} =
+        \begin{pmatrix}
+            1 & 7 & 3 \\
+            2 & 3 & 6 \\
+            3 & -1 & -2
+        \end{pmatrix}
+    \]
+\end{ejem}
+
+\begin{ejer}\label{matcofej}
+    Sea $B = 
+    \begin{pmatrix}
+        3 & -2 \\
+        -1 & 2
+    \end{pmatrix}$, calcular $\adj(B)$.   
+\end{ejer}
+
+\begin{teo}
+Sea $A\in\Mat[\K]{n}{n}$, entonces
+\[
+    A \adj(A) = \adj(A) A = \det(A) I_{n}.
+\]
+\end{teo}
+
+\begin{ejem}
+    Consideremos la matriz $A$ del ejemplo \ref{matrizcofactores}, se tiene
+    \[
+        A \adj(A) = \begin{pmatrix}
+            0 & 1 & 3 \\
+            2 & -1 & 0 \\
+            -1 & 2 & -1
+        \end{pmatrix}
+        \begin{pmatrix}
+            1 & 7 & 3 \\
+            2 & 3 & 6 \\
+            3 & -1 & -2
+        \end{pmatrix} = 
+        \begin{pmatrix}
+            11 & 0 & 0 \\
+            0 & 11 & 0 \\
+            0 & 0 & 11
+        \end{pmatrix} = 11 I_{3}
+    \]
+    \[
+        \adj(A) A = 
+        \begin{pmatrix}
+            1 & 7 & 3 \\
+            2 & 3 & 6 \\
+            3 & -1 & -2
+        \end{pmatrix}
+        \begin{pmatrix}
+            0 & 1 & 3 \\
+            2 & -1 & 0 \\
+            -1 & 2 & -1
+        \end{pmatrix} =
+        \begin{pmatrix}
+            11 & 0 & 0 \\
+            0 & 11 & 0 \\
+            0 & 0 & 11
+        \end{pmatrix} = 11 I_{3}
+    \]
+    
+    \noindent Como el $\det(A) = 11$ (verifique), entonces $A \adj(A) = \adj(A) A = \det(A) I_{3}$.
+\end{ejem}
+
+\begin{ejer} 
+    Dada la matriz $B$ del ejercicio \ref{matcofej}, compruebe que:
+    \[
+        B \adj(B) = \adj(B) B = \det(B) I_{2}.
+    \]
+\end{ejer}
+
+\begin{cor}
+Sea $A\in\Mat[\K]{n}{n}$. Si $\det(A) \neq 0$, entonces 
+$A$ es invertible y 
+\[
+    A^{- 1} = \dfrac{1}{\det(A)}\adj(A).
+\]
+\end{cor}
+
+\begin{ejem}
+    Consideremos nuevamente la matriz $A$ del ejemplo \ref{matrizcofactores}.
+    
+    \noindent Como el $\det(A) \not = 0$, entonces se tiene:
+    \[
+        A^{-1} = \dfrac{1}{11}
+        \begin{pmatrix}
+            1 & 7 & 3 \\
+            2 & 3 & 6 \\
+            3 & -1 & -2
+        \end{pmatrix} = 
+        \begin{pmatrix}
+            \dfrac{1}{11} & \dfrac{7}{11} & \dfrac{3}{11} \\
+            \dfrac{2}{11} & \dfrac{3}{11} & \dfrac{6}{11} \\
+            \dfrac{3}{11} & -\dfrac{1}{11} & -\dfrac{2}{11}
+        \end{pmatrix}
+    \]
+\end{ejem}
+
+\begin{ejer} Dada la matriz $B$ del ejemplo \ref{matcofej}, calcule su matriz inversa.
+\end{ejer}
+
+\begin{teo}\label{TeoInvAdj}
+    Sea $A \in \Mat[\K]{n}{n}$. Si $A$ es no singular, entonces $\det(A) \neq 0$ y 
+    \[
+        \det(A^{-1}) = \dfrac{1}{\det(A)}.
+    \]
+\end{teo}
+
+\begin{ejem}
+    Sea $A$ la matriz del ejemplo \ref{matrizcofactores}. Se tiene que:
+    \[
+        \det(A^{-1}) = \dfrac{1}{11} = \dfrac{1}{\det(A)}
+    \]
+\end{ejem}
+
+\begin{ejer} Compruebe la igualdad del teorema \ref{TeoInvAdj} para la matriz del ejemplo \ref{matcofej}.
+\end{ejer}
+
+\begin{prop}\label{Pro_NS}
+Sea $A\in\Mat[\K]{n}{n}$. Una matriz $A$ es no singular si y sólo si $\det(A)\neq0$.
+\end{prop}
+
+\begin{ejer} Hacer la demostración de la proposición \ref{Pro_NS}.
+\end{ejer}
+
+\begin{prop}
+Sea $A\in\Mat[\K]{n}{n}$. El sistema homogéneo $Ax=0$ tiene solución no trivial si y sólo si $\det(A)=0$.
+\end{prop}
+
+\begin{ejer}
+Dado el sistema lineal homogéneo:
+\[
+\systeme[x_1 x_2 x_3]{x_1+5x_2-4x_3=0, x_1-2x_2+x_3=0, 3x_1+x_2-2x_3=0}
+\]
+Obtenga la solución del sistema.
+\end{ejer}
+\begin{prop}
+Sean $A\in\Mat[\K]{n}{n}$ y $b\in\Mat[\K]{n}{1}$. El sistema $Ax=b$ tiene solución única si y sólo si $\det(A)\neq0$ y su solución es
+\[
+    A^{- 1}b.
+\]
+\end{prop}
+\begin{ejer}
+Dado el sistema lineal:
+\[
+\systeme[x_1 x_2 x_3]{x_1-4x_2+x_3=5, 2x_1-6x_2-x_3=8, -x_1-5x_3=-12}
+\]
+Obtenga la solución del sistema.
+\end{ejer}
+%\begin{teo}[Equivalencias no singulares]
+%Sea $A\in\Mat[\K]{n}{n}$, los siguientes enunciados son equivalentes.
+%\begin{enumerate}
+%\item $A$ es no singular;
+%\item el sistema $Ax=0$ tiene solamente la solución trivial;
+%\item $A$ es equivalente por filas a $I_{n}$;
+%\item $\rang(A)=n$;
+%\item el sistema lineal $Ax=b$ tiene una solución única para cada $b\in\Mat[\K]{n}{1}$; y
+%\item $\det(A)\neq0$.
+%\end{enumerate}
+%\end{teo}
+
+%\subsection{Regla de Cramer}
+%\begin{teo}[Regla de Cramer]
+ %   Sean $A\in\Mat[\K]{n}{n}$ y $b\in\Mat[\K]{n}{1}$. Consideremos el sistema de ecuaciones
+  %  \[
+   %     \l\{
+    %    \begin{array}{c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c}
+     %   a_{11} x_1 & + & a_{12} x_2 & + \, \cdots \, + & a_{1n} x_n & = & b_1, \\
+      %  a_{21} x_1 & + & a_{22} x_2 & + \, \cdots \, + & a_{2n} x_n & = & b_2, \\
+       % \vdots &    &     \vdots & & \vdots & &  \vdots \\
+     %   a_{n1} x_1 & + & a_{n2} x_2 & + \, \cdots \, + & a_{nn} x_n & = & b_n, \\
+      %  \end{array}
+     %   \r.
+    %\]
+    %y denotemos por $A$ a su matriz de coeficientes y $b$ a su matriz de constantes. Si $\det(A) \neq 0$, el sistema tiene solución única y está dada por:
+  %  \[
+   %     x_j = \dfrac{\det(A_j)}{\det(A)},
+    %\]
+    %para $j\in I$ y donde $A_j$ es la matriz que se obtiene reemplazando la $j$-ésima columna de $A$ por $b$.
+%\end{teo}
+
+%\begin{ejem}
+ %   Consideremos el sistema de ecuaciones:
+  %  \[
+   %     \l\{
+    %    \begin{array}{c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c}
+   %     2x_1 & + & x_2  & - & x_3  & = & 3 \\
+    %    x_1  & + & x_2  & + & x_3  & = & 1 \\
+     %   x_1  & - & 2x_2 & - & 3x_3 & = & 4 \\
+      %  \end{array}
+       % \r.
+    %\]
+    %En donde:
+    %\[
+     %   A = 
+        %\begin{pmatrix}
+            %2 & 1 & -1 \\
+            %1 & 1 & 1 \\
+            %1 & -2 & -3
+%        \end{pmatrix} \qquad y \qquad b =
+        %\begin{pmatrix}
+         %   3 \\
+          %  1 \\
+           % 4
+        %\end{pmatrix}
+    %\]
+    %Se sigue que $\det(A) = 5$. Puesto que $\det(A) \not = 0$, el sistema tiene solución única, la cual está determinada por:
+  %  \[
+   %     x_1 = \dfrac{
+        %\begin{vmatrix}
+         %   3 & 1 & -1 \\
+          %  1 & 1 & 1 \\
+           % 4 & -2 & -3
+        %\end{vmatrix}}{5} = 2
+   % \]
+   % \[
+    %    x_2 = \dfrac{
+        %\begin{vmatrix}
+         %   2 & 3 & -1 \\
+          %  1 & 1 & 1 \\
+           % 1 & 4 & -3
+        %\end{vmatrix}}{5} = -1
+    %\]
+    %\[
+     %   x_3 = \dfrac{
+        %\begin{vmatrix}
+         %   2 & 1 & 3 \\
+          %  1 & 1 & 1 \\
+           % 1 & -2 & 4
+%        \end{vmatrix}}{5} = 0
+ %   \]
+  %  Así, la solución única del sistema es $x = \begin{pmatrix}2&-1&0\end{pmatrix}^{\intercal}$.
+%\end{ejem}
+
+%\begin{ejer}
+ %   Resuelva el sistema de ecuaciones:
+ %   \[
+  %      \l\{
+   %     \begin{array}{c@{\,}c@{\,}c@{\,}c@{\,}c}
+    %    -ax_1  & + & 2bx_2 & = & c \\
+     %   2ax_1 & - & 5bx_2 & = & 3c
+      %  \end{array}
+     %   \r.
+    %\]
+    %donde $a$, $b$ y $c$ son números reales, con $a b \not = 0$
+
+  %   \[
+   %     \l\{
+    %    \begin{array}{c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c}
+     %   3x  & + & 2y & + & z &= & 2 \\
+      %  2x  & + & 2y & + & z &= & 2\\
+       % x  & + & y & + & z &= & 1
+        %\end{array}
+        %\r.
+    %\]
+
+
+%\end{ejer}
+\end{document}

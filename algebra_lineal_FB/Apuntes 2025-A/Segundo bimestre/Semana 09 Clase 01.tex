@@ -1,0 +1,398 @@
+\documentclass[compacto,10pt]{pubciencias-notas}
+
+% -- Paquetes adicionales
+\usepackage{comandosEPN}
+
+% -- Datos del libro
+\autor{Departamento de Formación Básica}
+\materia{Álgebra Lineal}
+\nota{Semana 09 Clase 01}
+\fecha{Semestre 2025-A}
+
+\logouno[1.1cm]{Logo_EPN.eps}
+\logodos[1.7cm]{Logo_DFB.eps}
+
+\definecolor{colordef}{cmyk}{0.81,0.62,0.00,0.22}
+
+\begin{document}
+
+\encabezado
+
+\vspace*{-4mm}
+
+\setcounter{section}{3}
+\section{Espacios Vectoriales}
+\setcounter{subsection}{5}
+\subsection{Independencia lineal}
+
+\begin{prop}\label{prop_ld}
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial, $k\in\N^{*}$ y
+    
+    \noindent $S=\{v_1,v_2,\ldots,v_k\}\subseteq E$. Se tiene que $S$ es un conjunto linealmente dependiente si y sólo si alguno de los vectores $v_j\in S$ es una combinación lineal de otros elementos de $S$.
+\end{prop}
+
+\begin{ejem}\hspace{0pt} En el espacio vectorial $(\R^{2},+,\cdot,\R)$ considere el conjunto 
+
+\noindent $S = \{(1, 2), (2, -1), (4, 3)\}$, se tiene que $S$ es linealmente dependiente. En efecto, notemos que el vector $(4, 3)$ se puede escribir como combinación lineal de los vectores $(1, 2)$ y  $(2, -1)$, lo que junto con la proposición \ref{prop_ld} implica que $S$ es linealmente dependiente.
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} En el espacio vectorial $(\Mat[\R]{2}{2}, +, \cdot, \R)$, 
+¿es el conjunto \[\left\{\begin{pmatrix} 1 & 0\\ 2 & 0 \end{pmatrix}, \begin{pmatrix} 1 & 1\\ 0 & 0 \end{pmatrix}, \begin{pmatrix} 0 & 1\\ 2 & 0 \end{pmatrix} \right\},\] linealmente dependiente o independiente? Justifique su respuesta.
+\end{ejer}
+
+\begin{prop}
+Sean $(E, +, \cdot, \K)$ un espacio vectorial, $k\in\N^{*}$ y $S$ un conjunto de $E$ con $k$ elementos. Si $S$ es un conjunto linealmente independiente, entonces todo conjunto de $k + 1$ elementos de $\gen(S)$ es linealmente dependiente.
+\end{prop}
+
+\begin{ejem}\hspace{0pt}
+En el espacio vectorial $(\R^4,+,\cdot,\R)$ el conjunto \[S = \{(1,0,-1,0), (1,0,1,0)\}\] es linealmente \emph{independiente}, mientras que el conjunto \[\{(1,0,-1,0), (1,0,1,0), (3,0,1,0)\}\] es linealmente \emph{dependiente}.
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} 
+En el espacio vectorial $(\R^3,+,\cdot,\R)$ considere el conjunto linealmente independiente $S=\{(1,0,2), (0,0,1)\}$. Determine $\gen(S)$ y un conjunto linealmente dependiente a partir de $S$.
+\end{ejer}
+
+
+\begin{prop}
+    Sean $(E, +, \cdot, \K)$ un espacio vectorial, $k \in \N^{*}$ y
+    
+    \noindent $S = \{v_{1}, v_{2}, \cdots, v_{k} \} \subset E$. Si $S$ es linealmente dependiente, entonces
+    \[
+        \gen(S) = \gen(S \setminus \{ v_{j} \})
+    \]
+    donde $v_{j}$ es combinación lineal de los demás elementos de $S$.
+\end{prop}
+
+\begin{ejem}\hspace{0pt} En el espacio vectorial $(\R^{2},+,\cdot,\R)$, considere el conjunto 
+
+\noindent $S = \{(1, 0), (0, 1), (4, -3)\}$, se tiene que $S$ es linealmente dependiente y que 
+\[
+    \gen(S) = \gen(S \setminus \{ (4,3) \}).
+\]
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} En el espacio vectorial $(\R^{4},+,\cdot,\R)$, sean $v_1=(1,1,0,0)$, $v_2=(1,0,1,-1)$ y $v_3=(1,2,-1,1)$. Muestre que $S=\{v_1, v_2, v_3\}$ es linealmente dependiente y encuentre $ \gen(S)$. 
+\end{ejer}
+
+\begin{prop}
+    Sean $(E, +, \cdot, \K)$ un espacio vectorial, $S \subset E$ y $v \in E$. Si $S$ es linealmente independiente y $\gen(S) \not = E$, entonces $S \cup \{ v \}$ es linealmente independiente, siempre y cuando $v \not \in \gen(S)$
+\end{prop}
+
+\begin{ejem}\hspace{0pt} En el espacio vectorial $(\R^{3},+,\cdot,\R)$, el conjunto $S = \{(1,0,-1), (1,0,1)\} $ es linealmente independiente y $ \gen(S) \not = \R^{3}$. Notemos que $(0,1,0) \in \R^{3}$, y que $(0,1,0) \notin \gen(S)$. Por lo tanto $S_{1} = \{ (1,0,-1), (1,0,1), (0,1,0)\}$ es linealmente independiente.
+\end{ejem}
+
+\begin{ejer}\hspace{0pt}
+En el espacio vectorial $(\Mat[\R]{2}{2},+,\cdot,\R)$, considere el conjunto:
+\[
+S=\left\lbrace 
+\begin{pmatrix}
+1&0\\
+2&-1
+\end{pmatrix},
+\begin{pmatrix}
+0&1\\
+-1&3
+\end{pmatrix},
+\begin{pmatrix}
+2&0\\
+3&1
+\end{pmatrix}
+\right\rbrace.
+\]
+Determine $\gen(S)$ y un conjunto linealmente independiente con 4 elementos a partir de $S$.
+\end{ejer}
+
+% \begin{advertencia}
+% Un error común cuando se trabaja la independencia lineal en el espacio de polinomios, por ejemplo en $\R_{2}[x]$, consiste en que si se desea mostrar que el conjunto $S = \{1 + x, 2x + x^{2}\} \subseteq \R_{2}[x]$ es linealmente independiente, al formar la combinación lineal nula con estos elementos tomando $\alpha_{1}, \alpha_{2}\in\R$ se escribe que:
+% \[
+%     \alpha_{1}(1 + x) + \alpha_{2}(2x + x^{2}) = (0, 0x, 0x^{2}).
+% \]
+% Como se puede apreciar se confunde entre el elemento neutro de $\R_{2}[x]$ con $(0, 0, 0)$ el neutro de $\R^{3}$, lo correcto es
+% \[
+%     \alpha_{1}(1 + x) + \alpha_{2}(2x + x^{2}) = 0 + 0x + 0x^{2}.
+% \]
+% Otro error que se comete es asegurar que:
+% \[
+%     1 + x = (1, x, 0)
+% \]
+% en donde nuevamente se confunden a los espacios con los que se trabaja.
+% \end{advertencia}
+
+\setcounter{subsection}{6}
+\subsection{Base y dimensión}
+
+\begin{defi}
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial y $B\subseteq E$. Se dice que $B$ es una base de $E$ si 
+    \begin{enumerate}
+        \item $B$ genera a $E$; y 
+        \item $B$ es linealmente independiente. 
+    \end{enumerate}
+    
+\end{defi}
+
+\begin{ejem}
+Dado el subespacio vectorial  
+\[W=\left\lbrace \begin{pmatrix} a & b\\ b & c \end{pmatrix}\in \mathbb{R}^{2\times2}:
+\left|    
+     \begin{matrix}
+     a & b & 0\\
+     2 & 0 & 1 \\
+     1 & 3 &0
+     \end{matrix}
+\right|=0: a,b,c\in\Rbb
+\right\rbrace \]
+
+    Hallar una base $B$ para el conjunto $W$.
+Primero hallamos la restricción del conjunto
+
+\[
+\left|    
+     \begin{matrix}
+     a & b & 0\\
+     2 & 0 & 1 \\
+     1 & 3 &0
+     \end{matrix}
+\right|=-3a+b=0 
+\]
+Entonces, tenemos que:
+\begin{align*}
+W &=\left\lbrace \begin{pmatrix} a & b\\ b & c \end{pmatrix}\in \mathbb{R}^{2\times2}:
+-3a+b=0: a,b,c\in\Rbb 
+\right\rbrace\\
+&=\left\lbrace \begin{pmatrix} a & b\\ b & c \end{pmatrix}\in \mathbb{R}^{2\times2}:
+b=3a: a,c\in\Rbb 
+\right\rbrace\\
+&=\left\lbrace \begin{pmatrix} a & 3a\\ 3a & c \end{pmatrix}\in \mathbb{R}^{2\times2}: a,c\in\Rbb \right\rbrace\\
+&=\left\lbrace \begin{pmatrix} a & 3a\\ 3a & 0 \end{pmatrix}+\begin{pmatrix} 0 & 0\\ 0 & c \end{pmatrix}\in \mathbb{R}^{2\times2}: a,c\in\Rbb \right\rbrace\\
+&=\left\lbrace a\begin{pmatrix} 1 & 3\\ 3 & 0 \end{pmatrix}+c\begin{pmatrix} 0 & 0\\ 0 & 1 \end{pmatrix}\in \mathbb{R}^{2\times2}: a,c\in\Rbb \right\rbrace\\
+&=\text{gen}\left\lbrace \begin{pmatrix} 1 & 3\\ 3 & 0 \end{pmatrix},\begin{pmatrix} 0 & 0\\ 0 & 1 \end{pmatrix}\right\rbrace
+\end{align*}
+Luego, tomamos $B=\left\lbrace \begin{pmatrix} 1 & 3\\ 3 & 0 \end{pmatrix},\begin{pmatrix} 0 & 0\\ 0 & 1 \end{pmatrix}\right\rbrace$ se tiene que $W=$ gen$(B)=\langle B \rangle$. Entonces, $B$ genera a $W$.
+Ahora, verificamos si $B$ es LI.
+Hacemos la combinación lineal nula. Supongamos que existe $\alpha_1, \alpha_2 \in \mathbb{K} $ tales que:
+\begin{align*}
+\begin{pmatrix} 0 & 0\\ 0 & 0 \end{pmatrix} &=\alpha_1\begin{pmatrix} 1 & 3\\ 3 & 0 \end{pmatrix}+\alpha_2\begin{pmatrix} 0 & 0\\ 0 & 1 \end{pmatrix}\\
+&=\begin{pmatrix} \alpha_1 & 3\alpha_1\\ 3\alpha_1 & 0 \end{pmatrix}+\begin{pmatrix} 0 & 0\\ 0 & \alpha_2 \end{pmatrix}\\
+&=\begin{pmatrix} \alpha_1 & 3\alpha_1\\ 3\alpha_1 & \alpha_2 \end{pmatrix}
+\end{align*}
+A partir de lo cual se obtiene el siguiente sistema de ecuaciones:
+\[
+\systeme[\alpha_1  \alpha_2]{\alpha_1=0,
+3\alpha_1=0,3\alpha_1=0,\hspace{0.5cm}\alpha_2=0}
+\]
+Como $\alpha_1=\alpha_2=0$. Entonces $B$ es LI.\\
+
+Por lo tanto, $B$ es base de $W$.
+\end{ejem}
+
+\begin{teo}[Base canónica de $\R^n$]
+    En $\R^n$, el conjunto $\{e^1,e^2,\ldots,e^n\}\subset\R^n$, definidos por 
+    \[
+        e^i_j=
+        \begin{cases}
+            0& \text{si }i\neq j,\\
+            1& \text{si }i= j,
+        \end{cases}
+    \]
+    para todo $i,j\in\{1,2,\ldots,n\}$, es una base de $\R^n$, conocida como la base canónica de $\R^{n}$.
+\end{teo}
+
+\begin{ejem}\hspace{0pt}
+Para el espacio vectorial $\R^{3}$ se tiene que su base canónica está dada por:
+\[
+    B = \{e^{1}, e^{2}, e^{3}\} = \{(1, 0, 0), (0, 1, 0), (0, 0, 1)\}.
+\]
+\end{ejem}
+
+\begin{ejer}\hspace{0pt}
+Considere el espacio vectorial $\R^{4}$, identifique a los vectores de su  base canónica:
+\[
+    B = \{e^{1}, e^{2}, e^{3}, e^4\}.
+\]
+\end{ejer}
+
+% \begin{teo}[Base canónica de {$\R_n[x]$}]
+%     En $\R_n[x]$, el conjunto $\{1,x,\ldots,x^{n-1},x^n\}$ es una base de $\R_n[x]$. A esta base se la denomina la base canónica de $\R_n[x]$.
+% \end{teo}
+
+% \begin{ejem}\hspace{0pt}
+% Para el espacio vectorial $\R_2[x]$ se tiene que su base canónica es $\{1,x,x^2\}$.
+% \end{ejem}
+
+% \begin{ejer}\hspace{0pt}
+% Identifique a la base canónica del espacio vectorial  $\R_4[x]$.
+% \end{ejer}
+
+\begin{teo}
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial y $B\subseteq E$ una base de $E$. Se tiene que todo elemento de $E$ se puede escribir, de manera única, como combinación lineal de elementos de $B$.
+\end{teo}
+
+\begin{ejem}\hspace{0pt}
+En el espacio vectorial $\Mat{2}{2}$ tenemos que su base canónica está dada por:
+\[
+    B = \l\{\begin{pmatrix}1&0\\0&0\end{pmatrix}, 
+            \begin{pmatrix}0&1\\0&0\end{pmatrix},
+            \begin{pmatrix}0&0\\1&0\end{pmatrix},
+            \begin{pmatrix}0&0\\0&1\end{pmatrix}\r\}.
+\]
+Además, se tiene que:
+\[
+    \begin{pmatrix}a&b\\c&d\end{pmatrix} = 
+    a\begin{pmatrix}1&0\\0&0\end{pmatrix} +
+    b\begin{pmatrix}0&1\\0&0\end{pmatrix} +
+    c\begin{pmatrix}0&0\\1&0\end{pmatrix} +
+    d\begin{pmatrix}0&0\\0&1\end{pmatrix}
+\]
+para todo $\begin{pmatrix}a&b\\c&d\end{pmatrix}\in\Mat{2}{2}$ es única, ya que una base es un conjunto linealmente independiente.
+\end{ejem}
+
+% \begin{ejer}\hspace{0pt}
+% Para el espacio vectorial $\R_2[x]$ se tiene que el conjunto
+% \[
+%     B = \l\{1+x+x^2,1+x,1\r\}
+% \]
+% es una base. Verifique que la combinación lineal
+% \[
+%     a+bx+cx^2=c(1+x+x)^2+(b-c)(1+x)+(a-b)
+% \]
+% es única, para todo $ a+bx+cx^2\in\R_2[x]$.
+% \end{ejer}
+\begin{teo}
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial y $B\subseteq E$. Si todo elemento de $E$ se puede escribir, de manera única, como combinación lineal de elementos de $B$, entonces $B$ es una base de $E$.
+\end{teo}
+
+% \begin{ejem}\hspace{0pt}
+% En el espacio vectorial $\R_{1}[t]$ considere el conjunto 
+% \[
+%     B = \{1 - t, 1 + t\}.
+% \]
+% Notemos que todo elemento de $\R_{1}[t]$ se escribe como combinación lineal de los elementos de $B$ y esta combinación es única. En efecto, sean $a_0+a_1t\in\R_1[t]$, $\alpha_1,\alpha_2\in\K$ tales que
+% \[
+% \alpha_1(1-t)+\alpha_2(1+t)=a_0+a_1t
+% \]
+% o equivalentemente
+% \[
+% (\alpha_1+\alpha_2)+(-\alpha_1+\alpha_2)t=a_0+a_1t
+% \]
+% para todo $t\in\R$. Igualando polinomios se obtiene al sistema de ecuaciones lineales:
+% \[
+% \systeme[\alpha_1 \alpha_2]{\alpha_1+\alpha_2=a_0,
+% -\alpha_1+\alpha_2=a_1}
+% \]
+% la matriz ampliada asociada a este sistema verifica la siguiente equivalencia por filas:
+% \[
+%     (A|b) = 
+%     \begin{pNiceArray}{cc|c}
+%     1&1&a_0\\
+%     -1&1&a_1    
+%     \end{pNiceArray}
+%     \sim
+%     \begin{pNiceArray}{cc|c}
+%     1&1&a_0\\
+%     0&2&a_0+a_1
+%     \end{pNiceArray}
+% \]
+% Dado que $\mbox{ran}(A)=\mbox{ran}(A|b)$=2 es igual al número de incógnitas, por el Teorema de Rouché Frobenius, el sistema tiene solución única, y en virtud del teorema anterior, concluimos que $B$ es una base de $\R_{1}[t]$.
+% \end{ejem}
+
+\begin{ejer}\hspace{0pt}
+En el espacio vectorial $\mathbb{R}^3$ determine si el conjunto \[B=\{(1,1,0),(1,0,1),(0,1,1)\}\] forma una base de $\mathbb{R}^3$.
+\end{ejer}
+
+\begin{prop}
+Sean $(E,+,\cdot,\K)$ un espacio vectorial y $S\subseteq E$ un conjunto que genera a $E$. Se tiene que algún subconjunto de $S$ es base de $E$.
+\end{prop}
+
+\begin{ejem}\hspace{0pt}
+En el espacio vectorial $\Mat{2}{2}$, considere al conjunto 
+\[
+    S = \l\{\begin{pmatrix}1&0\\0&1\end{pmatrix}, 
+            \begin{pmatrix}0&1\\1&0\end{pmatrix},
+            \begin{pmatrix}0&- 1\\0&0\end{pmatrix},
+            \begin{pmatrix}0&0\\1&1\end{pmatrix},
+            \begin{pmatrix}1&0\\1&- 1\end{pmatrix}\r\}.
+\]
+Notemos que $\gen(S) = \Mat{2}{2}$ y que el subconjunto $B$ de $S$ es una base de $\Mat{2}{2}$, donde
+\[
+    B = \l\{\begin{pmatrix}1&0\\0&1\end{pmatrix}, 
+            \begin{pmatrix}0&1\\1&0\end{pmatrix},
+            \begin{pmatrix}0&- 1\\0&0\end{pmatrix},
+            \begin{pmatrix}0&0\\1&1\end{pmatrix}\r\}.
+\]
+\end{ejem}
+
+% \begin{ejer}\hspace{0pt}
+% En el espacio vectorial $\R_{2}[x]$, sean los vectores $v_1(x)=-5+4x$, $v_2(x)=5-2x-x^2$, $v_3(x)=2-x+2x^2$,  $v_4(x)=6-2x-6x^2$. Suponga que
+% \[
+% W=\gen(\{v_1(x),v_2(x),v_3(x),v_4(x)\}).
+% \]
+% Encuentre una base de $W$.
+% \end{ejer}
+
+\begin{teo}
+Todo espacio vectorial tiene una base.
+\end{teo}
+
+\begin{ejem}\hspace{0pt}
+En el espacio vectorial $\R^{3}$, consideremos al subespacio vectorial 
+\[
+    W = \{(x_{1}, x_{2}, x_{3})\in\R^{3}\,:\,x_{1} + x_{2} = x_{3}\}.
+\]
+El conjunto $B = \{(1, 0, 1), (0, 1, 1)\}$ es una base de $W$. En efecto:
+\begin{enumerate}
+\item Sean $\alpha_1,\alpha_2\in\R$ tales que:
+\[
+\alpha_1(1, 0, 1)+\alpha_2(0, 1, 1)=(0,0,0)
+\]
+o equivalentemente
+\[
+(\alpha_1,\alpha_2,\alpha_1+\alpha_2)=(0,0,0).
+\]
+Igualando vectores obtenemos que $\alpha_1=\alpha_2=0$. Por lo tanto, $B$ es un conjunto linealmente independiente.
+\item Sean $\alpha_1,\alpha_2\in\R$ y $(x_{1}, x_{2}, x_{3})\in\R^{3}$ tales que 
+\[
+\alpha_1(1, 0, 1)+\alpha_2(0, 1, 1)=(x_{1}, x_{2}, x_{3})
+\]
+o equivalentemente
+\[
+(\alpha_1,\alpha_2,\alpha_1+\alpha_2)=(x_{1}, x_{2}, x_{3}).
+\]
+Igualando vectores se obtiene el sistema de ecuaciones:
+\[
+\systeme[\alpha_1 \alpha_2 \alpha_3]{\alpha_1=x_1,
+\alpha_2=x_2,\alpha_1+\alpha_2=x_3}
+\]
+La matriz ampliada $(A|b)$ asociada a este sistema verifica la siguiente equivalencia por filas:
+\[
+(A|b)=
+\begin{pNiceArray}{cc|c}
+1&0&x_1\\
+0&1&x_2\\
+1&1&x_3\\
+\end{pNiceArray}
+\sim
+\begin{pNiceArray}{cc|c}
+1&0&x_1\\
+0&1&x_2\\
+0&0&x_3-x_1-x_2.
+\end{pNiceArray}
+\]
+Luego, el sistema tiene solución si  $x_3-x_1-x_2=0$.  Por lo tanto,
+\[\gen(B)=\{(x_{1}, x_{2}, x_{3})\in\R^{3}\,:\,x_{1} + x_{2} = x_{3}\} = W.\]
+\end{enumerate}
+De 1. y 2. se sigue que $B$ es una base para $W$.
+\end{ejem}
+% \begin{ejer}\hspace{0pt}
+% En el espacio vectorial $\R_{2}[x]$, considere al subespacio vectorial
+% \[
+% W=\{p(x)\in\R_{2}[x]: p(0)+p'(0)=0\}.
+% \]
+% Determine una base para $W$.
+% \end{ejer}
+
+\begin{obs}\label{Obs1}\hspace{0pt}
+Si $\{v_{1}, v_{2}, \ldots, v_{n}\}$ es una base de un espacio vectorial $E$, entonces para todo $c\neq0$, se tiene que $\{cv_{1}, v_{2}, \ldots, v_{n}\}$ también es una base de $E$, es decir, un espacio vectorial no nulo tiene muchas bases.
+\end{obs}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}

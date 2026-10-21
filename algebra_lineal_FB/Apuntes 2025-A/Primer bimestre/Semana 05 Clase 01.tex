@@ -1,0 +1,417 @@
+\documentclass[compacto,10pt]{pubciencias-notas}
+
+% -- Paquetes adicionales
+\usepackage{comandosEPN}
+
+% -- Datos del libro
+\autor{Departamento de Formación Básica}
+\materia{Álgebra Lineal}
+\nota{Semana 05 Clase 01}
+\fecha{Semestre 2025-A}
+
+\logouno[1.1cm]{Logo_EPN.eps}
+\logodos[1.7cm]{Logo_DFB.eps}
+
+\definecolor{colordef}{cmyk}{0.81,0.62,0.00,0.22}
+
+\begin{document}
+
+\encabezado
+
+\vspace*{-8mm}
+\setcounter{section}{1}
+\section{Sistemas de ecuaciones}
+\setcounter{subsection}{3}
+\subsection{Sistemas homogéneos}
+
+\begin{teo}\label{Sem03Clas02CarcSisHom}
+    Sea $A \in \Mat[\K]{n}{n}$, el sistema homogéneo 
+    \[
+        Ax = 0
+    \]
+    tiene una solución no trivial si y solo si $A$ es singular. 
+\end{teo}
+
+\begin{comment}
+\begin{proof}\hspace{0pt} 
+Supongamos que $A$ es singular, entonces $\rang(A)  = \rang(A|0) < n$, lo que implica el sistema $Ax = 0$ es consistente con infinitas soluciones, por tanto, el sistema tiene al menos una solución no trivial.
+
+Para el recíproco razonemos por reducción al absurdo, esto es, supongamos que $Ax = 0$ tiene una solución no trivial y que $A$ es no singular, lo que implica que $A^{-1}$ existe, de lo cual
+\[
+    Ax = 0 \Longleftrightarrow A^{- 1}(Ax) = A^{- 1}0 \Longleftrightarrow x = 0
+\]
+lo que contradice lo supuesto.
+\end{proof}
+\end{comment}
+
+\begin{teo}\label{Sem03Clas02InvCat}
+    Sea $A \in \Mat[\K]{n}{n}$. Se tiene que $A$ es no singular si y solo si el sistema lineal $Ax=b$ tiene una solución única para cada $b \in \Mat[\K]{n}{1}$.
+\end{teo}
+
+\begin{ejem}\hspace{0pt}\label{Sem03Clas02EjemPartB} 
+Dado el sistema de ecuaciones lineales
+\[
+    \systeme[x_1 x_2]{2x_1 +x_2 =b_{1},
+        x_1 +x_2 = b_{2}}
+\]
+que tiene solución única para todo $\begin{pmatrix}b_{1}\\b_{2}\end{pmatrix}\in\Mat{2}{1}$, se tiene que 
+$A = \begin{pmatrix}2&1\\1&1\end{pmatrix}$ es no singular. En efecto, notemos que 
+\[
+    \begin{pmatrix}
+    2&1&|&b_{1}\\
+    1&1&|&b_{2}
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+    1&1&|&b_{2}\\
+    0&-1&|&b_{1} - 2b_{2}
+    \end{pmatrix}
+\]
+luego, $\rang(A) = \rang(A|b) = 2$, y, por tanto, el sistema $Ax = b$ posee solución única, que junto con el teorema \ref{Sem03Clas02InvCat} implica que $A$ es no singular.
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} 
+Considere al sistema de ecuaciones lineales
+\[
+    \systeme[x_1 x_2 x_3]{x_1 +2x_2 =1,
+        x_2 +2x_3 = 1,
+        x_3 = 1}
+\]
+Utilizando la inversa de la matriz de coeficientes muestre que el sistema posee solución única y encuéntrela.
+\end{ejer}
+
+\begin{prop}\label{Sem03Clas02EquivInv}
+    Sea $A \in \Mat[\K]{n}{n}$, se tienen que las siguientes proposiciones son equivalentes:
+    \begin{enumerate}
+    \item[$a)$] 
+        $A$ es no singular;
+    \item[$b)$] 
+        el sistema $Ax=0$ solamente tiene la solución trivial;
+    \item[$c)$] 
+        $A$ es equivalente por filas a $I_n$;
+    \item[$d)$] 
+        $\rang(A)=n$; y 
+    \item[$e)$] 
+        el sistema lineal $Ax=b$ tiene una solución única para cada $b \in \Mat[\K]{n}{1}$. 
+    \end{enumerate}
+\end{prop}
+
+\begin{comment}
+\begin{ejem} Dada la matriz 
+\[
+    A = \begin{pmatrix}
+    2&1\\
+    1&1
+    \end{pmatrix}
+\]
+La matriz $A$ verifica a la proposición \ref{Sem03Clas02EquivInv}.
+
+\begin{proof}\hspace{0pt} Considerando al ejemplo \ref{Sem03Clas02EjemPartA} notemos que los literales $a)$, $c)$ y $d)$ se verifican. Considerando al ejemplo \ref{Sem03Clas02EjemPartB} notemos que se cumple el literal $e)$. Por el literal $a)$ junto con el teorema \ref{Sem03Clas02CarcSisHom}, el literal $b)$ se verifica. Por lo tanto, la matriz $A$ verifica a la proposición \ref{Sem03Clas02EquivInv}.\qedhere
+\end{proof}
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} Construya un ejemplo de un sistema de ecuaciones lineales $3 \times 3$ que tenga solución, y compruebe que su matriz de coeficientes es singular.
+\end{ejer}
+\end{comment}
+
+\begin{ejer}\hspace{0pt} 
+Dada la matriz $A = \begin{pmatrix}a&b\\c&d\end{pmatrix}$, verificar que su inversa es  
+\[
+    A^{-1} = \dfrac{1}{ad - bc}\begin{pmatrix}d&-b\\-c&a\end{pmatrix} \text{   siempre que   } ad - bc \neq 0.
+\]
+\end{ejer}
+
+\setcounter{section}{2}
+\section{Determinantes}
+
+En esta sección tomaremos $n\in \N$, con $n>0$, e $I = \{ 1, 2, \ldots, n\}$.
+
+\subsection{Definiciones fundamentales}
+
+\begin{defi}[Menor]
+    Sea $A\in \Mat[\K]{n}{n}$ e $i,j\in I$. A la matriz de $\Mat[\K]{(n-1)}{(n-1)}$ que se obtiene luego de eliminar la fila $i$ y la columna $j$ de $A$ se la llama el menor $ij$ de $A$, y se denota por $A_{ij}$.
+\end{defi}
+
+\begin{advertencia}
+    En la literatura se puede encontrar la notación de $M_{ij}$ para el menor de $ij$ de $A$.
+\end{advertencia}
+
+\begin{comment}
+\begin{defi}[Menor principal]
+    Sean $A\in \Mat[\K]{n}{n}$ y $k\in I$. A la matriz de $\Mat[\K]{k}{k}$ que se obtiene eliminar las $n-k$ últimas filas y columnas de $A$, se la llama el menor principal $k$ de $A$, denotado por $A_{k}$.
+\end{defi}
+
+\begin{advertencia}
+    En la literatura se puede encontrar la notación de $M_{k}$ para el menor principal $k$ de $A$.
+\end{advertencia}
+\end{comment}
+
+\begin{ejem}\hspace{0pt}
+
+    Sea
+    $A = \begin{pmatrix}
+        -1 & 4 & 0 \\
+        2 & 1 & -2 \\
+        0 & 3 & 5
+    \end{pmatrix}$, se tiene que:
+    
+    \[A_{12} = \begin{pmatrix}
+        2 & -2 \\
+        0 & 5
+    \end{pmatrix}, \quad 
+    A_{23} = \begin{pmatrix}
+        -1 & 4 \\
+        0 & 3
+    \end{pmatrix} \quad \text{y} \quad 
+    A_{31} = \begin{pmatrix}
+        4 & 0 \\
+        1 & -2
+    \end{pmatrix}
+    \]
+    
+    %\noindent Determine los menores $A_{32}$, $A_{13}$ y $A_{22}$.
+
+\end{ejem}
+
+\begin{ejer}
+\item Sea
+$B = \begin{pmatrix}
+    1 & -3 & -1 \\
+    0 & 1 & -5 \\
+    4 & 2 & 0
+\end{pmatrix}$. Determine los menores $B_{11}$, $B_{32}$ y $B_{21}$.
+\end{ejer}
+
+
+\begin{defi}[Determinante] 
+    Sea $A\in \Mat[\K]{n}{n}$ se define el determinante de $A$, denotado por $\det(A)$ (o por $|A|$), de manera inductiva, como sigue:
+    \begin{itemize}
+    \item 
+        Si $n=1$ y $A=(a_{11})$, entonces $\det(A) = a_{11}$.
+    \item
+        Si $n>1$, entonces
+        \begin{align*}
+            \det(A) 
+            & = \sum_{k=1}^n a_{1k}(-1)^{1+k}\det(A_{1k})\\
+            & = a_{11}\det(A_{11}) - a_{12}\det(A_{12}) 
+            + \ldots +  (-1)^{1+n} a_{1n}\det(A_{1n}).
+        \end{align*}
+    \end{itemize}
+\end{defi}
+
+\begin{ejem}\hspace{0pt} \label{determinante3por3}
+
+\begin{itemize}
+\item 
+    Sea $A$ una matriz de orden $2 \times 2$ de la forma
+    \[ 
+        A=
+        \begin{pmatrix}
+         a_{11} & a_{12}\\
+         a_{21} & a_{22}
+        \end{pmatrix},
+    \]
+    se tiene que
+    \[
+        A_{11} = (a_{22})
+        \texty
+        A_{12} = (a_{21}),
+    \]
+    por lo tanto
+    \[
+        \det(A_{11}) = a_{22}
+        \texty
+        \det(A_{12}) = a_{21},
+    \]
+    de esta forma,
+    \begin{align*}
+        \det(A) &= \sum_{k=1}^{2} a_{1k}(-1)^{1+k}\det(A_{1k})\\
+        &= (-1)^{1+1}a_{11}\det(A_{11}) + (-1)^{1+2}a_{12}\det(A_{12})\\
+        & = a_{11}a_{22} - a_{12}a_{21}
+    \end{align*}
+    es decir,
+    \[
+        \det(A) = \begin{vmatrix}
+        a_{11} & a_{12} \\
+        a_{21} & a_{22}
+        \end{vmatrix}
+        = a_{11}a_{22} - a_{12}a_{21}.
+    \]
+    
+\item Sea $B = \begin{pmatrix}
+        1 & 5 \\
+        2 & 6
+    \end{pmatrix}$, se tiene que $\det(B) = 6-10 = -4$
+
+%\item Sea $C$ una matriz de orden $3 \times 3$ de la forma
+ %        \[ C=
+  %      \begin{pmatrix}
+   %      c_{11} & c_{12} & c_{13}\\
+    %     c_{21} & c_{22} & c_{23}\\
+     %    c_{31} & c_{32} & c_{33}\\
+      %  \end{pmatrix}
+       % \]
+        %\noindent el determinante de la matriz $C$ está dado por:
+        %\begin{align*}
+        %\det(C) &= \sum_{k=1}^{3} (-1)^{1+k}c_{1k}\det(C_{1k}) \\
+        %&= (-1)^{1+1}c_{11}\det(C_{11}) + 
+        %(-1)^{1+2}c_{12}\det(C_{12}) + 
+        %(-1)^{1+3}c_{13}\det(C_{13})\\
+        %&= 
+        %c_{11}
+        %\begin{vmatrix}
+        %c_{22} & c_{23} \\
+        %c_{32} & c_{33}
+        %\end{vmatrix} - c_{12}
+      %  \begin{vmatrix}
+%        c_{21} & c_{23} \\
+ %       c_{31} & c_{33} \\
+  %      \end{vmatrix}+ c_{13}
+   %     \begin{vmatrix}
+    %    c_{21} & c_{22} \\
+     %   c_{31} & c_{32}
+      %  \end{vmatrix}.
+    %\end{align*}
+%\item
+ %   Sea $D = \begin{pmatrix}
+  %      -1 & 1 & 0 \\
+   %     0 & 1 & -2 \\
+    %    2 & 2 & 1
+    %\end{pmatrix}$, se tiene %que:
+    %\[
+     %   \det(D) = -1 
+      %  \begin{vmatrix}
+       %     1 & -2 \\
+        %    2 & 1
+        %\end{vmatrix} -1
+        %\begin{vmatrix}
+         %   0 & -2 \\
+          %  2 & 1
+        %\end{vmatrix} +0
+        %\begin{vmatrix}
+         %   0 & 1 \\
+          %  2 & 2
+        %\end{vmatrix} = -1(5) -1(4) = -9.
+    %\]
+\end{itemize}
+\end{ejem}
+
+%\begin{ejer}\hspace{0pt} Calcular el determinante de las siguientes matrices:
+%\begin{enumerate}
+%\item[$a)$] $A = \begin{pmatrix}-4 & 2 \\-1 & 3\end{pmatrix}$
+%\item[$b)$] $B = \begin{pmatrix}1&-3&-1\\-2&1&-2\\0&5&0\end{pmatrix}$
+%\end{enumerate}
+%\end{ejer}
+
+\begin{defi}[Cofactor]
+    Sea $A\in \Mat[\K]{n}{n}$ e $i,j\in I$. El cofactor $ij$ de $A$ denotado $C_{ij}$, está dado por
+    \[
+        C_{ij} = (-1)^{i+j} \det (A_{ij})
+    \]
+     donde $A_{ij}$ es el menor $ij$ de $A$.
+\end{defi}
+
+\begin{ejem} Dada la matriz $A = 
+\begin{pmatrix}
+-2 & -1 & -3 \\
+0 & 1 & -1 \\
+3 & 3 & 2
+\end{pmatrix}$, se tiene que:
+\begin{itemize}
+\item El cofactor $32$ de A es:
+\[C_{32} = (-1)^{5}
+\begin{vmatrix}
+-2 & -3 \\
+0 & -1
+\end{vmatrix} = -1(2)=-2\]
+\item El cofactor $13$ de A es:
+\[C_{13} = (-1)^{4}
+\begin{vmatrix}
+0 & 1 \\
+3 & 3
+\end{vmatrix} = 1(-3) = -3\]
+\end{itemize}
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} Dada la matriz 
+\[
+    A = 
+    \begin{pmatrix}
+        -1 & 1 & 0 \\
+        0 & 2 & -1 \\
+        3 & 2 & 5
+    \end{pmatrix}.
+\]
+Determinar los cofactores $C_{23}$, $C_{13}$, $C_{21}$ y $C_{32}$.
+\end{ejer}
+
+%\begin{advertencia}
+%    En la literatura, también se suele llamar menor al determinante de $A_{ij}$ en 
+%    lugar de a la matriz, como lo haremos en este texto. Además, cofactor, se lo %suele denotar por $A_{ij}$.
+%\end{advertencia}
+
+\begin{teo}[Generalización cálculo del determinante]
+    Sea $A \in \Mat[\K]{n}{n}$. Se tiene que para todo $i\in I$,
+    \[
+        \det(A) 
+        = \sum_{k=1}^n a_{ik}C_{ik} 
+        = a_{i1}C_{i1} + a_{i2}C_{i2} + \ldots + a_{in}C_{in}
+    \]
+    y
+    \[
+        \det(A) 
+        = \sum_{k=1}^n a_{ki}C_{ki} 
+        = a_{1i}C_{1i} + a_{2i}C_{2i} + \ldots + a_{ni}C_{ni}.
+    \]
+\end{teo}
+
+\begin{advertencia}
+    El lado derecho de las igualdades toma el nombre de expansión por cofactores del determinante de $A$, con respecto a la fila $i$ y con respecto a la columna $i$.
+\end{advertencia}
+
+\begin{ejem}\hspace{0pt}\label{Det_Ej1}
+    Sea $A =
+    \begin{pmatrix}
+        -2 & -1 & -3 \\
+        0 & 1 & -1 \\
+        3 & 3 & 2
+    \end{pmatrix}$.
+    \noindent Calculemos el determinante de $A$ mediante la expansión por cofactores de $A$, con respecto a la fila $1$. Se tiene
+    \[
+        \det(A) = -2 
+        \begin{vmatrix}
+            1 & -1 \\
+            3 & 2
+        \end{vmatrix} +1
+        \begin{vmatrix}
+            0 & -1 \\
+            3 & 2
+        \end{vmatrix} -3
+        \begin{vmatrix}
+            0 & 1 \\
+            3 & 3
+        \end{vmatrix} = 2
+    \]
+    
+    ahora, calculemos el determinante de $A$ mediante la expansión por cofactores de $A$, con respecto a la columna 2:
+    \[
+        \det(A) = 1 
+        \begin{vmatrix}
+            0 & -1 \\
+            3 & 2
+        \end{vmatrix} +1
+        \begin{vmatrix}
+            -2 & -3 \\
+            3 & 2
+        \end{vmatrix} -3
+        \begin{vmatrix}
+            -2 & -3 \\
+            0 & -1
+        \end{vmatrix} = 2
+    \]
+    
+    \end{ejem}
+    
+    \begin{ejer}\hspace{0pt} Considere a la matriz del ejemplo \ref{Det_Ej1}, calcule su determinante mediante la expansión por cofactores de $A$, con respecto a la columna $3$.
+\end{ejer}
+\end{document}

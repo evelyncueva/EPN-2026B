@@ -1,0 +1,300 @@
+\documentclass[compacto,10pt]{pubciencias-notas}
+
+% -- Paquetes adicionales
+\usepackage{comandosEPN}
+
+% -- Datos del libro
+\autor{Departamento de Formación Básica}
+\materia{Álgebra Lineal}
+\nota{Semana 07 Clase 02}
+\fecha{Semestre 2025-A}
+
+\logouno[1.1cm]{Logo_EPN.eps}
+\logodos[1.7cm]{Logo_DFB.eps}
+
+\definecolor{colordef}{cmyk}{0.81,0.62,0.00,0.22}
+
+\begin{document}
+
+\encabezado
+
+\vspace*{-8mm}
+
+\setcounter{section}{3}
+\section{Espacios Vectoriales}
+\setcounter{subsection}{1}
+\subsection{Propiedades}
+
+\begin{teo}
+Sea $(E,+,\cdot,\K)$ un espacio vectorial, para todo $u \in E$ y todo $\alpha \in \K$, se tiene que:
+\begin{enumerate}
+\item $0\cdot u = 0_{E}$;
+\item $\alpha \cdot 0_{E} = 0_{E}$;
+\item Si $\alpha \cdot u=0_{E}$, entonces $\alpha  = 0$ o $u = 0_{E}$;
+\item $(-1) \cdot u = -u$.
+\end{enumerate}
+\end{teo}
+
+\begin{prop}
+Sea $(E,+,\cdot,\K)$ un espacio vectorial, para todo $u, v, w \in E$ y todo $\alpha, \beta \in \K$, se tiene que:
+    \begin{enumerate}
+        \item $-(-u) = u$;
+        \item Si $u + v = u + w$, entonces $v = w$;
+        \item Si $u \neq 0$ y $\alpha u = \beta u$, entonces $\alpha  = \beta$;
+    \end{enumerate}
+\end{prop}
+
+\begin{ejer}\hspace{0pt} Dado el conjunto $E = \{(x_{1},x_{2})\in\R^{2}\,:\,x_{1}>0,\,x_{2}>0\}$. Considere la operación
+\[
+    (x_{1},x_{2}) \oplus (y_{1},y_{2}) = (x_{1}+y_{1},x_{2}+y_{2}).
+\]
+Dotando a $E$ de está operación, verifique que no existe el elemento neutro.
+\end{ejer}
+
+\begin{ejem}\hspace{0pt} Sea $E=\{1\}$ el conjunto formado solamente por el elemento 1. Definimos $1 \oplus 1 = 1$ y $\alpha \odot 1 = 1,$ para todo $\alpha\in\R$. Con estas operaciones $E$ es un espacio vectorial real, verifique que las propiedades se cumplen trivialmente.
+\end{ejem}
+
+
+\begin{ejer}\hspace{0pt} Sea $E$ el conjunto de todos los números reales. Se definen a las operaciones:
+\[
+    \funcion{\oplus}{E \times E}{E}{(u, v)}{2u - v}
+    \texty
+    \funcion{\odot}{\R \times E}{E}{(\alpha, u)}{\alpha u.}
+\]
+\begin{enumerate}
+\item ¿Qué se puede decir sobre la existencia y unicidad del elemento neutro?
+\item ¿Es $E$ un espacio vectorial?
+\end{enumerate}
+\end{ejer}
+
+% \begin{ejer}\hspace{0pt} Sea $E = \mathbb{R}^{2}$. Se define a la operación $\oplus$ por \[
+%     (x_{1},x_{2}) \oplus (y_{1},y_{2}) = (x_{1} + x_{2}, y_{1}y_{2})
+% \]
+% para todo $(x_{1},x_{2}), (y_{1},y_{2})\in E$.
+% \begin{enumerate}
+% \item ¿Qué se puede decir sobre la existencia y unicidad del elemento neutro?
+% \item ¿Qué se puede decir sobre la existencia y unicidad del elemento inverso de cualquier elemento de $E$?
+% \end{enumerate}
+% \end{ejer}
+
+\subsection{Subespacios}
+
+\begin{defi}[Subespacio Vectorial]
+    Sea $(E,+,\cdot,\K)$ un espacio vectorial y $W$ un subconjunto no vacío de $E$. Se dice que $W$ es un subespacio vectorial del espacio vectorial $E$ si $(W, +|_{W}, \cdot|_{W}, \K)$ es un espacio vectorial.
+\end{defi}
+
+\begin{teo}\label{Teosev}
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial y $W$ un subconjunto no vacío de $E$. Se tiene que $W$ es un subespacio vectorial de $E$ si y sólo si se cumplen las siguientes condiciones:
+    \vspace{-5pt}
+    \begin{itemize}
+    \item 
+        si $u,v \in W$, entonces $u + v \in W$; y
+    \item 
+        si $\alpha \in \K$ y $u \in W$, entonces $\alpha u \in W$.
+    \end{itemize}
+\end{teo}
+
+\begin{obs}
+Notemos que dados $E$ un espacio vectorial sobre el cuerpo $\K$ y $W\subseteq E$ mostrar las condiciones del teorema anterior es equivalente a mostrar que 
+\[
+    \alpha u + v \in W 
+\]
+para todo $u, v \in W$ y todo $\alpha\in\K$.
+\end{obs}
+
+%\begin{obs}
+%Dado $E$ un espacio vectorial sobre el cuerpo $\K$ se tiene que $\{0_{E}\}$ y $E$ son subespacios vectoriales de $E$.
+%\end{obs}
+
+\begin{advertencia}
+Si vamos a mostrar que $W$ es un subespacio del espacio vectorial $E$, una de las condiciones a ser verificada es que $W\neq\emptyset$, para lo cual es suficiente mostrar que $0_{E}\in W$.
+\end{advertencia}
+
+\begin{ejem}\hspace{0pt} \textbf{El subespacio trivial.} Para cualquier espacio vectorial $E$, el subconjunto $\{0_{E}\}$
+que consiste únicamente en el vector neutro es un subespacio vectorial ya que:
+\[
+   0_{E} + 0_{E}=0_{E}
+   \texty
+   \alpha 0_{E}=0_{E}
+\]
+para todo $\alpha\in\K$. Luego, a $\{0_{E}\}$ se lo denomina como el subespacio trivial de $E$.
+\end{ejem}
+
+\begin{ejem}\hspace{0pt} Un espacio vectorial es un subespacio en sí mismo. En efecto, para cada espacio vectorial $E$, $E$ es un subespacio en sí mismo.
+\end{ejem}
+
+\begin{obs}
+Los subespacios de $E$ distintos a $\{0_{E}\}$ y $E$ se denominan subespacios propios. 
+\end{obs}
+
+\begin{ejem}\label{Ejsev}\hspace{0pt} \textbf{Un subespacio propio de $\mathbb{R}^{2}$.} Consideremos al espacio vectorial $\mathbb{R}^{2}$ con sus operaciones usuales de suma y producto por un escalar. Considere el conjunto:
+\[
+    W= \{(x,y)\in \mathbb{R}^{2} : y=2x \}.
+\]
+Se tiene que $W$ es un subespacio vectorial de $\R^{2}$. Para mostrarlo utilizamos al teorema \ref{Teosev}.
+\begin{enumerate}
+\item[$i)$] Notemos que $0 = 2(0)$, lo que implica que $(0,0)\in W$, luego, $W\neq\emptyset$.
+\item[$ii)$] Sean $(x_{1},x_{2}), (y_{1}, y_{2})\in W$, vamos a mostrar que $(x_{1},x_{2}) + (y_{1}, y_{2})\in W$.
+
+Por hipótesis tenemos que: 
+\[
+    x_{2} = 2x_{1} \texty y_{2} = 2y_{1}.
+\]
+Además, notemos que:
+\[
+    (x_{1},x_{2}) + (y_{1}, y_{2}) = (x_{1} + y_{1}, x_{2} + y_{2}).
+\]
+Luego, 
+\[
+    x_{2} + y_{2} = 2x_{1} + 2y_{1} = 2(x_{1} + y_{1})
+\]
+lo que implica que $(x_{1},x_{2})+(y_{1}, y_{2})\in W$.
+\item[$iii)$] Sean $\alpha\in\R$ y $(x_{1},x_{2})\in W$, vamos a mostrar que $\alpha(x_{1},x_{2})\in W$.
+
+Por hipótesis tenemos que: 
+\[
+    x_{2} = 2x_{1}.
+\]
+Además, notemos que: 
+\[
+    \alpha(x_{1},x_{2}) = (\alpha x_{1}, \alpha x_{2}).
+\]
+Luego, 
+\[
+    \alpha x_{2}  = \alpha(2x_{1}) = 2(\alpha x_{1})
+\]
+lo que implica que $\alpha (x_{1},x_{2})\in W$.
+\end{enumerate}
+Por $i)$, $ii)$ y $iii)$ junto con el teorema \ref{Teosev} se concluye que $W$ es un subespacio vectorial de $\R^{2}$. Finalmente, notemos que $(1,1)\notin W$ y que $(1,1)\in\R^{2}$, lo que implica que $W$ es un subespacio vectorial propio de $\R^{2}$.
+\begin{comment}
+Observe que $W$ es no vacío porque $0_{E}=(0,0)\in W$. Mostremos que es un subespacio vectorial para ello sean
+$(x_{1},2x_{1}) \in W$  y $(x_{2},2x_{2}) \in W$ por lo tanto,
+\[
+(x_{1},2x_{1})+(x_{2},2x_{2})=(x_{1}+x_{2},2(x_{1}+x_{2})) \in W
+\]
+y
+\[
+\alpha(x_{1},2x_{1})=(\alpha x_{1},2\alpha x_{1}) \in W
+\]
+de modo que $W$ es cerrado bajo la suma y el producto con un escalar por lo tanto es un subespacio de $\mathbb{R}^{2}$. 
+
+Finalmente observemos que $W\neq \{0_{E}\}$ ya que $(1,2)\in W$ y $W\neq \mathbb{R}^{2} $ ya que $(1,3)\notin W$ de modo que W es un subespacio vectorial propio de $\mathbb{R}^{2}$. \end{comment}
+\end{ejem}
+
+\begin{comment}
+\begin{ejem}
+Un subespacio propio de $\mathbb{R}^{3}$. De manera similar al ejemplo anterior se puede mostrar que dado $t\in\R$ el conjunto:
+\[
+    W= \{(x,y,z)\in \mathbb{R}^{3}\,:\,x=at,\,y=bt,\,z=ct,\,a,\,b,\,c\in\mathbb{R}\}
+\]
+es un subespacio de $\mathbb{R}^{3}$.
+\end{ejem}
+\end{comment}
+
+\begin{ejem}\hspace{0pt} Sean $E=\mathbb{R}^{2}$ y $W=\{(x,1)\in \mathbb{R}^{2}\,:\, x \in \mathbb{R}\}$, considerando a las operaciones usuales para la suma y producto con un escalar en $E$, tenemos que $W$ no es un subespacio vectorial de $E$. En efecto, notemos que $(5,1)\in W$ y $(2,1)\in W$ y que su suma
+\[
+    (5,1)+(2,1)=(7,2) \notin W,
+\]
+por lo tanto, $W$ no es un subespacio vectorial de $\mathbb{R}^{2}$, dado que no cumple la primera propiedad del teorema \ref{Teosev}.
+\end{ejem}
+
+\begin{ejem}
+Sean $E=\mathbb{R}^{2}$ y $W=\{(x,y)\in \mathbb{R}^{2}\,:\,x>0\}$, considerando a las operaciones usuales para la suma y producto con un escalar en $E$, tenemos que $W$ no es un subespacio vectorial de $E$. En efecto, notemos que $(3,1)\in W$ y que:
+\[
+    -2(3,1)=(-6,-2)\notin W
+\]
+por lo tanto, $W$ no es un subespacio vectorial de $\mathbb{R}^{2}$, dado que no cumple la segunda propiedad del teorema \ref{Teosev}.
+\end{ejem}
+
+\begin{teo}
+    Sea $(E, +, \cdot, \K)$ un espacio vectorial. Si $W_{1}$ y $W_{2}$ son subespacios vectoriales de E, entonces $W_{1} \cap W_{2}$ es un subespacio vectorial de E.
+\end{teo}
+
+\begin{comment}
+\begin{advertencia}
+Veamos una demostración:
+
+Observe que $W_{1} \cap W_{2}$ es no vacío porque contiene al $0_{E}$.
+
+Sea $x_{1}\in W_{1} \cap W_{2} $ y $x_{2}\in W_{1} \cap W_{2} $
+entonces como $W_{1}$ y $W_{2}$ son subespacios vectoriales de E, $x_{1}+x_{2}\in W_{1}  $ y $x_{1}+x_{2}\in W_{2}  $; esto significa que $x_{1}+x_{2}\in W_{1} \cap W_{2} $.
+
+De manera similar se muestra que, $\alpha x_{1}\in  W_{1} \cap W_{2} $.
+
+por lo tanto, se cumplen los axiomas de cerradura y así $W_{1} \cap W_{2}$ es un subespacio vectorial de E.
+\end{advertencia}
+\end{comment}
+
+\begin{ejem}\hspace{0pt} En el espacio vectorial $\mathbb{R}^{3}$ consideremos los subespacios:
+\[
+    W_{1}=\left\{(x,y,z):x-y=0\right\}
+    \texty
+    W_{2}=\left\{(x,y,z):y-z=0\right\}.\]
+Se tiene que $W_{1}\cap W_{2}$ es un subespacio vectorial de $\R^{3}$. En efecto, por la definición de intersección de conjuntos tenemos que:
+\[
+    W_{1} \cap W_{2} = \{(x,y,z)\in\R^{3}\,:\,x-y=0,\,y-z=0\}.
+\]
+Ahora, si $(x,y,z)\in W_{1} \cap W_{2}$ se tiene que se verifica al sistema de ecuaciones lineales:
+\[
+    \systeme[xyz]{x-y=0,y-z=0}
+\]
+a partir de lo cual se tiene que:
+\[
+    x= z \texty y = z
+\]
+con $z\in\R$. Luego, 
+\[
+    W_{1}\cap W_{2}=\left\{(x,y,z)\in \mathbb{R}^{3}\,:\,x=z,\,y=z\right\}.
+\]
+Finalmente, se tiene que $W_{1} \cap W_{2}$ es un subespacio vectorial de $\mathbb{R}^{3}$, para mostrarlo considere el ejemplo \ref{Ejsev}, además, muestre que se tiene a un subespacio vectorial propio.
+\end{ejem}
+
+\begin{cor}
+    Sea $(E, +, \cdot, \K)$ un espacio vectorial. Si $W_{1}, W_{2}, \cdots, W_{n}$ son subespacios vectoriales de E, entonces $W_{1} \cap W_{2} \cap \cdots \cap W_{n}$ es un subespacio vectorial de E.
+\end{cor}
+
+\begin{advertencia}
+La unión de dos subespacios vectoriales NO necesariamente es un subespacio vectorial.
+\end{advertencia}
+
+\begin{ejem}\hspace{0pt} En el espacio vectorial $\R^{2}$ con las operaciones usuales de suma y producto con un escalar, sean los subespacios vectoriales:
+\[
+    W_{1} = \{(x,y)\in\R^{2}\,:\,x=y\}
+    \texty
+    W_{2} = \{(x,y)\in\R^{2}\,:\,x+2y=0\}.
+\]
+Se tiene que $W_{1} \cup W_{2}$ no es un subespacio vectorial de $\R^{2}$. En efecto, notemos que $(1,1)\in W_{1} \subseteq W_{1} \cup W_{2}$ y que $(2,-1)\in W_{2} \subseteq W_{1} \cup W_{2}$, sin embargo, $(1,1) + (2,-1) = (3,0) \notin W_{1} \cup W_{2}$, lo que implica que $W_{1} \cup W_{2}$ no es un subespacio vectorial de $\R^{2}$ dado que no se cumple la primera propiedad del teorema \ref{Teosev}.
+\end{ejem}
+
+\begin{defi}[Combinación lineal]
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial, $k\in\N^*$ y $v_1, v_2, \ldots, v_k \in E$. Se dice que un vector $v \in E$ es una combinación lineal de 
+    $v_1, v_2, \ldots, v_k$ si 
+    \[
+        v = \alpha_1 v_1 + \alpha_2 v_2 + \cdots + \alpha_k v_k
+    \]
+    para algunos $\alpha_1, \alpha_2, \ldots, \alpha_k \in \K$.
+\end{defi}
+
+\begin{ejem}\hspace{0pt} En el espacio vectorial $(\R^{2}, +, \cdot, \R)$ con las operaciones usuales, sean $u, v, w\in \R^{2}$ donde $u = (1, 2)$, $v = (2, 4)$ y $w = (0,0)$, se tiene que
+\begin{gather}
+\label{Comb_Lin1}
+u = \dfrac{1}{2}v + 5w,
+\end{gather}
+esto implica que $u$ es combinación lineal de $v$ y de $w$ donde se han utilizado los escalares $\alpha_{1} = \dfrac{1}{2}$ y $\alpha_{2} = 5$.
+
+\noindent Además,
+\begin{gather}
+\label{Comb_Lin2}
+    w = 2u - v,
+\end{gather}
+entonces $w$ es combinación lineal de $u$ y de $v$ donde se han utilizado los escalares $\alpha_{1} = 2$ y $\alpha_{2} = - 1$.
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} En el espacio vectorial $(\R^{3},+,\cdot,\R)$ con las operaciones usuales, sean $v_{1} = (3,0,-2),$ $v_{2}= (2,-1,-5)\}$ y $v=(1,-2,-5)$.
+\begin{enumerate}
+    \item ¿Para qué valores de $k$ el vector $(1,-2,k)$, se expresa como combinación lineal de $v_{1}$ y $v_{2}$?
+    \item ¿Se puede expresar $v$ como combinación lineal de $v_{1}$ y $v_{2}$?
+\end{enumerate}
+\end{ejer}
+
+\end{document}

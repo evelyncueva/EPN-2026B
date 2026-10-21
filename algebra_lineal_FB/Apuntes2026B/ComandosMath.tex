@@ -1,0 +1,826 @@
+% Mat. Jonathan Ortiz
+% jonathan.ortizc@epn.edu.ec
+
+% En Examen
+%\renewcommand{\headrulewidth}{0pt}
+%\renewcommand{\footrulewidth}{0pt}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% --- Funciones
+%% Funcion completa
+\newcommand{\funcion}[5]{%
+    {\setlength{\arraycolsep}{2pt}
+    \begin{array}{r@{\,}ccl}
+        #1\colon & #2 & \longrightarrow & #3\\
+            & #4 & \longmapsto & \displaystyle#5
+    \end{array}
+    }
+}
+
+%% Funcion dom-img
+
+\newcommand{\func}[3]{ #1\colon #2 \to  #3}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% --- Conjuntos
+\newcommand{\N}{\mathbb{N}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\U}{\mathbb{U}}
+
+
+\renewcommand{\subset}{\subseteq}
+\renewcommand{\emptyset}{\varnothing}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%--- Operadores Matemáticos
+
+\DeclareMathOperator{\dom}{Dom}
+\DeclareMathOperator{\img}{Img}
+
+\DeclareMathOperator{\Dom}{Dom}
+\DeclareMathOperator{\Img}{Img}
+
+\DeclareMathOperator{\proy}{proy}
+
+
+\renewcommand{\setminus}{\smallsetminus}
+
+\renewcommand{\sin}{\sen}
+
+
+\DeclareMathOperator{\CVA}{CVA}
+
+\DeclareMathOperator{\Cte}{Cte}
+
+\DeclareMathOperator{\sgn}{sgn}
+
+
+\DeclareMathOperator{\Sol}{Sol}
+\DeclareMathOperator{\sol}{Sol}
+
+\DeclareMathOperator{\Cis}{Cis}
+\DeclareMathOperator{\cis}{Cis}
+
+\DeclareMathOperator{\arcsec}{arcsec}
+\DeclareMathOperator{\arccsc}{arccsc}
+\DeclareMathOperator{\arccot}{arc cot}
+
+\DeclareMathOperator{\rad}{rad}
+
+\DeclareMathOperator{\im}{Im}
+
+\DeclareMathOperator{\re}{Re}
+
+\DeclareMathOperator{\rang}{rang}
+
+
+\newcommand{\cl}[1]{\overline{#1}}
+
+\newcommand{\floor}[1]{
+\left \lfloor{#1}\right \rfloor 
+}
+
+\newcommand{\ceil}[1]{
+\left \lceil{#1}\right \rceil
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%--- Ambiente Solución
+
+\newenvironment{solucion}
+{ \begin{proof}[Solución]
+}
+{\end{proof}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%--- Grados
+\newcommand{\grad}{^\circ}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% --- Proposiciones
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\F}{\mathbb{F}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% --- Conectores
+\newcommand{\Di}{\Longleftrightarrow}
+\newcommand{\Imp}{\Longrightarrow}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% --- Intervalos
+\newcommand{\lop}{\left]}
+\newcommand{\lcl}{\left[}
+\newcommand{\rop}{\right[}
+\newcommand{\rcl}{\right]}
+
+\newcommand{\PD}[1]{
+\noindent \begin{tabularx}{0.9\textwidth}{X l}
+#1
+\end{tabularx}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%555
+%--- Puntaje
+
+\newcommand{\puntaje}[1]{
+\begin{center}
+\begin{tabular}{|l|l|l|l|l|l|l|}
+\hline
+Pregunta         & 1 & 2 & 3 & 4 & 5 & Total \\ \hline
+Puntaje          &   &   &   &   &   &       \\ \hline
+Puntos Obtenidos &   &   &   &   &   &       \\ \hline
+\end{tabular}
+\end{center}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%--- Abreviaciones
+
+\newcommand{\correcta}[1]{La opción correcta es la $#1)$.}
+\renewcommand{\and}{\quad \text y \quad}
+\newcommand{\yds}{\quad \text y \quad}
+
+\newcommand{\orm}{\quad \vee \quad }
+\newcommand{\andm}{\quad \wedge \quad }
+
+\renewcommand{\l}{\left}
+\renewcommand{\r}{\right}
+
+\newcommand{\f}{\left(}
+\newcommand{\g}{\right)}
+
+\newcommand{\e}{\varepsilon}
+\renewcommand{\d}{\delta}
+
+\newcommand{\Sum}{\displaystyle\sum}
+\newcommand{\Binom}{\displaystyle\binom}
+\newcommand{\Int}{\displaystyle\int}
+\newcommand{\Lim}{\displaystyle\lim}
+
+\newcommand{\eval}[2]{\Big | _{#1}^{#2}}
+\newcommand{\Eval}[2]{\Bigg | _{#1}^{#2}}
+
+
+\newcommand{\sset}{\subseteq}
+
+
+%--- Más menos
+
+% \renewcommand{\pm}{
+% \begin{array}{c}
+% +\\[-0.3cm]
+% -
+% \end{array}
+% }
+
+\renewcommand{\mp}{
+\begin{array}{c}
+-\\[-0.3cm]
++
+\end{array}
+}
+
+%--- 
+
+\newcommand{\itemone}{\stepcounter{enumi}\item[ \textcolor{red}{*} \, \theenumi.] }
+
+\newcommand{\itemonei}{\stepcounter{enumii}\item[ \textcolor{red}{*} \, \theenumii)] }
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%--- Espacios
+
+\newcommand{\enblanco}[1]{
+
+\begin{pspicture}[showgrid=false](0,0)(15,#1)
+%\psgrid[gridlabels=0,griddots=1,gridcolor=blue]
+\psgrid[ subgriddiv=2, gridlabels=0pt,gridcolor=blue!10,subgridcolor=blue!10]
+\end{pspicture}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%--- Opciones
+
+
+
+\newcommand{\opcionesm}[4]
+    {\vspace{-1mm}
+    \begin{enumerate}[leftmargin=*,label=\textit{\alph*)}]
+	    \item $#1$ \item $#2$ \item $#3$ \item $#4$
+    \end{enumerate}
+    }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+%--- Intervalos
+
+\newcommand{\intervalof}[4]{
+\begin{pspicture}[showgrid=false](-2.7,0.5)(0,0)
+ 
+\psline[linewidth=0.5pt]{<->}(-2.5,-0.2)(2.5,-0.2)
+
+\pspolygon[fillstyle=hlines,linewidth=0.5pt](-1,-0.2)(-1,0.2)(1,0.2)(1,-0.2)
+
+ 
+\ifthenelse{\equal{#1}{0}}
+{
+\psdots[fillcolor=white,dotsize=0.15](-1,0.2)
+}{}
+
+\ifthenelse{\equal{#2}{0}}
+{
+\psdots[fillcolor=white,dotsize=0.15](1,0.2)
+}{}
+
+\ifthenelse{\equal{#1}{1}}
+{
+\psdots[fillcolor=black,dotsize=0.15](-1,0.2)
+}{}
+
+\ifthenelse{\equal{#2}{1}}
+{
+\psdots[fillcolor=black,dotsize=0.15](1,0.2)
+}{}
+
+\uput[u](-2.5,-0.3){\footnotesize $-\infty$}
+\uput[u](2.5,-0.3){\footnotesize $+\infty$}
+\uput[d](-1,-0.1){#3}
+\uput[d](1,-0.1){#4}
+
+ \end{pspicture}
+ }
+
+\newcommand{\intervaloi}[3]{
+\begin{pspicture}(-2.7,0.5)(0,0)
+ 
+\psline[linewidth=0.5pt]{<->}(-2.5,-0.2)(2.5,-0.2)
+\pspolygon[fillstyle=hlines,linewidth=0pt,linecolor=white](-1,-0.2)(-1,0.2)(1,0.2)(1,-0.2)
+
+\uput[u](-2.5,-0.3){\footnotesize $-\infty$}
+\uput[u](2.5,-0.3){\footnotesize $+\infty$}
+
+\ifthenelse{\equal{#1}{0}}
+{
+\psline[linewidth=0.5pt](1,-0.2)(1,0.2)
+\psline[linewidth=0.5pt]{<-}(-1.2,0.2)(1,0.2)
+\uput[d](1,-0.1){#3}
+
+\ifthenelse{\equal{#2}{0}}
+{
+\psdots[fillcolor=white,dotsize=0.15](1,0.2)
+}{}
+
+\ifthenelse{\equal{#2}{1}}
+{
+\psdots[fillcolor=black,dotsize=0.15](1,0.2)
+}{
+}
+
+}{
+}
+
+
+\ifthenelse{\equal{#1}{1}}
+{
+\psline[linewidth=0.5pt](-1,-0.2)(-1,0.2)
+\psline[linewidth=0.5pt]{->}(-1,0.2)(1.2,0.2)
+\uput[d](-1,-0.1){#3}
+
+\ifthenelse{\equal{#2}{0}}
+{
+\psdots[fillcolor=white,dotsize=0.15](-1,0.2)
+}{}
+
+\ifthenelse{\equal{#2}{1}}
+{
+\psdots[fillcolor=black,dotsize=0.15](-1,0.2)
+}{}
+
+}{}
+\ifthenelse{\equal{#1}{2}}
+{
+\psline[linewidth=0.5pt]{<->}(-2.3,0.2)(2.3,0.2)
+\pspolygon[fillstyle=hlines,linewidth=0pt,linecolor=white](-2.1,-0.2)(-2.1,0.2)(2.1,0.2)(2.1,-0.2)
+}
+
+\end{pspicture}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% --- Tablas
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\tdoscasos}[3]{
+\begin{pspicture}[showgrid=false](-0.5,-0.5)(5.5,1.1)
+%--- Tabla ----
+\psline[linewidth=0.5pt](0,0)(0,1)(4,1)(4,0)(0,0)
+
+\psline[linewidth=0.5pt](2,0)(2,1)
+\psline[linewidth=0.5pt](3,0)(3,1)
+
+
+%--- Puntos
+
+\psdots[fillcolor=black,dotsize=0.15](3,0.5)
+
+
+%--- Signos
+
+\ifthenelse{\equal{#1}{1}}
+{
+\rput(2.5,0.5){$+$}
+\rput(3.5,0.5){$-$}
+}
+{
+\rput(2.5,0.5){$-$}
+\rput(3.5,0.5){$+$}
+}
+
+
+
+
+%--- Raíces ----
+\begin{scriptsize}
+\uput[u](1.8,1){ $-\infty$}
+
+\uput[u](3,1){ #3}
+
+\uput[u](3.8,1){ $+\infty$}
+\end{scriptsize}
+
+%--- Expresiones
+
+\rput(1,0.5){#2}
+
+\end{pspicture}
+}
+
+
+\newcommand{\ttrescasos}[6]{
+\begin{pspicture}[showgrid=false](-0.5,-0.5)(5.5,2.2)
+%--- Tabla ----
+\psline[linewidth=0.5pt](0,0)(5,0)(5,2)(0,2)(0,0)
+\psline[linewidth=0.5pt](0,1)(5,1)
+\psline[linewidth=0.5pt](2,0)(2,2)
+\psline[linewidth=0.5pt](3,0)(3,2)
+\psline[linewidth=0.5pt](4,0)(4,2)
+
+
+%--- Puntos
+
+\psdots[fillcolor=black,dotsize=0.15](3,1.5)(4,0.5)
+
+
+%--- Signos
+
+\ifthenelse{\equal{#1}{1}}
+{
+\rput(2.5,1.5){$+$}
+\rput(3.5,1.5){$-$}
+\rput(4.5,1.5){$-$}
+}
+{
+\rput(2.5,1.5){$-$}
+\rput(3.5,1.5){$+$}
+\rput(4.5,1.5){$+$}
+}
+
+\ifthenelse{\equal{#2}{1}}
+{
+\rput(2.5,.5){$+$}
+\rput(3.5,.5){$+$}
+\rput(4.5,.5){$-$}
+}
+{
+\rput(2.5,.5){$-$}
+\rput(3.5,.5){$-$}
+\rput(4.5,.5){$+$}
+}
+
+%--- Raíces ----
+\begin{scriptsize}
+\uput[u](1.8,2){ $-\infty$}
+
+\uput[u](3,2){ $#5$}
+\uput[u](4,2){ $#6$}
+
+\uput[u](4.8,2){ $+\infty$}
+\end{scriptsize}
+
+%--- Expresiones
+
+\rput(1,1.5){$#3$}
+\rput(1,0.5){$#4$}
+
+
+\end{pspicture}
+}
+
+
+\newcommand{\tcuatrocasos}[6]{
+\begin{pspicture}[showgrid=false](-0.5,-0.5)(5.5,2.2)
+%--- Tabla ----
+\psline[linewidth=0.5pt](0,0)(5,0)(5,2)(0,2)(0,0)
+\psline[linewidth=0.5pt](0,1)(5,1)
+\psline[linewidth=0.5pt](2,0)(2,2)
+\psline[linewidth=0.5pt](3,0)(3,2)
+\psline[linewidth=0.5pt](4,0)(4,2)
+
+
+%--- Puntos
+
+\psdots[fillcolor=black,dotsize=0.15](3,1.5)(4,0.5)
+
+
+%--- Signos
+
+\ifthenelse{\equal{#1}{1}}
+{
+\rput(2.5,1.5){$+$}
+\rput(3.5,1.5){$-$}
+\rput(4.5,1.5){$-$}
+}
+{
+\rput(2.5,1.5){$-$}
+\rput(3.5,1.5){$+$}
+\rput(4.5,1.5){$+$}
+}
+
+\ifthenelse{\equal{#2}{1}}
+{
+\rput(2.5,.5){$+$}
+\rput(3.5,.5){$+$}
+\rput(4.5,.5){$-$}
+}
+{
+\rput(2.5,.5){$-$}
+\rput(3.5,.5){$-$}
+\rput(4.5,.5){$+$}
+}
+
+%--- Raíces ----
+\begin{scriptsize}
+\uput[u](1.8,2){ $-\infty$}
+
+\uput[u](3,2){ $#5$}
+\uput[u](4,2){ $#6$}
+
+\uput[u](4.8,2){ $+\infty$}
+\end{scriptsize}
+
+%--- Expresiones
+
+\rput(1,1.5){$#3$}
+\rput(1,0.5){$#4$}
+
+
+\end{pspicture}
+}
+
+\iffalse
+\newcommand{\tdossignos}[5]{
+\begin{pspicture}[showgrid=false](-0.5,-0.5)(5.5,3.2)
+%--- Tabla ----
+\psline[linewidth=0.5pt](0,0)(5,0)(5,3)(0,3)(0,0)
+\psline[linewidth=0.5pt](0,1)(5,1)
+\psline[linewidth=0.5pt](0,2)(5,2)
+\psline[linewidth=0.5pt](2,1)(2,3)
+\psline[linewidth=0.5pt](3,1)(3,3)
+\psline[linewidth=0.5pt](4,1)(4,3)
+
+
+%--- Casilleros
+
+\ifthenelse{\equal{#3}{0}}
+{
+\pspolygon[fillstyle=vlines,linewidth=0.5pt](2,0)(2,1)(3,1)(3,0)
+\pspolygon[linewidth=0.5pt](3,0)(3,1)(4,1)(4,0)
+\pspolygon[fillstyle=vlines,linewidth=0.5pt](4,0)(4,1)(5,1)(5,0)
+}{
+\pspolygon[linewidth=0.5pt](2,0)(2,1)(3,1)(3,0)
+\pspolygon[linewidth=0.5pt](3,0)(3,1)(4,1)(4,0)
+\pspolygon[linewidth=0.5pt](4,0)(4,1)(5,1)(5,0)
+
+}
+
+\ifthenelse{\equal{#2}{1}}
+{
+\pspolygon[linewidth=0.5pt](2,0)(2,1)(3,1)(3,0)
+\pspolygon[fillstyle=vlines,linewidth=0.5pt](3,0)(3,1)(4,1)(4,0)
+\pspolygon[linewidth=0.5pt](4,0)(4,1)(5,1)(5,0)
+}{
+\pspolygon[linewidth=0.5pt](2,0)(2,1)(3,1)(3,0)
+\pspolygon[linewidth=0.5pt](3,0)(3,1)(4,1)(4,0)
+\pspolygon[linewidth=0.5pt](4,0)(4,1)(5,1)(5,0)
+
+}
+
+
+
+
+%--- Puntos
+
+\psdots[fillcolor=black,dotsize=0.15](3,2.5)(4,1.5)
+
+
+%--- Signos
+
+\ifthenelse{\equal{#1}{0}}
+{
+\rput(2.5,2.5){$-$}
+\rput(3.5,2.5){$+$}
+\rput(4.5,2.5){$+$}
+
+\ifthenelse{\equal{#2}{0}}
+{
+\rput(2.5,1.5){$-$}
+\rput(3.5,1.5){$-$}
+\rput(4.5,1.5){$+$}
+
+\rput(2.5,.5){$+$}
+\rput(3.5,.5){$-$}
+\rput(4.5,.5){$+$}
+}
+{
+\rput(2.5,1.5){$+$}
+\rput(3.5,1.5){$+$}
+\rput(4.5,1.5){$-$}
+
+\rput(2.5,.5){$-$}
+\rput(3.5,.5){$+$}
+\rput(4.5,.5){$-$}}
+}
+{
+\rput(2.5,2.5){$+$}
+\rput(3.5,2.5){$-$}
+\rput(4.5,2.5){$-$}
+
+\ifthenelse{\equal{#2}{0}}
+{
+\rput(2.5,1.5){$-$}
+\rput(3.5,1.5){$-$}
+\rput(4.5,1.5){$+$}
+
+\rput(2.5,.5){$-$}
+\rput(3.5,.5){$+$}
+\rput(4.5,.5){$-$}
+}
+{
+\rput(2.5,1.5){$+$}
+\rput(3.5,1.5){$+$}
+\rput(4.5,1.5){$-$}
+
+\rput(2.5,.5){$+$}
+\rput(3.5,.5){$-$}
+\rput(4.5,.5){$+$}}
+}
+
+
+%--- Raíces ----
+\begin{scriptsize}
+\uput[u](1.8,3){ $-\infty$}
+
+\uput[u](3,3){ $#7$}
+\uput[u](4,3){ $#8$}
+
+\uput[u](4.8,3){ $+\infty$}
+\end{scriptsize}
+
+%--- Expresiones
+
+\rput(1,2.5){$#4$}
+\rput(1,1.5){$#5$}
+\rput(1,0.5){\small #6}
+
+\end{pspicture}
+}
+
+
+\newcommand{\ttressignosmm}[8]{
+\begin{pspicture}[showgrid=false](-0.5,-0.5)(6.5,4.2)
+%--- Tabla ----
+\psline[linewidth=0.5pt](0,0)(6,0)(6,4)(0,4)(0,0)
+\psline[linewidth=0.5pt](0,1)(6,1)
+\psline[linewidth=0.5pt](0,2)(6,2)
+\psline[linewidth=0.5pt](0,3)(6,3)
+\psline[linewidth=0.5pt](2,1)(2,4)
+\psline[linewidth=0.5pt](3,1)(3,4)
+\psline[linewidth=0.5pt](4,1)(4,4)
+\psline[linewidth=0.5pt](5,1)(5,4)
+
+%--- Casilleros
+
+\ifthenelse{\equal{#1}{0}}
+{
+\pspolygon[fillstyle=vlines,linewidth=0.5pt](2,0)(2,1)(3,1)(3,0)
+\pspolygon[linewidth=0.5pt](3,0)(3,1)(4,1)(4,0)
+\pspolygon[fillstyle=vlines,linewidth=0.5pt](4,0)(4,1)(5,1)(5,0)
+\pspolygon[linewidth=0.5pt](5,0)(5,1)(6,1)(6,0)
+}
+{\pspolygon[linewidth=0.5pt](2,0)(2,1)(3,1)(3,0)
+\pspolygon[fillstyle=vlines,linewidth=0.5pt](3,0)(3,1)(4,1)(4,0)
+\pspolygon[linewidth=0.5pt](4,0)(4,1)(5,1)(5,0)
+\pspolygon[fillstyle=vlines,linewidth=0.5pt](5,0)(5,1)(6,1)(6,0)
+}
+
+
+
+%--- Puntos
+
+\psdots[fillcolor=black,dotsize=0.15](3,3.5)(4,2.5)(5,1.5)
+
+
+%--- Signos
+
+\rput(2.5,3.5){$-$}
+\rput(3.5,3.5){$+$}
+\rput(4.5,3.5){$+$}
+\rput(5.5,3.5){$+$}
+
+\rput(2.5,2.5){$-$}
+\rput(3.5,2.5){$-$}
+\rput(4.5,2.5){$+$}
+\rput(5.5,2.5){$+$}
+
+\rput(2.5,1.5){$-$}
+\rput(3.5,1.5){$-$}
+\rput(4.5,1.5){$-$}
+\rput(5.5,1.5){$+$}
+
+\rput(2.5,0.5){$-$}
+\rput(3.5,0.5){$+$}
+\rput(4.5,0.5){$-$}
+\rput(5.5,0.5){$+$}
+
+%--- Raíces ----
+\begin{scriptsize}
+\uput[u](1.8,4){ $-\infty$}
+
+\uput[u](3,4){ $#6$}
+\uput[u](4,4){ $#7$}
+\uput[u](5,4){ $#8$}
+
+\uput[u](5.8,4){ $+\infty$}
+\end{scriptsize}
+
+%--- Expresiones
+
+\rput(1,3.5){$#2$}
+\rput(1,2.5){$#3$}
+\rput(1,1.5){$#4$}
+\rput(1,0.5){$#5$}
+
+\end{pspicture}
+}
+
+\fi
+
+\newcommand{\tsaltostres}[5]{
+\begin{pspicture}[showgrid=false](-0.5,-0.5)(5.5,1.2)
+%--- Tabla ----
+\psline[linewidth=0.5pt](0,0)(6,0)(6,1)(0,1)(0,0)
+
+%--- Casilleros
+
+\ifthenelse{\equal{#2}{1}}
+{
+\pspolygon[fillstyle=vlines,linewidth=0.5pt](3,0)(3,1)(4,1)(4,0)
+\pspolygon[linewidth=0.5pt](4,0)(4,1)(5,1)(5,0)
+\pspolygon[fillstyle=vlines,linewidth=0.5pt](5,0)(5,1)(6,1)(6,0)
+}{
+\pspolygon[linewidth=0.5pt](3,0)(3,1)(4,1)(4,0)
+\pspolygon[linewidth=0.5pt](4,0)(4,1)(5,1)(5,0)
+\pspolygon[linewidth=0.5pt](5,0)(5,1)(6,1)(6,0)
+}
+
+\ifthenelse{\equal{#2}{2}}
+{
+\pspolygon(3,0)(3,1)(4,1)(4,0)
+\pspolygon[fillstyle=vlines,linewidth=0.5pt](4,0)(4,1)(5,1)(5,0)
+\pspolygon(5,0)(5,1)(6,1)(6,0)
+}{}
+
+
+
+%--- Puntos
+
+%\psdots[fillcolor=black,dotsize=0.15](3,2.5)(4,1.5)
+
+
+%--- Signos
+
+\ifthenelse{\equal{#1}{0}}
+{
+\rput(3.5,.5){$-$}
+\rput(4.5,.5){$+$}
+\rput(5.5,.5){$-$}
+}{}
+
+\ifthenelse{\equal{#1}{1}}
+{
+\rput(3.5,.5){$+$}
+\rput(4.5,.5){$-$}
+\rput(5.5,.5){$+$}
+}{}
+
+
+
+
+%--- Raíces ----
+\begin{scriptsize}
+\uput[u](2.8,1){ $-\infty$}
+
+\uput[u](4,1){ $#4$}
+\uput[u](5,1){ $#5$}
+
+\uput[u](5.8,1){ $+\infty$}
+\end{scriptsize}
+
+%--- Expresiones
+
+\rput(1.5,0.5){#3}
+
+\end{pspicture}
+}
+
+
+\newcommand{\tsaltoscuatro}[6]{
+\begin{pspicture}[showgrid=false](-0.5,-0.5)(7,1.2)
+%--- Tabla ----
+\psline[linewidth=0.5pt](0,0)(7,0)(7,1)(0,1)(0,0)
+
+%--- Casilleros
+
+\ifthenelse{\equal{#2}{1}}
+{
+\pspolygon[fillstyle=vlines,linewidth=0.5pt](3,0)(3,1)(4,1)(4,0)
+\pspolygon[linewidth=0.5pt](4,0)(4,1)(5,1)(5,0)
+\pspolygon[fillstyle=vlines,linewidth=0.5pt](5,0)(5,1)(6,1)(6,0)
+\pspolygon[linewidth=0.5pt](6,0)(6,1)(7,1)(7,0)
+}{
+\pspolygon[linewidth=0.5pt](3,0)(3,1)(4,1)(4,0)
+\pspolygon[linewidth=0.5pt](4,0)(4,1)(5,1)(5,0)
+\pspolygon[linewidth=0.5pt](5,0)(5,1)(6,1)(6,0)
+\pspolygon[linewidth=0.5pt](6,0)(6,1)(7,1)(7,0)
+}
+
+\ifthenelse{\equal{#2}{2}}
+{
+\pspolygon[linewidth=0.5pt](3,0)(3,1)(4,1)(4,0)
+\pspolygon[fillstyle=vlines,linewidth=0.5pt](4,0)(4,1)(5,1)(5,0)
+\pspolygon[linewidth=0.5pt](5,0)(5,1)(6,1)(6,0)
+\pspolygon[fillstyle=vlines,linewidth=0.5pt](6,0)(6,1)(7,1)(7,0)
+}{}
+
+
+
+
+%--- Puntos
+
+%\psdots[fillcolor=black,dotsize=0.15](3,2.5)(4,1.5)
+
+
+%--- Signos
+
+\ifthenelse{\equal{#1}{0}}
+{
+\rput(3.5,.5){$-$}
+\rput(4.5,.5){$+$}
+\rput(5.5,.5){$-$}
+\rput(6.5,.5){$+$}
+}{}
+
+\ifthenelse{\equal{#1}{1}}
+{
+\rput(3.5,.5){$+$}
+\rput(4.5,.5){$-$}
+\rput(5.5,.5){$+$}
+\rput(6.5,.5){$-$}
+}{}
+
+
+%--- Raíces ----
+\begin{scriptsize}
+\uput[u](2.8,1){ $-\infty$}
+
+\uput[u](4,1){ $#4$}
+\uput[u](5,1){ $#5$}
+\uput[u](6,1){ $#6$}
+
+\uput[u](6.8,1){ $+\infty$}
+\end{scriptsize}
+
+%--- Expresiones
+
+\rput(1.5,0.5){#3}
+
+\end{pspicture}
+}

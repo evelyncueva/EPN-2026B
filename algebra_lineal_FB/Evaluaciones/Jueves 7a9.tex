@@ -1,0 +1,84 @@
+ % \documentclass[10pt,respuestas,a4]{examenEPN}
+\documentclass[10pt,a4]{examenEPN0}
+\usepackage[T1]{fontenc}
+\examen{Prueba 01}
+\input{ComandoLocales}
+%\imprimirDoble
+\begin{document}
+\encabezado
+\datosAlgebra{GR5E}{22/10/2026}
+%Poner el grupo y la fecha, o dejar las llaves vacías.
+\indicacionesPrueba
+\begin{preguntas}
+
+\item Sea $\alpha\in\R$. Halle el rango de la matriz en función de $\alpha$:
+\[
+A = \begin{pmatrix} 
+1 & -1 & 2 \\ 
+2 & -2 & 5 \\ 
+-1 & \alpha & -1 
+\end{pmatrix} 
+\]
+\puntaje{5}
+% Espacio de respuesta hasta el final de la página.
+\par\vfill\newpage
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\item Demuestre o refute:
+
+    %\item Sean que $A, B \in \mathbb{R}^{n \times n}$ matrices simétricas entonces $AB - BA$ es antisimétrica
+  Sea $A \in \mathbb{R}^{n \times n}$  una matriz idempotente entonces la matriz $B = 2A - I_n$ es involutiva (es decir, $B^2 = I_n$).
+\puntaje{5}
+% Espacio de respuesta hasta el final de la página.
+\par\vfill\newpage
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item Considere el siguiente sistema de ecuaciones lineales en las variables $x, y, z$: 
+\[
+\begin{cases} 
+x - y + z = 0 \\ 
+kx + 2y  -2z = -k \\ 
+ y + kz = 1 
+\end{cases}
+\]
+
+\begin{enumerate}
+ \item  Escriba la matriz ampliada $(A \mid b)$ asociada al sistema y aplique, consecutivamente, las siguientes operaciones elementales por fila  \puntaje{1} \[-kF_1 + F_2\rightarrow F_2;\quad F_2\leftrightarrow F_3 \quad  \text{y} \quad  -(2+k)F_2 + F_3 \rightarrow F_3\]
+
+
+\item  Determine, utilizando el Teorema de Rouché-Frobenius, los valores de $k\in \mathbb{R}$ para los cuales el sistema tiene solución única, infinitas soluciones o no tiene solución. Además, si $k=-1$, obtenga el conjunto solución.  \puntaje{4}
+\end{enumerate}
+% Espacio de respuesta hasta el final de la página.
+\par\vfill\newpage
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item Una planta de manufactura automatizada utiliza tres máquinas de control numérico computarizado (Maquinaria $X$, $Y$, $Z$) para fabricar tres piezas críticas de un motor aeronáutico. El tiempo de operación (en minutos) que requiere cada pieza en cada máquina es el siguiente:
+
+\begin{itemize}
+    \item La \textbf{Pieza 1} requiere 1 minuto en la máquina $X$, 2 minutos en la $Y$, y 3 minutos en la $Z$.
+    \item La \textbf{Pieza 2} requiere 3 minutos en la máquina $X$, 1 minuto en la $Y$, y 2 minutos en la $Z$.
+    \item La \textbf{Pieza 3} requiere 2 minutos en la máquina $X$, 3 minutos en la $Y$, y 1 minuto en la $Z$.
+\end{itemize}
+
+Si al final de la jornada las máquinas registraron un tiempo de operación total de \textbf{46 minutos la Máquina X}, \textbf{36 minutos la Máquina Y} y \textbf{38 minutos la Máquina Z}. Plantee el sistema de ecuaciones que determine cuántas unidades de cada pieza se fabricaron durante el turno. \puntaje{5}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    
+% El espacio restante de la última página queda disponible para responder.
+\par\vfill
+\end{preguntas}
+\final
+\end{document}

@@ -1,0 +1,251 @@
+\documentclass[compacto,10pt]{pubciencias-notas}
+
+% -- Paquetes adicionales
+\usepackage{comandosEPN}
+
+% -- Datos del libro
+\autor{Departamento de Formación Básica}
+\materia{Álgebra Lineal}
+\nota{Semana 14 Clase 01}
+\fecha{Semestre 2024-B}
+
+\logouno[1.1cm]{Logo_EPN.eps}
+\logodos[1.7cm]{Logo_DFB.eps}
+
+\definecolor{colordef}{cmyk}{0.81,0.62,0.00,0.22}
+
+\begin{document}
+
+\encabezado
+\vspace*{-8mm}
+
+\setcounter{section}{6}
+\section{Valores y vectores propios}
+
+
+\setcounter{subsection}{1}
+\subsection{Polinomio caracter\'istico}
+
+
+\begin{defi}
+Sea $A\in \Mat[\K]{n}{n}$. Al polinomio
+\[
+    p(\lambda) = \det(A - \lambda I_{n})
+\]
+se lo denomina polinomio característico de $A$, donde $I_{n}$ es la matriz identidad.
+\end{defi}
+
+\begin{ejem}\hspace{0pt} Dada la matriz $A = \begin{pmatrix} 1&2\\4&3 \end{pmatrix}$, su polinomio característico es:
+\begin{align*}
+    p(\lambda)  &=  \det(A - \lambda I_{2})\\
+                &=  \det\l(\begin{pmatrix}1&2\\4&3\end{pmatrix}-\lambda\begin{pmatrix}1&0\\0&1\end{pmatrix}\r)\\
+                &=  \det\begin{pmatrix}1-\lambda &2 \\ 4 & 3-\lambda \end{pmatrix}\\
+                &= \lambda^2 - 4\lambda - 5.\\
+%                &= (\lambda + 1) (\lambda - 5).
+\end{align*}
+Por lo tanto, $p(\lambda)= \lambda^2 - 4\lambda - 5$ es el polinomio característico de $A$.
+\end{ejem}
+
+
+\begin{prop}
+Sean $A\in \Mat[\K]{n}{n}$ y $\lambda \in \K$. Se tiene que $\lambda$ es un valor propio de $A$ si y solo si
+\[
+    \det(A - \lambda I_{n}) = 0,
+\]
+donde $I_{n}$ es la matriz identidad.
+\end{prop}
+
+\begin{advertencia}
+Notemos que todo valor propio de $A\in\Mat[\K]{n}{n}$, es raíz del polinomio característico de $A$.
+\end{advertencia}
+
+\begin{ejem}\hspace{0pt} Dada la matriz $A = \begin{pmatrix} 1&2\\4&3 \end{pmatrix}$, del ejemplo anterior su polinomio característico es:
+\begin{align*}
+    p(\lambda)  &=  \det(A - \lambda I_{2})\\
+%                &=  \det\l(\begin{pmatrix}1&2\\4&3\end{pmatrix}-\lambda\begin{pmatrix}1&0\\0&1\end{pmatrix}\r)\\
+%                &=  \det\begin{pmatrix}1-\lambda &2 \\ 4 & 3-\lambda \end{pmatrix}\\
+                &= \lambda^2 - 4\lambda - 5\\
+                &= (\lambda + 1) (\lambda - 5).
+\end{align*}
+Por lo tanto, $\lambda_1 = -1$ y $\lambda_2 = 5$ son los valores propios de $A$.
+\end{ejem}
+
+\begin{prop}
+Los valores propios de una matriz triangular son los elementos de la diagonal principal de la matriz. 
+\end{prop}
+%
+%\begin{teo}[Teorema de Cayley–Hamilton]
+%Sea $A\in \Mat[\K]{n}{n}$ y $p(\lambda)$ su polinomio característico. Se tiene que
+%\[
+ %   p(A) = 0.
+%\]
+%\end{teo}
+
+%\begin{advertencia}
+%Es decir, toda matriz es un cero de su polinomio característico, esto es,
+%si $A\in\Mat[\K]{n}{n}$ y si su polinomio característico es
+%\[
+%   p(\lambda) =  \lambda^{n} + c_{n-1}\lambda^{n-1} + \cdots + c_{1}\lambda + c_{0}
+%\]
+%entonces,
+%\[
+%   p(A) =  A^{n} + c_{n-1}A^{n-1} + \cdots + c_{1}A + c_{0}I_{n} = 0.
+%\]
+%\end{advertencia}
+
+%\begin{ejem}\hspace{0pt} 
+%Para la matriz $A = \begin{pmatrix} 1&2\\4&3 \end{pmatrix}$, sabemos que su polinomio característico es:
+%\[
+%    p(\lambda)  = \lambda^2 - 4\lambda - 5.
+%\]
+%Luego, se tiene que:
+%\[
+%    p(A)  = A^2 - 4A - 5I_{2} = \begin{pmatrix}9&8\\16&17\end{pmatrix} - 4\begin{pmatrix}1&2\\4&3\end{pmatrix} - 5\begin{pmatrix}1&0\\0&1\end{pmatrix} = \begin{pmatrix}0&0\\0&0\end{pmatrix}.
+%\]
+%\end{ejem}
+
+\begin{advertencia}
+\textbf{Algoritmo para encontrar los valores y vectores propios de una matriz.}
+
+Sea $A\in\Mat[\K]{n}{n}$.
+\begin{description}
+    \item[Paso 1.] Hallar el polinomio característico $p(\lambda)$ de $A$.
+    \item[Paso 2.] Hallar las raíces de $p(\lambda)$.
+    \item[Paso 3.] Repetir los pasos $a)$ y $b)$ para cada valor propio $\lambda$ de $A$:
+        \begin{enumerate}
+            \item[$a)$] Construir $M = A - \lambda I_{n}$ restando $\lambda$ a los elementos diagonales de $A$.
+            \item[$b)$] Encontrar una base para el espacio solución de $Mv = 0$. Los vectores de la base son vectores propios linealmente independientes de $A$ asociados a $\lambda$.
+        \end{enumerate}
+\end{description}
+\end{advertencia}
+
+
+
+
+\begin{ejem}\hspace{0pt} Dada la matriz $A = \begin{pmatrix}
+1&-1&4 \\ 3&2&-1 \\ 2&1&-1 \end{pmatrix}$. 
+
+Paso 1. Su polinomio característico es:
+\begin{align*}
+    p(\lambda)  &=  \det(A - \lambda I_{3})\\
+                &=  \det\l(\begin{pmatrix}
+1&-1&4 \\ 3&2&-1 \\ 2&1&-1 \end{pmatrix}-\lambda\begin{pmatrix} 1&0&0 \\ 0&1&0 \\ 0&0&1 \end{pmatrix}\r)\\
+                &=  \det\begin{pmatrix} 1-\lambda &-1&4 \\ 3&2-\lambda &-1 \\ 2&1&-1-\lambda  \end{pmatrix}\\
+                &= -\lambda^3+2\lambda^2 + 5\lambda - 6.\\
+%                &= (\lambda + 1) (\lambda - 5).
+\end{align*}
+Por lo tanto, $p(\lambda)=-\lambda^3+2\lambda^2 + 5\lambda - 6$.
+
+Paso 2. Las raíces de $p(\lambda)$ son:
+
+
+\begin{align*}
+    p(\lambda)  &=  0\\
+%                &=  \det\l(\begin{pmatrix}1&2\\4&3\end{pmatrix}-\lambda\begin{pmatrix}1&0\\0&1\end{pmatrix}\r)\\
+%                &=  \det\begin{pmatrix}1-\lambda &2 \\ 4 & 3-\lambda \end{pmatrix}\\
+              -\lambda^3+2\lambda^2 + 5\lambda - 6 &=0 \\
+               -(\lambda-1)(\lambda+2)(\lambda -3) &=0 .
+\end{align*}
+
+
+
+
+por lo tanto las raíces de $p(\lambda)$ son $\lambda_{1}=1,\lambda_{2}=-2$ y $\lambda_{3}=3$.
+
+
+Paso 3.
+
+Para $\lambda_{1}=1$.
+
+\[
+A-\lambda_{1}I_{3}=\begin{pmatrix}
+1&-1&4 \\ 3&2&-1 \\ 2&1&-1 \end{pmatrix} -\begin{pmatrix}
+1&0&0 \\ 0&1&0 \\ 0&0&1 \end{pmatrix}=\begin{pmatrix}
+0&-1&4 \\ 3&1&-1 \\ 2&1&-2 \end{pmatrix}.
+\]
+
+Encontremos la solución de $(A-\lambda_{1}I_{3})v=0$
+
+\[
+(A-\lambda_{1}I_{3})v= \begin{pmatrix}
+0&-1&4 \\ 3&1&-1 \\ 2&1&-2 \end{pmatrix}\begin{pmatrix} x_{1}\\ x_{2}\\ x_{3}\end{pmatrix}=\begin{pmatrix} 0\\ 0\\ 0\end{pmatrix}
+\]
+
+por lo que la matriz ampliada del sistema es
+
+
+\begin{align*}
+\begin{pmatrix}0 & -1 & 4 & | & 0\\ 3 & 1 & -1 & | & 0\\ 2 & 1 & -2 & | & 0\end{pmatrix}
+& \sim 
+\begin{pmatrix}0 & -1 & 4 & | & 0\\ 3 & 0 & 3 & | & 0\\ 2 & 0 & 2 & | & 0\end{pmatrix}
+&& \begin{array}{c}
+    F_1+F_2\rightarrow F_2\\
+    F_1+F_3\rightarrow F_3
+\end{array}\\
+& \sim 
+\begin{pmatrix}0 & -1 & 4 & | & 0\\ 1 & 0 & 1 & | & 0\\ 2 & 0 & 2 & | & 0\end{pmatrix}
+&& \frac{1}{3}F_2\rightarrow F_2\\
+& \sim 
+\begin{pmatrix}0 & -1 & 4 & | & 0\\ 1 & 0 & 1 & | & 0\\ 0 & 0 & 0 & | & 0\end{pmatrix}
+&& -2F_2+F_3\rightarrow F_3
+\end{align*}
+
+de donde se tiene que $x_{1}=-x_{3}$; $x_{2}=4x_{3}$ y
+\[
+    E_1 = \left \langle (-1,4,1) \right \rangle.
+\]
+
+Verifique que $ E_{-2} =\left  \langle (1,-1,-1)  \right \rangle$ y $ E_3=\left \langle (1,2,1)  \right \rangle.$
+
+
+
+% y $ E_3 \right \rangle
+% =\left \langle  \right \rangle gen\l\{(1,2,1)\r\}.$
+
+En conclusión $\lambda_{1}=1,\lambda_{2}=-2$ y $\lambda_{3}=3$ son los valores propios de $A$ y $(-1,4,1),(1,-1,-1),(1,2,1)$ son vectores propios de
+$\lambda_{1},\lambda_{2}$ y $\lambda_{3}$, respectivamente. 
+
+\end{ejem}
+
+
+
+
+
+
+\begin{ejer}\hspace{0pt}
+Dada la aplicación lineal:
+\[
+    \funcion{T}{\R^2}{\R^2}{(a,b)}{(6a-b,3a+2b)}
+\]
+Hallar los valores y vectores propios de $T$.
+\end{ejer}
+
+\begin{teo}
+Cualquier polinomio de grado $n$ tiene exactamente $n$ raíces (contando con las veces que una determinada raíz se repite) en los complejos.
+\end{teo}
+
+\begin{defi}
+Sea $\lambda$ un valor propio de la matriz $A$, el número de veces que un valor propio $\lambda$ se repite como raíz del polinomio característico $\rho(\lambda)$ se llama multiplicidad algebraica, notada $m_a(\lambda)$.
+\end{defi}
+
+\begin{defi}
+Sea $\lambda$ un valor propio de la matriz $A$, entonces la multiplicidad geométrica de $\lambda$, notada $m_g(\lambda)$ está dada por
+\[ m_g(\lambda) = \dim(E_\lambda)\]
+\end{defi}
+
+\begin{teo}
+Sea $\lambda$ valor propio de la matriz $A$, entonces
+\begin{center}
+ $m_g(\lambda) \leq m_a(\lambda)$
+\end{center}
+\end{teo}
+
+\begin{teo}
+Contando multiplicidades, toda matriz $A \in \Mat[\K]{n}{n} $ tiene exactamente $n$ valores propios en los complejos.
+\end{teo}
+
+\begin{ejem}\hspace{0pt}\label{Cap7:ejem03} La matriz $A = \begin{pmatrix}1&0&0&1\\0&2&0&0\\0&0&2&0\\1&0&0&1\end{pmatrix}$ tiene como valores propios a $\lambda_{1} = 0$ y $\lambda_{2}=2$ con $m_a(\lambda_{1})=1$, $m_a(\lambda_{2})=3$, $m_g(\lambda_{1})=1$ y $m_g(\lambda_{2})=3$.
+\end{ejem}
+
+
+\end{document}

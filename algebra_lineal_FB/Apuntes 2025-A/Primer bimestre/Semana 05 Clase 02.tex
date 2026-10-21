@@ -1,0 +1,520 @@
+\documentclass[compacto,10pt]{pubciencias-notas}
+
+% -- Paquetes adicionales
+\usepackage{comandosEPN}
+
+% -- Datos del libro
+\autor{Departamento de Formación Básica}
+\materia{Álgebra Lineal}
+\nota{Semana 05 Clase 02}
+\fecha{Semestre 2025-A}
+
+\logouno[1.1cm]{Logo_EPN.eps}
+\logodos[1.7cm]{Logo_DFB.eps}
+
+\definecolor{colordef}{cmyk}{0.81,0.62,0.00,0.22}
+
+\begin{document}
+
+\encabezado
+
+\vspace*{-8mm}
+
+\setcounter{section}{2}
+\section{Determinantes}
+\setcounter{subsection}{1}
+\subsection{Propiedades fundamentales}
+
+\begin{teo}[Determinante de una matriz triangular]
+    Sea $A \in \Mat[\K]{n}{n}$ una matriz triangular superior o triangular inferior, entonces
+    \[
+        \det(A) = a_{11}a_{22} \cdots a_{nn},
+    \]
+    es decir, el determinante de una matriz triangular es el producto de los elementos de su diagonal principal.
+\end{teo}
+
+\begin{ejem}
+    Consideremos la matriz
+    $A = \begin{pmatrix}
+    2 & 0 & 0 & 0 & 0 & 0 \\
+    8 & -1 & 0 & 0 & 0 & 0 \\
+    -7 & 6 & 2 & 0 & 0 & 0 \\
+    4 & 0 & 3 & -2 & 0 & 0 \\
+    -5 & 2 & 3 & 5 & 1 & 0 \\
+    1 & -3 & 7 & -6 & 2 & 3
+    \end{pmatrix}
+    $.
+    
+    \noindent Se sigue que $\det(A) = (2)(-1)(2)(-2)(1)(3) = 24$
+\end{ejem}
+
+\begin{ejer}
+    Calcular el determinante de la siguiente matriz
+    \[
+        B =
+        \begin{pmatrix}
+            -2 & 0 & 3 & 5 & -1 \\
+            0 & 5 & -1 & 4 & 0 \\
+            0 & 0 & -1 & 7 & -2 \\
+            0 & 0 & 0 & 3 & -1 \\
+            0 & 0 & 0 & 0 & 1
+        \end{pmatrix}.
+    \]
+\end{ejer}
+
+% \begin{prop}
+%     Sea $E\in\Mat[\K]{n}{n}$ una matriz elemental, $i,j\in I$ y $\alpha\in\K$, con $\alpha\neq 0$. Se tiene que
+%     \begin{itemize}
+%     \item   
+%         si la operación es $F_i \leftrightarrow F_j$, entonces $\det(E) = - 1$;
+%     \item 
+%         si la operación es $\alpha F_i \rightarrow F_i$, entonces $\det(E) = \alpha$; y
+%     \item 
+%         si la operación es $\alpha F_i + F_j\rightarrow F_j$, entonces $\det(E) = 1$.
+%     \end{itemize}
+% \end{prop}
+
+% \begin{ejem}
+%     Consideremos la matriz $
+%     \begin{pmatrix}
+%         1 & 0 \\
+%         0 & 1
+%     \end{pmatrix}$, cuyo determinante es $1$.
+    
+%     \begin{itemize}
+%     \item
+%         Si hacemos $F_{1} \leftrightarrow F_{2}$,  obtenemos $ E =
+%         \begin{pmatrix}
+%             0 & 1 \\
+%             1 & 0
+%         \end{pmatrix}$. Se sigue que $\det(E) = -1$.
+        
+%     \item
+%         Si hacemos $3F_{1} \rightarrow F_{1}$, obtenemos $ E =
+%         \begin{pmatrix}
+%             3 & 0 \\
+%             0 & 1
+%         \end{pmatrix}$. Se sigue que $\det(E) = 3$.
+        
+%     \item
+%         Si hacemos $-2F_{2} + F_{1} \rightarrow F_{1} $, obtenemos $ E =
+%         \begin{pmatrix}
+%             1 & -2 \\
+%             0 & 1
+%         \end{pmatrix}$.
+        
+%         \noindent Se sigue que $\det(E) = 1$.
+%     \end{itemize}
+% \end{ejem}
+
+% \begin{ejer}
+%     Considere la matriz $ 
+%     \begin{pmatrix}
+%         1 & 0 & 0 \\
+%         0 & 1 & 0 \\
+%         0 & 0 & 1
+%     \end{pmatrix}$, cuyo determinante es $1$. Para cada operación por fila determine a la correspondiente matriz elemental y a su determinante.
+%     \begin{enumerate}
+%         \item[$a)$] $F_{3} \leftrightarrow F_{1}$
+%         \item[$b)$] $-2F_{2} \rightarrow F_{2}$
+%         \item[$c)$] $3F_{3} + F2 \rightarrow F_{2}$
+%     \end{enumerate}
+% \end{ejer}
+
+\begin{prop}
+    Sea $A \in \Mat[\K]{n}{n}$. El determinante de la matriz $A$ y de su transpuesta son iguales, es decir, 
+    \[
+        \det(A^\intercal) = \det(A).
+    \]
+\end{prop}
+
+\begin{obs}
+    Por esta proposición, cuando se \textbf{calcula el valor de un determinante}, da lo mismo trabajar por filas que trabajar por columnas.
+\end{obs}
+
+\begin{teo}[Determinante del producto de matrices]\label{DetProd}
+    Sean $A, B\in \Mat[\K]{n}{n}$, se tiene que:
+    \[
+        \det(AB) = \det(A)\det(B).
+    \]
+    es decir, el determinante de un producto de matrices es igual al producto de los determinantes de las matrices.
+\end{teo}
+
+\begin{ejem} Dadas las matrices 
+\[
+A = 
+    \begin{pmatrix}
+        -2 & 3 \\
+        1 & 1
+    \end{pmatrix}
+\texty
+B=
+    \begin{pmatrix}
+        1 & -1 \\
+        2 & 4
+    \end{pmatrix}.
+\]
+Se sigue que $AB = 
+    \begin{pmatrix}
+        4 & 14 \\
+        3 & 3
+    \end{pmatrix}$ y ya que $\det(A) = -5$, $\det(B) = 6$ y $\det(AB) = -30$, la igualdad del teorema \ref{DetProd} se verifica.
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} Dadas las matrices
+\[
+A = 
+    \begin{pmatrix}
+        3 & 0 & 3 \\
+        0 & 3 & 0 \\
+        3 & 0 & 3
+    \end{pmatrix}
+\texty    
+B = 
+    \begin{pmatrix}
+        -2 & 0 & -2 \\
+        0 & -2 & 0 \\
+        2 & 0 & 2
+    \end{pmatrix}.
+\]
+Calcular $AB$, $\det(AB)$, $\det(A)$, $\det(B)$ y compruebe la igualdad del teorema \ref{DetProd}.
+\end{ejer}
+
+\begin{prop}
+    Sea $A \in \Mat[\K]{n}{n}$. Si una fila o columna de $A$ contiene solo ceros, entonces $\det (A) =0$.
+\end{prop}
+
+\begin{ejem}
+    Sea $A =
+    \begin{pmatrix}
+        3 & -1 & 11 & 0 \\
+        9 & 7 & -5 & 0 \\
+        -2 & -6 & -8 & 0 \\
+        4 & 1 & -5 & 0
+    \end{pmatrix}$. Realizamos el cálculo del determinante de $A$ mediante la expansión por cofactores de $A$, con respecto a la columna $4$. Obtenemos,
+    \begin{align*}
+        \det(A) &= \sum_{k=1}^{4} a_{k4} C_{k4}\\
+                &= \sum_{k=1}^{4} 0\cdot C_{k4}\\
+                &= 0
+    \end{align*}
+    
+\end{ejem}
+
+\begin{prop}
+    Sea $A \in \Mat[\K]{n}{n}$. Si dos filas o columnas de $A$ son iguales, entonces 
+    \[
+        \det(A) = 0
+    \]
+\end{prop}
+
+\begin{ejem}
+    Sea $A = 
+    \begin{pmatrix}
+        1 & 3 & 1 & 2 \\
+        -1 & 1 & -1 & 3 \\
+        2 & 3 & 2 & 1 \\
+        -2 & 1 & -2 & 3
+    \end{pmatrix}$, calculemos su determinante mediante la expansión por cofactores con respecto a la primera columna.
+    \begin{align*}
+        \det(A) = & 1
+        \begin{vmatrix}
+            1 & -1 & 3 \\
+            3 & 2 & 1 \\
+            1 & -2 & 3
+        \end{vmatrix} + 1
+        \begin{vmatrix}
+            3 & 1 & 2 \\
+            3 & 2 & 1 \\
+            1 & -2 & 3
+        \end{vmatrix} +2
+        \begin{vmatrix}
+            3 & 1 & 2 \\
+            1 & -1 & 3 \\
+            1 & -2 & 3
+        \end{vmatrix} +2
+        \begin{vmatrix}
+            3 & 1 & 2 \\
+            1 & -1 & 3 \\
+            3 & 2 & 1
+        \end{vmatrix} \\
+        = & -8 + 0 + 2(7) + 2(-3) \\
+        = & \, 0.
+    \end{align*}
+\end{ejem}
+
+\begin{ejer} Calcular el determinante de la matriz $B = 
+    \begin{pmatrix}
+        1 & -1 & 1 \\
+        0 & 5 & 0 \\
+        2 & 3 & 2
+    \end{pmatrix}$.
+\end{ejer}
+
+\begin{prop}
+    Sea $A \in \Mat[\K]{n}{n}$. Si una  fila o columna de $A$ es múltiplo de otra, entonces 
+    \[
+        \det(A) = 0
+    \]
+\end{prop}
+
+\begin{ejem}
+    El determinante de la matriz $A =
+\begin{pmatrix}1 & 2 & -1 \\-2 & 5 & -2 \\3 & 6 & -3\end{pmatrix}$ es nulo. Pues la fila $3$ es múltiplo de la fila $1$. Por tanto, $\det(A)=0$
+\end{ejem}
+
+\begin{ejer} Calcular el determinante de la matriz $B = 
+    \begin{pmatrix}
+        2 & -6 & 4 \\
+        -1 & 3 & 1 \\
+        3 & -9 & 3
+    \end{pmatrix}$.
+\end{ejer}
+
+% \begin{ejer}
+%     Verifique que el determinante de la matriz $B$ del ejemplo $12$ es cero, realizando el cálculo de otra manera.
+% \end{ejer}
+
+% \begin{ejer} Demuestre a la proposición $3$.
+% \end{ejer}
+
+\begin{prop}\label{DetSign}
+    Sean $A, B \in \Mat[\K]{n}{n}$. Si la matriz $B$ se obtiene intercambiando dos filas o columnas de $A$ entonces
+    \[  
+        \det(B) = - \det(A).
+    \]
+\end{prop}
+
+\begin{ejem} Dadas las matrices 
+\[
+A = 
+    \begin{pmatrix}
+        1 & 0 & 0 \\
+        3 & -1 & 0 \\
+        3 & 3 & -2 
+    \end{pmatrix}
+\texty
+B =
+    \begin{pmatrix}
+        1 & 0 & 0 \\
+        3 & 3 & -2 \\
+        3 & -1 & 0
+    \end{pmatrix}.
+\]
+Notemos que la matriz $B$ se obtiene al intercambiar las filas $2$ y $3$ de la matriz $A$. Además, $\det(A) = 2$ y $\det(B) = -2$, es decir, la igualdad de la proposición \ref{DetSign} se verifica.
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} Dadas las matrices
+\[
+A = 
+    \begin{pmatrix}
+        1 & 0 & 0 \\
+        3 & -1 & 0 \\
+        3 & 3 & -2 
+    \end{pmatrix}
+\texty
+B =
+    \begin{pmatrix}
+        -1 & 3 & 0 \\
+        0 & 1 & 0 \\
+        3 & 3 & -2
+    \end{pmatrix}.
+\]
+Comparar a sus determinantes.
+\end{ejer}
+
+\begin{prop}
+    Sean $A, B \in \Mat[\K]{n}{n}$. Si $B$ se obtiene al multiplicar una fila o columna de $A$ por un escalar $\alpha \in \K$, entonces
+    \[
+        \det(B) = \alpha \det(A).
+    \]
+\end{prop}
+
+\begin{ejem}\hspace{0pt} Dada la matriz $A =
+\begin{pmatrix}1 & -1 & -1 \\-2 & 1 & -2 \\0 & 2 & 0\end{pmatrix}$ cuyo determinante es 8. Considere a la matriz $B =
+\begin{pmatrix}1 & 2 & -1 \\-2 & -2 & -2 \\0 & -4 & 0\end{pmatrix}$. Notemos que $B$ se obtiene al multiplicar la segunda columna de la matriz $A$ por $-2$.
+    
+    \noindent Luego, $\det(B) = -2(8) = -16$.
+\end{ejem}
+
+% \begin{ejer} Demuestre a la proposición $9$.
+% \end{ejer}
+
+\begin{prop}
+    Sea $A\in \Mat[\K]{n}{n}$ y $\alpha \in\K$. Se tiene que
+    \[
+        \det(\alpha A) = \alpha^n \det(A).
+    \]
+\end{prop}
+
+\begin{ejem}
+    Sea $A =
+    \begin{pmatrix}
+        -2 & -3 & 6 & 4 \\
+        0 & 2 & 6 & -9 \\
+        0 & 0 & -1 & 8 \\
+        0 & 0 & 0 & 2
+    \end{pmatrix}$. Notemos que al ser $A$ una matriz triangular superior, $\det(A) = 8$.
+    
+    \noindent Consideremos la matriz $-2A = 
+    \begin{pmatrix}
+        4 & 6 & -12 & -8 \\
+        0 & -4 & -12 & 18 \\
+        0 & 0 & 2 & -16 \\
+        0 & 0 & 0 & -4
+    \end{pmatrix}$ y calculemos su determinante. Puesto que está también es una matriz triangular superior, se sigue que $\det(-2A) = 128 = (-2)^{4}8$.
+\end{ejem}
+
+\begin{ejer}
+    Sea $A = 
+    \begin{pmatrix}
+        1 & -2 \\
+        -1 & 3
+    \end{pmatrix}$. ¿Cuál es el valor de $\det(-4A)$?
+\end{ejer}
+
+\begin{prop}
+    Sean $A, B \in \Mat[\K]{n}{n}$, $\alpha\in\K$ e $i,j\in I$, con $i\neq j$. Si $B$ se obtiene al aplicar una operación de fila $\alpha F_i + F_j \to F_j$, entonces 
+    \[
+        \det(B) = \det(A).
+    \]
+\end{prop}
+
+% \begin{prop} Sean $A, B, C \in \Mat[\K]{n}{n}$ y $j\in I$ tales que $A$, $B$ y $C$ difieran únicamente en la columna $j$. Si la columna $j$ de $C$ es el resultado de sumar las columnas $j$ de $A$ y $B$, entonces 
+%     \[
+%         \det(C) = \det(A) + \det(B).
+%     \]
+% \end{prop}
+
+% \begin{ejem}
+%     Si $\det
+%         \begin{pmatrix}
+%             x&y&z\\
+%             3&0&2\\
+%             1&1&1
+%         \end{pmatrix}
+%     =1$, calcular el determinante de la matriz:
+%     \[
+%         \begin{pmatrix}
+%             x&y&z\\
+%             3x+3&3y&3z+2\\
+%             x+1&y+1&z+1
+%         \end{pmatrix}
+%     \]
+    % Notemos que
+    % \begin{align*}
+    %     \det\begin{pmatrix}
+    %                 x & y & z\\
+    %                 3x+3 & 3y & 3z+2\\
+    %                 x+1 & y+1 & z+1
+    %             \end{pmatrix}
+    %         &= 
+    %         \det\begin{pmatrix}
+    %                 x&y&z\\
+    %                 3x & 3y & 3z\\
+    %                 x+1 & y+1 & z+1
+    %             \end{pmatrix}\\
+    %         &\phantom{=} 
+    %         + \det
+    %             \begin{pmatrix}
+    %                 x&y&z\\
+    %                 3 & 0 & 2\\
+    %                 x+1 & y+1 & z+1
+    %             \end{pmatrix} \\
+    %         &= 
+    %         3\det\begin{pmatrix}
+    %                 x&y&z\\
+    %                 x & y & z\\
+    %                 x+1 & y+1 & z+1
+    %             \end{pmatrix}\\
+    %         &\phantom{=} + \det
+    %             \begin{pmatrix}
+    %                 x&y&z\\
+    %                 3 & 0 & 2\\
+    %                 x & y & z
+    %             \end{pmatrix}\\
+    %         &\phantom{=} + \det
+    %             \begin{pmatrix}
+    %                 x&y&z\\
+    %                 3 & 0 & 2\\
+    %                 1 & 1 & 1
+    %             \end{pmatrix}\\
+    %         &= 3(0) + 0 + 1 \\
+    %         &= 1. 
+    % \end{align*}
+    % Por lo tanto,
+    % \[
+    %     \det\begin{pmatrix}
+    %         x & y & z\\
+    %         3x+3 & 3y & 3z+2\\
+    %         x+1 & y+1 & z+1
+    %     \end{pmatrix} = 1.
+    % \]
+% \end{ejem}
+
+\begin{ejer}
+    Si $\det
+        \begin{pmatrix}
+            x&y&z\\
+            3&0&2\\
+            1&1&1
+        \end{pmatrix}
+    =1$, calcular el determinante de la matriz:
+    
+    \[
+        \begin{pmatrix}
+            x & y & z \\
+            3x+3 & 3y & 3z+2 \\
+            2 & 2 & 2
+        \end{pmatrix}.
+    \]
+\end{ejer}
+
+\begin{ejer}
+  Utilizando propiedades de determinantes, calcular:
+   \[
+    \begin{vmatrix}
+            1 & a & a^2 \\
+            1 & b & b^2 \\
+            1 & c & c^2
+        \end{vmatrix}
+    \]
+\end{ejer}
+%\begin{prop} Sean $A, B, C \in \Mat[\K]{n}{n}$ y $j\in I$ tales que $A$, $B$ y $C$ difieran únicamente en la columna $j$. Si la columna $j$ de $C$ es el resultado de sumar las columnas $j$ de $A$ y $B$, entonces 
+ %   \[
+  %      \det(C) = \det(A) + \det(B).
+   % \]
+%\end{prop}
+
+%\begin{ejem}
+ %   Si $\det\begin{pmatrix}
+  %      -2 & -3 & 1 \\
+   %     0 & 2 & x\\
+    %    1 & 1 & y
+    %\end{pmatrix} = 8$ y %$\det\begin{pmatrix}
+     %   -2 & 6 & 1 \\
+      %  0 & 4 & x\\
+       % 1 & -3 & y
+    %\end{pmatrix} = 5$.
+    
+    %Entonces, 
+    %\begin{align*}
+     %   \det\begin{pmatrix}
+      %  -2 & 3 & 1 \\
+       % 0 & 6 & x\\
+       % 1 & -2 & y
+    %\end{pmatrix} &= \det\begin{pmatrix}
+    %    -2 & -3 & 1 \\
+     %   0 & 2 & x\\
+      %  1 & 1 & y
+  %  \end{pmatrix} + \det\begin{pmatrix}
+   %     -2 & -3 & 1 \\
+    %    0 & 2 & x\\
+     %   1 & 1 & y
+    %\end{pmatrix}\\
+    %&= 8 + 5 \\
+    %&= 13
+    %\end{align*}
+
+%\end{ejem}
+
+\end{document}

@@ -1,0 +1,354 @@
+\documentclass[compacto,10pt]{pubciencias-notas}
+
+% -- Paquetes adicionales
+\usepackage{comandosEPN}
+
+% -- Datos del libro
+\autor{Departamento de Formación Básica}
+\materia{Álgebra Lineal}
+\nota{Semana 07 Clase 01}
+\fecha{Semestre 2025-A}
+
+\logouno[1.1cm]{Logo_EPN.eps}
+\logodos[1.7cm]{Logo_DFB.eps}
+
+\definecolor{colordef}{cmyk}{0.81,0.62,0.00,0.22}
+
+\begin{document}
+
+\encabezado
+
+\vspace*{-4mm}
+
+\setcounter{section}{3}
+\section{Espacios Vectoriales}
+\subsection{Espacio Vectorial}
+
+\begin{defi}[Espacio Vectorial]
+    Dados un campo $\K$, un conjunto no vacío $E$ y dos operaciones:
+    \[
+        \funcion{\oplus}{E\times E}{E}{(x,y)}{x\oplus y,}
+        \texty
+        \funcion{\odot}{\K\times E}{E}{(\alpha,x)}{\alpha\odot x}
+    \]
+    llamadas suma y producto, respectivamente; se dice que $(E,\oplus,\odot,\K)$ es un espacio vectorial si cumplen las siguientes propiedades:
+    \begin{enumerate}
+    \item \textbf{Asociativa de la suma:}
+        para todo $x,y,z\in E$ se tiene que
+        \[
+            (x \oplus y) \oplus z = x \oplus (y \oplus z);
+        \]
+    \item \textbf{Conmutativa de la suma:}
+        para todo $x,y\in E$ se tiene que
+        \[
+            x \oplus y = y \oplus x;
+        \]
+    \item \textbf{Elemento neutro de la suma:}
+        existe un elemento de $E$, denotado por $0_E$ o simplemente $0$, tal que para todo $x\in E$ se tiene que 
+        \[
+            x \oplus 0_E = 0_E \oplus x = x;
+        \]
+    \item \textbf{Inverso de la suma:}
+        para todo $x\in E$, existe un elemento de $E$, denotado por $-x$, tal que
+        \[
+            x \oplus (-x)= 0_E;
+        \]
+    \item \textbf{Distributiva del producto I:}
+        para todo $x,y\in E$ y todo $\alpha\in \K$ se tiene que
+        \[
+            \alpha\odot (x \oplus y)=\alpha\odot x \oplus \alpha\odot y
+        \]
+        
+    \item \textbf{Distributiva del producto II:}
+        para todo $x\in E$ y todo $\alpha,\beta\in \K$ se tiene que
+        \[
+            (\alpha+\beta)\odot x=\alpha\odot x \oplus \beta\odot x;
+        \]
+    \item \textbf{Asociativa del producto:}
+        para todo $x\in E$ y todo $\alpha,\beta\in \K$ se tiene que
+        \[
+            (\alpha\cdot \beta)\odot x=\alpha\odot(\beta\odot x);
+        \]
+    \item \textbf{Elemento neutro del producto:}
+        para todo $x\in E$ se tiene que
+        \[
+            1\odot x=x,
+        \]
+        donde $1\in\K$ es el elemento neutro multiplicativo de $\K$
+    \end{enumerate}
+\end{defi}
+
+% \begin{advertencia}
+%     De la definición de las operaciones suma y producto en el espacio vectorial observamos que necesariamente el resultado de sumar dos elementos del conjunto debe pertenecer al conjunto. Se tiene también que el producto de un escalar por un elemento del conjunto debe pertenecer al conjunto.
+% \end{advertencia}
+
+\begin{advertencia}
+    Note que de la definición de espacio vectorial es necesario que las operaciones suma y producto sean cerradas. Esto es que, para el espacio vectorial $(E,\oplus,\odot,\K)$ además de las 8 propiedades de la definición se debe cumplir:
+
+    \begin{itemize}[leftmargin=*]
+        \item[] \textbf{Clausura de la suma:} Si $x,y\in E$ entonces $x\oplus y\in E$. 
+        \item[] \textbf{Clausura del producto:} Si $x\in E$ y $\alpha\in\K$, entonces $\alpha\odot x\in E$.
+    \end{itemize}
+\end{advertencia}
+
+\textbf{Nota:}
+A los elementos del espacio vectorial $E$ se les denomina \emph{vectores} y a los elementos del campo $\K$ se les denomina \emph{escalares}.
+
+\begin{ejem}\hspace{0pt} Verifique si el conjunto de ternas ordenadas de números reales
+\[\R^{3} =\{(x_1, x_2, x_3) : x_1\in \R \wedge x_2\in \R \wedge x_3\in \R\}\]
+es un espacio vectorial sobre el campo $\R$ si se definen las operaciones $\oplus$ y $\odot$ de la siguiente manera: dados $a=(a_1,a_2,a_3)\in \R^{3}$ y $b=(b_1,b_2,b_3)\in \R^{3}$, y dado $\lambda\in \R$, se define:
+\[a\oplus b = (a_1, a_2, a_3) \oplus (b_1, b_2, b_3) = (a_1+b_1, a_2+b_2, a_3+b_3)\]
+\[\lambda \odot a = \lambda \odot (a_1,a_2,a_3) = (\lambda\cdot a_1, \lambda\cdot a_2, \lambda\cdot a_3)\]
+a continuación, ilustraremos la demostración de cada una de las propiedades:
+
+\begin{enumerate}
+\item Asociativa de la suma
+    
+Suponga que $a=(a_1,a_2,a_3)\in \R^{3}$, $b=(b_1,b_2,b_3)\in \R^{3}$ y $c=(c_1,c_2,c_3)\in \R^{3}$. Entonces:
+    
+$(a \oplus b) \oplus c$
+\begin{align*}
+    \phantom{abc}&= [(a_1,a_2,a_3) \oplus (b_1,b_2,b_3)] \oplus (c_1,c_2,c_3) & \text{Definiciones de $a$, $b$ y $c$}\\
+    &= (a_1+b_1, a_2+b_2, a_3+b_3) \oplus (c_1,c_2,c_3) & \text{Definición de $\oplus$ en $\R^{3}$}\\
+    &= ([a_1+b_1]+c_1, [a_2+b_2]+c_2, [a_3+b_3]+c_3) & \text{Definición de $\oplus$ en $\R^{3}$}\\
+    &= (a_1+[b_1+c_1], a_2+[b_2+c_2], a_3+[b_3+c_3]) & \text{Propiedad asociativa en $\R$}\\
+    &= (a_1,a_2,a_3) \oplus (b_1+c_1, b_2+c_2, b_3+c_3) & \text{Definición de $\oplus$ en $\R^{3}$}\\
+    &= (a_1,a_2,a_3) \oplus [(b_1,b_2,b_3) \oplus (c_1,c_2,c_3)] & \text{Definición de $\oplus$ en $\R^{3}$}\\
+    &= a\oplus (b\oplus c) & \text{Definiciones de $a$, $b$ y $c$}
+\end{align*}
+    
+\item Conmutativa de la suma
+    
+Suponga que $a=(a_1,a_2,a_3)\in \R^{3}$ y $b=(b_1,b_2,b_3)\in \R^{3}$. Entonces:
+\begin{align*}
+    a \oplus b &= (a_1, a_2, a_3) \oplus (b_1, b_2, b_3) & \text{Definiciones de a y b}\\
+    &= (a_1+b_1, a_2+b_2, a_3+b_3) & \text{Definición de $\oplus$ en $\R^{3}$}\\
+    &= (b_1+a_1, b_2+a_2, b_3+a_3) & \text{Conmutativa de $+$ en $\R$}\\
+    &= (b_1, b_2, b_3) \oplus (a_1, a_2, a_3) & \text{Definición de $\oplus$ en $\R^{3}$}\\
+    &= b\oplus a & \text{Definiciones de a y b}
+\end{align*}
+    
+\item Elemento neutro de la suma
+    
+Se debe probar que la siguiente proposición es verdadera:
+\[(\exists 0_E\in \R^{3})(\forall a\in \R^{3})(a\oplus 0_E=0_E\oplus a=a)\]
+Esta demostración es de existencia, por lo que se debe exhibir un elemento $0_E\in \R^{3}$ que satisfaga la definición de elemento neutro.\newline
+
+Sea $0_E=(0,0,0)$. Se debe probar que para todo $a=(a_1,a_2,a_3)\in \R^{3}$ se cumpla que:
+\[a\oplus 0_E = 0_E \oplus a = a\]
+En efecto:
+\begin{align*}
+    a \oplus 0_E &= (a_1, a_2, a_3) \oplus (0,0,0) & \text{Definiciones de $a$ y $0_E$}\\
+    &= (a_1+0,a_2+0, a_3+0) & \text{Definición de $\oplus$ en $\R^{3}$}\\
+    &= (a_1,a_2,a_3) & \text{Neutro aditivo en $\R$}\\
+    &= a & \text{Definición de $a$}
+\end{align*}
+por la propiedad conmutativa, se tiene que $a\oplus 0_E= 0_E\oplus a$. Por tanto, se ha demostrado también que:
+\[0_E \oplus a = a\]
+    
+\item Inverso de la suma
+    
+Se debe probar que la siguiente proposición es verdadera:
+\[(\forall a\in \R^{3})(\exists \hat{a}\in \R^{3})(\hat{a}\oplus a=a\oplus \hat{a}=0_E)\]
+
+Esta también es una demostración de existencia, en este caso, por el orden de los cuantificadores, el elemento $\hat{a}$ depende de $a$.\newline
+
+Sea $a=(a_1,a_2,a_3)\in \R^{3}$. Se prueba que el vector buscado $\hat{a}$ se define del siguiente modo:
+\[\hat{a}=(-a_1, -a_2, -a_3)\]
+donde cada $-a_i$ es el inverso aditivo de $a_i\in \R$, para $i=1,2,3$.\newline
+Entonces, tenemos que:
+\begin{align*}
+    a\oplus \hat{a} &= (a_1, a_2, a_3) \oplus (-a_1, -a_2, -a_3) & \text{Definiciones de $a$ y $\hat{a}$}\\
+    &= (a_1+(-a_1), a_2+(-a_2), a_3+(-a_3)) & \text{Definición de $\oplus$ en $\R^{3}$}\\
+    &= (0,0,0) & \text{Inverso aditivo en $\R$}\\
+    &= 0_E & \text{Definición de $0_E$}
+\end{align*}
+por la propiedad conmutativa de $\oplus$, se tiene también que:
+\[\hat{a} \oplus a = 0_E\]
+    
+\item Distributiva del producto I
+    
+Suponga que $a=(a_1,a_2,a_3)\in \R^{3}$, $b=(b_1,b_2,b_3)\in \R^{3}$ y $\lambda\in \R$. Entonces:
+
+$\lambda \odot (a\oplus b)$
+\begin{align*}
+    \phantom{abc} &= \lambda \odot ((a_1,a_2,a_3)\oplus (b_1,b_2,b_3)) & \text{Definiciones de $a$ y $b$}\\
+    &= \lambda \odot (a_1+b_1,a_2+b_2,a_3+b_3) & \text{Definición de $\oplus$ en $\R^{3}$}\\
+    &= (\lambda\cdot[a_1+b_1],\lambda\cdot[a_2+b_2],\lambda\cdot[a_3+b_3]) & \text{Definición de $\odot$ en $\R^{3}$}\\
+    &= (\lambda\cdot a_1, \lambda\cdot a_2, \lambda\cdot a_3) \oplus (\lambda\cdot b_1, \lambda\cdot b_2, \lambda\cdot b_3) & \text{Definición de $\oplus$ en $\R^{3}$}\\
+    &= \lambda \odot (a_1,a_2,a_3) \oplus \lambda \odot (b_1,b_2,b_3) & \text{Definición de $\odot$ en $\R^{3}$}\\
+    &= \lambda \odot a \oplus \lambda \odot b &  \text{Definiciones de $a$ y $b$}
+\end{align*}
+    
+\item Distributiva del producto II
+    
+Suponga que $a=(a_1,a_2,a_3)\in \R^{3}$ y $\lambda, \beta\in \R$. Entonces:
+
+$(\lambda + \beta)\odot a$
+\begin{align*}
+    \phantom{abc} &= (\lambda + \beta)\odot (a_1, a_2, a_3) & \text{Definición de $a$}\\
+    &= ((\lambda + \beta)\cdot a_1, (\lambda + \beta)\cdot a_2, (\lambda + \beta)\cdot a_3) & \text{Definición de $\odot$ en $\R^{3}$}\\
+    &= (\lambda a_1 + \beta a_1, \lambda a_2 + \beta a_2, \lambda a_3 + \beta a_3) & \text{Distributiva del producto en $\R$}\\
+    &= (\lambda a_1, \lambda a_2, \lambda a_3) \oplus (\beta a_1, \beta a_2, \beta a_3) & \text{Definición de $\oplus$ en $\R^{3}$}\\
+    &= \lambda \odot (a_1, a_2, a_3) \oplus \beta\odot (a_1,a_2,a_3) & \text{Definición de $\odot$ en $\R^{3}$}\\
+    &= \lambda \odot a \oplus \beta \odot a & \text{Definición de $a$}
+\end{align*}
+    
+\item Asociativa del producto
+    
+Suponga que $a=(a_1,a_2,a_3)\in \R^{3}$ y $\lambda, \beta\in \R$. Entonces:
+\begin{align*}
+    (\lambda\cdot \beta) \odot a &= (\lambda\cdot \beta) \odot (a_1,a_2,a_3) & \text{Definición de $a$}\\
+    &= ((\lambda\cdot \beta)\cdot a_1, (\lambda\cdot \beta)\cdot a_2, (\lambda\cdot \beta)\cdot a_3) & \text{Definición de $\odot$ en $\R^{3}$}\\
+    &= (\lambda\cdot(\beta\cdot a_1), \lambda\cdot(\beta\cdot a_2), \lambda\cdot(\beta\cdot a_3)) & \text{Asociativa $\cdot$ en $\R$}\\
+    &= \lambda \odot (\beta\cdot a_1, \beta\cdot a_2, \beta\cdot a_3) & \text{Definición de $\odot$ en $\R^{3}$}\\
+    &= \lambda \odot (\beta \odot (a_1, a_2, a_3)) & \text{Definición de $\odot$ en $\R^{3}$}\\
+    &= \lambda \odot (\beta \odot a) & \text{Definición de $a$}
+\end{align*}
+    
+\item Elemento neutro del producto
+    
+Se debe probar que la siguiente proposición es verdadera:
+\[(\forall a\in \R^{3})(1\odot a = a), \quad \text{donde } 1\in \R\]
+Suponga que $a=(a_1,a_2,a_3)\in\R^{3}$. Entonces:
+\begin{align*}
+    1 \odot a &= 1\odot (a_1,a_2,a_3) & \text{Definición de $a$}\\
+    &= (1\cdot a_1, 1\cdot a_2, 1\cdot a_3) & \text{Definición de $\odot$ en $\R^{3}$}\\
+    &= (a_1,a_2,a_3) & \text{Neutro multiplicativo en $\R$}\\
+    &= a & \text{Definición de $a$}
+\end{align*}
+
+En vista que se satisfacen todas las propiedades de la \emph{definición 1}, se concluye que $(\R^{3}, \oplus, \odot, \R)$ es un espacio vectorial.
+\end{enumerate}
+\end{ejem}
+
+% \begin{ejer}\hspace{0pt} Verifique si el conjunto de polinomios con coeficientes reales de grado menor o igual que $2$
+% \[\R_{2}[x]=\{p(x)=a_0 + a_1x + a_2x^2 : a_i\in \R, 0\leq i\leq 2 \}\]
+% es un espacio vectorial sobre $\R$ si la operación $\oplus$ es la suma usual entre polinomios y $\odot$ es el producto usual entre un número real y un polinomio.\newline 
+% Es decir: si $p\in\R_{2}[x]$ y $q\in\R_{2}[x]$, y $\alpha\in \R$, entonces:
+% \[p(x)\oplus q(x) = (p+q)(x)\]
+% \[\alpha \odot p(x) = (\alpha p)(x)\]
+% para todo $x\in \R$.
+% \end{ejer}
+
+\begin{ejer}\hspace{0pt} Verifique si el conjunto $V$ definido por:
+\[V=\left\{\left(\begin{array}{cc}
+    a & b \\
+    c & d
+\end{array}\right)\in\mathbb{R}^{2\times 2} : ad-cb=0\right\},\]
+junto a las operaciones usuales de suma de matrices y producto de un escalar por matriz es un espacio vectorial real.
+\end{ejer}
+
+\begin{ejer} Verifique si el conjunto 
+\[V=\left\lbrace (x,y,3,w)\in\R^4 : 2x-y=0 \right\rbrace\]
+junto a las operaciones usuales de suma y producto por un escalar en $\R^4$ es un espacio vectorial real.
+\end{ejer}
+
+\begin{obs}
+    Utilizamos los símbolos $\oplus$ y $\odot$ para enfatizar el hecho de que, en general, las operaciones definidas no son la suma y el producto estándar que utilizamos. Si no existe riesgo de confusión, utilizaremos la notación
+    \[
+        x\oplus y = x+y
+        \texty
+        \alpha \odot x = \alpha x
+    \]
+    y diremos que el espacio vectorial es $(E,+,\cdot,\K)$.
+    En caso de que no exista ambigüedad en las operaciones utilizadas se dirá que $E$ es un espacio vectorial sobre $\K$. Además, si el campo está sobre entendido diremos que $E$ es un espacio vectorial.
+\end{obs}
+
+\begin{advertencia}
+Un error común es pensar que el elemento neutro es siempre el cero, ya que, dependiendo del espacio vectorial, se tiene un determinado elemento neutro. Por ejemplo:
+\begin{itemize}
+\item Para el espacio vectorial $(\R, +, \cdot, \R)$ tenemos que su elemento neutro es justamente el 0.
+\item Para el espacio $(\R^{+}, \oplus , \odot, \R)$ donde 
+\[
+    x \oplus y = xy
+    \texty
+    \alpha \odot x = x^{\alpha}
+\]
+para todo $x,y\in\R^{+}$ y todo $\alpha\in\R$, el elemento neutro es 1, esto es, $0_{E} = 1$. Notemos que $0\notin\R^{+}$.
+\end{itemize}
+\end{advertencia}
+
+\begin{prop}
+    Los siguientes conjuntos con sus operaciones usuales de suma y producto son espacios vectoriales:
+    \begin{itemize}
+    \item
+        $(\R^n, +, \cdot, \R$), con $n\in \N^*$.
+        
+    \item
+        $(\Mat[\R]{m}{n}, +, \cdot, \R)$, con $m,n\in \N^*$.
+        
+    \item
+        $(\mathcal{F}(I), +, \cdot, \R)$
+        
+    \item
+        $(\mathcal{C}(I), +, \cdot, \R)$
+    
+    \begin{comment}
+    \item
+        $(\mathcal{C}^{k}(I), +, \cdot, \R)$, donde
+        \[
+            \mathcal{C}^k(I)=\{\func{f}{I}{\R}: f\text{ es $k$ - veces derivable en }I\text{ y }f^{k}\in\mathcal{C}(I)\}, \text{con } I\subseteq \R.
+        \]
+    \end{comment}
+    
+    \item
+        $(\R_n[x], +, \cdot, \R)$
+    \end{itemize}
+\end{prop}
+
+\begin{obs}
+Es importante mencionar respecto a esta proposición que:
+\begin{itemize}
+\item $\R^{n}= \{ (x_{1},\ldots, x_{n}): x_{i} \in \R \; \text{para } i = 1,\ldots, n \}$ y sus operaciones están definidos mediante
+%\[
+%\R^{n}  = \{ (x_{1}, ..., x_{n}): x_{i} \in \R \; \text{para } i = 1, ..., n \}
+%\]
+\begin{align*}
+(x_{1}, x_{2}, \ldots, x_{n})+(y_{1}, y_{2}, \ldots, y_{n}) & = (x_{1}+y_{1}, x_{2}+y_{2}, \ldots, x_{n}+y_{n}) \\
+\alpha \cdot (x_{1}, x_{2}, \ldots, x_{n}) & = (\alpha \cdot x_{1}, \alpha \cdot x_{2}, \ldots, \alpha \cdot x_{n}).
+\end{align*}
+\item $\mathcal{F}(I)=\{\func{f}{I}{\R}: f\text{ es una función}\}$, siendo $I$ un intervalo de $\R$.
+            
+$+$ es la suma usual de dos funciones y $\cdot$ es la multiplicación de un número real por una función.
+\item $\mathcal{C}(I)=\{\func{f}{I}{\R}: f\text{ es una función continua} \}$, siendo $I$ un intervalo de $\R$.
+            
+$+$ es la suma usual de dos funciones y $\cdot$ es la multiplicación de un número real por una función.
+\item $ \R_n[x] = \{ p : p(x) = a_{0} + a_{1}x + \cdots + a_{n}x^{n}, \, a_{i} \in \R \text{ para } i = 0, 1, \cdots, n \}$.
+            
+$+$ representa la suma usual de dos polinomios de grado menor o igual a $n$ y $\cdot$ representa el producto de un número real por un polinomio.
+\end{itemize}
+\end{obs}
+
+\begin{prop}
+Sea $(E, +, \cdot, \K)$ un espacio vectorial, el elemento neutro es único.
+\end{prop}
+
+%\begin{ejem}\hspace{0pt} Para cada espacio de la observación anterior su elemento neutro es:
+\begin{ejem}\hspace{0pt} Para los espacios definidos con anterioridad su elemento neutro es:
+\begin{itemize}
+\item $0_{\R^{n}} = (0, 0, \ldots, 0)$.
+\item $0_{\Mat{m}{n}} = 0_{m \times n}$.
+\item $0_{\mathcal{F}(I)} = 0_{\mathcal{C}(I)} = 0_{f}$, donde
+\[
+    \funcion{0_{f}}{I}{\R}{x}{0}
+\]
+con $I\subseteq\R$.
+\item $0_{\R_{n}[x]} = 0 + 0x + \cdots + 0x^{n-1} + 0x^{n},$ para todo $x\in\R$.
+\end{itemize}
+\end{ejem}
+
+\begin{prop}
+Sea $(E, +, \cdot, \K)$ un espacio vectorial, para todo $u\in E$ su inverso es único.
+\end{prop}
+
+\begin{ejer}\hspace{0pt} Sea $E$ el conjunto de todos los números reales positivos. Considere las operaciones:
+\[
+    \funcion{\oplus}{E \times E}{E}{(x, y)}{xy}
+    \texty
+    \funcion{\odot}{\R \times E}{E}{(\alpha, x)}{x^{\alpha}.}
+\]
+Muestre que con las operaciones definidas sobre $E,$ es un espacio vectorial real cuyo elemento neutro es $1$ y tal que si $u\in E$ su inverso está dado por $u^{-1}$.
+\end{ejer}
+
+\end{document}

@@ -1,0 +1,301 @@
+\documentclass[compacto,10pt]{pubciencias-notas}
+
+% -- Paquetes adicionales
+\usepackage{comandosEPN}
+
+% -- Datos del libro
+\autor{Departamento de Formación Básica}
+\materia{Álgebra Lineal}
+\nota{Semana 08 Clase 01}
+\fecha{Semestre 2025-A}
+
+\logouno[1.1cm]{Logo_EPN.eps}
+\logodos[1.7cm]{Logo_DFB.eps}
+
+\definecolor{colordef}{cmyk}{0.81,0.62,0.00,0.22}
+
+\begin{document}
+
+\encabezado
+
+\vspace*{-8mm}
+
+\setcounter{section}{3}
+\section{Espacios Vectoriales}
+\setcounter{subsection}{3}
+\subsection{Combinación lineal y cápsula}
+
+\begin{defi}
+Sean $(E,+,\cdot,\K)$ un espacio vectorial, $k\in\N^{*}$ y $S = \{v_1, v_2, \ldots, v_k\} \subset E$. Al conjunto de todos los vectores en $E$ que son combinaciones lineales de los vectores de $S$ se lo llama cápsula de $S$ y se denota por $\spn(S)$, es decir
+    \[
+        \spn(S) = \{\alpha_1 v_1 + \alpha_2 v_2 + \cdots + \alpha_k v_k:\alpha_1, \alpha_2, \ldots, \alpha_k \in \K\}.
+    \]
+\end{defi}
+
+\begin{advertencia}
+A este conjunto también se lo conoce como \emph{cápsula lineal} y su notación viene de su nombre en inglés, \emph{linear span}. También se utiliza la notación $\langle S\rangle$.
+\end{advertencia}
+
+\begin{ejem}\label{S07C01:EJ_Cap_lin}
+En el espacio vectorial $(\R^{2}, +, \cdot, \R)$ con las operaciones usuales, sean $v_{1}, v_{2}\in \R^{2}$ donde $v_{1} = (2, 3)$ y $v_{2} = (4, 6)$. Se define el conjunto $S = \{v_{1}, v_{2}\}$ su cápsula lineal está dada por:
+\begin{align*}
+    \spn(S) &= \{(x, y)\in\R^{2}\,:\,(x, y) = \alpha_{1}v_{1}+\alpha_{2}v_{2},\alpha_{1}, \alpha_{2}\in\R\}\\
+    &= \{(x, y)\in\R^{2}\,:\,(x, y) = \alpha_{1}(2, 3)+\alpha_{2}(4, 6),\alpha_{1}, \alpha_{2}\in\R\}\\
+    &= \{(x, y)\in\R^{2}\,:\,(x, y) = (2\alpha_{1}, 3\alpha_{1})+(4\alpha_{2}, 6\alpha_{2}),\alpha_{1}, \alpha_{2}\in\R\}\\
+    &= \{(x, y)\in\R^{2}\,:\,(x, y) = (2\alpha_{1}+4\alpha_{2}, 3\alpha_{1}+6\alpha_{2}),\alpha_{1}, \alpha_{2}\in\R\}\\
+    &= \{(x, y)\in\R^{2}\,:\,2\alpha_{1}+4\alpha_{2} = x, 3\alpha_{1}+6\alpha_{2} = y,\alpha_{1}, \alpha_{2}\in\R\}\\
+    &= \{(x, y)\in\R^{2}\,:\,3x - 2y = 0\}.
+\end{align*}
+En efecto, sea $(x, y)\in\R^{2}$ se tiene que $(x,y)\in\spn(S)$ si y solo si se verifica el sistema de ecuaciones lineales
+\[
+    \systeme[\alpha_{1}\alpha_{2}]{2\alpha_{1}+4\alpha_{2} = x, 3\alpha_{1}+6\alpha_{2} = y}
+\]
+donde $\alpha_{1}, \alpha_{2}\in\R$. La matriz ampliada del sistema verifica la equivalencia siguiente:
+\[
+    \begin{pNiceArray}{cc|c}
+    2&4&x\\
+    3&6&y
+    \end{pNiceArray}
+    \sim
+    \begin{pNiceArray}{cc|c}
+    2&4&x\\
+    0&0&-3x+2y
+    \end{pNiceArray}.
+\]
+Luego, para que el sistema tenga solución se debe tener que $-3x+2y=0$, lo que implica que:
+\[
+    \spn(S) = \{(x, y)\in\R^{2}\,:\,3x - 2y = 0\}.
+\]
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} En el espacio vectorial $(\R^{3},+,\cdot,\R)$ encontrar la cápsula del conjunto \[S=\{(1,-1,0),(-2,3,-1),(2,1,-3)\}.\]
+\end{ejer}
+
+\begin{teo}
+Sean $(E,+,\cdot,\K)$ un espacio vectorial y $S\subset E$. Se tiene que $\spn(S)$ es un subespacio vectorial de $E$.
+\end{teo}
+
+\begin{comment}
+    \begin{advertencia}
+        Si $S = \emptyset$, definimos $\spn(S)$ como $\{0\}$.
+    \end{advertencia}
+\end{comment}
+
+% \subsection{Conjunto generador}
+% \begin{defi}
+%     Sean $(E,+,\cdot,\K)$ un espacio vectorial y $S\subseteq E$. Al subespacio vectorial más pequeño que contiene a $S$ (es decir, la intersección de todos los subespacios que contienen a $S$) se lo denomina espacio generado por $S$ y se denota por $\gen(S)$.
+% \end{defi}
+
+% \begin{obs}
+%     Si $S = \emptyset$, definimos $\gen(\emptyset)=\{0_{E}\}$.
+% \end{obs}
+
+% \begin{prop}\label{S07C02:Gen_Cap}
+%     Sean $(E,+,\cdot,\K)$ un espacio vectorial y $S\subseteq E$. Se tiene que $\spn(S)=\gen(S)$.
+% \end{prop}
+
+\begin{obs}
+    Si $S = \emptyset$, entonces
+    $\spn(\emptyset) = \{ 0_{E} \}$.
+\end{obs}
+
+% \begin{obs}
+%     Si $S = \emptyset$, entonces
+%     $\spn(\emptyset) = \gen(\emptyset) = \{ 0_{E} \}$.
+% \end{obs}
+
+\begin{defi} 
+Sean $(E,+,\cdot,\K)$ un espacio vectorial, $k\in\N^{*}$ y $S=\{v_1,v_2,\ldots,v_k\}\subseteq E$. 
+Se dice que $S$ genera el espacio vectorial $E$ si cada vector en $E$ es una combinación lineal de los 
+elementos de $S$, es decir, si para todo $v\in E$, existen  $\alpha_1, \alpha_2, \ldots, \alpha_k\in \K$ 
+tales que 
+    \[
+        v = \alpha_1v_1+ \alpha_2v_2+ \cdots+ \alpha_k v_k.
+    \]
+\end{defi}
+
+\begin{ejem}\label{S07C02:Ej_Conj_gen}
+En el espacio vectorial $(\R^2,+,\cdot,\R)$ con las operaciones usuales, considere el conjunto $S=\{(1,0), (0,2)\}$. Tenemos que $S$ genera el espacio vectorial $\R^2$. En efecto, sean $(x,y)\in\mathbb{R}^2$ y $\alpha_1,\alpha_2\in\R$ tal que $(x,y)$ es combinación lineal de los elementos de $S$, es decir:
+\[
+\alpha_1 (1,0)+\alpha_2 (0,2)=(x,y)
+\]
+o equivalentemente
+\[
+(\alpha_1,2\alpha_2)=(x,y).
+\]
+Igualando ambos vectores se obtiene el siguiente sistema de ecuaciones:
+\[
+\systeme[\alpha_1 \alpha_2]{\alpha_1=x,2\alpha_2=y}
+\]
+este sistema tiene solución única $\alpha_1=x$ y $\alpha_2=\dfrac{y}{2}$. Por lo tanto, cada vector de $\mathbb{R}^2$ se puede  escribir como combinación lineal de los elementos de $S$. Por ejemplo, el vector $v=(-1,4)\in\mathbb{R}^2$ se puede escribir como:
+\[
+    (-1,4)=(-1)(1,0)+\dfrac{4}{2}(0,2).
+\]
+Finalmente, notemos que $\gen(S) = \R^{2}$.
+\end{ejem}
+
+% \begin{ejer}
+% En el espacio vectorial $(\R_1[t],+,\cdot,\R)$ con las operaciones usuales, considere el subconjunto $S=\{1,-t\}$ verifique que $S$ genera $\R_1[t]$.
+% \end{ejer}
+
+\begin{prop}
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial, $k\in\N^{*}$ y 
+ \[S=\{v_1,v_2,\ldots,v_k\}\subseteq E.\]
+Se tiene que $S$ genera el espacio vectorial $E$ si y solo si
+    \[
+        E = \gen(S) = \spn(S).
+    \]
+\end{prop}
+
+\begin{ejem}\label{Semana6: ejem1}
+En el espacio vectorial $(\R^{2},+,\cdot,\R)$ con las operaciones usuales, dado el conjunto $S = \{u_{1}\} = \{(2, 3)\}$ se tiene que el espacio generado por $S$ está dada por $\gen(S) = \spn(S) = \{(x,y)\in\R^{2}\,:\,3x-2y=0\}$, además, el espacio generado se representa gráficamente como una recta en el plano, en la figura \ref{GeneradoR2} se puede observar a dicho espacio.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.45\linewidth]{Graficos/GeneradoR2.eps}
+    \caption{Espacio generado por $S = \{u_{1}\}$.}
+    \label{GeneradoR2}
+\end{figure}
+\end{ejem}
+
+\begin{ejem}
+En el espacio vectorial $(\R^{3},+,\cdot,\R)$ con las operaciones usuales, dado el conjunto $S = \{v_{1}, v_{2}\} = \{(0, 2, 2), (0, 1, - 2)\}$ se tiene que el espacio generado por $S$ está dado por $\gen(S) = \spn(S) = \{(x,y,z)\in\R^{3}\,:\,x=0\}$, además, el espacio generado se representa gráficamente como un plano en el espacio.
+
+% . en la figura \ref{GeneradoR3} se puede observar a dicho espacio.
+
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=1.0\linewidth]{Graficos/GeneradorR3.eps}
+%     \caption{Espacio generado por $S = \{v_{1}, v_{2}\}$.}
+%     \label{GeneradoR3}
+% \end{figure}
+\end{ejem}
+
+\begin{obs}
+Un espacio vectorial puede ser generado por distintos conjuntos. Por ejemplo, el espacio $\R^{2}$ está generado por los conjuntos $\{(1, 0), (0, 1)\}$, $\{(1, 1), (1, - 1)\}$, $\{(1, 2), (2, -1), (4, 3)\}$ y $\{(0, 0), (1, 2), (4, 5), (5, 7), (- 3, - 3)\}$, entre otros.
+\end{obs}
+
+\begin{prop}\label{S07C02:Cap_com_lin}
+Sean $(E,+,\cdot,\K)$ un espacio vectorial, $k\in\N^{*}$ y
+
+\noindent$S=\{v_1,v_2,\ldots,v_k\}\subseteq E$. Si algún $v_{j}$ es combinación lineal de los demás elementos de $S$, entonces
+\[
+    \spn(S) = \spn\{v_{1}, v_{2}, \ldots, v_{j - 1}, v_{j + 1}, \ldots, v_{k}\}.
+\]
+\end{prop}
+
+\begin{ejem}\hspace{0pt} En el espacio vectorial $(\mathbb{R}^2,+,\cdot,\R)$ con las operaciones usuales, considere el subconjunto:
+\[
+    S=\{(2,-2), (1,0), (3,2), (0,2)\}.
+\]
+Notemos que se tiene la siguiente combinación lineal:
+\[
+    (3,2)=0(2,-2)+3(1,0)+(0,2),
+\]
+lo que junto con la proposición \ref{S07C02:Cap_com_lin} implica que:
+\[
+    \spn(S) = \spn\{(2,-2), (1,0), (0,2)\}.
+\]
+Además, notemos que dado que se tiene a la combinación lineal:
+\[
+    (2,-2)=2(1,0)-(0,2),
+\]
+por la proposición \ref{S07C02:Cap_com_lin} se tiene que:
+\[
+    \spn(S) = \spn\{(1,0), (0,2)\}.
+\]
+Considerando al ejemplo \ref{S07C02:Ej_Conj_gen} se concluye que:
+\[
+     \spn(S) = \R^{2}.
+\]
+\end{ejem}
+
+\begin{ejer}
+En el espacio vectorial $(\Mat[\R]{2}{3},+,\cdot,\R)$ con las operaciones usuales, considere el subconjunto:
+\[S=\left\lbrace \begin{pmatrix} 1 & 0 & 2\\ 0 & 0 & 1 \end{pmatrix}, \begin{pmatrix} 1 & 0 & 0\\ 1 & 0 & 1 \end{pmatrix}, \begin{pmatrix} 2 & 1 & 0\\ 4 & 1 & 2 \end{pmatrix}, \begin{pmatrix} 0 & 1 & 0\\ 2 & 1 & 0 \end{pmatrix} \right\rbrace.\]
+Verifique que existe alguna matriz $v_j$ combinación lineal de los demás elementos de $S$ tal que:
+\[
+    \spn(S) = \spn(\{v_{k}\in S: k\neq j\}).
+\]
+\end{ejer}
+
+% \begin{ejer}
+% En el espacio vectorial $(\R_2[t],+,\cdot,\R)$ con las operaciones usuales, considere el subconjunto:
+% \[S=\{1,t,t^2,1-2t\}.\]
+% Verifique que existe algún $v_j$ combinación lineal de los demás elementos de $S$ tal que:
+% \[
+%     \spn(S) = \spn(\{v_{k}\in S: k\neq j\}).
+% \]
+% \end{ejer}
+
+\begin{defi}[Independencia lineal]
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial, $k\in\N^{*}$ y $S=\{v_1,v_2,\ldots,v_k\}\subseteq E$. Se dice que $S$ es un conjunto linealmente independiente si y solo si
+    \[ \alpha_1 v_1 + \alpha_2 v_2 + \cdots + \alpha_k v_k = 0 \]
+    implica que 
+    \[ \alpha_1=\alpha_2=\ldots= \alpha_k=0 \]
+    es solución única.
+\end{defi}
+\begin{advertencia}
+    Decimos que un conjunto de vectores $\{v_1,v_2,\ldots,v_k\}$ es linealmente dependiente si existen $\alpha_1, \alpha_2, \ldots, \alpha_k \in \K$, \textbf{no todos iguales a cero}, tales que:
+    \[
+        \alpha_1 v_1 + \alpha_2 v_2 + \cdots + \alpha_k v_k = 0.
+    \]
+\end{advertencia}
+
+% \begin{defi}
+%     Sean $(E,+,\cdot,\K)$ un espacio vectorial, $k\in\N^{*}$ y $S=\{v_1,v_2,\ldots,v_k\}\subseteq E$. Se dice que $S$ es un conjunto linealmente dependiente si existen $\alpha_1, \alpha_2, \ldots, \alpha_k \in \K$, no todos iguales a cero, tales que:
+%     \[
+%         \alpha_1 v_1 + \alpha_2 v_2 + \cdots + \alpha_k v_k = 0
+%     \]
+%     en caso contrario, se dice que $S$ es un conjunto linealmente independiente. 
+% \end{defi}
+
+% \begin{advertencia}
+%     De esta definición, se tiene que $\{v_1,v_2,\ldots,v_k\}$ es linealmente independiente si y solo si
+%     \[
+%         \alpha_1 v_1 + \alpha_2 v_2 + \cdots + \alpha_k v_k = 0
+%     \]
+%     implica que
+%     \[
+%         \alpha_1 = \alpha_2 = \cdots = \alpha_k = 0.
+%     \]
+%     es solución única.
+% \end{advertencia}
+
+\begin{ejem}\label{Semana6: ejem2}
+En el espacio vectorial $(\R^{2},+,\cdot,\R)$, sean $v_{1} = (1,2)$ y $v_{2} = (2,4)$. El conjunto $S = \{v_{1}, v_{2}\}$ es linealmente dependiente. 
+
+\noindent En efecto, sean $\alpha_1, \alpha_2\in\R$, formemos a la combinación lineal nula:
+\[
+    \alpha_1(1,2)+\alpha_2(2,4)=(0,0).
+\]
+o equivalentemente, 
+\begin{equation}\label{Semana6: ec1}
+    (\alpha_1+2\alpha_2,2\alpha_1+4\alpha_2)=(0,0).
+\end{equation}
+A partir de la igualdad de pares ordenados en (\ref{Semana6: ec1}), se obtiene el siguiente sistema de ecuaciones lineales:
+\[
+    \systeme[\alpha_{1} \alpha_{2}]{\alpha_1+2\alpha_2=0,2\alpha_1+4\alpha_2=0.}
+\]
+Este sistema tiene infinitas soluciones donde $\alpha_{1} = -2\alpha_{2}$ con $\alpha_{2}\in\R$. Por lo tanto, el conjunto $S$ es linealmente dependiente.
+\end{ejem}
+
+\begin{ejer}\label{Semana6: ejem3}
+En el espacio vectorial $(\R^2,+,\cdot,\R)$, sean $v_{1} = (1, 3)$ y $v_{2} = (-2,4)$. Se define el conjunto $S = \{v_{1}, v_{2}\}$. Muestre que el conjunto $S$ es linealmente independiente.
+\end{ejer}
+
+\begin{ejer}\hspace{0pt}
+Considerando el Ejemplo \ref{Semana6: ejem3}, sea $T=\{2v_{1} + v_{2}, 4v_{1} - 3v_{2}\}$, ¿es $T$ un conjunto linealmente independiente? Justifique su respuesta.
+\end{ejer}
+
+\begin{prop}
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial y $S\subseteq E$. Si $0_{E}\in S$, entonces $S$ es linealmente dependiente.
+\end{prop}
+
+% \begin{advertencia}
+%     Se puede extender esta definición para conjuntos infinitos diciendo que $S$ es linealmente independiente si todo subconjunto finito de $S$ es linealmente independiente.
+% \end{advertencia}
+
+
+
+\end{document}

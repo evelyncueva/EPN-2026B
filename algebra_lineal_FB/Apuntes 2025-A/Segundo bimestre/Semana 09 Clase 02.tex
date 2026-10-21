@@ -1,0 +1,266 @@
+\documentclass[compacto,10pt]{pubciencias-notas}
+
+% -- Paquetes adicionales
+\usepackage{comandosEPN}
+
+% -- Datos del libro
+\autor{Departamento de Formación Básica}
+\materia{Álgebra Lineal}
+\nota{Semana 09 Clase 02}
+\fecha{Semestre 2025-A}
+
+\logouno[1.1cm]{Logo_EPN.eps}
+\logodos[1.7cm]{Logo_DFB.eps}
+
+\definecolor{colordef}{cmyk}{0.81,0.62,0.00,0.22}
+
+\begin{document}
+
+\encabezado
+
+\vspace*{-4mm}
+
+\setcounter{section}{3}
+\section{Espacios Vectoriales}
+\setcounter{subsection}{6}
+\subsection{Base y dimensión}
+
+\begin{prop}
+Sean $(E,+,\cdot,\K)$ un espacio vectorial y $B\subseteq E$ una base de $E$. Si $S\subseteq E$ es un conjunto linealmente independiente, entonces
+    \[
+        \card(S)\leq \card(B).
+    \]
+\end{prop}
+
+\begin{ejem}\hspace{0pt} 
+En el espacio vectorial $\R^{3}$, el conjunto $B = \{(1, 1, 0),(0, 1, 1),(1, 0, 1)\}$ es una de sus bases. Considere al conjunto $S$ dado por:
+\[
+    S= \{(1, 0, 0),(0, 1, 0)\}.
+\]
+Notemos que $S$ es un conjunto linealmente independiente con $\card(S) = 2$, además, $\card(B) = 3$, luego, 
+\[
+2=\card(S)\leq \card(B)=3.
+\]
+\end{ejem}
+
+\begin{ejer}\hspace{0pt}
+En el espacio vectorial $(\R^{3},+,\cdot,\R)$, el conjunto $B=\lbrace(0,-1,0), (0,1,2),$ $(3,0,-5)\rbrace$ forma una base. A partir de $B$ obtenga un conjunto $C$ linealmente independiente tal que: $\card(C) < \card(B)$.
+\end{ejer}
+
+% \begin{ejer}\hspace{0pt}
+% En el espacio vectorial $(\R^{3},+,\cdot,\R)$, el conjunto $B=\{1-x, x+2x^2, 3-5x^2 \}$ forma una base. A partir de $B$ obtenga un conjunto $C$ linealmente independiente tal que: $\card(C) < \card(B)$.
+% \end{ejer}
+
+\begin{prop}
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial y $B\subseteq E$ una base de $E$. Si $S\subseteq E$ es un conjunto que genera a $E$, entonces 
+    \[
+        \card(B)\leq \card(S).
+    \]
+\end{prop}
+
+\begin{ejem}\hspace{0pt}
+Sea el espacio vectorial $\R^{2}$, y $B = \{(1,-2),(2, 1)\}\subseteq\R^{2}$ es una base de $\R^{2}$. Donde:
+    \[
+        S= \{(1, 0),(0, 1),(1,1)\}\subseteq\R^{2}.
+    \]
+Tal que $S$ es genera a $\R^{2}$. Entonces:
+     \[
+        \card(B)=2\leq \card(S)=3.
+    \]
+\end{ejem}
+
+% \begin{ejer}\hspace{0pt}
+% En el espacio vectorial $(\R^{1}[x],+,\cdot,\R)$, el conjunto $B=\{3, 1-2x\}$ forma una base. A partir de $B$ obtenga un conjunto $D$ que genere a $\R_{2}[x]$ y además verifique que $\card(D) > \card(B)$: 
+% \end{ejer}
+
+\begin{ejer}\hspace{0pt}
+En el espacio vectorial $(\R^{2},+,\cdot,\R)$, el conjunto $B=\{(3,0), (1,-2\}$ forma una base. A partir de $B$ obtenga un conjunto $D$ que genere a $\R^{3}$ y además verifique que $\card(D) > \card(B)$.
+\end{ejer}
+
+\begin{obs}\label{ObsBase}
+De acuerdo con las proposiciones anteriores, en un espacio vectorial, una base es el conjunto linealmente independiente con el mayor número de elementos, además, es el conjunto generador del espacio vectorial con el menor número de elementos.
+\end{obs}
+
+\begin{prop}
+Sean $(E,+,\cdot,\K)$ un espacio vectorial y $B,T\subseteq E$ bases de $E$. Se tiene que
+    \[
+        \card(B) = \card(T).
+    \]
+\end{prop}
+
+\begin{ejem}\hspace{0pt}
+En el espacio vectorial $\R_1 [t]$, notemos que 
+\[
+    B = \{1+t,1-t\} \texty T = \{1,t\}
+\]
+son bases de $\R_1 [t]$, con:
+\[
+    \card(B) = \card(T)=2.
+\]
+\end{ejem}
+
+\begin{ejer}\hspace{0pt}
+Considere el subespacio vectorial:
+\[W=\left\{\begin{pmatrix} a & b\\ c & d\end{pmatrix} \in \mathbb{R}^{2\times 2} : a -2b -c = 0, a+3d=0 \right\}\]
+Obtenga dos bases distintas para $W$ y verifique la proposición 3.
+\end{ejer}
+
+\begin{obs}
+La observación \ref{ObsBase} establece que un espacio vectorial no nulo tiene muchas bases, pero la proposición anterior indica que todas las bases del mismo espacio vectorial tienen el mismo número de elementos.
+\end{obs}
+
+\begin{defi}[Dimensión]
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial y $B\subseteq E$ una base de $E$. Se define la dimensión de $E$, denotado por $\dim(E)$, como la cardinalidad de $B$. Es decir,
+    \[
+        \dim(E) = \card(B).
+    \]
+\end{defi}
+
+\begin{ejem}\hspace{0pt}
+En el espacio vectorial $\R^{2}$, se tiene que $B = \{(1,0),(0, 1)\}$ es una base de $\R^{2}$. Entonces:
+\[
+    \text{dim}(\R^{2})= \text{card}(B)=2,
+\]
+es decir, la dimensión de $\R^{2}$ es 2.
+\end{ejem} 
+
+
+\begin{obs}
+Para el espacio vectorial $\{0\}$ se define su dimensión como 0.
+\end{obs}
+
+\begin{ejem}\hspace{0pt}
+Sean $m, n\in\N^{*}$, se tiene que:
+    \begin{itemize}
+    \item
+        $\dim(\R^n)=n$;
+    \item
+        $\dim(\Mat[\R]{m}{n})=mn$;
+    \item
+        $\dim(\R_n[x])=n+1$;
+    \end{itemize}
+\end{ejem}
+
+\begin{ejem}\hspace{0pt}
+En el espacio vectorial $\R^{3}$, para el subespacio vectorial 
+\[
+    W = \{(x_{1}, x_{2}, x_{3})\in\R^{3}\,:\,x_{1} + x_{2} = x_{3}\}
+\]
+una base es
+\[
+    B = \{(1,0,1),(0, 1,1)\}
+\]
+Luego,
+\[
+    \text{dim}(W)= \text{card}(B)=2,
+\]
+es decir, la dimensión de $W$ es 2.
+\end{ejem}
+
+\begin{ejer}\hspace{0pt}
+Considere el subespacio vectorial:
+\[W=\left\{ (a,b,c,d) \in \mathbb{R}^{4} : a+2b=0,\;\; c-d=0 \right\}\]
+Calcule la dimensión de $W$.
+\end{ejer}
+
+\begin{prop}
+Sean $(E,+,\cdot,\K)$ un espacio vectorial y $S\subseteq E$ un conjunto linealmente independiente. Se tiene que existe una base $B$ de $E$ que contiene a $S$.
+\end{prop}
+
+\begin{teo}
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial, $B\subseteq E$ y $n\in\N^*$ tal que $\dim(E)=n$ y $\card(B)=n$. Se tiene que:
+    \begin{itemize}
+    \item
+        Si $B$ es linealmente independiente, entonces $B$ es una base de $E$.
+    \item
+        Si $B$ genera a $E$, entonces $B$ es una base de $E$.
+    \end{itemize}
+\end{teo}
+
+\begin{ejem}\hspace{0pt}
+En el espacio vectorial $\R^{3}$, considere al conjunto $S$ dado por:
+\[
+    S = \{(1, 0, 1), (0, 1, 1),(0, 0, 1)\}.
+\]
+Se tiene que dim$(\R^{3})=3$ y que la $\card(S)=3$.
+Dado que $S$ es un conjunto linealmente independiente, por el teorema anterior, concluimos que $S$ es una base de $\R^{3}$.
+\end{ejem}
+
+\begin{ejer}\hspace{0pt}
+En el espacio vectorial $(\mathbb{R}^{2\times 2}, +, ., \mathbb{R})$, verifique si el conjunto:
+\[B=\left\{\begin{pmatrix} 1 & 2\\ 0 & 1\end{pmatrix}, \begin{pmatrix} 0 & -1\\ 1 & 2\end{pmatrix}, \begin{pmatrix} 1 & 0\\ -1 & 1\end{pmatrix}, \begin{pmatrix} 1 & -2\\ 1 & 0\end{pmatrix}  \right\}\]
+forma una base para el espacio.
+\end{ejer}
+
+
+\begin{teo}
+Sean $(E,+,\cdot,\K)$ un espacio vectorial con $\dim(E)=n$ y sea $m<n$. Sean $B=\{v_1, v_2, v_3, v_4, \dots, v_m\}\subseteq E$ un conjunto linealmente independiente y $u\not\in \spn(B)$, entonces el conjunto $B \cup \{u\} $ es linealmente independiente.
+\end{teo}
+
+\begin{ejem}\hspace{0pt}
+En el espacio vectorial $\R^{3}$, considere al conjunto $B$, dado por:
+\[
+    B = \{(1, 0, 1), (1, -1, 0)\}.
+\]
+Obtengamos un conjunto $B'$ de tal forma que $B \subseteq B'$ y que $B'$ sea una base para $\R^{3}$.
+
+Calculemos la cápsula de $B$, tenemos que:
+\begin{align*}
+\spn(B) &= 
+    \{(a, b, c) \in \R^{3}:(a, b, c)=\alpha (1, 0, 1)+\beta (1, -1, 0), \alpha, \beta\in\R\}\\
+    &=\{(a, b, c) \in \R^{3}:(a, b, c)=(\alpha , 0, \alpha)+ (\beta, -\beta, 0), \alpha, \beta\in\R \}\\
+    &=\{(a, b, c) \in \R^{3}:(a, b, c)=(\alpha +\beta,-\beta , \alpha), \alpha, \beta\in\R\}\\
+    &=\{(a, b, c) \in \R^{3}:\alpha +\beta=a,-\beta =b, \alpha=c \}.
+\end{align*}
+Ahora, si $(a,b,c)\in\R^{3}$, se tiene que $(a,b,c)\in\spn(B)$ si y solo si se verifica el sistema de ecuaciones:
+\[
+    \systeme[\alpha \beta]{\alpha + \beta =a{,}, -\beta=b{,},\alpha=c}
+\]
+con $\alpha, \beta \in\R$. La matriz ampliada asociada al sistema verifica la siguiente equivalencia por filas:
+\[
+\begin{pmatrix}
+1&1&|&a\\
+0&-1&|&b\\
+1&0&|&c
+\end{pmatrix}
+\sim 
+\begin{pmatrix}
+1&0&|&c\\
+0&1&|&-b\\
+0&0&|&a+b-c
+\end{pmatrix}
+\]
+Luego, para que el sistema tenga solución se debe tener que $a+b-c=0$, entonces
+\[
+    \spn(B) = \{(a,b,c)\in\R^{3}\,:\,a+b-c=0\}.
+\]
+Ahora, notemos que $(1,0,0)\notin\spn(B)$, por tanto,
+\[
+    B' = B \cup \{(1,0,0)\}
+\]
+es un conjunto linealmente independiente tal que $B\subseteq B'$, además, ya que $\card(B')=3 = \dim(R^{3})$, se concluye que $B'$ también es base de $\R^{3}$.
+\end{ejem}
+% \begin{ejer}\hspace{0pt}
+% \item
+%     Sea $W = \{ p(x) \in \R_4[x] : p''(-1) = 0\}$
+%     \begin{enumerate}
+%     \item
+%         Calcule una base para $W$
+%     \item
+%         Completar la base del literal anterior a una base para $\R_4[x]$
+    
+%     \end{enumerate}
+% \end{ejer}
+\begin{ejer}\hspace{0pt}
+\item
+    Sea $W = \{(a,b,c,d,e) \in \R^5 : 6a+c=3b\}$
+    \begin{enumerate}
+    \item
+        Calcule una base para $W$
+    \item
+        Completar la base del literal anterior a una base para $\R^5$
+    
+    \end{enumerate}
+\end{ejer}
+
+\end{document}

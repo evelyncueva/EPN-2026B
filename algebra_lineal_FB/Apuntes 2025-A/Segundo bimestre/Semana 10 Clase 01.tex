@@ -1,0 +1,187 @@
+\documentclass[compacto,10pt]{pubciencias-notas}
+
+% -- Paquetes adicionales
+\usepackage{comandosEPN}
+
+% -- Datos del libro
+\autor{Departamento de Formación Básica}
+\materia{Álgebra Lineal}
+\nota{Semana 10 Clase 01}
+\fecha{Semestre 2025-A}
+
+\logouno[1.1cm]{Logo_EPN.eps}
+\logodos[1.7cm]{Logo_DFB.eps}
+
+\definecolor{colordef}{cmyk}{0.81,0.62,0.00,0.22}
+
+\begin{document}
+
+\encabezado
+
+\vspace*{-4mm}
+
+\setcounter{section}{3}
+\section{Espacios Vectoriales}
+\setcounter{subsection}{7}
+\subsection{Suma de espacios vectoriales}
+
+\begin{defi}[Suma de subespacios]
+    Sea $(E,+,\cdot,\K)$ un espacio vectorial y $W_1,W_2\subseteq E$ subespacios vectoriales de $E$. Se define la suma $W_1+W_2$ por:
+    \[
+        W_1 + W_2 =\left\{v\in E: v=w_1+w_2, \, \text{ con }\, w_1\in W_1, w_2\in W_2\right\}. 
+    \]
+\end{defi}
+\begin{prop}
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial y $W_1,W_2\subseteq E$ subespacios vectoriales de $E$. Se tiene que $W_1 + W_2$ es un subespacio vectorial de $E$.
+\end{prop}
+
+\begin{proof}[Demostración.]\hspace{0pt} De forma inmediata se tiene que $W_1+W_2$ es diferente del vacío, pues $0_E\in W_1+W_2$, dado que:
+\[0_E = 0_E + 0_E\]
+donde $0_E\in W_1$ y $0_E\in W_2$ (por ser subespacios vectoriales de E).\newline
+
+Por otro lado, para $\lambda\in\mathbb{K}$, $a\in W_1+W_2$ y $b\in W_1+W_2$ existen $a_1\in W_1$, $a_2\in W_2$, $b_1\in W_1$, $b_2\in W_2$ tales que:
+\[
+a = a_1 + a_2\quad \text{ y }\quad b = b_1 + b_2
+\]
+entonces,
+\begin{align*}
+    \lambda a + b &= \lambda(a_1+a_2) + (b_1+b_2)\\
+                  &= (\lambda a_1 + b_1) + (\lambda a_2 + b_2)
+\end{align*}    
+Lo que muestra la proposición.
+\end{proof}
+
+
+\begin{prop}
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial y $W_1,W_2\subseteq E$ dos subespacios vectoriales de $E$. Sean $B_1$ y $B_2$ bases de $W_1$ y $W_2$, respectivamente, se tiene que:
+    \[
+        W_1 + W_2 = \spn(B_1 \cup B_2).
+    \]
+\end{prop}
+
+\begin{ejem}\hspace{0pt} Considere el espacio vectorial $\R^{3}$, donde:
+\[
+    W_{1} = \{(x,0,0)\in \R^3: x \in \R \} 
+    \texty
+    W_{2} = \{(0,y,0)\in \R^3: y \in \R\}
+\]
+son subespacios vectoriales, se tiene que: 
+\[
+    B_{1} = \{(1, 0, 0)\}
+    \texty
+    B_{2} = \{(0, 1, 0)\}
+\]
+son bases de $W_{1}$ y $W_{2}$, respectivamente. Entonces:
+\begin{align*}
+    W_1+W_2
+    &=\spn(B_{1} \cup B_{2})\\
+    &= \spn(\{(1,0,0), (0,1,0)\})\\
+    &= \{(x,y,z)\in\R^{3}\,:\, (x,y,z) = \alpha_{1}(1,0,0) + \alpha_{2}(0,1,0),\, \alpha_{1},\alpha_{2}\in\R \}\\
+    &= \{(x,y,z)\in\R^{3}\,:\, (x,y,z) = (\alpha_{1},\alpha_{2},0),\, \alpha_{1},\alpha_{2}\in\R \}\\
+    &= \{(x,y,z)\in\R^{3}\,:\, \alpha_{1} = x, \alpha_{2} = y, z=0,\, \alpha_{1},\alpha_{2}\in\R \}\\
+    &= \{(x,y,z)\in \R^3:  z = 0\}\\
+    &= \{(x,y,0)\in \R^3:  x,y\in \R \}
+\end{align*}
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} Considere el espacio vectorial $\mathbb{R}^{2\times 2}$ y los subespacios vectoriales:
+\[S=\left\{\begin{pmatrix} a & b\\ c & d \end{pmatrix} : a+2c=0\right\}\]
+\[T=\left\{\begin{pmatrix} a & b\\ c & d \end{pmatrix} : d-a=0\right\}\]
+Halle $S+T$ y su dimensión.
+\end{ejer}
+
+\begin{teo}[Teorema de Grassmann]
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial de dimensión finita y $W_1,W_2\subseteq E$ dos subespacios vectoriales de $E$. Se tiene que
+    \[
+        \dim(W_1 + W_2) = \dim(W_1) + \dim(W_2) - \dim(W_1 \cap W_2).
+    \]
+\end{teo}
+
+\begin{obs}
+De acuerdo con el teorema anterior concluimos que en un espacio vectorial $E$ de dimensión finita, cualquier subespacio $W$ verifica que
+\[
+\dim(W) \leq \dim(E).
+\]
+\end{obs}
+
+\begin{ejem}\hspace{0pt} Considere los subespacios vectoriales:
+\[
+    W_{1} = \{(x,0,0)\in \R^3: x \in \R \} 
+    \texty
+    W_{2} = \{(0,y,0)\in \R^3: y \in \R\}.
+\]
+
+Se tiene que $\dim(E) = \dim(\R^{3}) = 3$ y que $\dim(W_{1}) = \dim(W_{2}) = 1$ con $\dim(W_{1} + W_{2}) = 2$, por el teorema anterior, concluimos que $\dim(W_{1} \cap W_{2}) = 0$, lo que implica que $W_{1} \cap W_{2} = \{0_{\R^{3}}\}$.
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} Para el Ejercicio 1, obtenga la $\dim(S\cap T)$.
+\end{ejer}
+
+\begin{defi}[Suma directa]
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial y $W_1, W_2\subseteq E$ subespacios vectoriales de $E$. La suma directa de $W_1$ y $W_2$, denotada por $W_1\oplus W_2$ se define por:
+    \[
+        W_1 \oplus W_2 =\left\{v\in E : (\exists !w_1\in W_1)(\exists !w_2\in W_2)\, \, v=w_1+w_2 \right\} 
+    \]
+\end{defi}
+
+\begin{advertencia}
+Se dice que un espacio vectorial $E$ está en suma directa de dos subespacios $W_1$ y $W_2$ si cualquier elemento de $E$ se puede escribir de manera única como la suma de elementos de $W_1$ y $W_2$.
+\end{advertencia}
+
+
+\begin{teo}
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial y  $W_1,W_2\subseteq E$ subespacios vectoriales de $E$, se tiene que:
+    \[
+        E = W_1 \oplus W_2
+    \]
+    si y sólo si:
+    \[
+        E = W_1 + W_2 \texty
+        W_1 \cap W_2 = \{0_{E}\}.
+    \]
+\end{teo}
+\begin{ejem}\hspace{0pt}\label{EjemDirecta1} En el espacio vectorial $\R^{3}$ considere los subespacios vectoriales:
+\[
+    W_{1} = \{(x,y,z)\in \R^3: x+y+z=0\}
+    \texty 
+    W_{2} = \{(x,y,z)\in \R^3: x=z=0\}.
+\]
+Se tiene que:
+\begin{align*}
+    W_{1} &= \{(x,y,-x-y): x,y\in\R\}\\
+    &= \{x(1,0,-1)+y(0,1,-1): x,y\in\R\}\\
+    &= \langle \{\underbrace{(1,0,-1), (0,1,-1)}_{:=B_1}\}\rangle
+\end{align*}
+con $B_1$ un conjunto linealmente independiente, es decir, $B_1=\{(1,0,-1), (0,1,-1)\}$ es una base de $W_1$. Además,
+\begin{align*}
+    W_{2} &= \{(0,y,0): y\in\R\}\\
+    &= \{y(0,1,0): y\in\R\}\\
+    &= \langle \{\underbrace{(0,1,0)}_{:=B_2}\}\rangle
+\end{align*}
+con $B_2$ un conjunto linealmente independiente, es decir, $B_2=\{(0,1,0)\}$ es una base de $W_2$.
+Por tanto:
+\begin{align*}
+    W_1+W_2 &= \spn(B_1\cup B_2)\\
+    &= \{(x,y,z)\in\R^3 : (x,y,z)=\lambda_1 (1,0,-1) + \lambda_2 (0,1,-1) + \lambda_3 (0,1,0) \}\\
+    &= \{(x,y,z)\in\R^3 : (\lambda_1, \lambda_2+\lambda_3, -\lambda_1-\lambda_2)=(x,y,z)\}\\
+    &= \R^{3}
+\end{align*}
+además,
+\begin{align*}
+    W_1 \cap W_2 &= \{(x,y,z)\in\R^3 : x+y+z=0, x=z=0\}\\
+    &= \{(x,y,z)\in\R^3 : x=y=z=0\}\\
+    &= (0,0,0)
+\end{align*}
+de lo anterior se concluye:
+\[
+    \R^{3} = W_{1} \oplus W_{2}.
+\]
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} En el espacio vectorial $\mathbb{R}^{2\times 2}$ considere los subespacios vectoriales:
+\[W_1 = \left\{A\in \mathbb{R}^{2\times 2} : A=A^T\right\}\]
+\[W_2 = \left\{A\in \mathbb{R}^{2\times 2} : A=-A^T\right\}\]
+Verifique que: $\mathbb{R}^{2\times 2} = W_1 \oplus W_2$.
+\end{ejer}
+
+\end{document}

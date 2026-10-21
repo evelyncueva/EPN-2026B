@@ -1,0 +1,387 @@
+%\documentclass[10pt,respuestas,a4]{examenEPN}
+\documentclass[10pt,a4]{examenEPN}
+
+\usepackage{comandosEPN}
+\usepackage{esint}
+\usepackage{tikz}
+\usepackage{systeme}
+\usetikzlibrary{automata, positioning}
+\usepackage{multicol}
+\usepackage{enumitem} 
+\usepackage{multicol}
+
+\usepackage{pstricks,pst-plot}
+
+\materia{Álgebra Lineal}
+\examen{Hoja de ejercicios Valores y Vectores Propios}
+
+\autor{Departamento de Formación Básica}
+\fecha{Semestre 2024-B}
+\logouno[1.6cm]{Logo_EPN.eps}
+\logodos[2.6cm]{Logo_DFB.eps}
+
+\begin{document}
+
+\encabezado
+%\notapie{Ejercicios sugeridos: 
+%Valores y vectores propios: 1, 6a, 9a, 9c y 10b.}
+\begin{preguntas}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Dados $a,b,c,d,e,f\in\R$, considere la matriz $A = \begin{pmatrix}1&a&b\\1&c&d\\1&e&f\end{pmatrix}$, una matriz simétrica. Determine los valores de $a,b,c,d,e,f$ tales que los vectores $(1,1,1)^{T}$ y $(1,0,-1)^{T}$ sean vectores propios de $A$, asociados a dos valores propios distintos.
+    
+\begin{respuesta}\hspace{0pt}
+
+Por ser $A$ simétrica se tiene que $a = 1$, $b = 1$ y que $d = e$. Sean $\lambda_{1}$ y $\lambda_{2}$ los dos valores propios de $A$ que se consideran, entonces
+\[
+    \begin{pmatrix}1&1&1\\1&c&d\\1&d&f\end{pmatrix}\begin{pmatrix}1\\1\\1\end{pmatrix}=\lambda_{1}\begin{pmatrix}1\\1\\1\end{pmatrix}
+    \texty
+    \begin{pmatrix}1&1&1\\1&c&d\\1&d&f\end{pmatrix}\begin{pmatrix}1\\0\\-1\end{pmatrix}=\lambda_{2}\begin{pmatrix}1\\0\\-1\end{pmatrix}.
+\]
+A partir de lo cual se obtienen que $\lambda_{1}=3$, $\lambda_{2}=0$, $c=1$, $d=1$ y $f=1$.\qedhere
+\end{respuesta}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{respuesta}\hspace{0pt}
+
+\begin{enumerate}
+    \item Supongamos que existe otro valor propio $\lambda_{1}$ tal que $u$ es su vector propio asociado, entonces
+    \[
+        f(u) = \lambda_{1}u.
+    \]
+    Además, por hipótesis tenemos que
+    \[
+        f(u) = \lambda u.
+    \]
+    Por tanto, tenemos que $\lambda_{1}u=\lambda u$, lo que implica que $(\lambda_{1}-\lambda)u=0$, y dado que $u\neq0$, al ser un vector propio, concluimos que $\lambda_{1}=\lambda$. Por lo cual, el enunciado es verdadero.
+    \item Sea $\alpha\in\R$, entonces
+    \[
+        f(\alpha u) = \alpha f(u) = \alpha (\lambda u) = \lambda (\alpha u).
+    \]
+    Por lo cual, $\alpha u$ es un vector propio de $f$ asociado al valor propio $\lambda$.
+    \item Verifiquemos si $u+v$ es un vector propio de $f$; para esto debemos encontrar el correspondiente valor propio. En efecto,
+    \[
+        f(u + v) = f(u) + f(v) = \lambda u + \mu v.
+    \]
+    Si $\lambda = \mu$, tendríamos que $f(u + v) = f(u) + f(v) = \lambda(u+v)$, sin embargo, esto no es posible ya que se tiene que  $\lambda\neq\mu$, en efecto, notemos que la aplicación lineal
+    \[
+        \funcion{f}{\R^{2}}{\R^{2}}{(x,y)}{(x+2y,2x+y).}
+    \]
+    Cuya matriz asociada a la base canónica es $A = \begin{pmatrix}1&2\\2&1\end{pmatrix}$, cuyos valores propios son $-1$ y 3 con vectores propios asociados $(-1,1)^{T}$ y $(1,1)^{T}$, respectivamente. Además,
+    \[
+        f((-1,1)+(1,1))=f(0,2)=(4,2)=2(2,1).
+    \]
+    Por lo tanto, el enunciado es falso.\qedhere
+\end{enumerate}
+\end{respuesta}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\item Sea $\func{f}{\R^{n}}{\R^{n}}$ una aplicación lineal de manera que $f \circ f = f$. Calcular los valores propios de $f$.
+    
+%\begin{respuesta}\hspace{0pt}
+
+%Supongamos que $\lambda$ es un valor propio de $f$ y que $v$ es un vector propio asociado a este valor propio. Entonces, se tienen que
+%\[
+%    f(v) = \lambda v
+%\]
+%y que 
+%\[
+ %   (f \circ f)(v) = f(f(v)) = f(\lambda v) = \lambda f(v) = \lambda^{2} v.
+%\]
+%Por hipótesis tenemos que $f \circ f = f$, y, por tanto, 
+%\[
+ %   f(v) = (f \circ f)(v).
+%\]
+%Luego, 
+%\[
+%    \lambda v = \lambda^{2} v,
+%\]
+%lo que implica que $\lambda(1 - \lambda)v = 0$, y dado que $v\neq0$, al ser un vector propio, tenemos que $\lambda(1 - \lambda)=0$. Por lo tanto, los valores propios de $f$ son 0 y 1.\qedhere
+%\end{respuesta}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Sea $f$ una aplicación lineal, hallar sus valores y vectores propios, donde:
+\begin{enumerate}
+    \item 
+    \[
+        \funcion{f}{\R^{2}}{\R^{2}}{(x,y)}{(x+y,2x-3y).}
+    \]
+    \item
+    \[
+        \funcion{f}{\Mat{2}{2}}{\Mat{2}{2}}{
+        \begin{pmatrix}
+        a&b\\
+        c&d
+        \end{pmatrix}
+        }{\begin{pmatrix}
+        a+b-d&b\\c&-a+c+d
+        \end{pmatrix}
+        .}
+    \]
+  
+\end{enumerate}
+
+\begin{respuesta}\hspace{0pt}
+
+\begin{enumerate}
+    \item Para el valor propio $\lambda_{1} = - \sqrt{6}-1$ su correspondiente vector propio es $\begin{pmatrix}-\sqrt{6}+2\\2\end{pmatrix}$; para el valor propio $\lambda_{2} = \sqrt{6}-1$ su correspondiente vector propio es $\begin{pmatrix}\sqrt{6}+2\\2\end{pmatrix}$.
+    \item Sea $B$ la base canónica de $\Mat{2}{2}$, verifique que
+    \[
+        [f]_{B}^{B} = 
+        \begin{pmatrix}
+        1&1&0&-1\\
+        0&1&0&0\\
+        0&0&1&0\\
+        -1&0&1&1
+        \end{pmatrix}
+    \]
+    Verifique que la matriz $A$ cumple que para el valor propio $\lambda_{1} = 0$ su correspondiente vector propio es $\begin{pmatrix}1\\0\\0\\1\end{pmatrix}$; para el valor propio $\lambda_{2} = 1$ sus correspondientes vectores propios son $\begin{pmatrix}1\\0\\1\\0\end{pmatrix}$ y $\begin{pmatrix}0\\1\\0\\1\end{pmatrix}$; para el valor propio $\lambda_{3} = 2$ su correspondiente vector propio es $\begin{pmatrix}-1\\0\\0\\1\end{pmatrix}$.
+    
+    Ahora, para el valor propio $\lambda_{1} = 0$ se verifica que 
+    \[
+        [f(v_{1})]_{B} = \lambda_{1}[v_{1}]_{B}
+    \]
+    donde
+    \[
+        [v_{1}]_{B} = \begin{pmatrix}1\\0\\0\\1\end{pmatrix}
+    \]
+    de lo cual
+    \[
+        v_{1} = \begin{pmatrix}1&0\\0&1\end{pmatrix}
+    \]
+    
+    Para el valor propio $\lambda_{2} = 1$ se verifica que 
+    \[
+        [f(v_{2})]_{B} = \lambda_{2}[v_{2}]_{B}
+        \texty
+        [f(v_{3})]_{B} = \lambda_{2}[v_{3}]_{B}
+    \]
+    donde
+    \[
+        [v_{2}]_{B} = \begin{pmatrix}1\\0\\1\\0\end{pmatrix}
+        \texty
+        [v_{3}]_{B} = \begin{pmatrix}0\\1\\0\\1\end{pmatrix}
+    \]
+    de lo cual
+    \[
+        v_{2} = \begin{pmatrix}1&0\\1&0\end{pmatrix}
+        \texty
+        v_{3} = \begin{pmatrix}0&1\\0&1\end{pmatrix}
+    \]
+    
+    Finalmente, para el valor propio $\lambda_{3} = 2$ se verifica que 
+    \[
+        [f(v_{4})]_{B} = \lambda_{3}[v_{4}]_{B}
+    \]
+    donde
+    \[
+        [v_{4}]_{B} = \begin{pmatrix}-1\\0\\0\\1\end{pmatrix}
+    \]
+    de lo cual
+    \[
+        v_{4} = \begin{pmatrix}-1&0\\0&1\end{pmatrix}.
+    \]
+    \item Sea $B = \{1, t, t^{2}\}$ la base canónica de $R_{2}[t]$, notemos que la matriz de representación de $f$ respecto a la base $B$ tanto en la salida como en la llegada es
+    \[
+        A = [f]_{B}^{B} = \begin{pmatrix}1&-1&1\\-1&1&-1\\1&-1&1\end{pmatrix}.
+    \]
+    Verifique que la matriz $A$ cumple que para el valor propio $\lambda_{1} = 0$ sus correspondientes vectores propios son $\begin{pmatrix}1\\1\\0\end{pmatrix}$ y $\begin{pmatrix}-1\\0\\1\end{pmatrix}$; para el valor propio $\lambda_{2} = 3$ su correspondiente vector propio es $\begin{pmatrix}1\\-1\\1\end{pmatrix}$.
+    
+    Luego, para el valor propio $\lambda_{1} = 0$ se verifica que 
+    \[
+        [f(v_{1})]_{B} = \lambda_{1}[v_{1}]_{B}
+        \texty
+        [f(v_{2})]_{B} = \lambda_{1}[v_{2}]_{B}
+    \]
+    donde
+    \[
+        [v_{1}]_{B} = \begin{pmatrix}1\\1\\0\end{pmatrix}
+        \texty
+        [v_{2}]_{B} = \begin{pmatrix}-1\\0\\1\end{pmatrix}
+    \]
+    de lo cual
+    \[
+        v_{1} = 1 + t
+        \texty
+        v_{2} = -1 +  t^{2}.
+    \]
+    
+    De forma similar, para el valor propio $\lambda_{2} = 3$ se verifica que 
+    \[
+        [f(v_{3})]_{B} = \lambda_{2}[v_{3}]_{B}
+    \]
+    donde
+    \[
+        [v_{3}]_{B} = \begin{pmatrix}1\\-1\\1\end{pmatrix}
+    \]
+    de lo cual
+    \[
+        v_{3} = 1 - t +  t^{2}.\qedhere
+    \]
+\end{enumerate}
+\end{respuesta}
+\begin{comment}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Sea $f$ una aplicación lineal, hallar sus valores y vectores propios, donde:
+\begin{enumerate}
+    \item 
+    \[
+        \funcion{f}{\R^{2}}{\R^{2}}{(x,y)}{(x+y,2x-3y).}
+    \]
+    \item
+    \[
+        \funcion{f}{\Mat{2}{2}}{\R_{3}[t]}{
+        \begin{pmatrix}
+        a&b\\
+        c&d
+        \end{pmatrix}
+        }{(a+b-d) + bt + ct^{2} + (-a+c+d)t^{3}.}
+    \]
+    \item 
+    \[
+        \funcion{f}{\R_{2}[t]}{\R^{3}}{a+bt+ct^{2}}{(a-b+c,-a+b-c,a-b+c).}
+    \]
+\end{enumerate}
+
+\begin{respuesta}\hspace{0pt}
+
+Verificar que:
+\begin{enumerate}
+    \item Para el valor propio $\lambda_{1} = - \sqrt{6}-1$ su correspondiente vector propio es $\begin{pmatrix}-\sqrt{6}+2\\2\end{pmatrix}$; para el valor propio $\lambda_{2} = \sqrt{6}-1$ su correspondiente vector propio es $\begin{pmatrix}\sqrt{6}+2\\2\end{pmatrix}$.
+    \item Para el valor propio $\lambda_{1} = 0$ su correspondiente vector propio es $\begin{pmatrix}1\\0\\0\\1\end{pmatrix}$; para el valor propio $\lambda_{2} = 1$ sus correspondientes vectores propios son $\begin{pmatrix}1\\0\\1\\0\end{pmatrix}$ y $\begin{pmatrix}0\\1\\0\\1\end{pmatrix}$; para el valor propio $\lambda_{3} = 2$ su correspondiente vector propio es $\begin{pmatrix}-1\\0\\0\\1\end{pmatrix}$.
+    \item Para el valor propio $\lambda_{1} = 0$ sus correspondientes vectores propios son $\begin{pmatrix}1\\1\\0\end{pmatrix}$ y $\begin{pmatrix}-1\\0\\1\end{pmatrix}$; para el valor propio $\lambda_{2} = 3$ su correspondiente vector propio es $\begin{pmatrix}1\\-1\\1\end{pmatrix}$.\qedhere
+\end{enumerate}
+\end{respuesta}
+\end{comment}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Dado $a\in\R\setminus\{0\}$, considere la matriz $A = \begin{pmatrix}1&a&a\\a&1&a\\a&a&1\end{pmatrix}$.
+\begin{enumerate}
+    \item Compruebe que $\begin{pmatrix}1\\1\\1\end{pmatrix}$ es un vector propio de $A$. Hallar el valor propio $\lambda$ asociado. Calcule una base de $E_{\lambda}$.
+    \item Compruebe que $1-a$ es un valor propio de $A$ y calcule una base del espacio propio correspondiente.
+    \item Compruebe que todo vector $x\in\R^{3}$ se puede escribir como $x=y+z$ donde $y\in E_{\lambda}$ y $z\in E_{1-a}$ y que $E_{\lambda} \cap E_{1-a} = \{0\}$.
+\end{enumerate}
+    
+\begin{respuesta}\hspace{0pt}
+
+\begin{enumerate}
+    \item Verifique que el valor propio asociado es $\lambda=2a+1$ y que $E_{\lambda}=\gen(\{(1,1,1)\})$.
+    \item Utilice el polinomio característico de $A - \mu I_{3}$ y compruebe que $E_{1-a}=\gen(\{(-1,1,0),(-1,0,1)\})$.
+    \item Verifique que $E_{\lambda} + E_{1-a} = \R^{3}$ y concluya que $\dim(E_{\lambda} \cap E_{1-a}) = 0$.\qedhere
+\end{enumerate}
+\end{respuesta}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Sean $A,B\in\Mat{n}{n}$. Pruebe que si $\lambda$ es un valor propio de $AB$ también lo es de $BA$.
+
+\emph{Sugerencia:} Distinga los casos $\lambda\neq0$ y $\lambda=0$. Al tratar este último, considere el polinomio característico de $AB$.
+    
+\begin{respuesta}\hspace{0pt}
+
+Supongamos que $\lambda\neq0$, entonces, existe un vector $v$ no nulo tal que $(AB)v=\lambda v$. Ahora, sea $w = Bv$, tenemos que
+\[
+    (BA)w = B(Aw) = B(A(Bv)) = B((AB)v) = B(\lambda v) = \lambda Bv = \lambda w.
+\]
+Luego, $\lambda$ es un valor propio de $BA$.
+
+Ahora, supongamos que $\lambda=0$, entonces
+\[
+    \det(AB - 0I_{n}) = \det(AB) = \det(BA) = \det(BA - 0I_{n}).
+\]
+Lo que implica que 0 también es valor propio de $BA$. Por lo tanto, todo valor propio de $AB$ también lo es de $BA$.\qedhere
+\end{respuesta}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item En cada caso encuentre los valores y vectores propios de la matriz dada.
+\begin{multicols}{2}
+\begin{enumerate}
+
+\item $A_{1} = \begin{pmatrix}2&0&3\\0&1&0\\0&1&2\end{pmatrix}$
+
+\begin{respuesta}\hspace{0pt} El polinomio característico es
+\[
+    p(\lambda) = - (\lambda - 1)(\lambda - 2)^{2}
+\]
+para cada $\lambda\in\R$. 
+
+Para el valor propio 1 el vector propio asociado es
+\[
+    (-3a, - a, a)
+\]
+para cada $a\in\R\setminus\{0\}$.
+
+Para el valor propio 2 el vector propio asociado es
+\[
+    (b, 0, 0)
+\]
+para cada $b\in\R\setminus\{0\}$.
+\end{respuesta}
+\item $A_{2} = \begin{pmatrix}0&0&0&1\\0&0&0&0\\0&0&0&0\\1&0&0&0\end{pmatrix}$
+\end{enumerate}
+\end{multicols}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item En cada caso encuentre los valores y vectores propios de la matriz dada.
+\begin{multicols}{2}
+\begin{enumerate}
+\item $A_{1} = \begin{pmatrix}1&-1\\2&4\end{pmatrix}$
+
+\begin{respuesta}\hspace{0pt} El polinomio característico es
+\[
+    p(\lambda) = (\lambda - 2)(\lambda - 3)
+\]
+para cada $\lambda\in\R$. 
+
+Para el valor propio 2 el vector propio asociado es
+\[
+    (-a, a)
+\]
+para cada $a\in\R\setminus\{0\}$.
+
+Para el valor propio 3 el vector propio asociado es
+\[
+    (-b/2, b)
+\]
+para cada $b\in\R\setminus\{0\}$.
+\end{respuesta}
+\item $A_{2} = \begin{pmatrix}1&1&-2\\4&0&4\\1&-1&4\end{pmatrix}$
+
+\end{enumerate}
+\end{multicols}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%
+\item Para cada matriz dada encuentre los valores  propios y correspondiente espacio propio asociado.
+\begin{multicols}{2}
+\begin{enumerate}
+
+\item $A_{1} = \begin{pmatrix}0&1&1\\1&0&1\\1&1&0\end{pmatrix}$
+\item $A_{2} = \begin{pmatrix}0&0&0&0\\0&0&1&0\\0&1&0&0\\0&0&0&0\end{pmatrix}$
+\end{enumerate}
+\end{multicols}
+\item Para cada matriz dada encuentre los valores  propios y correspondiente espacio propio asociado.
+\begin{multicols}{2}
+\begin{enumerate}
+
+
+\begin{respuesta}\hspace{0pt} El polinomio característico es
+\[
+    p(\lambda) = - \lambda^{2}(\lambda - 6)
+\]
+para cada $\lambda\in\R$. 
+
+Para el valor propio 0 el espacio propio asociado es
+\[
+    E_{0} = \l\{(x,y,z)\in\R\,:\,x + y + z = 0\r\}.
+\]
+
+Para el valor propio 6 el vector propio asociado es
+\[
+    E_{6} = \l\{(x,y,z)\in\R\,:\,x = y, x = z \r\}.
+\]
+\end{respuesta}
+\item $A_{1} = \begin{pmatrix}0&1&1\\1&0&1\\1&1&0\end{pmatrix}$
+\item $A_{2} = \begin{pmatrix}0&0&0&0\\0&0&1&0\\0&1&0&0\\0&0&0&0\end{pmatrix}$
+\end{enumerate}
+\end{multicols}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\final
+\end{preguntas}
+\end{document}

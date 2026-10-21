@@ -1,0 +1,267 @@
+\documentclass[compacto,10pt]{pubciencias-notas}
+
+% -- Paquetes adicionales
+\usepackage{comandosEPN}
+
+% -- Datos del libro
+\autor{Departamento de Formación Básica}
+\materia{Álgebra Lineal}
+\nota{Semana 12 Clase 01}
+\fecha{Semestre 2024-B}
+
+\logouno[1.1cm]{Logo_EPN.eps}
+\logodos[1.7cm]{Logo_DFB.eps}
+
+\definecolor{colordef}{cmyk}{0.81,0.62,0.00,0.22}
+
+\begin{document}
+
+\encabezado
+\vspace*{-8mm}
+
+\setcounter{section}{4}
+\section{Espacios con producto interno}
+\setcounter{subsection}{2}
+\subsection{Proyección ortogonal}
+\setcounter{defi}{8}
+\begin{defi}[Proyección ortogonal]
+Sean $(E,+,\cdot,\K)$ un espacio vectorial con producto interno, 
+$W$ un subespacio vectorial de $E$ y  $\{u_1, u_2, \ldots, u_k \}$ una base ortogonal de $W$. Para $v \in E$, la proyección ortogonal de $v$ sobre $W$, denotado por $\proy_W (v)$, se define por:
+
+\[   \proy_W(v) = \dfrac{\left<v,u_1 \right>}{\left<u_1, u_1 \right\rangle }u_1 +
+   \dfrac{\left<v,u_2 \right\rangle}{\left<u_2, u_2 \right\rangle}u_2 +
+   \cdots +
+   \dfrac{\left<v,u_k \right\rangle}{\left<u_k, u_k \right\rangle}u_k,
+\]
+donde $\proy_W (v) \in W$.
+\end{defi}
+\begin{ejem}\hspace{0pt}\label{ProyeccionOrtogonal} En el espacio vectorial $\R^{3}$ considere a $B=\{u_1, u_2\}$ una base ortonormal de un subespacio $W$ de $\R^3$, donde
+\[
+    u_1 = \l(\dfrac{\sqrt{2}}{2},\dfrac{\sqrt{2}}{2},0\r)
+    \texty
+    u_2 = \l(- \dfrac{\sqrt{6}}{6},\dfrac{\sqrt{6}}{6}, \dfrac{\sqrt{6}}{3}\r)
+\]
+y sea $v = (1,1,1)$, entonces
+\begin{align*}
+\proy_W(v)
+&= \l<v, u_1\r> u_1 + \l<v, u_2\r> u_2\\
+&= \l<(1, 1, 1), \l(\dfrac{\sqrt{2}}{2},\dfrac{\sqrt{2}}{2},0\r)\r> \l(\dfrac{\sqrt{2}}{2},\dfrac{\sqrt{2}}{2},0\r) +\\
+&\phantom{= } \l<(1, 1, 1), 
+\l(- \dfrac{\sqrt{6}}{6},\dfrac{\sqrt{6}}{6}, \dfrac{\sqrt{6}}{3}\r)\r> \l(- \dfrac{\sqrt{6}}{6},\dfrac{\sqrt{6}}{6}, \dfrac{\sqrt{6}}{3}\r)\\
+&= \sqrt{2}\l(\dfrac{\sqrt{2}}{2},\dfrac{\sqrt{2}}{2},0\r) + \dfrac{\sqrt{6}}{3} 
+\l(- \dfrac{\sqrt{6}}{6},\dfrac{\sqrt{6}}{6}, \dfrac{\sqrt{6}}{3}\r)\\
+&= \l(1, 1, 0\r) + \l(- \dfrac{1}{3}, \dfrac{1}{3}, \dfrac{2}{3}\r)\\
+&= \l(\dfrac{2}{3}, \dfrac{4}{3}, \dfrac{2}{3}\r)
+\end{align*}
+donde $\proy_W(v) \in W = \{(x_{1}, x_{2}, x_{3})\in\R^{3}\,:\,x_{1} - x_{2} + x_{3} = 0\}$.
+\end{ejem}
+\begin{teo}[Teorema de la proyección]\label{TeoProyec}
+Sean $(E,+,\cdot,\K)$ un espacio vectorial de dimensión finita provisto de producto interno, $W$ un subespacio vectorial de $E$ y $v \in E$. Se tiene que
+\[
+    v = \proy_W( v) + \proy_{W^\perp}( v).
+\]
+\end{teo}
+
+\begin{ejem}\hspace{0pt} Considere el ejemplo \ref{ProyeccionOrtogonal}, se puede encontrar directamente la proyección ortogonal de $v$ sobre $W^{\perp}$, aplicando el teorema \ref{TeoProyec}:
+\begin{align*}
+\proy_{W^\perp}(v) 
+    &=  v -\proy_{W}(v)\\
+    &= (1,1,1) - \l(\dfrac{2}{3}, \dfrac{4}{3}, \dfrac{2}{3}\r)\\
+    &= \l(\dfrac{1}{3}, - \dfrac{1}{3}, \dfrac{1}{3}\r)
+\end{align*}
+sin necesidad de determinar previamente que:
+\[
+W^{\perp} = \{(x_{1}, x_{2}, x_{3})\in\R^{3}\,:\,x_{1} + x_{2} = 0, x_{2} + x_{3} = 0\}.
+\]
+\end{ejem}
+\begin{teo}
+Sean $(E,+,\cdot,\K)$ un espacio vectorial de dimensión finita provisto de producto interno, $W$ un subespacio vectorial de $E$ y $v \in E$. Se tiene que el vector en $W$ más cercano a $v$ es $\proy_W(v)$, es decir,
+\[
+\|v-w\| \quad \text{ es mínima cuando } \quad w = \proy_W(v).
+\]
+Equivale a afirmar que, para todo $w\in W$ se verifica la desigualdad:
+\[
+    \|v - \proy_{W}(v)\| \leq \|v - w\|,
+\]
+y se cumple la igualdad solo en el caso en que $w = \proy_{W}(v)$.
+\end{teo}
+
+\begin{ejem}\hspace{0pt} Considere el ejemplo \ref{ProyeccionOrtogonal}, se tiene que tomando $w = \proy_{W}(v)$ el valor de $\|v - w\| = \|\proy_{W^{\perp}}(v)\| = \dfrac{\sqrt{3}}{3}$ es la distancia mínima de $v = (1,1,1)$ a $W = \{(x_{1}, x_{2}, x_{3})\in\R^{3}\,:\,x_{1} - x_{2} + x_{3} = 0\}$.
+\end{ejem}
+
+\newpage
+\section{Aplicaciones lineales}
+
+\subsection{Definición de Aplicación lineal}
+\setcounter{defi}{0}
+\begin{defi}[Aplicación lineal]
+    Sean $(E,+_1,\cdot_1,\K)$ y $(F,+_2,\cdot_2,\K)$ espacios vectoriales. A una función
+    
+    \noindent $\func{T}{E}{F}$ se le llama aplicación lineal (transformación lineal) si para todo $\alpha \in \K$, y todo $u,v \in E$ se cumple:
+    \begin{enumerate}
+    \item 
+        $T(u +_1 v) = T(u) +_2 T(v)\quad$ y
+    \item 
+        $T(\alpha \cdot_1 v ) = \alpha \cdot_2 T(v)$.
+    \end{enumerate}
+\end{defi}
+
+\begin{obs}
+En adelante, consideraremos $(E,+,\cdot,\K)$ y $(F,+,\cdot,\K)$ espacios vectoriales, ya que, si bien se están notando de la misma manera las operaciones suma y producto de los dos espacios vectoriales, estamos claros que no tiene por qué ser así. Con esto conseguimos simplificar la escritura de la definición de aplicación lineal.
+\end{obs}
+
+\begin{advertencia}
+    Se denotará
+    \begin{enumerate}
+    \item 
+        $T(u + v) = T(u) + T(v)\quad$ y
+    \item 
+        $T(\alpha v ) = \alpha T(v)$,
+    \end{enumerate}
+    para $\alpha \in \K$ y $u,v \in E$.
+\end{advertencia}
+
+\begin{obs}
+    Al conjunto de todas las aplicaciones lineales del espacio vectorial $E$ en el espacio vectorial $F$, lo designaremos por $\mathscr{L}(E,F)$.
+\end{obs}
+
+\begin{ejem}\hspace{0pt} \label{ejem1}
+Las siguientes funciones, son ejemplos de transformaciones lineales.
+\begin{enumerate}
+\item
+    Aplicación lineal nula.
+    \[
+        \funcion{T}{E}{E}{v}{0_{E}}
+    \]
+\item
+    Aplicación lineal identidad.
+    \[
+        \funcion{T}{E}{E}{v}{v}
+    \]
+    \item
+    \[
+        \funcion{T}{\R^3}{\R^2}{(x,y,z)}{(x-2z,y-z)}
+    \]
+      \item
+    \[
+        \funcion{T}{\R^3}{\R^3}{(x,y,z)}{(x + y,y + z,x)}
+    \]
+  
+    
+   
+    
+  
+\end{enumerate}
+\end{ejem}
+\begin{ejem}
+En la aplicaci\'on lineal
+\[
+        \funcion{T}{\R^3}{\R^2}{(x,y,z)}{(x-2z,y-z)}
+\]
+se tiene que
+\[
+    T(0,0,0)=(0,0) \texty T(-1,2,3)=(-7,-1).
+\]
+\end{ejem}
+
+\begin{ejer}\label{Ejercicio1}
+Dada la aplicaci\'on lineal 
+    \[
+        \funcion{T}{\R^3}{\R^3}{(a,b,c)}{(a,a-b,c)}
+    \]
+Hallar  $T(0,0,0)$, $T(1,-2,3)$ y $T(0,-6,1)$.
+\end{ejer}
+
+
+\begin{ejem}
+Demostremos que la función definida en el Ejercicio \ref{Ejercicio1} es una aplicación lineal.
+\[
+    \funcion{T}{\R^3}{\R^3}{(a,b,c)}{(a,a-b,c)}
+\]
+\begin{enumerate}
+\item
+    Para todo $u, v \in \R^{3}$, vamos a demostrar que $T(u+v) = T(u) + T(v)$.
+
+    \noindent Sean $u = (a, b, c), v = (d, e, f) \in \R^{3}$, tenemos
+    \begin{align*}
+        T(u) & = (a,a-b,c) \\
+        T(v) & = (d,d-e,f) \text{, luego} \\
+        T(u) + T(v) & = (a,a-b,c) + (d,d-e,f).
+    \end{align*}
+    Por otra parte, $u+v = (a+d, b+e, c+f)$, se sigue que
+    \begin{align*}
+        T(u+v) & = (a + d,(a+d) - (b+e), c+f) \\
+        & = (a,a-b, c) + (d,d-e,f).
+    \end{align*}
+    Por lo tanto:
+    \[
+        T(u+v) = T(u) + T(v)
+    \]
+    
+\item
+    Para todo $\alpha \in \R$ y para todo $u \in \R^{3}$, vamos a demostrar que $T(\alpha u) = \alpha T(u)$.
+    
+    Sean $\alpha \in \R$ y $u = (a, b, c) \in \R^{3}$. 
+    Tenemos que $\alpha u = (\alpha a, \alpha b, \alpha c)$, luego
+    \begin{align*}
+    T(\alpha u) & = (\alpha a,(\alpha a - \alpha b) , \alpha c) \\
+    & = \alpha (a, a-b, c)
+    \end{align*}
+    Por otra parte
+    \[
+        \alpha T(u) = \alpha (a ,a-b,c)
+    \]
+    Por lo tanto:
+    \[
+        T(\alpha u) = \alpha T(u)
+    \]
+    De $1.$ y $2.$ se sigue que $T$ es una aplicación lineal.
+\end{enumerate}
+\end{ejem}
+
+\begin{ejer} 
+Demuestre que la siguiente funci\'on es una aplicaci\'on lineal:
+   \[
+        \funcion{T}{\R^3}{\R^2}{(x,y,z)}{(x-2z,y-z)}
+    \]
+\end{ejer}
+\begin{teo}
+     Sea $T \in \mathscr{L}(E,F)$. Para todo $u,v, v_1, v_2, \ldots, v_n \in E$ y $\alpha_1, \alpha_2, \ldots, \alpha_n \in \K$, se tiene que:
+     \begin{enumerate}
+         \item $T(0_E) = 0_F$.
+         \item $T(u-v) = T(u) - T(v)$.
+         \item $T\left(\displaystyle \sum_{k=1}^n \alpha_k v_k \right)= 
+         \displaystyle \sum_{k=1}^n \alpha_k T\left(v_k \right)$.
+     \end{enumerate}
+\end{teo}
+
+\begin{teo}
+    $(\mathscr{L}(E,F), +, \cdot, \K)$ es un espacio vectorial. Siendo $+$ la suma usual entre funciones y $\cdot$ la multiplicación de un elemento del campo por una función.
+\end{teo}
+\subsection{Propiedades de las aplicaciones lineales}
+
+\begin{prop}
+Sean $T_1,T_2 \in \mathscr{L}(E,F)$ y $B= \{v_1, v_2, \ldots, v_n\}$ una base para $E$. Si
+\[
+    T_1(v_i) = T_2(v_i)
+\]
+para todo $i \in \{1, 2, \ldots, n\}$, entonces $T_1(v)=T_2(v)$, para todo $v\in E$, es decir, 
+\[
+    T_1 = T_2.
+\]
+\end{prop}
+
+\begin{prop}
+Si $\{v_1, v_2, \ldots, v_n\}$ es una base del espacio vectorial $E$ y 
+
+\noindent \{ $w_1, w_2, \ldots, w_n \} \subset F$, entonces existe una única transformación lineal
+
+\noindent $T \in \mathscr{L}(E,F)$ tal que
+\[
+    T(v_i) = w_i
+\]
+para todo $i\in \{1, 2, \ldots, n\}$.
+\end{prop}
+
+
+\end{document}

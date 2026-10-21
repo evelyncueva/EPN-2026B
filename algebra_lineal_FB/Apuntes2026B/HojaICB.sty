@@ -1,0 +1,160 @@
+% --- Identificacion
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{hojaICB}[2013/10/20]
+
+% Paquete creado para el formato de exámenes
+% del Instituto de Ciencias Básicas de la EPN.
+% por: Andrés Merino y Jonathan Ortiz
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% --- Paquetes requeridos
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[spanish]{babel}
+
+\RequirePackage{enumitem}
+\RequirePackage{ifthen}
+\RequirePackage{graphicx}
+\RequirePackage[table,dvipsnames]{xcolor}
+
+\RequirePackage{pstricks}
+\RequirePackage{array}
+\RequirePackage{mathpazo}
+\RequirePackage{comment}
+\RequirePackage{float}
+
+
+\RequirePackage{amsmath,amssymb,amsthm}
+
+\RequirePackage[a4paper,left=1.5cm,right=1.5cm,top=1cm,bottom=1cm,includefoot]{geometry}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\let\oldproof\proof
+\renewcommand{\proof}{\color{black}\oldproof}
+%mantiene el color del ambiente proof
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% --- Opciones paquete
+\DeclareOption*{\input{\excludecomment{proof}}}
+
+\newboolean{resp}\setboolean{resp}{false}
+\DeclareOption{respuestas}{\setboolean{resp}{true}}
+
+\newcommand{\resal}[1]{\colorbox{ProcessBlue}{#1}}
+
+
+\ProcessOptions\relax
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% --- Variables
+\newcommand{\materia}[1]%
+  {\newcommand\@materia{#1}}
+
+\newcommand{\grupo}[1]%
+  {\newcommand\@grupo{#1}}
+
+\newcommand{\fecha}[1]%
+  {\newcommand\@fecha{#1}}
+
+\newcommand\@inicio{\hspace{0pt}}
+\newcommand{\inicio}[1]%
+  {\renewcommand\@inicio{ #1}}
+
+\newcommand\@color{blue!50!black}
+\newcommand{\pcolor}[1]%
+  {\renewcommand\@color{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% --- Comando en examen y en respuestas
+\newcommand{\EnExamen}[1]{\ifthenelse{\boolean{resp}}{}{#1}}
+\newcommand{\EnRespuesta}[1]{\ifthenelse{\boolean{resp}}{#1}{}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% --- Permita partir los "display"
+\allowdisplaybreaks
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% --- Espacio interlineado
+\setlength{\parskip}{0.2\baselineskip}
+\renewcommand{\baselinestretch}{1.1}
+
+\AtBeginDocument{
+    \addtolength{\abovedisplayskip}{-1.5mm}
+    \addtolength{\belowdisplayskip}{-1.5mm}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifthenelse{\boolean{resp}}
+        {}{
+        \excludecomment{proof}
+        \renewcommand{\resal}[1]{#1}
+}
+%Quita las soluciones para tomar el examen
+%Quita el resaltado de las respuestas correctas
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% --- Encabezado
+\newcommand{\encabezado}{
+\hrule
+    \begin{center}
+        \parbox{2cm}{\includegraphics[width=1.25cm]{Logos/buho.eps}}
+        \parbox{12.5cm}{\centering
+            \Large \textbf{\textsc{
+           \large Escuela Polit\'ecnica Nacional\\
+            Departamento de Formación Básica\\
+            %\normalsize
+            \@materia\\
+            \@fecha}}}
+        \parbox{1cm}{\includegraphics[width=1.7cm]{Logos/logoEPN.eps}}
+        \\
+    \end{center}
+
+\hrule
+    \vspace{2mm}
+    {\noindent\small\@inicio}
+    \ifthenelse{\boolean{resp}}{\color{\@color}}{}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+% --- Preguntas, ejercicios y opciones
+\newenvironment{preguntas}
+    {\vspace{2mm}\noindent\textbf{\textsc{Preguntas:}}
+        \begin{enumerate}[leftmargin=*,listparindent=\parindent]}
+    {\end{enumerate}}
+
+\newenvironment{ejercicios}
+    {%\ifthenelse{\boolean{resp}}{}{\newpage}
+        \noindent\textbf{\textsc{Ejercicios:}}
+        \begin{enumerate}[leftmargin=*,listparindent=\parindent]}
+    {\end{enumerate}}
+
+\newcommand{\opciones}[4]
+    {\vspace{-1mm}
+    \begin{enumerate}[leftmargin=*,label=\textit{\alph*)}]
+	    \item #1 \item #2 \item #3 \item #4
+    \end{enumerate}
+    }
+
+\newtheorem{advertencia}{Advertencia}
+\newtheorem{peligro}{Peligro}
+\newtheorem{obs}{Observación}
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% --- Respuestas
+\newcommand{\respuesta}[2][Soluci\'on]{
+    \ifthenelse{\boolean{resp}}
+        {{\color{black}\begin{proof}[#1]#2\end{proof}}}{}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% --- Varios
+\spanishlcroman
+\setlist[itemize,1]{label=$\bullet$}

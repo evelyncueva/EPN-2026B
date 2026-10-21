@@ -1,0 +1,349 @@
+\documentclass[compacto,10pt]{pubciencias-notas}
+
+% -- Paquetes adicionales
+\usepackage{comandosEPN}
+
+% -- Datos del libro
+\autor{Departamento de Formación Básica}
+\materia{Álgebra Lineal}
+\nota{Clase 02}
+\fecha{Semestre 2025-A}
+
+\logouno[1.1cm]{Logo_EPN.eps}
+\logodos[1.7cm]{Logo_DFB.eps}
+
+\definecolor{colordef}{cmyk}{0.81,0.62,0.00,0.22}
+
+\begin{document}
+
+\encabezado
+
+\vspace{-8mm}
+
+\section{Matrices}
+\setcounter{subsection}{1}
+%\setcounter{defi}{6}
+\subsection{Operaciones entre matrices}
+
+\begin{defi}[Multiplicación de matrices]\label{Sem01Clas01DefMultMAt}
+    Sean $A \in \Mat[\K]{m}{p}$ y $B \in \Mat[\K]{p}{n}$, el producto de las matrices $A$ y $B$ es la matriz $C \in \Mat[\K]{m}{n}$ tal que
+    \begin{align*}
+        c_{ij} & = a_{i1}b_{1j} + a_{i2} b_{2j} + \cdots + a_{ip}b_{pj} \\
+               & = \sum_{k=1}^p a_{ik} b_{kj}
+    \end{align*}
+    para todo $i \in I$ y $j \in J$. A esta matriz se la denota por $AB$.
+\end{defi}
+
+\begin{ejem}
+Considere las matrices $A,B\in\K^{3\times3}$:
+\[ 
+    A = 
+    \begin{pmatrix}
+    1&0&-1\\
+    0&2&3\\
+    -5&0&3
+    \end{pmatrix}
+    \texty
+    B = 
+    \begin{pmatrix}
+    -1&2&1\\
+    5&-2&1\\
+    -1&2&-2
+    \end{pmatrix}.
+\]
+Notemos que el número de columnas de $A$ es el número de filas de $B$, luego, su multiplicación existe y la denominaremos por $C = AB$. Para ilustrar la multiplicación de matrices, obtengamos al elemento $c_{12}$ de $C$, para esto, consideramos la fila 1 de $A$ y la columna 2 de $B$ y realizamos lo indicado en la definición \ref{Sem01Clas01DefMultMAt}.
+\begin{align*}
+    c_{12}
+        &= \sum_{k=1}^{3}{a_{1k} b_{k2}}\\
+        &= a_{11}b_{12} + a_{12} b_{22} + a_{13}b_{32}\\
+        &= (1)(2) + (0)(- 2) + (- 1)(2)\\
+        &= 0.
+\end{align*}
+Calculemos también, al elemento $c_{33}$ de $C$, en este caso consideramos la fila 3 de $A$ y la columna 3 de $B$, y utilizamos la definición \ref{Sem01Clas01DefMultMAt}.
+\begin{align*}
+    c_{33}
+        &= \sum_{k=1}^{3}{a_{3k} b_{k3}}\\
+        &= a_{31}b_{13} + a_{32} b_{23} + a_{33}b_{33}\\
+        &= (-5)(1) + (0)(1) + (3)(-2)\\
+        &= -11.
+\end{align*}
+Finalmente, la multiplicación de las matrices $A$ y $B$ está dada por:
+\[ 
+    AB = 
+    \begin{pmatrix}
+    0&0&3\\
+    7&2&-4\\
+    2&-4&-11
+    \end{pmatrix},
+\]
+donde $AB\in\K^{3\times 3}$.
+\end{ejem}
+
+\begin{ejer}\label{Apuntes01EjerProdMat} Considere las siguientes matrices $A\in\K^{2\times 3}$ y $B\in\K^{3\times 2}$:
+	\[ 
+	A = 
+	\begin{pmatrix}
+	1  & 5 &8    \\ 
+	-1  & 0 & -2  \\ 
+	\end{pmatrix}
+	\texty
+	B = 
+	\begin{pmatrix}
+	3 &0 \\ 
+	-1&5\\
+	2&-1
+	\end{pmatrix}.
+	\]
+	Obtenga a la matriz $AB$.
+\end{ejer}
+
+\begin{teo} 
+Sean $A, B\in \K^{m \times n}$, $C,D\in \K^{n \times p}$, $E\in \K^{p \times q}$ y $\alpha \in\K$. Se tiene que
+\begin{enumerate}
+\item[$a)$] $A(DE) = (AD)E$;
+\item[$b)$] $A(C+D) = AC + AD$; 
+\item[$c)$] $(A+B)C = AC + BC$;
+\item[$d)$] $A(\alpha C) = \alpha (AC) = (\alpha A) C$.
+\end{enumerate}
+\end{teo}
+
+\begin{advertencia}
+    En general, $AB\neq BA$.
+\end{advertencia}
+
+\begin{obs}
+Dadas dos matrices $A$ y $B$ si $AB = BA$, entonces diremos que $A$ y $B$ conmutan.
+\end{obs}
+
+\begin{ejem}\hspace{0pt} Considere a las matrices $A$ y $B$ del ejercicio \ref{Apuntes01EjerProdMat}, tenemos que
+\[
+    AB = \begin{pmatrix}14&17\\-7&2\end{pmatrix}
+    \texty
+    BA = \begin{pmatrix}3&15&24\\-6&-5&-18\\3&10&18\end{pmatrix}.
+\]
+Notemos que $AB\in\Mat[\K]{2}{2}$ y que $BA\in\Mat[\K]{3}{3}$ con $AB \neq BA$, es decir, $A$ y $B$ no conmutan.
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} Dadas las matrices
+\[
+    A = \begin{pmatrix}1&1&-2\\0&-1&3\end{pmatrix} ,
+    \qquad
+    B = \begin{pmatrix}1&0\\-1&1\\0&1\end{pmatrix}
+    \texty
+    C 
+    = \begin{pmatrix}1&2\\1&-3\end{pmatrix}.
+\]
+Si es posible, calcule la siguientes operaciones. Si no, explique por qué.
+\begin{enumerate}
+    \item [$a)$] $AB+C$
+    \item [$b)$] $C+BA$
+\end{enumerate}
+\end{ejer}
+
+\begin{defi}[Transpuesta de una matriz]
+Sea $A \in \Mat[\K]{m}{n}$. La matriz transpuesta de $A$ es la matriz $B\in \Mat[\K]{n}{m}$ tal que: 
+\[
+    \l(b_{ij}\r) = \l(a_{ji}\r)
+\]
+para todo $i\in I$ y $j \in J$. A esta matriz se la denota por $A^\intercal$.
+\end{defi}
+
+\begin{advertencia}
+    Con esto, tenemos que si $A\in \Mat[\K]{m}{n}$, entonces $A^\intercal\in \Mat[\K]{n}{m}$ y $\l(a_{ij}\r)^\intercal =\l(a_{ji}\r)$.
+\end{advertencia}
+
+\begin{ejem}\hspace{0pt} 
+Considere la matriz
+\[ 
+A= 
+\begin{pmatrix}
+ 1 &4  & -2   \\ 
+  3& 7 &   9 \\ 
+ 0 & -3 & 5  
+\end{pmatrix}
+\]
+su transpuesta es
+\[
+A^\intercal= 
+\begin{pmatrix}
+1 & 3 & 0   \\ 
+4 & 7  &-3    \\ 
+-2 & 9 & 5  
+\end{pmatrix}.
+\]	
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} Dadas las matrices
+\[
+    A = \begin{pmatrix}2&3\\1&4\end{pmatrix},
+    \qquad
+    B = \begin{pmatrix}-2&4&7\\-1&0&1\end{pmatrix}
+    \texty
+    C = \begin{pmatrix}1&0&1\\0&1&1\\0&0&1\\1&1&1\end{pmatrix}.
+\]
+Calcular su transpuesta.
+\end{ejer}
+
+\begin{teo}[Propiedades de la transpuesta]\label{Mat:PropTrans}
+    Sean $\alpha \in \K$, $A,B\in\K^{m \times n}$ y  $C\in\K^{n \times p}$. Se tiene que
+    \begin{itemize}
+    \item[$a)$] 
+        $\l(A^\intercal\r)^\intercal = A$;
+    \item[$b)$] 
+        $(A+B)^\intercal = A^{\intercal} + B^{\intercal}$;
+    \item[$c)$] 
+        $(AC)^\intercal = C^\intercal A^\intercal$;
+    \item[$d)$] 
+        $(\alpha A)^\intercal = \alpha A^\intercal$.
+    \end{itemize}
+\end{teo}
+
+\begin{advertencia}
+Un error común es el siguiente:
+\[
+    (AB)^{\intercal} = A^{\intercal}B^{\intercal}
+\]
+Notemos que lo anterior es verdad, solamente cuando $A$ y $B$ conmutan.
+\end{advertencia}
+
+\begin{ejem}\hspace{0pt} Dada la matriz $A\in\Mat[\K]{n}{n}$. En este ejemplo vamos a ilustrar a las propiedades de la transpuesta. Notemos que
+\begin{eqnarray*}
+ (A^{\intercal}A)^{\intercal} &=& A^{\intercal}(A^{\intercal})^{\intercal}, \quad\text{Teorema \ref{Mat:PropTrans}, literal $c$} \\
+ &=& A^{\intercal}A, \quad\text{Teorema \ref{Mat:PropTrans}, literal $a$} 
+\end{eqnarray*}
+y que
+\begin{eqnarray*}
+(A^{\intercal} - A)^{\intercal} &=& (A^{\intercal})^{\intercal} + (-A)^{\intercal}, \quad\text{Teorema \ref{Mat:PropTrans}, literal $b$} \\
+&=& A - A^{\intercal}, \quad\text{Teorema \ref{Mat:PropTrans}, literales $a$ y $d$} .
+\end{eqnarray*}
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} Sean $A, B, C\in\Mat[\K]{n}{n}$. Justificando cada paso demostrar que 
+\[\l(A(B + C)\r)^{\intercal} = B^{\intercal}A^{\intercal} + C^{\intercal}A^{\intercal}.\]
+\end{ejer}
+
+\begin{defi}[Matriz cuadrada]
+    Si $A$ es un elemento de $\K^{n \times n}$, se dice que $A$ es una matriz cuadrada de orden $n$.
+\end{defi}
+
+\begin{defi}[Traza de una matriz]\label{DefTraza}
+Sea $A$ una matriz cuadrada de orden $n$. La traza de la matriz $A$ es un escalar que notaremos como $\Tr(A)$ tal que:
+%Sea $A \in \Mat[\K]{n}{n}$, la traza de $A$, $\Tr$, se define como la suma de todos los elementos de la diagonal principal de $A$,
+    \[ 
+        \Tr(A) = \sum_{j=1}^n a_{jj}.
+    \]
+\end{defi}
+
+\begin{advertencia}
+    Sea $A$ una matriz cuadrada de orden $n$, el conjunto de las componentes $a_{ij}$ tales que $i=j$ se conoce como diagonal principal de la matriz $A$.
+\end{advertencia}
+\begin{advertencia}
+    La traza de una matriz cuadrada es igual a la suma de los elementos de su diagonal principal. 
+\end{advertencia}
+
+\begin{ejem}
+Dada la matriz:
+\[
+A= 
+\begin{pmatrix}
+1&-1&2\\
+0&-3&-1\\
+-2&-3&8
+\end{pmatrix}.
+\]
+De la definición de traza se tiene que:
+\[
+    \Tr(A) = a_{11} + a_{22} + a_{33} = (1)+(-3)+(8)=6.
+\]
+\end{ejem}
+
+\begin{ejer}
+Dada la matriz:
+\[
+B= 
+\begin{pmatrix}
+1&0&2\\
+0&0&-1\\
+-2&-3&-3
+\end{pmatrix}.
+\]
+Determine la $\Tr(B)$ y la $\Tr(B^{\intercal})$.
+\end{ejer}
+
+\begin{teo}[Propiedades de la traza]\label{Teo:PropTraza}
+    Sea $A, B \in \Mat[\K]{n}{n}$ y $\alpha \in \K$. Se tiene que:
+    \begin{itemize}
+        \item $\Tr(\alpha A) = \alpha \Tr(A)$;
+        \item $\Tr(A + B) = \Tr(A) + \Tr(B)$;
+        \item $\Tr(A^{\intercal}) = \Tr(A)$; y
+        \item $\Tr(A B) = \Tr(B A)$.
+    \end{itemize}
+\end{teo}
+
+
+\begin{defi}[Matriz identidad de orden $n$]
+    Se define la matriz identidad de orden $n$ al elemento $A$ de $\K^{n \times n}$ tal que
+    \[
+        a_{ij} =
+            \begin{cases}
+            1 & \text{si } i=j, \\
+            0 & \text{si } i \neq j,
+            \end{cases}
+    \]
+    para todo $i,j\in J$. A esta matriz se la denota por $I_n$.
+\end{defi}
+
+\begin{obs}
+    Sea $\alpha\in\R$, una matriz de la forma $\alpha I$ se llama matriz escalar. Es decir, la multiplicación de un escalar por la matriz identidad. 
+\end{obs}
+
+\begin{prop}
+    Sea $A\in\Mat[\K]{m}{n}$ se tiene que
+    \[ 
+        I_m A = A I_n = A.
+    \]
+\end{prop}
+
+\begin{obs}
+La matriz $I_{n}$ conmuta con toda matriz de $\Mat[\K]{n}{n}$.
+\end{obs}
+
+\begin{defi}
+    Sean $A \in \K^{n \times n}$ y $r\in\N$. Se define $A$ a la potencia $r$ por
+    \begin{itemize}
+    \item[$a)$] 
+        $A^0 = I_n$; y
+    \item[$b)$] 
+        $A^{r+1} = A^rA$.
+    \end{itemize}
+\end{defi}
+\begin{obs}
+    Sea $r$ el menor entero positivo tal que $A^r=0$, se dice que $A$ es una matriz nilpotente de orden $r$. 
+\end{obs}
+\begin{obs}
+    Si $A^2=A$ se dice que $A$ es una  matriz idempotente. 
+\end{obs}
+
+\begin{ejer}
+    Dadas las matrices
+    \[
+        A=\begin{pmatrix}1&1\\-1&-1\end{pmatrix}  \texty  B=\begin{pmatrix}1&0\\3&0\end{pmatrix}
+    \]
+    calcular $A^2$ y $B^2$
+\end{ejer}
+
+\begin{teo}\label{Apunte01TeoPot}
+    Sean $A \in \K^{n \times n}$ y $r,s\in\N$. Se tiene que
+    \begin{itemize}
+    \item[$a)$] 
+        $A^r A^s = A^{r+s}$; y 
+    \item[$b)$] 
+        $(A^r)^s = A^{rs}$.
+    \end{itemize}
+\end{teo}
+
+\begin{advertencia}
+Note que en general $(AB)^r \neq A^r B^r$.
+\end{advertencia}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}

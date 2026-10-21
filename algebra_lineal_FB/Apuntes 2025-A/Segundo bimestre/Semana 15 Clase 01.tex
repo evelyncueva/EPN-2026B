@@ -1,0 +1,185 @@
+\documentclass[compacto,10pt]{pubciencias-notas}
+
+% -- Paquetes adicionales
+\usepackage{comandosEPN}
+
+% -- Datos del libro
+\autor{Departamento de Formación Básica}
+\materia{Álgebra Lineal}
+\nota{Semana 15 Clase 01}
+\fecha{Semestre 2024-B}
+
+\logouno[1.1cm]{Logo_EPN.eps}
+\logodos[1.7cm]{Logo_DFB.eps}
+
+\definecolor{colordef}{cmyk}{0.81,0.62,0.00,0.22}
+
+\begin{document}
+
+\encabezado
+\vspace*{-8mm}
+
+\setcounter{section}{6}
+\section{Valores y vectores propios}
+\setcounter{subsection}{2}
+\subsection{Diagonalización}
+
+%\begin{defi}
+%Sea $f \in \mathscr{L}(\Mat[\K]{n}{n}, \Mat[\K]{n}{n})$ es una transformación de semejanzas de $A$ a $B$ si existe una matriz invertible $C$ tal que \[ f(A) =  C^{-1} A C\]\end{defi}
+
+\begin{defi}
+Sean $A,B \in \Mat[\K]{n}{n}$. Se dice que $A$ es semejante o similar a $B$ si existe una matriz no singular $C \in \Mat[\K]{n}{n}$ tal que \[ CB = AC\] o equivalentemente \[B=C^{-1}AC.\]
+\end{defi}
+\begin{ejem}\label{Cap7:ejem01} 
+Sean las matrices $A = \begin{pmatrix} 1 & -1 \\ 0 & 2 \end{pmatrix}$ y $C = \begin{pmatrix} 2 & -1 \\ 1 & 0 \end{pmatrix}$. Encontrar una matriz $B\in\mathbb{R}^{2\times 2}$ tal que $A$ sea semejante a la matriz $B$, a través de la matriz invertible $C$. \\
+En efecto, sea $B=\begin{pmatrix} a & b \\ c & d \end{pmatrix}\in\mathbb{R}^{2\times 2}$ tal que $CB = AC$, es decir:
+\begin{eqnarray*}
+\begin{pmatrix} 2 & -1 \\ 1 & 0 \end{pmatrix}
+\begin{pmatrix} a & b \\ c & d \end{pmatrix}&=&
+\begin{pmatrix} 1 & -1 \\ 0 & 2 \end{pmatrix}
+\begin{pmatrix} 2 & -1 \\ 1 & 0 \end{pmatrix}\\
+\begin{pmatrix} 2a-c & 2b-d \\ a& b \end{pmatrix}&=&\begin{pmatrix} 1 & -1 \\ 2 & 0 \end{pmatrix}.
+\end{eqnarray*}
+De donde, $a=2$, $b=0$, $c=3$ y $d=1$. Así, $B=\begin{pmatrix} 2 & 0 \\ 3 & 1 \end{pmatrix}$. Por lo tanto, $A$ y $B$ son semejantes. 
+\\
+Otra manera de encontrar $B$ es utilizando la expresión $B=C^{-1}AC$, es decir:
+\begin{eqnarray*}
+B&=&\begin{pmatrix} 0 & 1 \\ -1 & 2 \end{pmatrix}
+\begin{pmatrix} 1 & -1 \\ 0 & 2 \end{pmatrix}
+\begin{pmatrix} 2 & -1 \\ 1 & 0 \end{pmatrix}\\
+&=&\begin{pmatrix} 2 & 0 \\ 3 & 1 \end{pmatrix}.
+\end{eqnarray*}
+\end{ejem}
+\begin{ejer}\label{Cap7:ejer01} 
+Sean las matrices $E = \begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$ y $F = \begin{pmatrix} -1 & 1 \\ 1 & 1 \end{pmatrix}$. Encontrar una matriz $D\in\mathbb{R}^{2\times 2}$  tal que $E$ sea semejante a $D$, a través de la matriz invertible $F$.
+\end{ejer}
+\begin{teo}
+Sean $A,B, C \in \Mat[\K]{n}{n}$.
+\begin{enumerate}
+    \item Si $A$ es semejante a $B$ entonces $B$ es semejante a $A$.
+    \item $A$ es semejante a sí mismo.
+    \item Si $A$ es semejante a $B$  y $B$ es semejante a $C$ entonces $A$ es semejante a $C$.  
+\end{enumerate}
+\end{teo}
+\begin{defi}
+Una matriz $A\in\Mat[\K]{n}{n}$ se dice diagonalizable si es semejante a una matriz diagonal. En este caso, también diremos que $A$ puede diagonalizarse.
+\end{defi}
+\begin{ejem}
+Del ejercicio \ref{Cap7:ejer01}, se tiene que $E$ es diagonalizable, puesto que es semejante a una matriz diagonal $D=\begin{pmatrix} 0 & 0 \\ 0 & 2 \end{pmatrix}$.
+\end{ejem}
+\begin{ejer}
+Determine si la matriz $E$ del Ejemplo \ref{Cap7:ejer01} es diagonalizable.
+\end{ejer}
+\begin{teo}\label{Mismosvp}
+Sean $A,B \in \Mat[\K]{n}{n}$  matrices semejantes. Entonces
+\begin{enumerate}
+    \item $\text{p}_{A}(\lambda)=\text{p}_{B}(\lambda)$.
+    \item $A$ y $B$ tienen los mismos valores propios.
+    \item $\text{Tr}(A)=\text{Tr}(B)$.
+\end{enumerate}
+\end{teo}
+\begin{ejem}
+En el ejemplo \ref{Cap7:ejem01}, las matrices $A$ y $B$ tienen el mismo polinomio característico, los mismos valores propios y la misma traza. Del mismo modo sucede con las matrices $E$ y $D$ del ejercicio \ref{Cap7:ejer01}.
+\end{ejem}
+\begin{ejer}
+¿El recíproco del Teorema \ref{Mismosvp} es verdadero?. Justifique su respuesta.
+\end{ejer}
+\begin{advertencia}
+Si $A,B \in \Mat[\K]{n}{n}$ son matrices semejantes, los vectores propios son distintos generalmente.
+\end{advertencia}
+\begin{teo}
+Una matriz $A \in \Mat[\K]{n}{n}$ es diagonalizable si y solo si tiene $n$ vectores propios linealmente independientes. 
+\end{teo}
+
+\begin{advertencia}
+Si $A\in\Mat[\K]{n}{n}$ una matriz diagonalizable, entonces existe $C\in\Mat[\K]{n}{n}$ no singular tal que $C^{-1}AC = D$, donde $D \in \Mat[\K]{n}{n}$ está dada por:
+\[
+    D = 
+    \begin{pmatrix}
+     \lambda_1 & 0         & 0        & \cdots & 0 \\
+             0 & \lambda_2 & 0        & \cdots & 0 \\
+             0 &  0        & \lambda_3& \cdots & 0 \\
+    \vdots     & \vdots    & \vdots   & \ddots & \vdots\\
+      0        & 0         & 0        & \cdots & \lambda_n \\
+\end{pmatrix}\]
+donde $\lambda_1, \lambda_2,  \cdots, \lambda_n$ son los valores propios de $A$. Además, $C$ es una matriz cuyas columnas son, respectivamente, los $n$ vectores propios linealmente independientes de $A$.
+\end{advertencia}
+
+\begin{ejem}\hspace{0pt} 
+Considere a la matriz $A=\begin{pmatrix}1&2\\4&3\end{pmatrix}$, se tiene que:
+\begin{enumerate}
+\item La matriz $A$ es semejante a la matriz $D = \begin{pmatrix}-1&0\\0&5\end{pmatrix}$, para esto consideramos a la matriz no singular $C = \begin{pmatrix}-1&1\\1&2\end{pmatrix}$.
+\item La matriz $A$ es diagonalizable.
+\item Las matrices $A$ y $D$ tienen los mismos valores propios.
+\item Los vectores propios de $A$ forman un conjunto linealmente independiente.
+\end{enumerate}
+\end{ejem}
+
+\begin{teo}
+Si la matriz $A \in \Mat[\K]{n}{n}$ tiene $n$ valores propios diferentes, entonces $A$ es diagonalizable.
+\end{teo}
+
+\begin{ejer}\label{Ejer1}
+¿ La matriz
+$
+A=\begin{pmatrix}
+1&2\\
+2&-1
+\end{pmatrix}
+$
+es diagonalizable?
+\end{ejer}
+\begin{teo}
+Sea $A\in\Mat[\K]{n}{n}$. $A$ tiene $n$ vectores propios linealmente independientes si y sólo si la multiplicidad geométrica de cada valor propio es igual a la multiplicidad algebraica.
+\end{teo}
+
+\begin{ejem}\label{Cap7:ejem04} 
+Considere a la matriz diagonalizable
+\[
+A=\begin{pmatrix}1&1&-2\\4&0&4\\1&-1&4\end{pmatrix},
+\]
+con matriz diagonal semejante $D = \begin{pmatrix}0&0&0\\0&2&0\\0&0&3\end{pmatrix}$. \\
+En efecto, para cada valor propio se tiene que la multiplicidad algebraica es igual a la geométrica, lo que implica que $A$ tiene $3$ vectores propios linealmente independientes, por tanto, $A$ es diagonalizable, es decir, es semejante a una matriz diagonal $D$ cuyos elementos en la diagonal principal son los valores propios de la matriz $A$.
+\end{ejem}
+
+%\begin{teo}\label{Matsemflineal}
+%Sea $T\in\mathscr{L}(E,E)$ y sean $B_{1}$ y $B_{2}$ dos bases de $E$, entonces $[T]^{B_{1}}_{B_{1}}$ y $[T]^{B_{2}}_{B_{2}}$ son semejantes.
+%\end{teo}
+
+%\begin{ejem}\hspace{0pt} Sea $T\in\mathscr{L}(\R^{2},\R^{2})$ y sean $B_{1}$ y $B_{2}$ bases de $\R^{2}$, se tiene que:
+%\[
+%    [T]_{B_{2}}^{B_{2}} = [I]_{B_{2}}^{B_{1}} [T]_{B_{1}}^{B_{1}} [I]_{B_{1}}^{B_{2}} = ([I]_{B_{1}}^{B_{2}})^{-1} [T]_{B_{1}}^{B_{1}} [I]_{B_{1}}^{B_{2}}.
+%\]
+%Lo que implica que $[T]_{B_{1}}^{B_{1}}$ y $[T]_{B_{2}}^{B_{2}}$ son semejantes.
+%\end{ejem}
+
+\begin{advertencia}
+\textbf{Proceso para diagonalizar una matriz $A\in\Mat[\K]{n}{n}$.}
+
+\begin{description}
+    \item[Paso 1.] Hallar el polinomio característico $p(\lambda)$ de $A$.
+    \item[Paso 2.] Hallar las raíces de $p(\lambda)$.
+    \item[Paso 3.] Para cada valor propio $\lambda_{j}$ de $A$ con multiplicidad algebraica $k_{j}$, determinamos una base para el espacio solución de $(A - \lambda_{j} I_{n})v = 0$ (el espacio propio asociado con $\lambda_{j}$).
+    
+    Si la dimensión del espacio del espacio propio es menor que $k_{j}$, entonces $A$ no es diagonalizable. De acuerdo con ello, determinamos $n$ vectores propios linealmente independientes de $A$.
+    \item[Paso 4.] Sea $C$ la matriz cuyas columnas son los $n$ vectores propios linealmente independientes determinados en el paso 3. Entonces, 
+    \[  
+        C^{-1}AC = D,
+    \]
+    es una matriz diagonal cuyos elementos de la diagonal son los valores propios de $A$ correspondientes a las columnas de $C$.
+\end{description}
+\end{advertencia}
+
+\begin{ejem}\hspace{0pt} La matriz $A=\begin{pmatrix}1&0&0\\1&1&0\\0&1&1\end{pmatrix}$ no es diagonalizable ya que tiene a $1$ como valor propio con multiplicidad algebraica igual a $3$ y multiplicidad geométrica igual a $1$, es decir, solamente tiene un vector propio asociado a 1.
+\end{ejem}
+
+\begin{ejer}
+Diagonalice la matriz $
+A=\begin{pmatrix}
+1&2\\
+2&-1
+\end{pmatrix}
+$
+\end{ejer}
+
+\end{document}

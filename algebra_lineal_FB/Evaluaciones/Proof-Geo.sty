@@ -1,0 +1,54 @@
+% --- Identificacion
+\NeedsTeXFormat{LaTeX2e}
+%\ProvidesPackage{prueba}[2017/03/08]
+
+% Paquete creado para el formato para demostraciones
+%de Geometría
+%de https://www.overleaf.com/8514791xpstbwqfxxvg#/30259891/
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% --- Paquetes requeridos
+\RequirePackage{tabularx}
+
+\newcounter{proofstmt}
+\newenvironment{Proof-Geo}{
+  \renewcommand{\tabularxcolumn}[1]{>{\raggedright\arraybackslash}p{##1}}
+  \renewcommand{\arraystretch}{1.15}
+  \setcounter{proofstmt}{0}
+  \newcommand{\Paso}[2]{%
+    \refstepcounter{proofstmt}
+    \theproofstmt. & $##1$ & \theproofstmt. & ##2\\
+  }
+  %\vspace{\baselineskip}
+  \noindent\tabularx{0.95\textwidth}{c @{\hspace{0.5em}}X c@{\hspace{0.5em}} X}
+  \hline
+  \multicolumn{2}{c}{\bfseries Proposiciones} & \multicolumn{2}{c}{\bfseries Razones}\\
+  \hline
+}{%
+  \hline
+  \endtabularx%
+  %\hrule
+  %
+  %\vspace*{\baselineskip}
+}
+
+%Ejemplo
+% \begin{Proof-Geo}
+% \Paso{Segment $AD$ bisects segment $BC$.}
+% {Given.}
+
+% \Paso{Segments $AM$ and $MD$ are congruent. \label{label1}}
+% {When a segment is bisected, the two resulting segments are congruent.}
+
+% \Paso{Segment $BC$ bisects segment $AD$.}
+% {Given.}
+
+% \Paso{Segments $BM$ and $CM$ are congruent.}
+% {When a segment is bisected, the two resulting segments are congruent.}
+
+% \Paso{$\angle AMB$ and $\angle DMC$ are congruent.}
+% {Verticle angles are congruent.}
+
+% \Paso{$\triangle ABM$ and $\triangle DCM$ are congruent.}
+% {SAS postulate (2, 4, 5).}
+% \end{Proof-Geo}

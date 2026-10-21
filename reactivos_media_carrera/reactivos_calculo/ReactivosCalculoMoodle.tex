@@ -1,0 +1,166 @@
+\documentclass[10pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+% Evitar caracteres activos (< y >) al convertir desigualdades a Moodle XML.
+\usepackage[spanish,shorthands=off]{babel}
+
+\usepackage{aleph-comandos}
+\usepackage{moodle}
+% Se recomienda leer la documentación de estos
+% paquetes en https://www.alephsub0.org/recursos/
+
+% -- Paquetes adicionales
+\usepackage{amssymb}
+\usepackage{mathpazo}
+
+% -- Datos
+\title{Reactivos Cálculo Diferencial}
+\author{Evelyn Cueva}
+
+\usepackage[margin=2cm]{geometry}
+
+\begin{document}
+\maketitle
+
+
+\begin{quiz}{Calculo-Diferencial-Examen-Media-Carrera-MATD124}
+
+\typeout{MATD124: pregunta 1 - inicio}
+
+\begin{multi}[single=true,shuffle=false]{calculo-diferencial-MATD124-01}
+Sea $S=\{1-1/n:n\in\mathbb{N}\}$. ¿Cuál es la afirmación correcta?
+    \item[fraction=0] $\inf S=0$ y $\max S=1$.
+    \item* $\min S=0$, $\sup S=1$ y $S$ no tiene máximo.
+    \item[fraction=0] $\inf S=-1$ y $\sup S=1$.
+    \item[fraction=0] $\min S=0$ y $\sup S=0$.
+\end{multi}
+\typeout{MATD124: pregunta 1 - completada}
+
+\typeout{MATD124: pregunta 2 - inicio}
+
+\begin{multi}[single=true,shuffle=false]{calculo-diferencial-MATD124-02}
+Para la sucesión $a_n=(3n^2+1)/(2n^2+n)$, ¿cuál es el valor de
+$\displaystyle\lim_{n\to\infty}a_n$?
+    \item[fraction=0] $0$.
+    \item[fraction=0] $1$.
+    \item[fraction=0] $3$.
+    \item* $\dfrac{3}{2}$.
+\end{multi}
+\typeout{MATD124: pregunta 2 - completada}
+
+\typeout{MATD124: pregunta 3 - inicio}
+
+\begin{multi}[single=true,shuffle=false]{calculo-diferencial-MATD124-03}
+¿Cuál de las siguientes condiciones define que una sucesión
+real $(a_n)$ es de Cauchy?
+    \item* Para todo $\varepsilon>0$, existe $N\in\mathbb{N}$ tal que
+  $|a_n-a_m|<\varepsilon$ para todos $n,m\geq N$.
+    \item[fraction=0] Existe $\varepsilon>0$ tal que $|a_n-a_m|<\varepsilon$ para todos
+  $n,m\in\mathbb{N}$.
+    \item[fraction=0] Para todo $\varepsilon>0$, existe $N\in\mathbb{N}$ tal que
+  $|a_n|<\varepsilon$ para todo $n\geq N$.
+    \item[fraction=0] Existe $N\in\mathbb{N}$ tal que $a_n=a_m$ para todos $n,m\geq N$.
+\end{multi}
+\typeout{MATD124: pregunta 3 - completada}
+
+\typeout{MATD124: pregunta 4 - inicio}
+
+\begin{multi}[single=true,shuffle=false]{calculo-diferencial-MATD124-04}
+¿Cuál es el valor de
+$\displaystyle\lim_{x\to 0}\frac{e^{2x}-1}{x}$?
+    \item[fraction=0] $0$.
+    \item[fraction=0] $1$.
+    \item* $2$.
+    \item[fraction=0] El límite no existe.
+\end{multi}
+\typeout{MATD124: pregunta 4 - completada}
+
+\typeout{MATD124: pregunta 5 - inicio}
+
+\begin{multi}[single=true,shuffle=false]{calculo-diferencial-MATD124-05}
+Sea
+$$
+f(x)=\begin{cases}
+\dfrac{x^2-4}{x-2},&x\neq 2,\\
+k,&x=2.
+\end{cases}
+$$
+¿Para qué valor de $k$ es continua $f$ en $x=2$?
+    \item[fraction=0] $k=0$.
+    \item* $k=4$.
+    \item[fraction=0] $k=2$.
+    \item[fraction=0] No existe un valor de $k$ que haga continua a $f$ en $x=2$.
+\end{multi}
+\typeout{MATD124: pregunta 5 - completada}
+
+\typeout{MATD124: pregunta 6 - inicio}
+
+\begin{multi}[single=true,shuffle=false]{calculo-diferencial-MATD124-06}
+Una función $f$ es continua en $[0,2]$ y diferenciable en $(0,2)$.
+Se sabe que $f(0)=-1$, $f(2)=3$ y $f'(x)>0$ para todo $x\in(0,2)$.
+¿Qué se puede concluir sobre las soluciones de $f(x)=0$ en $(0,2)$?
+    \item[fraction=0] No existe ninguna solución.
+    \item[fraction=0] Existe al menos una solución, pero las condiciones
+    no permiten determinar si es única.
+    \item[fraction=0] Existen al menos dos soluciones distintas.
+    \item* Existe exactamente una solución.
+\end{multi}
+\typeout{MATD124: pregunta 6 - completada}
+
+\typeout{MATD124: pregunta 7 - inicio}
+
+\begin{multi}[single=true,shuffle=false]{calculo-diferencial-MATD124-07}
+Sea $f$ diferenciable en un intervalo abierto $I$. Si $f'(x)\geq0$
+para todo $x\in I$, ¿cuál de las siguientes conclusiones está garantizada?
+    \item[fraction=0] Para cualesquiera $x_1,x_2\in I$ con $x_1<x_2$,
+    se cumple $f(x_1)<f(x_2)$.
+    \item[fraction=0] $f$ es constante en $I$.
+    \item[fraction=0] $f$ no puede ser constante en ningún subintervalo de $I$.
+    \item* Para cualesquiera $x_1,x_2\in I$ con $x_1<x_2$,
+    se cumple $f(x_1)\leq f(x_2)$.
+\end{multi}
+\typeout{MATD124: pregunta 7 - completada}
+
+\typeout{MATD124: pregunta 8 - inicio}
+
+\begin{multi}[single=true,shuffle=false]{calculo-diferencial-MATD124-08}
+La ecuación $x^2+xy+y^2=3$ define localmente a $y$ como una
+función diferenciable de $x$ alrededor de $(1,1)$. ¿Cuál es la pendiente de
+la recta tangente en ese punto?
+    \item[fraction=0] $1$.
+    \item[fraction=0] $-\dfrac{1}{2}$.
+    \item* $-1$.
+    \item[fraction=0] $0$.
+\end{multi}
+\typeout{MATD124: pregunta 8 - completada}
+
+\typeout{MATD124: pregunta 9 - inicio}
+
+\begin{multi}[single=true,shuffle=false]{calculo-diferencial-MATD124-09}
+Una función $f$ es continua en $[0,3]$ y diferenciable en $(0,3)$.
+Se sabe que $f'(x)<0$ para $0<x<1$ y que $f'(x)>0$ para $1<x<3$.
+Sin conocer una fórmula para $f$, ¿cuál de las siguientes afirmaciones
+es necesariamente verdadera?
+    \item[fraction=0] $f$ alcanza su máximo absoluto en $x=1$.
+    \item* $f$ alcanza su mínimo absoluto en $x=1$.
+    \item[fraction=0] $f(0)<f(1)$.
+    \item[fraction=0] $f(3)<f(1)$.
+\end{multi}
+\typeout{MATD124: pregunta 9 - completada}
+
+\typeout{MATD124: pregunta 10 - inicio}
+
+\begin{multi}[single=true,shuffle=false]{calculo-diferencial-MATD124-10}
+¿Cuál es el polinomio de Taylor de grado dos de $f(x)=e^x$
+centrado en $x=0$?
+    \item[fraction=0] $1+x+x^2$.
+    \item[fraction=0] $x+\dfrac{x^2}{2}$.
+    \item[fraction=0] $1+\dfrac{x^2}{2}$.
+    \item* $1+x+\dfrac{x^2}{2}$.
+\end{multi}
+\typeout{MATD124: pregunta 10 - completada}
+
+\end{quiz}
+\typeout{MATD124: 10 - quiz completado}
+\end{document}

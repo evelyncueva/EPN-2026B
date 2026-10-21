@@ -1,0 +1,411 @@
+\documentclass[compacto,10pt]{pubciencias-notas}
+
+% -- Paquetes adicionales
+\usepackage{comandosEPN}
+
+% -- Datos del libro
+\autor{Departamento de Formación Básica}
+\materia{Álgebra Lineal}
+\nota{Semana 11 Clase 01}
+\fecha{Semestre 2025-A}
+
+\logouno[1.1cm]{Logo_EPN.eps}
+\logodos[1.7cm]{Logo_DFB.eps}
+
+\definecolor{colordef}{cmyk}{0.81,0.62,0.00,0.22}
+
+\begin{document}
+
+\encabezado
+\vspace*{-8mm}
+
+\setcounter{section}{4}
+\section{Espacios con producto interno}
+\subsection{Producto interno}
+
+\begin{defi}[Producto interno]
+    Sea $(E,+,\cdot,\K)$ un espacio vectorial. Un producto interno sobre $E$ es una función
+    \[
+        \funcion{\langle  \cdot, \cdot \rangle }{E\times E}{\K}{(u,v)}{\langle  u, v \rangle }
+    \]
+    tal que cumple:
+    \begin{enumerate}
+        \item 
+            $\langle  v, v \rangle  \geq 0$ para todo $ v \in E$;
+        \item 
+            $\langle  v,v \rangle  = 0$ si y solo si $ v = 0$;
+        \item 
+            $\langle  u + v, w \rangle  = \langle  u,w \rangle  + \langle  v,w\rangle  $ para todo $u,v,w \in E$;
+        \item
+            $\langle  \alpha v,w \rangle  = \alpha \langle  v,w \rangle $ para todo $v,w \in E$ y $\alpha\in\K$.
+        \item
+            $\langle  v,w \rangle  = \overline{\langle w, v \rangle}$ para todo $v,w \in E$.
+    \end{enumerate}
+\end{defi}
+
+
+\begin{advertencia}
+    En caso de tratarse de un espacio vectorial sobre el campo de los números reales, la propiedad 5 equivale a
+    \begin{enumerate}[start=5]
+        \item
+            $\langle  v,w \rangle  = \langle  w, v \rangle $ para todo $v,w \in E$.
+    \end{enumerate}
+\end{advertencia}
+
+
+\begin{advertencia}
+    Se puede demostrar utilizando la propiedad 4 que
+    \begin{itemize}
+        \item
+            si $v = 0$, entonces $\langle  v,v \rangle  = 0$;
+    \end{itemize}
+    por lo cual, podríamos cambiar la propiedad 2 por
+    \begin{enumerate}[start=2]
+        \item
+            si $\langle  v,v \rangle  = 0$, entonces $ v = 0$
+    \end{enumerate}
+\end{advertencia}
+
+\begin{advertencia}
+    Si se define un producto interno sobre un espacio vectorial $E$, a este se lo denomina espacio con producto interno o prehilbertiano.
+\end{advertencia}
+
+%\begin{ejem}\hspace{0pt} En el espacio vectorial $\R^3$ definimos a la función 
+%\[
+%    \funcion{\langle \cdot,\cdot\rangle }{\R^{3} \times \R^{3}}{\R}{(u, v)}{u_1 v_1}
+%\]
+%donde $u = (u_1, u_2, u_3)$ y $v  = (v_1,v_2,v_3)$. Tomando $u = (0,2,3)$, se tiene que
+%\[
+%    \langle u,u\rangle  = \langle (0,2,3),(0,2,3)\rangle  = 0,
+%\]
+%sin embargo, $u \neq (0,0,0)$, por tanto, $\langle \cdot,\cdot\rangle $ no es un producto interno.
+%\end{ejem}
+
+%\begin{ejem}\hspace{0pt} En el espacio vectorial $\R_1[x]$ definimos la función $$\func{\langle \cdot,\cdot\rangle }{\R_1[x] \times \R_1[x]}{\R}$$ por
+%\[
+ %   \langle  p, q \rangle  = a_0 b_0 + 2 a_1b_1 
+%\]
+%para todo $p(x) = a_0 + a_1 x\in\R_1[x]$ y todo $q(x) = b_0 + b_1x\in\R_1[x]$. La función $\langle \cdot,\cdot\rangle $ es un producto interno.
+
+%\begin{proof}[Demostración.]\hspace{0pt}
+%Sean $p,q,r\in\R_{1}[x]$ y sea $\alpha\in\R$.
+%\begin{enumerate}
+%\item Tenemos que $p(x) = a_{0} + a_{1}x$, y que
+%\[
+ %   \langle p,p\rangle  = a^{2}_{0} + 2a^{2}_{1} \geq 0.
+%\]
+%\item Se tiene que
+%\begin{align*}
+ %   \langle p,p\rangle  = 0
+  %  &\Longleftrightarrow 
+   % a^{2}_{0} + 2a^{2}_{1} = 0.
+%\end{align*}
+%Lo cual se verifica si y solo si $a_{0} = a_{1} = 0$, o equivalentemente $p(x) = 0 + 0x$.
+%\item Notemos que $q(x) = b_{0} + b_{1}x$ y $r(x) = c_{0} + c_{1}x$, entonces
+%\begin{align*}
+ %   \langle p + q, r\rangle  
+  %  &= (a_{0} + b_{0})c_{0} + 2(a_{1} + b_{1})c_{1}\\
+   % &= (a_{0}c_{0} + 2a_{1}c_{1}) + (b_{0}c_{0} + 2b_{1}c_{1})\\
+    %&= \langle p, r\rangle   + \langle q, r\rangle .
+%\end{align*}
+%\item Tenemos que
+%\begin{align*}
+ %   \langle \alpha p, q\rangle  = (\alpha a_{0})b_{0} + 2(\alpha a_{1})b_{1} = \alpha(a_{0}b_{0} + 2a_{1}b_{1}) = \alpha\langle p,q\rangle .
+%\end{align*}
+%\item Se tiene que
+%\begin{align*}
+ %   \langle p,q\rangle  = a_{0}b_{0} + 2a_{1}b_{1} = b_{0}a_{0} + 2b_{1}a_{1} = \langle q,p\rangle .
+%\end{align*}
+%\end{enumerate}
+%Por 1, 2, 3, 4 y 5 concluimos que $\langle \cdot,\cdot\rangle $ es un producto interno.\qedhere
+%\end{proof}
+%\end{ejem}
+
+%\begin{ejer}\hspace{0pt} En el espacio vectorial $\Mat{2}{2}$ se define a la función
+%\[
+ %   \func{\langle \cdot,\cdot\rangle }{\Mat{2}{2}\times\Mat{2}{2}}{\R}
+%\]
+%por 
+%\[
+ %   \langle A,B\rangle  = a_{11}b_{11} + 2a_{12}b_{12} + 2a_{21}b_{21} + a_{22}b_{22}
+%\]
+%para toda $A = \begin{pmatrix}a_{11}&a_{12}\\a_{21}&a_{22}\end{pmatrix}\in\Mat{2}{2}$ y toda $B = \begin{pmatrix}b_{11}&b_{12}\\b_{21}&b_{22}\end{pmatrix}\in\Mat{2}{2}$. Determine si $\langle \cdot,\cdot\rangle $ es un producto interno.
+%\end{ejer}
+
+%\begin{ejer}\hspace{0pt} En el espacio vectorial $\R^2$, verifique si la función
+%\[
+ %   \func{\langle \cdot,\cdot\rangle }{\R^2\times\R^2}{\R}
+%\]
+%definida por
+%\[
+ %   \langle u,v\rangle  = u^{T}Av = (u_1,u_2)\begin{pmatrix}1 & 0\\ 2 & 0\end{pmatrix}\begin{pmatrix}v_1\\v_2\end{pmatrix}
+%\]
+%para $u^{T}=(u_1,u_2)$ y $v^{T}=(v_1,v_2)$, es un producto interno. 
+%\end{ejer}
+
+A continuación, se indican los productos internos usuales en los espacios vectoriales que hemos trabajado durante el curso.
+\begin{enumerate}
+\item En $(\R^n,+, \cdot, \R)$, para $x,y\in \R^n$:
+\[
+    \langle  x, y \rangle  = \dsum_{k=1}^{n}{x_k y_k}.
+\]
+\item En $(\C^n,+, \cdot, \C)$, para $x,y\in \C^n$:
+\[
+    \langle  x, y \rangle  = \dsum_{k=1}^{n}{x_k \overline{y_k}}.
+\]
+\item En $(\R_{n}[x], +, \cdot, \R)$, para $p(x),q(x)\in \R_{n}[x]$, si 
+\[  
+    p(x) = a_0 + a_1x + \cdots + a_nx^n
+    \texty
+    q(x) = b_0 + b_1x + \cdots + b_nx^n
+\]
+entonces
+\[
+    \langle  p(x), q(x) \rangle  = \dsum_{k=0}^{n}{a_k b_k}.
+\]
+\item En $(\Mat[\R]{n}{n},+, \cdot, \R)$, para $A,B\in \Mat[\R]{n}{n}$:
+\[
+    \langle  A, B \rangle  = \Tr(AB^{T}).
+\]
+%\item En $(\mathcal{C}([a,b]),+, \cdot, \R)$, para $f,g\in \mathcal{C}([a,b])$:
+%\[
+ %   \langle  f, g \rangle  = \int_{a}^{b}{f(x) g(x)\,dx}.
+%\]
+\end{enumerate}
+
+\begin{teo}\label{te12:01}
+    Sea $(E,+,\cdot,\K)$ un espacio vectorial provisto de producto interno, entonces:
+    \begin{enumerate}
+        \item 
+            Para todo $u,v,w \in E$ se verifica que:
+            \[\langle  u, v+w\rangle  = \langle  u,v\rangle  + \langle  u, w \rangle .\]
+        \item 
+            Para todo $u,v \in E$ y $\alpha \in \K$ se verifica que:
+            \[\langle  u, \alpha v\rangle  =  \overline{\alpha}\langle  u,v\rangle .\]
+        \item
+            Para todo $u\in E$ se cumple que:
+            \[\langle  u, 0 \rangle  =  \langle  0, u \rangle   = 0.\]
+    \end{enumerate}
+\end{teo}
+
+\begin{advertencia}
+    En caso de tratarse de un espacio vectorial sobre el campo de los números reales, la propiedad 2 del Teorema \ref{te12:01} implica
+    \begin{enumerate}[start=2]
+        \item
+            Para todo $u,v \in E$ y $\alpha \in \R$
+            \[\langle  u, \alpha v\rangle  =  \alpha\langle  u,v\rangle \]
+    \end{enumerate}
+\end{advertencia}
+
+\begin{proof}[Demostración de la propiedad 2 del Teorema \ref{te12:01}.]\hspace{0pt} Sean $u,v\in E$ y $\alpha\in\K$, tenemos que
+\begin{align*}
+    \langle u,\alpha v\rangle  &= \overline{\langle \alpha v,u\rangle }\\
+    &= \overline{\alpha\langle v,u\rangle }\\
+    &= \overline{\alpha}\overline{\langle v,u\rangle }\\
+    &= \overline{\alpha}\langle u,v\rangle .
+\end{align*}
+Lo que muestra al enunciado.
+\end{proof}
+
+\begin{ejer}\hspace{0pt} Sea $(E,+,\cdot,\R)$ un espacio vectorial provisto de producto interno, sean $u,v,w\in E$, demuestre que $\langle u - v,v - w\rangle  = \langle v,u - v\rangle  + \langle w,v-u\rangle .$
+\end{ejer}
+
+\begin{defi}[Vectores ortogonales]
+Sean $(E,+,\cdot,\K)$ un espacio vectorial provisto de producto interno y $u, v \in E$. Se dice que $u$ y $v$ son ortogonales si $\langle  u, v \rangle  = 0$.
+\end{defi}
+
+\begin{ejem}\hspace{0pt}\label{Sem08:EjemOrt} En el espacio vectorial $\R^{3}$ con el producto interno usual, los vectores $u=(1,1,2)$ y $v=(2,0,-1)$ son ortogonales. En efecto, notemos que
+\[
+    \langle u,v\rangle  = \langle (1,1,2),(2,0,-1)\rangle  = (1)(2) + (1)(0) + (2)(-1) = 0.
+\]
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} En el espacio vectorial $\Mat{2}{2}$ con producto interno usual, considere a los vectores $A = \begin{pmatrix}-1&0\\-1&0\end{pmatrix}$ y $B = \begin{pmatrix}0&1\\1&1\end{pmatrix}$. Determine si $A$ y $B$ son ortogonales.
+\end{ejer}
+
+\begin{defi}[Norma]
+Sea $(E,+,\cdot,\K)$ un espacio vectorial provisto de producto interno. Sea $u\in E$, la norma de $u$, denotada por $\|u \|$, está definida por:
+\[
+    \| u\| = \sqrt{\langle  u, u \rangle .}
+\]
+\end{defi}
+
+\begin{ejem}\hspace{0pt} En el espacio vectorial $\mathbb{R}^{3}$ considere el vector $u=(2,3,-4)$ y halle su norma.\newline
+
+Considerando el producto interno se tiene que:
+\[
+\| u\| = \sqrt{\langle  (2,3,-4), (2,3,-4) \rangle } = \sqrt{29}
+\]
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} En el espacio vectorial $\mathbb{R}^{2\times 2}$ considere la matriz $v=\begin{pmatrix}0&2\\1&-1\end{pmatrix}$ y halle su norma.
+\end{ejer}
+
+\begin{defi}[Distancia]
+Sea $(E,+,\cdot,\K)$ un espacio vectorial con producto interno. La distancia en el espacio se define por
+\[
+    \funcion{d}{E\times E}{\R}{(u,v)}{\| u - v\|.}
+\]
+\end{defi}
+
+\begin{ejem}\hspace{0pt} En el espacio vectorial $\R^{3}$ con el producto interno usual se tiene que la distancia en $\R^{3}$ es:
+\[
+    d(u, v) = \|u - v\| = \sqrt{(u_{1} - v_{1})^{2} + (u_{2} - v_{2})^{2} + (u_{3} - v_{3})^{2}}
+\]
+para todo $u = (u_{1}, u_{2}, u_{3}), v = (v_{1}, v_{2}, v_{3})\in\R^{3}$.
+\end{ejem}
+
+
+\begin{ejer}\hspace{0pt} En el espacio vectorial $\R^{3}$ considere los vectores:
+\[u=(2,1,3)\]
+\[v=(0,1,-2)\]
+obtenga la distancia entre $u$ y $v$.
+
+%En el espacio vectorial $\R_{2}[t]$ considere los vectores:
+%\[p(t)=2+t+3t^2\]
+%\[q(t)=t-2t^2\]
+%obtenga la distancia entre $p$ y $q$.
+\end{ejer}
+
+%\begin{defi}[Norma]
+%Sea $(E,+,\cdot,\K)$ un espacio vectorial provisto de producto interno. Sea %$u\in E$, la norma de $u$, denotada por $\|u \|$, está definida por:
+%\[
+%    \| u\| = \sqrt{\langle  u, u \rangle .}
+%\]
+%\end{defi}
+
+%\begin{ejem}\hspace{0pt}\label{Sem08:EjemNorm} En el espacio vectorial %$\R^{3}$ con el producto interno usual, los vectores $u=(1,1,2)$ y %$v=(2,0,-1)$ tienen norma $\sqrt{6}$ y $\sqrt{5}$, respectivamente. En %efecto, notemos que
+%\[
+ %   \|u\| = \sqrt{\langle u,u\rangle } = \sqrt{\langle (1,1,2),(1,1,2)\rangle } = \sqrt{(1)^{2} + %(1)^{2} + (2)^{2}} = \sqrt{6}
+%\]
+%y
+%\[
+ %   \|v\| = \sqrt{\langle v,v\rangle } = \sqrt{\langle (2,0,-1),(2,0,-1)\rangle } = \sqrt{(2)^{2} %+ (0)^{2} + (-1)^{2}} = \sqrt{5}.
+%\]
+%\end{ejem}
+
+%\begin{ejer}\hspace{0pt} En el espacio vectorial $\Mat{2}{2}$ con producto %interno, considere a los vectores $A = %\begin{pmatrix}-1&0\\-1&0\end{pmatrix}$ y $B = %\begin{pmatrix}0&1\\1&1\end{pmatrix}$. Determine sus normas.
+%\end{ejer}
+
+%\begin{defi}[Distancia]
+%Sea $(E,+,\cdot,\K)$ un espacio vectorial con producto interno. La distancia %en el espacio se define por
+%\[
+ %   \funcion{d}{E\times E}{\R}{(u,v)}{\| u - v\|.}
+%\]
+%\end{defi}
+
+%\begin{ejem}\hspace{0pt} En el espacio vectorial $\R^{3}$ con el producto %interno usual se tiene que la distancia en $\R^{3}$ es:
+%\[
+%    d(u, v) = \|u - v\| = \sqrt{(u_{1} - v_{1})^{2} + (u_{2} - v_{2})^{2} + %(u_{3} - v_{3})^{2}}
+%\]
+%para todo $u = (u_{1}, u_{2}, u_{3}), v = (v_{1}, v_{2}, v_{3})\in\R^{3}$. %Además, sean $u=(1,1,2)$ y $v=(2,0,-1)$ su distancia es $\sqrt{11}$. En %efecto, notemos que
+%\[
+ %   d(u, v) = \|u - v\| = \sqrt{(1 - 2)^{2} + (1 - 0)^{2} + (2 - (-1))^{2}} = %\sqrt{11}.
+%\]
+%\end{ejem}
+
+%\begin{ejer}\hspace{0pt} En el espacio vectorial $\Mat{2}{2}$ con producto %interno, considere a los vectores $A = %\begin{pmatrix}-1&0\\-1&0\end{pmatrix}$ y $B = %\begin{pmatrix}0&1\\1&1\end{pmatrix}$. Determine su distancia.
+%\end{ejer}
+
+\begin{teo}[Teorema de Pitágoras]
+    Sea $(E,+,\cdot,\K)$ un espacio vectorial con producto interno.
+    Si $u,v$ son vectores ortogonales de $E$, entonces
+    \[
+        \| u + v \|^2 = \|u\|^2 + \|v\|^2.
+    \]
+\end{teo}
+\begin{proof}
+    Sea $(E,+,\cdot,\K)$ un espacio vectorial con producto interno.
+    Tal que  $u,v$ son vectores ortogonales de $E$, por definición de norma sabemos que 
+    \[
+    \| u + v \|^2 =\langle u+v,u+v\rangle.
+    \]
+    Por teorema \ref{te12:01} se tiene que 
+    \begin{align*}
+         \| u + v \|^2 &=\langle u+v,u+v\rangle\\
+         &=\langle u+v,u\rangle+\langle u+v,v\rangle\\
+         &=\langle u,u\rangle+\langle v,u\rangle+\langle u,v\rangle+\langle v,v\rangle.\\
+    \end{align*}
+    Además como $u,v$ son vectores ortogonales sabemos que $\langle v,u\rangle = \langle u,v\rangle =0 $, así reemplazando en la anterior ecuación tenemos que 
+    \[
+    \| u + v \|^2=\langle u,u\rangle+\langle v,v\rangle.
+    \]
+    Finalmente, usando la definición de norma se sigue que
+    \[
+    \| u + v \|^2 = \|u\|^2 + \|v\|^2.
+    \]
+\end{proof}
+
+\begin{ejem}\hspace{0pt}\label{Sem08:EjemPit} En el espacio vectorial $\R^{3}$ con el producto interno usual, los vectores $u=(1,1,2)$ y $v=(2,0,-1)$ son ortogonales y son tales que 
+\[
+    \| u + v \|^2 = \|u\|^2 + \|v\|^2.
+\]
+En efecto, por el ejemplo de vectores ortogonales, $u$ y $v$ son ortogonales y por el ejemplo de norma, sus normas son tales que $\|u\|^{2}=6$ y $\|v\|^{2}=5$, además,
+\[
+    \|u + v\|^{2} = \|(3,1,1)\|^{2} = (3)^{2} + (1)^{2} + (1)^{2} = 11=\|u\|^{2}+\|v\|^{2}.
+\]
+Lo que verifica el resultado.
+\end{ejem}
+
+\begin{ejem}
+    Sea $(E,+,\cdot,\K)$ un espacio vectorial con producto interno.
+    Si $u,v$ son vectores ortogonales de $E$, tales que 
+    \[
+    \|u\|=\|v\|=1
+    \]
+    Hallar $\|u+v\|$.
+
+    Por hipótesis sabemos que $u,v$ son ortogonales, por tanto 
+    \begin{align*}
+        \|u+v\|^2&=\|u\|^2+\|v\|^2\\
+        &=1^2+1^2\\
+        &=1+1\\
+        &=2
+    \end{align*}
+    Finalmente, 
+    \[
+    \|u+v\|=\sqrt{2}
+    \]
+\end{ejem}
+\begin{ejer}
+    Sea $(E,+,\cdot,\K)$ un espacio vectorial con producto interno.
+    Si $u,v$ son vectores ortogonales de $E$, tales que 
+    \[
+    \|u\|=\|v\|=2
+    \]
+    Hallar $\|u-v\|$.
+\end{ejer}
+%\begin{teo}[Desigualdad de Cauchy-Schwartz]
+ %   Sea $(E,+,\cdot,\K)$ un espacio vectorial provisto de producto interno.
+  %  Para todo $u,v\in E$ se cumple que
+   % \[
+    %    | \langle  u , v \rangle  | \leq \|u\|  \|v\|.
+    %\]
+%\end{teo}
+%\begin{advertencia}
+ %   Esta desigualdad es una igualdad si y solo si $u$ es un múltiplo escalar de $v$.
+%\end{advertencia}
+%\comentario{Opción 1) para demostrar en CD.}
+\begin{comment}
+\begin{proof}%Demostración (opcion 1)
+Sean $u,v \in E$. 
+
+Si $v=0$ entonces la desigualdad se cumple pues ambos lados de la desigualdad son cero.
+
+Si $ v\neq 0$, considere la descomposición ortogonal
+\begin{equation*}\label{eq12:03}
+    u = \dfrac{\langle  u , v \rangle }{\|v\|^2} v + w
+\end{equation*}
+donde $w\in E$ es ortogonal a $v$. Aplicando el Teorema de Pitágoras a la desigualdad a \eqref{eq12:03} se obtiene
+\begin{align*}
+    \|u\|^2 
+&= \left| \dfrac{\langle  u,v \rangle }{\|v\|^2} v \right\| + \|w\|^2 \\
+&= \dfrac{\|\langle  u , v \rangle  |^2 \|v\|^2}{\|v\|^4 + \|w\|^2}\\
+&= \dfrac{|\langle  u,v \rangle  | }{\|v\|^2} + \|w\|^2 \\
+&\geq \dfrac{| \langle  u,v \rangle  |^2}{ \|v\|^2 }
+\end{align*}
+luego tomando la raíz cuadrada a cada lado se obtiene la desigualdad de Cauchy-Schwartz. 
+\end{proof}
+\end{comment}
+
+\end{document}

@@ -1,0 +1,80 @@
+\documentclass[10pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+
+\usepackage{aleph-comandos}
+\usepackage{moodle}
+% Se recomienda leer la documentación de estos
+% paquetes en https://www.alephsub0.org/recursos/
+
+% -- Paquetes adicionales
+\usepackage{amssymb}
+\usepackage{mathpazo}
+
+% -- Datos
+\title{Reactivos Álgebra Lineal}
+\author{Evelyn Cueva}
+
+\usepackage[margin=2cm]{geometry}
+
+\begin{document}
+\maketitle
+
+\begin{quiz}{Algebra-Lineal-Examen-Media-Carrera-2022A}
+
+% Ejercicio de cálculo para evaluar núcleo de una transformación
+% y teorema fundamental de las aplicaciones lineales. 
+
+\begin{multi}{algebra-lineal-01}
+    Suponga que $T$ es una transformaci\'on lineal de $\mathbb{R}^4$ en $\mathbb{R}^2$ tal que su espacio nulo (n\'ucleo) est\'a definido por
+    \[
+        \mathcal N(T) = \lbrace (x_1,x_2,x_3,x_4)\in \mathbb R^4 \colon x_1 = 5x_2 \ \text{ y }\ x_3=7x_4\rbrace
+    \]
+    Indique cu\'al de las siguientes afirmaciones es correctas:
+    \item[fraction=0] $\text{dim }\mathcal N(T) = 4.$
+    \item[fraction=0] La transformaci\'on no es sobreyectiva.
+    \item[fraction=0] La transformaci\'on es inyectiva.
+    \item* La lista $(5,1,0,0), (0,0,7,1)$ es una base de $\mathcal N(T).$ 
+\end{multi}
+
+% Pregunta conceptual para evaluar conceptos básicos 
+% de subespacios, independencia lineal, espacio generador y
+% dimensión.
+
+\begin{multi}{algebra-lineal-02}
+    Seleccione la afirmaci\'on verdadera: 
+    \item[fraction=0] Una lista de vectores que contiene el cero, en un espacio vectorial $V$, puede ser linealmente independiente. 
+    \item[fraction=0] La dimensi\'on de un espacio vectorial depende de la base que se elija para el espacio.
+    \item[fraction=0] Si $U_1$ y $U_2$ son subespacios de un espacio vectorial de dimensi\'on finita entonces siempre se cumple que $\text{dim}(U_1+
+    U_2) = \text{dim }U_1 + \text{dim }U_2.$
+    \item* Para $v_1,\ldots,v_n$ elementos de un espacio vectorial $V$, el conjunto $\text{gen}(v_1,\ldots,v_n)$, formado por todas las posibles combinaciones lineales de la lista $v_1,\ldots,v_n,$ es un subespacio de $V$. 
+\end{multi}
+
+% Pregunta conceptual para evaluar conocimientos básicos de
+% definiciones y propiedades de matrices
+
+\begin{multi}{algebra-lineal-03}
+    Seleccione qu\'e propiedad no es verdadera necesariamente para matrices:
+    \item* Si $A$ es una matriz de $m\times n$ y $B$ una matriz de $n\times m$, entonces $AB = BA.$
+    \item[fraction=0] Si $A$ es una matriz cuadrada y sim\'etrica de tama\~no $n\times n$ con coeficientes $(a_{ij})$, entonces $a_{ij}=a_{ji}$ para todo $i,j\in\lbrace 1,\ldots,n\rbrace.$
+    \item[fraction=0] Si $A$ y $B$ son matrices no singulares de tama\~no $n\times n$, entonces $AB$ es no singular y $(AB)^{-1}=B^{-1}A^{-1}.$
+    \item[fraction=0] Los determinantes de una matriz y su transpuesta son iguales.
+\end{multi}
+
+% Pregunta conceptual para evaluar definición de valores propios
+% de operadores lineales en dimensión finita, además 
+% la equivalencia entre inyectividad y sobreyectividad en este
+% caso.
+
+\begin{multi}{algebra-lineal-04}
+    Suponga $V$ un espacio vectorial de dimensi\'on finita sobre un campo $\mathbb F$, $T\colon V\longrightarrow V$ un operador lineal y $\lambda \in \mathbb F.$ Seleccione cu\'al de las siguientes cadenas de equivalencias se satisface:
+    \item* $\lambda$ es un valor propio de $T.$ $\Longleftrightarrow$ $T-\lambda I$ no es inyectivo. $\Longleftrightarrow$ $T-\lambda I$ no es sobreyectivo.
+    \item[fraction=0]  $\lambda$ es un valor propio de $T.$ $\Longleftrightarrow$ $T-\lambda I$ es inyectivo. $\Longleftrightarrow$ $T-\lambda I$ es sobreyectivo.
+    \item[fraction=0] $\lambda$ es un valor propio de $T.$ $\Longleftrightarrow$ $T-\lambda I$ es inyectivo. $\Longleftrightarrow$ $T-\lambda I$ no es sobreyectivo.
+    \item[fraction=0] $\lambda$ es un valor propio de $T.$ $\Longleftrightarrow$ $T-\lambda I$ no es inyectivo. $\Longleftrightarrow$ $T-\lambda I$ es sobreyectivo.
+\end{multi}
+\end{quiz}
+
+\end{document}

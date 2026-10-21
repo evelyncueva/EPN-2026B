@@ -1,0 +1,4329 @@
+\documentclass[compacto,10pt]{pubciencias-notas}
+
+% -- Paquetes adicionales
+\usepackage{comandosEPN}
+
+\usepackage{titlesec}
+
+% -- Datos del libro
+\autor{Departamento de Formación Básica}
+\materia{Álgebra Lineal}
+\nota{Primer Semestre}
+\fecha{Semestre 2025-A}
+
+\logouno[1.1cm]{Logo_EPN.eps}
+\logodos[1.7cm]{Logo_DFB.eps}
+
+\definecolor{colordef}{cmyk}{0.81,0.62,0.00,0.22}
+
+\begin{document}
+
+% \tableofcontents
+
+\encabezado
+
+
+\vspace{-8mm}
+
+\section{Matrices}
+\subsection{Definiciones y conceptos fundamentales}
+
+\begin{defi}[Matriz]
+    Una matriz sobre un cuerpo $\K$ es una función 
+    \[
+        \funcion{A}{I\times J}{\K}
+        %{(i,j)}{A(i,j)=a_{ij},}
+        {(i,j)}{a_{ij},}
+    \]
+    la cual se representa por
+    \[
+        A = 
+        \begin{pmatrix}
+        a_{11} & a_{12} & \cdots & a_{1n} \\ 
+        a_{21} & a_{22} & \cdots & a_{2n} \\ 
+        \vdots & \vdots & \ddots & \vdots\\ 
+        a_{m1} & a_{m2} & \cdots & a_{mn}
+        \end{pmatrix}.
+    \]
+    Con esto, se dice que $A$ es de orden $m \times n$ y que tiene $m$ filas y $n$ columnas. 
+    
+    Al conjunto de todas las matrices de orden $m \times n$ sobre el campo $\K$ se denota por $\Mat[\K]{m}{n}$.
+\end{defi}
+
+\begin{obs} 
+A $a_{ij}$ se lo denomina elemento o componente $ij$ de $A$, el número que aparece en la fila $i$ y la columna $j$.
+\end{obs}
+
+\begin{advertencia}
+    Dada una matriz $A$, esta se la representa también por $A=\l(a_{ij}\r)$.
+\end{advertencia}
+
+\begin{advertencia}
+    Otras notaciones usuales para el conjunto de las matrices, que se puede encontrar en la literatura, son $\M_{m\times n}$ o $M_{mn}$.
+\end{advertencia}
+
+\begin{ejem}\hspace{0pt} Considere las matrices
+\[
+    A = \begin{pmatrix}1&0\\-2&-5\\0&3\end{pmatrix}
+    \texty
+    B = \begin{pmatrix}8&1&5\\5&7&-8\end{pmatrix}.
+\]
+La matriz $A$ es de orden $3 \times 2$ y la matriz $B$ es de orden $2 \times 3$. El elemento en la fila 1 y columna 2 de $A$ es, $a_{12} = 0$ y el elemento de la fila 2 y columna 3 de $B$ es, $b_{23} = -8$.
+\end{ejem}
+
+\begin{ejem} \hspace{0pt} Considere la matriz $A = \l(a_{ij}\r)\in\Mat[\R]{m}{n}$ donde
+\[
+    a_{ij} = 0
+\]
+para cada $i\in I$ y $j\in J$. 
+
+Esta matriz, donde todos sus elementos son igual a 0, se denomina matriz nula o cero de orden $m\times n$ y suele notarse por matriz $0$.  
+    
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} Dada la matriz $A = \l(a_{ij}\r)\in\Mat[\R]{2}{3}$ donde
+\[
+    a_{ij} = 2i - j
+\]
+para cada $i\in\{1,2\}$ y $j\in\{1,2,3\}$. Escriba a la matriz con todos sus elementos.
+\end{ejer}
+
+\begin{defi}[Filas y columnas]
+    Sean $A\in\Mat[\K]{m}{n}$, $i\in I$ y $j\in J$. A la matriz
+    \[
+        \begin{pmatrix}
+        a_{1j} \\ 
+        a_{2j} \\ 
+        \vdots \\ 
+        a_{mj} 
+        \end{pmatrix}
+    \]
+    se la llama la $j$-ésima columna de $A$ que notaremos $A^j$ y a la matriz
+    \[
+        \begin{pmatrix}
+        a_{i1}& a_{i2}&\cdots& a_{in}
+        \end{pmatrix}
+    \]
+    se la llama la $i$-ésima fila de $A$ que notaremos $A_i$.
+\end{defi}
+
+\begin{ejem}
+Considere la matriz
+\[
+    A = \begin{pmatrix}1&0&6\\-2&-5&3\\0&3&0\end{pmatrix}.
+\]
+La 3-ésima columna de $A$, es
+\[
+    \begin{pmatrix}6\\3\\0\end{pmatrix}.
+\]
+La 1-ésima fila de $A$ es
+\[
+    \begin{pmatrix}1&0&6\end{pmatrix}.
+\]
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} Dada la matriz $A = \begin{pmatrix}1&2&-1&0&3\\1&2&0&1&3\\3&3&3&3&3\end{pmatrix}$. Indique a su 2-ésima fila, 3-ésima columna y 5-ésima columna.
+\end{ejer}
+
+\begin{defi}[Igualdad de matrices]
+    Sean $A \in \Mat[\K]{m}{n}$ y $B \in \Mat[\K]{p}{q}$. Se dice que las matrices $A$ y $B$ son iguales, y se representa por $A=B$, si:
+    \begin{itemize}
+    \item[$a)$] 
+        $m=p$ y $n=q$; y
+    \item[$b)$] 
+        $a_{ij}=b_{ij}$ para todo $i\in I$ y $j \in J$.
+    \end{itemize}
+\end{defi}
+
+\begin{ejem} Dados $x,y,z\in\R$, considere las matrices $A$ y $B$, 
+\[
+    A = \begin{pmatrix}1&6\\-8&3\\0&7\end{pmatrix}
+    \texty
+    B = \begin{pmatrix}x&6\\y&3\\0&z\end{pmatrix}.
+\]
+Notando que $A$ y $B$ tienen el mismo orden, para que sean iguales los valores de $x$, $y$ y $z$ deben ser $1$, $-8$ y $7$, respectivamente.
+\end{ejem}
+
+%\begin{ejer}\hspace{0pt} Dadas las matrices %$A, B, C\in\Mat[\R]{2}{2}$ donde 
+%\[
+%    a_{ij} = \max\{i,j\}, \qquad b_{ij} = \min\{i,j\} \texty c_{ij} = - \max\{-i,-j\}
+%\]
+%para cada $i,j\in\{1,2\}$. Indique cuáles matrices son iguales y cuáles no lo son.
+%\end{ejer}
+
+\begin{comment}
+\begin{defi}[Vectores]
+    El conjunto $\K^n$ es:
+    \[
+        \K^n=\underbrace{\K\times\K\times\cdots\times\K}_{n\text{ veces}},
+    \]
+    es decir,
+    \[
+        \K^n=\{(a_1,a_2,\ldots,a_n):a_i\in\K\text{ para todo }i \in J\}.
+    \]
+\end{defi}
+
+\begin{advertencia}
+    Por notación, si $a\in\K^n$, se asumirá $a=(a_1,a_2,\ldots,a_n)$.
+\end{advertencia}
+
+\begin{advertencia}
+    Podemos identificar cada elemento de $\K^n$ con una matriz de $\Mat[\K]{n}{1}$ de la siguiente manera: si
+    \[
+        a = (a_1,a_2,\ldots,a_n) \in \K^n,
+    \]
+    entonces, visto como matriz es
+    \[
+        a = 
+        \begin{pmatrix}
+            a_1\\a_2\\
+            \vdots\\a_n
+        \end{pmatrix}
+        \in \Mat[\K]{n}{1}.
+    \]
+\end{advertencia}
+
+\begin{ejem} El vector $u = (1, 2, y)$ donde $y\in\R$, visto como matriz es
+\[
+    u = \begin{pmatrix}1\\2\\y\end{pmatrix}\in\Mat[\K]{3}{1}.
+\]
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} Dada la matriz $A = \begin{pmatrix}1&3\\2&2\\2&1\end{pmatrix}$, escriba a sus columnas cómo elementos de $\R^{3}$ y sus filas como elementos de $\Mat{2}{1}$ y de $\R^{2}$.
+\end{ejer}
+\end{comment}
+
+\newpage
+\subsection{Operaciones entre matrices}
+
+En esta sección consideramos  $p,q\in \N$ con $p>0$ y $q>0$.
+
+\begin{defi}[Suma de matrices]
+    Sean $A, B \in \Mat[\K]{m}{n}$. La suma de las matrices $A$ y $B$ es la matriz $C\in \Mat[\K]{m}{n}$ tal que:
+    \[ 
+        c_{ij} = a_{ij} + b_{ij}
+    \]
+    para todo $i \in I$ y $j \in J$. A esta matriz se la denota por $A+B$.
+\end{defi}
+
+\begin{advertencia}
+    Con esto, tenemos que $\l(a_{ij}\r)+\l(b_{ij}\r)=\l(a_{ij} + b_{ij}\r)$.
+\end{advertencia}
+
+\begin{ejem}\label{Ejem:Sem01Clas01SumaMat}
+Considere las matrices
+\[ 
+    A = 
+    \begin{pmatrix}
+    1&\dfrac{1}{2}&\dfrac{1}{4}\\
+    -2&-5&6\\
+    0&\dfrac{7}{3}&20
+    \end{pmatrix}
+    \texty
+    B = 
+    \begin{pmatrix}
+    8&-\dfrac{1}{2}&-\dfrac{1}{4}\\
+    5&7&-8\\
+    -1&-\dfrac{1}{3}& 2
+    \end{pmatrix}.
+\]
+La suma de las matrices $A$ y $B$ se calcula sumando los elementos que ocupan la misma posición, es decir, si $C = A + B$ para calcular al elemento $c_{12}$ se tiene que
+\[
+    c_{12} = a_{12} + b_{12} = \dfrac{1}{2} + \l(- \dfrac{1}{2}\r) = 0.
+\]
+Finalmente
+\[
+A+B = 
+\begin{pmatrix}
+9 & 0 &0 \\
+3 & 2 & -2 \\
+-1 &2 & 22
+\end{pmatrix}.
+\]
+\end{ejem}
+
+\begin{ejer}\hspace{0pt}\label{Ejer:Sem01Clas01SumaMat} Dada la matriz
+\[
+    A = 
+    \begin{pmatrix}
+    1&\dfrac{1}{2}&\dfrac{1}{4}\\
+    -2&-5&6\\
+    0&\dfrac{7}{3}&20
+    \end{pmatrix}   
+\] 
+Calcular $A + A$.
+\end{ejer}
+\begin{teo}\label{Teo:Sem01Clas01PropSum}
+    Sean $A,B,C\in\Mat[\K]{m}{n}$. Se tiene que:
+    
+    \begin{itemize}
+    \item[$a)$]    
+        $A + B = B + A$.        
+    \item[$b)$]    
+        $A + (B+C) = (A + B)+C$.
+    \item[$c)$] 
+        Existe una única matriz $0$ de orden $m \times n$ tal que 
+        \[ 
+            A + 0 =  A 
+        \]
+        para cualquier matriz $A$ de orden $m \times n$. La matriz $0$ se denomina neutro aditivo de orden $m \times n$, también llamada la matriz nula.
+    \item[$d)$] 
+        Para cada matriz $A$ de orden $m \times n$, existe una única matriz, denotada por $-A$, de orden $m \times n$ tal que:
+        
+        \[
+            A + (-A) = 0.
+        \]
+        
+        A la matriz $-A$ se la denomina el inverso aditivo de $A$.
+    \end{itemize}
+\end{teo}
+
+\begin{defi}[Multiplicación por un escalar]
+Sean $A\in \Mat[\K]{m}{n}$ y $\alpha \in \K$. El producto del escalar $\alpha$ por la matriz $A$ es la matriz $B\in \Mat[\K]{m}{n}$ tal que:
+\[ 
+    b_{ij} = \alpha a_{ij}
+\]
+para todo $i \in I$ y $j \in J$. A esta matriz se la denota por $\alpha A$.
+\end{defi}
+
+\begin{advertencia}
+Con esto, tenemos que $\alpha \l(a_{ij}\r) =\l(\alpha a_{ij}\r)$.
+\end{advertencia}
+
+\begin{ejem} Multiplicación de un escalar con una matriz. Se tiene que
+\[ 
+    9\cdot
+    \begin{pmatrix}9&0&0\\3&2&-2\\-1&\dfrac{7}{3}&22\end{pmatrix}
+    =
+    \begin{pmatrix}81&0&0\\27&18&-18\\-9&21&198\end{pmatrix}.
+\]
+Notemos que $9$ multiplica a cada elemento de $A$.
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} Dada la matriz 
+\[
+    A = 
+    \begin{pmatrix}
+    1&\dfrac{1}{2}&\dfrac{1}{4}\\
+    -2&-5&6\\
+    0&\dfrac{7}{3}&20
+    \end{pmatrix}
+\]
+Calcular   $2A$ y $A + A$, comparar.
+\end{ejer}
+
+\begin{teo}[Propiedades de la multiplicación por un escalar]\label{Teo:Sem01Cla01PropMult}
+    Sean $\alpha,\beta \in \K$ y $A,B\in\Mat[\K]{m}{n}$. Se tiene que
+    \begin{itemize}
+    \item[$a)$] 
+        $\alpha(\beta A) = (\alpha\beta)A$;
+    \item[$b)$] 
+        $(\alpha+\beta)A = \alpha A + \beta A$; y
+    \item[$c)$] 
+        $\alpha(A+B) = \alpha A + \alpha B$.
+    \end{itemize}
+\end{teo}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Matrices}
+\setcounter{subsection}{1}
+%\setcounter{defi}{6}
+\subsection{Operaciones entre matrices}
+
+\begin{defi}[Multiplicación de matrices]\label{Sem01Clas01DefMultMAt}
+    Sean $A \in \Mat[\K]{m}{p}$ y $B \in \Mat[\K]{p}{n}$, el producto de las matrices $A$ y $B$ es la matriz $C \in \Mat[\K]{m}{n}$ tal que
+    \begin{align*}
+        c_{ij} & = a_{i1}b_{1j} + a_{i2} b_{2j} + \cdots + a_{ip}b_{pj} \\
+               & = \sum_{k=1}^p a_{ik} b_{kj}
+    \end{align*}
+    para todo $i \in I$ y $j \in J$. A esta matriz se la denota por $AB$.
+\end{defi}
+
+\begin{ejem}
+Considere las matrices $A,B\in\K^{3\times3}$:
+\[ 
+    A = 
+    \begin{pmatrix}
+    1&0&-1\\
+    0&2&3\\
+    -5&0&3
+    \end{pmatrix}
+    \texty
+    B = 
+    \begin{pmatrix}
+    -1&2&1\\
+    5&-2&1\\
+    -1&2&-2
+    \end{pmatrix}.
+\]
+Notemos que el número de columnas de $A$ es el número de filas de $B$, luego, su multiplicación existe y la denominaremos por $C = AB$. Para ilustrar la multiplicación de matrices, obtengamos al elemento $c_{12}$ de $C$, para esto, consideramos la fila 1 de $A$ y la columna 2 de $B$ y realizamos lo indicado en la definición \ref{Sem01Clas01DefMultMAt}.
+\begin{align*}
+    c_{12}
+        &= \sum_{k=1}^{3}{a_{1k} b_{k2}}\\
+        &= a_{11}b_{12} + a_{12} b_{22} + a_{13}b_{32}\\
+        &= (1)(2) + (0)(- 2) + (- 1)(2)\\
+        &= 0.
+\end{align*}
+Calculemos también, al elemento $c_{33}$ de $C$, en este caso consideramos la fila 3 de $A$ y la columna 3 de $B$, y utilizamos la definición \ref{Sem01Clas01DefMultMAt}.
+\begin{align*}
+    c_{33}
+        &= \sum_{k=1}^{3}{a_{3k} b_{k3}}\\
+        &= a_{31}b_{13} + a_{32} b_{23} + a_{33}b_{33}\\
+        &= (-5)(1) + (0)(1) + (3)(-2)\\
+        &= -11.
+\end{align*}
+Finalmente, la multiplicación de las matrices $A$ y $B$ está dada por:
+\[ 
+    AB = 
+    \begin{pmatrix}
+    0&0&3\\
+    7&2&-4\\
+    2&-4&-11
+    \end{pmatrix},
+\]
+donde $AB\in\K^{3\times 3}$.
+\end{ejem}
+
+\begin{ejer}\label{Apuntes01EjerProdMat} Considere las siguientes matrices $A\in\K^{2\times 3}$ y $B\in\K^{3\times 2}$:
+	\[ 
+	A = 
+	\begin{pmatrix}
+	1  & 5 &8    \\ 
+	-1  & 0 & -2  \\ 
+	\end{pmatrix}
+	\texty
+	B = 
+	\begin{pmatrix}
+	3 &0 \\ 
+	-1&5\\
+	2&-1
+	\end{pmatrix}.
+	\]
+	Obtenga a la matriz $AB$.
+\end{ejer}
+
+\begin{teo} 
+Sean $A, B\in \K^{m \times n}$, $C,D\in \K^{n \times p}$, $E\in \K^{p \times q}$ y $\alpha \in\K$. Se tiene que
+\begin{enumerate}
+\item[$a)$] $A(DE) = (AD)E$;
+\item[$b)$] $A(C+D) = AC + AD$; 
+\item[$c)$] $(A+B)C = AC + BC$;
+\item[$d)$] $A(\alpha C) = \alpha (AC) = (\alpha A) C$.
+\end{enumerate}
+\end{teo}
+
+\begin{advertencia}
+    En general, $AB\neq BA$.
+\end{advertencia}
+
+\begin{obs}
+Dadas dos matrices $A$ y $B$ si $AB = BA$, entonces diremos que $A$ y $B$ conmutan.
+\end{obs}
+
+\begin{ejem}\hspace{0pt} Considere a las matrices $A$ y $B$ del ejercicio \ref{Apuntes01EjerProdMat}, tenemos que
+\[
+    AB = \begin{pmatrix}14&17\\-7&2\end{pmatrix}
+    \texty
+    BA = \begin{pmatrix}3&15&24\\-6&-5&-18\\3&10&18\end{pmatrix}.
+\]
+Notemos que $AB\in\Mat[\K]{2}{2}$ y que $BA\in\Mat[\K]{3}{3}$ con $AB \neq BA$, es decir, $A$ y $B$ no conmutan.
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} Dadas las matrices
+\[
+    A = \begin{pmatrix}1&1&-2\\0&-1&3\end{pmatrix} ,
+    \qquad
+    B = \begin{pmatrix}1&0\\-1&1\\0&1\end{pmatrix}
+    \texty
+    C 
+    = \begin{pmatrix}1&2\\1&-3\end{pmatrix}.
+\]
+Si es posible, calcule la siguientes operaciones. Si no, explique por qué.
+\begin{enumerate}
+    \item [$a)$] $AB+C$
+    \item [$b)$] $C+BA$
+\end{enumerate}
+\end{ejer}
+
+\begin{defi}[Transpuesta de una matriz]
+Sea $A \in \Mat[\K]{m}{n}$. La matriz transpuesta de $A$ es la matriz $B\in \Mat[\K]{n}{m}$ tal que: 
+\[
+    \l(b_{ij}\r) = \l(a_{ji}\r)
+\]
+para todo $i\in I$ y $j \in J$. A esta matriz se la denota por $A^\intercal$.
+\end{defi}
+
+\begin{advertencia}
+    Con esto, tenemos que si $A\in \Mat[\K]{m}{n}$, entonces $A^\intercal\in \Mat[\K]{n}{m}$ y $\l(a_{ij}\r)^\intercal =\l(a_{ji}\r)$.
+\end{advertencia}
+
+\begin{ejem}\hspace{0pt} 
+Considere la matriz
+\[ 
+A= 
+\begin{pmatrix}
+ 1 &4  & -2   \\ 
+  3& 7 &   9 \\ 
+ 0 & -3 & 5  
+\end{pmatrix}
+\]
+su transpuesta es
+\[
+A^\intercal= 
+\begin{pmatrix}
+1 & 3 & 0   \\ 
+4 & 7  &-3    \\ 
+-2 & 9 & 5  
+\end{pmatrix}.
+\]	
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} Dadas las matrices
+\[
+    A = \begin{pmatrix}2&3\\1&4\end{pmatrix},
+    \qquad
+    B = \begin{pmatrix}-2&4&7\\-1&0&1\end{pmatrix}
+    \texty
+    C = \begin{pmatrix}1&0&1\\0&1&1\\0&0&1\\1&1&1\end{pmatrix}.
+\]
+Calcular su transpuesta.
+\end{ejer}
+
+\begin{teo}[Propiedades de la transpuesta]\label{Mat:PropTrans}
+    Sean $\alpha \in \K$, $A,B\in\K^{m \times n}$ y  $C\in\K^{n \times p}$. Se tiene que
+    \begin{itemize}
+    \item[$a)$] 
+        $\l(A^\intercal\r)^\intercal = A$;
+    \item[$b)$] 
+        $(A+B)^\intercal = A^{\intercal} + B^{\intercal}$;
+    \item[$c)$] 
+        $(AC)^\intercal = C^\intercal A^\intercal$;
+    \item[$d)$] 
+        $(\alpha A)^\intercal = \alpha A^\intercal$.
+    \end{itemize}
+\end{teo}
+
+\begin{advertencia}
+Un error común es el siguiente:
+\[
+    (AB)^{\intercal} = A^{\intercal}B^{\intercal}
+\]
+Notemos que lo anterior es verdad, solamente cuando $A$ y $B$ conmutan.
+\end{advertencia}
+
+\begin{ejem}\hspace{0pt} Dada la matriz $A\in\Mat[\K]{n}{n}$. En este ejemplo vamos a ilustrar a las propiedades de la transpuesta. Notemos que
+\begin{eqnarray*}
+ (A^{\intercal}A)^{\intercal} &=& A^{\intercal}(A^{\intercal})^{\intercal}, \quad\text{Teorema \ref{Mat:PropTrans}, literal $c$} \\
+ &=& A^{\intercal}A, \quad\text{Teorema \ref{Mat:PropTrans}, literal $a$} 
+\end{eqnarray*}
+y que
+\begin{eqnarray*}
+(A^{\intercal} - A)^{\intercal} &=& (A^{\intercal})^{\intercal} + (-A)^{\intercal}, \quad\text{Teorema \ref{Mat:PropTrans}, literal $b$} \\
+&=& A - A^{\intercal}, \quad\text{Teorema \ref{Mat:PropTrans}, literales $a$ y $d$} .
+\end{eqnarray*}
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} Sean $A, B, C\in\Mat[\K]{n}{n}$. Justificando cada paso demostrar que 
+\[\l(A(B + C)\r)^{\intercal} = B^{\intercal}A^{\intercal} + C^{\intercal}A^{\intercal}.\]
+\end{ejer}
+
+\begin{defi}[Matriz cuadrada]
+    Si $A$ es un elemento de $\K^{n \times n}$, se dice que $A$ es una matriz cuadrada de orden $n$.
+\end{defi}
+
+\begin{defi}[Traza de una matriz]\label{DefTraza}
+Sea $A$ una matriz cuadrada de orden $n$. La traza de la matriz $A$ es un escalar que notaremos como $\Tr(A)$ tal que:
+%Sea $A \in \Mat[\K]{n}{n}$, la traza de $A$, $\Tr$, se define como la suma de todos los elementos de la diagonal principal de $A$,
+    \[ 
+        \Tr(A) = \sum_{j=1}^n a_{jj}.
+    \]
+\end{defi}
+
+\begin{advertencia}
+    Sea $A$ una matriz cuadrada de orden $n$, el conjunto de las componentes $a_{ij}$ tales que $i=j$ se conoce como diagonal principal de la matriz $A$.
+\end{advertencia}
+\begin{advertencia}
+    La traza de una matriz cuadrada es igual a la suma de los elementos de su diagonal principal. 
+\end{advertencia}
+
+\begin{ejem}
+Dada la matriz:
+\[
+A= 
+\begin{pmatrix}
+1&-1&2\\
+0&-3&-1\\
+-2&-3&8
+\end{pmatrix}.
+\]
+De la definición de traza se tiene que:
+\[
+    \Tr(A) = a_{11} + a_{22} + a_{33} = (1)+(-3)+(8)=6.
+\]
+\end{ejem}
+
+\begin{ejer}
+Dada la matriz:
+\[
+B= 
+\begin{pmatrix}
+1&0&2\\
+0&0&-1\\
+-2&-3&-3
+\end{pmatrix}.
+\]
+Determine la $\Tr(B)$ y la $\Tr(B^{\intercal})$.
+\end{ejer}
+
+\begin{teo}[Propiedades de la traza]\label{Teo:PropTraza}
+    Sea $A, B \in \Mat[\K]{n}{n}$ y $\alpha \in \K$. Se tiene que:
+    \begin{itemize}
+        \item $\Tr(\alpha A) = \alpha \Tr(A)$;
+        \item $\Tr(A + B) = \Tr(A) + \Tr(B)$;
+        \item $\Tr(A^{\intercal}) = \Tr(A)$; y
+        \item $\Tr(A B) = \Tr(B A)$.
+    \end{itemize}
+\end{teo}
+
+
+\begin{defi}[Matriz identidad de orden $n$]
+    Se define la matriz identidad de orden $n$ al elemento $A$ de $\K^{n \times n}$ tal que
+    \[
+        a_{ij} =
+            \begin{cases}
+            1 & \text{si } i=j, \\
+            0 & \text{si } i \neq j,
+            \end{cases}
+    \]
+    para todo $i,j\in J$. A esta matriz se la denota por $I_n$.
+\end{defi}
+
+\begin{obs}
+    Sea $\alpha\in\R$, una matriz de la forma $\alpha I$ se llama matriz escalar. Es decir, la multiplicación de un escalar por la matriz identidad. 
+\end{obs}
+
+\begin{prop}
+    Sea $A\in\Mat[\K]{m}{n}$ se tiene que
+    \[ 
+        I_m A = A I_n = A.
+    \]
+\end{prop}
+
+\begin{obs}
+La matriz $I_{n}$ conmuta con toda matriz de $\Mat[\K]{n}{n}$.
+\end{obs}
+
+\begin{defi}
+    Sean $A \in \K^{n \times n}$ y $r\in\N$. Se define $A$ a la potencia $r$ por
+    \begin{itemize}
+    \item[$a)$] 
+        $A^0 = I_n$; y
+    \item[$b)$] 
+        $A^{r+1} = A^rA$.
+    \end{itemize}
+\end{defi}
+\begin{obs}
+    Sea $r$ el menor entero positivo tal que $A^r=0$, se dice que $A$ es una matriz nilpotente de orden $r$. 
+\end{obs}
+\begin{obs}
+    Si $A^2=A$ se dice que $A$ es una  matriz idempotente. 
+\end{obs}
+
+\begin{ejer}
+    Dadas las matrices
+    \[
+        A=\begin{pmatrix}1&1\\-1&-1\end{pmatrix}  \texty  B=\begin{pmatrix}1&0\\3&0\end{pmatrix}
+    \]
+    calcular $A^2$ y $B^2$
+\end{ejer}
+
+\begin{teo}\label{Apunte01TeoPot}
+    Sean $A \in \K^{n \times n}$ y $r,s\in\N$. Se tiene que
+    \begin{itemize}
+    \item[$a)$] 
+        $A^r A^s = A^{r+s}$; y 
+    \item[$b)$] 
+        $(A^r)^s = A^{rs}$.
+    \end{itemize}
+\end{teo}
+
+\begin{advertencia}
+Note que en general $(AB)^r \neq A^r B^r$.
+\end{advertencia}
+
+\section{Matrices}
+\setcounter{subsection}{2}
+\subsection{Tipos de matrices}
+
+\begin{defi}[Matriz triangular]
+    Sea $A\in \mathbb{K}^{n \times n}$. Se dice que $A$ es
+    \begin{itemize}
+    \item 
+        una matriz triangular superior si $a_{ij} = 0 $ para todo $i>j$ con $i,j \in J$; y
+    \item 
+        una matriz triangular inferior si $a_{ij} = 0 $ para todo $i<j$ con $i,j \in J$.
+    \end{itemize}
+\end{defi}
+
+\begin{ejem}
+A continuación, un ejemplo de una matriz triangular superior
+\[
+	\begin{pmatrix}3&2\\0&1\end{pmatrix}
+\]
+y de una matriz triangular inferior:
+\[
+	\begin{pmatrix}1&0&0\\-8&2&0\\0&-6&3\end{pmatrix}.
+\]
+\end{ejem}
+
+\begin{defi}[Matriz diagonal]
+    Sea $A\in \mathbb{K}^{n \times n}$. Se dice que $A$ es una matriz diagonal si verifica que:
+    \[ 
+        a_{ij} = 0
+    \]
+    para todo $i\in J$ y $j\in J$ con $i\neq j$.
+\end{defi}
+
+\begin{ejem}
+Vemos algunos ejemplos de matrices diagonales:
+\[
+	\begin{pmatrix}
+	-2&0\\
+	0&5
+	\end{pmatrix},
+	\quad
+ 	\begin{pmatrix}
+	1&0&0\\
+	0&1&0\\
+	0&0&1
+	\end{pmatrix},
+	\quad
+	\begin{pmatrix}
+	-3&0&0&0\\
+	0&-3&0&0\\
+	0&0&3&0\\
+	0&0&0&3\\
+	\end{pmatrix}.
+\]
+Notemos que en todos los casos los términos fuera de la diagonal principal son todos iguales a cero. 
+\end{ejem}
+
+\begin{comment}
+\begin{defi}[Matriz escalar]
+    Sea $A\in \mathbb{K}^{n \times n}$. Se dice que $A$ es una matriz escalar si es una matriz diagonal que verifica:
+    \[ 
+        a_{ii} = \alpha
+    \]
+    para todo $i\in J$, con $\alpha\in\K$, es decir,  todos los elementos de la diagonal son iguales.
+\end{defi}
+
+\begin{ejem}
+Vemos algunos ejemplos de matrices diagonales:
+\[
+	\begin{pmatrix}
+	-2&0\\
+	0&-2
+	\end{pmatrix},
+	\quad
+	\begin{pmatrix}
+	5&0&0&0\\
+	0&5&0&0\\
+	0&0&5&0\\
+	0&0&0&5\\
+	\end{pmatrix}.
+ \]
+\end{ejem}
+
+\begin{advertencia}
+Note que una matriz identidad es un tipo de matriz escalar. Además, la matriz escalar se puede expresar como la multiplicación de un escalar por la matriz identidad.
+\end{advertencia}
+
+\begin{ejem} Considere a la siguiente matriz diagonal
+\[
+	A= \begin{pmatrix}
+	3&0\\
+	0&3\\
+	\end{pmatrix}
+	=3 \begin{pmatrix}
+	1&0\\
+	0&1\\
+	\end{pmatrix}
+	=3 I_2.
+\]
+Note que la matriz escalar dada se escribe como el producto del escalar 3 con la matriz identidad.
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} Demuestre que la suma de dos matrices escalares es una matriz escalar. ¿Qué se puede decir sobre la resta?
+\end{ejer}
+\end{comment}
+
+\begin{defi}[Matriz simétrica]
+    Sea $A\in \mathbb{K}^{n \times n}$. Se dice que $A$ es simétrica si $A^\intercal = A$.
+\end{defi}
+
+\begin{ejem}\hspace{0pt} La matriz 
+\[
+A = \begin{pmatrix}0&1&2&2\\1&-8&2&3\\2&2&5&4\\2&3&4&1
+\end{pmatrix},
+\]
+es simétrica, en efecto, tenemos que
+\[
+    A^{\intercal} = A.
+\]
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} Dada la matriz $A\in\Mat[\K]{n}{n}$, muestre que $A^{\intercal} + A$ es simétrica.
+\end{ejer}
+
+\begin{defi}[Matriz antisimétrica]
+    Sea $A\in \mathbb{K}^{n \times n}$. Se dice que $A$ es antisimétrica si $A^\intercal = -A$.
+\end{defi}
+
+\begin{ejem}\hspace{0pt} La matriz
+\[
+A = \begin{pmatrix}0&1&-8\\-1&0&3\\8&-3&0\end{pmatrix},
+\]
+es antisimétrica, en efecto, tenemos que
+\[
+    A^{\intercal} = - A.
+\]
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} Dada la matriz $A\in\Mat[\K]{n}{n}$, muestre que $A^{\intercal} - A$ es antisimétrica.
+\end{ejer}
+
+\begin{comment}
+\begin{defi}[Matriz nilpotente]
+    Sea $A\in \mathbb{K}^{n \times n}$ y $r \in \N$. Se dice que $A$ es nilpotente de orden $r$ si $r$ es el menor entero positivo tal que
+    \[ 
+        A^r = 0.
+    \]
+\end{defi}
+
+\begin{ejem}\hspace{0pt} La siguiente matriz es nilpotente de orden 2:
+\[
+	A=\begin{pmatrix}1&1\\-1&-1\end{pmatrix}
+\]
+En efecto, determinemos a $A^2$,
+\[
+	A^2=A\cdot A=
+	\begin{pmatrix}1&1\\-1&-1\end{pmatrix}\cdot 
+    \begin{pmatrix}1&1\\-1&-1\end{pmatrix} =
+    \begin{pmatrix}0&0\\0&0\end{pmatrix}.
+\]
+Luego, la matriz $A$ es nilpotente de orden $2$.
+\end{ejem}
+
+\begin{defi}[Matriz idempotente]
+    Sea $A\in \mathbb{K}^{n \times n}$. Se dice que $A$ es una matriz idempotente si $A^2 = A$.
+\end{defi}
+
+\begin{ejem}\hspace{0pt} La matriz 
+\[
+	A=\begin{pmatrix}1&0\\3&0\end{pmatrix}
+\]
+es idempotente, en efecto, calculemos a $A^2$,
+\[
+	A^2=
+	\begin{pmatrix}1&0\\3&0\end{pmatrix}\cdot \begin{pmatrix}1&0\\3&0\end{pmatrix}=
+	\begin{pmatrix}1&0\\3&0\end{pmatrix}=A.
+\]
+\end{ejem}
+
+\begin{advertencia}
+Note que si la matriz $A$ es idempotente entonces se puede concluir que $A^n=A$, para todo $n \in \Nbb^*$.
+\end{advertencia}
+\end{comment}
+
+\begin{defi}[Matriz escalonada por filas]
+Se dice que una matriz está en forma escalonada por filas cuando satisface las siguientes propiedades:
+\begin{enumerate}
+\item Todas las filas que constan de ceros, si las hay, están en la parte inferior de la matriz. 
+\item La entrada principal (primer elemento distinto de cero) de cada fila está en una columna a la derecha de la entrada principal de la fila de arriba. 
+\item En una columna, todas las entradas abajo de una entrada principal son ceros.
+\end{enumerate}
+\end{defi}
+
+\begin{defi}[Matriz escalonada reducida por filas]
+Se dice que una matriz está en forma escalonada reducida por filas cuando satisface las siguientes propiedades:
+\begin{enumerate}
+\item Es una matriz escalonada por filas. 
+\item La entrada principal de cada fila es 1.
+\item Cada 1 principal es el único elemento distinto de cero de su columna
+\end{enumerate}
+\end{defi}
+
+\begin{ejem}\hspace{0pt} Las siguientes matrices son escalonadas por filas
+\[
+    \begin{pmatrix}
+        1&4\\
+        0&1\\
+        0&0
+    \end{pmatrix},\qquad
+    \begin{pmatrix}
+        1&6\\
+        0&2
+    \end{pmatrix} \texty
+    \begin{pmatrix}
+        3&0&1&-2&-1\\
+        0&0&1&4&-2\\
+        0&0&0&-7&2
+    \end{pmatrix}.
+\]
+
+\end{ejem}
+\begin{ejem}\hspace{0pt} Las siguientes matrices son escalonadas reducidas por filas
+\[
+    \begin{pmatrix}
+        1&0&0&2\\
+        0&1&0&-2\\
+        0&0&1&0\\
+        0&0&0&0
+    \end{pmatrix},\qquad
+    \begin{pmatrix}
+        1&6\\
+        0&0
+    \end{pmatrix} \texty
+    \begin{pmatrix}
+        1&0&0&0&-1\\
+        0&0&1&0&-2\\
+        0&0&0&1&2
+    \end{pmatrix}.
+\]
+\end{ejem}
+
+\subsection{Equivalencia por filas}
+
+\begin{defi}[Operaciones elementales de fila]
+    Dada una matriz $A\in\K^{m \times n}$, una operación elemental por filas sobre $A$ es una de las siguientes:
+    \begin{itemize}
+    \item   
+        \textbf{Intercambio de filas:} dados $i , j \in I$, intercambiar la fila $i$ por la fila $j$, denotado por
+        \[
+            F_i \leftrightarrow F_j,
+        \]
+        es reemplazar la fila
+        \[
+            \begin{pmatrix}a_{i1}&a_{i2}&\ldots& a_{in}\end{pmatrix}
+        \]
+        por la fila
+        \[
+            \begin{pmatrix}a_{j1}&a_{j2}&\ldots& a_{jn}\end{pmatrix}
+        \]
+        y viceversa.
+        \item 
+        \textbf{Multiplicar una fila por un escalar:} dados $i\in I$ y $\alpha\in \K$, con $\alpha\neq 0$ y $\alpha \neq 1$, multiplicar la fila $i$ por $\alpha$, denotado por
+        \[
+            \alpha F_i \rightarrow F_i,
+        \]
+        es reemplazar la fila
+        \[
+            \begin{pmatrix}a_{i1}&a_{i2}&\ldots& a_{in}\end{pmatrix}
+        \]
+        por 
+        \[
+            \begin{pmatrix}\alpha a_{i1}&\alpha a_{i2}&\ldots&\alpha a_{in}\end{pmatrix}.
+        \]
+       \item 
+        \textbf{Sumar un múltiplo de una fila con otra:} dados $i,j\in I$ y $\alpha\in \K$, multiplicar la fila $i$ por $\alpha$ y sumarlo a la fila $j$, denotado por
+        \[
+            \alpha F_i + F_j\rightarrow F_j,
+        \]
+        es reemplazar la fila
+        \[
+            \begin{pmatrix}a_{j1}&a_{j2}&\ldots& a_{jn}\end{pmatrix}
+        \]
+        por 
+        \[
+            \begin{pmatrix}\alpha a_{i1} + a_{j1}&\alpha a_{i2} + a_{j2}&\ldots&\alpha a_{in} + a_{jn}\end{pmatrix}.
+        \]
+        
+\end{itemize}
+\end{defi}
+
+\begin{ejem}\hspace{0pt}\label{Ejem:OprEle} \emph Dada la matriz:
+     \[
+           A=\begin{pmatrix}
+           1&2&3 \\
+           0&-1&2\\
+           -1&2&-3
+           \end{pmatrix}
+        \]
+    Aplicar las siguientes operaciones
+    \begin{itemize}
+        \item \textit{Intercambio de filas:} $F_2 \leftrightarrow F_3$
+
+        Se obtiene la siguiente matriz
+        \[
+           B=\begin{pmatrix}
+           1&2&3 \\
+           -1&2&-3\\
+           0&-1&2
+           \end{pmatrix}
+        \]
+
+        \item \textit{Multiplicar una fila por un escalar:} $3  F_1 \rightarrow F_1$
+
+        Se obtiene la siguiente matriz
+        \[
+           C=\begin{pmatrix}
+           3&6&9 \\
+           0&-1&2\\
+           -1&2&-3
+           \end{pmatrix}
+        \]
+
+        \item \textit{Sumar un múltiplo de una fila con otra:} $3 F_1 + F_3\rightarrow F_3$
+
+        Se obtiene la siguiente matriz
+        \[
+           D=\begin{pmatrix}
+           1&2&3 \\
+           0&-1&2\\
+           2&8&6
+           \end{pmatrix}
+        \]
+    \end{itemize}
+    \end{ejem}
+    
+% \begin{ejem}\hspace{0pt} \emph{Multiplicar una fila por un escalar.} Considerando a la matriz $A$ del ejemplo \ref{Ejem:OprEle}, si se aplica la operación de fila $3  F_1 \rightarrow F_1$ se tiene la siguiente matriz:
+%     \[
+%            C=\begin{pmatrix}
+%            3&6&9 \\
+%            0&-1&2\\
+%            -1&2&-3
+%            \end{pmatrix}
+%         \]
+    
+%     \end{ejem}
+    
+% \begin{ejem}\hspace{0pt}\label{Ejem:OpeEle1} \emph{Sumar un múltiplo de una fila con otra.} Considere a la matriz $A$ del ejemplo \ref{Ejem:OprEle}, si se aplica la operación de fila $3 F_1 + F_3\rightarrow F_3$ se tiene la siguiente matriz:
+%     \[
+%            D=\begin{pmatrix}
+%            1&2&3 \\
+%            0&-1&2\\
+%            2&8&6
+%            \end{pmatrix}
+%         \]
+    
+% \end{ejem}
+
+
+\begin{ejer}\hspace{0pt}\label{Ejer:OpeELe1}   
+Dada la matriz
+\[
+    A=\begin{pmatrix}
+           1&2&3 \\
+           0&-1&2\\
+           -1&2&-3
+           \end{pmatrix}.
+\]
+Note que en el ejemplo anterior se realizaron tres operaciones sobre esta matriz. Ahora, realizar las mismas operaciones sobre $A$ de manera consecutiva. 
+\begin{enumerate}
+\item $F_{2} \leftrightarrow F_{3}$.
+\item $3F_{1} \rightarrow F_{1}$.
+\item $3F_{1} + F_{3} \rightarrow F_{3}$.
+\end{enumerate}
+¿Qué matriz se ha obtenido?
+\end{ejer}
+
+% \begin{teo}
+% Dada una matriz $A \in \Mat[\K]{m}{n}$, a cada operación elemental de filas $e$, le corresponde una operación elemental de filas $e^{- 1}$, del mismo tipo de $e$, tal que, $e(e^{- 1}(A))=e^{- 1}(e(A))=A$.
+
+% \end{teo}
+% \begin{advertencia}
+%     Notemos que si $e_1, e_2, e_3$ son operaciones de fila tal que:
+% \[
+% e_1:F_i \leftrightarrow F_j,
+% \]
+% \[
+% e_2:\alpha \cdot F_i \rightarrow F_i,
+% \] 
+% \text{y}
+% \[
+% e_3:\alpha \cdot F_i +F_j\rightarrow F_j.
+% \]
+
+% Entonces existen las operaciones elementales de fila  $e_1^{-1}$,$e_2^{-1}$,$e_3^{-1}$ donde:
+% \[
+% e_1^{-1}:F_i \leftrightarrow F_j,
+% \]
+% \[
+% e_2^{-1}:\dfrac{1}{\alpha} \cdot F_i \rightarrow F_i,
+% \] 
+% \text{y}
+% \[
+% e_3^{-1}:-\alpha \cdot F_i +F_j\rightarrow F_j.
+% \]
+% \end{advertencia} 
+% \begin{advertencia}
+% A la operación elemental $e^{- 1}$ se le llama operación elemental inversa de $e$.
+% \end{advertencia}
+
+\begin{defi}[Equivalente por filas]
+    Sean $A,B\in \Mat[\K]{m}{n}$, se dice que la matriz $A$ es equivalente por filas a una matriz $B$, denotado por $A\sim B$, si se puede obtener $B$ al aplicar a la matriz $A$ una sucesión de operaciones elementales de fila.
+\end{defi}
+
+\begin{advertencia}
+Si $A$ es equivalente por filas a $B$, entonces es $B$ equivalente por filas a $A$.
+\end{advertencia}
+
+\begin{ejem}\hspace{0pt} Al aplicar la operación $2F_2+F_1\rightarrow F_1$ a la matriz
+\[
+    A=\begin{pmatrix}
+        2&3&1&1\\
+        1&-2&-1&3\\
+        0&2&-3&4
+    \end{pmatrix}
+\]
+se obtiene la matriz
+\[
+    B=\begin{pmatrix}
+        4&-1&-1&7\\
+        1&-2&-1&3\\
+        0&2&-3&4
+    \end{pmatrix}.
+\]
+Entonces $A$ es equivalente por filas a $B$, es decir, $A\sim B$. 
+\end{ejem}
+
+% \begin{ejer}\hspace{0pt} Considere a la matriz $A$ y a las operaciones elementales de fila del ejercicio \ref{Ejer:OpeELe}, escriba a las correspondientes operaciones elementales de fila inversas.
+% \end{ejer}
+
+\section{Matrices}
+\setcounter{subsection}{3}
+\subsection{Equivalencia por filas}
+
+\textbf{Pasos para transformar una matriz a una matriz escalonada por filas.} Dada una matriz $A$.
+\begin{enumerate}
+\item Determinar la primera columna (contando de izquierda a derecha), tal que no todos sus elementos sean cero. Ésta es la \textbf{columna pivote}.
+\item En la columna pivote, identificar al primer elemento (contando de arriba hacia abajo) distinto de cero. A este elemento lo denominaremos \textbf{pivote}.
+\item Intercambiar, en caso necesario, la primera fila por aquella fila donde aparece el pivote, de modo que éste se encuentre ahora en la primera fila.
+% \item Multiplicar a la primera fila por el recíproco del pivote. Así, el primer elemento de la columna pivote es ahora un 1.
+\item Realizar las operaciones elementales de fila necesarias para que los elementos debajo del pivote, dentro de la columna pivote, sean cero.
+\item Identificar a la primera columna (después de la columna pivote) cuyos elementos sean no todos cero y repetir los pasos anteriores hasta obtener a la matriz escalonada por filas.
+\end{enumerate}
+
+\begin{ejem}\hspace{0pt}\label{Ejem:EPF} Dada la matriz
+\[
+    A=\begin{pmatrix}
+    1&5&-4\\
+    1&-2&1\\
+    3&1&-2
+    \end{pmatrix}.
+\]
+Obtengamos una matriz escalonada por filas, para esto, notemos que la columna pivote es la primera columna de $A$ y que en la posición $11$ ya se encuentra el pivote, entonces
+\begin{align*}
+A=\begin{pmatrix}
+1&5&-4\\
+1&-2&1\\
+3&1&-2
+\end{pmatrix}
+& \sim 
+\begin{pmatrix}
+1&5&-4\\
+0&-7&5\\
+0&-14&10
+\end{pmatrix}
+&& \begin{array}{c}
+    -F_1+F_2\rightarrow F_2\\
+    -3F_1+F_3\rightarrow F_3
+\end{array}\\
+& \sim 
+\begin{pmatrix}
+1&5&-4\\
+0&-7&5\\
+0&0&0
+\end{pmatrix}
+&& -2F_2+F_3\rightarrow F_3
+% & \sim 
+% \begin{pmatrix}
+% 1&5&-4\\
+% 0&1&-\frac{5}{7}\\
+% 0&0&0
+% \end{pmatrix}
+% && -\frac{1}{7}F_2\rightarrow F_2
+\end{align*}
+Luego, una matriz escalonada por filas obtenida a partir de $A$ es
+\[
+    \begin{pmatrix}
+    1&5&-4\\
+    0&-7&5\\
+    0&0&0
+    \end{pmatrix}.
+\]
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} Dada la matriz
+\begin{align*}
+A=\begin{pmatrix}
+1&5&-4&0\\
+1&-2&1&2\\
+0&1&-1&1
+\end{pmatrix}.
+\end{align*}
+Obtenga una matriz escalonada por filas equivalente.
+\end{ejer}
+
+\begin{teo}
+    Toda matriz $A\in\Mat[\K]{m}{n}$ es equivalente por filas a una única matriz en forma escalonada reducida por filas. 
+\end{teo}
+
+\textbf{Pasos para transformar una matriz a una matriz escalonada reducida por filas.} Dada una matriz $A$.
+\begin{enumerate}
+\item Determinar la primera columna (contando de izquierda a derecha), tal que no todos sus elementos sean cero. Ésta es la \textbf{columna pivote}.
+\item En la columna pivote, identificar al primer elemento (contando de arriba hacia abajo) distinto de cero. A este elemento lo denominaremos \textbf{pivote}.
+\item Intercambiar, en caso necesario, la primera fila por aquella fila donde aparece el pivote, de modo que éste se encuentre ahora en la primera fila.
+\item Multiplicar a la primera fila por el recíproco del pivote. Así, el primer elemento de la columna pivote es ahora un 1.
+\item Realizar las operaciones elementales de fila necesarias para que los elementos de la columna pivote sean cero, excepto el pivote.
+\item Identificar a la primera columna (después de la columna pivote) cuyos elementos sean no todos cero y repetir los pasos anteriores de tal manera que ahora solamente, en la nueva columna pivote, su elemento pivote sea diferente de cero. Continuar con el proceso indicado hasta obtener a la matriz escalonada reducida por filas.
+\end{enumerate}
+
+%Hallar una matriz $B$ equivalente a la matriz $A$ mediante el proceso de Gauss.
+
+%\begin{advertencia}
+%    \textbf{Eliminación de Gauss Jordán:} El proceso para obtener una matriz escalonada reducida por filas a partir de una matriz cualquiera se conoce como eliminación de Gauss-Jordán.
+%\end{advertencia}
+
+\begin{ejem}\label{Ejem:EPF2}\hspace{0pt} Dada la matriz
+\[
+    A=\begin{pmatrix}
+    1&5&-4\\
+    1&-2&1\\
+    3&1&-2
+    \end{pmatrix}.
+\]
+Obtengamos la correspondiente matriz escalonada reducida por filas equivalente. Se tiene que
+\begin{align*}
+A=\begin{pmatrix}
+1&5&-4\\
+1&-2&1\\
+3&1&-2
+\end{pmatrix}
+& \sim 
+\begin{pmatrix}
+1&5&-4\\
+0&-7&5\\
+0&-14&10
+\end{pmatrix}
+&& \begin{array}{c}
+    -F_1+F_2\rightarrow F_2\\
+    -3F_1+F_3\rightarrow F_3
+\end{array}\\
+& \sim 
+\begin{pmatrix}
+1&5&-4\\
+0&-7&5\\
+0&0&0
+\end{pmatrix}
+&& -2F_2+F_3\rightarrow F_3\\
+& \sim 
+\begin{pmatrix}
+1&5&-4\\
+0&1&-\frac{5}{7}\\
+0&0&0
+\end{pmatrix}
+&& -\frac{1}{7}F_2\rightarrow F_2\\
+& \sim
+\begin{pmatrix}
+1&0&-\frac{3}{7}\\
+0&1&-\frac{5}{7}\\
+0&0&0\\
+\end{pmatrix}
+&&-5F_2+F_1\rightarrow F_1
+\end{align*}
+Luego, la correspondiente matriz escalonada por filas obtenida a partir de $A$ es
+\[
+    \begin{pmatrix}
+    1&0&-\frac{3}{7}\\
+    0&1&-\frac{5}{7}\\
+    0&0&0\\
+    \end{pmatrix}.
+\]
+\end{ejem}
+
+\begin{ejer}
+Dada la matriz:
+\[
+    A=\begin{pmatrix}
+    1&5&-4&0\\
+    1&-2&1&2\\
+    0&1&-1&1
+    \end{pmatrix}
+\]
+Obtenga su correspondiente matriz escalonada reducida por filas.
+\end{ejer}
+
+\begin{defi}
+    Sean $A, B\in\Mat[\K]{m}{n}$, donde 
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %la única matriz escalonada reducida por filas 
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    $B$ es una matriz escalonada por filas 
+    equivalente a $A$. 
+    El rango de $A$, denotado por $\rang(A)$, es el número de filas no nulas que tiene la matriz $B$.  
+\end{defi}
+
+\begin{prop}
+    Sean $A, B\in\Mat[\K]{m}{n}$. Se tiene que si $A\sim B$, entonces 
+    \[
+        \rang(A) = \rang(B).
+    \]
+\end{prop}
+
+\begin{prop}
+    Sea $A\in\Mat[\K]{m}{n}$. Se tiene que si $A$ es una matriz escalonada, entonces $\rang(A)$ es el número de filas no nulas que tiene $A$.
+\end{prop}
+
+\begin{ejem}\hspace{0pt} Considerando que
+\[
+    A=\begin{pmatrix}
+        1&5&-4\\
+        1&-2&1\\
+        3&1&-1
+    \end{pmatrix} \sim
+    \begin{pmatrix}
+        1&5&-4\\
+        0&-7&5\\
+        0&0&0
+    \end{pmatrix}=B
+\]
+y que $B$ es una matriz escalonada con dos filas no nulas, entonces $\rang(A)=\rang(B)=2$
+\end{ejem}
+
+\begin{ejer} \label{Ejer:OpeELe} Calcular el rango de la matriz 
+\[
+    B=\begin{pmatrix}
+    1&0&-2&0\\
+    1&-2&1&-1\\
+    -2&1&3&4
+    \end{pmatrix}.
+\]
+\end{ejer}
+\begin{defi}[Matriz elemental]
+    Dada una operación elemental por fila, se llama matriz elemental al resultado de aplicar dicha operación a la matriz identidad.
+\end{defi}
+
+\begin{ejem}\label{ejem2}
+Considerando la matriz identidad $I_{3}$ y la operación elemental de fila $F_3+F_2\rightarrow F_2$, tenemos que le corresponde la matriz elemental:
+\[
+    E=\begin{pmatrix}1&0&0\\0&1&1\\0&0&1\end{pmatrix}.
+\]
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} Considere las siguientes operaciones elementales de fila y escriba las correspondiente matrices elementales.
+\begin{enumerate}
+    \item $-F_1+F_2\rightarrow F_2$
+    \item $2F_1+F_3\rightarrow F_3$
+    \item $F_2\longleftrightarrow F_1$.
+\end{enumerate}
+\end{ejer}
+
+\begin{teo}
+    Sean $E\in \Mat[\K]{m}{m}$ una matriz elemental y $A\in\Mat[\K]{m}{n}$, el resultado de aplicar la operación por filas correspondiente a $E$ a la matriz $A$ es $EA$.
+\end{teo}
+
+\begin{ejem}\hspace{0pt} Considere a la matriz 
+\[
+    A=\begin{pmatrix}0&2&5\\-4&-1&0\\3&2&1\end{pmatrix}
+\]
+y a la operación elemental de fila $F_3+F_2\rightarrow F_2$. Notemos que al aplicar esta operación a $A$ se obtiene la matriz equivalente $B$.
+\begin{align*}
+	A=\begin{pmatrix}
+	0&2&5\\
+	-4&-1&0\\
+	3&2&1\\
+	\end{pmatrix}
+	\sim
+	 \begin{pmatrix}
+    0&2&5\\
+    -1&1&1\\
+    3&2&1\\
+    \end{pmatrix} = B
+\end{align*}
+Por otro lado, se tiene que la matriz elemental correspondiente a dicha operación es
+\[
+    E=
+    \begin{pmatrix}1&0&0\\0&1&1\\0&0&1\end{pmatrix}
+\]
+tal que 
+\[
+    B=EA=\begin{pmatrix}1&0&0\\0&1&1\\0&0&1\end{pmatrix}\begin{pmatrix}
+	0&2&5\\
+	-4&-1&0\\
+	3&2&1\\
+	\end{pmatrix}=\begin{pmatrix}
+    0&2&5\\
+    -1&1&1\\
+    3&2&1\\
+    \end{pmatrix}
+\]
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} Dada la matriz $A = \begin{pmatrix}2&-3\\2&1\end{pmatrix}$ considere a las matrices elementales
+\[
+    E_{1} = \begin{pmatrix}1&0\\-1&1\end{pmatrix}
+    \texty
+    E_{2} = \begin{pmatrix}\frac{1}{2}&0\\0&1\end{pmatrix}
+\]
+tal que la matriz $B = E_{2}E_{1}A$.
+\begin{enumerate}
+\item[$a)$] Encuentre a la matriz $B$.
+\item[$b)$] Identifique las operaciones elementales de fila asociadas a las matrices elementales $E_{1}$ y $E_{2}$.
+\item[$c)$] Aplique las operaciones elementales de fila determinadas en el literal anterior sobre A para mostrar que $A\sim B$.
+\end{enumerate}
+\end{ejer}
+
+\setcounter{section}{1}
+\section{Sistemas de ecuaciones}
+
+\begin{defi}[Sistema de ecuaciones]
+    Un sistema de ecuaciones lineales es un conjunto de $m$ ecuaciones lineales en las cuales figuran $n$ incógnitas a las que notaremos por: $x_1, x_2, \ldots, x_n$. Así, dados $a_{ij}\in\R$ y $b_i\in \R$ con $i\in I$ y $j\in J$, fijos, un sistema de ecuaciones es:
+    \[
+    \l\{
+    \begin{array}{cccccccccc}
+        a_{11}x_1& + &a_{12}x_2& + &\cdots &+& a_{1n}x_n &= &b_1,\\
+        a_{21}x_1& + &a_{22}x_2& + &\cdots &+& a_{2n}x_n &= &b_2,\\
+                &&&    &            &        & &\hspace{2mm} \vdots&\\
+        a_{m1}x_1& + &a_{m2}x_2& + &\cdots &+& a_{mn}x_n &= &b_m.
+    \end{array}
+    \r.
+    \]
+\end{defi}
+
+\begin{ejem}
+El siguiente sistema de ecuaciones:
+\[
+    \systeme[x_1 x_2 x_3 x_4]{x_1 +x_2 +5x_3 -4x_4=3, x_1 -2x_2 +x_3 -2x_4=1, 3x_1 +x_2 -2x_3 -4x_4=-3.}
+\]
+Es un sistema de ecuaciones lineales de 3 ecuaciones con 4 incógnitas $x_1, x_2, x_3$ y $x_4$. 
+\end{ejem}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Representación matricial de un sistema de ecuaciones}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{defi}[Representación matricial]
+Dado un sistema de ecuaciones lineales de $m$ ecuaciones lineales en las cuales figuran $n$ incógnitas:
+\[
+\l\{
+\begin{array}{cccccccccc}
+    a_{11}x_1& + &a_{12}x_2& + &\cdots &+& a_{1n}x_n &= &b_1,\\
+    a_{21}x_1& + &a_{22}x_2& + &\cdots &+& a_{2n}x_n &= &b_2,\\
+            &&&    &            &        & &\hspace{2mm} \vdots&\\
+    a_{m1}x_1& + &a_{m2}x_2& + &\cdots &+& a_{mn}x_n &= &b_m.
+\end{array}
+\r.
+\]
+donde $a_{ij}\in\R$ y $b_i\in \R$ con $i\in I$ y $j\in J$. A la matriz
+\[
+    A=\begin{pmatrix}
+    a_{11} & a_{12} & \cdots & a_{1n}\\
+    a_{21} & a_{22} & \cdots & a_{2n}\\
+    \vdots & \vdots & \ddots & \vdots\\
+    a_{m1} & a_{m2} & \cdots & a_{mn}
+    \end{pmatrix}
+\]
+se la llama matriz de coeficientes del sistema y a 
+\[
+    b=\begin{pmatrix}
+    b_1 \\ b_2 \\ \vdots \\ b_m
+    \end{pmatrix}
+    \texty
+    x=\begin{pmatrix}
+    x_1 \\ x_2 \\ \vdots \\ x_n
+    \end{pmatrix}
+\]
+se las llama columnas de constantes y de incógnitas, respectivamente. Además, se dice que
+\[
+    Ax=b
+\]
+es la representación matricial del sistema de ecuaciones.
+\end{defi}
+
+\begin{ejem}\hspace{0pt}\label{Sem2:EjeSisRepMat}
+Dado el siguiente sistema de ecuaciones lineales:
+  \[
+        \systeme[x_1 x_2 x_3]{x_1+5x_2-4x_3=3{,}, x_1-2x_2+x_3=1{,}, 3x_1+x_2-2x_3=-3.}
+    \]
+Su representación matricial es
+\[
+    Ax = b
+\]
+siendo 
+ \[
+        A=\begin{pmatrix}
+        1 & 5 & -4\\
+        1& -2 & 1\\
+        3&1&-2\\
+        \end{pmatrix}
+\]
+su matriz de coeficientes y 
+\[
+        b=\begin{pmatrix}
+        3\\ 1 \\ -3
+        \end{pmatrix}
+        \texty
+        x=\begin{pmatrix}
+        x_1\\ x_2 \\ x_3
+        \end{pmatrix}
+\]
+sus matrices columna de constantes y de incógnitas, respectivamente.
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} 
+Dada la representación matricial de un sistema de ecuaciones lineales:
+\[
+    Ax = b
+\]
+siendo
+\[
+    A = 
+    \begin{pmatrix}
+    1 & 5 & -4\\
+    2& -2 & 3\\
+    3&7&0\\
+    0&1&1
+    \end{pmatrix},
+    \qquad
+    x = 
+    \begin{pmatrix}
+    x_1\\ x_2\\ x_3
+    \end{pmatrix}
+    \texty
+    b =
+    \begin{pmatrix}
+    1\\ 2 \\ -1\\3
+    \end{pmatrix}.
+\]
+Escriba el sistema de ecuaciones lineales correspondiente.
+\end{ejer}
+
+\begin{defi}[Matriz ampliada]
+    Sean $A\in\Mat[\K]{m}{n}$ y $B\in\Mat[\K]{m}{p}$, se define la matriz ampliada de $A$ y $B$ al elemento de $\Mat[\K]{m}{(n+p)}$ dado por:
+    \[
+        \begin{pmatrix}
+        a_{11}&a_{12}&\cdots&a_{1n}&|&b_{11}&b_{12}&\cdots&b_{1p}\\
+        a_{21}&a_{22}&\cdots&a_{2n}&|&b_{21}&b_{22}&\cdots&b_{2p}\\
+        \vdots&\vdots&\ddots&\vdots&|&\vdots&\vdots&\ddots&\vdots\\
+        a_{m1}&a_{m2}&\cdots&a_{mn}&|&b_{m1}&b_{m2}&\cdots&b_{mp}
+        \end{pmatrix}.
+    \]
+    y se la denota por $(A|B)$.
+\end{defi}
+
+\begin{ejem}\hspace{0pt} 
+Dadas las siguientes matrices:
+\[
+    A=\begin{pmatrix}
+        1 & 3\\
+        1& 2
+\end{pmatrix}
+\texty
+B=\begin{pmatrix}
+        1 & 0\\
+        0& 1
+\end{pmatrix}.
+\]
+Su matriz ampliada es:
+\[
+    (A|B)=
+    \begin{pmatrix}
+    1& 3&|&1 & 0\\
+    1& 2&|&0&1
+    \end{pmatrix}.
+\]
+\end{ejem}
+\begin{defi}
+    Dado el sistema de ecuaciones lineales en forma matricial
+    \[
+        Ax=b
+    \]
+    con $A\in \Mat[\K]{m}{n}$ y $b\in\Mat[\K]{m}{1}$, se dice que 
+    
+    \[
+        (A|b)
+    \]
+    
+    es la matriz ampliada asociada al sistema.
+\end{defi}
+
+\begin{ejem}
+\hspace{0pt} 
+Considere el sistema de ecuaciones lineales 
+\[
+        \systeme[x_1 x_2 x_3]{x_1+5x_2-4x_3=3{,}, x_1-2x_2+x_3=1{,}, 3x_1+x_2-2x_3=-3.}
+\]
+se tiene que su matriz ampliada es:
+\[
+    \begin{pmatrix}
+        1&5&-4&|&3\\
+        1&-2&1&|&1\\
+        3&1&-2&|&-3
+        \end{pmatrix}.
+\]
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} 
+Dados los siguientes sistemas de ecuaciones lineales:
+  \[
+        \systeme[x_1 x_2 x_3]{x_1+5x_2-4x_3=3, x_1-2x_2+x_3=1, 3x_1+x_2-2x_3=-3}
+        \texty
+        \systeme[x_1 x_2 x_3]{x_1+x_2+x_3=0, x_1-6x_2+2x_3=-1.}
+    \]
+Determinar sus matrices asociadas.    
+\end{ejer}
+
+
+\subsection{Resolución de sistemas lineales}
+
+\begin{defi}[Solución de un sistema]
+Dados $A\in\Mat[\K]{m}{n}$, $b \in\Mat[\K]{m}{1}$ y $x \in\Mat[\K]{n}{1}$, considere la representación matricial $Ax = b$ de un sistema de ecuaciones lineales con $m$ ecuaciones y $n$ incógnitas. 
+Se dice que una solución de este sistema es todo $z\in\Mat[\K]{n}{1}$ tal que $Az=b$.
+\end{defi}
+
+\begin{teo}
+    Sean $A,C\in \Mat[\K]{m}{n}$ y $b,d\in \Mat[\K]{m}{1}$, se tiene que los sistemas de ecuaciones lineales
+    \[
+        Ax=b
+        \texty
+        Cx=d
+    \]
+    tienen las mismas soluciones si y solo si
+    \[
+        (A|b)\sim (C|d),
+    \]
+    es decir, si las matrices aumentadas de los sistemas son equivalentes por filas. 
+\end{teo}
+
+\noindent El procedimiento de reducción de Gauss-Jordan para resolver el sistema lineal $Ax = b$ es el siguiente.
+
+\begin{description}
+\item[Paso 1.] Formar la matriz aumentada $(A|b)$.
+\item[Paso 2.] Transformar la matriz aumentada $(A|b)$ a su forma escalonada reducida por filas $(C|d)$ mediante operaciones elementales por fila.
+\item[Paso 3.] Para cada fila distinta de cero de la matriz $(C|d)$, se despeja la incógnita correspondiente a la entrada principal de cada fila. Las filas que constan completamente de ceros se pueden ignorar, pues la ecuación correspondiente será satisfecha por cualquier valor de las incógnitas.
+\end{description}
+
+\noindent El procedimiento de eliminación de Gauss para resolver el sistema lineal $Ax = b$ es el siguiente.
+\begin{description}
+\item[Paso 1.] Formar la matriz aumentada $(A|b)$.
+\item[Paso 2.] Transformar la matriz aumentada $(A|b)$ a su forma escalonada por filas $(C|d)$ mediante operaciones elementales por fila.
+\item[Paso 3.] Resolver el sistema lineal correspondiente a $(C|d)$. Las filas constan completamente de ceros se pueden ignorar, pues la ecuación correspondiente será satisfecha por cualquier valor de las incógnitas.
+\end{description}
+
+\begin{ejem}\hspace{0pt} 
+Los sistemas de ecuaciones lineales siguientes
+\[
+    \systeme[x_1  x_2]{2x_1 +x_2 = 2,
+        x_1 -2x_2 = 1}
+    \texty
+    \systeme[x_1 x_2]{4x_1 +2x_2 = 4,
+        7x_1 +x_2 = 7}
+\]
+tienen la misma solución, esta es $\begin{pmatrix}1\\0\end{pmatrix}$. En efecto, observemos que las matrices ampliadas de los sistemas son 
+\[
+    \begin{pmatrix}
+    2&1&|&2\\
+    1&-2&|&1
+    \end{pmatrix}
+    \texty
+    \begin{pmatrix}
+    4&2&|&4\\
+    7&1&|&7
+    \end{pmatrix}
+\]
+respectivamente, notemos también que
+\begin{align*}
+    \begin{pmatrix}
+    2&1&|&2\\
+    1&-2&|&1
+    \end{pmatrix}
+    &\sim \begin{pmatrix}
+    2&1&|&2\\
+    7&1&|&7
+    \end{pmatrix}
+    && 3F_{1} + F_{2} \to F_{2}\\
+    &\sim \begin{pmatrix}
+    4&2&|&4\\
+    7&1&|&7
+    \end{pmatrix}
+    && 2F_{1} \to F_{1},
+\end{align*}
+es decir, las matrices ampliadas son equivalentes por filas, para obtener la solución del sistema utilizamos el procedimiento de reducción de Gauss-Jordan desde el paso 2, dado que ya obtuvimos a la matriz ampliada,
+\begin{align*}
+    \begin{pmatrix}
+    2&1&|&2\\
+    1&-2&|&1
+    \end{pmatrix}
+    &\sim \begin{pmatrix}
+    1&-2&|&1\\
+    2&1&|&2
+    \end{pmatrix}
+    && F_{1} \leftrightarrow F_{2}\\
+    &\sim \begin{pmatrix}
+    1&-2&|&1\\
+    0&5&|&0
+    \end{pmatrix}
+    && -2F_{1} + F_{2} \to F_{2}\\
+    &\sim \begin{pmatrix}
+    1&-2&|&1\\
+    0&1&|&0
+    \end{pmatrix}
+    && \frac{1}{5}F_{2} \to F_{2}\\
+    &\sim \begin{pmatrix}
+    1& 0&|&1\\
+    0&  1&|&0
+    \end{pmatrix}
+    && 2F_{2} + F_{1} \to F_{1},
+\end{align*}
+lo que implica que la solución de los dos sistemas es $\begin{pmatrix}1\\0\end{pmatrix}$.
+\end{ejem}
+
+\begin{ejer}\hspace{0pt}
+Considere a los sistemas de ecuaciones lineales siguientes:
+\[
+    \systeme[x_1 x_2]{x_1 +x_2 = 2,
+        3x_1 -5x_2 = - 2}
+    \texty
+    \systeme[x_1 x_2]{2x_1 -x_2 = 1,
+        x_1 -2x_2 = - 1.}
+\]
+Muestre que son sistemas equivalentes y obtenga la solución de estos.
+\end{ejer}
+
+\setcounter{section}{1}
+\section{Sistemas de ecuaciones}
+\setcounter{subsection}{1}
+\subsection{Resolución de sistemas lineales}
+
+\begin{defi}
+    Sean $A\in \Mat[\K]{m}{n}$ y $b\in \Mat[\K]{m}{1}$, dado el sistema de ecuaciones lineales
+    \[
+        Ax=b,
+    \]
+    se dice que
+    \begin{itemize}
+    \item
+        el sistema es \textbf{inconsistente} si no tiene solución;
+    \item
+        el sistema es \textbf{consistente} si tiene al menos una solución.
+    \end{itemize}
+\end{defi}
+
+\begin{ejem}\hspace{0pt} 
+El sistema de ecuaciones lineales
+\[
+    \systeme[x_1 x_2]{x_1 -x_2 = 3,
+        2x_1 -2x_2 = 4}
+\]
+no tiene solución, es decir, es un sistema inconsistente. Analicemos la matriz ampliada del sistema
+\begin{align*}
+    \begin{pmatrix}
+    1&-1&|&3\\
+    2&-2&|&4
+    \end{pmatrix}
+    &\sim
+    \begin{pmatrix}
+    1&-1&|&3\\
+    0&0&|&-2
+    \end{pmatrix} 
+    && -2F_{1} + F_{2} \to F_{2}
+\end{align*}
+Notemos que la segunda fila de la matriz equivalente implica que
+\[
+    0x_{1} + 0x_{2} = -2
+\]
+lo cual es falso, lo que nos permite concluir que el sistema no posee solución, es decir, es inconsistente para cualquier valor de $x_{1}$ y $x_{2}$.
+\end{ejem}
+
+\begin{ejem}\hspace{0pt} 
+El sistema de ecuaciones lineales
+\[
+    \systeme[x_1 x_2]{x_1 -x_2 = 3,
+        2x_1 -2x_2 = 6}
+\]
+tiene al menos una solución, es decir, es un sistema consistente. Analicemos la matriz ampliada del sistema
+\begin{align*}
+    \begin{pmatrix}
+    1&-1&|&3\\
+    2&-2&|&6
+    \end{pmatrix}
+    &\sim
+    \begin{pmatrix}
+    1&-1&|&3\\
+    0&0&|&0
+    \end{pmatrix} 
+    && -2F_{1} + F_{2} \to F_{2}
+\end{align*}
+Notemos que la segunda fila de la matriz equivalente implica que
+\[
+    0x_{1} + 0x_{2} = 0
+\]
+lo cual es verdadero para cualquier valor de $x_{1}$ y $x_{2}$, mientras que la primera fila implica que
+\[
+    x_{1} - x_{2} = 3
+\]
+que se verifica para todos los valores de $x_{1} = 3 + x_{2}$ con $x_{2}\in\R$. Por tanto, el sistema es consistente.
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} 
+Dado el sistema de ecuaciones lineales
+\[
+    \systeme[x_1 x_2]{2x_1 -x_2 = 3,
+        x_1 +x_2 = 0.}
+\]
+Muestre que es un sistema consistente.
+\end{ejer}
+
+\begin{comment}
+\begin{ejer}\hspace{0pt} 
+Tipos de soluciones y aplicación del teorema de Rouché-Frobenius.
+\begin{enumerate}
+\item[$a)$] Considere el sistema de ecuaciones lineales
+\[
+    \systeme[x_1 x_2 x_3]{x_1 +x_2 +x_3 = 1,
+        2x_1 +3x_2 = 1,
+        x_1 +x_2 -x_3 = 0}
+\]
+Compruebe que se cumple la igualdad $\rang(A) = \rang(A|b) = 3$ y concluya que el sistema es consistente. ¿Cuántas soluciones posee el sistema? 
+\item[$b)$] Dado el sistema de ecuaciones lineales
+\[
+    \systeme[x_1 x_2 x_3]{x_2 +x_3 = 1,
+        2x_1 +3x_2 -x_3 = 1,
+        x_1 +x_2 -x_3 = 0.}
+\]
+Demuestre que este sistema posee infinitas soluciones.
+\end{enumerate}
+\end{ejer}
+
+\begin{ejer}\hspace{0pt} 
+Dado $\alpha\in\R$, considere al sistema de ecuaciones lineales
+\[
+    \systeme[x_1 x_2]{{\alpha}x_1 +x_2 = 1,
+        x_1 +{\alpha}x_2 = 1.}
+\]
+\begin{enumerate}
+\item[$a)$] ¿Para qué valores de $\alpha$ el sistema tiene solución única?
+\item[$b)$] ¿Para qué valores de $\alpha$ el sistema no tiene solución?
+\item[$c)$] ¿Para qué valores de $\alpha$ el sistema tiene infinitas soluciones?
+\end{enumerate}
+\end{ejer}
+\end{comment}
+
+\begin{teo}
+    Sean $A\in \Mat[\K]{m}{n}$ y $b\in \Mat[\K]{m}{1}$, dado el sistema de ecuaciones lineales
+    \[
+        Ax=b,
+    \]
+    se tiene una y solo una de las siguientes
+    \begin{itemize}
+    \item
+        el sistema es inconsistente;
+    \item
+        el sistema es consistente y tiene una única solución; o
+    \item
+        el sistema es consistente y tiene infinitas soluciones.
+    \end{itemize}
+\end{teo}
+
+\begin{teo}[Teorema de Rouché–Frobenius]\label{Sem03TeoR-F}
+    Sean $A\in \Mat[\K]{m}{n}$ y $b\in \Mat[\K]{m}{1}$, dado el sistema de ecuaciones lineales
+    \[
+        Ax=b,
+    \]
+    se tiene que
+    \begin{itemize}
+    \item
+        el sistema es consistente si y solo si $\rang(A)=\rang(A|b)$;
+    \item
+        en caso de que el sistema sea consistente, la solución es única si y solo si $\rang(A)=n$.
+    \end{itemize}
+\end{teo}
+
+\begin{ejem}\hspace{0pt} 
+Considere el sistema de ecuaciones lineales
+\[
+    \systeme[x_1 x_2 x_3]{-x_1 +x_2 +x_3 = 1,
+        2x_1 +3x_2 -2x_3 = 1,
+        x_1 +x_2 -x_3 = 0}
+\]
+es un sistema inconsistente. En efecto, se tiene que 
+\[
+    \rang(A) = 2 \neq \rang(A|b) = 3.
+\]
+\end{ejem}
+
+\begin{obs} Notemos que podemos determinar el tipo de solución, lo cual lo hacemos analizando el rango de las matrices de coeficientes y ampliada, sin embargo, no hemos determinado la solución como tal.
+\end{obs}
+
+\setcounter{section}{1}
+\section{Sistemas de ecuaciones}
+\setcounter{subsection}{2}
+\subsection{Matriz Inversa}
+
+\begin{defi}\label{Sem03Clas02DefInv}
+    Sea $A\in \Mat[\K]{n}{n}$. Se dice que $A$ es no singular o invertible si existe una matriz $B\in \Mat[\K]{n}{n}$ tal que 
+    \[
+        AB = BA = I_n
+    \]
+    la matriz $B$ se denomina inversa de $A$ y se la denota por $A^{-1}$. 
+    
+    \noindent Si no existe tal matriz, entonces se dice que $A$ es singular o no invertible. 
+\end{defi}
+
+\begin{prop}
+    Si una matriz tiene inversa, la inversa es única. 
+\end{prop}
+
+\begin{comment}
+\begin{proof}\hspace{0pt} Sea $A\in\Mat[\K]{n}{n}$ una matriz invertible y supongamos que $B$ y $C$ son dos inversas de $A$, por la definición \ref{Sem03Clas02DefInv} se tiene que
+\[
+    AB = BA = I_{n}
+    \texty
+    AC = CA = I_{n}.
+\]
+Se tiene, además, que
+\begin{align*}
+    B 
+    &= BI_{n}\\
+    &= B(AC)\\
+    &= (BA)C\\
+    &= I_{n}C\\
+    &= C
+\end{align*}
+lo que muestra que $B = C$, y, por tanto, si la inversa de $A$ existe, es única.\qedhere
+\end{proof}
+\end{comment}
+
+\begin{ejem}\hspace{0pt} 
+Sean $A\in\Mat[\K]{n}{n}$ una matriz no singular y sean $x, b \in \Mat[\K]{n}{1}$. Si $Ax = b$, entonces $x = A^{- 1}b$.
+
+\begin{proof}[Solución.]\hspace{0pt} Por hipótesis sobre $A$ se tiene que $A^{-1}$ existe, entonces
+\begin{align*}
+    Ax = b
+    &\Longleftrightarrow A^{-1}(Ax) = A^{-1}b
+    && \text{Multiplicando $A^{- 1}$ en ambos lados}\\
+    &\Longleftrightarrow (A^{-1}A)x = A^{-1}b
+    && \text{Propiedad asociativa}\\
+    &\Longleftrightarrow I_{n}x = A^{-1}b
+    && \text{Definición de matriz inversa}\\
+    &\Longleftrightarrow x = A^{-1}b
+    && \text{Multiplicación por la matriz identidad}\qedhere
+\end{align*}
+\end{proof}
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} 
+Sean $A\in\Mat[\K]{n}{n}$ una matriz no singular y sean $x, b \in \Mat[\K]{n}{1}$. Si $x^{\intercal}A^{2} + b^{\intercal}A = 0$, entonces $x^{\intercal} = - b^{\intercal}A^{- 1}$.
+\end{ejer}
+
+\begin{teo}\label{Sem03Clas02PropInv}
+    Sea $A, B \in \Mat[\K]{n}{n}$. 
+    \begin{enumerate}
+    \item[$a)$] 
+        Si $A$ es una matriz no singular, entonces $A^{-1}$ es no singular y 
+        \[ 
+            (A^{-1})^{-1} = A.
+        \]
+    \item[$b)$] 
+        Si $A$ y $B$ son matrices no singulares, entonces $AB$ es no singular y 
+        \[ 
+            (AB)^{-1} = B^{-1}A^{-1}.
+        \]
+    \item[$c)$] 
+        Si $A$ es una matriz no singular, entonces
+        \[
+            {(A^\intercal)}^{-1} = {(A^{-1})}^\intercal.
+        \]
+    \end{enumerate}
+\end{teo}
+
+\begin{comment}
+\begin{proof}\hspace{0pt} 
+Demostremos el primer enunciado del teorema \ref{Sem03Clas02PropInv}. Supongamos que $A\in\Mat[\K]{n}{n}$ es una matriz no singular, entonces $A^{- 1}$ existe, además,
+\[
+    A^{- 1}A = AA^{- 1} = I_{n},
+\]
+luego, $A^{- 1}$ es no singular con inversa $(A^{- 1})^{- 1} = A$.\qedhere
+\end{proof}
+\end{comment}
+
+\begin{ejem}\hspace{0pt} 
+Sean $A, X\in\Mat[\K]{n}{n}$ matrices no singulares. Si $AA^{\intercal}X^{- 1} = A$ entonces $X = A^{\intercal}$.
+
+\begin{proof}[Solución.]\hspace{0pt} Supongamos que $A$ y $X$ son matrices no singulares y que $AA^{\intercal}X^{- 1} = A$, vamos a mostrar que $X = A^{\intercal}$. Se tiene que
+\begin{align*}
+    AA^{\intercal}X^{- 1} = A
+    &\Rightarrow A^{- 1}(AA^{\intercal}X^{- 1}) = A^{- 1}A
+    && \text{Multiplicando por $A^{- 1}$ en}\\
+    &\phantom{\Rightarrow A^{- 1}(AA^{\intercal}X^{- 1}) = A^{- 1}A}
+    && \text{ambos lados}\\
+    &\Rightarrow (A^{- 1}A)(A^{\intercal}X^{- 1}) = A^{- 1}A
+    && \text{Propiedad asociativa}\\
+    &\Rightarrow A^{\intercal}X^{- 1} = I_{n}
+    && \text{Definición de matriz inversa}\\
+    &\Rightarrow ((A^{\intercal})^{-1}A^{\intercal})X^{- 1} = (A^{\intercal})^{-1}I_{n}
+    && \text{Multiplicando por $(A^{\intercal})^{-1}$ en}\\
+    &\phantom{\Rightarrow ((A^{\intercal})^{-1}A^{\intercal})X^{- 1} = (A^{\intercal})^{-1}I_{n}}
+    && \text{ambos lados y propiedad asociativa}\\
+    &\Rightarrow X^{- 1} = (A^{\intercal})^{-1}
+    && \text{Definición de matriz inversa}\\
+    &\Rightarrow X = A^{\intercal}
+    && \text{Teorema \ref{Sem03Clas02PropInv}}\qedhere
+\end{align*}
+\end{proof}
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} 
+Sean $A, X\in\Mat[\K]{n}{n}$ matrices no singulares tales que $(A^{\intercal})^{-1} + X^{- 1}$ es no singular. Si $2((A^{\intercal})^{-1} + X^{- 1})^{- 1} = A^{\intercal}$, entonces $X = A^{\intercal}$.
+\end{ejer}
+
+\begin{teo}
+    Sean $p\in\N^*$ y $A_1, A_2, \ldots, A_p \in \Mat[\K]{n}{n}$ matrices no singulares. Se tiene que $A_1 A_2 \cdots A_p$ es no singular y 
+    \[
+        (A_1 A_2 \cdots A_p)^{-1} = A_p^{-1} A_{p-1}^{-1} \cdots A_1^{-1}.
+    \]
+\end{teo}
+
+\begin{comment}
+\begin{proof} La demostración se realiza usando Inducción, y se deja como ejercicio, el caso $p=2$ es la parte $b)$ del teorema \ref{Sem03Clas02PropInv}\qedhere
+\end{proof}
+\end{comment}
+
+\begin{teo}\label{Sem03Clas01CarcInv}
+    Sean $A, B \in \Mat[\K]{n}{n}$. Se tiene que si $AB=I_n$, entonces $BA=I_n$. Se dice que $B$ es la inversa de $A$ y viceversa.
+\end{teo}
+
+\begin{ejem}\hspace{0pt} 
+Sean $A,B\in\Mat[\K]{n}{n}$ tales que $AB = I_{n}$, entonces $B^{2}A^{2} = I_{n}$.
+
+\begin{proof}[Solución.]\hspace{0pt} Supongamos que $A,B\in\Mat[\K]{n}{n}$ son tales que $AB = I_{n}$, se tiene que
+\begin{align*}
+    B^{2}A^{2}
+    &= (BB)(AA)
+    && \text{Definición de $A$ a la $r$}\\
+    &= B((BA)A)
+    && \text{Propiedad asociativa}\\
+    &= B(I_{n}A)
+    && \text{Hipótesis sobre $AB$ y teorema \ref{Sem03Clas01CarcInv}}\\
+    &= BA
+    && \text{Multiplicar por $I_{n}$}\\
+    &= I_{n}
+    && \text{Hipótesis sobre $AB$ y teorema \ref{Sem03Clas01CarcInv}}\qedhere
+\end{align*}
+\end{proof}
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} 
+Sean $A,B\in\Mat[\K]{n}{n}$ tales que $AB = I_{n}$, entonces $B^{3}A^{3} = I_{n}$.
+\end{ejer}
+
+\begin{teo}
+    Sea $A \in \Mat[\K]{n}{n}$, se tiene que $A$ es no singular si y solo si es equivalente por filas a $I_n$. Además,
+    \[
+        (A|I_n) \sim (I_n|A^{-1}).
+    \]
+\end{teo}
+\begin{ejem} 
+Dada la matriz $A = \begin{pmatrix}2&1\\1&1\end{pmatrix}$, su inversa es $A^{- 1} = \begin{pmatrix}1&-1\\-1&2\end{pmatrix}$.
+
+\begin{proof}[Solución.]\hspace{0pt} Supongamos que $A^{- 1}$ existe, escribamos $A$ seguido de $I_{2}$ en la forma de matriz aumentada
+\[
+    (A|I_{2}) =
+    \begin{pmatrix}
+    2&1&|&1&0\\
+    1&1&|&0&1
+    \end{pmatrix}
+\]
+y después realizamos operaciones elementales por fila.
+\begin{align*}
+    \begin{pmatrix}
+    2&1&|&1&0\\
+    1&1&|&0&1
+    \end{pmatrix}
+    &\sim
+    \begin{pmatrix}
+    1&1&|&0&1\\
+    2&1&|&1&0
+    \end{pmatrix}
+    && F_{1} \leftrightarrow F_{2}\\
+    &\sim
+    \begin{pmatrix}
+    1&1&|&0&1\\
+    0&-1&|&1&-2
+    \end{pmatrix}
+    &&-2F_{1} + F_{2} \to F_{2}\\
+    &\sim
+    \begin{pmatrix}
+    1&1&|&0&1\\
+    0&1&|&-1&2
+    \end{pmatrix}
+    &&-F_{2} \to F_{2}\\
+    &\sim
+    \begin{pmatrix}
+    1&0&|&1&-1\\
+    0&1&|&-1&2
+    \end{pmatrix}
+    &&-F_{2} + F_{1}\to F_{1}
+\end{align*}
+Dado que $A$ se redujo a $I_{2}$ se tiene que
+\[
+    A^{- 1} = 
+    \begin{pmatrix}
+    1&-1\\
+    -1&2
+    \end{pmatrix}.\qedhere
+\]
+\end{proof}
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} 
+Dada la matriz $A = \begin{pmatrix}1&2&0\\0&1&2\\0&0&1\end{pmatrix}$. Calcule $A^{- 1}$ si existe.
+\end{ejer}
+
+
+\setcounter{section}{1}
+\section{Sistemas de ecuaciones}
+\setcounter{subsection}{3}
+\subsection{Sistemas homogéneos}
+
+\begin{teo}\label{Sem03Clas02CarcSisHom}
+    Sea $A \in \Mat[\K]{n}{n}$, el sistema homogéneo 
+    \[
+        Ax = 0
+    \]
+    tiene una solución no trivial si y solo si $A$ es singular. 
+\end{teo}
+
+\begin{comment}
+\begin{proof}\hspace{0pt} 
+Supongamos que $A$ es singular, entonces $\rang(A)  = \rang(A|0) < n$, lo que implica el sistema $Ax = 0$ es consistente con infinitas soluciones, por tanto, el sistema tiene al menos una solución no trivial.
+
+Para el recíproco razonemos por reducción al absurdo, esto es, supongamos que $Ax = 0$ tiene una solución no trivial y que $A$ es no singular, lo que implica que $A^{-1}$ existe, de lo cual
+\[
+    Ax = 0 \Longleftrightarrow A^{- 1}(Ax) = A^{- 1}0 \Longleftrightarrow x = 0
+\]
+lo que contradice lo supuesto.
+\end{proof}
+\end{comment}
+
+\begin{teo}\label{Sem03Clas02InvCat}
+    Sea $A \in \Mat[\K]{n}{n}$. Se tiene que $A$ es no singular si y solo si el sistema lineal $Ax=b$ tiene una solución única para cada $b \in \Mat[\K]{n}{1}$.
+\end{teo}
+
+\begin{ejem}\hspace{0pt}\label{Sem03Clas02EjemPartB} 
+Dado el sistema de ecuaciones lineales
+\[
+    \systeme[x_1 x_2]{2x_1 +x_2 =b_{1},
+        x_1 +x_2 = b_{2}}
+\]
+que tiene solución única para todo $\begin{pmatrix}b_{1}\\b_{2}\end{pmatrix}\in\Mat{2}{1}$, se tiene que 
+$A = \begin{pmatrix}2&1\\1&1\end{pmatrix}$ es no singular. En efecto, notemos que 
+\[
+    \begin{pmatrix}
+    2&1&|&b_{1}\\
+    1&1&|&b_{2}
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+    1&1&|&b_{2}\\
+    0&-1&|&b_{1} - 2b_{2}
+    \end{pmatrix}
+\]
+luego, $\rang(A) = \rang(A|b) = 2$, y, por tanto, el sistema $Ax = b$ posee solución única, que junto con el teorema \ref{Sem03Clas02InvCat} implica que $A$ es no singular.
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} 
+Considere al sistema de ecuaciones lineales
+\[
+    \systeme[x_1 x_2 x_3]{x_1 +2x_2 =1,
+        x_2 +2x_3 = 1,
+        x_3 = 1}
+\]
+Utilizando la inversa de la matriz de coeficientes muestre que el sistema posee solución única y encuéntrela.
+\end{ejer}
+
+\begin{prop}\label{Sem03Clas02EquivInv}
+    Sea $A \in \Mat[\K]{n}{n}$, se tienen que las siguientes proposiciones son equivalentes:
+    \begin{enumerate}
+    \item[$a)$] 
+        $A$ es no singular;
+    \item[$b)$] 
+        el sistema $Ax=0$ solamente tiene la solución trivial;
+    \item[$c)$] 
+        $A$ es equivalente por filas a $I_n$;
+    \item[$d)$] 
+        $\rang(A)=n$; y 
+    \item[$e)$] 
+        el sistema lineal $Ax=b$ tiene una solución única para cada $b \in \Mat[\K]{n}{1}$. 
+    \end{enumerate}
+\end{prop}
+
+\begin{comment}
+\begin{ejem} Dada la matriz 
+\[
+    A = \begin{pmatrix}
+    2&1\\
+    1&1
+    \end{pmatrix}
+\]
+La matriz $A$ verifica a la proposición \ref{Sem03Clas02EquivInv}.
+
+\begin{proof}\hspace{0pt} Considerando al ejemplo \ref{Sem03Clas02EjemPartA} notemos que los literales $a)$, $c)$ y $d)$ se verifican. Considerando al ejemplo \ref{Sem03Clas02EjemPartB} notemos que se cumple el literal $e)$. Por el literal $a)$ junto con el teorema \ref{Sem03Clas02CarcSisHom}, el literal $b)$ se verifica. Por lo tanto, la matriz $A$ verifica a la proposición \ref{Sem03Clas02EquivInv}.\qedhere
+\end{proof}
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} Construya un ejemplo de un sistema de ecuaciones lineales $3 \times 3$ que tenga solución, y compruebe que su matriz de coeficientes es singular.
+\end{ejer}
+\end{comment}
+
+\begin{ejer}\hspace{0pt} 
+Dada la matriz $A = \begin{pmatrix}a&b\\c&d\end{pmatrix}$, verificar que su inversa es  
+\[
+    A^{-1} = \dfrac{1}{ad - bc}\begin{pmatrix}d&-b\\-c&a\end{pmatrix} \text{   siempre que   } ad - bc \neq 0.
+\]
+\end{ejer}
+
+\setcounter{section}{2}
+\section{Determinantes}
+
+En esta sección tomaremos $n\in \N$, con $n>0$, e $I = \{ 1, 2, \ldots, n\}$.
+
+\subsection{Definiciones fundamentales}
+
+\begin{defi}[Menor]
+    Sea $A\in \Mat[\K]{n}{n}$ e $i,j\in I$. A la matriz de $\Mat[\K]{(n-1)}{(n-1)}$ que se obtiene luego de eliminar la fila $i$ y la columna $j$ de $A$ se la llama el menor $ij$ de $A$, y se denota por $A_{ij}$.
+\end{defi}
+
+\begin{advertencia}
+    En la literatura se puede encontrar la notación de $M_{ij}$ para el menor de $ij$ de $A$.
+\end{advertencia}
+
+\begin{comment}
+\begin{defi}[Menor principal]
+    Sean $A\in \Mat[\K]{n}{n}$ y $k\in I$. A la matriz de $\Mat[\K]{k}{k}$ que se obtiene eliminar las $n-k$ últimas filas y columnas de $A$, se la llama el menor principal $k$ de $A$, denotado por $A_{k}$.
+\end{defi}
+
+\begin{advertencia}
+    En la literatura se puede encontrar la notación de $M_{k}$ para el menor principal $k$ de $A$.
+\end{advertencia}
+\end{comment}
+
+\begin{ejem}\hspace{0pt}
+
+    Sea
+    $A = \begin{pmatrix}
+        -1 & 4 & 0 \\
+        2 & 1 & -2 \\
+        0 & 3 & 5
+    \end{pmatrix}$, se tiene que:
+    
+    \[A_{12} = \begin{pmatrix}
+        2 & -2 \\
+        0 & 5
+    \end{pmatrix}, \quad 
+    A_{23} = \begin{pmatrix}
+        -1 & 4 \\
+        0 & 3
+    \end{pmatrix} \quad \text{y} \quad 
+    A_{31} = \begin{pmatrix}
+        4 & 0 \\
+        1 & -2
+    \end{pmatrix}
+    \]
+    
+    %\noindent Determine los menores $A_{32}$, $A_{13}$ y $A_{22}$.
+
+\end{ejem}
+
+\begin{ejer}
+\item Sea
+$B = \begin{pmatrix}
+    1 & -3 & -1 \\
+    0 & 1 & -5 \\
+    4 & 2 & 0
+\end{pmatrix}$. Determine los menores $B_{11}$, $B_{32}$ y $B_{21}$.
+\end{ejer}
+
+
+\begin{defi}[Determinante] 
+    Sea $A\in \Mat[\K]{n}{n}$ se define el determinante de $A$, denotado por $\det(A)$ (o por $|A|$), de manera inductiva, como sigue:
+    \begin{itemize}
+    \item 
+        Si $n=1$ y $A=(a_{11})$, entonces $\det(A) = a_{11}$.
+    \item
+        Si $n>1$, entonces
+        \begin{align*}
+            \det(A) 
+            & = \sum_{k=1}^n a_{1k}(-1)^{1+k}\det(A_{1k})\\
+            & = a_{11}\det(A_{11}) - a_{12}\det(A_{12}) 
+            + \ldots +  (-1)^{1+n} a_{1n}\det(A_{1n}).
+        \end{align*}
+    \end{itemize}
+\end{defi}
+
+\begin{ejem}\hspace{0pt} \label{determinante3por3}
+
+\begin{itemize}
+\item 
+    Sea $A$ una matriz de orden $2 \times 2$ de la forma
+    \[ 
+        A=
+        \begin{pmatrix}
+         a_{11} & a_{12}\\
+         a_{21} & a_{22}
+        \end{pmatrix},
+    \]
+    se tiene que
+    \[
+        A_{11} = (a_{22})
+        \texty
+        A_{12} = (a_{21}),
+    \]
+    por lo tanto
+    \[
+        \det(A_{11}) = a_{22}
+        \texty
+        \det(A_{12}) = a_{21},
+    \]
+    de esta forma,
+    \begin{align*}
+        \det(A) &= \sum_{k=1}^{2} a_{1k}(-1)^{1+k}\det(A_{1k})\\
+        &= (-1)^{1+1}a_{11}\det(A_{11}) + (-1)^{1+2}a_{12}\det(A_{12})\\
+        & = a_{11}a_{22} - a_{12}a_{21}
+    \end{align*}
+    es decir,
+    \[
+        \det(A) = \begin{vmatrix}
+        a_{11} & a_{12} \\
+        a_{21} & a_{22}
+        \end{vmatrix}
+        = a_{11}a_{22} - a_{12}a_{21}.
+    \]
+    
+\item Sea $B = \begin{pmatrix}
+        1 & 5 \\
+        2 & 6
+    \end{pmatrix}$, se tiene que $\det(B) = 6-10 = -4$
+
+%\item Sea $C$ una matriz de orden $3 \times 3$ de la forma
+ %        \[ C=
+  %      \begin{pmatrix}
+   %      c_{11} & c_{12} & c_{13}\\
+    %     c_{21} & c_{22} & c_{23}\\
+     %    c_{31} & c_{32} & c_{33}\\
+      %  \end{pmatrix}
+       % \]
+        %\noindent el determinante de la matriz $C$ está dado por:
+        %\begin{align*}
+        %\det(C) &= \sum_{k=1}^{3} (-1)^{1+k}c_{1k}\det(C_{1k}) \\
+        %&= (-1)^{1+1}c_{11}\det(C_{11}) + 
+        %(-1)^{1+2}c_{12}\det(C_{12}) + 
+        %(-1)^{1+3}c_{13}\det(C_{13})\\
+        %&= 
+        %c_{11}
+        %\begin{vmatrix}
+        %c_{22} & c_{23} \\
+        %c_{32} & c_{33}
+        %\end{vmatrix} - c_{12}
+      %  \begin{vmatrix}
+%        c_{21} & c_{23} \\
+ %       c_{31} & c_{33} \\
+  %      \end{vmatrix}+ c_{13}
+   %     \begin{vmatrix}
+    %    c_{21} & c_{22} \\
+     %   c_{31} & c_{32}
+      %  \end{vmatrix}.
+    %\end{align*}
+%\item
+ %   Sea $D = \begin{pmatrix}
+  %      -1 & 1 & 0 \\
+   %     0 & 1 & -2 \\
+    %    2 & 2 & 1
+    %\end{pmatrix}$, se tiene %que:
+    %\[
+     %   \det(D) = -1 
+      %  \begin{vmatrix}
+       %     1 & -2 \\
+        %    2 & 1
+        %\end{vmatrix} -1
+        %\begin{vmatrix}
+         %   0 & -2 \\
+          %  2 & 1
+        %\end{vmatrix} +0
+        %\begin{vmatrix}
+         %   0 & 1 \\
+          %  2 & 2
+        %\end{vmatrix} = -1(5) -1(4) = -9.
+    %\]
+\end{itemize}
+\end{ejem}
+
+%\begin{ejer}\hspace{0pt} Calcular el determinante de las siguientes matrices:
+%\begin{enumerate}
+%\item[$a)$] $A = \begin{pmatrix}-4 & 2 \\-1 & 3\end{pmatrix}$
+%\item[$b)$] $B = \begin{pmatrix}1&-3&-1\\-2&1&-2\\0&5&0\end{pmatrix}$
+%\end{enumerate}
+%\end{ejer}
+
+\begin{defi}[Cofactor]
+    Sea $A\in \Mat[\K]{n}{n}$ e $i,j\in I$. El cofactor $ij$ de $A$ denotado $C_{ij}$, está dado por
+    \[
+        C_{ij} = (-1)^{i+j} \det (A_{ij})
+    \]
+     donde $A_{ij}$ es el menor $ij$ de $A$.
+\end{defi}
+
+\begin{ejem} Dada la matriz $A = 
+\begin{pmatrix}
+-2 & -1 & -3 \\
+0 & 1 & -1 \\
+3 & 3 & 2
+\end{pmatrix}$, se tiene que:
+\begin{itemize}
+\item El cofactor $32$ de A es:
+\[C_{32} = (-1)^{5}
+\begin{vmatrix}
+-2 & -3 \\
+0 & -1
+\end{vmatrix} = -1(2)=-2\]
+\item El cofactor $13$ de A es:
+\[C_{13} = (-1)^{4}
+\begin{vmatrix}
+0 & 1 \\
+3 & 3
+\end{vmatrix} = 1(-3) = -3\]
+\end{itemize}
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} Dada la matriz 
+\[
+    A = 
+    \begin{pmatrix}
+        -1 & 1 & 0 \\
+        0 & 2 & -1 \\
+        3 & 2 & 5
+    \end{pmatrix}.
+\]
+Determinar los cofactores $C_{23}$, $C_{13}$, $C_{21}$ y $C_{32}$.
+\end{ejer}
+
+%\begin{advertencia}
+%    En la literatura, también se suele llamar menor al determinante de $A_{ij}$ en 
+%    lugar de a la matriz, como lo haremos en este texto. Además, cofactor, se lo %suele denotar por $A_{ij}$.
+%\end{advertencia}
+
+\begin{teo}[Generalización cálculo del determinante]
+    Sea $A \in \Mat[\K]{n}{n}$. Se tiene que para todo $i\in I$,
+    \[
+        \det(A) 
+        = \sum_{k=1}^n a_{ik}C_{ik} 
+        = a_{i1}C_{i1} + a_{i2}C_{i2} + \ldots + a_{in}C_{in}
+    \]
+    y
+    \[
+        \det(A) 
+        = \sum_{k=1}^n a_{ki}C_{ki} 
+        = a_{1i}C_{1i} + a_{2i}C_{2i} + \ldots + a_{ni}C_{ni}.
+    \]
+\end{teo}
+
+\begin{advertencia}
+    El lado derecho de las igualdades toma el nombre de expansión por cofactores del determinante de $A$, con respecto a la fila $i$ y con respecto a la columna $i$.
+\end{advertencia}
+
+\begin{ejem}\hspace{0pt}\label{Det_Ej1}
+    Sea $A =
+    \begin{pmatrix}
+        -2 & -1 & -3 \\
+        0 & 1 & -1 \\
+        3 & 3 & 2
+    \end{pmatrix}$.
+    \noindent Calculemos el determinante de $A$ mediante la expansión por cofactores de $A$, con respecto a la fila $1$. Se tiene
+    \[
+        \det(A) = -2 
+        \begin{vmatrix}
+            1 & -1 \\
+            3 & 2
+        \end{vmatrix} +1
+        \begin{vmatrix}
+            0 & -1 \\
+            3 & 2
+        \end{vmatrix} -3
+        \begin{vmatrix}
+            0 & 1 \\
+            3 & 3
+        \end{vmatrix} = 2
+    \]
+    
+    ahora, calculemos el determinante de $A$ mediante la expansión por cofactores de $A$, con respecto a la columna 2:
+    \[
+        \det(A) = 1 
+        \begin{vmatrix}
+            0 & -1 \\
+            3 & 2
+        \end{vmatrix} +1
+        \begin{vmatrix}
+            -2 & -3 \\
+            3 & 2
+        \end{vmatrix} -3
+        \begin{vmatrix}
+            -2 & -3 \\
+            0 & -1
+        \end{vmatrix} = 2
+    \]
+    
+    \end{ejem}
+    
+    \begin{ejer}\hspace{0pt} Considere a la matriz del ejemplo \ref{Det_Ej1}, calcule su determinante mediante la expansión por cofactores de $A$, con respecto a la columna $3$.
+\end{ejer}
+
+\setcounter{section}{2}
+\section{Determinantes}
+\setcounter{subsection}{1}
+\subsection{Propiedades fundamentales}
+
+\begin{teo}[Determinante de una matriz triangular]
+    Sea $A \in \Mat[\K]{n}{n}$ una matriz triangular superior o triangular inferior, entonces
+    \[
+        \det(A) = a_{11}a_{22} \cdots a_{nn},
+    \]
+    es decir, el determinante de una matriz triangular es el producto de los elementos de su diagonal principal.
+\end{teo}
+
+\begin{ejem}
+    Consideremos la matriz
+    $A = \begin{pmatrix}
+    2 & 0 & 0 & 0 & 0 & 0 \\
+    8 & -1 & 0 & 0 & 0 & 0 \\
+    -7 & 6 & 2 & 0 & 0 & 0 \\
+    4 & 0 & 3 & -2 & 0 & 0 \\
+    -5 & 2 & 3 & 5 & 1 & 0 \\
+    1 & -3 & 7 & -6 & 2 & 3
+    \end{pmatrix}
+    $.
+    
+    \noindent Se sigue que $\det(A) = (2)(-1)(2)(-2)(1)(3) = 24$
+\end{ejem}
+
+\begin{ejer}
+    Calcular el determinante de la siguiente matriz
+    \[
+        B =
+        \begin{pmatrix}
+            -2 & 0 & 3 & 5 & -1 \\
+            0 & 5 & -1 & 4 & 0 \\
+            0 & 0 & -1 & 7 & -2 \\
+            0 & 0 & 0 & 3 & -1 \\
+            0 & 0 & 0 & 0 & 1
+        \end{pmatrix}.
+    \]
+\end{ejer}
+
+% \begin{prop}
+%     Sea $E\in\Mat[\K]{n}{n}$ una matriz elemental, $i,j\in I$ y $\alpha\in\K$, con $\alpha\neq 0$. Se tiene que
+%     \begin{itemize}
+%     \item   
+%         si la operación es $F_i \leftrightarrow F_j$, entonces $\det(E) = - 1$;
+%     \item 
+%         si la operación es $\alpha F_i \rightarrow F_i$, entonces $\det(E) = \alpha$; y
+%     \item 
+%         si la operación es $\alpha F_i + F_j\rightarrow F_j$, entonces $\det(E) = 1$.
+%     \end{itemize}
+% \end{prop}
+
+% \begin{ejem}
+%     Consideremos la matriz $
+%     \begin{pmatrix}
+%         1 & 0 \\
+%         0 & 1
+%     \end{pmatrix}$, cuyo determinante es $1$.
+    
+%     \begin{itemize}
+%     \item
+%         Si hacemos $F_{1} \leftrightarrow F_{2}$,  obtenemos $ E =
+%         \begin{pmatrix}
+%             0 & 1 \\
+%             1 & 0
+%         \end{pmatrix}$. Se sigue que $\det(E) = -1$.
+        
+%     \item
+%         Si hacemos $3F_{1} \rightarrow F_{1}$, obtenemos $ E =
+%         \begin{pmatrix}
+%             3 & 0 \\
+%             0 & 1
+%         \end{pmatrix}$. Se sigue que $\det(E) = 3$.
+        
+%     \item
+%         Si hacemos $-2F_{2} + F_{1} \rightarrow F_{1} $, obtenemos $ E =
+%         \begin{pmatrix}
+%             1 & -2 \\
+%             0 & 1
+%         \end{pmatrix}$.
+        
+%         \noindent Se sigue que $\det(E) = 1$.
+%     \end{itemize}
+% \end{ejem}
+
+% \begin{ejer}
+%     Considere la matriz $ 
+%     \begin{pmatrix}
+%         1 & 0 & 0 \\
+%         0 & 1 & 0 \\
+%         0 & 0 & 1
+%     \end{pmatrix}$, cuyo determinante es $1$. Para cada operación por fila determine a la correspondiente matriz elemental y a su determinante.
+%     \begin{enumerate}
+%         \item[$a)$] $F_{3} \leftrightarrow F_{1}$
+%         \item[$b)$] $-2F_{2} \rightarrow F_{2}$
+%         \item[$c)$] $3F_{3} + F2 \rightarrow F_{2}$
+%     \end{enumerate}
+% \end{ejer}
+
+\begin{prop}
+    Sea $A \in \Mat[\K]{n}{n}$. El determinante de la matriz $A$ y de su transpuesta son iguales, es decir, 
+    \[
+        \det(A^\intercal) = \det(A).
+    \]
+\end{prop}
+
+\begin{obs}
+    Por esta proposición, cuando se \textbf{calcula el valor de un determinante}, da lo mismo trabajar por filas que trabajar por columnas.
+\end{obs}
+
+\begin{teo}[Determinante del producto de matrices]\label{DetProd}
+    Sean $A, B\in \Mat[\K]{n}{n}$, se tiene que:
+    \[
+        \det(AB) = \det(A)\det(B).
+    \]
+    es decir, el determinante de un producto de matrices es igual al producto de los determinantes de las matrices.
+\end{teo}
+
+\begin{ejem} Dadas las matrices 
+\[
+A = 
+    \begin{pmatrix}
+        -2 & 3 \\
+        1 & 1
+    \end{pmatrix}
+\texty
+B=
+    \begin{pmatrix}
+        1 & -1 \\
+        2 & 4
+    \end{pmatrix}.
+\]
+Se sigue que $AB = 
+    \begin{pmatrix}
+        4 & 14 \\
+        3 & 3
+    \end{pmatrix}$ y ya que $\det(A) = -5$, $\det(B) = 6$ y $\det(AB) = -30$, la igualdad del teorema \ref{DetProd} se verifica.
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} Dadas las matrices
+\[
+A = 
+    \begin{pmatrix}
+        3 & 0 & 3 \\
+        0 & 3 & 0 \\
+        3 & 0 & 3
+    \end{pmatrix}
+\texty    
+B = 
+    \begin{pmatrix}
+        -2 & 0 & -2 \\
+        0 & -2 & 0 \\
+        2 & 0 & 2
+    \end{pmatrix}.
+\]
+Calcular $AB$, $\det(AB)$, $\det(A)$, $\det(B)$ y compruebe la igualdad del teorema \ref{DetProd}.
+\end{ejer}
+
+\begin{prop}
+    Sea $A \in \Mat[\K]{n}{n}$. Si una fila o columna de $A$ contiene solo ceros, entonces $\det (A) =0$.
+\end{prop}
+
+\begin{ejem}
+    Sea $A =
+    \begin{pmatrix}
+        3 & -1 & 11 & 0 \\
+        9 & 7 & -5 & 0 \\
+        -2 & -6 & -8 & 0 \\
+        4 & 1 & -5 & 0
+    \end{pmatrix}$. Realizamos el cálculo del determinante de $A$ mediante la expansión por cofactores de $A$, con respecto a la columna $4$. Obtenemos,
+    \begin{align*}
+        \det(A) &= \sum_{k=1}^{4} a_{k4} C_{k4}\\
+                &= \sum_{k=1}^{4} 0\cdot C_{k4}\\
+                &= 0
+    \end{align*}
+    
+\end{ejem}
+
+\begin{prop}
+    Sea $A \in \Mat[\K]{n}{n}$. Si dos filas o columnas de $A$ son iguales, entonces 
+    \[
+        \det(A) = 0
+    \]
+\end{prop}
+
+\begin{ejem}
+    Sea $A = 
+    \begin{pmatrix}
+        1 & 3 & 1 & 2 \\
+        -1 & 1 & -1 & 3 \\
+        2 & 3 & 2 & 1 \\
+        -2 & 1 & -2 & 3
+    \end{pmatrix}$, calculemos su determinante mediante la expansión por cofactores con respecto a la primera columna.
+    \begin{align*}
+        \det(A) = & 1
+        \begin{vmatrix}
+            1 & -1 & 3 \\
+            3 & 2 & 1 \\
+            1 & -2 & 3
+        \end{vmatrix} + 1
+        \begin{vmatrix}
+            3 & 1 & 2 \\
+            3 & 2 & 1 \\
+            1 & -2 & 3
+        \end{vmatrix} +2
+        \begin{vmatrix}
+            3 & 1 & 2 \\
+            1 & -1 & 3 \\
+            1 & -2 & 3
+        \end{vmatrix} +2
+        \begin{vmatrix}
+            3 & 1 & 2 \\
+            1 & -1 & 3 \\
+            3 & 2 & 1
+        \end{vmatrix} \\
+        = & -8 + 0 + 2(7) + 2(-3) \\
+        = & \, 0.
+    \end{align*}
+\end{ejem}
+
+\begin{ejer} Calcular el determinante de la matriz $B = 
+    \begin{pmatrix}
+        1 & -1 & 1 \\
+        0 & 5 & 0 \\
+        2 & 3 & 2
+    \end{pmatrix}$.
+\end{ejer}
+
+\begin{prop}
+    Sea $A \in \Mat[\K]{n}{n}$. Si una  fila o columna de $A$ es múltiplo de otra, entonces 
+    \[
+        \det(A) = 0
+    \]
+\end{prop}
+
+\begin{ejem}
+    El determinante de la matriz $A =
+\begin{pmatrix}1 & 2 & -1 \\-2 & 5 & -2 \\3 & 6 & -3\end{pmatrix}$ es nulo. Pues la fila $3$ es múltiplo de la fila $1$. Por tanto, $\det(A)=0$
+\end{ejem}
+
+\begin{ejer} Calcular el determinante de la matriz $B = 
+    \begin{pmatrix}
+        2 & -6 & 4 \\
+        -1 & 3 & 1 \\
+        3 & -9 & 3
+    \end{pmatrix}$.
+\end{ejer}
+
+% \begin{ejer}
+%     Verifique que el determinante de la matriz $B$ del ejemplo $12$ es cero, realizando el cálculo de otra manera.
+% \end{ejer}
+
+% \begin{ejer} Demuestre a la proposición $3$.
+% \end{ejer}
+
+\begin{prop}\label{DetSign}
+    Sean $A, B \in \Mat[\K]{n}{n}$. Si la matriz $B$ se obtiene intercambiando dos filas o columnas de $A$ entonces
+    \[  
+        \det(B) = - \det(A).
+    \]
+\end{prop}
+
+\begin{ejem} Dadas las matrices 
+\[
+A = 
+    \begin{pmatrix}
+        1 & 0 & 0 \\
+        3 & -1 & 0 \\
+        3 & 3 & -2 
+    \end{pmatrix}
+\texty
+B =
+    \begin{pmatrix}
+        1 & 0 & 0 \\
+        3 & 3 & -2 \\
+        3 & -1 & 0
+    \end{pmatrix}.
+\]
+Notemos que la matriz $B$ se obtiene al intercambiar las filas $2$ y $3$ de la matriz $A$. Además, $\det(A) = 2$ y $\det(B) = -2$, es decir, la igualdad de la proposición \ref{DetSign} se verifica.
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} Dadas las matrices
+\[
+A = 
+    \begin{pmatrix}
+        1 & 0 & 0 \\
+        3 & -1 & 0 \\
+        3 & 3 & -2 
+    \end{pmatrix}
+\texty
+B =
+    \begin{pmatrix}
+        -1 & 3 & 0 \\
+        0 & 1 & 0 \\
+        3 & 3 & -2
+    \end{pmatrix}.
+\]
+Comparar a sus determinantes.
+\end{ejer}
+
+\begin{prop}
+    Sean $A, B \in \Mat[\K]{n}{n}$. Si $B$ se obtiene al multiplicar una fila o columna de $A$ por un escalar $\alpha \in \K$, entonces
+    \[
+        \det(B) = \alpha \det(A).
+    \]
+\end{prop}
+
+\begin{ejem}\hspace{0pt} Dada la matriz $A =
+\begin{pmatrix}1 & -1 & -1 \\-2 & 1 & -2 \\0 & 2 & 0\end{pmatrix}$ cuyo determinante es 8. Considere a la matriz $B =
+\begin{pmatrix}1 & 2 & -1 \\-2 & -2 & -2 \\0 & -4 & 0\end{pmatrix}$. Notemos que $B$ se obtiene al multiplicar la segunda columna de la matriz $A$ por $-2$.
+    
+    \noindent Luego, $\det(B) = -2(8) = -16$.
+\end{ejem}
+
+% \begin{ejer} Demuestre a la proposición $9$.
+% \end{ejer}
+
+\begin{prop}
+    Sea $A\in \Mat[\K]{n}{n}$ y $\alpha \in\K$. Se tiene que
+    \[
+        \det(\alpha A) = \alpha^n \det(A).
+    \]
+\end{prop}
+
+\begin{ejem}
+    Sea $A =
+    \begin{pmatrix}
+        -2 & -3 & 6 & 4 \\
+        0 & 2 & 6 & -9 \\
+        0 & 0 & -1 & 8 \\
+        0 & 0 & 0 & 2
+    \end{pmatrix}$. Notemos que al ser $A$ una matriz triangular superior, $\det(A) = 8$.
+    
+    \noindent Consideremos la matriz $-2A = 
+    \begin{pmatrix}
+        4 & 6 & -12 & -8 \\
+        0 & -4 & -12 & 18 \\
+        0 & 0 & 2 & -16 \\
+        0 & 0 & 0 & -4
+    \end{pmatrix}$ y calculemos su determinante. Puesto que está también es una matriz triangular superior, se sigue que $\det(-2A) = 128 = (-2)^{4}8$.
+\end{ejem}
+
+\begin{ejer}
+    Sea $A = 
+    \begin{pmatrix}
+        1 & -2 \\
+        -1 & 3
+    \end{pmatrix}$. ¿Cuál es el valor de $\det(-4A)$?
+\end{ejer}
+
+\begin{prop}
+    Sean $A, B \in \Mat[\K]{n}{n}$, $\alpha\in\K$ e $i,j\in I$, con $i\neq j$. Si $B$ se obtiene al aplicar una operación de fila $\alpha F_i + F_j \to F_j$, entonces 
+    \[
+        \det(B) = \det(A).
+    \]
+\end{prop}
+
+% \begin{prop} Sean $A, B, C \in \Mat[\K]{n}{n}$ y $j\in I$ tales que $A$, $B$ y $C$ difieran únicamente en la columna $j$. Si la columna $j$ de $C$ es el resultado de sumar las columnas $j$ de $A$ y $B$, entonces 
+%     \[
+%         \det(C) = \det(A) + \det(B).
+%     \]
+% \end{prop}
+
+% \begin{ejem}
+%     Si $\det
+%         \begin{pmatrix}
+%             x&y&z\\
+%             3&0&2\\
+%             1&1&1
+%         \end{pmatrix}
+%     =1$, calcular el determinante de la matriz:
+%     \[
+%         \begin{pmatrix}
+%             x&y&z\\
+%             3x+3&3y&3z+2\\
+%             x+1&y+1&z+1
+%         \end{pmatrix}
+%     \]
+    % Notemos que
+    % \begin{align*}
+    %     \det\begin{pmatrix}
+    %                 x & y & z\\
+    %                 3x+3 & 3y & 3z+2\\
+    %                 x+1 & y+1 & z+1
+    %             \end{pmatrix}
+    %         &= 
+    %         \det\begin{pmatrix}
+    %                 x&y&z\\
+    %                 3x & 3y & 3z\\
+    %                 x+1 & y+1 & z+1
+    %             \end{pmatrix}\\
+    %         &\phantom{=} 
+    %         + \det
+    %             \begin{pmatrix}
+    %                 x&y&z\\
+    %                 3 & 0 & 2\\
+    %                 x+1 & y+1 & z+1
+    %             \end{pmatrix} \\
+    %         &= 
+    %         3\det\begin{pmatrix}
+    %                 x&y&z\\
+    %                 x & y & z\\
+    %                 x+1 & y+1 & z+1
+    %             \end{pmatrix}\\
+    %         &\phantom{=} + \det
+    %             \begin{pmatrix}
+    %                 x&y&z\\
+    %                 3 & 0 & 2\\
+    %                 x & y & z
+    %             \end{pmatrix}\\
+    %         &\phantom{=} + \det
+    %             \begin{pmatrix}
+    %                 x&y&z\\
+    %                 3 & 0 & 2\\
+    %                 1 & 1 & 1
+    %             \end{pmatrix}\\
+    %         &= 3(0) + 0 + 1 \\
+    %         &= 1. 
+    % \end{align*}
+    % Por lo tanto,
+    % \[
+    %     \det\begin{pmatrix}
+    %         x & y & z\\
+    %         3x+3 & 3y & 3z+2\\
+    %         x+1 & y+1 & z+1
+    %     \end{pmatrix} = 1.
+    % \]
+% \end{ejem}
+
+\begin{ejer}
+    Si $\det
+        \begin{pmatrix}
+            x&y&z\\
+            3&0&2\\
+            1&1&1
+        \end{pmatrix}
+    =1$, calcular el determinante de la matriz:
+    
+    \[
+        \begin{pmatrix}
+            x & y & z \\
+            3x+3 & 3y & 3z+2 \\
+            2 & 2 & 2
+        \end{pmatrix}.
+    \]
+\end{ejer}
+
+\begin{ejer}
+  Utilizando propiedades de determinantes, calcular:
+   \[
+    \begin{vmatrix}
+            1 & a & a^2 \\
+            1 & b & b^2 \\
+            1 & c & c^2
+        \end{vmatrix}
+    \]
+\end{ejer}
+%\begin{prop} Sean $A, B, C \in \Mat[\K]{n}{n}$ y $j\in I$ tales que $A$, $B$ y $C$ difieran únicamente en la columna $j$. Si la columna $j$ de $C$ es el resultado de sumar las columnas $j$ de $A$ y $B$, entonces 
+ %   \[
+  %      \det(C) = \det(A) + \det(B).
+   % \]
+%\end{prop}
+
+%\begin{ejem}
+ %   Si $\det\begin{pmatrix}
+  %      -2 & -3 & 1 \\
+   %     0 & 2 & x\\
+    %    1 & 1 & y
+    %\end{pmatrix} = 8$ y %$\det\begin{pmatrix}
+     %   -2 & 6 & 1 \\
+      %  0 & 4 & x\\
+       % 1 & -3 & y
+    %\end{pmatrix} = 5$.
+    
+    %Entonces, 
+    %\begin{align*}
+     %   \det\begin{pmatrix}
+      %  -2 & 3 & 1 \\
+       % 0 & 6 & x\\
+       % 1 & -2 & y
+    %\end{pmatrix} &= \det\begin{pmatrix}
+    %    -2 & -3 & 1 \\
+     %   0 & 2 & x\\
+      %  1 & 1 & y
+  %  \end{pmatrix} + \det\begin{pmatrix}
+   %     -2 & -3 & 1 \\
+    %    0 & 2 & x\\
+     %   1 & 1 & y
+    %\end{pmatrix}\\
+    %&= 8 + 5 \\
+    %&= 13
+    %\end{align*}
+
+%\end{ejem}
+
+\setcounter{section}{2}
+\section{Determinantes}
+\setcounter{subsection}{1}
+\subsection{Resolución de sistemas de ecuaciones}
+
+\begin{defi}[Matriz de cofactores]
+Sea $A\in\Mat[\K]{n}{n}$. La matriz de cofactores de $A$, que se denota por $\cof(A)$, es la matriz de orden $n \times n$ que está formada por los cofactores de $A$, es decir:
+\[
+\cof(A) = (C_{ij}) = 
+\begin{pmatrix}
+C_{11}&C_{12}&\ldots&C_{1n}\\
+C_{21}&C_{22}&\ldots&C_{2n}\\
+\vdots&\vdots&\ddots&\vdots\\
+C_{n1}&C_{n2}&\ldots&C_{nn}
+\end{pmatrix}.
+\]
+donde, $C_{ij} = (-1)^{i+j} \det (A_{ij})$.
+\end{defi}
+
+\begin{ejem}\label{matrizcofactores}
+    Sea $A = 
+    \begin{pmatrix}
+    0 & 1 & 3 \\
+    2 & -1 & 0 \\
+    -1 & 2 & -1
+    \end{pmatrix}$, determinemos sus cofactores correspondientes a la primera columna.
+    \begin{itemize}
+    \item
+        $C_{11} = (-1)^{2} 
+        \begin{vmatrix}
+            -1 & 0 \\
+            2 & -1
+        \end{vmatrix} = 1$.
+        
+    \item
+        $C_{21} = (-1)^{3}
+        \begin{vmatrix}
+            1 & 3 \\
+            2 & -1
+        \end{vmatrix} = 7$.
+        
+    \item
+        $C_{31} = (-1)^{4}
+        \begin{vmatrix}
+            1 & 3 \\
+            -1 & 0
+        \end{vmatrix} = 3$.
+    \end{itemize}
+\end{ejem}
+
+\begin{ejer}
+    Verifique que la matriz de los cofactores de la matriz $A$ del ejemplo \ref{matrizcofactores} es: \[ \cof(A) = 
+    \begin{pmatrix}
+            1 & 2 & 3\\
+            7 & 3 & -1 \\
+            3 & 6 & -2
+        \end{pmatrix}
+    \]
+\end{ejer}
+
+\begin{defi}[Matriz adjunta]
+Sea $A\in\Mat[\K]{n}{n}$. La matriz adjunta de $A$, que se denota por $\adj(A)$, es la matriz de orden $n \times n$ igual a la transpuesta de la matriz de cofactores de $A$, es decir:
+\[
+    \adj(A) = \cof(A)^{T}.
+\]
+\end{defi}
+
+\begin{ejem}
+    Consideramos la matriz $A$, planteada en el ejemplo \ref{matrizcofactores}. Se tiene:
+    \[
+        \adj(A) = \cof(A)^{T} =
+        \begin{pmatrix}
+            1 & 7 & 3 \\
+            2 & 3 & 6 \\
+            3 & -1 & -2
+        \end{pmatrix}
+    \]
+\end{ejem}
+
+\begin{ejer}\label{matcofej}
+    Sea $B = 
+    \begin{pmatrix}
+        3 & -2 \\
+        -1 & 2
+    \end{pmatrix}$, calcular $\adj(B)$.   
+\end{ejer}
+
+\begin{teo}
+Sea $A\in\Mat[\K]{n}{n}$, entonces
+\[
+    A \adj(A) = \adj(A) A = \det(A) I_{n}.
+\]
+\end{teo}
+
+\begin{ejem}
+    Consideremos la matriz $A$ del ejemplo \ref{matrizcofactores}, se tiene
+    \[
+        A \adj(A) = \begin{pmatrix}
+            0 & 1 & 3 \\
+            2 & -1 & 0 \\
+            -1 & 2 & -1
+        \end{pmatrix}
+        \begin{pmatrix}
+            1 & 7 & 3 \\
+            2 & 3 & 6 \\
+            3 & -1 & -2
+        \end{pmatrix} = 
+        \begin{pmatrix}
+            11 & 0 & 0 \\
+            0 & 11 & 0 \\
+            0 & 0 & 11
+        \end{pmatrix} = 11 I_{3}
+    \]
+    \[
+        \adj(A) A = 
+        \begin{pmatrix}
+            1 & 7 & 3 \\
+            2 & 3 & 6 \\
+            3 & -1 & -2
+        \end{pmatrix}
+        \begin{pmatrix}
+            0 & 1 & 3 \\
+            2 & -1 & 0 \\
+            -1 & 2 & -1
+        \end{pmatrix} =
+        \begin{pmatrix}
+            11 & 0 & 0 \\
+            0 & 11 & 0 \\
+            0 & 0 & 11
+        \end{pmatrix} = 11 I_{3}
+    \]
+    
+    \noindent Como el $\det(A) = 11$ (verifique), entonces $A \adj(A) = \adj(A) A = \det(A) I_{3}$.
+\end{ejem}
+
+\begin{ejer} 
+    Dada la matriz $B$ del ejercicio \ref{matcofej}, compruebe que:
+    \[
+        B \adj(B) = \adj(B) B = \det(B) I_{2}.
+    \]
+\end{ejer}
+
+\begin{cor}
+Sea $A\in\Mat[\K]{n}{n}$. Si $\det(A) \neq 0$, entonces 
+$A$ es invertible y 
+\[
+    A^{- 1} = \dfrac{1}{\det(A)}\adj(A).
+\]
+\end{cor}
+
+\begin{ejem}
+    Consideremos nuevamente la matriz $A$ del ejemplo \ref{matrizcofactores}.
+    
+    \noindent Como el $\det(A) \not = 0$, entonces se tiene:
+    \[
+        A^{-1} = \dfrac{1}{11}
+        \begin{pmatrix}
+            1 & 7 & 3 \\
+            2 & 3 & 6 \\
+            3 & -1 & -2
+        \end{pmatrix} = 
+        \begin{pmatrix}
+            \dfrac{1}{11} & \dfrac{7}{11} & \dfrac{3}{11} \\
+            \dfrac{2}{11} & \dfrac{3}{11} & \dfrac{6}{11} \\
+            \dfrac{3}{11} & -\dfrac{1}{11} & -\dfrac{2}{11}
+        \end{pmatrix}
+    \]
+\end{ejem}
+
+\begin{ejer} Dada la matriz $B$ del ejemplo \ref{matcofej}, calcule su matriz inversa.
+\end{ejer}
+
+\begin{teo}\label{TeoInvAdj}
+    Sea $A \in \Mat[\K]{n}{n}$. Si $A$ es no singular, entonces $\det(A) \neq 0$ y 
+    \[
+        \det(A^{-1}) = \dfrac{1}{\det(A)}.
+    \]
+\end{teo}
+
+\begin{ejem}
+    Sea $A$ la matriz del ejemplo \ref{matrizcofactores}. Se tiene que:
+    \[
+        \det(A^{-1}) = \dfrac{1}{11} = \dfrac{1}{\det(A)}
+    \]
+\end{ejem}
+
+\begin{ejer} Compruebe la igualdad del teorema \ref{TeoInvAdj} para la matriz del ejemplo \ref{matcofej}.
+\end{ejer}
+
+\begin{prop}\label{Pro_NS}
+Sea $A\in\Mat[\K]{n}{n}$. Una matriz $A$ es no singular si y sólo si $\det(A)\neq0$.
+\end{prop}
+
+\begin{ejer} Hacer la demostración de la proposición \ref{Pro_NS}.
+\end{ejer}
+
+\begin{prop}
+Sea $A\in\Mat[\K]{n}{n}$. El sistema homogéneo $Ax=0$ tiene solución no trivial si y sólo si $\det(A)=0$.
+\end{prop}
+
+\begin{ejer}
+Dado el sistema lineal homogéneo:
+\[
+\systeme[x_1 x_2 x_3]{x_1+5x_2-4x_3=0, x_1-2x_2+x_3=0, 3x_1+x_2-2x_3=0}
+\]
+Obtenga la solución del sistema.
+\end{ejer}
+\begin{prop}
+Sean $A\in\Mat[\K]{n}{n}$ y $b\in\Mat[\K]{n}{1}$. El sistema $Ax=b$ tiene solución única si y sólo si $\det(A)\neq0$ y su solución es
+\[
+    A^{- 1}b.
+\]
+\end{prop}
+\begin{ejer}
+Dado el sistema lineal:
+\[
+\systeme[x_1 x_2 x_3]{x_1-4x_2+x_3=5, 2x_1-6x_2-x_3=8, -x_1-5x_3=-12}
+\]
+Obtenga la solución del sistema.
+\end{ejer}
+%\begin{teo}[Equivalencias no singulares]
+%Sea $A\in\Mat[\K]{n}{n}$, los siguientes enunciados son equivalentes.
+%\begin{enumerate}
+%\item $A$ es no singular;
+%\item el sistema $Ax=0$ tiene solamente la solución trivial;
+%\item $A$ es equivalente por filas a $I_{n}$;
+%\item $\rang(A)=n$;
+%\item el sistema lineal $Ax=b$ tiene una solución única para cada $b\in\Mat[\K]{n}{1}$; y
+%\item $\det(A)\neq0$.
+%\end{enumerate}
+%\end{teo}
+
+%\subsection{Regla de Cramer}
+%\begin{teo}[Regla de Cramer]
+ %   Sean $A\in\Mat[\K]{n}{n}$ y $b\in\Mat[\K]{n}{1}$. Consideremos el sistema de ecuaciones
+  %  \[
+   %     \l\{
+    %    \begin{array}{c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c}
+     %   a_{11} x_1 & + & a_{12} x_2 & + \, \cdots \, + & a_{1n} x_n & = & b_1, \\
+      %  a_{21} x_1 & + & a_{22} x_2 & + \, \cdots \, + & a_{2n} x_n & = & b_2, \\
+       % \vdots &    &     \vdots & & \vdots & &  \vdots \\
+     %   a_{n1} x_1 & + & a_{n2} x_2 & + \, \cdots \, + & a_{nn} x_n & = & b_n, \\
+      %  \end{array}
+     %   \r.
+    %\]
+    %y denotemos por $A$ a su matriz de coeficientes y $b$ a su matriz de constantes. Si $\det(A) \neq 0$, el sistema tiene solución única y está dada por:
+  %  \[
+   %     x_j = \dfrac{\det(A_j)}{\det(A)},
+    %\]
+    %para $j\in I$ y donde $A_j$ es la matriz que se obtiene reemplazando la $j$-ésima columna de $A$ por $b$.
+%\end{teo}
+
+%\begin{ejem}
+ %   Consideremos el sistema de ecuaciones:
+  %  \[
+   %     \l\{
+    %    \begin{array}{c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c}
+   %     2x_1 & + & x_2  & - & x_3  & = & 3 \\
+    %    x_1  & + & x_2  & + & x_3  & = & 1 \\
+     %   x_1  & - & 2x_2 & - & 3x_3 & = & 4 \\
+      %  \end{array}
+       % \r.
+    %\]
+    %En donde:
+    %\[
+     %   A = 
+        %\begin{pmatrix}
+            %2 & 1 & -1 \\
+            %1 & 1 & 1 \\
+            %1 & -2 & -3
+%        \end{pmatrix} \qquad y \qquad b =
+        %\begin{pmatrix}
+         %   3 \\
+          %  1 \\
+           % 4
+        %\end{pmatrix}
+    %\]
+    %Se sigue que $\det(A) = 5$. Puesto que $\det(A) \not = 0$, el sistema tiene solución única, la cual está determinada por:
+  %  \[
+   %     x_1 = \dfrac{
+        %\begin{vmatrix}
+         %   3 & 1 & -1 \\
+          %  1 & 1 & 1 \\
+           % 4 & -2 & -3
+        %\end{vmatrix}}{5} = 2
+   % \]
+   % \[
+    %    x_2 = \dfrac{
+        %\begin{vmatrix}
+         %   2 & 3 & -1 \\
+          %  1 & 1 & 1 \\
+           % 1 & 4 & -3
+        %\end{vmatrix}}{5} = -1
+    %\]
+    %\[
+     %   x_3 = \dfrac{
+        %\begin{vmatrix}
+         %   2 & 1 & 3 \\
+          %  1 & 1 & 1 \\
+           % 1 & -2 & 4
+%        \end{vmatrix}}{5} = 0
+ %   \]
+  %  Así, la solución única del sistema es $x = \begin{pmatrix}2&-1&0\end{pmatrix}^{\intercal}$.
+%\end{ejem}
+
+%\begin{ejer}
+ %   Resuelva el sistema de ecuaciones:
+ %   \[
+  %      \l\{
+   %     \begin{array}{c@{\,}c@{\,}c@{\,}c@{\,}c}
+    %    -ax_1  & + & 2bx_2 & = & c \\
+     %   2ax_1 & - & 5bx_2 & = & 3c
+      %  \end{array}
+     %   \r.
+    %\]
+    %donde $a$, $b$ y $c$ son números reales, con $a b \not = 0$
+
+  %   \[
+   %     \l\{
+    %    \begin{array}{c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c}
+     %   3x  & + & 2y & + & z &= & 2 \\
+      %  2x  & + & 2y & + & z &= & 2\\
+       % x  & + & y & + & z &= & 1
+        %\end{array}
+        %\r.
+    %\]
+
+
+%\end{ejer}
+
+
+\setcounter{section}{2}
+\section{Determinantes}
+\setcounter{subsection}{1}
+\subsection{Resolución de sistemas de ecuaciones}
+
+\begin{teo}[Equivalencias no singulares]
+Sea $A\in\Mat[\K]{n}{n}$, los siguientes enunciados son equivalentes.
+\begin{enumerate}
+\item $A$ es no singular;
+\item el sistema $Ax=0$ tiene solamente la solución trivial;
+\item $A$ es equivalente por filas a $I_{n}$;
+\item $\rang(A)=n$;
+\item el sistema lineal $Ax=b$ tiene una solución única para cada $b\in\Mat[\K]{n}{1}$; y
+\item $\det(A)\neq0$.
+\end{enumerate}
+\end{teo}
+\begin{ejer}
+    Sea $\alpha\in\mathbb{R}$. Resuelva el sistema de ecuaciones:
+     \[
+        \l\{
+        \begin{array}{c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c}
+        \alpha x_1  & + & 2x_2 &= & 0 \\
+        2x_1  & + & \alpha x_2 &= & 0
+        \end{array}
+        \r.
+    \]
+    ¿Para qué valores de $\alpha$ el sistema tiene solución trivial?
+\end{ejer}
+\begin{ejer}
+    Sea $\alpha\in\mathbb{R}$. Dada la matriz
+     \[
+        A=\begin{pmatrix}
+            1&2&3\\
+            \alpha&1&0\\
+            -1&2&1
+        \end{pmatrix}
+    \]
+    ¿Para qué valores de $\alpha$ la matriz $A$ es no singular?
+\end{ejer}
+\subsection{Regla de Cramer}
+\begin{teo}[Regla de Cramer]
+    Sean $A\in\Mat[\K]{n}{n}$ y $b\in\Mat[\K]{n}{1}$. Consideremos el sistema de ecuaciones
+    \[
+        \l\{
+        \begin{array}{c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c}
+        a_{11} x_1 & + & a_{12} x_2 & + \, \cdots \, + & a_{1n} x_n & = & b_1, \\
+        a_{21} x_1 & + & a_{22} x_2 & + \, \cdots \, + & a_{2n} x_n & = & b_2, \\
+        \vdots &    &     \vdots & & \vdots & &  \vdots \\
+        a_{n1} x_1 & + & a_{n2} x_2 & + \, \cdots \, + & a_{nn} x_n & = & b_n, \\
+        \end{array}
+        \r.
+    \]
+    y denotemos por $A$ a su matriz de coeficientes y $b$ a su matriz de constantes. Si $\det(A) \neq 0$, el sistema tiene solución única y está dada por:
+    \[
+        x_j = \dfrac{\det(A_j)}{\det(A)},
+    \]
+    para $j\in I$ y donde $A_j$ es la matriz que se obtiene reemplazando la $j$-ésima columna de $A$ por $b$.
+\end{teo}
+
+\begin{ejem}
+    Consideremos el sistema de ecuaciones:
+    \[
+        \l\{
+        \begin{array}{c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c}
+        2x_1 & + & x_2  & - & x_3  & = & 3 \\
+        x_1  & + & x_2  & + & x_3  & = & 1 \\
+        x_1  & - & 2x_2 & - & 3x_3 & = & 4 \\
+        \end{array}
+        \r.
+    \]
+    En donde:
+    \[
+        A = 
+        \begin{pmatrix}
+            2 & 1 & -1 \\
+            1 & 1 & 1 \\
+            1 & -2 & -3
+        \end{pmatrix} \qquad y \qquad b =
+        \begin{pmatrix}
+            3 \\
+            1 \\
+            4
+        \end{pmatrix}
+    \]
+    Se sigue que $\det(A) = 5$. Puesto que $\det(A) \not = 0$, el sistema tiene solución única, la cual está determinada por:
+    \[
+        x_1 = \dfrac{
+        \begin{vmatrix}
+            3 & 1 & -1 \\
+            1 & 1 & 1 \\
+            4 & -2 & -3
+        \end{vmatrix}}{5} = 2
+    \]
+    \[
+        x_2 = \dfrac{
+        \begin{vmatrix}
+            2 & 3 & -1 \\
+            1 & 1 & 1 \\
+            1 & 4 & -3
+        \end{vmatrix}}{5} = -1
+    \]
+    \[
+        x_3 = \dfrac{
+        \begin{vmatrix}
+            2 & 1 & 3 \\
+            1 & 1 & 1 \\
+            1 & -2 & 4
+        \end{vmatrix}}{5} = 0
+    \]
+    Así, la solución única del sistema es $x = \begin{pmatrix}2&-1&0\end{pmatrix}^{\intercal}$.
+\end{ejem}
+
+\begin{ejer}
+    Resuelva el sistema de ecuaciones:
+ %   \[
+  %      \l\{
+   %     \begin{array}{c@{\,}c@{\,}c@{\,}c@{\,}c}
+    %    -ax_1  & + & 2bx_2 & = & c \\
+     %   2ax_1 & - & 5bx_2 & = & 3c
+      %  \end{array}
+     %   \r.
+    %\]
+    %donde $a$, $b$ y $c$ son números reales, con $a b \not = 0$
+
+     \[
+        \l\{
+        \begin{array}{c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c}
+        3x  & + & 2y & + & z &= & 2 \\
+        2x  & + & 2y & + & z &= & 2\\
+        x  & + & y & + & z &= & 1
+        \end{array}
+        \r.
+    \]
+\end{ejer}
+
+\setcounter{section}{3}
+\section{Espacios Vectoriales}
+\subsection{Espacio Vectorial}
+
+\begin{defi}[Espacio Vectorial]
+    Dados un campo $\K$, un conjunto no vacío $E$ y dos operaciones:
+    \[
+        \funcion{\oplus}{E\times E}{E}{(x,y)}{x\oplus y,}
+        \texty
+        \funcion{\odot}{\K\times E}{E}{(\alpha,x)}{\alpha\odot x}
+    \]
+    llamadas suma y producto, respectivamente; se dice que $(E,\oplus,\odot,\K)$ es un espacio vectorial si cumplen las siguientes propiedades:
+    \begin{enumerate}
+    \item \textbf{Asociativa de la suma:}
+        para todo $x,y,z\in E$ se tiene que
+        \[
+            (x \oplus y) \oplus z = x \oplus (y \oplus z);
+        \]
+    \item \textbf{Conmutativa de la suma:}
+        para todo $x,y\in E$ se tiene que
+        \[
+            x \oplus y = y \oplus x;
+        \]
+    \item \textbf{Elemento neutro de la suma:}
+        existe un elemento de $E$, denotado por $0_E$ o simplemente $0$, tal que para todo $x\in E$ se tiene que 
+        \[
+            x \oplus 0_E = 0_E \oplus x = x;
+        \]
+    \item \textbf{Inverso de la suma:}
+        para todo $x\in E$, existe un elemento de $E$, denotado por $-x$, tal que
+        \[
+            x \oplus (-x)= 0_E;
+        \]
+    \item \textbf{Distributiva del producto I:}
+        para todo $x,y\in E$ y todo $\alpha\in \K$ se tiene que
+        \[
+            \alpha\odot (x \oplus y)=\alpha\odot x \oplus \alpha\odot y
+        \]
+        
+    \item \textbf{Distributiva del producto II:}
+        para todo $x\in E$ y todo $\alpha,\beta\in \K$ se tiene que
+        \[
+            (\alpha+\beta)\odot x=\alpha\odot x \oplus \beta\odot x;
+        \]
+    \item \textbf{Asociativa del producto:}
+        para todo $x\in E$ y todo $\alpha,\beta\in \K$ se tiene que
+        \[
+            (\alpha\cdot \beta)\odot x=\alpha\odot(\beta\odot x);
+        \]
+    \item \textbf{Elemento neutro del producto:}
+        para todo $x\in E$ se tiene que
+        \[
+            1\odot x=x,
+        \]
+        donde $1\in\K$ es el elemento neutro multiplicativo de $\K$
+    \end{enumerate}
+\end{defi}
+
+% \begin{advertencia}
+%     De la definición de las operaciones suma y producto en el espacio vectorial observamos que necesariamente el resultado de sumar dos elementos del conjunto debe pertenecer al conjunto. Se tiene también que el producto de un escalar por un elemento del conjunto debe pertenecer al conjunto.
+% \end{advertencia}
+
+\begin{advertencia}
+    Note que de la definición de espacio vectorial es necesario que las operaciones suma y producto sean cerradas. Esto es que, para el espacio vectorial $(E,\oplus,\odot,\K)$ además de las 8 propiedades de la definición se debe cumplir:
+
+    \begin{itemize}[leftmargin=*]
+        \item[] \textbf{Clausura de la suma:} Si $x,y\in E$ entonces $x\oplus y\in E$. 
+        \item[] \textbf{Clausura del producto:} Si $x\in E$ y $\alpha\in\K$, entonces $\alpha\odot x\in E$.
+    \end{itemize}
+\end{advertencia}
+
+\textbf{Nota:}
+A los elementos del espacio vectorial $E$ se les denomina \emph{vectores} y a los elementos del campo $\K$ se les denomina \emph{escalares}.
+
+\begin{ejem}\hspace{0pt} Verifique si el conjunto de ternas ordenadas de números reales
+\[\R^{3} =\{(x_1, x_2, x_3) : x_1\in \R \wedge x_2\in \R \wedge x_3\in \R\}\]
+es un espacio vectorial sobre el campo $\R$ si se definen las operaciones $\oplus$ y $\odot$ de la siguiente manera: dados $a=(a_1,a_2,a_3)\in \R^{3}$ y $b=(b_1,b_2,b_3)\in \R^{3}$, y dado $\lambda\in \R$, se define:
+\[a\oplus b = (a_1, a_2, a_3) \oplus (b_1, b_2, b_3) = (a_1+b_1, a_2+b_2, a_3+b_3)\]
+\[\lambda \odot a = \lambda \odot (a_1,a_2,a_3) = (\lambda\cdot a_1, \lambda\cdot a_2, \lambda\cdot a_3)\]
+a continuación, ilustraremos la demostración de cada una de las propiedades:
+
+\begin{enumerate}
+\item Asociativa de la suma
+    
+Suponga que $a=(a_1,a_2,a_3)\in \R^{3}$, $b=(b_1,b_2,b_3)\in \R^{3}$ y $c=(c_1,c_2,c_3)\in \R^{3}$. Entonces:
+    
+$(a \oplus b) \oplus c$
+\begin{align*}
+    \phantom{abc}&= [(a_1,a_2,a_3) \oplus (b_1,b_2,b_3)] \oplus (c_1,c_2,c_3) & \text{Definiciones de $a$, $b$ y $c$}\\
+    &= (a_1+b_1, a_2+b_2, a_3+b_3) \oplus (c_1,c_2,c_3) & \text{Definición de $\oplus$ en $\R^{3}$}\\
+    &= ([a_1+b_1]+c_1, [a_2+b_2]+c_2, [a_3+b_3]+c_3) & \text{Definición de $\oplus$ en $\R^{3}$}\\
+    &= (a_1+[b_1+c_1], a_2+[b_2+c_2], a_3+[b_3+c_3]) & \text{Propiedad asociativa en $\R$}\\
+    &= (a_1,a_2,a_3) \oplus (b_1+c_1, b_2+c_2, b_3+c_3) & \text{Definición de $\oplus$ en $\R^{3}$}\\
+    &= (a_1,a_2,a_3) \oplus [(b_1,b_2,b_3) \oplus (c_1,c_2,c_3)] & \text{Definición de $\oplus$ en $\R^{3}$}\\
+    &= a\oplus (b\oplus c) & \text{Definiciones de $a$, $b$ y $c$}
+\end{align*}
+    
+\item Conmutativa de la suma
+    
+Suponga que $a=(a_1,a_2,a_3)\in \R^{3}$ y $b=(b_1,b_2,b_3)\in \R^{3}$. Entonces:
+\begin{align*}
+    a \oplus b &= (a_1, a_2, a_3) \oplus (b_1, b_2, b_3) & \text{Definiciones de a y b}\\
+    &= (a_1+b_1, a_2+b_2, a_3+b_3) & \text{Definición de $\oplus$ en $\R^{3}$}\\
+    &= (b_1+a_1, b_2+a_2, b_3+a_3) & \text{Conmutativa de $+$ en $\R$}\\
+    &= (b_1, b_2, b_3) \oplus (a_1, a_2, a_3) & \text{Definición de $\oplus$ en $\R^{3}$}\\
+    &= b\oplus a & \text{Definiciones de a y b}
+\end{align*}
+    
+\item Elemento neutro de la suma
+    
+Se debe probar que la siguiente proposición es verdadera:
+\[(\exists 0_E\in \R^{3})(\forall a\in \R^{3})(a\oplus 0_E=0_E\oplus a=a)\]
+Esta demostración es de existencia, por lo que se debe exhibir un elemento $0_E\in \R^{3}$ que satisfaga la definición de elemento neutro.\newline
+
+Sea $0_E=(0,0,0)$. Se debe probar que para todo $a=(a_1,a_2,a_3)\in \R^{3}$ se cumpla que:
+\[a\oplus 0_E = 0_E \oplus a = a\]
+En efecto:
+\begin{align*}
+    a \oplus 0_E &= (a_1, a_2, a_3) \oplus (0,0,0) & \text{Definiciones de $a$ y $0_E$}\\
+    &= (a_1+0,a_2+0, a_3+0) & \text{Definición de $\oplus$ en $\R^{3}$}\\
+    &= (a_1,a_2,a_3) & \text{Neutro aditivo en $\R$}\\
+    &= a & \text{Definición de $a$}
+\end{align*}
+por la propiedad conmutativa, se tiene que $a\oplus 0_E= 0_E\oplus a$. Por tanto, se ha demostrado también que:
+\[0_E \oplus a = a\]
+    
+\item Inverso de la suma
+    
+Se debe probar que la siguiente proposición es verdadera:
+\[(\forall a\in \R^{3})(\exists \hat{a}\in \R^{3})(\hat{a}\oplus a=a\oplus \hat{a}=0_E)\]
+
+Esta también es una demostración de existencia, en este caso, por el orden de los cuantificadores, el elemento $\hat{a}$ depende de $a$.\newline
+
+Sea $a=(a_1,a_2,a_3)\in \R^{3}$. Se prueba que el vector buscado $\hat{a}$ se define del siguiente modo:
+\[\hat{a}=(-a_1, -a_2, -a_3)\]
+donde cada $-a_i$ es el inverso aditivo de $a_i\in \R$, para $i=1,2,3$.\newline
+Entonces, tenemos que:
+\begin{align*}
+    a\oplus \hat{a} &= (a_1, a_2, a_3) \oplus (-a_1, -a_2, -a_3) & \text{Definiciones de $a$ y $\hat{a}$}\\
+    &= (a_1+(-a_1), a_2+(-a_2), a_3+(-a_3)) & \text{Definición de $\oplus$ en $\R^{3}$}\\
+    &= (0,0,0) & \text{Inverso aditivo en $\R$}\\
+    &= 0_E & \text{Definición de $0_E$}
+\end{align*}
+por la propiedad conmutativa de $\oplus$, se tiene también que:
+\[\hat{a} \oplus a = 0_E\]
+    
+\item Distributiva del producto I
+    
+Suponga que $a=(a_1,a_2,a_3)\in \R^{3}$, $b=(b_1,b_2,b_3)\in \R^{3}$ y $\lambda\in \R$. Entonces:
+
+$\lambda \odot (a\oplus b)$
+\begin{align*}
+    \phantom{abc} &= \lambda \odot ((a_1,a_2,a_3)\oplus (b_1,b_2,b_3)) & \text{Definiciones de $a$ y $b$}\\
+    &= \lambda \odot (a_1+b_1,a_2+b_2,a_3+b_3) & \text{Definición de $\oplus$ en $\R^{3}$}\\
+    &= (\lambda\cdot[a_1+b_1],\lambda\cdot[a_2+b_2],\lambda\cdot[a_3+b_3]) & \text{Definición de $\odot$ en $\R^{3}$}\\
+    &= (\lambda\cdot a_1, \lambda\cdot a_2, \lambda\cdot a_3) \oplus (\lambda\cdot b_1, \lambda\cdot b_2, \lambda\cdot b_3) & \text{Definición de $\oplus$ en $\R^{3}$}\\
+    &= \lambda \odot (a_1,a_2,a_3) \oplus \lambda \odot (b_1,b_2,b_3) & \text{Definición de $\odot$ en $\R^{3}$}\\
+    &= \lambda \odot a \oplus \lambda \odot b &  \text{Definiciones de $a$ y $b$}
+\end{align*}
+    
+\item Distributiva del producto II
+    
+Suponga que $a=(a_1,a_2,a_3)\in \R^{3}$ y $\lambda, \beta\in \R$. Entonces:
+
+$(\lambda + \beta)\odot a$
+\begin{align*}
+    \phantom{abc} &= (\lambda + \beta)\odot (a_1, a_2, a_3) & \text{Definición de $a$}\\
+    &= ((\lambda + \beta)\cdot a_1, (\lambda + \beta)\cdot a_2, (\lambda + \beta)\cdot a_3) & \text{Definición de $\odot$ en $\R^{3}$}\\
+    &= (\lambda a_1 + \beta a_1, \lambda a_2 + \beta a_2, \lambda a_3 + \beta a_3) & \text{Distributiva del producto en $\R$}\\
+    &= (\lambda a_1, \lambda a_2, \lambda a_3) \oplus (\beta a_1, \beta a_2, \beta a_3) & \text{Definición de $\oplus$ en $\R^{3}$}\\
+    &= \lambda \odot (a_1, a_2, a_3) \oplus \beta\odot (a_1,a_2,a_3) & \text{Definición de $\odot$ en $\R^{3}$}\\
+    &= \lambda \odot a \oplus \beta \odot a & \text{Definición de $a$}
+\end{align*}
+    
+\item Asociativa del producto
+    
+Suponga que $a=(a_1,a_2,a_3)\in \R^{3}$ y $\lambda, \beta\in \R$. Entonces:
+\begin{align*}
+    (\lambda\cdot \beta) \odot a &= (\lambda\cdot \beta) \odot (a_1,a_2,a_3) & \text{Definición de $a$}\\
+    &= ((\lambda\cdot \beta)\cdot a_1, (\lambda\cdot \beta)\cdot a_2, (\lambda\cdot \beta)\cdot a_3) & \text{Definición de $\odot$ en $\R^{3}$}\\
+    &= (\lambda\cdot(\beta\cdot a_1), \lambda\cdot(\beta\cdot a_2), \lambda\cdot(\beta\cdot a_3)) & \text{Asociativa $\cdot$ en $\R$}\\
+    &= \lambda \odot (\beta\cdot a_1, \beta\cdot a_2, \beta\cdot a_3) & \text{Definición de $\odot$ en $\R^{3}$}\\
+    &= \lambda \odot (\beta \odot (a_1, a_2, a_3)) & \text{Definición de $\odot$ en $\R^{3}$}\\
+    &= \lambda \odot (\beta \odot a) & \text{Definición de $a$}
+\end{align*}
+    
+\item Elemento neutro del producto
+    
+Se debe probar que la siguiente proposición es verdadera:
+\[(\forall a\in \R^{3})(1\odot a = a), \quad \text{donde } 1\in \R\]
+Suponga que $a=(a_1,a_2,a_3)\in\R^{3}$. Entonces:
+\begin{align*}
+    1 \odot a &= 1\odot (a_1,a_2,a_3) & \text{Definición de $a$}\\
+    &= (1\cdot a_1, 1\cdot a_2, 1\cdot a_3) & \text{Definición de $\odot$ en $\R^{3}$}\\
+    &= (a_1,a_2,a_3) & \text{Neutro multiplicativo en $\R$}\\
+    &= a & \text{Definición de $a$}
+\end{align*}
+
+En vista que se satisfacen todas las propiedades de la \emph{definición 1}, se concluye que $(\R^{3}, \oplus, \odot, \R)$ es un espacio vectorial.
+\end{enumerate}
+\end{ejem}
+
+% \begin{ejer}\hspace{0pt} Verifique si el conjunto de polinomios con coeficientes reales de grado menor o igual que $2$
+% \[\R_{2}[x]=\{p(x)=a_0 + a_1x + a_2x^2 : a_i\in \R, 0\leq i\leq 2 \}\]
+% es un espacio vectorial sobre $\R$ si la operación $\oplus$ es la suma usual entre polinomios y $\odot$ es el producto usual entre un número real y un polinomio.\newline 
+% Es decir: si $p\in\R_{2}[x]$ y $q\in\R_{2}[x]$, y $\alpha\in \R$, entonces:
+% \[p(x)\oplus q(x) = (p+q)(x)\]
+% \[\alpha \odot p(x) = (\alpha p)(x)\]
+% para todo $x\in \R$.
+% \end{ejer}
+
+\begin{ejer}\hspace{0pt} Verifique si el conjunto $V$ definido por:
+\[V=\left\{\left(\begin{array}{cc}
+    a & b \\
+    c & d
+\end{array}\right)\in\mathbb{R}^{2\times 2} : ad-cb=0\right\},\]
+junto a las operaciones usuales de suma de matrices y producto de un escalar por matriz es un espacio vectorial real.
+\end{ejer}
+
+\begin{ejer} Verifique si el conjunto 
+\[V=\left\lbrace (x,y,3,w)\in\R^4 : 2x-y=0 \right\rbrace\]
+junto a las operaciones usuales de suma y producto por un escalar en $\R^4$ es un espacio vectorial real.
+\end{ejer}
+
+\begin{obs}
+    Utilizamos los símbolos $\oplus$ y $\odot$ para enfatizar el hecho de que, en general, las operaciones definidas no son la suma y el producto estándar que utilizamos. Si no existe riesgo de confusión, utilizaremos la notación
+    \[
+        x\oplus y = x+y
+        \texty
+        \alpha \odot x = \alpha x
+    \]
+    y diremos que el espacio vectorial es $(E,+,\cdot,\K)$.
+    En caso de que no exista ambigüedad en las operaciones utilizadas se dirá que $E$ es un espacio vectorial sobre $\K$. Además, si el campo está sobre entendido diremos que $E$ es un espacio vectorial.
+\end{obs}
+
+\begin{advertencia}
+Un error común es pensar que el elemento neutro es siempre el cero, ya que, dependiendo del espacio vectorial, se tiene un determinado elemento neutro. Por ejemplo:
+\begin{itemize}
+\item Para el espacio vectorial $(\R, +, \cdot, \R)$ tenemos que su elemento neutro es justamente el 0.
+\item Para el espacio $(\R^{+}, \oplus , \odot, \R)$ donde 
+\[
+    x \oplus y = xy
+    \texty
+    \alpha \odot x = x^{\alpha}
+\]
+para todo $x,y\in\R^{+}$ y todo $\alpha\in\R$, el elemento neutro es 1, esto es, $0_{E} = 1$. Notemos que $0\notin\R^{+}$.
+\end{itemize}
+\end{advertencia}
+
+\begin{prop}
+    Los siguientes conjuntos con sus operaciones usuales de suma y producto son espacios vectoriales:
+    \begin{itemize}
+    \item
+        $(\R^n, +, \cdot, \R$), con $n\in \N^*$.
+        
+    \item
+        $(\Mat[\R]{m}{n}, +, \cdot, \R)$, con $m,n\in \N^*$.
+        
+    \item
+        $(\mathcal{F}(I), +, \cdot, \R)$
+        
+    \item
+        $(\mathcal{C}(I), +, \cdot, \R)$
+    
+    \begin{comment}
+    \item
+        $(\mathcal{C}^{k}(I), +, \cdot, \R)$, donde
+        \[
+            \mathcal{C}^k(I)=\{\func{f}{I}{\R}: f\text{ es $k$ - veces derivable en }I\text{ y }f^{k}\in\mathcal{C}(I)\}, \text{con } I\subseteq \R.
+        \]
+    \end{comment}
+    
+    \item
+        $(\R_n[x], +, \cdot, \R)$
+    \end{itemize}
+\end{prop}
+
+\begin{obs}
+Es importante mencionar respecto a esta proposición que:
+\begin{itemize}
+\item $\R^{n}= \{ (x_{1},\ldots, x_{n}): x_{i} \in \R \; \text{para } i = 1,\ldots, n \}$ y sus operaciones están definidos mediante
+%\[
+%\R^{n}  = \{ (x_{1}, ..., x_{n}): x_{i} \in \R \; \text{para } i = 1, ..., n \}
+%\]
+\begin{align*}
+(x_{1}, x_{2}, \ldots, x_{n})+(y_{1}, y_{2}, \ldots, y_{n}) & = (x_{1}+y_{1}, x_{2}+y_{2}, \ldots, x_{n}+y_{n}) \\
+\alpha \cdot (x_{1}, x_{2}, \ldots, x_{n}) & = (\alpha \cdot x_{1}, \alpha \cdot x_{2}, \ldots, \alpha \cdot x_{n}).
+\end{align*}
+\item $\mathcal{F}(I)=\{\func{f}{I}{\R}: f\text{ es una función}\}$, siendo $I$ un intervalo de $\R$.
+            
+$+$ es la suma usual de dos funciones y $\cdot$ es la multiplicación de un número real por una función.
+\item $\mathcal{C}(I)=\{\func{f}{I}{\R}: f\text{ es una función continua} \}$, siendo $I$ un intervalo de $\R$.
+            
+$+$ es la suma usual de dos funciones y $\cdot$ es la multiplicación de un número real por una función.
+\item $ \R_n[x] = \{ p : p(x) = a_{0} + a_{1}x + \cdots + a_{n}x^{n}, \, a_{i} \in \R \text{ para } i = 0, 1, \cdots, n \}$.
+            
+$+$ representa la suma usual de dos polinomios de grado menor o igual a $n$ y $\cdot$ representa el producto de un número real por un polinomio.
+\end{itemize}
+\end{obs}
+
+\begin{prop}
+Sea $(E, +, \cdot, \K)$ un espacio vectorial, el elemento neutro es único.
+\end{prop}
+
+%\begin{ejem}\hspace{0pt} Para cada espacio de la observación anterior su elemento neutro es:
+\begin{ejem}\hspace{0pt} Para los espacios definidos con anterioridad su elemento neutro es:
+\begin{itemize}
+\item $0_{\R^{n}} = (0, 0, \ldots, 0)$.
+\item $0_{\Mat{m}{n}} = 0_{m \times n}$.
+\item $0_{\mathcal{F}(I)} = 0_{\mathcal{C}(I)} = 0_{f}$, donde
+\[
+    \funcion{0_{f}}{I}{\R}{x}{0}
+\]
+con $I\subseteq\R$.
+\item $0_{\R_{n}[x]} = 0 + 0x + \cdots + 0x^{n-1} + 0x^{n},$ para todo $x\in\R$.
+\end{itemize}
+\end{ejem}
+
+\begin{prop}
+Sea $(E, +, \cdot, \K)$ un espacio vectorial, para todo $u\in E$ su inverso es único.
+\end{prop}
+
+\begin{ejer}\hspace{0pt} Sea $E$ el conjunto de todos los números reales positivos. Considere las operaciones:
+\[
+    \funcion{\oplus}{E \times E}{E}{(x, y)}{xy}
+    \texty
+    \funcion{\odot}{\R \times E}{E}{(\alpha, x)}{x^{\alpha}.}
+\]
+Muestre que con las operaciones definidas sobre $E,$ es un espacio vectorial real cuyo elemento neutro es $1$ y tal que si $u\in E$ su inverso está dado por $u^{-1}$.
+\end{ejer}
+
+
+\setcounter{section}{3}
+\section{Espacios Vectoriales}
+\setcounter{subsection}{1}
+\subsection{Propiedades}
+
+\begin{teo}
+Sea $(E,+,\cdot,\K)$ un espacio vectorial, para todo $u \in E$ y todo $\alpha \in \K$, se tiene que:
+\begin{enumerate}
+\item $0\cdot u = 0_{E}$;
+\item $\alpha \cdot 0_{E} = 0_{E}$;
+\item Si $\alpha \cdot u=0_{E}$, entonces $\alpha  = 0$ o $u = 0_{E}$;
+\item $(-1) \cdot u = -u$.
+\end{enumerate}
+\end{teo}
+
+\begin{prop}
+Sea $(E,+,\cdot,\K)$ un espacio vectorial, para todo $u, v, w \in E$ y todo $\alpha, \beta \in \K$, se tiene que:
+    \begin{enumerate}
+        \item $-(-u) = u$;
+        \item Si $u + v = u + w$, entonces $v = w$;
+        \item Si $u \neq 0$ y $\alpha u = \beta u$, entonces $\alpha  = \beta$;
+    \end{enumerate}
+\end{prop}
+
+\begin{ejer}\hspace{0pt} Dado el conjunto $E = \{(x_{1},x_{2})\in\R^{2}\,:\,x_{1}>0,\,x_{2}>0\}$. Considere la operación
+\[
+    (x_{1},x_{2}) \oplus (y_{1},y_{2}) = (x_{1}+y_{1},x_{2}+y_{2}).
+\]
+Dotando a $E$ de está operación, verifique que no existe el elemento neutro.
+\end{ejer}
+
+\begin{ejem}\hspace{0pt} Sea $E=\{1\}$ el conjunto formado solamente por el elemento 1. Definimos $1 \oplus 1 = 1$ y $\alpha \odot 1 = 1,$ para todo $\alpha\in\R$. Con estas operaciones $E$ es un espacio vectorial real, verifique que las propiedades se cumplen trivialmente.
+\end{ejem}
+
+
+\begin{ejer}\hspace{0pt} Sea $E$ el conjunto de todos los números reales. Se definen a las operaciones:
+\[
+    \funcion{\oplus}{E \times E}{E}{(u, v)}{2u - v}
+    \texty
+    \funcion{\odot}{\R \times E}{E}{(\alpha, u)}{\alpha u.}
+\]
+\begin{enumerate}
+\item ¿Qué se puede decir sobre la existencia y unicidad del elemento neutro?
+\item ¿Es $E$ un espacio vectorial?
+\end{enumerate}
+\end{ejer}
+
+% \begin{ejer}\hspace{0pt} Sea $E = \mathbb{R}^{2}$. Se define a la operación $\oplus$ por \[
+%     (x_{1},x_{2}) \oplus (y_{1},y_{2}) = (x_{1} + x_{2}, y_{1}y_{2})
+% \]
+% para todo $(x_{1},x_{2}), (y_{1},y_{2})\in E$.
+% \begin{enumerate}
+% \item ¿Qué se puede decir sobre la existencia y unicidad del elemento neutro?
+% \item ¿Qué se puede decir sobre la existencia y unicidad del elemento inverso de cualquier elemento de $E$?
+% \end{enumerate}
+% \end{ejer}
+
+\subsection{Subespacios}
+
+\begin{defi}[Subespacio Vectorial]
+    Sea $(E,+,\cdot,\K)$ un espacio vectorial y $W$ un subconjunto no vacío de $E$. Se dice que $W$ es un subespacio vectorial del espacio vectorial $E$ si $(W, +|_{W}, \cdot|_{W}, \K)$ es un espacio vectorial.
+\end{defi}
+
+\begin{teo}\label{Teosev}
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial y $W$ un subconjunto no vacío de $E$. Se tiene que $W$ es un subespacio vectorial de $E$ si y sólo si se cumplen las siguientes condiciones:
+    \vspace{-5pt}
+    \begin{itemize}
+    \item 
+        si $u,v \in W$, entonces $u + v \in W$; y
+    \item 
+        si $\alpha \in \K$ y $u \in W$, entonces $\alpha u \in W$.
+    \end{itemize}
+\end{teo}
+
+\begin{obs}
+Notemos que dados $E$ un espacio vectorial sobre el cuerpo $\K$ y $W\subseteq E$ mostrar las condiciones del teorema anterior es equivalente a mostrar que 
+\[
+    \alpha u + v \in W 
+\]
+para todo $u, v \in W$ y todo $\alpha\in\K$.
+\end{obs}
+
+%\begin{obs}
+%Dado $E$ un espacio vectorial sobre el cuerpo $\K$ se tiene que $\{0_{E}\}$ y $E$ son subespacios vectoriales de $E$.
+%\end{obs}
+
+\begin{advertencia}
+Si vamos a mostrar que $W$ es un subespacio del espacio vectorial $E$, una de las condiciones a ser verificada es que $W\neq\emptyset$, para lo cual es suficiente mostrar que $0_{E}\in W$.
+\end{advertencia}
+
+\begin{ejem}\hspace{0pt} \textbf{El subespacio trivial.} Para cualquier espacio vectorial $E$, el subconjunto $\{0_{E}\}$
+que consiste únicamente en el vector neutro es un subespacio vectorial ya que:
+\[
+   0_{E} + 0_{E}=0_{E}
+   \texty
+   \alpha 0_{E}=0_{E}
+\]
+para todo $\alpha\in\K$. Luego, a $\{0_{E}\}$ se lo denomina como el subespacio trivial de $E$.
+\end{ejem}
+
+\begin{ejem}\hspace{0pt} Un espacio vectorial es un subespacio en sí mismo. En efecto, para cada espacio vectorial $E$, $E$ es un subespacio en sí mismo.
+\end{ejem}
+
+\begin{obs}
+Los subespacios de $E$ distintos a $\{0_{E}\}$ y $E$ se denominan subespacios propios. 
+\end{obs}
+
+\begin{ejem}\label{Ejsev}\hspace{0pt} \textbf{Un subespacio propio de $\mathbb{R}^{2}$.} Consideremos al espacio vectorial $\mathbb{R}^{2}$ con sus operaciones usuales de suma y producto por un escalar. Considere el conjunto:
+\[
+    W= \{(x,y)\in \mathbb{R}^{2} : y=2x \}.
+\]
+Se tiene que $W$ es un subespacio vectorial de $\R^{2}$. Para mostrarlo utilizamos al teorema \ref{Teosev}.
+\begin{enumerate}
+\item[$i)$] Notemos que $0 = 2(0)$, lo que implica que $(0,0)\in W$, luego, $W\neq\emptyset$.
+\item[$ii)$] Sean $(x_{1},x_{2}), (y_{1}, y_{2})\in W$, vamos a mostrar que $(x_{1},x_{2}) + (y_{1}, y_{2})\in W$.
+
+Por hipótesis tenemos que: 
+\[
+    x_{2} = 2x_{1} \texty y_{2} = 2y_{1}.
+\]
+Además, notemos que:
+\[
+    (x_{1},x_{2}) + (y_{1}, y_{2}) = (x_{1} + y_{1}, x_{2} + y_{2}).
+\]
+Luego, 
+\[
+    x_{2} + y_{2} = 2x_{1} + 2y_{1} = 2(x_{1} + y_{1})
+\]
+lo que implica que $(x_{1},x_{2})+(y_{1}, y_{2})\in W$.
+\item[$iii)$] Sean $\alpha\in\R$ y $(x_{1},x_{2})\in W$, vamos a mostrar que $\alpha(x_{1},x_{2})\in W$.
+
+Por hipótesis tenemos que: 
+\[
+    x_{2} = 2x_{1}.
+\]
+Además, notemos que: 
+\[
+    \alpha(x_{1},x_{2}) = (\alpha x_{1}, \alpha x_{2}).
+\]
+Luego, 
+\[
+    \alpha x_{2}  = \alpha(2x_{1}) = 2(\alpha x_{1})
+\]
+lo que implica que $\alpha (x_{1},x_{2})\in W$.
+\end{enumerate}
+Por $i)$, $ii)$ y $iii)$ junto con el teorema \ref{Teosev} se concluye que $W$ es un subespacio vectorial de $\R^{2}$. Finalmente, notemos que $(1,1)\notin W$ y que $(1,1)\in\R^{2}$, lo que implica que $W$ es un subespacio vectorial propio de $\R^{2}$.
+\begin{comment}
+Observe que $W$ es no vacío porque $0_{E}=(0,0)\in W$. Mostremos que es un subespacio vectorial para ello sean
+$(x_{1},2x_{1}) \in W$  y $(x_{2},2x_{2}) \in W$ por lo tanto,
+\[
+(x_{1},2x_{1})+(x_{2},2x_{2})=(x_{1}+x_{2},2(x_{1}+x_{2})) \in W
+\]
+y
+\[
+\alpha(x_{1},2x_{1})=(\alpha x_{1},2\alpha x_{1}) \in W
+\]
+de modo que $W$ es cerrado bajo la suma y el producto con un escalar por lo tanto es un subespacio de $\mathbb{R}^{2}$. 
+
+Finalmente observemos que $W\neq \{0_{E}\}$ ya que $(1,2)\in W$ y $W\neq \mathbb{R}^{2} $ ya que $(1,3)\notin W$ de modo que W es un subespacio vectorial propio de $\mathbb{R}^{2}$. \end{comment}
+\end{ejem}
+
+\begin{comment}
+\begin{ejem}
+Un subespacio propio de $\mathbb{R}^{3}$. De manera similar al ejemplo anterior se puede mostrar que dado $t\in\R$ el conjunto:
+\[
+    W= \{(x,y,z)\in \mathbb{R}^{3}\,:\,x=at,\,y=bt,\,z=ct,\,a,\,b,\,c\in\mathbb{R}\}
+\]
+es un subespacio de $\mathbb{R}^{3}$.
+\end{ejem}
+\end{comment}
+
+\begin{ejem}\hspace{0pt} Sean $E=\mathbb{R}^{2}$ y $W=\{(x,1)\in \mathbb{R}^{2}\,:\, x \in \mathbb{R}\}$, considerando a las operaciones usuales para la suma y producto con un escalar en $E$, tenemos que $W$ no es un subespacio vectorial de $E$. En efecto, notemos que $(5,1)\in W$ y $(2,1)\in W$ y que su suma
+\[
+    (5,1)+(2,1)=(7,2) \notin W,
+\]
+por lo tanto, $W$ no es un subespacio vectorial de $\mathbb{R}^{2}$, dado que no cumple la primera propiedad del teorema \ref{Teosev}.
+\end{ejem}
+
+\begin{ejem}
+Sean $E=\mathbb{R}^{2}$ y $W=\{(x,y)\in \mathbb{R}^{2}\,:\,x>0\}$, considerando a las operaciones usuales para la suma y producto con un escalar en $E$, tenemos que $W$ no es un subespacio vectorial de $E$. En efecto, notemos que $(3,1)\in W$ y que:
+\[
+    -2(3,1)=(-6,-2)\notin W
+\]
+por lo tanto, $W$ no es un subespacio vectorial de $\mathbb{R}^{2}$, dado que no cumple la segunda propiedad del teorema \ref{Teosev}.
+\end{ejem}
+
+\begin{teo}
+    Sea $(E, +, \cdot, \K)$ un espacio vectorial. Si $W_{1}$ y $W_{2}$ son subespacios vectoriales de E, entonces $W_{1} \cap W_{2}$ es un subespacio vectorial de E.
+\end{teo}
+
+\begin{comment}
+\begin{advertencia}
+Veamos una demostración:
+
+Observe que $W_{1} \cap W_{2}$ es no vacío porque contiene al $0_{E}$.
+
+Sea $x_{1}\in W_{1} \cap W_{2} $ y $x_{2}\in W_{1} \cap W_{2} $
+entonces como $W_{1}$ y $W_{2}$ son subespacios vectoriales de E, $x_{1}+x_{2}\in W_{1}  $ y $x_{1}+x_{2}\in W_{2}  $; esto significa que $x_{1}+x_{2}\in W_{1} \cap W_{2} $.
+
+De manera similar se muestra que, $\alpha x_{1}\in  W_{1} \cap W_{2} $.
+
+por lo tanto, se cumplen los axiomas de cerradura y así $W_{1} \cap W_{2}$ es un subespacio vectorial de E.
+\end{advertencia}
+\end{comment}
+
+\begin{ejem}\hspace{0pt} En el espacio vectorial $\mathbb{R}^{3}$ consideremos los subespacios:
+\[
+    W_{1}=\left\{(x,y,z):x-y=0\right\}
+    \texty
+    W_{2}=\left\{(x,y,z):y-z=0\right\}.\]
+Se tiene que $W_{1}\cap W_{2}$ es un subespacio vectorial de $\R^{3}$. En efecto, por la definición de intersección de conjuntos tenemos que:
+\[
+    W_{1} \cap W_{2} = \{(x,y,z)\in\R^{3}\,:\,x-y=0,\,y-z=0\}.
+\]
+Ahora, si $(x,y,z)\in W_{1} \cap W_{2}$ se tiene que se verifica al sistema de ecuaciones lineales:
+\[
+    \systeme[xyz]{x-y=0,y-z=0}
+\]
+a partir de lo cual se tiene que:
+\[
+    x= z \texty y = z
+\]
+con $z\in\R$. Luego, 
+\[
+    W_{1}\cap W_{2}=\left\{(x,y,z)\in \mathbb{R}^{3}\,:\,x=z,\,y=z\right\}.
+\]
+Finalmente, se tiene que $W_{1} \cap W_{2}$ es un subespacio vectorial de $\mathbb{R}^{3}$, para mostrarlo considere el ejemplo \ref{Ejsev}, además, muestre que se tiene a un subespacio vectorial propio.
+\end{ejem}
+
+\begin{cor}
+    Sea $(E, +, \cdot, \K)$ un espacio vectorial. Si $W_{1}, W_{2}, \cdots, W_{n}$ son subespacios vectoriales de E, entonces $W_{1} \cap W_{2} \cap \cdots \cap W_{n}$ es un subespacio vectorial de E.
+\end{cor}
+
+\begin{advertencia}
+La unión de dos subespacios vectoriales NO necesariamente es un subespacio vectorial.
+\end{advertencia}
+
+\begin{ejem}\hspace{0pt} En el espacio vectorial $\R^{2}$ con las operaciones usuales de suma y producto con un escalar, sean los subespacios vectoriales:
+\[
+    W_{1} = \{(x,y)\in\R^{2}\,:\,x=y\}
+    \texty
+    W_{2} = \{(x,y)\in\R^{2}\,:\,x+2y=0\}.
+\]
+Se tiene que $W_{1} \cup W_{2}$ no es un subespacio vectorial de $\R^{2}$. En efecto, notemos que $(1,1)\in W_{1} \subseteq W_{1} \cup W_{2}$ y que $(2,-1)\in W_{2} \subseteq W_{1} \cup W_{2}$, sin embargo, $(1,1) + (2,-1) = (3,0) \notin W_{1} \cup W_{2}$, lo que implica que $W_{1} \cup W_{2}$ no es un subespacio vectorial de $\R^{2}$ dado que no se cumple la primera propiedad del teorema \ref{Teosev}.
+\end{ejem}
+
+\begin{defi}[Combinación lineal]
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial, $k\in\N^*$ y $v_1, v_2, \ldots, v_k \in E$. Se dice que un vector $v \in E$ es una combinación lineal de 
+    $v_1, v_2, \ldots, v_k$ si 
+    \[
+        v = \alpha_1 v_1 + \alpha_2 v_2 + \cdots + \alpha_k v_k
+    \]
+    para algunos $\alpha_1, \alpha_2, \ldots, \alpha_k \in \K$.
+\end{defi}
+
+\begin{ejem}\hspace{0pt} En el espacio vectorial $(\R^{2}, +, \cdot, \R)$ con las operaciones usuales, sean $u, v, w\in \R^{2}$ donde $u = (1, 2)$, $v = (2, 4)$ y $w = (0,0)$, se tiene que
+\begin{gather}
+\label{Comb_Lin1}
+u = \dfrac{1}{2}v + 5w,
+\end{gather}
+esto implica que $u$ es combinación lineal de $v$ y de $w$ donde se han utilizado los escalares $\alpha_{1} = \dfrac{1}{2}$ y $\alpha_{2} = 5$.
+
+\noindent Además,
+\begin{gather}
+\label{Comb_Lin2}
+    w = 2u - v,
+\end{gather}
+entonces $w$ es combinación lineal de $u$ y de $v$ donde se han utilizado los escalares $\alpha_{1} = 2$ y $\alpha_{2} = - 1$.
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} En el espacio vectorial $(\R^{3},+,\cdot,\R)$ con las operaciones usuales, sean $v_{1} = (3,0,-2),$ $v_{2}= (2,-1,-5)\}$ y $v=(1,-2,-5)$.
+\begin{enumerate}
+    \item ¿Para qué valores de $k$ el vector $(1,-2,k)$, se expresa como combinación lineal de $v_{1}$ y $v_{2}$?
+    \item ¿Se puede expresar $v$ como combinación lineal de $v_{1}$ y $v_{2}$?
+\end{enumerate}
+\end{ejer}
+
+\setcounter{section}{3}
+\section{Espacios Vectoriales}
+\setcounter{subsection}{3}
+\subsection{Combinación lineal y cápsula}
+
+\begin{defi}
+Sean $(E,+,\cdot,\K)$ un espacio vectorial, $k\in\N^{*}$ y $S = \{v_1, v_2, \ldots, v_k\} \subset E$. Al conjunto de todos los vectores en $E$ que son combinaciones lineales de los vectores de $S$ se lo llama cápsula de $S$ y se denota por $\spn(S)$, es decir
+    \[
+        \spn(S) = \{\alpha_1 v_1 + \alpha_2 v_2 + \cdots + \alpha_k v_k:\alpha_1, \alpha_2, \ldots, \alpha_k \in \K\}.
+    \]
+\end{defi}
+
+\begin{advertencia}
+A este conjunto también se lo conoce como \emph{cápsula lineal} y su notación viene de su nombre en inglés, \emph{linear span}. También se utiliza la notación $\langle S\rangle$.
+\end{advertencia}
+
+\begin{ejem}\label{S07C01:EJ_Cap_lin}
+En el espacio vectorial $(\R^{2}, +, \cdot, \R)$ con las operaciones usuales, sean $v_{1}, v_{2}\in \R^{2}$ donde $v_{1} = (2, 3)$ y $v_{2} = (4, 6)$. Se define el conjunto $S = \{v_{1}, v_{2}\}$ su cápsula lineal está dada por:
+\begin{align*}
+    \spn(S) &= \{(x, y)\in\R^{2}\,:\,(x, y) = \alpha_{1}v_{1}+\alpha_{2}v_{2},\alpha_{1}, \alpha_{2}\in\R\}\\
+    &= \{(x, y)\in\R^{2}\,:\,(x, y) = \alpha_{1}(2, 3)+\alpha_{2}(4, 6),\alpha_{1}, \alpha_{2}\in\R\}\\
+    &= \{(x, y)\in\R^{2}\,:\,(x, y) = (2\alpha_{1}, 3\alpha_{1})+(4\alpha_{2}, 6\alpha_{2}),\alpha_{1}, \alpha_{2}\in\R\}\\
+    &= \{(x, y)\in\R^{2}\,:\,(x, y) = (2\alpha_{1}+4\alpha_{2}, 3\alpha_{1}+6\alpha_{2}),\alpha_{1}, \alpha_{2}\in\R\}\\
+    &= \{(x, y)\in\R^{2}\,:\,2\alpha_{1}+4\alpha_{2} = x, 3\alpha_{1}+6\alpha_{2} = y,\alpha_{1}, \alpha_{2}\in\R\}\\
+    &= \{(x, y)\in\R^{2}\,:\,3x - 2y = 0\}.
+\end{align*}
+En efecto, sea $(x, y)\in\R^{2}$ se tiene que $(x,y)\in\spn(S)$ si y solo si se verifica el sistema de ecuaciones lineales
+\[
+    \systeme[\alpha_{1}\alpha_{2}]{2\alpha_{1}+4\alpha_{2} = x, 3\alpha_{1}+6\alpha_{2} = y}
+\]
+donde $\alpha_{1}, \alpha_{2}\in\R$. La matriz ampliada del sistema verifica la equivalencia siguiente:
+\[
+    \begin{pNiceArray}{cc|c}
+    2&4&x\\
+    3&6&y
+    \end{pNiceArray}
+    \sim
+    \begin{pNiceArray}{cc|c}
+    2&4&x\\
+    0&0&-3x+2y
+    \end{pNiceArray}.
+\]
+Luego, para que el sistema tenga solución se debe tener que $-3x+2y=0$, lo que implica que:
+\[
+    \spn(S) = \{(x, y)\in\R^{2}\,:\,3x - 2y = 0\}.
+\]
+\end{ejem}
+
+\begin{ejer}\hspace{0pt} En el espacio vectorial $(\R^{3},+,\cdot,\R)$ encontrar la cápsula del conjunto \[S=\{(1,-1,0),(-2,3,-1),(2,1,-3)\}.\]
+\end{ejer}
+
+\begin{teo}
+Sean $(E,+,\cdot,\K)$ un espacio vectorial y $S\subset E$. Se tiene que $\spn(S)$ es un subespacio vectorial de $E$.
+\end{teo}
+
+\begin{comment}
+    \begin{advertencia}
+        Si $S = \emptyset$, definimos $\spn(S)$ como $\{0\}$.
+    \end{advertencia}
+\end{comment}
+
+% \subsection{Conjunto generador}
+% \begin{defi}
+%     Sean $(E,+,\cdot,\K)$ un espacio vectorial y $S\subseteq E$. Al subespacio vectorial más pequeño que contiene a $S$ (es decir, la intersección de todos los subespacios que contienen a $S$) se lo denomina espacio generado por $S$ y se denota por $\gen(S)$.
+% \end{defi}
+
+% \begin{obs}
+%     Si $S = \emptyset$, definimos $\gen(\emptyset)=\{0_{E}\}$.
+% \end{obs}
+
+% \begin{prop}\label{S07C02:Gen_Cap}
+%     Sean $(E,+,\cdot,\K)$ un espacio vectorial y $S\subseteq E$. Se tiene que $\spn(S)=\gen(S)$.
+% \end{prop}
+
+\begin{obs}
+    Si $S = \emptyset$, entonces
+    $\spn(\emptyset) = \{ 0_{E} \}$.
+\end{obs}
+
+% \begin{obs}
+%     Si $S = \emptyset$, entonces
+%     $\spn(\emptyset) = \gen(\emptyset) = \{ 0_{E} \}$.
+% \end{obs}
+
+\begin{defi} 
+Sean $(E,+,\cdot,\K)$ un espacio vectorial, $k\in\N^{*}$ y $S=\{v_1,v_2,\ldots,v_k\}\subseteq E$. 
+Se dice que $S$ genera el espacio vectorial $E$ si cada vector en $E$ es una combinación lineal de los 
+elementos de $S$, es decir, si para todo $v\in E$, existen  $\alpha_1, \alpha_2, \ldots, \alpha_k\in \K$ 
+tales que 
+    \[
+        v = \alpha_1v_1+ \alpha_2v_2+ \cdots+ \alpha_k v_k.
+    \]
+\end{defi}
+
+\begin{ejem}\label{S07C02:Ej_Conj_gen}
+En el espacio vectorial $(\R^2,+,\cdot,\R)$ con las operaciones usuales, considere el conjunto $S=\{(1,0), (0,2)\}$. Tenemos que $S$ genera el espacio vectorial $\R^2$. En efecto, sean $(x,y)\in\mathbb{R}^2$ y $\alpha_1,\alpha_2\in\R$ tal que $(x,y)$ es combinación lineal de los elementos de $S$, es decir:
+\[
+\alpha_1 (1,0)+\alpha_2 (0,2)=(x,y)
+\]
+o equivalentemente
+\[
+(\alpha_1,2\alpha_2)=(x,y).
+\]
+Igualando ambos vectores se obtiene el siguiente sistema de ecuaciones:
+\[
+\systeme[\alpha_1 \alpha_2]{\alpha_1=x,2\alpha_2=y}
+\]
+este sistema tiene solución única $\alpha_1=x$ y $\alpha_2=\dfrac{y}{2}$. Por lo tanto, cada vector de $\mathbb{R}^2$ se puede  escribir como combinación lineal de los elementos de $S$. Por ejemplo, el vector $v=(-1,4)\in\mathbb{R}^2$ se puede escribir como:
+\[
+    (-1,4)=(-1)(1,0)+\dfrac{4}{2}(0,2).
+\]
+Finalmente, notemos que $\gen(S) = \R^{2}$.
+\end{ejem}
+
+% \begin{ejer}
+% En el espacio vectorial $(\R_1[t],+,\cdot,\R)$ con las operaciones usuales, considere el subconjunto $S=\{1,-t\}$ verifique que $S$ genera $\R_1[t]$.
+% \end{ejer}
+
+\begin{prop}
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial, $k\in\N^{*}$ y 
+ \[S=\{v_1,v_2,\ldots,v_k\}\subseteq E.\]
+Se tiene que $S$ genera el espacio vectorial $E$ si y solo si
+    \[
+        E = \gen(S) = \spn(S).
+    \]
+\end{prop}
+
+\begin{ejem}\label{Semana6: ejem1}
+En el espacio vectorial $(\R^{2},+,\cdot,\R)$ con las operaciones usuales, dado el conjunto $S = \{u_{1}\} = \{(2, 3)\}$ se tiene que el espacio generado por $S$ está dada por $\gen(S) = \spn(S) = \{(x,y)\in\R^{2}\,:\,3x-2y=0\}$, además, el espacio generado se representa gráficamente como una recta en el plano.%, en la figura \ref{GeneradoR2} se puede observar a dicho espacio.
+
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=0.45\linewidth]{Graficos/GeneradoR2.eps}
+%     \caption{Espacio generado por $S = \{u_{1}\}$.}
+%     \label{GeneradoR2}
+% \end{figure}
+\end{ejem}
+
+\begin{ejem}
+En el espacio vectorial $(\R^{3},+,\cdot,\R)$ con las operaciones usuales, dado el conjunto $S = \{v_{1}, v_{2}\} = \{(0, 2, 2), (0, 1, - 2)\}$ se tiene que el espacio generado por $S$ está dado por $\gen(S) = \spn(S) = \{(x,y,z)\in\R^{3}\,:\,x=0\}$, además, el espacio generado se representa gráficamente como un plano en el espacio.
+
+% . en la figura \ref{GeneradoR3} se puede observar a dicho espacio.
+
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=1.0\linewidth]{Graficos/GeneradorR3.eps}
+%     \caption{Espacio generado por $S = \{v_{1}, v_{2}\}$.}
+%     \label{GeneradoR3}
+% \end{figure}
+\end{ejem}
+
+\begin{obs}
+Un espacio vectorial puede ser generado por distintos conjuntos. Por ejemplo, el espacio $\R^{2}$ está generado por los conjuntos $\{(1, 0), (0, 1)\}$, $\{(1, 1), (1, - 1)\}$, $\{(1, 2), (2, -1), (4, 3)\}$ y $\{(0, 0), (1, 2), (4, 5), (5, 7), (- 3, - 3)\}$, entre otros.
+\end{obs}
+
+\begin{prop}\label{S07C02:Cap_com_lin}
+Sean $(E,+,\cdot,\K)$ un espacio vectorial, $k\in\N^{*}$ y
+
+\noindent$S=\{v_1,v_2,\ldots,v_k\}\subseteq E$. Si algún $v_{j}$ es combinación lineal de los demás elementos de $S$, entonces
+\[
+    \spn(S) = \spn\{v_{1}, v_{2}, \ldots, v_{j - 1}, v_{j + 1}, \ldots, v_{k}\}.
+\]
+\end{prop}
+
+\begin{ejem}\hspace{0pt} En el espacio vectorial $(\mathbb{R}^2,+,\cdot,\R)$ con las operaciones usuales, considere el subconjunto:
+\[
+    S=\{(2,-2), (1,0), (3,2), (0,2)\}.
+\]
+Notemos que se tiene la siguiente combinación lineal:
+\[
+    (3,2)=0(2,-2)+3(1,0)+(0,2),
+\]
+lo que junto con la proposición \ref{S07C02:Cap_com_lin} implica que:
+\[
+    \spn(S) = \spn\{(2,-2), (1,0), (0,2)\}.
+\]
+Además, notemos que dado que se tiene a la combinación lineal:
+\[
+    (2,-2)=2(1,0)-(0,2),
+\]
+por la proposición \ref{S07C02:Cap_com_lin} se tiene que:
+\[
+    \spn(S) = \spn\{(1,0), (0,2)\}.
+\]
+Considerando al ejemplo \ref{S07C02:Ej_Conj_gen} se concluye que:
+\[
+     \spn(S) = \R^{2}.
+\]
+\end{ejem}
+
+\begin{ejer}
+En el espacio vectorial $(\Mat[\R]{2}{3},+,\cdot,\R)$ con las operaciones usuales, considere el subconjunto:
+\[S=\left\lbrace \begin{pmatrix} 1 & 0 & 2\\ 0 & 0 & 1 \end{pmatrix}, \begin{pmatrix} 1 & 0 & 0\\ 1 & 0 & 1 \end{pmatrix}, \begin{pmatrix} 2 & 1 & 0\\ 4 & 1 & 2 \end{pmatrix}, \begin{pmatrix} 0 & 1 & 0\\ 2 & 1 & 0 \end{pmatrix} \right\rbrace.\]
+Verifique que existe alguna matriz $v_j$ combinación lineal de los demás elementos de $S$ tal que:
+\[
+    \spn(S) = \spn(\{v_{k}\in S: k\neq j\}).
+\]
+\end{ejer}
+
+% \begin{ejer}
+% En el espacio vectorial $(\R_2[t],+,\cdot,\R)$ con las operaciones usuales, considere el subconjunto:
+% \[S=\{1,t,t^2,1-2t\}.\]
+% Verifique que existe algún $v_j$ combinación lineal de los demás elementos de $S$ tal que:
+% \[
+%     \spn(S) = \spn(\{v_{k}\in S: k\neq j\}).
+% \]
+% \end{ejer}
+
+\begin{defi}[Independencia lineal]
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial, $k\in\N^{*}$ y $S=\{v_1,v_2,\ldots,v_k\}\subseteq E$. Se dice que $S$ es un conjunto linealmente independiente si y solo si
+    \[ \alpha_1 v_1 + \alpha_2 v_2 + \cdots + \alpha_k v_k = 0 \]
+    implica que 
+    \[ \alpha_1=\alpha_2=\ldots= \alpha_k=0 \]
+    es solución única.
+\end{defi}
+\begin{advertencia}
+    Decimos que un conjunto de vectores $\{v_1,v_2,\ldots,v_k\}$ es linealmente dependiente si existen $\alpha_1, \alpha_2, \ldots, \alpha_k \in \K$, \textbf{no todos iguales a cero}, tales que:
+    \[
+        \alpha_1 v_1 + \alpha_2 v_2 + \cdots + \alpha_k v_k = 0.
+    \]
+\end{advertencia}
+
+% \begin{defi}
+%     Sean $(E,+,\cdot,\K)$ un espacio vectorial, $k\in\N^{*}$ y $S=\{v_1,v_2,\ldots,v_k\}\subseteq E$. Se dice que $S$ es un conjunto linealmente dependiente si existen $\alpha_1, \alpha_2, \ldots, \alpha_k \in \K$, no todos iguales a cero, tales que:
+%     \[
+%         \alpha_1 v_1 + \alpha_2 v_2 + \cdots + \alpha_k v_k = 0
+%     \]
+%     en caso contrario, se dice que $S$ es un conjunto linealmente independiente. 
+% \end{defi}
+
+% \begin{advertencia}
+%     De esta definición, se tiene que $\{v_1,v_2,\ldots,v_k\}$ es linealmente independiente si y solo si
+%     \[
+%         \alpha_1 v_1 + \alpha_2 v_2 + \cdots + \alpha_k v_k = 0
+%     \]
+%     implica que
+%     \[
+%         \alpha_1 = \alpha_2 = \cdots = \alpha_k = 0.
+%     \]
+%     es solución única.
+% \end{advertencia}
+
+\begin{ejem}\label{Semana6: ejem2}
+En el espacio vectorial $(\R^{2},+,\cdot,\R)$, sean $v_{1} = (1,2)$ y $v_{2} = (2,4)$. El conjunto $S = \{v_{1}, v_{2}\}$ es linealmente dependiente. 
+
+\noindent En efecto, sean $\alpha_1, \alpha_2\in\R$, formemos a la combinación lineal nula:
+\[
+    \alpha_1(1,2)+\alpha_2(2,4)=(0,0).
+\]
+o equivalentemente, 
+\begin{equation}\label{Semana6: ec1}
+    (\alpha_1+2\alpha_2,2\alpha_1+4\alpha_2)=(0,0).
+\end{equation}
+A partir de la igualdad de pares ordenados en (\ref{Semana6: ec1}), se obtiene el siguiente sistema de ecuaciones lineales:
+\[
+    \systeme[\alpha_{1} \alpha_{2}]{\alpha_1+2\alpha_2=0,2\alpha_1+4\alpha_2=0.}
+\]
+Este sistema tiene infinitas soluciones donde $\alpha_{1} = -2\alpha_{2}$ con $\alpha_{2}\in\R$. Por lo tanto, el conjunto $S$ es linealmente dependiente.
+\end{ejem}
+
+\begin{ejer}\label{Semana6: ejem3}
+En el espacio vectorial $(\R^2,+,\cdot,\R)$, sean $v_{1} = (1, 3)$ y $v_{2} = (-2,4)$. Se define el conjunto $S = \{v_{1}, v_{2}\}$. Muestre que el conjunto $S$ es linealmente independiente.
+\end{ejer}
+
+\begin{ejer}\hspace{0pt}
+Considerando el Ejemplo \ref{Semana6: ejem3}, sea $T=\{2v_{1} + v_{2}, 4v_{1} - 3v_{2}\}$, ¿es $T$ un conjunto linealmente independiente? Justifique su respuesta.
+\end{ejer}
+
+\begin{prop}
+    Sean $(E,+,\cdot,\K)$ un espacio vectorial y $S\subseteq E$. Si $0_{E}\in S$, entonces $S$ es linealmente dependiente.
+\end{prop}
+
+% \begin{advertencia}
+%     Se puede extender esta definición para conjuntos infinitos diciendo que $S$ es linealmente independiente si todo subconjunto finito de $S$ es linealmente independiente.
+% \end{advertencia}
+
+
+
+\end{document}

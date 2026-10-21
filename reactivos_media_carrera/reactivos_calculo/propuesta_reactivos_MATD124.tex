@@ -1,0 +1,219 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2.5cm]{geometry}
+
+% Compilar desde esta carpeta: pdflatex propuesta_reactivos_MATD124.tex
+% Cambiar a \solucionesfalse para generar la versión para estudiantes.
+\newif\ifsoluciones
+\solucionestrue
+\newenvironment{alternativas}{%
+  \begin{enumerate}\renewcommand{\labelenumi}{\Alph{enumi})}%
+  \setlength{\itemsep}{3pt}\setlength{\parskip}{0pt}%
+}{\end{enumerate}}
+\newcommand{\reactivo}[2]{\subsection*{Reactivo #1}\noindent #2\par}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+\begin{document}
+\begin{center}
+  {\Large\bfseries Propuesta de reactivos de Cálculo Diferencial}\par
+  {\large MATD124 --- Examen de media carrera}
+\end{center}
+
+
+\section*{Instrucciones}
+Seleccione una sola respuesta en cada pregunta. Cada reactivo tiene cuatro
+alternativas y únicamente una es correcta. Salvo indicación contraria, las
+variables y funciones son reales; $\mathbb{N}=\{1,2,3,\ldots\}$.
+
+\reactivo{1}{Sea $S=\{1-1/n:n\in\mathbb{N}\}$. ¿Cuál es la afirmación correcta?}
+\begin{alternativas}
+  \item $\inf S=0$ y $\max S=1$.
+  \item $\min S=0$, $\sup S=1$ y $S$ no tiene máximo.
+  \item $\inf S=-1$ y $\sup S=1$.
+  \item $\min S=0$ y $\sup S=0$.
+\end{alternativas}
+
+\reactivo{2}{Para la sucesión $a_n=(3n^2+1)/(2n^2+n)$, ¿cuál es el valor de
+$\displaystyle\lim_{n\to\infty}a_n$?}
+\begin{alternativas}
+  \item $0$.
+  \item $1$.
+  \item $3$.
+  \item $\dfrac{3}{2}$.
+\end{alternativas}
+
+\reactivo{3}{¿Cuál de las siguientes condiciones define que una sucesión
+real $(a_n)$ es de Cauchy?}
+\begin{alternativas}
+  \item Para todo $\varepsilon>0$, existe $N\in\mathbb{N}$ tal que
+  $|a_n-a_m|<\varepsilon$ para todos $n,m\geq N$.
+  \item Existe $\varepsilon>0$ tal que $|a_n-a_m|<\varepsilon$ para todos
+  $n,m\in\mathbb{N}$.
+  \item Para todo $\varepsilon>0$, existe $N\in\mathbb{N}$ tal que
+  $|a_n|<\varepsilon$ para todo $n\geq N$.
+  \item Existe $N\in\mathbb{N}$ tal que $a_n=a_m$ para todos $n,m\geq N$.
+\end{alternativas}
+
+\reactivo{4}{¿Cuál es el valor de
+$\displaystyle\lim_{x\to 0}\frac{e^{2x}-1}{x}$?}
+\begin{alternativas}
+  \item $0$.
+  \item $1$.
+  \item $2$.
+  \item El límite no existe.
+\end{alternativas}
+
+\reactivo{5}{Sea
+\[
+f(x)=\begin{cases}
+\dfrac{x^2-4}{x-2},&x\neq 2,\\
+k,&x=2.
+\end{cases}
+\]
+¿Para qué valor de $k$ es continua $f$ en $x=2$?}
+\begin{alternativas}
+  \item $k=0$.
+  \item $k=4$.
+  \item $k=2$.
+  \item No existe un valor de $k$ que haga continua a $f$ en $x=2$.
+\end{alternativas}
+
+\reactivo{6}{Una función $f$ es continua en $[0,2]$ y diferenciable en $(0,2)$.
+Se sabe que $f(0)=-1$, $f(2)=3$ y $f'(x)>0$ para todo $x\in(0,2)$.
+¿Qué se puede concluir sobre las soluciones de $f(x)=0$ en $(0,2)$?}
+\begin{alternativas}
+\item No existe ninguna solución.
+    \item Existe al menos una solución, pero las condiciones
+    no permiten determinar si es única.
+    \item Existen al menos dos soluciones distintas.
+    \item Existe exactamente una solución.
+\end{alternativas}
+
+\reactivo{7}{Sea $f$ diferenciable en un intervalo abierto $I$. Si $f'(x)\geq0$
+para todo $x\in I$, ¿cuál de las siguientes conclusiones está garantizada?}
+\begin{alternativas}
+\item Para cualesquiera $x_1,x_2\in I$ con $x_1<x_2$,
+    se cumple $f(x_1)<f(x_2)$.
+    \item $f$ es constante en $I$.
+    \item $f$ no puede ser constante en ningún subintervalo de $I$.
+    \item Para cualesquiera $x_1,x_2\in I$ con $x_1<x_2$,
+    se cumple $f(x_1)\leq f(x_2)$.
+\end{alternativas}
+
+\reactivo{8}{La ecuación $x^2+xy+y^2=3$ define localmente a $y$ como una
+función diferenciable de $x$ alrededor de $(1,1)$. ¿Cuál es la pendiente de
+la recta tangente en ese punto?}
+\begin{alternativas}
+  \item $1$.
+  \item $-\dfrac{1}{2}$.
+  \item $-1$.
+  \item $0$.
+\end{alternativas}
+
+\reactivo{9}{Una función $f$ es continua en $[0,3]$ y diferenciable en $(0,3)$.
+Se sabe que $f'(x)<0$ para $0<x<1$ y que $f'(x)>0$ para $1<x<3$.
+Sin conocer una fórmula para $f$, ¿cuál de las siguientes afirmaciones
+es necesariamente verdadera?}
+\begin{alternativas}
+\item $f$ alcanza su máximo absoluto en $x=1$.
+    \item $f$ alcanza su mínimo absoluto en $x=1$.
+    \item $f(0)<f(1)$.
+    \item $f(3)<f(1)$.
+\end{alternativas}
+
+\reactivo{10}{¿Cuál es el polinomio de Taylor de grado dos de $f(x)=e^x$
+centrado en $x=0$?}
+\begin{alternativas}
+  \item $1+x+x^2$.
+  \item $x+\dfrac{x^2}{2}$.
+  \item $1+\dfrac{x^2}{2}$.
+  \item $1+x+\dfrac{x^2}{2}$.
+\end{alternativas}
+
+\ifsoluciones
+\clearpage
+\section*{Clave y correspondencia con el programa}
+
+\begin{center}
+\begin{tabular}{ccl}
+\hline
+Reactivo & Respuesta & Contenido del programa (página 2)\\
+\hline
+1 & B & 1.1: Supremo e ínfimo de conjuntos acotados\\
+2 & D & 2.1--2.2: Convergencia y álgebra de límites\\
+3 & A & 2.5: Criterio de Cauchy\\
+4 & C & 6.2 y 6.6: Exponencial y regla de L'Hópital\\
+5 & B & 3.1 y 3.3: Límites y continuidad\\
+6 & D & 4.3 y 5.6: Existencia y unicidad de un cero\\
+7 & D & 5.6: Valor medio y monotonía\\
+8 & C & 5.1 y 5.5: Tangente y derivación implícita\\
+9 & B & 6.3: Extremos de una función\\
+10 & D & 6.7: Fórmula de Taylor\\
+\hline
+\end{tabular}
+\end{center}
+
+\section*{Justificaciones}
+\begin{enumerate}
+\item \textbf{B.} Para $n=1$ se obtiene $0$, el mínimo. Todos los elementos
+son menores que $1$ y convergen a $1$, de modo que $\sup S=1$.
+Como $1\notin S$, no existe máximo.
+
+\item \textbf{D.} Dividiendo numerador y denominador por $n^2$:
+\[
+a_n=\frac{3+1/n^2}{2+1/n}\longrightarrow\frac{3}{2}.
+\]
+
+\item \textbf{A.} La definición exige que cualesquiera dos términos de una
+cola de la sucesión estén arbitrariamente próximos. B expresa acotamiento
+de las diferencias, C expresa convergencia a cero y D exige una sucesión
+eventualmente constante; ninguna de estas tres condiciones es la definición
+de Cauchy.
+
+\item \textbf{C.} Se presenta la forma indeterminada $0/0$. La regla de
+L'Hópital es aplicable: las funciones son diferenciables en un entorno de
+cero y la derivada del denominador es $1\neq0$. Por tanto,
+\[
+\lim_{x\to0}\frac{e^{2x}-1}{x}
+=\lim_{x\to0}2e^{2x}=2.
+\]
+
+\item \textbf{B.} Para $x\neq2$, $f(x)=x+2$. Así,
+$\lim_{x\to2}f(x)=4$; la continuidad exige que $f(2)=k=4$.
+
+\item \textbf{D.} La continuidad y el cambio de signo
+garantizan al menos un cero interior. Como $f'>0$, el teorema del valor
+medio implica que $f$ es estrictamente creciente y no puede tomar el
+valor $0$ en dos puntos distintos. Así, el cero existe y es único.
+
+\item \textbf{D.} Para $x_1<x_2$, el teorema del valor medio
+da $f(x_2)-f(x_1)=f'(c)(x_2-x_1)\geq0$ para algún $c\in(x_1,x_2)$.
+Esto garantiza que $f$ es no decreciente. No garantiza crecimiento
+estricto: una función constante satisface la hipótesis. Tampoco obliga
+a que $f$ sea constante, como muestra $f(x)=x$.
+
+\item \textbf{C.} Derivando implícitamente:
+\[
+2x+y+xy'+2yy'=0,
+\qquad y'=-\frac{2x+y}{x+2y}.
+\]
+En $(1,1)$, el denominador vale $3$ y la pendiente es $-3/3=-1$.
+
+\item \textbf{B.} El signo negativo de $f'$ implica que $f$
+es estrictamente decreciente en $[0,1]$; el signo positivo implica que es
+estrictamente creciente en $[1,3]$. Ambas afirmaciones se justifican
+aplicando el teorema del valor medio a pares de puntos de cada intervalo.
+Por tanto, $f(1)<f(x)$ para todo $x\in[0,3]$ distinto de $1$.
+
+\item \textbf{D.} Puesto que $f(0)=f'(0)=f''(0)=1$,
+\[
+P_2(x)=f(0)+f'(0)x+\frac{f''(0)}{2!}x^2
+=1+x+\frac{x^2}{2}.
+\]
+\end{enumerate}
+\fi
+\end{document}
