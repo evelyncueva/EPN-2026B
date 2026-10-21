@@ -21,11 +21,12 @@
     \global\pdfpagewidth=297mm
     \global\pdfpageheight=210mm
     % La caja de salida no mide necesariamente el ancho del papel.
-    % Fijar la separacion entre origenes evita desplazar la segunda copia
-    % segun el ancho del contenido y conserva los margenes A5 originales.
+    % Fijar la separacion entre origenes evita que dependa del contenido.
+    % Acercar cada copia 4 mm al centro reduce el espacio entre ambas
+    % sin cambiar la escala del texto ni el ancho de las mitades A4.
     \setbox\AtBeginShipoutBox=\hbox{%
-      \hbox to 148.5mm{\copy\AtBeginShipoutBox\hss}%
-      \hbox to 148.5mm{\copy\AtBeginShipoutBox\hss}%
+      \hbox to 148.5mm{\kern4mm\copy\AtBeginShipoutBox\hss}%
+      \hbox to 148.5mm{\kern-4mm\copy\AtBeginShipoutBox\hss}%
     }%
   }%
 }

@@ -2,25 +2,21 @@
 % !TeX program = pdflatex
 \documentclass[10pt,a5paper]{article}
 \newif\ifmostrarSoluciones
-\mostrarSolucionestrue
+\mostrarSolucionesfalse
 \usepackage{estilo_apuntes}
-\dosPorCarillafalse % Cambie a \dosPorCarillatrue para imprimir dos páginas por carilla.
-\encabezadoprueba{Prueba 1}{22 de octubre de 2026}
+\dosPorCarillatrue % Cambie a \dosPorCarillatrue para imprimir dos páginas por carilla.
+\encabezadoprueba{Prueba 1}{23 de octubre de 2026}
 
 \begin{document}
 \begin{center}
   {\color{Azul}\large\bfseries Prueba 1}
 \end{center}
-
-\medskip
-
-\medskip
 \noindent\textbf{Indicaciones}
 \begin{itemize}
   \item La duración de la prueba es de 1 hora y 30 minutos.
   \item Escriba el desarrollo de cada ejercicio de manera clara y ordenada.
   Justifique cada paso e indique las propiedades, restricciones o resultados que
-  utilice. Una respuesta sin justificación recibirá únicamente crédito parcial.
+  utilice. Una respuesta sin justificación recibirá únicamente una nota parcial.
   \item No se permite el uso de ningún dispositivo electrónico durante la
   evaluación.
   \item Cualquier intento de copia penalizará la evaluación con una calificación
@@ -30,7 +26,7 @@
 \medskip
 \noindent\textbf{Ejercicios}
 \begin{enumerate}
-  \item Para $a\in\mathbb{R}$, considere la función
+  \item \textbf{(3 puntos)} Para $a\in\mathbb{R}$, considere la función
   \[
     F_a\colon\mathbb{R}\to\mathbb{R},
     \qquad
@@ -46,7 +42,7 @@
     \lim_{x\to2}F_a(x).
   \]
   \textbf{Hint:} Factorice el numerador y considere los casos $x<2$ y $x>2$ por separado.
-  \item Sea $A$ una función definida para $x$ cercanos a $0$, excepto posiblemente en $0$, que satisface
+  \item \textbf{(3 puntos)} Sea $A$ una función definida para $x$ cercanos a $0$, excepto posiblemente en $0$, que satisface
   \[
     |A(x)|\leq3.
   \]
@@ -55,24 +51,26 @@
     \lim_{x\to0}
     \frac{x^2}{|x|+x^2}\,A(x).
   \]
-\textbf{Hint:} Note que $x^2=|x|^2$ para $x\neq 0$.
-  \item Considere las funciones
+\textbf{Hint:} Encuentre una función $g$ tal que
   \[
-    f\colon\mathbb{R}\setminus\{-1\}
-    \to\mathbb{R}\setminus\{2\},
+    \left|\frac{x^2}{|x|+x^2}\,A(x)\right|\leq g(x)
+  \]
+  Note que $x^2=|x|^2$ para $x\neq 0$ y que $|xy|=|x||y|$ para todo $x,y\in\mathbb{R}$.
+  \item \textbf{(4 puntos)} Considere las funciones
+  \[
+    f\colon\mathbb{R}\setminus\{2\}\to\mathbb{R}\setminus\{1\},
     \qquad
-    f(x)=\frac{2x+1}{x+1},
+    f(x)=\frac{x+1}{x-2},
   \]
   y
   \[
-    g\colon\mathbb{R}\setminus\{2\}
-    \to\mathbb{R}\setminus\{-1\},
+    g\colon[0,\infty)\to[0,\infty),
     \qquad
-    g(x)=\frac{1-x}{x-2}.
+    g(x)=\sqrt{x}.
   \]
   \begin{enumerate}
-    \item Determine si cada función es inyectiva, sobreyectiva o biyectiva.
-    \item Determine la función $g\circ f$.
+    \item \textbf{(2 puntos)} Analice la inyectividad y sobreyectividad de $f$.
+    \item \textbf{(2 puntos)} Determine la función $g\circ f$.
   \end{enumerate}
 \end{enumerate}
 
@@ -136,61 +134,46 @@
     \frac{x^2}{|x|+x^2}A(x)=0.
   \]
 
-  \item Si $f(x)=2$, entonces $2x+1=2(x+1)$, lo cual implicaría $1=2$.
-  Por tanto, $f(x)\neq2$. De manera análoga, si $g(x)=-1$, se obtendría
-  $1-x=-(x-2)$, que también implicaría $1=2$. Las dos leyes producen valores
-  en sus codominios.
+  \item Para $x\neq2$, se tiene
+  \[
+    f(x)=1+\frac{3}{x-2}\neq1,
+  \]
+  por lo que $f$ toma valores en su codominio. Si $f(x_1)=f(x_2)$,
+  al multiplicar por los denominadores no nulos obtenemos
+  \[
+    (x_1+1)(x_2-2)=(x_2+1)(x_1-2)
+    \implies -3x_1=-3x_2
+    \implies x_1=x_2.
+  \]
+  Así, $f$ es inyectiva. Para cada $y\neq1$, la ecuación $f(x)=y$ equivale a
+  \[
+    x=\frac{2y+1}{y-1}.
+  \]
+  Este valor pertenece al dominio, pues $x-2=3/(y-1)\neq0$, y al sustituirlo
+  se verifica que $f(x)=y$. Por tanto, $f$ es sobreyectiva y biyectiva.
 
-  Para estudiar $f$, sea $y\in\mathbb{R}\setminus\{2\}$. Al resolver
+  La composición está definida cuando $x\neq2$ y $f(x)\geq0$, es decir,
   \[
-    y=\frac{2x+1}{x+1}
+    \frac{x+1}{x-2}\geq0.
   \]
-  para $x$, se obtiene el único valor
+  Los puntos críticos son $-1$ y $2$. El análisis de signos da
   \[
-    x=\frac{1-y}{y-2}.
+    \begin{array}{c|ccccc}
+      x & (-\infty,-1) & -1 & (-1,2) & 2 & (2,\infty)\\ \hline
+      (x+1)/(x-2) & + & 0 & - & \text{no definido} & +
+    \end{array}
   \]
-  Este valor pertenece al dominio de $f$, pues
+  Se incluye $x=-1$, pues la raíz de cero existe, y se excluye $x=2$,
+  pues anula el denominador. En consecuencia,
   \[
-    x+1=-\frac{1}{y-2}\neq0.
+    D_{g\circ f}=(-\infty,-1]\cup(2,\infty).
   \]
-  Al sustituirlo en la ley de $f$ se verifica que $f(x)=y$. Así, cada
-  elemento del codominio tiene una única preimagen y $f$ es inyectiva y
-  sobreyectiva; por tanto, es biyectiva.
-
-  Para $g$, sea $y\in\mathbb{R}\setminus\{-1\}$. Resolviendo
+  Con este dominio natural, la función solicitada es
   \[
-    y=\frac{1-x}{x-2}
-    \iff x(y+1)=2y+1,
-  \]
-  obtenemos la única preimagen posible
-  \[
-    x=\frac{2y+1}{y+1}.
-  \]
-  Este valor pertenece al dominio de $g$, pues
-  \[
-    x-2=-\frac{1}{y+1}\neq0.
-  \]
-  Al sustituirlo en $g$ se obtiene $g(x)=y$. Cada elemento del codominio tiene
-  una única preimagen, de modo que $g$ también es inyectiva, sobreyectiva y
-  biyectiva.
-
-  Para todo $x\in\mathbb{R}\setminus\{-1\}$,
-  \begin{align*}
-    (g\circ f)(x)
-    &=\frac{1-\dfrac{2x+1}{x+1}}
-            {\dfrac{2x+1}{x+1}-2}\\
-    &=\frac{-x/(x+1)}{-1/(x+1)}\\
-    &=x.
-  \end{align*}
-  No hay restricciones adicionales: si $x\neq-1$, entonces $f(x)\neq2$, por
-  lo que se puede aplicar $g$. Así, la función solicitada es
-  \[
-    g\circ f\colon\mathbb{R}\setminus\{-1\}
-    \to\mathbb{R}\setminus\{-1\},
+    g\circ f\colon(-\infty,-1]\cup(2,\infty)\to[0,\infty),
     \qquad
-    (g\circ f)(x)=x.
+    (g\circ f)(x)=\sqrt{\frac{x+1}{x-2}}.
   \]
-  Es la función identidad en $\mathbb{R}\setminus\{-1\}$.
 \end{enumerate}
 \end{solucion}
 \fi
