@@ -1,0 +1,191 @@
+% Adaptado de Semana 06 Clase 02 (2025-A).
+\documentclass[compacto,10pt]{pubciencias-notas}
+\usepackage{comandosEPN}
+\autor{Departamento de Formación Básica}
+\materia{Álgebra Lineal}
+\nota{Semana 05 Clase 01}
+\fecha{Semestre 2026-B}
+\logouno[1.1cm]{Logo_EPN.eps}
+\logodos[1.7cm]{Logo_DFB.eps}
+\definecolor{colordef}{cmyk}{0.81,0.62,0.00,0.22}
+
+\begin{document}
+\encabezado
+\vspace*{-8mm}
+\setcounter{section}{2}
+\section{Determinantes}
+\setcounter{subsection}{3}
+\subsection{Un mismo criterio, distintas formas de reconocerlo}
+
+En las semanas anteriores relacionamos la solución de un sistema con el rango
+y la matriz inversa. El determinante completa estas conexiones: para una matriz
+cuadrada, los siguientes criterios expresan una misma condición.
+
+\begin{teo}[Equivalencias de invertibilidad]\label{sem05cl01:equivalencias}
+    Sea $A\in\Mat[\R]{n}{n}$. Son equivalentes:
+    \begin{enumerate}
+        \item $A$ es invertible o no singular;
+        \item $Ax=0$ tiene únicamente la solución trivial;
+        \item $A$ es equivalente por filas a $I_n$;
+        \item $\rang(A)=n$;
+        \item $Ax=b$ tiene una única solución para cada $b\in\R^n$;
+        \item $\det(A)\ne0$.
+    \end{enumerate}
+\end{teo}
+
+Tener un pivote en cada columna permite reducir $A$ a $I_n$, obtener su inversa
+y resolver de manera única cualquier sistema $Ax=b$. Al escalonar una matriz
+cuadrada, la presencia de todos esos pivotes también equivale a que su
+determinante sea distinto de cero.
+
+\begin{ejem}[Decidir sin calcular la inversa]
+    Retomemos el brazo robótico de la semana 02. Sus dos mecanismos producen
+    desplazamientos $u=(2,1)^{\top}$ y $v=(1,3)^{\top}$. La matriz asociada es
+    \[
+        A=\begin{pmatrix}2&1\\1&3\end{pmatrix},
+        \qquad \det(A)=2\cdot3-1\cdot1=5\ne0.
+    \]
+    Por el teorema, $\rang(A)=2$, $A$ tiene inversa y $Ax=0$ solo tiene la
+    solución trivial. Además, cada objetivo $b\in\R^2$ determina una única
+    solución real de $Ax=b$.
+
+    Para esta descripción permitimos intensidades reales: un valor negativo
+    significa invertir el desplazamiento. Si el mecanismo solo admite
+    activaciones enteras no negativas, debemos comprobar esa restricción
+    después de resolver el sistema.
+\end{ejem}
+
+Ya sabemos reconocer cuándo existe una solución única. Ahora veremos cómo
+obtenerla mediante determinantes.
+
+\subsection{Regla de Cramer}
+
+\begin{teo}[Regla de Cramer]\label{sem05cl01:cramer}
+    Sean $A\in\Mat[\R]{n}{n}$ y $b\in\R^n$. Si $\det(A)\ne0$, la única
+    solución de $Ax=b$ tiene componentes
+    \[
+        x_j=\frac{\det(A^{(j)})}{\det(A)},\qquad j=1,\ldots,n,
+    \]
+    donde $A^{(j)}$ se obtiene reemplazando la columna $j$ de $A$ por $b$,
+    sin modificar las demás columnas.
+\end{teo}
+
+\begin{obs}
+    La notación $A^{(j)}$ designa una matriz de reemplazo de columnas;
+    no debe confundirse con el menor $A_{ij}$ de la clase anterior.
+\end{obs}
+
+\noindent\textbf{Procedimiento.}
+\begin{enumerate}
+    \item Escribir el sistema como $Ax=b$ y comprobar que $\det(A)\ne0$.
+    \item Para cada incógnita $x_j$, reemplazar la columna $j$ por $b$.
+    \item Calcular el cociente de determinantes y comprobar la solución
+          en las ecuaciones originales.
+\end{enumerate}
+
+\begin{ejem}[Alcanzar el objetivo del robot]\label{sem05cl01:robot}
+    Para alcanzar $b=(8,9)^{\top}$ necesitamos resolver
+    \[
+        \left\{\begin{aligned}2x_1+x_2&=8,\\x_1+3x_2&=9.\end{aligned}\right.
+    \]
+    Como $\det(A)=5$, podemos aplicar Cramer. Las matrices de reemplazo son
+    \[
+        A^{(1)}=\begin{pmatrix}8&1\\9&3\end{pmatrix},
+        \qquad A^{(2)}=\begin{pmatrix}2&8\\1&9\end{pmatrix}.
+    \]
+    Entonces
+    \[
+        x_1=\frac{8\cdot3-1\cdot9}{5}=3,
+        \qquad x_2=\frac{2\cdot9-8\cdot1}{5}=2.
+    \]
+    La comprobación es $2(3)+2=8$ y $3+3(2)=9$. Geométricamente,
+    \[
+        3\begin{pmatrix}2\\1\end{pmatrix}
+        +2\begin{pmatrix}1\\3\end{pmatrix}
+        =\begin{pmatrix}8\\9\end{pmatrix}.
+    \]
+    Tres activaciones del primer mecanismo y dos del segundo permiten
+    alcanzar el objetivo; en este caso también se cumple la restricción
+    de activaciones enteras no negativas.
+\end{ejem}
+
+\begin{ejer}[Aplicación guiada: producción de kits]
+    Un taller fabrica kits $P$ y $Q$. Cada kit $P$ requiere dos horas de corte
+    y una de ensamblaje; cada kit $Q$ requiere una hora de cada actividad.
+    Se utilizarán por completo 11 horas de corte y 7 de ensamblaje.
+    \begin{enumerate}
+        \item Defina las incógnitas y escriba el sistema $Ax=b$.
+        \item Explique, usando el teorema \ref{sem05cl01:equivalencias},
+              por qué existe una única solución real.
+        \item Resuelva por Cramer y compruebe las horas utilizadas.
+        \item Compare con el procedimiento de la matriz inversa de la
+              semana 04. ¿Qué indicaría una cantidad negativa de kits?
+    \end{enumerate}
+    \textbf{Punto de control:} debe obtener $p=4$ y $q=3$.
+\end{ejer}
+
+\begin{ejer}[Trabajo en parejas: tres incógnitas]
+    Considere
+    \[
+        \left\{\begin{aligned}
+            3x+2y+z&=2,\\2x+2y+z&=2,\\x+y+z&=1.
+        \end{aligned}\right.
+    \]
+    \begin{enumerate}
+        \item Escriba $A$ y $b$. Compruebe que $\det(A)=1$.
+              Puede comenzar con $F_1\leftarrow F_1-F_2$ y expandir por
+              la nueva primera fila.
+        \item Construya las tres matrices de reemplazo y distribuya
+              el cálculo de sus determinantes entre los integrantes.
+        \item Reúna los resultados, determine la solución y compruébela.
+    \end{enumerate}
+    \textbf{Para comprobar después de calcular:}
+    los numeradores son $0$, $1$ y $0$, respectivamente.
+\end{ejer}
+
+\subsection{¿Qué ocurre si el determinante es cero?}
+
+\begin{advertencia}
+    Cramer requiere $\det(A)\ne0$. Si $\det(A)=0$, la fórmula no se aplica.
+    Esto no permite afirmar que el sistema carece de solución: puede tener
+    infinitas soluciones o ser incompatible.
+\end{advertencia}
+
+Por ejemplo, para $S=\begin{pmatrix}2&4\\1&2\end{pmatrix}$,
+se tiene $\det(S)=0$. Comparemos dos lados derechos:
+\[
+    \left\{\begin{aligned}2x_1+4x_2&=8,\\x_1+2x_2&=4\end{aligned}\right.
+    \qquad\text{y}\qquad
+    \left\{\begin{aligned}2x_1+4x_2&=8,\\x_1+2x_2&=9.\end{aligned}\right.
+\]
+En el primero, ambas ecuaciones expresan la misma restricción y las soluciones
+son $(x_1,x_2)=(4-2t,t)$, con $t\in\R$. En el segundo, duplicar la segunda
+ecuación contradice la primera, por lo que no hay solución.
+
+Cramer resulta útil para sistemas pequeños y para expresar una incógnita
+mediante una fórmula. Para sistemas grandes, la eliminación evita calcular
+muchos determinantes y sigue siendo nuestra herramienta principal.
+
+\section{Ejercicios}
+
+\begin{ejer}[Salida individual]
+    Con los mecanismos del ejemplo \ref{sem05cl01:robot}, alcance ahora
+    el objetivo $(5,5)^{\top}$. Escriba las matrices de reemplazo,
+    resuelva por Cramer y compruebe el resultado.
+    Explique por qué se verificó el denominador antes de calcular los numeradores.
+\end{ejer}
+
+\begin{ejer}[Aplicación: mezcla]
+    Se desea preparar 10 litros de una mezcla al $30\%$ a partir de dos
+    soluciones, una al $20\%$ y otra al $40\%$. Suponga que los volúmenes se
+    suman. Si $x$ e $y$ son los litros de cada solución:
+    \begin{enumerate}
+        \item Justifique el sistema $x+y=10$, $0.2x+0.4y=3$.
+        \item Resuelva por Cramer e interprete las unidades de la respuesta.
+        \item Si ambas soluciones iniciales fueran al $20\%$, ¿podría
+              obtenerse la mezcla solicitada? Relacione su respuesta con
+              el determinante y con la concentración final.
+    \end{enumerate}
+\end{ejer}
+
+\end{document}
