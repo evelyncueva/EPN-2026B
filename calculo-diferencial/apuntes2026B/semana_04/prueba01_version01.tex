@@ -1,25 +1,22 @@
-% !TeX root = propuesta_prueba_semana04.tex
+% !TeX root = prueba01_version01.tex
 % !TeX program = pdflatex
 % Propuesta parcial de la primera evaluación.
 \documentclass[10pt,a5paper]{article}
 \newif\ifmostrarSoluciones
 \mostrarSolucionestrue
 \usepackage{estilo_apuntes}
-\encabezado{Semana 4}{Propuesta de evaluación}
+\dosPorCarillafalse % Cambie a \dosPorCarillatrue para imprimir dos páginas por carilla.
+\encabezadoprueba{Prueba 1}{22 de octubre de 2026}
 
 \begin{document}
-\tituloclase{Primera evaluación}{Propuesta parcial de ejercicios}{Semanas 1 a 3}
-
-\noindent
-\textbf{Nombre:} \rule{7cm}{0.4pt}
+\begin{center}
+  {\color{Azul}\large\bfseries Prueba 1}
+\end{center}
 
 \medskip
-\noindent
-\textbf{Fecha:} \rule{3cm}{0.4pt}
-\hfill
-\textbf{Puntaje:} \rule{1.5cm}{0.4pt}
 
-\begin{nota}[indicaciones]
+\medskip
+\noindent\textbf{Indicaciones}
 \begin{itemize}
   \item La duración de la prueba es de 1 hora y 30 minutos.
   \item Escriba el desarrollo de cada ejercicio de manera clara y ordenada.
@@ -29,11 +26,10 @@
   evaluación.
   \item Cualquier intento de copia penalizará la evaluación con una calificación
   total de cero.
-  \item Puntaje sugerido: 10 puntos por ejercicio.
 \end{itemize}
-\end{nota}
 
-\begin{ejercicios}[propuesta parcial]
+\medskip
+\noindent\textbf{Ejercicios}
 \begin{enumerate}
   \item Sean $a,b\in\mathbb{R}$ y sea $F\colon\mathbb{R}\to\mathbb{R}$ la función definida por
   \[
@@ -48,9 +44,9 @@
   \[
     \lim_{x\to1}F(x)
   \]
-  y, además, se cumpla $F(2)=5$. Calcule el límite y compárelo con $F(1)$.
+  y, además, se cumpla $F(2)=5$. Calcule el límite.
 
-  \item Sea $B$ una función definida cerca de $0$, excepto posiblemente en $0$, que satisface
+  \item Sea $B$ una función definida para $x$ cerca de $0$, excepto posiblemente en $0$, que satisface
   \[
     |B(x)|\leq4.
   \]
@@ -59,8 +55,7 @@
     \lim_{x\to0}
     \frac{\sqrt{1+x^2}-1}{x}\,B(x).
   \]
-  No suponga que $B$ tiene límite.
-
+  \textbf{Hint:} Note que $\sqrt{1+x^2}\geq 1$.
   \item Considere las funciones
   \[
     f\colon[1,\infty)\to[0,\infty),
@@ -75,11 +70,9 @@
   \]
   \begin{enumerate}
     \item Determine si cada función es inyectiva, sobreyectiva o biyectiva.
-    \item Halle la ley de asignación y el dominio de $g\circ f$ y de $f\circ g$.
-    \item Decida si $f$ y $g$ son funciones inversas. Justifique su respuesta.
+    \item Determine la función $g\circ f$.
   \end{enumerate}
 \end{enumerate}
-\end{ejercicios}
 
 \ifmostrarSoluciones
 \begin{solucion}[de la propuesta]
@@ -96,7 +89,8 @@
   \[
     \lim_{x\to1^+}F(x)=a+b.
   \]
-  La existencia del límite exige
+  Como ambos límites laterales son finitos, el límite bilateral existe si y
+  solo si son iguales, es decir, si y solo si
   \[
     a+b=2.
   \]
@@ -112,11 +106,8 @@
   \]
   En consecuencia,
   \[
-    \lim_{x\to1}F(x)=2,
-    \qquad
-    F(1)=5.
+    \lim_{x\to1}F(x)=2.
   \]
-  El límite y el valor de la función en el punto son diferentes.
 
   \item Para $x\neq0$, racionalizamos el factor algebraico:
   \[
@@ -171,26 +162,13 @@
     =\left(\sqrt{x-1}\right)^2+1
     =x.
   \]
-  Por tanto,
+  Por tanto, la función solicitada queda definida por
   \[
-    \operatorname{Dom}(g\circ f)=[1,\infty).
+    g\circ f\colon[1,\infty)\to[1,\infty),
+    \qquad
+    (g\circ f)(x)=x.
   \]
-
-  Como $g(x)\in[1,\infty)$ para todo $x\in\mathbb{R}$, la composición
-  $f\circ g$ está definida en $\mathbb{R}$ y
-  \[
-    (f\circ g)(x)
-    =\sqrt{x^2}
-    =|x|.
-  \]
-  Así,
-  \[
-    \operatorname{Dom}(f\circ g)=\mathbb{R}.
-  \]
-  Aunque $g\circ f$ es la identidad en $[1,\infty)$, $f\circ g$ no es la
-  identidad en $\mathbb{R}$. Por tanto, $f$ y $g$ no son inversas con los
-  dominios dados. Si se restringe el dominio de $g$ a $[0,\infty)$, entonces sí
-  son funciones inversas.
+  Es la función identidad en $[1,\infty)$.
 \end{enumerate}
 \end{solucion}
 \fi

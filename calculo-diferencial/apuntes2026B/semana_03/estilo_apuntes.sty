@@ -10,9 +10,26 @@
 \RequirePackage[most]{tcolorbox}
 \RequirePackage{enumitem}
 \RequirePackage{fancyhdr}
+\RequirePackage{atbegshi}
 \RequirePackage[expansion=false]{microtype}
 \RequirePackage{array}
 \RequirePackage{hyperref}
+
+% Duplica cada página A5 en las dos mitades de una carilla A4 horizontal.
+\newcommand{\dosPorCarillatrue}{%
+  \AtBeginShipout{%
+    \global\pdfpagewidth=297mm
+    \global\pdfpageheight=210mm
+    % La caja de salida no mide necesariamente el ancho del papel.
+    % Fijar la separacion entre origenes evita desplazar la segunda copia
+    % segun el ancho del contenido y conserva los margenes A5 originales.
+    \setbox\AtBeginShipoutBox=\hbox{%
+      \hbox to 148.5mm{\copy\AtBeginShipoutBox\hss}%
+      \hbox to 148.5mm{\copy\AtBeginShipoutBox\hss}%
+    }%
+  }%
+}
+\newcommand{\dosPorCarillafalse}{}
 
 \definecolor{Azul}{HTML}{1F4E79}
 \definecolor{AzulClaro}{HTML}{EAF3F8}
@@ -50,6 +67,12 @@
     \scriptsize\color{Gris}#1 · #2
     \end{tabular}}%
   \AtBeginDocument{\thispagestyle{fancy}}}
+\newcommand{\encabezadoprueba}[2]{%
+  \rhead{%
+    \begin{tabular}[b]{@{}r@{}}
+    \scriptsize\color{Gris}#1 · #2
+    \end{tabular}}%
+  \AtBeginDocument{\thispagestyle{fancy}}}
 \newcommand{\tituloclase}[3]{%
   \begin{center}
   {\color{Azul}\Large\bfseries #1}\par
@@ -80,6 +103,6 @@
   \par\medskip
 }
 \newtcolorbox{docente}[1][]{breakable,colback=GrisClaro,colframe=Gris,title={Orientación docente#1},fonttitle=\bfseries,arc=2mm,boxrule=0.6pt}
-\newtcolorbox{nota}[1][]{enhanced,breakable,blanker,borderline west={1pt}{0pt}{Gris!70},title={Observación#1},coltitle=Gris,fonttitle=\bfseries,left=3mm,right=0mm,top=1mm,bottom=1mm,before skip=5pt,after skip=5pt}
+\newtcolorbox{nota}[1][]{enhanced,breakable,blanker,borderline west={1pt}{0pt}{Gris!70},title={\if\relax\detokenize{#1}\relax Observación\else #1\fi},coltitle=Gris,fonttitle=\bfseries,left=3mm,right=0mm,top=1mm,bottom=1mm,before skip=5pt,after skip=5pt}
 
 \newcommand{\fuentes}[1]{\vfill{\footnotesize\color{Gris}#1}}

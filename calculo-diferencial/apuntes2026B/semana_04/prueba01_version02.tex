@@ -1,24 +1,21 @@
-% !TeX root = propuesta_prueba_semana04_curso_2.tex
+% !TeX root = prueba01_version02.tex
 % !TeX program = pdflatex
 \documentclass[10pt,a5paper]{article}
 \newif\ifmostrarSoluciones
 \mostrarSolucionestrue
 \usepackage{estilo_apuntes}
-\encabezado{Semana 4}{Primera evaluación -- versión B}
+\dosPorCarillafalse % Cambie a \dosPorCarillatrue para imprimir dos páginas por carilla.
+\encabezadoprueba{Prueba 1}{22 de octubre de 2026}
 
 \begin{document}
-\tituloclase{Primera evaluación}{Propuesta para el segundo curso}{Semanas 1 a 3}
-
-\noindent
-\textbf{Nombre:} \rule{7cm}{0.4pt}
+\begin{center}
+  {\color{Azul}\large\bfseries Prueba 1}
+\end{center}
 
 \medskip
-\noindent
-\textbf{Fecha:} \rule{3cm}{0.4pt}
-\hfill
-\textbf{Puntaje:} \rule{1.5cm}{0.4pt}
 
-\begin{nota}[indicaciones]
+\medskip
+\noindent\textbf{Indicaciones}
 \begin{itemize}
   \item La duración de la prueba es de 1 hora y 30 minutos.
   \item Escriba el desarrollo de cada ejercicio de manera clara y ordenada.
@@ -28,11 +25,10 @@
   evaluación.
   \item Cualquier intento de copia penalizará la evaluación con una calificación
   total de cero.
-  \item Puntaje sugerido: 10 puntos por ejercicio.
 \end{itemize}
-\end{nota}
 
-\begin{ejercicios}[propuesta paralela]
+\medskip
+\noindent\textbf{Ejercicios}
 \begin{enumerate}
   \item Para $a\in\mathbb{R}$, considere la función
   \[
@@ -49,19 +45,17 @@
   \[
     \lim_{x\to2}F_a(x).
   \]
-  Para esos valores, calcule el límite y compárelo con $F_a(2)$.
-
-  \item Sea $A$ una función definida cerca de $0$, excepto posiblemente en
-  $0$, que satisface
+  \textbf{Hint:} Factorice el numerador y considere los casos $x<2$ y $x>2$ por separado.
+  \item Sea $A$ una función definida para $x$ cercanos a $0$, excepto posiblemente en $0$, que satisface
   \[
     |A(x)|\leq3.
   \]
-  Sin suponer que $A$ tiene límite, calcule mediante el teorema del Sanduche
+  Calcule mediante el teorema del Sanduche
   \[
     \lim_{x\to0}
-    \frac{x^2}{\sqrt{x^2}+x^2}\,A(x).
+    \frac{x^2}{|x|+x^2}\,A(x).
   \]
-
+\textbf{Hint:} Note que $x^2=|x|^2$ para $x\neq 0$.
   \item Considere las funciones
   \[
     f\colon\mathbb{R}\setminus\{-1\}
@@ -77,14 +71,10 @@
     g(x)=\frac{1-x}{x-2}.
   \]
   \begin{enumerate}
-    \item Verifique que las leyes de asignación producen valores en los
-    codominios indicados.
     \item Determine si cada función es inyectiva, sobreyectiva o biyectiva.
-    \item Halle la ley de asignación y el dominio de $g\circ f$ y de
-    $f\circ g$. Decida si $f$ y $g$ son funciones inversas.
+    \item Determine la función $g\circ f$.
   \end{enumerate}
 \end{enumerate}
-\end{ejercicios}
 
 \ifmostrarSoluciones
 \begin{solucion}[de la propuesta paralela]
@@ -113,34 +103,37 @@
   \]
   de donde $a=-4$. En ese caso,
   \[
-    \lim_{x\to2}F_{-4}(x)=0,
-    \qquad
-    F_{-4}(2)=7.
+    \lim_{x\to2}F_{-4}(x)=0.
   \]
-  El límite y el valor de la función en el punto son diferentes.
 
-  \item Para $x\neq0$, se tiene $\sqrt{x^2}=|x|$. Entonces
+  \item Para $x\neq0$, se tiene $x^2=|x|^2$ y $|x|>0$. Por tanto,
+  \[
+    \frac{x^2}{|x|+x^2}
+    =\frac{|x|^2}{|x|(1+|x|)}
+    =\frac{|x|}{1+|x|}.
+  \]
+  Como este factor es no negativo y $|A(x)|\leq3$, obtenemos
   \[
     \left|
-      \frac{x^2}{\sqrt{x^2}+x^2}A(x)
+      \frac{x^2}{|x|+x^2}A(x)
     \right|
     \leq
     3\frac{x^2}{|x|+x^2}
-    =3\frac{|x|}{1+|x|}
-    \leq3|x|.
+    =3\frac{|x|}{1+|x|}.
   \]
   En consecuencia,
   \[
-    -3|x|
+    -\frac{3|x|}{1+|x|}
     \leq
-    \frac{x^2}{\sqrt{x^2}+x^2}A(x)
+    \frac{x^2}{|x|+x^2}A(x)
     \leq
-    3|x|.
+    \frac{3|x|}{1+|x|}.
   \]
-  Como ambas cotas tienden a $0$, el teorema del Sanduche permite concluir que
+  Como $|x|$ tiende a $0$ y $1+|x|$ tiende a $1$, ambas cotas tienden a $0$.
+  El teorema del Sanduche permite concluir que
   \[
     \lim_{x\to0}
-    \frac{x^2}{\sqrt{x^2}+x^2}A(x)=0.
+    \frac{x^2}{|x|+x^2}A(x)=0.
   \]
 
   \item Si $f(x)=2$, entonces $2x+1=2(x+1)$, lo cual implicaría $1=2$.
@@ -156,34 +149,48 @@
   \[
     x=\frac{1-y}{y-2}.
   \]
-  Este valor no es $-1$, por lo que pertenece al dominio de $f$. Así, cada
-  elemento del codominio tiene una única preimagen y $f$ es biyectiva. El mismo
-  argumento, o la simetría de las expresiones, muestra que $g$ es biyectiva.
+  Este valor pertenece al dominio de $f$, pues
+  \[
+    x+1=-\frac{1}{y-2}\neq0.
+  \]
+  Al sustituirlo en la ley de $f$ se verifica que $f(x)=y$. Así, cada
+  elemento del codominio tiene una única preimagen y $f$ es inyectiva y
+  sobreyectiva; por tanto, es biyectiva.
+
+  Para $g$, sea $y\in\mathbb{R}\setminus\{-1\}$. Resolviendo
+  \[
+    y=\frac{1-x}{x-2}
+    \iff x(y+1)=2y+1,
+  \]
+  obtenemos la única preimagen posible
+  \[
+    x=\frac{2y+1}{y+1}.
+  \]
+  Este valor pertenece al dominio de $g$, pues
+  \[
+    x-2=-\frac{1}{y+1}\neq0.
+  \]
+  Al sustituirlo en $g$ se obtiene $g(x)=y$. Cada elemento del codominio tiene
+  una única preimagen, de modo que $g$ también es inyectiva, sobreyectiva y
+  biyectiva.
 
   Para todo $x\in\mathbb{R}\setminus\{-1\}$,
   \begin{align*}
     (g\circ f)(x)
     &=\frac{1-\dfrac{2x+1}{x+1}}
             {\dfrac{2x+1}{x+1}-2}\\
+    &=\frac{-x/(x+1)}{-1/(x+1)}\\
     &=x.
   \end{align*}
-  Por tanto,
+  No hay restricciones adicionales: si $x\neq-1$, entonces $f(x)\neq2$, por
+  lo que se puede aplicar $g$. Así, la función solicitada es
   \[
-    \operatorname{Dom}(g\circ f)=\mathbb{R}\setminus\{-1\}.
+    g\circ f\colon\mathbb{R}\setminus\{-1\}
+    \to\mathbb{R}\setminus\{-1\},
+    \qquad
+    (g\circ f)(x)=x.
   \]
-  Para todo $x\in\mathbb{R}\setminus\{2\}$,
-  \begin{align*}
-    (f\circ g)(x)
-    &=\frac{2\dfrac{1-x}{x-2}+1}
-            {\dfrac{1-x}{x-2}+1}\\
-    &=x.
-  \end{align*}
-  Por tanto,
-  \[
-    \operatorname{Dom}(f\circ g)=\mathbb{R}\setminus\{2\}.
-  \]
-  Las dos composiciones son las identidades en los dominios correspondientes;
-  en consecuencia, $f$ y $g$ son funciones inversas.
+  Es la función identidad en $\mathbb{R}\setminus\{-1\}$.
 \end{enumerate}
 \end{solucion}
 \fi
