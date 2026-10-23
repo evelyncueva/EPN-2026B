@@ -1,4 +1,4 @@
-% Adaptado de Semana 07 Clase 01 (2025-A), con motivación geométrica.
+% Introduccion a espacios vectoriales: geometria, ejemplos y operaciones.
 \documentclass[compacto,10pt]{pubciencias-notas}
 \usepackage{comandosEPN}
 \usepackage{tikz}
@@ -16,29 +16,18 @@
 \vspace*{-8mm}
 \setcounter{section}{3}
 \section{Espacios vectoriales}
-\subsection{Motivación: operar con desplazamientos}
+\subsection{Motivación: sumar y cambiar la escala}
 
-Un desplazamiento en el plano se representa mediante un vector
-$u=(u_1,u_2)$. Podemos dibujarlo como una flecha desde el origen hasta el punto
-$(u_1,u_2)$; trasladar la flecha sin cambiar su dirección, sentido ni longitud
-representa el mismo desplazamiento. En esta clase escribiremos los vectores
-como tuplas; en un producto matricial los interpretaremos como columnas.
-
-\begin{ejem}[Componer, escalar e invertir un movimiento]
-    Sean $u=(2,1)$ y $v=(1,3)$. La suma compone los desplazamientos:
-    \[
-        u+v=(3,4).
-    \]
-    El producto por un número real cambia la escala del movimiento:
-    \[
-        2u=(4,2),\qquad -u=(-2,-1),\qquad 0u=(0,0).
-    \]
-    El vector $-u$ permite regresar después de ejecutar $u$;
-    el vector cero representa no desplazarse.
-\end{ejem}
+En el plano conocemos dos operaciones: sumar vectores y multiplicarlos por
+números reales. Si $u=(2,1)$ y $v=(1,3)$, entonces
+\[
+    u+v=(3,4),\qquad 2u=(4,2),\qquad -u=(-2,-1).
+\]
+La suma compone desplazamientos; el producto por un escalar cambia su
+magnitud y puede invertir su sentido. El vector cero representa no desplazarse.
 
 \begin{center}
-\begin{tikzpicture}[scale=0.8]
+\begin{tikzpicture}[scale=0.65]
     \draw[->] (-0.3,0)--(4.2,0) node[right] {$x$};
     \draw[->] (0,-0.3)--(0,4.7) node[above] {$y$};
     \fill[colordef!10] (0,0)--(2,1)--(3,4)--(1,3)--cycle;
@@ -51,125 +40,28 @@ como tuplas; en un producto matricial los interpretaremos como columnas.
 \end{tikzpicture}
 \end{center}
 
-\noindent\textbf{Para discutir.} Si primero ejecutamos $v$ y después $u$,
-¿cambia el desplazamiento final? ¿Qué representan $\frac12u$ y $-2u$?
-
-Hasta ahora podemos movernos por todo el plano. Nos preguntamos:
-\textbf{¿qué conjuntos de movimientos permiten sumar y cambiar la escala
-sin salir de ellos?}
-
-\subsection{Rectas y planos que contienen al origen}
-
-\begin{ejem}[Moverse por una recta]\label{sem05cl02:recta}
-    Supongamos que los movimientos deben seguir la dirección $u=(2,1)$.
-    El conjunto de desplazamientos permitidos es
-    \[
-        L=\{t(2,1):t\in\R\}=\{(x,y)\in\R^2:x-2y=0\}.
-    \]
-    Contiene $u$, $2u$, $-u$ y el vector cero. Para comprobar que dos
-    movimientos cualesquiera de $L$ pueden componerse sin salir de la recta,
-    escribimos $p=su$ y $q=tu$, con $s,t\in\R$. Entonces
-    \[
-        p+q=(s+t)u\in L,\qquad
-        \lambda p=(\lambda s)u\in L\quad\text{para todo }\lambda\in\R.
-    \]
-    Estas igualdades justifican la estabilidad para todos los movimientos
-    y todas las escalas, no solo para los vectores que dibujamos.
-\end{ejem}
-
-\begin{center}
-\begin{minipage}[t]{0.47\textwidth}
-\centering
-\begin{tikzpicture}[scale=0.78]
-    \draw[->] (-1.4,0)--(3.8,0) node[right] {$x$};
-    \draw[->] (0,-1)--(0,2.3) node[above] {$y$};
-    \draw[colordef,thick] (-1.2,-0.6)--(3.5,1.75);
-    \draw[->,very thick] (0,0)--(2,1) node[above left] {$u$};
-    \draw[->,thick] (0,0)--(-1,-0.5);
-    \fill (0,0) circle (2pt) node[below right] {$0$};
-    \node at (2.8,2.1) {$L:x-2y=0$};
-\end{tikzpicture}
-
-La recta contiene al vector cero.
-\end{minipage}
-\hfill
-\begin{minipage}[t]{0.47\textwidth}
-\centering
-\begin{tikzpicture}[scale=0.78]
-    \draw[->] (-1.4,0)--(3.8,0) node[right] {$x$};
-    \draw[->] (0,-1)--(0,2.3) node[above] {$y$};
-    \draw[colordef,thick] (-1.2,-1.1)--(3.5,1.25);
-    \draw[->,very thick] (0,0)--(1,0);
-    \fill (1,0) circle (2pt) node[below right] {$(1,0)$};
-    \fill (0,0) circle (2pt) node[above left] {$0$};
-    \node at (2.1,2.1) {$M:x-2y=1$};
-\end{tikzpicture}
-
-La recta trasladada no contiene al cero.
-\end{minipage}
-\end{center}
-
-En cambio, $M=\{(x,y):x-2y=1\}$ contiene $(1,0)$, pero no contiene su
-múltiplo $0(1,0)=(0,0)$. Por tanto, al permitir todas las escalas,
-podemos salir de $M$.
-
-\begin{ejem}[Moverse por un plano del espacio]\label{sem05cl02:plano}
-    Consideremos los desplazamientos que satisfacen
-    \[
-        P=\{(x,y,z)\in\R^3:x+y-z=0\}.
-    \]
-    Los vectores $a=(1,0,1)$ y $b=(0,1,1)$ pertenecen a $P$;
-    también $a+b=(1,1,2)$, $-a$ y el vector cero.
-    Al despejar $z=x+y$, obtenemos
-    \[
-        P=\{(s,t,s+t):s,t\in\R\}
-         =\{s(1,0,1)+t(0,1,1):s,t\in\R\}.
-    \]
-    Esta descripción utiliza dos variables libres, como en los sistemas
-    homogéneos de la semana 03.
-\end{ejem}
-
-\begin{center}
-\begin{tikzpicture}[x={(1cm,-0.25cm)},y={(-0.65cm,-0.4cm)},z={(0cm,1cm)},scale=1.15]
-    \filldraw[fill=colordef!12,draw=colordef!45]
-        (-0.5,-0.5,-1)--(1.6,-0.5,1.1)--(1.6,1.6,3.2)--(-0.5,1.6,1.1)--cycle;
-    \draw[->] (0,0,0)--(2.3,0,0) node[right] {$x$};
-    \draw[->] (0,0,0)--(0,2.3,0) node[left] {$y$};
-    \draw[->] (0,0,0)--(0,0,3.5) node[above] {$z$};
-    \fill[colordef!25] (0,0,0)--(1,0,1)--(1,1,2)--(0,1,1)--cycle;
-    \draw[->,thick,colordef] (0,0,0)--(1,0,1) node[right] {$a$};
-    \draw[->,thick,colordef] (0,0,0)--(0,1,1) node[left] {$b$};
-    \draw[dashed] (1,0,1)--(1,1,2)--(0,1,1);
-    \draw[->,very thick] (0,0,0)--(1,1,2) node[above right] {$a+b$};
-    \node[below] at (0,0,0) {$0$};
-    \node[right] at (1.6,1.6,3.2) {$P:z=x+y$};
-\end{tikzpicture}
-
-\small Se muestra una porción del plano; este se prolonga indefinidamente.
-\end{center}
-
-Para comprobar la estabilidad en general, sean $p,q\in P$ y $\lambda\in\R$.
-Como $p_1+p_2-p_3=0$ y $q_1+q_2-q_3=0$, se cumple
-\[
-    (p_1+q_1)+(p_2+q_2)-(p_3+q_3)=0,
-    \qquad \lambda p_1+\lambda p_2-\lambda p_3=0.
-\]
-Por tanto, $p+q$ y $\lambda p$ también pertenecen a $P$.
-
-\noindent\textbf{Complete y contraste.} El plano $Q=\{(x,y,z):x+y-z=1\}$
-no contiene al vector cero. Si $p,q\in Q$, ¿cuánto vale
-$(p_1+q_1)+(p_2+q_2)-(p_3+q_3)$? ¿Pertenece $p+q$ a $Q$?
+También podemos sumar matrices, polinomios y funciones, y multiplicarlos
+por números reales. Aunque sus elementos no sean flechas, estas operaciones
+obedecen las mismas reglas algebraicas. La definición de espacio vectorial
+reúne esa estructura común.
 
 \subsection{Definición de espacio vectorial real}
 
-Los ejemplos anteriores comparten una estructura: sus elementos pueden
-sumarse y multiplicarse por escalares, respetando ciertas reglas.
-
 \begin{defi}[Espacio vectorial real]\label{sem05cl02:espacio}
-    Un conjunto no vacío $V$, con operaciones de suma
-    $V\times V\to V$ y producto escalar $\R\times V\to V$, es un
-    \textbf{espacio vectorial real} si, para todo $u,v,w\in V$ y
-    $\alpha,\beta\in\R$, se cumplen:
+    Un conjunto no vacío $V$, equipado con las funciones
+    \[
+        \begin{aligned}
+            +\colon V\times V&\longrightarrow V,
+            & (u,v)&\longmapsto u+v,\\
+            \cdot\colon\R\times V&\longrightarrow V,
+            & (\alpha,u)&\longmapsto\alpha\cdot u,
+        \end{aligned}
+    \]
+    llamadas \textbf{suma} y \textbf{producto por escalar}, respectivamente,
+    es un \textbf{espacio vectorial real} si, para todo $u,v,w\in V$ y
+    $\alpha,\beta\in\R$, se cumplen las siguientes propiedades.
+    Para simplificar la notación, escribimos $\alpha u$ en lugar de
+    $\alpha\cdot u$.
     \begin{enumerate}
         \item \textbf{Asociatividad de la suma:} $(u+v)+w=u+(v+w)$.
         \item \textbf{Conmutatividad de la suma:} $u+v=v+u$.
@@ -188,125 +80,207 @@ sumarse y multiplicarse por escalares, respetando ciertas reglas.
     que los multiplican se llaman \textbf{escalares}.
 \end{defi}
 
-\begin{advertencia}
-    Las operaciones deben ser \textbf{cerradas}: si $u,v\in V$ y
-    $\lambda\in\R$, entonces $u+v\in V$ y $\lambda u\in V$.
-    No basta con que las operaciones puedan calcularse en un conjunto mayor.
-\end{advertencia}
+\begin{obs}
+    La definición incluye la \textbf{clausura}: sumar dos elementos de $V$
+    o multiplicar uno por cualquier escalar real produce otro elemento de $V$.
+    El producto escalar de esta definición es la multiplicación de un vector
+    por un número; no es el producto punto entre dos vectores.
+\end{obs}
 
-Geométricamente, el neutro representa no moverse, el inverso permite regresar
-y la distributividad expresa que escalar un recorrido compuesto equivale
-a escalar cada desplazamiento y después sumarlos.
+\subsection{Espacios conocidos: \texorpdfstring{$\R$, $\R^2$ y $\R^3$}{R, R2 y R3}}
 
-\begin{ejem}[El espacio $\R^n$ con sus operaciones usuales]
-    Para $u=(u_1,\ldots,u_n)$ y $v=(v_1,\ldots,v_n)$, se define
-    \[
-        u+v=(u_1+v_1,\ldots,u_n+v_n),\qquad
-        \alpha u=(\alpha u_1,\ldots,\alpha u_n).
-    \]
-    Estas operaciones son cerradas. El neutro es $(0,\ldots,0)$ y el inverso
-    de $u$ es $(-u_1,\ldots,-u_n)$. Las otras identidades se verifican por
-    componentes mediante las propiedades de los números reales.
-    Por ejemplo, en $\R^2$,
+\begin{ejem}[Números y tuplas]
+    El conjunto $\R$ es un espacio vectorial real con la suma y la
+    multiplicación usuales. Aquí cada número real es también un vector.
+    En $\R^2$ y $\R^3$, las operaciones se realizan por componentes:
     \begin{align*}
-        \alpha(u+v)
-        &=\bigl(\alpha(u_1+v_1),\alpha(u_2+v_2)\bigr)\\
-        &=\bigl(\alpha u_1+\alpha v_1,\alpha u_2+\alpha v_2\bigr)
-         =\alpha u+\alpha v.
+        (u_1,u_2)+(v_1,v_2)&=(u_1+v_1,u_2+v_2),\\
+        \alpha(u_1,u_2)&=(\alpha u_1,\alpha u_2),\\
+        (u_1,u_2,u_3)+(v_1,v_2,v_3)&=(u_1+v_1,u_2+v_2,u_3+v_3),\\
+        \alpha(u_1,u_2,u_3)&=(\alpha u_1,\alpha u_2,\alpha u_3).
     \end{align*}
-    \textbf{A su turno:} justifique $1u=u$ y
-    $(\alpha+\beta)u=\alpha u+\beta u$ con vectores generales de $\R^2$.
+    Sus vectores cero son, respectivamente, $0$, $(0,0)$ y $(0,0,0)$;
+    el inverso aditivo se obtiene cambiando el signo de cada componente.
+    Las propiedades usuales de los números reales garantizan todos los
+    axiomas, por componentes. Lo mismo ocurre en $\R^n$; no necesitamos
+    demostrar de nuevo cada propiedad para cada valor de $n$.
 \end{ejem}
 
-\subsection{Cómo verificar nuestros ejemplos geométricos}
+\begin{advertencia}
+    Esto se afirma para los espacios completos $\R$, $\R^2$, $\R^3$ y
+    $\R^n$ con sus operaciones usuales. Un subconjunto no es automáticamente
+    un espacio vectorial: por ejemplo, el primer cuadrante contiene $(1,0)$,
+    pero no contiene $-1(1,0)=(-1,0)$.
+\end{advertencia}
 
-\begin{prop}[Criterio para subconjuntos de $\R^n$]
-    Sea $V\subseteq\R^n$ con las operaciones usuales. Entonces $V$ es un
-    espacio vectorial real si y solo si:
-    \begin{enumerate}
-        \item el vector cero pertenece a $V$;
-        \item si $u,v\in V$, entonces $u+v\in V$;
-        \item si $u\in V$ y $\lambda\in\R$, entonces $\lambda u\in V$.
-    \end{enumerate}
-\end{prop}
+\subsection{Otros objetos que también son vectores}
 
-\begin{proof}
-    Si $V$ es un espacio vectorial con estas operaciones, la clausura es
-    necesaria. Para cualquier $u\in V$, la clausura bajo el escalar cero
-    implica que el vector cero usual pertenece a $V$.
-    Recíprocamente, las tres condiciones garantizan operaciones cerradas,
-    un neutro en $V$ e inversos en $V$, pues $-u=(-1)u$. Las demás
-    identidades se heredan de $\R^n$.
-\end{proof}
+En los siguientes ejemplos los escalares siguen siendo números reales.
+Cambia el tipo de objeto que llamamos vector y la forma de efectuar las
+operaciones.
 
-Por este criterio, la recta $L$ y el plano $P$ ya estudiados son espacios
-vectoriales reales. Un subconjunto así se llama \textbf{subespacio} de
-$\R^n$; estudiaremos este concepto con más detalle posteriormente.
-El criterio anterior se aplica a las operaciones usuales, no a operaciones
-nuevas definidas de otra manera.
-
-\begin{ejem}[Contener al origen no basta]
-    La unión de los ejes del plano es $E=\{(x,y)\in\R^2:xy=0\}$.
-    Contiene al cero y cualquier múltiplo de un vector de $E$ sigue en $E$.
-    Sin embargo, $(1,0),(0,1)\in E$, mientras que
+\begin{ejem}[Matrices de un tamaño fijo]\label{sem05cl02:matrices}
+    El conjunto $\Mat[\R]{m}{n}$ de todas las matrices reales de tamaño
+    $m\times n$ es un espacio vectorial con las operaciones conocidas:
     \[
-        (1,0)+(0,1)=(1,1)\notin E.
+        A+B=(a_{ij}+b_{ij}),\qquad \alpha A=(\alpha a_{ij}).
     \]
-    Falla la clausura de la suma; por ello $E$ no es un espacio vectorial
-    con las operaciones usuales.
+    Por ejemplo, para
+    \[
+        A=\begin{pmatrix}1&-2\\0&3\end{pmatrix},\qquad
+        B=\begin{pmatrix}2&1\\-1&0\end{pmatrix},
+    \]
+    se obtiene
+    \[
+        A+B=\begin{pmatrix}3&-1\\-1&3\end{pmatrix},\qquad
+        2A=\begin{pmatrix}2&-4\\0&6\end{pmatrix}.
+    \]
+    El vector cero es la matriz nula y el inverso aditivo de $A$ es $-A$.
+    Las operaciones conservan el tamaño y los axiomas se cumplen entrada
+    por entrada. La multiplicación entre matrices no forma parte de las
+    operaciones exigidas por la definición de espacio vectorial.
+\end{ejem}
+
+\begin{ejem}[Polinomios de grado a lo sumo $n$]\label{sem05cl02:polinomios}
+    Para un entero fijo $n\ge0$, consideremos
+    \[
+        \Pol_n=\{a_0+a_1t+\cdots+a_nt^n:a_0,\ldots,a_n\in\R\}.
+    \]
+    Este conjunto incluye el polinomio cero. La suma y el producto escalar
+    usuales operan sobre los coeficientes:
+    \begin{align*}
+        (p+q)(t)&=(a_0+b_0)+(a_1+b_1)t+\cdots+(a_n+b_n)t^n,\\
+        (\alpha p)(t)&=\alpha a_0+\alpha a_1t+\cdots+\alpha a_nt^n.
+    \end{align*}
+    Por ejemplo, si $p(t)=1+2t$ y $q(t)=t-t^2$ pertenecen a $\Pol_2$,
+    entonces
+    \[
+        (p+q)(t)=1+3t-t^2,\qquad (-2p)(t)=-2-4t.
+    \]
+    Las operaciones no producen términos de grado mayor que $n$ y los
+    axiomas se heredan de los coeficientes reales. El neutro es el polinomio
+    cero y el inverso de $p$ es $-p$. Por ello $\Pol_n$ es un espacio
+    vectorial real. Es importante decir ``grado a lo sumo $n$'': los
+    polinomios de grado exactamente $n$ no incluyen al polinomio cero.
+\end{ejem}
+
+\begin{ejem}[Funciones con un mismo dominio]\label{sem05cl02:funciones}
+    Sea $\mathcal{F}(\R,\R)$ el conjunto de todas las funciones
+    $f:\R\to\R$. Definimos las operaciones \textbf{punto a punto}:
+    \[
+        (f+g)(t)=f(t)+g(t),\qquad (\alpha f)(t)=\alpha f(t)
+        \quad(t\in\R).
+    \]
+    Si $f(t)=t^2$ y $g(t)=\sin t$, entonces
+    \[
+        (f+g)(t)=t^2+\sin t,\qquad (3g)(t)=3\sin t.
+    \]
+    Los resultados siguen siendo funciones de $\R$ en $\R$. Las propiedades
+    de los reales, aplicadas en cada $t$, garantizan los axiomas. El vector
+    cero es la función $0_V(t)=0$ para todo $t$ y el inverso de $f$ es
+    la función $(-f)(t)=-f(t)$.
+
+    En un modelo de señales reales, $f+g$ representa la superposición de
+    dos señales y $\alpha f$, un ajuste de su amplitud. No se está usando
+    la composición de funciones como suma.
+\end{ejem}
+
+En cada ejemplo, el conjunto contiene los resultados de ambas operaciones
+para cualquier elección de vectores y escalares. Las propiedades usuales
+permiten reconocer la estructura sin repetir ocho demostraciones.
+
+\subsection{Observación: también podemos definir otras operaciones}
+
+\begin{obs}[El espacio depende del conjunto y de las operaciones]
+    Las palabras ``suma'' y ``producto escalar'' describen el papel de las
+    operaciones en los axiomas. Es posible definir operaciones distintas
+    de las usuales, siempre que se cumplan todas las condiciones de la
+    definición. En ese caso, también pueden cambiar el vector cero y
+    los inversos aditivos.
+\end{obs}
+
+\begin{ejem}[Ganancias de audio y escala logarítmica]\label{sem05cl02:ganancias}
+    Un factor de ganancia $g>0$ multiplica la amplitud de una señal: $g=2$
+    la duplica, $g=1$ la deja igual y $g=1/2$ la reduce a la mitad.
+    Al aplicar sucesivamente dos ajustes, sus factores se multiplican.
+    Esto motiva considerar $V=(0,\infty)$ con las operaciones
+    \[
+        g\oplus h=gh,\qquad \alpha\odot g=g^{\alpha},
+        \quad g,h>0,\quad\alpha\in\R.
+    \]
+    Los símbolos nuevos distinguen estas operaciones de la suma y el
+    producto usuales. Por ejemplo,
+    \[
+        2\oplus3=6,\qquad 2\odot3=9,\qquad (-1)\odot2=\tfrac12.
+    \]
+    En la segunda expresión, el primer 2 es un escalar y el 3 es un vector.
+    El \textbf{vector cero es 1}, pues $g\oplus1=g$; el inverso aditivo
+    de $g$ es $1/g$. Además, $0\odot g=1$.
+
+    ¿Por qué se cumplen los axiomas? El cambio de coordenadas
+    $\varphi(g)=\ln g$ es una biyección de $(0,\infty)$ en $\R$ y satisface
+    \[
+        \varphi(g\oplus h)=\varphi(g)+\varphi(h),\qquad
+        \varphi(\alpha\odot g)=\alpha\varphi(g).
+    \]
+    Así, ambas operaciones se convierten en las usuales de $\R$; por eso
+    se cumplen todos los axiomas. Por ejemplo, una de las distributividades es
+    \[
+        \alpha\odot(g\oplus h)=(gh)^{\alpha}
+        =g^{\alpha}h^{\alpha}
+        =(\alpha\odot g)\oplus(\alpha\odot h).
+    \]
+
+    En software de audio, la ganancia de amplitud puede expresarse en
+    decibelios mediante $D(g)=20\log_{10}g$. En estas coordenadas,
+    $D(gh)=D(g)+D(h)$: encadenar factores equivale a sumar sus ganancias
+    en decibelios. Por ejemplo, dos factores de ganancia 2 producen un
+    factor 4; sus valores aproximados son $6.02+6.02=12.04$ decibelios.
+    La estructura anterior ofrece una lectura algebraica de esta regla.\footnote{Aplicación:
+    \href{https://www.mathworks.com/help/dsp/ref/dbgain.html}{MathWorks, bloque dB Gain de Simulink}.}
+    Aquí trabajamos con factores estrictamente positivos; el factor 0,
+    que anula la señal, queda fuera de este espacio.
 \end{ejem}
 
 \section{Ejercicios}
 
-\begin{ejer}[Clasificación en parejas]
-    Para cada conjunto, decida si es un espacio vectorial real con las
-    operaciones usuales. Si lo es, compruebe las tres condiciones del
-    criterio; si no, exhiba una condición que falle y un contraejemplo.
-    \begin{enumerate}
-        \item $V_1=\{(x,y)\in\R^2:y=2x\}$.
-        \item $V_2=\{(x,y)\in\R^2:x\ge0,\ y\ge0\}$.
-        \item $V_3=\{(x,y,z)\in\R^3:z=0\}$.
-        \item $V_4=\{(x,y,z)\in\R^3:z=1\}$.
-    \end{enumerate}
-    Un dibujo orienta la respuesta, pero aceptar un conjunto requiere
-    justificar las condiciones con elementos generales.
+\begin{ejer}[Reconocer vectores, escalares y neutros]
+    En $\R$, $\R^2$, $\R^3$, $\Mat[\R]{2}{2}$, $\Pol_2$ y
+    $\mathcal{F}(\R,\R)$, indique un vector y un escalar real.
+    Escriba el vector cero y el inverso aditivo del vector elegido.
+    Explique por qué una matriz o una función también puede llamarse vector.
 \end{ejer}
 
-\begin{ejer}[Aplicación: velocidades admisibles]
-    Una plataforma admite velocidades $v=(v_x,v_y,v_z)$ que satisfacen
-    $v_x+v_y-v_z=0$.
+\begin{ejer}[Operaciones con matrices y polinomios]
     \begin{enumerate}
-        \item Verifique que $(1,0,1)$ y $(0,1,1)$ son admisibles.
-              ¿También lo es su suma?
-        \item Justifique para velocidades cualesquiera que sumarlas,
-              duplicarlas o invertirlas mantiene la restricción.
-        \item Explique qué representa la velocidad cero y relacione
-              el conjunto de velocidades con el plano del ejemplo
-              \ref{sem05cl02:plano}.
+        \item Para las matrices $A$ y $B$ del ejemplo
+              \ref{sem05cl02:matrices}, calcule $2A-B$ y $A+(-A)$.
+        \item Si $p(t)=1-t+2t^2$ y $q(t)=3+t-t^2$, calcule
+              $p+q$ y $2p-q$. ¿Pertenecen los resultados a $\Pol_2$?
+        \item Explique por qué la suma de dos polinomios de grado
+              exactamente 2 puede dejar de tener grado 2. Dé un ejemplo.
     \end{enumerate}
+\end{ejer}
+
+\begin{ejer}[Combinar señales]
+    Sean $f(t)=t^2$ y $g(t)=t+1$, con dominio $\R$.
+    Escriba $(f+g)(t)$ y $(2f-g)(t)$ y evalúe ambas funciones en $t=2$.
+    Distinga la función $f+g$ del número $(f+g)(2)$.
+\end{ejer}
+
+\begin{ejer}[Operaciones diferentes]
+    En el espacio de ganancias del ejemplo \ref{sem05cl02:ganancias},
+    calcule $4\oplus\tfrac12$, $\tfrac12\odot4$ y $(-1)\odot4$.
+    Compruebe que $4\oplus((-1)\odot4)=0_V$.
+    Explique por qué el resultado debe ser 1 y no el número 0.
 \end{ejer}
 
 \begin{ejer}[Salida individual]
-    Un compañero afirma: «Si un conjunto de vectores contiene al origen,
-    entonces es un espacio vectorial con las operaciones usuales».
-    Refute la afirmación y explique cuál es la condición que falla
-    en su contraejemplo.
+    ¿Basta especificar un conjunto para definir un espacio vectorial?
+    Indique qué operaciones y qué escalares se deben precisar.
+    Explique por qué $(0,\infty)$ no es un espacio vectorial real con
+    las operaciones usuales, aunque sí lo es con las del ejemplo
+    \ref{sem05cl02:ganancias}.
 \end{ejer}
-
-\begin{ejer}[Trabajo autónomo: del sistema al conjunto de soluciones]
-    Considere $H=\{(x,y,z)\in\R^3:x-2y+z=0\}$.
-    \begin{enumerate}
-        \item Describa sus elementos mediante dos parámetros reales.
-        \item Compruebe que contiene al cero y es cerrado bajo suma
-              y producto por cualquier escalar real.
-        \item ¿Qué cambia si el lado derecho de la ecuación es 1?
-    \end{enumerate}
-\end{ejer}
-
-\begin{obs}
-    La palabra vector no se limita a flechas: matrices y polinomios también
-    forman espacios vectoriales con sus operaciones usuales. En cada caso,
-    debemos identificar el conjunto, las operaciones y su elemento neutro.
-\end{obs}
 
 \end{document}
