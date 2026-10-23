@@ -32,12 +32,11 @@ cuadrada, los siguientes criterios expresan una misma condición.
     \end{enumerate}
 \end{teo}
 
-\begin{ejem}[Aplicación: brazo robótico]\label{sem05cl01:robot}
+\begin{ejem}[Aplicación: brazo robótico]\label{sem05cl01:robot-modelo}
     Retomemos el brazo robótico del ejercicio 5 de la semana 02. Sus dos mecanismos producen
     desplazamientos $u=(2,1)^{\top}$ y $v=(1,3)^{\top}$.
     Las variables $x_1$ y $x_2$ representan, respectivamente, el número de
-    activaciones del primer y del segundo mecanismo. Para alcanzar el
-    objetivo original $b=(8,9)^{\top}$ desde el origen, el sistema asociado era
+    activaciones del primer y del segundo mecanismo. Para alcanzar la posición final $b=(8,9)^{\top}$ desde el origen, el sistema asociado era
     \[
         \left\{\begin{aligned}
             2x_1+x_2&=8,\\
@@ -55,10 +54,13 @@ cuadrada, los siguientes criterios expresan una misma condición.
     solución trivial. Además, cada objetivo $b\in\R^2$ determina una única
     solución real de $Ax=b$.
 
-    Para esta descripción permitimos intensidades reales: un valor negativo
-    significa invertir el desplazamiento. Si el mecanismo solo admite
-    activaciones enteras no negativas, debemos comprobar esa restricción
-    después de resolver el sistema.
+    En el modelo matemático permitimos que $x_1,x_2\in\R$: un valor
+    fraccionario representa una parte del desplazamiento de una activación
+    y un valor negativo indica un desplazamiento en sentido contrario.
+    Esta interpretación supone que los mecanismos permiten ajustar la
+    magnitud del desplazamiento e invertir su sentido. Si solo admiten
+    activaciones completas hacia adelante, debemos comprobar, después de
+    resolver el sistema, que $x_1$ y $x_2$ sean enteros no negativos.
 \end{ejem}
 
 Ya sabemos reconocer cuándo existe una solución única. Ahora veremos cómo
@@ -75,11 +77,6 @@ obtenerla mediante determinantes.
     donde $A^{(j)}$ se obtiene reemplazando la columna $j$ de $A$ por $b$,
     sin modificar las demás columnas.
 \end{teo}
-
-\begin{obs}
-    La notación $A^{(j)}$ designa una matriz de reemplazo de columnas;
-    no debe confundirse con el menor $A_{ij}$ de la clase anterior.
-\end{obs}
 
 \noindent\textbf{Procedimiento.}
 \begin{enumerate}
@@ -101,8 +98,8 @@ obtenerla mediante determinantes.
     \]
     Entonces
     \[
-        x_1=\frac{8\cdot3-1\cdot9}{5}=3,
-        \qquad x_2=\frac{2\cdot9-8\cdot1}{5}=2.
+        x_1=\frac{\det(A^{(1)})}{\det(A)}=\frac{8\cdot3-1\cdot9}{5}=3,
+        \qquad x_2=\frac{\det(A^{(2)})}{\det(A)}=\frac{2\cdot9-8\cdot1}{5}=2.
     \]
     La comprobación es $2(3)+2=8$ y $3+3(2)=9$. Geométricamente,
     \[
@@ -114,6 +111,39 @@ obtenerla mediante determinantes.
     alcanzar el objetivo; en este caso también se cumple la restricción
     de activaciones enteras no negativas.
 \end{ejem}
+
+\subsection{¿Qué ocurre si el determinante es cero?}
+
+\begin{advertencia}
+    Cramer requiere $\det(A)\ne0$. Si $\det(A)=0$, la fórmula no se aplica.
+    Esto no permite afirmar que el sistema carece de solución: puede tener
+    infinitas soluciones o ser incompatible.
+\end{advertencia}
+
+Por ejemplo, para $S=\begin{pmatrix}2&4\\1&2\end{pmatrix}$,
+se tiene $\det(S)=0$. Comparemos dos lados derechos:
+\[
+    \left\{\begin{aligned}2x_1+4x_2&=8,\\x_1+2x_2&=4\end{aligned}\right.
+    \qquad\text{y}\qquad
+    \left\{\begin{aligned}2x_1+4x_2&=8,\\x_1+2x_2&=9.\end{aligned}\right.
+\]
+En el primero, ambas ecuaciones expresan la misma restricción y las soluciones
+son $(x_1,x_2)=(4-2t,t)$, con $t\in\R$. En el segundo, duplicar la segunda
+ecuación contradice la primera, por lo que no hay solución.
+
+Cramer resulta útil para sistemas pequeños y para expresar una incógnita
+mediante una fórmula. Para sistemas grandes, la eliminación evita calcular
+muchos determinantes y sigue siendo nuestra herramienta principal.
+
+
+\section{Ejercicios}
+
+\begin{ejer}[Salida individual]
+    Con los mecanismos del ejemplo \ref{sem05cl01:robot}, alcance ahora
+    el objetivo $(5,5)^{\top}$. Escriba las matrices de reemplazo,
+    resuelva por Cramer y compruebe el resultado.
+    Explique por qué se verificó el denominador antes de calcular los numeradores.
+\end{ejer}
 
 \begin{ejer}[Aplicación guiada: producción de kits]
     Un taller fabrica kits $P$ y $Q$. Cada kit $P$ requiere dos horas de corte
@@ -147,38 +177,6 @@ obtenerla mediante determinantes.
     \end{enumerate}
     \textbf{Para comprobar después de calcular:}
     los numeradores son $0$, $1$ y $0$, respectivamente.
-\end{ejer}
-
-\subsection{¿Qué ocurre si el determinante es cero?}
-
-\begin{advertencia}
-    Cramer requiere $\det(A)\ne0$. Si $\det(A)=0$, la fórmula no se aplica.
-    Esto no permite afirmar que el sistema carece de solución: puede tener
-    infinitas soluciones o ser incompatible.
-\end{advertencia}
-
-Por ejemplo, para $S=\begin{pmatrix}2&4\\1&2\end{pmatrix}$,
-se tiene $\det(S)=0$. Comparemos dos lados derechos:
-\[
-    \left\{\begin{aligned}2x_1+4x_2&=8,\\x_1+2x_2&=4\end{aligned}\right.
-    \qquad\text{y}\qquad
-    \left\{\begin{aligned}2x_1+4x_2&=8,\\x_1+2x_2&=9.\end{aligned}\right.
-\]
-En el primero, ambas ecuaciones expresan la misma restricción y las soluciones
-son $(x_1,x_2)=(4-2t,t)$, con $t\in\R$. En el segundo, duplicar la segunda
-ecuación contradice la primera, por lo que no hay solución.
-
-Cramer resulta útil para sistemas pequeños y para expresar una incógnita
-mediante una fórmula. Para sistemas grandes, la eliminación evita calcular
-muchos determinantes y sigue siendo nuestra herramienta principal.
-
-\section{Ejercicios}
-
-\begin{ejer}[Salida individual]
-    Con los mecanismos del ejemplo \ref{sem05cl01:robot}, alcance ahora
-    el objetivo $(5,5)^{\top}$. Escriba las matrices de reemplazo,
-    resuelva por Cramer y compruebe el resultado.
-    Explique por qué se verificó el denominador antes de calcular los numeradores.
 \end{ejer}
 
 \begin{ejer}[Aplicación: mezcla]
