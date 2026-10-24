@@ -1,2 +1,5 @@
 # Excluir la carpeta de inicialización local.
 /Calculo_diferencial_init/
+
+# Archivos temporales de trabajo.
+/tmp/

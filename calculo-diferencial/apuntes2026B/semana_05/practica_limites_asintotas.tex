@@ -1,0 +1,154 @@
+% !TeX root = practica_limites_asintotas.tex
+% !TeX program = pdflatex
+% Práctica de los contenidos de límites de las semanas 03 y 04.
+\documentclass[10pt,a5paper]{article}
+\newif\ifmostrarSoluciones
+\mostrarSolucionestrue
+\usepackage{estilo_apuntes}
+\newtcolorbox[auto counter]{ejerciciopractica}[1][]{
+  breakable,
+  colback=GrisClaro,
+  colframe=Azul,
+  title={\titulonumerado{Ejercicio}{\thetcbcounter}{#1}},
+  fonttitle=\bfseries,
+  arc=2mm,
+  boxrule=0.7pt
+}
+\newenvironment{solucionejercicio}[1]{%
+  \par\medskip\noindent\textbf{Solución del ejercicio #1.}%
+  \enspace\ignorespaces
+}{%
+  \par\medskip
+}
+\encabezado{Semana 5}{Práctica de límites}
+
+\begin{document}
+\tituloclase{Práctica de límites y asíntotas}{Límites infinitos y al infinito, racionalización y asíntotas}{Contenidos de las semanas 3 y 4}
+
+\begin{objetivos}
+\begin{itemize}
+  \item Determinar límites infinitos mediante el análisis de signos e identificar asíntotas verticales.
+  \item Calcular límites al infinito de funciones racionales y radicales, e identificar asíntotas horizontales.
+  \item Justificar cada respuesta conservando las restricciones del dominio.
+\end{itemize}
+\end{objetivos}
+
+\noindent\textbf{Indicaciones.} Muestre el desarrollo e indique las propiedades que utiliza. En los ejercicios con asíntotas, escriba la ecuación de cada recta y el límite que la justifica.
+
+\begin{ejerciciopractica}[radicales y dos asíntotas horizontales]
+  Sea
+  \[
+    H(x)=\frac{\sqrt{4x^2+9}}{x-1},
+    \qquad D_H=\mathbb{R}\setminus\{1\}.
+  \]
+  \begin{enumerate}
+    \item Calcule sus límites cuando $x\to+\infty$ y cuando $x\to-\infty$.
+    \item Determine sus asíntotas horizontales y verticales, justificando cada una mediante límites.
+  \end{enumerate}
+\end{ejerciciopractica}
+
+\ifmostrarSoluciones
+\begin{solucionejercicio}{1}
+  Para $x\neq0$,
+  \[
+    \sqrt{4x^2+9}=|x|\sqrt{4+9/x^2}.
+  \]
+  Si $x\to+\infty$, se tiene $|x|=x$, de modo que
+  \[
+    H(x)=\frac{\sqrt{4+9/x^2}}{1-1/x}\longrightarrow2.
+  \]
+  Si $x\to-\infty$, se tiene $|x|=-x$, por lo que
+  \[
+    H(x)=-\frac{\sqrt{4+9/x^2}}{1-1/x}\longrightarrow-2.
+  \]
+  Las asíntotas horizontales son $y=2$ hacia $+\infty$ y $y=-2$ hacia $-\infty$.
+
+  Cerca de $1$, el numerador es positivo y tiende a $\sqrt{13}$. El denominador tiende a $0$ con el signo de $x-1$. Así,
+  \[
+    \lim_{x\to1^-}H(x)=-\infty,
+    \qquad \lim_{x\to1^+}H(x)=+\infty.
+  \]
+  La única asíntota vertical es $x=1$: el radicando es siempre positivo y el denominador no se anula en ningún otro punto.
+\end{solucionejercicio}
+\fi
+
+\begin{ejerciciopractica}[racionalización al infinito]
+  Considere la función definida en $\mathbb{R}$ por
+  \[
+    J(x)=\sqrt{x^2+6x+13}-x.
+  \]
+  \begin{enumerate}
+    \item Calcule $\lim_{x\to+\infty}J(x)$ mediante racionalización.
+    \item Calcule $\lim_{x\to-\infty}J(x)$.
+    \item Determine las asíntotas horizontales e indique en qué extremo se presentan.
+  \end{enumerate}
+\end{ejerciciopractica}
+
+\ifmostrarSoluciones
+\begin{solucionejercicio}{2}
+  El radicando es $(x+3)^2+4>0$, así que la función está definida para todo número real.
+
+  Cuando $x\to+\infty$, aparece una diferencia de términos que crecen sin cota. Para $x>0$, multiplicamos por el conjugado y obtenemos
+  \begin{align*}
+    J(x)&=\frac{6x+13}{\sqrt{x^2+6x+13}+x}\\
+        &=\frac{6+13/x}{\sqrt{1+6/x+13/x^2}+1}.
+  \end{align*}
+  En el último paso usamos $\sqrt{x^2}=x$, válido porque $x>0$. Por tanto,
+  \[
+    \lim_{x\to+\infty}J(x)=\frac{6}{1+1}=3.
+  \]
+
+  Para $x<0$, la raíz es no negativa y $-x>0$, de modo que $J(x)\geq-x$. Como $-x\to+\infty$ cuando $x\to-\infty$, la comparación implica
+  \[
+    \lim_{x\to-\infty}J(x)=+\infty.
+  \]
+  La única asíntota horizontal es $y=3$, hacia $+\infty$. No hay asíntota horizontal hacia $-\infty$.
+\end{solucionejercicio}
+\fi
+
+\begin{ejerciciopractica}[integración: parámetro, límites y asíntotas]
+  Para $a\in\mathbb{R}$, considere
+  \[
+    F_a(x)=\frac{2x^2+ax-3}{x^2-1},
+    \qquad D_{F_a}=\mathbb{R}\setminus\{-1,1\}.
+  \]
+  \begin{enumerate}
+    \item Determine $a$ para que $\lim_{x\to1}F_a(x)$ sea finito.
+    \item Para ese valor de $a$, calcule el límite anterior y determine todas las asíntotas verticales y horizontales de $F_a$.
+  \end{enumerate}
+\end{ejerciciopractica}
+
+\ifmostrarSoluciones
+\begin{solucionejercicio}{3}
+  Cuando $x\to1$, el numerador tiende a $a-1$ y el denominador tiende a $0$. Si $a\neq1$, el numerador conserva un signo no nulo cerca de $1$, mientras que el denominador cambia de signo. En ese caso no hay límite finito. Es necesario que $a=1$; comprobemos que también es suficiente.
+
+  Para $a=1$ se tiene
+  \[
+    2x^2+x-3=(x-1)(2x+3),\qquad
+    x^2-1=(x-1)(x+1).
+  \]
+  Por tanto, para $x\neq-1,1$,
+  \[
+    F_1(x)=\frac{2x+3}{x+1}=2+\frac{1}{x+1}.
+  \]
+  En consecuencia,
+  \[
+    \lim_{x\to1}F_1(x)=\frac52.
+  \]
+  El punto $1$ sigue excluido del dominio original, pero no produce una asíntota vertical.
+
+  En $-1$, la expresión $2+1/(x+1)$ permite obtener
+  \[
+    \lim_{x\to-1^-}F_1(x)=-\infty,
+    \qquad\lim_{x\to-1^+}F_1(x)=+\infty.
+  \]
+  Así, la única asíntota vertical es $x=-1$. Finalmente,
+  \[
+    \lim_{x\to+\infty}F_1(x)=
+    \lim_{x\to-\infty}F_1(x)=2,
+  \]
+  de modo que la asíntota horizontal es $y=2$ hacia ambos extremos.
+\end{solucionejercicio}
+\fi
+
+\end{document}
