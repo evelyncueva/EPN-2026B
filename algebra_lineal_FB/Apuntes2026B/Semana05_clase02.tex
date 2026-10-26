@@ -11,6 +11,15 @@
 \logodos[1.7cm]{Logo_DFB.eps}
 \definecolor{colordef}{cmyk}{0.81,0.62,0.00,0.22}
 
+% Permitir que las definiciones continúen en la página siguiente,
+% aprovechando el espacio disponible sin trasladar el bloque completo.
+\renewenvironment{defi}[1][]
+    {\begin{recuadrocti}[nombre=#1,tipo=Definición,contador=defi,
+        color=colordef,nobreak=false,needspace=0pt,
+        splittopskip=\topskip,splitbottomskip=0pt]}
+    {\end{recuadrocti}}
+\raggedbottom
+
 \begin{document}
 \encabezado
 \vspace*{-8mm}
@@ -115,17 +124,30 @@ reúne esa estructura común.
 
 \subsection{Otros objetos que también son vectores}
 
-En los siguientes ejemplos los escalares siguen siendo números reales.
+En los siguientes espacios los escalares siguen siendo números reales.
 Cambia el tipo de objeto que llamamos vector y la forma de efectuar las
 operaciones.
 
-\begin{ejem}[Matrices de un tamaño fijo]\label{sem05cl02:matrices}
+\begin{defi}[Espacio de matrices reales]
     El conjunto $\Mat[\R]{m}{n}$ de todas las matrices reales de tamaño
     $m\times n$ es un espacio vectorial con las operaciones conocidas:
     \[
         A+B=(a_{ij}+b_{ij}),\qquad \alpha A=(\alpha a_{ij}).
     \]
-    Por ejemplo, para
+    \begin{itemize}
+        \item \textbf{Neutro aditivo:} la matriz nula.
+        \item \textbf{Inverso aditivo de $A$:} la matriz $-A$.
+    \end{itemize}
+    Las operaciones conservan el tamaño y los axiomas se cumplen entrada
+    por entrada. 
+\end{defi}
+\begin{advertencia}
+La multiplicación entre matrices no forma parte de las
+    operaciones exigidas por la definición de espacio vectorial.    
+\end{advertencia}
+
+\begin{ejem}[Operaciones con matrices de tamaño $2\times2$]\label{sem05cl02:matrices}
+    Para las matrices
     \[
         A=\begin{pmatrix}1&-2\\0&3\end{pmatrix},\qquad
         B=\begin{pmatrix}2&1\\-1&0\end{pmatrix},
@@ -135,75 +157,154 @@ operaciones.
         A+B=\begin{pmatrix}3&-1\\-1&3\end{pmatrix},\qquad
         2A=\begin{pmatrix}2&-4\\0&6\end{pmatrix}.
     \]
-    El vector cero es la matriz nula y el inverso aditivo de $A$ es $-A$.
-    Las operaciones conservan el tamaño y los axiomas se cumplen entrada
-    por entrada. La multiplicación entre matrices no forma parte de las
-    operaciones exigidas por la definición de espacio vectorial.
 \end{ejem}
 
-\begin{ejem}[Polinomios de grado a lo sumo $n$]\label{sem05cl02:polinomios}
+% Mantener completa esta definición; las demás conservan los cortes permitidos.
+\begingroup
+\renewenvironment{defi}[1][]
+    {\begin{recuadrocti}[nombre=#1,tipo=Definición,contador=defi,
+        color=colordef,nobreak=true]}
+    {\end{recuadrocti}}
+\begin{defi}[Espacio de polinomios reales]
     Para un entero fijo $n\ge0$, consideremos
     \[
         \Pol_n=\{a_0+a_1t+\cdots+a_nt^n:a_0,\ldots,a_n\in\R\}.
     \]
-    Este conjunto incluye el polinomio cero. La suma y el producto escalar
-    usuales operan sobre los coeficientes:
+    Este conjunto incluye el polinomio cero. Sean $p,q\in\Pol_n$ dados por
+    \[
+        p(t)=a_0+a_1t+\cdots+a_nt^n,\qquad
+        q(t)=b_0+b_1t+\cdots+b_nt^n.
+    \]
+    Los coeficientes de $p$ son $a_0,\ldots,a_n$ y los de $q$ son
+    $b_0,\ldots,b_n$. La suma usual reúne los coeficientes de la misma
+    potencia de $t$, y el producto escalar multiplica cada coeficiente:
     \begin{align*}
         (p+q)(t)&=(a_0+b_0)+(a_1+b_1)t+\cdots+(a_n+b_n)t^n,\\
         (\alpha p)(t)&=\alpha a_0+\alpha a_1t+\cdots+\alpha a_nt^n.
     \end{align*}
-    Por ejemplo, si $p(t)=1+2t$ y $q(t)=t-t^2$ pertenecen a $\Pol_2$,
-    entonces
-    \[
-        (p+q)(t)=1+3t-t^2,\qquad (-2p)(t)=-2-4t.
-    \]
     Las operaciones no producen términos de grado mayor que $n$ y los
-    axiomas se heredan de los coeficientes reales. El neutro es el polinomio
-    cero y el inverso de $p$ es $-p$. Por ello $\Pol_n$ es un espacio
+    axiomas se heredan de los coeficientes reales.
+    \begin{itemize}
+        \item \textbf{Neutro aditivo:} el polinomio cero, $0(t)=0$, para todo $t\in\R$.
+        \item \textbf{Inverso aditivo de $p$:} el polinomio
+              $(-p)(t)=-p(t)$, para todo $t\in\R$.
+    \end{itemize}
+    Por ello $\Pol_n$ es un espacio
     vectorial real. Es importante decir ``grado a lo sumo $n$'': los
     polinomios de grado exactamente $n$ no incluyen al polinomio cero.
+\end{defi}
+\endgroup
+
+\begin{ejem}[Operaciones en $\Pol_2$]\label{sem05cl02:polinomios}
+    Tomemos
+    \[
+        p(t)=1+2t+0t^2,\qquad q(t)=0+1t-1t^2.
+    \]
+    Así, $(a_0,a_1,a_2)=(1,2,0)$ y $(b_0,b_1,b_2)=(0,1,-1)$.
+    Al sumar los coeficientes correspondientes, obtenemos
+    \[
+        (p+q)(t)=(1+0)+(2+1)t+(0-1)t^2=1+3t-t^2.
+    \]
+    Además, $(-2p)(t)=-2-4t$.
+    \begin{center}
+        \begin{tikzpicture}[x=1.35cm,y=0.42cm]
+            \draw[help lines,step=1] (-1,-6) grid (3,7);
+            \draw[->] (-1.2,0)--(3.3,0) node[right] {$t$};
+            \draw[->] (0,-6.3)--(0,7.5) node[above] {valor};
+            \foreach \t in {-1,1,2,3}
+                \draw (\t,0.12)--(\t,-0.12) node[below] {$\t$};
+            \foreach \v in {-6,-4,-2,2,4,6}
+                \draw (0.04,\v)--(-0.04,\v) node[left] {$\v$};
+            \draw[colordef,thick,domain=-1:3,samples=81]
+                plot (\x,{1+2*\x});
+            \draw[orange!80!black,thick,domain=-1:3,samples=81]
+                plot (\x,{\x-\x*\x});
+            \draw[teal!70!black,very thick,domain=-1:3,samples=81]
+                plot (\x,{1+3*\x-\x*\x});
+            \node[anchor=north west,fill=white,draw=black!30,inner sep=4pt,
+                font=\small] at (3.5,7) {
+                \begin{tabular}{cl}
+                    \tikz[baseline=-0.5ex]{\draw[colordef,thick] (0,0)--(0.8,0);}
+                        & $p(t)=1+2t$\\
+                    \tikz[baseline=-0.5ex]{\draw[orange!80!black,thick] (0,0)--(0.8,0);}
+                        & $q(t)=t-t^2$\\
+                    \tikz[baseline=-0.5ex]{\draw[teal!70!black,very thick] (0,0)--(0.8,0);}
+                        & $(p+q)(t)=1+3t-t^2$
+                \end{tabular}};
+        \end{tikzpicture}
+    \end{center}
+    Para cada $t$ se suman las alturas de las dos gráficas. Por ejemplo,
+    en $t=2$, $p(2)=5$ y $q(2)=-2$, de modo que $(p+q)(2)=3$.
 \end{ejem}
 
-\begin{ejem}[Funciones con un mismo dominio]\label{sem05cl02:funciones}
+\begin{defi}[Espacio de funciones reales]
     Sea $\mathcal{F}(\R,\R)$ el conjunto de todas las funciones
     $f:\R\to\R$. Definimos las operaciones \textbf{punto a punto}:
     \[
         (f+g)(t)=f(t)+g(t),\qquad (\alpha f)(t)=\alpha f(t)
         \quad(t\in\R).
     \]
+    Los resultados siguen siendo funciones de $\R$ en $\R$. Las propiedades
+    de los reales, aplicadas en cada $t$, garantizan los axiomas.
+    \begin{itemize}
+        \item \textbf{Neutro aditivo:} la función $0(t)=0$ para todo $t\in\R$.
+        \item \textbf{Inverso aditivo de $f$:} la función
+              $(-f)(t)=-f(t)$ para todo $t\in\R$.
+    \end{itemize}
+    Con estas operaciones, $\mathcal{F}(\R,\R)$ es un espacio vectorial real.
+\end{defi}
+
+\begin{ejem}[Operaciones con funciones]\label{sem05cl02:funciones}
     Si $f(t)=t^2$ y $g(t)=\sin t$, entonces
     \[
         (f+g)(t)=t^2+\sin t,\qquad (3g)(t)=3\sin t.
     \]
-    Los resultados siguen siendo funciones de $\R$ en $\R$. Las propiedades
-    de los reales, aplicadas en cada $t$, garantizan los axiomas. El vector
-    cero es la función $0_V(t)=0$ para todo $t$ y el inverso de $f$ es
-    la función $(-f)(t)=-f(t)$.
-
-    En un modelo de señales reales, $f+g$ representa la superposición de
-    dos señales y $\alpha f$, un ajuste de su amplitud. No se está usando
-    la composición de funciones como suma.
+    \begin{center}
+        \begin{tikzpicture}[x=1.35cm,y=0.85cm]
+            \draw[help lines,step=1] (-2,-1) grid (2,5);
+            \draw[->] (-2.3,0)--(2.4,0) node[right] {$t$};
+            \draw[->] (0,-1.3)--(0,5.5) node[above] {valor};
+            \foreach \t in {-2,-1,1,2}
+                \draw (\t,0.06)--(\t,-0.06) node[below] {$\t$};
+            \foreach \v in {-1,1,2,3,4,5}
+                \draw (0.04,\v)--(-0.04,\v) node[left] {$\v$};
+            \draw[colordef,thick,domain=-2:2,samples=101]
+                plot (\x,{\x*\x});
+            \draw[orange!80!black,thick,domain=-2:2,samples=101]
+                plot (\x,{sin(\x r)});
+            \draw[teal!70!black,very thick,domain=-2:2,samples=101]
+                plot (\x,{\x*\x+sin(\x r)});
+            \node[anchor=north west,fill=white,draw=black!30,inner sep=4pt,
+                font=\small] at (2.6,5) {
+                \begin{tabular}{cl}
+                    \tikz[baseline=-0.5ex]{\draw[colordef,thick] (0,0)--(0.8,0);}
+                        & $f(t)=t^2$\\
+                    \tikz[baseline=-0.5ex]{\draw[orange!80!black,thick] (0,0)--(0.8,0);}
+                        & $g(t)=\sin t$\\
+                    \tikz[baseline=-0.5ex]{\draw[teal!70!black,very thick] (0,0)--(0.8,0);}
+                        & $(f+g)(t)=t^2+\sin t$
+                \end{tabular}};
+        \end{tikzpicture}
+    \end{center}
+    La suma se realiza para el mismo valor de $t$; el seno se evalúa en
+    radianes.
 \end{ejem}
 
-En cada ejemplo, el conjunto contiene los resultados de ambas operaciones
-para cualquier elección de vectores y escalares. Las propiedades usuales
-permiten reconocer la estructura sin repetir ocho demostraciones.
+\subsection{Operaciones no usuales}
 
-\subsection{Observación: también podemos definir otras operaciones}
-
-\begin{obs}[El espacio depende del conjunto y de las operaciones]
+\begin{advertencia}
     Las palabras ``suma'' y ``producto escalar'' describen el papel de las
     operaciones en los axiomas. Es posible definir operaciones distintas
     de las usuales, siempre que se cumplan todas las condiciones de la
     definición. En ese caso, también pueden cambiar el vector cero y
     los inversos aditivos.
-\end{obs}
+\end{advertencia}
 
 \begin{ejem}[Ganancias de audio y escala logarítmica]\label{sem05cl02:ganancias}
     Un factor de ganancia $g>0$ multiplica la amplitud de una señal: $g=2$
     la duplica, $g=1$ la deja igual y $g=1/2$ la reduce a la mitad.
     Al aplicar sucesivamente dos ajustes, sus factores se multiplican.
-    Esto motiva considerar $V=(0,\infty)$ con las operaciones
+    Esto motiva considerar el conjunto $V=(0,\infty)$ con las operaciones
     \[
         g\oplus h=gh,\qquad \alpha\odot g=g^{\alpha},
         \quad g,h>0,\quad\alpha\in\R.
@@ -217,29 +318,41 @@ permiten reconocer la estructura sin repetir ocho demostraciones.
     El \textbf{vector cero es 1}, pues $g\oplus1=g$; el inverso aditivo
     de $g$ es $1/g$. Además, $0\odot g=1$.
 
-    ¿Por qué se cumplen los axiomas? El cambio de coordenadas
-    $\varphi(g)=\ln g$ es una biyección de $(0,\infty)$ en $\R$ y satisface
-    \[
-        \varphi(g\oplus h)=\varphi(g)+\varphi(h),\qquad
-        \varphi(\alpha\odot g)=\alpha\varphi(g).
-    \]
-    Así, ambas operaciones se convierten en las usuales de $\R$; por eso
-    se cumplen todos los axiomas. Por ejemplo, una de las distributividades es
-    \[
-        \alpha\odot(g\oplus h)=(gh)^{\alpha}
-        =g^{\alpha}h^{\alpha}
-        =(\alpha\odot g)\oplus(\alpha\odot h).
-    \]
-
-    En software de audio, la ganancia de amplitud puede expresarse en
-    decibelios mediante $D(g)=20\log_{10}g$. En estas coordenadas,
-    $D(gh)=D(g)+D(h)$: encadenar factores equivale a sumar sus ganancias
-    en decibelios. Por ejemplo, dos factores de ganancia 2 producen un
-    factor 4; sus valores aproximados son $6.02+6.02=12.04$ decibelios.
-    La estructura anterior ofrece una lectura algebraica de esta regla.\footnote{Aplicación:
-    \href{https://www.mathworks.com/help/dsp/ref/dbgain.html}{MathWorks, bloque dB Gain de Simulink}.}
-    Aquí trabajamos con factores estrictamente positivos; el factor 0,
-    que anula la señal, queda fuera de este espacio.
+    Para visualizar el efecto sobre una señal, tomemos $s(t)=\sin t$.
+    Una ganancia 2 produce $2s(t)$; al aplicar después una ganancia 3,
+    obtenemos $3(2s(t))=6s(t)$, de acuerdo con $2\oplus3=6$.
+    \begin{center}
+        \begin{tikzpicture}[x=0.85cm,y=0.35cm]
+            \draw[help lines,xstep=1.5708,ystep=2] (0,-6) grid (6.2832,6);
+            \draw[->] (0,0)--(6.8,0) node[right] {$t$};
+            \draw[->] (0,-6.6)--(0,7) node[above] {amplitud};
+            \foreach \t/\etiqueta in {1.5708/\frac{\pi}{2},3.1416/\pi,4.7124/\frac{3\pi}{2},6.2832/2\pi}
+                \draw (\t,0.15)--(\t,-0.15) node[below] {$\etiqueta$};
+            \foreach \v in {-6,-4,-2,2,4,6}
+                \draw (0.06,\v)--(-0.06,\v) node[left] {$\v$};
+            \draw[colordef,thick,domain=0:6.2832,samples=161]
+                plot (\x,{sin(\x r)});
+            \draw[orange!80!black,thick,domain=0:6.2832,samples=161]
+                plot (\x,{2*sin(\x r)});
+            \draw[teal!70!black,very thick,domain=0:6.2832,samples=161]
+                plot (\x,{6*sin(\x r)});
+            \node[anchor=north west,fill=white,draw=black!30,inner sep=4pt,
+                font=\small] at (7.2,6) {
+                \begin{tabular}{cl}
+                    \tikz[baseline=-0.5ex]{\draw[colordef,thick] (0,0)--(0.8,0);}
+                        & $s(t)=\sin t$\\
+                    \tikz[baseline=-0.5ex]{\draw[orange!80!black,thick] (0,0)--(0.8,0);}
+                        & $2s(t)=2\sin t$\\
+                    \tikz[baseline=-0.5ex]{\draw[teal!70!black,very thick] (0,0)--(0.8,0);}
+                        & $6s(t)=6\sin t$
+                \end{tabular}};
+        \end{tikzpicture}
+    \end{center}
+    Cambia la amplitud, pero se conservan el período y los instantes en que
+    la señal vale cero. Aplicar la ganancia inversa $1/2$ después de la
+    ganancia 2 recupera la señal original: $\tfrac12(2s(t))=s(t)$.
+    Por eso el neutro de las ganancias es 1: deja pasar la señal sin
+    modificarla; no significa silencio.
 \end{ejem}
 
 \section{Ejercicios}
@@ -268,7 +381,7 @@ permiten reconocer la estructura sin repetir ocho demostraciones.
     Distinga la función $f+g$ del número $(f+g)(2)$.
 \end{ejer}
 
-\begin{ejer}[Operaciones diferentes]
+\begin{ejer}[Operaciones no usuales]
     En el espacio de ganancias del ejemplo \ref{sem05cl02:ganancias},
     calcule $4\oplus\tfrac12$, $\tfrac12\odot4$ y $(-1)\odot4$.
     Compruebe que $4\oplus((-1)\odot4)=0_V$.
