@@ -43,7 +43,7 @@ Esto exige verificar tres condiciones:
 \end{enumerate}
 \end{definicion}
 
-En un punto de unión de dos tramos, la condición se escribe
+Es decir, 
 \[
   \lim_{x\to a^-}f(x)=\lim_{x\to a^+}f(x)=f(a).
 \]
@@ -95,10 +95,6 @@ Para clasificar el comportamiento cerca de $a$, primero se calculan los límites
   \item \textbf{Oscilatoria:} la oscilación impide que exista alguno de los límites laterales, sin que ese comportamiento sea un límite infinito.
 \end{itemize}
 \end{definicion}
-
-\begin{nota}[Dominio y puntos excluidos]
-La continuidad en un punto requiere que el punto pertenezca al dominio. Cuando se habla de una discontinuidad en un punto excluido, se describe el comportamiento alrededor de ese punto y se pregunta si existe una extensión continua. Por ejemplo, $1/x$ es continua en todo su dominio, aunque presenta una discontinuidad infinita en $0$ en este sentido.
-\end{nota}
 
 \begin{ejemplo}[]
 Clasifique el comportamiento en $0$ de las funciones
@@ -200,7 +196,7 @@ Por tanto, $f$ es continua en $[-2,\infty)$. No se exige un límite desde la izq
 Las funciones constante $f(x)=c$ e identidad $I(x)=x$ son continuas en $\mathbb{R}$, pues sus límites en $a$ son $c$ y $a$, respectivamente. A partir de ellas se construyen los polinomios mediante las siguientes operaciones.
 
 \begin{teorema}[operaciones que conservan continuidad]
-Si $f$ y $g$ son continuas en $a$ y $c\in\mathbb{R}$, entonces son continuas en $a$ las funciones
+Si $f$ y $g$ son continuas en $a$ y sea $c\in\mathbb{R}$, entonces son continuas en $a$ las funciones
 \[
   f+g,\quad f-g,\quad cf,\quad fg.
 \]
@@ -221,10 +217,6 @@ Estas propiedades se obtienen del álgebra de límites. Por ejemplo, si $g(a)\ne
   \item La función $\sqrt[n]{x}$ es continua en $\mathbb{R}$ si $n$ es impar, y en $[0,\infty)$ si $n$ es par. En el extremo $0$ de una raíz par se entiende continuidad por la derecha.
 \end{enumerate}
 \end{proposicion}
-
-\begin{nota}
-Si una raíz par está en el denominador, su radicando debe ser \textbf{estrictamente positivo}. Además, simplificar factores no devuelve automáticamente los puntos que estaban excluidos del dominio original.
-\end{nota}
 
 \begin{ejemplo}[dominio e intervalos de continuidad]
 Determine dónde es continua cada función:
@@ -292,16 +284,6 @@ Suponga que $u(x)\to L$ cuando $x\to a$ y que $\varphi$ es continua en $L$. Si $
 La función interior $u$ no necesita estar definida en $a$: basta con que tenga el límite indicado.
 \end{teorema}
 
-Escribir $t=u(x)$ permite reconocer la función exterior y el punto al que tiende su argumento. También se debe revisar si $t$ se aproxima por un solo lado.
-
-\begin{criterio}[cambio de variable cuando la función exterior no es continua]
-Suponga que $u(x)\to L$ y que $\lim_{t\to L}\varphi(t)=M$. Si, para $x$ suficientemente próximo a $a$ con $x\neq a$, la composición está definida y $u(x)\neq L$, entonces
-\[
-  \lim_{x\to a}\varphi(u(x))=M.
-\]
-Si se conoce solamente un límite lateral de $\varphi$, se requiere además que $u(x)$ se aproxime a $L$ desde ese lado. La condición $u(x)\neq L$ permite usar el límite exterior aunque $\varphi(L)$ no exista o no sea igual a $M$.
-\end{criterio}
-
 \begin{ejemplo}[cambio de variable con una raíz continua]
 Calcule $\displaystyle\lim_{x\to2}\sqrt{x^2+5}$ e indique las funciones interior y exterior.
 \end{ejemplo}
@@ -314,34 +296,6 @@ Con $t=x^2+5$ se tiene $t\to9$ cuando $x\to2$. La función exterior $\varphi(t)=
 El radicando es positivo para todo $x$, así que no hay restricciones adicionales.
 \end{solucion}
 \else\vspace{16mm}\fi
-
-\begin{ejemplo}[la expresión exterior no está definida en el punto límite]
-Calcule
-\[
-  \lim_{x\to0}\frac{\sqrt{1+x^2}-1}{x^2}.
-\]
-\end{ejemplo}
-\ifmostrarSoluciones
-\begin{solucion}
-Tomamos $t=1+x^2$. Para $x\neq0$, se tiene $t>1$, y cuando $x\to0$, $t\to1^+$. Así se reconoce el cociente
-\[
-  \frac{\sqrt{t}-1}{t-1}.
-\]
-No se puede sustituir $t=1$ en esta expresión. Para $t>1$, racionalizamos:
-\[
-  \frac{\sqrt{t}-1}{t-1}=\frac{1}{\sqrt{t}+1}.
-\]
-La última expresión sí es continua en $1$, por lo que el límite es $1/2$. La simplificación permite usar continuidad después de eliminar la indeterminación.
-\end{solucion}
-\else\vspace{26mm}\fi
-
-\begin{nota}[El límite exterior debe respetar el lado de aproximación]
-Si $t=x^2$ y $x\to0$, entonces $t\to0^+$ para $x\neq0$. Por ejemplo, para
-\[
-  S(t)=\begin{cases}0,&t<0,\\1,&t\geq0,\end{cases}
-\]
-el límite bilateral de $S$ en $0$ no existe, pero $S(x^2)=1$ y su límite cuando $x\to0$ sí existe. La continuidad de la función exterior es una hipótesis suficiente para pasar el límite, y no se debe suponer cuando hay un salto.
-\end{nota}
 
 \section*{Práctica y trabajo autónomo}
 
@@ -402,16 +356,6 @@ el límite bilateral de $S$ en $0$ no existe, pero $S(x^2)=1$ y su límite cuand
 \end{enumerate}
 \end{solucion}
 \fi
-
-\begin{nota}[Cierre: preguntas de comprobación]
-\begin{itemize}
-  \item ¿Cuáles son las tres condiciones para continuidad en un punto interior?
-  \item ¿Por qué se puede reparar una discontinuidad removible y no una de salto cambiando solamente un valor?
-  \item ¿Qué cambia en un extremo incluido de un intervalo?
-  \item ¿Qué restricciones se verifican antes de aplicar un cociente o una raíz par?
-  \item ¿Cuándo permite la continuidad sustituir el valor al que tiende una variable interior?
-\end{itemize}
-\end{nota}
 
 \fuentes{\textbf{Para ampliar:} \emph{Cálculo en una variable: notas de clase 2018-B}, Resumen No.~3, pp.~4--7 (continuidad y cambio de variable); \emph{Hojas de ejercicios 2018-B}, Hoja No.~03, ejercicios 3--4 (continuidad puntual y parámetros); J. Stewart, \emph{Cálculo de una variable: trascendentes tempranas}, §2.5; G. Strang--E. Herman, \emph{Cálculo, volumen 1}, OpenStax, §2.4. Ejemplos y ejercicios de este apunte elaborados para estas sesiones.}
 
