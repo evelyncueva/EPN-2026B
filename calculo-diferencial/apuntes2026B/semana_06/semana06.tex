@@ -1,0 +1,358 @@
+% !TeX root = semana06.tex
+% !TeX program = pdflatex
+% Clases 2 y 3: cuatro horas. Interpretaciones y aplicaciones, sin demostraciones.
+\documentclass[10pt,a5paper]{article}
+\newif\ifmostrarSoluciones
+\mostrarSolucionestrue
+\usepackage{tikz}
+\usepackage{estilo_apuntes}
+\usetikzlibrary{arrows.meta,positioning,babel}
+\encabezado{Semana 6}{Apunte semanal}
+
+\begin{document}
+\tituloclase{Teoremas de continuidad}{Signo, acotamiento, extremos y valores intermedios}{Semana 6 · clases 2 y 3 · 4 horas}
+
+\begin{objetivos}
+\begin{itemize}
+  \item Reconocer las hipótesis y las conclusiones de cada teorema.
+  \item Interpretar geométricamente la preservación del signo, el acotamiento y la existencia de extremos.
+  \item Distinguir una cota de un valor máximo o mínimo alcanzado.
+  \item Aplicar Bolzano y el teorema del valor intermedio a ceros, ecuaciones y situaciones concretas.
+  \item Reconocer qué conclusiones dejan de estar garantizadas cuando falta una hipótesis.
+\end{itemize}
+\end{objetivos}
+
+\begin{resumen}
+La continuidad conecta el comportamiento cercano a un punto con propiedades de una función sobre un intervalo. Cerca de un punto permite controlar el signo y el tamaño de sus valores. En un intervalo cerrado y acotado garantiza que se alcancen un máximo y un mínimo. Sobre un intervalo también impide omitir valores situados entre dos valores de la función.
+\end{resumen}
+
+\section*{Clase 2: signo, acotamiento y extremos}
+\subsection*{Preservación local del signo}
+
+\begin{teorema}[preservación del signo]
+Sea $f$ continua en un punto interior $a$ de su dominio.
+\begin{itemize}
+  \item Si $f(a)>0$, existe $\delta>0$ tal que $f(x)>0$ para todo $x$ del dominio con $|x-a|<\delta$.
+  \item Si $f(a)<0$, existe $\delta>0$ tal que $f(x)<0$ para todo $x$ del dominio con $|x-a|<\delta$.
+\end{itemize}
+\end{teorema}
+
+\textbf{Interpretación geométrica.} Si el punto $(a,f(a))$ está estrictamente por encima del eje horizontal, un tramo suficientemente cercano de la gráfica permanece por encima. Si está por debajo, permanece por debajo. Es una conclusión \textbf{local}: no se afirma que el signo se conserve en todo el dominio. En un extremo del dominio se considera solamente el lado disponible.
+
+\begin{center}
+\begin{tikzpicture}[x=1.3cm,y=1cm,every node/.style={font=\scriptsize}]
+  \fill[AzulClaro] (-0.7,0) rectangle (0.7,2.5);
+  \draw[->,Gris] (-2.1,0)--(2.1,0) node[right] {$x$};
+  \draw[->,Gris] (0,-0.5)--(0,2.8) node[above] {$y$};
+  \draw[Azul,thick,domain=-1.6:1.6,samples=60] plot (\x,{2-\x*\x});
+  \fill[Azul] (0,2) circle (2pt);
+  \node[above right] at (0,2) {$(a,f(a))$};
+  \node[below] at (-0.7,0) {$a-\delta$};
+  \node[below] at (0.7,0) {$a+\delta$};
+\end{tikzpicture}
+\end{center}f
+
+\subsection*{Acotamiento local y sobre un intervalo}
+
+\begin{definicion}[acotamiento]
+Una función está \textbf{acotada en un conjunto $A$} si existe $K>0$ tal que
+\[
+  |f(x)|\leq K\qquad\text{para todo }x\in A.
+\]
+Geométricamente, su gráfica sobre $A$ queda contenida en una franja horizontal entre $y=-K$ y $y=K$.
+\end{definicion}
+
+\begin{teorema}[acotamiento local]
+Si $f$ es continua en $a$, entoncesf existen $\delta>0$ y $K>0$ tales que
+\[
+  |f(x)|\leq K
+\]
+para los puntos $x$ de su dominio con $|x-a|<\delta$.
+\end{teorema}
+
+La franja contiene un tramo cercano a $a$. No se garantiza una misma cota para todo el dominio.
+
+\begin{ejemplo}[una función localmente acotada que no lo está globalmente]
+Estudie $f(x)=1/x$ cerca de $a=1$ y en su dominio completo.
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+Es continua en $1$. Si $|x-1|<1/2$, entonces $1/2<x<3/2$ y $|1/x|<2$. Así, $K=2$ es una cota válida en ese entorno. Sin embargo, en $\mathbb{R}\setminus\{0\}$ los valores no están acotados, porque $1/x\to+\infty$ cuando $x\to0^+$.
+\end{solucion}
+\else\vspace{18mm}\fi
+
+\begin{teorema}[acotamiento en un intervalo cerrado y acotado]
+Si $f$ es continua en $[a,b]$, con $a<b$, entonces está acotada en todo $[a,b]$. Es decir, existen números reales $m,M$ tales que
+\[
+  m\leq f(x)\leq M\qquad\text{para todo }x\in[a,b].
+\]
+\end{teorema}
+
+Aquí la continuidad se exige en \textbf{todo} el intervalo, incluida la continuidad lateral en los extremos. La misma pareja de cotas sirve para todos los puntos de $[a,b]$.
+
+\subsection*{Máximo y mínimo absolutos}
+
+\begin{definicion}[extremos absolutos]
+Una función alcanza un \textbf{máximo absoluto} en $x_M\in A$ si $f(x)\leq f(x_M)$ para todo $x\in A$. Alcanza un \textbf{mínimo absoluto} en $x_m\in A$ si $f(x_m)\leq f(x)$ para todo $x\in A$.
+
+Se distingue el \emph{punto} $x_M$ del \emph{valor máximo} $f(x_M)$, y el punto $x_m$ del valor mínimo $f(x_m)$.
+\end{definicion}
+
+\begin{teorema}[máximo--mínimo o de Weierstrass]
+Si $f$ es continua en un intervalo cerrado y acotado $[a,b]$, entonces existen $x_m,x_M\in[a,b]$ tales que
+\[
+  f(x_m)\leq f(x)\leq f(x_M)
+  \qquad\text{para todo }x\in[a,b].
+\]
+Por tanto, $f$ alcanza tanto un mínimo absoluto como un máximo absoluto.
+\end{teorema}
+
+\textbf{Interpretación geométrica.} La gráfica tiene un punto más bajo y uno más alto, ambos incluidos. El teorema garantiza su existencia; no indica dónde están ni asegura que cada extremo se alcance en un único punto. Los extremos pueden estar en el interior o en los extremos del intervalo.
+
+\begin{ejemplo}[extremos sin usar derivadas]
+Determine los extremos absolutos de $f(x)=(x-1)^2+2$ en $[-1,3]$ y distinga sus puntos de sus valores.
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+La función es continua en el intervalo cerrado y acotado, por lo que alcanza ambos extremos. Para $-1\leq x\leq3$, se tiene $-2\leq x-1\leq2$ y
+\[
+  0\leq(x-1)^2\leq4,
+  \qquad 2\leq f(x)\leq6.
+\]
+El mínimo absoluto es $2$, alcanzado en $x=1$. El máximo absoluto es $6$, alcanzado en dos puntos: $x=-1$ y $x=3$.
+\end{solucion}
+\else\vspace{22mm}\fi
+
+\begin{center}
+\begin{tikzpicture}[x=1.25cm,y=0.55cm,every node/.style={font=\scriptsize}]
+  \fill[AzulClaro] (-1,2) rectangle (3,6);
+  \draw[->,Gris] (-1.5,0)--(3.5,0) node[right] {$x$};
+  \draw[->,Gris] (0,-0.3)--(0,7) node[above] {$y$};
+  \draw[Rojo,dashed] (-1.3,2)--(3.2,2) node[right] {$m=2$};
+  \draw[Rojo,dashed] (-1.3,6)--(3.2,6) node[right] {$M=6$};
+  \draw[Azul,thick,domain=-1:3,samples=70] plot (\x,{(\x-1)^2+2});
+  \foreach \x/\y in {-1/6,1/2,3/6}{\fill[Azul] (\x,\y) circle (2.5pt);}
+  \foreach \x in {-1,1,3}{\node[below] at (\x,0) {$\x$};}
+\end{tikzpicture}
+\end{center}
+
+\subsection*{Hipótesis que no se pueden omitir}
+
+\begin{ejemplo}[contraejemplos para acotamiento y extremos]
+Determine qué hipótesis falla y qué conclusión deja de cumplirse:
+\begin{enumerate}
+  \item $f(x)=x$ en $(0,1)$.
+  \item $g(x)=x$ en $[0,\infty)$.
+  \item $h(0)=0$ y $h(x)=1/x$ para $0<x\leq1$, en $[0,1]$.
+  \item $q(x)=x$ para $0\leq x<1$, y $q(1)=0$, en $[0,1]$.
+\end{enumerate}
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+\begin{enumerate}
+  \item El intervalo no es cerrado. Aunque $0<f(x)<1$, no se alcanza ni el valor $0$ ni el valor $1$: no hay mínimo ni máximo absoluto.
+  \item El intervalo es cerrado, pero no acotado. La función no está acotada superiormente y no alcanza máximo; sí alcanza mínimo $0$ en $x=0$.
+  \item El intervalo es cerrado y acotado, pero falta continuidad en $0$. La función no está acotada superiormente y no tiene máximo.
+  \item Falta continuidad en $1$. La función está acotada y alcanza mínimo $0$, pero no alcanza máximo: los valores se acercan a $1$ sin llegar a él.
+\end{enumerate}
+Estos ejemplos muestran que \emph{estar acotada} y \emph{alcanzar sus cotas extremas} son afirmaciones diferentes.
+\end{solucion}
+\else\vspace{28mm}\fi
+
+\begin{nota}
+Si una hipótesis falla, el teorema \textbf{no garantiza} su conclusión; eso no significa que la conclusión sea siempre falsa. Por ejemplo, la función constante $f(x)=2$ en $(0,1)$ alcanza máximo y mínimo aunque el intervalo no sea cerrado.
+\end{nota}
+
+\begin{ejemplo}[aplicación: temperatura máxima y mínima]
+Durante cinco horas se modela una temperatura, en grados Celsius, mediante $T(t)=20-(t-2)^2$, con $0\leq t\leq5$. Justifique la existencia de una temperatura máxima y una mínima y determine sus valores y los instantes en que se alcanzan.
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+$T$ es polinómica y continua en $[0,5]$, así que el teorema garantiza ambos extremos. En ese intervalo, $-2\leq t-2\leq3$, de donde $0\leq(t-2)^2\leq9$. Así, $11\leq T(t)\leq20$. La máxima es $20\,{}^\circ\mathrm{C}$ en $t=2$; la mínima es $11\,{}^\circ\mathrm{C}$ en $t=5$.
+\end{solucion}
+\else\vspace{20mm}\fi
+
+\begin{ejercicios}[signo, acotamiento y extremos]
+\begin{enumerate}
+  \item Para $f(x)=x^2-4$, aplique preservación del signo en $a=1$ y encuentre un entorno concreto con ese signo.
+  \item Dé una cota de $|1/(x-2)|$ en el entorno $|x-3|<1/2$. ¿Existe una cota en todo $\mathbb{R}\setminus\{2\}$?
+  \item Determine los extremos absolutos de $p(x)=4-(x+1)^2$ en $[-3,2]$ usando desigualdades.
+  \item Una función es continua en $(0,2)$ y está acotada. ¿Se garantiza que alcance máximo y mínimo? Dé un contraejemplo.
+\end{enumerate}
+\end{ejercicios}
+\ifmostrarSoluciones
+\begin{solucion}[de la clase 2]
+\begin{enumerate}
+  \item Es continua y $f(1)=-3<0$. Por ejemplo, $|x-1|<1/2$ implica $1/2<x<3/2$ y $f(x)<0$.
+  \item En ese entorno, $1/2<x-2<3/2$, por lo que $|1/(x-2)|<2$. No hay cota global, pues la función crece sin cota cuando $x\to2^+$.
+  \item Como $-2\leq x+1\leq3$, se tiene $-5\leq p(x)\leq4$. El máximo es $4$ en $x=-1$ y el mínimo es $-5$ en $x=2$.
+  \item No. La función $f(x)=x$ en $(0,2)$ es continua y acotada, pero no alcanza ninguno de los dos extremos absolutos.
+\end{enumerate}
+\end{solucion}
+\fi
+
+\section*{Clase 3: ceros y valores intermedios}
+\subsection*{Teorema de Bolzano}
+
+\begin{teorema}[de Bolzano]
+Si $f$ es continua en $[a,b]$ y $f(a)f(b)<0$, entonces existe al menos un $c\in(a,b)$ tal que $f(c)=0$.
+\end{teorema}
+
+\textbf{Hipótesis:} continuidad en todo $[a,b]$ y signos estrictamente opuestos en los extremos. \textbf{Conclusión:} existencia de al menos un cero interior. Si un extremo ya tiene valor cero, se ha encontrado un cero, pero la condición estricta del enunciado anterior no se cumple.
+
+\textbf{Interpretación geométrica.} Una gráfica continua que pasa de estar debajo del eje horizontal a estar encima debe cruzarlo al menos una vez. El teorema no da una fórmula para el cero ni garantiza que sea único.
+
+\begin{center}
+\begin{tikzpicture}[x=3.7cm,y=1.6cm,every node/.style={font=\scriptsize}]
+  \draw[->,Gris] (-0.15,0)--(1.2,0) node[right] {$x$};
+  \draw[->,Gris] (0,-1.3)--(0,1.35) node[above] {$y$};
+  \draw[Azul,thick,domain=0:1,samples=70] plot (\x,{\x^3+\x-1});
+  \draw[Gris,dashed] (1,0)--(1,1);
+  \fill[Azul] (0,-1) circle (2pt);
+  \fill[Azul] (1,1) circle (2pt);
+  \fill[Rojo] (0.68233,0) circle (2pt);
+  \node[below right] at (0,-1) {$f(a)<0$};
+  \node[above] at (1,1) {$f(b)>0$};
+  \node[below] at (0.68233,0) {$c$};
+  \node[below] at (1,0) {$b$};
+\end{tikzpicture}
+\end{center}
+
+\begin{ejemplo}[existencia y localización de un cero]
+Justifique que la ecuación $x^3+x-1=0$ tiene una solución en $(0,1)$ y reduzca el intervalo que la contiene mediante tres pasos de bisección.
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+La función $f(x)=x^3+x-1$ es continua en $[0,1]$, con $f(0)=-1$ y $f(1)=1$. Por Bolzano, existe un cero en $(0,1)$.
+
+En cada paso se evalúa el punto medio y se conserva la mitad cuyos extremos tienen signos opuestos:
+\[
+  \begin{array}{c|c|c|c}
+    \text{Paso}&\text{Punto medio}&f(\text{punto medio})&\text{Intervalo conservado}\\ \hline
+    1&1/2&-3/8&[1/2,1]\\
+    2&3/4&11/64&[1/2,3/4]\\
+    3&5/8&-67/512&[5/8,3/4]
+  \end{array}
+\]
+Así, se localiza al menos un cero en $(0.625,0.75)$. Si se usa el punto medio $0.6875$ como aproximación, su distancia a un cero de ese intervalo es menor que $0.0625$, la mitad de la longitud del intervalo.
+\end{solucion}
+\else\vspace{30mm}\fi
+
+\begin{criterio}[bisección]
+Parta de un intervalo cerrado donde la función sea continua y los valores extremos tengan signos opuestos. Calcule el punto medio $m=(a+b)/2$.
+\begin{itemize}
+  \item Si $f(m)=0$, se encontró un cero.
+  \item En caso contrario, conserve $[a,m]$ o $[m,b]$ según dónde persista el cambio de signo.
+\end{itemize}
+Cada paso reduce la longitud a la mitad. Tras $n$ pasos, la longitud es $(b-a)/2^n$, y el punto medio del intervalo final aproxima algún cero con error a lo sumo $(b-a)/2^{n+1}$.
+\end{criterio}
+
+\subsection*{Qué no permite concluir Bolzano}
+
+\begin{ejemplo}[continuidad, existencia y unicidad]
+Interprete los siguientes casos:
+\begin{enumerate}
+  \item $s(x)=-1$ si $x<0$, y $s(x)=1$ si $x\geq0$, en $[-1,1]$.
+  \item $q(x)=x^2-1$ en $[-2,2]$.
+  \item $r(x)=x(x^2-1)$ en $[-2,2]$.
+\end{enumerate}
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+\begin{enumerate}
+  \item Hay signos opuestos en los extremos, pero falta continuidad en $0$. La función no tiene ceros. Un salto puede evitar el eje horizontal.
+  \item Es continua y los extremos tienen el mismo valor positivo $3$. No se cumple la condición de signos opuestos, pero sí existen ceros: $-1$ y $1$. Por tanto, que no haya cambio de signo en los extremos no permite descartar ceros interiores.
+  \item Es continua, $r(-2)=-6$ y $r(2)=6$, así que Bolzano se aplica. Sin embargo, hay tres ceros: $-1$, $0$ y $1$. La existencia garantizada no implica unicidad.
+\end{enumerate}
+\end{solucion}
+\else\vspace{26mm}\fi
+
+\subsection*{Teorema del valor intermedio}
+
+\begin{teorema}[del valor intermedio]
+Sea $f$ continua en $[a,b]$. Si $k$ está estrictamente entre $f(a)$ y $f(b)$, existe al menos un $c\in(a,b)$ tal que $f(c)=k$.
+
+Si se permiten también $k=f(a)$ o $k=f(b)$, la conclusión es que existe un $c\in[a,b]$ con $f(c)=k$.
+\end{teorema}
+
+\textbf{Interpretación geométrica.} Toda recta horizontal $y=k$ situada entre las alturas de los extremos corta la gráfica en algún punto del intervalo. Se trata de valores entre $f(a)$ y $f(b)$, aunque la gráfica también pueda alcanzar valores fuera de esa franja.
+
+Bolzano corresponde al nivel $k=0$ con signos opuestos en los extremos. Para estudiar una ecuación $f(x)=k$, también se puede aplicar Bolzano a $F(x)=f(x)-k$.
+
+\begin{center}
+\begin{tikzpicture}[x=1.4cm,y=0.8cm,every node/.style={font=\scriptsize}]
+  \draw[->,Gris] (-0.3,0)--(3.5,0) node[right] {$x$};
+  \draw[->,Gris] (0,-0.3)--(0,4.7) node[above] {$y$};
+  \draw[Azul,thick,domain=0:3,samples=60] plot (\x,{1+\x*\x/3});
+  \draw[Rojo,dashed] (0,2.5)--(3.2,2.5) node[right] {$y=k$};
+  \draw[Gris,dashed] (2.12132,0)--(2.12132,2.5);
+  \fill[Rojo] (2.12132,2.5) circle (2.5pt);
+  \fill[Azul] (0,1) circle (2pt);
+  \fill[Azul] (3,4) circle (2pt);
+  \node[left] at (0,1) {$f(a)$};
+  \node[above] at (3,4) {$f(b)$};
+  \node[below] at (2.12132,0) {$c$};
+\end{tikzpicture}
+\end{center}
+
+\begin{ejemplo}[alcanzar un nivel sin resolver exactamente la ecuación]
+Justifique que existe $c\in(1,2)$ tal que $c^3+c=5$.
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+La función $f(x)=x^3+x$ es continua en $[1,2]$. Como $f(1)=2$, $f(2)=10$ y $2<5<10$, el teorema del valor intermedio garantiza un $c\in(1,2)$ con $f(c)=5$. No es necesario resolver la ecuación cúbica para asegurar la existencia.
+\end{solucion}
+\else\vspace{16mm}\fi
+
+\subsection*{Aplicaciones y resolución de problemas}
+
+\begin{ejemplo}[un nivel de temperatura]
+La temperatura de una sustancia cambia continuamente durante diez minutos. Al inicio es $18\,{}^\circ\mathrm{C}$ y al final es $42\,{}^\circ\mathrm{C}$. ¿Qué puede afirmarse sobre el nivel de $30\,{}^\circ\mathrm{C}$? ¿Puede determinarse el instante exacto con estos datos?
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+Si $T$ es la temperatura, es continua en $[0,10]$ y $18<30<42$. Existe al menos un $c\in(0,10)$ con $T(c)=30$. Los datos no determinan el instante ni aseguran que se alcance ese nivel una sola vez. Tampoco indican que la temperatura crezca de manera uniforme.
+\end{solucion}
+\else\vspace{18mm}\fi
+
+\begin{ejemplo}[intersección de dos gráficas]
+Justifique que las gráficas de $y=\sqrt{x+1}$ y $y=2-x$ se intersectan para algún $x\in(0,2)$.
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+Se define la diferencia $F(x)=\sqrt{x+1}-(2-x)$, continua en $[0,2]$. Como $F(0)=-1<0$ y $F(2)=\sqrt3>0$, Bolzano garantiza un $c\in(0,2)$ con $F(c)=0$. En ese punto, $\sqrt{c+1}=2-c$, que expresa la intersección. El teorema establece existencia sin exigir despejar $c$.
+\end{solucion}
+\else\vspace{20mm}\fi
+
+\begin{nota}[Cómo elegir el teorema]
+\begin{itemize}
+  \item \textbf{Signo cerca de un punto:} continuidad allí y valor no nulo.
+  \item \textbf{Cotas y extremos:} continuidad sobre un intervalo cerrado y acotado.
+  \item \textbf{Un cero interior:} continuidad sobre el intervalo y signos opuestos en sus extremos.
+  \item \textbf{Un nivel $k$:} continuidad y $k$ entre los valores de los extremos.
+\end{itemize}
+Al combinar máximo--mínimo con valor intermedio, la imagen de una función continua en $[a,b]$ es el intervalo $[m,M]$ entre sus extremos absolutos. No tiene por qué coincidir con el intervalo entre $f(a)$ y $f(b)$.
+\end{nota}
+
+\begin{ejercicios}[Bolzano, valor intermedio y aplicaciones]
+\begin{enumerate}
+  \item Justifique que $x^3-2x-2=0$ tiene una solución en $(1,2)$ y realice dos pasos de bisección.
+  \item Explique por qué no se puede aplicar Bolzano a $f(x)=1/x$ en $[-1,1]$, aunque $f(-1)f(1)<0$.
+  \item Justifique que existe $c\in(0,2)$ tal que $c^2+c=4$. ¿Basta el teorema aplicado para garantizar unicidad?
+  \item Dos vehículos circulan con posiciones continuas $p$ y $q$ durante $0\leq t\leq4$. Se sabe que $p(0)=2$, $q(0)=5$, $p(4)=14$ y $q(4)=11$, en kilómetros. Justifique que en algún instante intermedio tienen la misma posición.
+\end{enumerate}
+\end{ejercicios}
+\ifmostrarSoluciones
+\begin{solucion}[de la clase 3]
+\begin{enumerate}
+  \item La función polinómica es continua, con $f(1)=-3$ y $f(2)=2$. En el primer punto medio, $f(1.5)=-1.625$, así que se conserva $[1.5,2]$. Después, $f(1.75)=-0.140625$, y se conserva $[1.75,2]$. Hay al menos un cero en $(1.75,2)$.
+  \item La función no está definida en $0$, por lo que no es continua en todo $[-1,1]$. No cumple las hipótesis y, de hecho, no tiene ningún cero.
+  \item La función $f(x)=x^2+x$ es continua en $[0,2]$, y $f(0)=0<4<6=f(2)$. El valor intermedio garantiza existencia, pero su enunciado no garantiza unicidad; esta requeriría un argumento adicional.
+  \item $F(t)=p(t)-q(t)$ es continua en $[0,4]$, con $F(0)=-3$ y $F(4)=3$. Bolzano garantiza algún $c\in(0,4)$ con $F(c)=0$, es decir, $p(c)=q(c)$.
+\end{enumerate}
+\end{solucion}
+\fi
+
+\fuentes{\textbf{Para ampliar:} \emph{Cálculo en una variable: notas de clase 2018-B}, Resumen No.~3 (valor intermedio) y Resumen No.~6 (extremos globales); J. Stewart, \emph{Cálculo de una variable: trascendentes tempranas}, §§2.5 y 4.1; G. Strang--E. Herman, \emph{Cálculo, volumen 1}, OpenStax, §§2.4 y 4.3. Se seleccionan los enunciados e interpretaciones, sin las demostraciones ni las técnicas de derivación. Ejemplos elaborados para estas sesiones.}
+
+\end{document}

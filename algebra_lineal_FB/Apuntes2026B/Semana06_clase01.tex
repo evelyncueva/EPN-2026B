@@ -1,0 +1,267 @@
+% Readaptado de Semana 07 Clase 02 (2025-A): subespacios con motivacion geometrica.
+\documentclass[compacto,10pt]{pubciencias-notas}
+\usepackage{comandosEPN}
+\usepackage{tikz}
+\usetikzlibrary{babel}
+\autor{Departamento de Formación Básica}
+\materia{Álgebra Lineal}
+\nota{Semana 06 Clase 01}
+\fecha{Semestre 2026-B}
+\logouno[1.1cm]{Logo_EPN.eps}
+\logodos[1.7cm]{Logo_DFB.eps}
+\definecolor{colordef}{cmyk}{0.81,0.62,0.00,0.22}
+\raggedbottom
+
+\begin{document}
+\encabezado
+\vspace*{-8mm}
+\setcounter{section}{3}
+\section{Espacios vectoriales}
+\subsection{Motivación: la recta en $\R^2$}
+
+En la semana anterior estudiamos espacios vectoriales con distintas clases
+de objetos matemáticos. Ahora mantendremos las operaciones de un espacio conocido y
+preguntaremos: \textbf{¿en qué subconjuntos podemos seguir sumando y
+multiplicando por cualquier escalar sin salir del conjunto?}
+En los ejemplos geométricos usaremos las operaciones usuales y escalares reales.
+
+\begin{ejem}[Desplazarse en una dirección]\label{sem06cl01:recta}
+    Un dispositivo se desplaza únicamente en la dirección $d=(1,2)$,
+    en ambos sentidos y con cualquier magnitud. Sus desplazamientos forman
+    la recta
+    \[
+        L=\{t(1,2):t\in\R\}=\{(x,y)\in\R^2:y=2x\}.
+    \]
+    Observemos que, en cada vector de $L$, la componente en $y$ es el
+    doble de la componente en $x$. Por ejemplo, $u=(1,2)$ y $v=(1/2,1)$
+    pertenecen a $L$. Su suma $u+v=(3/2,3)$ también pertenece a $L$.
+
+    Sumar desplazamientos de $L$ o multiplicarlos por cualquier escalar
+    real conserva la relación $y=2x$ y no nos hace salir de la recta.
+    Después de introducir la definición, probaremos que estas propiedades
+    permiten afirmar que $L$ es un \emph{subespacio de $\R^2$}.
+\end{ejem}
+
+\begin{center}
+    \begin{tikzpicture}[x=1.25cm,y=0.65cm]
+        \draw[->] (-1.5,0)--(2.3,0) node[right] {$x$};
+        \draw[->] (0,-2.6)--(0,4.7) node[above] {$y$};
+        \draw[colordef!65,thick] (-1.2,-2.4)--(2.1,4.2)
+            node[above right] {$L:y=2x$};
+        \draw[->,very thick,colordef] (0,0)--(1,2)
+            node[midway,left] {$u$};
+        \draw[->,thick,orange!80!black] (1,2)--(1.5,3)
+            node[midway,right] {$v$};
+        \draw[->,thick,teal!70!black] (0,0)--(-1,-2)
+            node[midway,left] {$-u$};
+        \fill (1.5,3) circle (1.5pt) node[left] {$u+v$};
+        \fill (0,0) circle (1.5pt) node[below right] {$0$};
+    \end{tikzpicture}
+\end{center}
+
+
+\subsection{Definición y criterio de subespacio}
+
+\begin{defi}[Subespacio vectorial]\label{sem06cl01:definicion}
+    Sea $V$ un espacio vectorial real y sea $W\subseteq V$ no vacío.
+    Decimos que $W$ es un \textbf{subespacio vectorial de $V$} si $W$,
+    con la misma suma y el mismo producto por escalar de $V$, es también
+    un espacio vectorial real.
+
+    Las operaciones en $W$ son las restricciones
+    \[
+        \begin{aligned}
+            +\colon W\times W&\longrightarrow W,
+            &(u,v)&\longmapsto u+v,\\
+            \cdot\colon\R\times W&\longrightarrow W,
+            &(\alpha,u)&\longmapsto\alpha u.
+        \end{aligned}
+    \]
+    Para que tengan estos codominios, sus resultados deben pertenecer a $W$.
+\end{defi}
+
+\begin{teo}[Criterio de subespacio]\label{sem06cl01:criterio}
+    Sea $V$ un espacio vectorial real. Un subconjunto $W\subseteq V$
+    es un subespacio de $V$ si y solo si satisface:
+    \begin{enumerate}
+        \item $0_V\in W$.
+        \item \textbf{Cerradura bajo la suma:} para todo $u,v\in W$,
+              se tiene $u+v\in W$.
+        \item \textbf{Cerradura bajo el producto por escalar:} para todo
+              $u\in W$ y todo $\alpha\in\R$, se tiene $\alpha u\in W$.
+    \end{enumerate}
+\end{teo}
+
+Retomemos la recta $L$ del ejemplo \ref{sem06cl01:recta} y apliquemos
+el criterio. Primero, $(0,0)\in L$, pues $0=2\cdot0$.
+Si $p=(s,2s)$ y $q=(t,2t)$ son dos vectores cualesquiera de $L$, entonces
+\[
+    p+q=(s+t,2s+2t)=(s+t,2(s+t))\in L.
+\]
+La componente en $y$ de la suma sigue siendo el doble de la componente
+en $x$. Además, para cualquier $\alpha\in\R$,
+\[
+    \alpha p=(\alpha s,2\alpha s)=(\alpha s,2(\alpha s))\in L.
+\]
+Se cumplen las tres condiciones; por tanto, $L$ es un subespacio de $\R^2$.
+
+\begin{obs}[Qué debemos comprobar]
+    No se repiten los ocho axiomas de espacio vectorial: ya se cumplen en
+    el espacio $V$, en este ejemplo, $\R^2$. Se comprueba que el subconjunto conserva los
+    resultados de sus operaciones. Para aceptar un subespacio hay que
+    razonar con vectores y escalares arbitrarios; para rechazarlo basta
+    un contraejemplo a cualquiera de las tres condiciones.
+\end{obs}
+
+Los conjuntos $\{0_V\}$ y $V$ son siempre subespacios de $V$:
+el primero solo contiene el vector cero y el segundo es el espacio completo.
+
+\begin{ejem}[Una recta trasladada]\label{sem06cl01:trasladada}
+    La recta $M=\{(x,y)\in\R^2:y=2x+1\}$ es paralela a $L$,
+    pero no contiene al origen. Por eso no es un subespacio.
+    Además, $u=(0,1)\in M$, mientras que
+    \[
+        0u=(0,0)\notin M,\qquad u+u=(0,2)\notin M.
+    \]
+\end{ejem}
+
+\begin{advertencia}
+    Contener al origen es necesario, pero no suficiente. También hay que
+    comprobar las dos cerraduras.
+\end{advertencia}
+
+\subsection{Subespacios de matrices y de polinomios}
+
+El mismo criterio se aplica a los espacios de la semana 05. Ahora los
+vectores serán matrices o polinomios; en cada caso, debemos identificar
+el vector cero y comprobar que las operaciones conservan la condición
+que define al subconjunto.
+
+\begin{ejem}[Matrices diagonales]\label{sem06cl01:matrices}
+    En el espacio $\Mat[\R]{2}{2}$, consideremos el subconjunto
+    \[
+        D=\left\{\begin{pmatrix}a&0\\0&b\end{pmatrix}:a,b\in\R\right\}.
+    \]
+    Sus elementos son las matrices diagonales de tamaño $2\times2$.
+    Usamos la suma de matrices y el producto por un escalar real usuales.
+    \begin{enumerate}
+        \item La matriz nula pertenece a $D$: basta tomar $a=b=0$.
+        \item Si $A,B\in D$, sus entradas fuera de la diagonal son cero.
+              Por tanto,
+              \[
+                  A+B=
+                  \begin{pmatrix}a&0\\0&b\end{pmatrix}
+                  +\begin{pmatrix}c&0\\0&d\end{pmatrix}
+                  =\begin{pmatrix}a+c&0\\0&b+d\end{pmatrix}\in D.
+              \]
+        \item Para cualquier $\alpha\in\R$ y cualquier $A\in D$,
+              \[
+                  \alpha A=\begin{pmatrix}\alpha a&0\\0&\alpha b\end{pmatrix}
+                  \in D.
+              \]
+    \end{enumerate}
+    Así, $D$ es un subespacio de $\Mat[\R]{2}{2}$. La condición que
+    conservan ambas operaciones es tener ceros fuera de la diagonal.
+\end{ejem}
+
+\begin{ejem}[Polinomios que se anulan en un punto]\label{sem06cl01:polinomios}
+    En el espacio $\Pol_2$ de los polinomios reales de grado a lo sumo 2,
+    consideremos
+    \[
+        W=\{p\in\Pol_2:p(1)=0\}.
+    \]
+    Por ejemplo, $t-1$ y $t^2-1$ pertenecen a $W$:
+    sus gráficas pasan por el punto $(1,0)$. Para probar que $W$ es un
+    subespacio, sean $p,q\in W$ dos polinomios arbitrarios de la forma
+    \[
+        p(t)=a_0+a_1t+a_2t^2,\qquad
+        q(t)=b_0+b_1t+b_2t^2,
+    \]
+    con coeficientes reales. Como ambos pertenecen a $W$, cumplen
+    \[
+        a_0+a_1+a_2=0,\qquad b_0+b_1+b_2=0.
+    \]
+    \begin{enumerate}
+        \item El polinomio cero pertenece a $W$, pues su valor en 1 es 0.
+        \item La suma de $p$ y $q$ es
+              \[
+                  (p+q)(t)=(a_0+b_0)+(a_1+b_1)t+(a_2+b_2)t^2.
+              \]
+              Es un polinomio de grado a lo sumo 2 y, al evaluar en 1,
+              \[
+                  \begin{aligned}
+                      (p+q)(1)&=(a_0+a_1+a_2)+(b_0+b_1+b_2)\\
+                              &=0+0=0.
+                  \end{aligned}
+              \]
+              Por tanto, $p+q\in W$.
+        \item Para cualquier $\alpha\in\R$, el producto por escalar es
+              \[
+                  (\alpha p)(t)=\alpha a_0+\alpha a_1t+\alpha a_2t^2.
+              \]
+              También tiene grado a lo sumo 2 y cumple
+              \[
+                  (\alpha p)(1)=\alpha(a_0+a_1+a_2)=\alpha\cdot0=0.
+              \]
+              Por tanto, $\alpha p\in W$.
+    \end{enumerate}
+    Por tanto, $W$ es un subespacio de $\Pol_2$. Sumar o escalar estos
+    polinomios conserva el paso de sus gráficas por $(1,0)$.
+
+\end{ejem}
+
+\section{Ejercicios}
+
+\begin{ejer}[Dibujar, decidir y justificar]
+    Para cada conjunto, haga un bosquejo y decida si es un subespacio del
+    espacio indicado, con las operaciones usuales. Si lo es, verifique
+    las tres condiciones del teorema \ref{sem06cl01:criterio} con vectores
+    arbitrarios; si no, dé un contraejemplo e identifique qué condición falla.
+    \begin{enumerate}
+        \item $W_1=\{(x,y)\in\R^2:x+y=0\}$.
+        \item $W_2=\{(x,y)\in\R^2:x\ge0,\ y\ge0\}$.
+        \item $W_3=\{(x,y,z)\in\R^3:z=0\}$.
+        \item $W_4=\{(x,y,z)\in\R^3:z=1\}$.
+        \item $W_5=\{t(1,2):t\ge0\}$, en $\R^2$ (una semirrecta).
+              Analice por separado si contiene al cero y si cumple cada
+              una de las dos cerraduras.
+    \end{enumerate}
+\end{ejer}
+
+\begin{ejer}[Velocidades permitidas en una plataforma]
+    Una plataforma admite velocidades del conjunto
+    \[
+        W=\{(v_x,v_y,v_z)\in\R^3:v_x+v_y-v_z=0\}.
+    \]
+    \begin{enumerate}
+        \item Interprete geométricamente $W$ y compruebe que
+              $a=(1,0,1)$ y $b=(0,1,1)$ pertenecen a él.
+        \item Calcule $2a-b$ y compruebe que sigue siendo admisible.
+              Explique qué permite afirmar esto sobre las dos cerraduras
+              y por qué un solo cálculo no basta para demostrarlas en general.
+        \item Si se añade la restricción $v_z\ge0$, ¿el conjunto de
+              velocidades sigue siendo un subespacio? Dé un contraejemplo.
+    \end{enumerate}
+\end{ejer}
+
+
+
+\begin{ejer}[Salida individual]
+    Un compañero afirma: ``Si un conjunto contiene al cero y todos los
+    múltiplos de cada uno de sus vectores, entonces es un subespacio''.
+    Explique qué condición falta y construya un contraejemplo en $\R^2$.
+\end{ejer}
+
+\begin{ejer}
+    Con las operaciones usuales de la semana 05, decida si son subespacios:
+    \begin{enumerate}
+        \item $U=\{A\in\Mat[\R]{2}{2}:a_{12}=a_{21}\}$, en
+              $\Mat[\R]{2}{2}$.
+        \item $T=\{p\in\Pol_2:p(0)=0\}$, en $\Pol_2$.
+        \item $S=\{p\in\Pol_2:p(0)=1\}$, en $\Pol_2$.
+    \end{enumerate}
+    Justifique con el criterio de subespacio, sin volver a verificar los
+    ocho axiomas de espacio vectorial.
+\end{ejer}
+
+\end{document}
