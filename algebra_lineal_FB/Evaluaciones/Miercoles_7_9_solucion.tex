@@ -1,0 +1,150 @@
+\documentclass[10pt,a4]{examenEPN0}
+\usepackage[T1]{fontenc}
+\input{ComandoLocales}
+\examen{Prueba 01: solucionario}
+\makeatletter
+\renewcommand{\@autor}{Departamento de Formación Básica}
+\renewcommand{\@fecha}{GR5M -- Miércoles de 7 a 9 -- 21/10/2026}
+\makeatother
+
+\begin{document}
+\encabezado
+
+\section*{1. Sistema homogéneo (5 puntos)}
+La matriz de coeficientes tiene dos columnas, de modo que hay dos
+incógnitas, $x_1$ y $x_2$. Reducimos por filas:
+\[
+    A=\begin{pmatrix}1&0\\1&1\\0&1\end{pmatrix}
+    \xrightarrow{F_2\leftarrow F_2-F_1}
+    \begin{pmatrix}1&0\\0&1\\0&1\end{pmatrix}
+    \xrightarrow{F_3\leftarrow F_3-F_2}
+    \begin{pmatrix}1&0\\0&1\\0&0\end{pmatrix}.
+\]
+Hay dos pivotes, por lo que $\rang(A)=2$. Como el sistema es homogéneo,
+es compatible y $\rang(A\mid\mathbf{0})=\rang(A)=2$. El rango coincide
+con el número de incógnitas; por tanto, no hay variables libres y la
+solución es única. Las ecuaciones reducidas dan $x_1=0$ y $x_2=0$.
+El conjunto solución es
+\[
+    \boxed{S=\{(0,0)\}.}
+\]
+
+\section*{2. Potencia de un producto de matrices (5 puntos)}
+La demostración propuesta es incorrecta. El paso 1 usa la definición
+de cuadrado y el paso 2 usa la asociatividad del producto matricial.
+El error está en el \textbf{paso 3}: se reemplaza $BA$ por $AB$ sin
+justificación. En general, el producto de matrices no es conmutativo.
+El paso 4 sería válido por asociatividad si se hubiera llegado
+correctamente a $A(AB)B$.
+
+Para refutar la afirmación, tomemos
+\[
+    A=\begin{pmatrix}1&0\\0&0\end{pmatrix},\qquad
+    B=\begin{pmatrix}0&1\\1&0\end{pmatrix}.
+\]
+Entonces
+\[
+    AB=\begin{pmatrix}0&1\\0&0\end{pmatrix},\qquad
+    (AB)^2=\begin{pmatrix}0&0\\0&0\end{pmatrix}.
+\]
+Por otra parte,
+\[
+    A^2=\begin{pmatrix}1&0\\0&0\end{pmatrix}=A,\qquad
+    B^2=\begin{pmatrix}1&0\\0&1\end{pmatrix}=I_2,
+\]
+y, en consecuencia,
+\[
+    A^2B^2=A=\begin{pmatrix}1&0\\0&0\end{pmatrix}
+    \ne\begin{pmatrix}0&0\\0&0\end{pmatrix}=(AB)^2.
+\]
+Un solo contraejemplo basta para refutar una afirmación universal.
+Si se añade la hipótesis $AB=BA$, el razonamiento sí demuestra la igualdad.
+
+\newpage
+\section*{3. Sistema con parámetro (5 puntos)}
+\noindent\textbf{a) Matriz ampliada y operaciones indicadas (1 punto).}
+La matriz ampliada es
+\[
+    (A\mid b)=\left(\begin{array}{ccc|c}
+        1&1&1&1\\0&1&k&2\\1&2&2&3
+    \end{array}\right).
+\]
+Aplicamos las operaciones en el orden solicitado:
+\[
+    \left(\begin{array}{ccc|c}
+        1&1&1&1\\0&1&k&2\\1&2&2&3
+    \end{array}\right)
+    \xrightarrow{F_3\leftarrow F_3-F_1}
+    \left(\begin{array}{ccc|c}
+        1&1&1&1\\0&1&k&2\\0&1&1&2
+    \end{array}\right)
+    \xrightarrow{F_3\leftarrow F_3-F_2}
+    \left(\begin{array}{ccc|c}
+        1&1&1&1\\0&1&k&2\\0&0&1-k&0
+    \end{array}\right).
+\]
+En la segunda operación se utilizó la tercera fila ya modificada.
+
+\noindent\textbf{b) Rangos y clasificación (4 puntos).}
+Por el teorema de Rouché--Frobenius, comparamos los rangos entre sí
+y con el número de incógnitas, que es 3:
+\begin{center}
+    \begin{tabular}{c|c|c|l}
+        Condición & $\rang(A)$ & $\rang(A\mid b)$ & Tipo de solución\\
+        \hline
+        $k\ne1$ & 3 & 3 & Única\\
+        $k=1$ & 2 & 2 & Infinitas soluciones
+    \end{tabular}
+\end{center}
+\begin{itemize}
+    \item Si $k\ne1$, la última fila tiene pivote. Hay tres pivotes en
+          ambas matrices y el rango coincide con el número de incógnitas.
+          La última ecuación da $x_3=0$; luego $x_2=2$ y $x_1=-1$.
+          Por tanto, $S=\{(-1,2,0)\}$.
+    \item Si $k=1$, la última fila es nula en la matriz ampliada.
+          Los rangos son iguales a 2, menores que 3, por lo que queda una
+          variable libre. Al tomar $x_3=t$, obtenemos $x_2=2-t$ y
+          $x_1=1-(2-t)-t=-1$. Así,
+          \[
+              S=\{(-1,2-t,t):t\in\R\}.
+          \]
+\end{itemize}
+\textbf{No existe ningún valor de $k$ que produzca un sistema incompatible:}
+la última fila nunca tiene la forma $[\,0\;0\;0\mid c\,]$ con $c\ne0$.
+
+\section*{4. Modelo de mezclas (5 puntos)}
+\noindent\textbf{a) Incógnitas y unidades (1 punto).}
+Para $i=1,2,3$, sea $x_i$ el volumen de la mezcla preparada $M_i$
+que se utiliza, medido en metros cúbicos. Por su interpretación física,
+$x_1,x_2,x_3\ge0$.
+
+\noindent\textbf{b) Ecuaciones de los materiales (3 puntos).}
+Cada proporción multiplica el volumen de la mezcla correspondiente:
+\[
+    \left\{\begin{aligned}
+        0.30x_1+0.20x_2+0.40x_3&=28 &&\text{(cemento)},\\
+        0.40x_1+0.50x_2+0.30x_3&=42 &&\text{(arena)},\\
+        0.30x_1+0.30x_2+0.30x_3&=30 &&\text{(grava)}.
+    \end{aligned}\right.
+\]
+Ambos miembros de cada ecuación se expresan en metros cúbicos.
+Al sumar las tres ecuaciones se obtiene $x_1+x_2+x_3=100$, por lo que
+el volumen total solicitado ya está incluido en el modelo.
+
+\noindent\textbf{c) Forma matricial (1 punto).}
+El sistema es $Ax=b$, donde
+\[
+    \boxed{
+    A=\begin{pmatrix}
+        0.30&0.20&0.40\\
+        0.40&0.50&0.30\\
+        0.30&0.30&0.30
+    \end{pmatrix},\qquad
+    x=\begin{pmatrix}x_1\\x_2\\x_3\end{pmatrix},\qquad
+    b=\begin{pmatrix}28\\42\\30\end{pmatrix}.}
+\]
+Las filas de $A$ corresponden a cemento, arena y grava; sus columnas,
+a $M_1$, $M_2$ y $M_3$, respectivamente. El planteamiento se completa con
+la restricción $x_1,x_2,x_3\ge0$. No se requiere resolver el sistema.
+
+\end{document}
