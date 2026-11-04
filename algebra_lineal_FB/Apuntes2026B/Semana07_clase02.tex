@@ -1,0 +1,249 @@
+% Combinación lineal, cápsula y dependencia e independencia lineal.
+\documentclass[compacto,10pt]{pubciencias-notas}
+\usepackage{comandosEPN}
+\usepackage{tikz}
+\usetikzlibrary{babel}
+\autor{Departamento de Formación Básica}
+\materia{Álgebra Lineal}
+\nota{Semana 07 Clase 02}
+\fecha{Semestre 2026-B}
+\logouno[1.1cm]{Logo_EPN.eps}
+\logodos[1.7cm]{Logo_DFB.eps}
+\definecolor{colordef}{cmyk}{0.81,0.62,0.00,0.22}
+\raggedbottom
+
+\begin{document}
+\encabezado
+\vspace*{-8mm}
+\setcounter{section}{3}
+\section{Espacios vectoriales}
+\subsection{Combinación lineal}
+
+En la clase anterior describimos rectas y planos mediante ecuaciones y
+parámetros. Ahora construiremos vectores sumando múltiplos de otros
+vectores. En toda la clase los escalares son reales.
+
+\begin{defi}[Combinación lineal]\label{sem07cl02:combinacion}
+    Sean $v_1,\ldots,v_k$ vectores de un espacio vectorial real $V$.
+    Un vector $w\in V$ es una \textbf{combinación lineal} de ellos si
+    existen escalares $\alpha_1,\ldots,\alpha_k\in\R$ tales que
+    \[
+        w=\alpha_1v_1+\cdots+\alpha_kv_k.
+    \]
+    Los $\alpha_i$ son los coeficientes de la combinación. Pueden ser
+    positivos, negativos o cero.
+\end{defi}
+
+\begin{ejem}[Construir un desplazamiento en $\R^2$]
+    Sean $u=(1,0)$, $v=(1,1)$ y $w=(3,2)$. Buscar $a,b\in\R$ tales que
+    $w=au+bv$ equivale a resolver
+    \[
+        (a+b,b)=(3,2),\qquad
+        \left\{\begin{aligned}a+b&=3,\\b&=2.\end{aligned}\right.
+    \]
+    Así, $a=1$, $b=2$ y $w=u+2v$. Geométricamente, recorremos $u$ y
+    después el desplazamiento $2v$; la resultante va del origen a $(3,2)$.
+    Trasladar una flecha para sumar no cambia el vector que representa.
+\end{ejem}
+\begin{center}
+    \begin{tikzpicture}[scale=1.05]
+        \draw[->] (-0.3,0)--(3.9,0) node[right] {$x$};
+        \draw[->] (0,-0.3)--(0,2.9) node[above] {$y$};
+        \fill[colordef!8] (0,0)--(1,0)--(3,2)--(2,2)--cycle;
+        \draw[->,thick,colordef] (0,0)--(1,0) node[midway,below] {$u$};
+        \draw[->,thick,orange!80!black] (0,0)--(1,1) node[left] {$v$};
+        \draw[->,thick,orange!80!black] (1,0)--(3,2)
+            node[midway,right] {$2v$};
+        \draw[dashed] (0,0)--(2,2)--(3,2);
+        \draw[->,very thick,teal!70!black] (0,0)--(3,2)
+            node[above right] {$w=u+2v$};
+        \node[below left] at (0,0) {$0$};
+    \end{tikzpicture}
+\end{center}
+
+\begin{obs}[La pregunta se convierte en un sistema]
+    En $\R^n$, ponemos los vectores dados como columnas de una matriz
+    $A=[\,v_1\ \cdots\ v_k\,]$. Entonces $w$ es combinación lineal de
+    ellos si y solo si $Ac=w$ es compatible, donde
+    $c=(\alpha_1,\ldots,\alpha_k)^{\top}$. Las incógnitas son los
+    coeficientes, no las coordenadas del vector objetivo ya fijado.
+\end{obs}
+
+\subsection{Cápsula lineal e interpretación geométrica}
+\begin{defi}[Cápsula lineal]\label{sem07cl02:capsula}
+    Sea $S=\{v_1,\ldots,v_k\}\subseteq V$. La \textbf{cápsula lineal}
+    de $S$ es el conjunto de todas sus combinaciones lineales:
+    \[
+        \spn(S)=\{\alpha_1v_1+\cdots+\alpha_kv_k:
+            \alpha_1,\ldots,\alpha_k\in\R\}.
+    \]
+    También se llama subespacio generado por $S$ y se denota $\langle S\rangle$.
+    Una combinación es un vector; la cápsula es un conjunto de vectores.
+\end{defi}
+
+\begin{teo}
+    La cápsula $\spn(S)$ es un subespacio de $V$ y es el menor subespacio
+    que contiene a $S$: cualquier subespacio que contenga a $S$ contiene
+    también a $\spn(S)$.
+\end{teo}
+\begin{proof}
+    El cero se obtiene tomando todos los coeficientes iguales a cero.
+    Sumar dos combinaciones suma sus coeficientes, y multiplicar una
+    combinación por un escalar multiplica sus coeficientes. Por tanto,
+    se cumplen las dos cerraduras. Además, cada $v_i$ está en la cápsula.
+    Si un subespacio contiene todos los $v_i$, sus cerraduras obligan
+    a que contenga cualquier combinación lineal de ellos.
+\end{proof}
+
+\begin{ejem}[Una recta en $\R^2$]
+    Para $u=(2,3)$ y $v=(4,6)=2u$,
+    \[
+        au+bv=(a+2b)(2,3).
+    \]
+    Por tanto,
+    \[
+        \spn\{u,v\}=\{t(2,3):t\in\R\}=\{(x,y):3x-2y=0\}.
+    \]
+    La cápsula es una recta, aunque la lista tenga dos vectores.
+    Para obtener cualquier $t$ basta elegir $a=t$ y $b=0$.
+\end{ejem}
+\begin{ejem}[Todo el plano $\R^2$]
+    Para $u=(1,0)$ y $v=(1,1)$, cualquier $(x,y)$ se escribe como
+    \[
+        (x,y)=(x-y)u+yv.
+    \]
+    Por tanto, $\spn\{u,v\}=\R^2$. A diferencia del ejemplo anterior,
+    las dos direcciones no son paralelas.
+\end{ejem}
+
+\begin{ejem}[Un plano en $\R^3$]\label{sem07cl02:plano}
+    Sean $a=(1,0,1)$ y $b=(0,1,1)$. Sus combinaciones son
+    \[
+        sa+tb=(s,t,s+t),\qquad s,t\in\R.
+    \]
+    Todas cumplen $z=x+y$. Recíprocamente, si $(x,y,z)$ cumple $z=x+y$,
+    entonces $(x,y,z)=xa+yb$. Así,
+    \[
+        \spn\{a,b\}=\{(x,y,z):x+y-z=0\}.
+    \]
+    El vector $(2,-1,1)=2a-b$ pertenece al plano, pero $(0,0,1)$ no:
+    no satisface su ecuación.
+\end{ejem}
+\begin{center}
+    \begin{tikzpicture}[x={(1cm,-0.25cm)},y={(-0.65cm,-0.4cm)},z={(0cm,0.9cm)}]
+        \filldraw[fill=colordef!10,draw=colordef!50]
+            (-0.4,-0.4,-0.8)--(1.6,-0.4,1.2)--(1.6,1.6,3.2)--(-0.4,1.6,1.2)--cycle;
+        \draw[->] (0,0,0)--(2.2,0,0) node[right] {$x$};
+        \draw[->] (0,0,0)--(0,2.2,0) node[left] {$y$};
+        \draw[->] (0,0,0)--(0,0,3.5) node[above] {$z$};
+        \draw[->,thick,colordef] (0,0,0)--(1,0,1) node[right] {$a$};
+        \draw[->,thick,orange!80!black] (0,0,0)--(0,1,1) node[left] {$b$};
+        \draw[dashed] (1,0,1)--(1,1,2)--(0,1,1);
+        \draw[->,very thick,teal!70!black] (0,0,0)--(1,1,2)
+            node[above right] {$a+b$};
+        \node[below right] at (0,0,0) {$0$};
+    \end{tikzpicture}
+
+    Al variar los dos coeficientes se recorre todo el plano, no solo el paralelogramo.
+\end{center}
+
+\begin{defi}[Conjunto generador]
+    Decimos que $S$ genera $V$ si $\spn(S)=V$; es decir, si cada vector
+    de $V$ se puede escribir como combinación lineal de los elementos de $S$.
+\end{defi}
+\begin{defi}[Vector redundante en una familia]
+    Un vector de una familia es redundante si se puede escribir como
+    combinación lineal de los demás. Quitar ese vector no cambia la cápsula.
+\end{defi}
+\begin{ejem}[Añadir un vector sin ampliar el plano]
+    Con $a,b$ del ejemplo \ref{sem07cl02:plano}, sea $c=(1,1,2)=a+b$.
+    Al sustituir $c=a+b$ obtenemos
+    \[
+        ra+sb+tc=(r+t)a+(s+t)b.
+    \]
+    Por tanto, se tiene
+    $\spn\{a,b,c\}=\spn\{a,b\}$. El vector $c$ es redundante.
+\end{ejem}
+
+\subsection{Dependencia e independencia lineal}
+\begin{defi}[Dependencia e independencia lineal]\label{sem07cl02:independencia}
+    Una familia $v_1,\ldots,v_k$ de vectores de $V$ es
+    \textbf{linealmente independiente (LI)} si la igualdad
+    \[
+        \alpha_1v_1+\cdots+\alpha_kv_k=0_V
+    \]
+    solo se cumple cuando $\alpha_1=\cdots=\alpha_k=0$.
+    Es \textbf{linealmente dependiente (LD)} si existen coeficientes
+    \textbf{no todos nulos} que producen esa igualdad.
+\end{defi}
+
+\begin{ejem}[Una relación de dependencia]
+    Para $u=(2,3)$ y $v=(4,6)$, tenemos $2u-v=0$.
+    Los coeficientes $2,-1$ no son ambos cero; por tanto, la familia es LD.
+    Del mismo modo, los vectores $a,b,c=a+b$ del ejemplo anterior son LD,
+    pues $a+b-c=0$ tiene coeficientes $(1,1,-1)$.
+\end{ejem}
+\begin{ejem}[Comprobar independencia]
+    Para $u=(1,0)$ y $v=(1,1)$,
+    \[
+        \alpha u+\beta v=0
+        \quad\Longleftrightarrow\quad
+        (\alpha+\beta,\beta)=(0,0).
+    \]
+    La segunda componente da $\beta=0$ y la primera, $\alpha=0$.
+    La familia es LI: no hay una relación nula con coeficientes no todos cero.
+\end{ejem}
+
+\begin{obs}[Relación con el rango]
+    En $\R^n$, para $A=[\,v_1\ \cdots\ v_k\,]$, la familia es LI si
+    y solo si $Ac=0$ tiene únicamente la solución trivial; equivalentemente,
+    si $\rang(A)=k$. Si $\rang(A)<k$, la familia es LD.
+    Solo para matrices cuadradas se puede usar directamente $\det(A)\ne0$.
+\end{obs}
+\begin{obs}[Consecuencias y precauciones]
+    \begin{itemize}
+        \item Una familia que contiene al vector cero es LD: asígnele
+              coeficiente 1 y a los demás coeficiente 0.
+        \item Dos vectores no nulos son LD si uno es múltiplo del otro.
+        \item Tres vectores pueden ser LD sin que ningún par sea paralelo:
+              ocurre con $a,b,a+b$. Hay que estudiar la familia completa.
+        \item Una familia LD tiene algún vector redundante: en una relación
+              no trivial, despeje un vector cuyo coeficiente sea distinto de cero.
+        \item Generar y ser LI son preguntas distintas: $a,b$ son LI en
+              $\R^3$, pero generan un plano, no todo $\R^3$.
+    \end{itemize}
+\end{obs}
+
+\section{Ejercicios}
+\begin{ejer}[Combinación y cápsula en $\R^3$]
+    \hspace{0pt}\par
+    Sean $v_1=(3,0,-2)$ y $v_2=(2,-1,-5)$.
+    \begin{enumerate}
+        \item Determine para qué valor de $k$ el vector $(1,-2,k)$ es
+              combinación lineal de $v_1,v_2$. Encuentre los coeficientes.
+        \item ¿Pertenece $(1,-2,-5)$ a su cápsula? Justifique.
+        \item Escriba una ecuación del plano que forman sus combinaciones.
+    \end{enumerate}
+\end{ejer}
+\begin{ejer}[Decidir LI o LD]
+    Justifique cada respuesta. Si la familia es LD, exhiba una relación
+    nula con coeficientes no todos cero; si es LI, resuelva el sistema homogéneo.
+    \begin{enumerate}
+        \item $(1,3),\ (-2,4)$ en $\R^2$.
+        \item $(1,0,1),\ (0,1,1),\ (1,1,2)$ en $\R^3$.
+        \item $(1,0,0),\ (0,1,0),\ (0,0,1)$ en $\R^3$.
+        \item $(1,2),\ (0,0)$ en $\R^2$.
+    \end{enumerate}
+\end{ejer}
+\begin{ejer}[También para polinomios]
+    \hspace{0pt}\par
+    En $\Pol_2$, estudie las familias $1,t,t^2$ y $1,t,1+t$.
+    Escriba la combinación nula e iguale los coeficientes de cada potencia.
+    ¿Cuál genera todo $\Pol_2$? Describa la cápsula de la otra.
+\end{ejer}
+\begin{ejer}[Salida individual]
+    Explique la diferencia entre una combinación lineal y una cápsula.
+    Dé una familia de tres vectores no nulos que genere $\R^2$ y sea LD.
+    Identifique un vector que pueda quitar sin cambiar la cápsula.
+\end{ejer}
+\end{document}
