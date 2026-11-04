@@ -1,0 +1,69 @@
+ % \documentclass[10pt,respuestas,a4]{examenEPN}
+\documentclass[10pt,a4]{examenEPN0}
+\examen{Prueba 02}
+\input{ComandoLocales}
+\begin{document}
+\encabezado
+\datosAlgebra{GR5E}{05/11/2026}
+%Poner el grupo y la fecha, o dejar las llaves vacías.
+\indicacionesPrueba
+\begin{preguntas}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Sea $A$ una matriz de orden $4 \times 4$ con $\det(A) = 5$. Se obtiene una nueva matriz $M$ realizando en orden las siguientes operaciones elementales por filas: 
+    \begin{itemize}
+        \item Intercambiar la fila 1 con la fila 3 ($F_1 \leftrightarrow F_3$).
+        \item Multiplicar la fila 2 por $3$ ($3F_2 \to F_2$).
+        \item Sumar a la fila 4 el doble de la fila 1 ($ 2F_1 +F_4  \to F_4$).
+    \end{itemize}
+    ¿Cuál es el valor de $\det(M)$?
+
+    Justifique su respuesta \puntaje{2}
+    \begin{enumerate}[label=(\alph*), itemsep=2pt]
+        \item $15$
+        \item $-15$
+        \item $-30$
+        \item $30$
+    \end{enumerate}   
+    \newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item Una empresa de envases reutilizables cobra a sus clientes por tres conceptos: \emph{reacondicionamiento de cada envase}, \emph{servicio de entrega} y \emph{depósito reembolsable}. Este último se devuelve íntegramente cuando el cliente retorna el envase. La empresa quiere identificar cuánto corresponde a cada concepto, suponiendo precios constantes.
+
+Una clienta paga inicialmente {\$95} por reacondicionar un envase, recibir una entrega y dejar el depósito. Cuando devuelve el envase, su gasto definitivo es de {\$65}. Por otra parte, un cliente lleva {dos envases propios} para reacondicionarlos y solicita {una sola entrega}. Como no necesita dejar depósito, paga un total de {\$105}.
+
+\begin{enumerate}
+\item Defina las tres variables, plantee el sistema de ecuaciones lineales que modela la situación y escriba su representación matricial $Ax=b$, identificando $A$, $x$ y $b$. \puntaje{3}
+\item Resuelva el sistema mediante el método de la matriz inversa y determine los valores de las tres incógnitas en el contexto del problema. \puntaje{3}
+\end{enumerate}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Considere el sistema de ecuaciones: 
+\[
+\begin{array}{ccccc}
+     2x& &+z&+3w&=-7 \\
+     &2y &+4z&&=2 \\
+     & &z&+3w&=-7 \\
+     & &3z&+2w&=0 \\
+\end{array}
+\]
+\begin{enumerate}
+    \item Halle la matriz asociada \(A\) y su determinante. Justifique si el sistema tiene única solución o no. \puntaje{3}
+    \item Utilice la regla de Cramer para encontrar únicamente los valores de \(x\), \(z\). \puntaje{3}
+\end{enumerate}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item (Ejercicio del deber)    Calcule $\det(A)$ utilizando expansión por cofactores, donde \puntaje{6}
+\[
+A = \begin{pmatrix}
+3 & -1 & -1 \\
+2 & 1 & 0 \\
+3 & 1 & 1
+\end{pmatrix}.
+\]
+\end{preguntas}
+\final
+\end{document}

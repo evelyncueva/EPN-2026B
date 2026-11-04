@@ -1,0 +1,75 @@
+ % \documentclass[10pt,respuestas,a4]{examenEPN}
+\documentclass[10pt,a4]{examenEPN0}
+\examen{Prueba 02}
+\input{ComandoLocales}
+\begin{document}
+\encabezado
+\datosAlgebra{GR6M}{06/11/2026}
+%Poner el grupo y la fecha, o dejar las llaves vacías.
+\indicacionesPrueba
+\begin{preguntas}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item  Considere el sistema lineal homogéneo $Ax = 0$, donde $A$ es una matriz cuadrada de orden $4 \times 4$. Si se sabe que $\det(A) = 0$, ¿qué se puede afirmar con certeza sobre el conjunto solución del sistema?
+
+Justifique su respuesta \puntaje{2}
+    \begin{enumerate}[label=(\alph*), itemsep=2pt]
+        \item El sistema es inconsistente (no tiene solución).
+        \item El sistema tiene únicamente la solución trivial $x = 0$.
+        \item El sistema tiene infinitas soluciones.
+        \item El sistema tiene exactamente cuatro soluciones distintas.
+    \end{enumerate}   
+    \newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item Un centro de datos ejecuta simultáneamente tres tipos de
+procesos informáticos:
+
+\begin{itemize}
+\item Procesos de análisis de datos (A),
+\item Procesos de respaldo y almacenamiento de información (B),
+\item Procesos de inteligencia artificial para reconocimiento de patrones (C).
+\end{itemize}
+Cada proceso consume recursos computacionales del servidor.
+Un proceso de análisis de datos utiliza 2 unidades de CPU,
+1 unidad de memoria RAM y 1 unidad de almacenamiento.
+Un proceso de respaldo utiliza 3 unidades de CPU y 2 unidades
+de memoria RAM. Por su parte, un proceso de inteligencia
+artificial utiliza 2 unidades de CPU, 1 unidad de memoria RAM
+y 2 unidades de almacenamiento. Durante una hora de operación se registró un consumo total de 21 unidades de CPU, 12 unidades de memoria RAM y
+10 unidades de almacenamiento.
+
+\begin{enumerate}
+\item Defina las tres variables, plantee el sistema de ecuaciones
+lineales que modela la situación y escriba su representación
+matricial $Ax=b$, identificando $A$, $x$ y $b$. \puntaje{3}
+
+\item Resuelva el sistema mediante la regla de Cramer y determine los valores de las tres incógnitas
+en el contexto del problema. \puntaje{3}
+\end{enumerate}
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Dadas las matrices: \puntaje{6}
+    \[A = \left(\begin{array}{cc}
+         \alpha &1  \\
+         \beta& 1 
+    \end{array}\right),\quad B = \left(\begin{array}{cc}
+         \alpha &-1  \\
+         -\beta& 2 
+    \end{array}\right)\]
+    donde \(\alpha,\beta\in\R\) . Explique por qué B no es la inversa de A.
+
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item (Ejercicio del deber)    Determine la inversa de $B$ utilizando el método de Gauss-Jordan, donde \puntaje{6}
+$$B=\begin{pmatrix}1&0&2\\2&-1&3\\4&1&8\end{pmatrix}.$$
+
+Una vez calculada $B^{-1}$, utilícela para resolver el sistema matricial $B\begin{pmatrix}x\\y\\z\end{pmatrix} = \begin{pmatrix}2\\-1\\4\end{pmatrix}.$
+
+
+    
+\end{preguntas}
+\final
+\end{document}
