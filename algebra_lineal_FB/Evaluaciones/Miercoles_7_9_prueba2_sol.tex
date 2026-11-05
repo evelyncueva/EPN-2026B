@@ -1,0 +1,246 @@
+\documentclass[10pt,a4]{examenEPN0}
+\input{ComandoLocales}
+\examen{Prueba 02: solucionario}
+\makeatletter
+\renewcommand{\@autor}{Departamento de Formación Básica}
+\renewcommand{\@fecha}{GR5M -- Miércoles de 7 a 9 -- 04/11/2026}
+\makeatother
+
+% Soluciones de Miercoles_7_9_Prueba02.tex (20 puntos).
+\begin{document}
+\encabezado
+
+\noindent\textbf{Criterio general de calificación.} Se asigna crédito parcial
+por los pasos correctos del procedimiento. Un error aritmético se penaliza
+en el paso donde se origina; los pasos posteriores se valoran por su
+coherencia con los resultados previos, sin repetir la misma penalización.
+Se aceptan procedimientos equivalentes que respeten el método solicitado.
+
+\section*{1. Mezcla de fertilizantes (6 puntos)}
+\noindent\textbf{Rúbrica (6 puntos).}
+\begin{itemize}[itemsep=2pt]
+    \item Definir las tres variables con sus unidades: 0,5 puntos.
+    \item Plantear las ecuaciones de los nutrientes: 1,5 puntos
+          (0,5 por cada ecuación).
+    \item Identificar correctamente $A$, $x$ y $b$: 1 punto.
+    \item Construir $[A\mid I_3]$: 0,25 puntos.
+    \item Escalonar con operaciones por filas identificadas y correctas: 1 punto.
+    \item Reducir hasta $[I_3\mid A^{-1}]$, identificando las operaciones:
+          1 punto.
+    \item Calcular $x=A^{-1}b$: 0,75 puntos.
+\end{itemize}
+
+\noindent\textbf{a) Variables y modelo matricial (3 puntos).}
+Sean $x_A$, $x_B$ y $x_C$ las cantidades de sacos de los abonos A, B y C,
+respectivamente. Por el contexto, las tres cantidades deben ser no negativas.
+Las ecuaciones para los nutrientes, medidos en kilogramos, son
+\[
+    \left\{\begin{aligned}
+        x_B+2x_C&=7 &&\text{(nitrógeno)},\\
+        2x_A+x_B+3x_C&=14 &&\text{(fósforo)},\\
+        x_A+x_B+x_C&=6 &&\text{(potasio)}.
+    \end{aligned}\right.
+\]
+La representación $Ax=b$ queda determinada por
+\[
+    A=\begin{pmatrix}0&1&2\\2&1&3\\1&1&1\end{pmatrix},\qquad
+    x=\begin{pmatrix}x_A\\x_B\\x_C\end{pmatrix},\qquad
+    b=\begin{pmatrix}7\\14\\6\end{pmatrix}.
+\]
+
+\noindent\textbf{b) Método de la matriz inversa (3 puntos).}
+Para calcular la inversa mediante Gauss--Jordan, colocamos la identidad
+a la derecha de $A$ y aplicamos cada operación a toda la fila de la
+matriz ampliada $[A\mid I_3]$.
+
+\noindent\textit{Escalonamiento.} Primero intercambiamos las filas 1 y 3
+para obtener un pivote igual a 1:
+\[
+    \left[\begin{array}{ccc|ccc}
+        0&1&2&1&0&0\\2&1&3&0&1&0\\1&1&1&0&0&1
+    \end{array}\right]
+    \xrightarrow{F_1\leftrightarrow F_3}
+    \left[\begin{array}{ccc|ccc}
+        1&1&1&0&0&1\\2&1&3&0&1&0\\0&1&2&1&0&0
+    \end{array}\right].
+\]
+Anulamos la entrada debajo del primer pivote y normalizamos la segunda fila:
+\[
+    \left[\begin{array}{ccc|ccc}
+        1&1&1&0&0&1\\2&1&3&0&1&0\\0&1&2&1&0&0
+    \end{array}\right]
+    \xrightarrow{F_2\leftarrow F_2-2F_1}
+    \left[\begin{array}{ccc|ccc}
+        1&1&1&0&0&1\\0&-1&1&0&1&-2\\0&1&2&1&0&0
+    \end{array}\right]
+    \xrightarrow{F_2\leftarrow -F_2}
+    \left[\begin{array}{ccc|ccc}
+        1&1&1&0&0&1\\0&1&-1&0&-1&2\\0&1&2&1&0&0
+    \end{array}\right].
+\]
+Ahora anulamos la entrada debajo del segundo pivote:
+\[
+    \left[\begin{array}{ccc|ccc}
+        1&1&1&0&0&1\\0&1&-1&0&-1&2\\0&1&2&1&0&0
+    \end{array}\right]
+    \xrightarrow{F_3\leftarrow F_3-F_2}
+    \left[\begin{array}{ccc|ccc}
+        1&1&1&0&0&1\\0&1&-1&0&-1&2\\0&0&3&1&1&-2
+    \end{array}\right].
+\]
+El bloque izquierdo está en forma escalonada y tiene tres pivotes.
+
+\noindent\textit{Reducción.} Normalizamos el tercer pivote y anulamos
+la entrada situada sobre él en la segunda fila:
+\[
+    \left[\begin{array}{ccc|ccc}
+        1&1&1&0&0&1\\0&1&-1&0&-1&2\\0&0&3&1&1&-2
+    \end{array}\right]
+    \xrightarrow{F_3\leftarrow \frac13 F_3}
+    \left[\begin{array}{ccc|ccc}
+        1&1&1&0&0&1\\0&1&-1&0&-1&2\\0&0&1&\frac13&\frac13&-\frac23
+    \end{array}\right]
+    \xrightarrow{F_2\leftarrow F_2+F_3}
+    \left[\begin{array}{ccc|ccc}
+        1&1&1&0&0&1\\0&1&0&\frac13&-\frac23&\frac43\\0&0&1&\frac13&\frac13&-\frac23
+    \end{array}\right].
+\]
+Finalmente, anulamos las entradas sobre los pivotes en la primera fila:
+\[
+    \left[\begin{array}{ccc|ccc}
+        1&1&1&0&0&1\\0&1&0&\frac13&-\frac23&\frac43\\0&0&1&\frac13&\frac13&-\frac23
+    \end{array}\right]
+    \xrightarrow{F_1\leftarrow F_1-F_3}
+    \left[\begin{array}{ccc|ccc}
+        1&1&0&-\frac13&-\frac13&\frac53\\0&1&0&\frac13&-\frac23&\frac43\\0&0&1&\frac13&\frac13&-\frac23
+    \end{array}\right]
+    \xrightarrow{F_1\leftarrow F_1-F_2}
+    \left[\begin{array}{ccc|ccc}
+        1&0&0&-\frac23&\frac13&\frac13\\0&1&0&\frac13&-\frac23&\frac43\\0&0&1&\frac13&\frac13&-\frac23
+    \end{array}\right].
+\]
+Hemos obtenido $[I_3\mid A^{-1}]$, por lo que $A$ es invertible y
+\[
+    A^{-1}=\frac{1}{3}\begin{pmatrix}-2&1&1\\1&-2&4\\1&1&-2\end{pmatrix},
+    \qquad
+    x=A^{-1}b=\frac{1}{3}
+    \begin{pmatrix}-14+14+6\\7-28+24\\7+14-12\end{pmatrix}
+    =\begin{pmatrix}2\\1\\3\end{pmatrix}.
+\]
+\textbf{Se necesitan 2 sacos de A, 1 saco de B y 3 sacos de C.}
+Las cantidades son no negativas y verifican las exigencias:
+\[
+    1+2(3)=7,\qquad 2(2)+1+3(3)=14,\qquad 2+1+3=6.
+\]
+
+\section*{2. Construcción de una matriz diagonal (6 puntos)}
+\noindent\textbf{Rúbrica (6 puntos).}
+\begin{itemize}[itemsep=2pt]
+    \item Obtener las tres componentes de $x$ mediante Cramer: 1,5 puntos
+          (0,5 por cada componente).
+    \item Proponer una matriz diagonal con determinante 3: 1 punto.
+    \item Calcular $b=Ax$: 1,5 puntos (0,5 por cada componente).
+    \item Verificar los cuatro determinantes solicitados: 2 puntos
+          (0,5 por cada determinante).
+\end{itemize}
+
+Denotamos por $A^{(i)}$ la matriz obtenida al reemplazar la columna $i$
+de $A$ por $b$. Como $\det(A)=3\ne0$, la regla de Cramer da
+\[
+    x_1=\frac{-9}{3}=-3,\qquad
+    x_2=\frac{12}{3}=4,\qquad
+    x_3=\frac{6}{3}=2.
+\]
+Elegimos una matriz diagonal cuyo producto de entradas diagonales sea 3:
+\[
+    \boxed{A=\begin{pmatrix}1&0&0\\0&1&0\\0&0&3\end{pmatrix},
+    \qquad b=A\begin{pmatrix}-3\\4\\2\end{pmatrix}
+    =\begin{pmatrix}-3\\4\\6\end{pmatrix}.}
+\]
+Verificamos los cuatro determinantes solicitados:
+\[
+    \det(A)=1\cdot1\cdot3=3,
+    \qquad
+    \det\begin{pmatrix}-3&0&0\\4&1&0\\6&0&3\end{pmatrix}=-9,
+\]
+\[
+    \det\begin{pmatrix}1&-3&0\\0&4&0\\0&6&3\end{pmatrix}=12,
+    \qquad
+    \det\begin{pmatrix}1&0&-3\\0&1&4\\0&0&6\end{pmatrix}=6.
+\]
+Este ejemplo satisface todas las condiciones; la elección de $A$ y $b$
+no es única.
+
+\newpage
+\section*{3. Resolución mediante la regla de Cramer (6 puntos)}
+\noindent\textbf{Rúbrica (6 puntos).}
+\begin{itemize}[itemsep=2pt]
+    \item Identificar $A$ y $b$: 0,5 puntos.
+    \item Calcular $\det(A)$ y justificar que Cramer es aplicable: 1 punto.
+    \item Construir $A^{(1)}$, $A^{(2)}$ y $A^{(3)}$: 1,5 puntos
+          (0,5 por cada matriz).
+    \item Calcular $\det(A^{(1)})$, $\det(A^{(2)})$ y $\det(A^{(3)})$:
+          1,5 puntos (0,5 por cada determinante).
+    \item Aplicar los tres cocientes de Cramer y obtener $(x,y,z)$:
+          1,5 puntos (0,5 por cada incógnita).
+\end{itemize}
+
+El sistema dado tiene matriz de coeficientes y término independiente
+\[
+    A=\begin{pmatrix}1&2&1\\2&-1&1\\3&1&-2\end{pmatrix},
+    \qquad b=\begin{pmatrix}4\\2\\2\end{pmatrix}.
+\]
+Desarrollamos los determinantes por la primera fila:
+\[
+    \det(A)
+    =1(2-1)-2(-4-3)+1(2+3)=20.
+\]
+Como $\det(A)\ne0$, el sistema tiene solución única. Denotamos por
+$A^{(i)}$ la matriz obtenida al reemplazar la columna $i$ de $A$ por $b$:
+\[
+    A^{(1)}=\begin{pmatrix}4&2&1\\2&-1&1\\2&1&-2\end{pmatrix},\qquad
+    A^{(2)}=\begin{pmatrix}1&4&1\\2&2&1\\3&2&-2\end{pmatrix},\qquad
+    A^{(3)}=\begin{pmatrix}1&2&4\\2&-1&2\\3&1&2\end{pmatrix}.
+\]
+Sus determinantes son
+\begin{align*}
+    \det(A^{(1)})&=\det\begin{pmatrix}4&2&1\\2&-1&1\\2&1&-2\end{pmatrix}
+        =4(2-1)-2(-4-2)+(2+2)=20,\\[2mm]
+    \det(A^{(2)})&=\det\begin{pmatrix}1&4&1\\2&2&1\\3&2&-2\end{pmatrix}
+        =(-4-2)-4(-4-3)+(4-6)=20,\\[2mm]
+    \det(A^{(3)})&=\det\begin{pmatrix}1&2&4\\2&-1&2\\3&1&2\end{pmatrix}
+        =(-2-2)-2(4-6)+4(2+3)=20.
+\end{align*}
+La regla de Cramer implica
+\[
+    x=\frac{\det(A^{(1)})}{\det(A)}=\frac{20}{20}=1,\qquad
+    y=\frac{\det(A^{(2)})}{\det(A)}=\frac{20}{20}=1,\qquad
+    z=\frac{\det(A^{(3)})}{\det(A)}=\frac{20}{20}=1.
+\]
+Por tanto, $\boxed{(x,y,z)=(1,1,1)}$. Al sustituir en las ecuaciones,
+\[
+    1+2(1)+1=4,\qquad 2(1)-1+1=2,\qquad 3(1)+1-2(1)=2.
+\]
+
+\section*{4. Determinante de matrices semejantes (2 puntos)}
+\noindent\textbf{Rúbrica (2 puntos).}
+\begin{itemize}[itemsep=2pt]
+    \item Aplicar el determinante a $A=PBP^{-1}$ y usar su propiedad
+          multiplicativa: 0,75 puntos.
+    \item Justificar $\det(P^{-1})=1/\det(P)$ y concluir
+          $\det(A)=\det(B)$: 0,75 puntos.
+    \item Obtener $\det(B)=5$ e identificar la opción (b): 0,5 puntos.
+\end{itemize}
+
+De $A=PBP^{-1}$ y de la propiedad multiplicativa del determinante,
+\[
+    \det(A)=\det(P)\det(B)\det(P^{-1}).
+\]
+Como $P$ es invertible, $\det(P)\ne0$ y
+$\det(P^{-1})=1/\det(P)$. En consecuencia,
+\[
+    \det(A)=\det(B),\qquad \boxed{\det(B)=5.}
+\]
+La respuesta correcta es la \textbf{opción (b)}.
+
+\end{document}

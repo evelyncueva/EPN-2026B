@@ -1,0 +1,76 @@
+ % \documentclass[10pt,respuestas,a4]{examenEPN}
+\documentclass[10pt,a4]{examenEPN0}
+\examen{Prueba 02}
+\input{ComandoLocales}
+\imprimirDoble
+
+\begin{document}
+\encabezado
+\datosAlgebra{GR5M}{04/11/2026}
+%Poner el grupo y la fecha, o dejar las llaves vacías.
+\indicacionesPrueba
+
+
+
+\begin{preguntas}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \item Se desea preparar un fertilizante que contenga tres tipos de abono. El abono A: no contiene Nitrógeno,
+% contiene 2 kg de Fósforo y 1 kg de Potasio por saco. El abono B: contiene 1 kg de Nitrógeno, 1 kg de Fósforo y 1 kg de Potasio por saco. El abono C: contiene 2 kg de Nitrógeno, 3 kg de Fósforo y 1 kg de Potasio por saco. La mezcla del fertilizante requerido debe contener 7 kg de Nitrógeno, 14 kg de Fósforo y 6 kg de Potasio.
+
+\item Se desea preparar un fertilizante que contenga tres tipos de abono. 
+
+\begin{itemize}
+\item El abono A: no contiene Nitrógeno,
+contiene 2 kg de Fósforo y 1 kg de Potasio por saco. 
+\item El abono B: contiene 1 kg de Nitrógeno, 1 kg de Fósforo y 1 kg de Potasio por saco. 
+\item El abono C: contiene 2 kg de Nitrógeno, 3 kg de Fósforo y 1 kg de Potasio por saco. 
+\end{itemize}
+La mezcla del fertilizante requerido debe contener 7 kg de Nitrógeno, 14 kg de Fósforo y 6 kg de Potasio.
+
+\begin{enumerate}
+\item Defina las tres variables, plantee el sistema de ecuaciones lineales que modela la situación y escriba su representación matricial $Ax=b$, identificando $A$, $x$ y $b$. \puntaje{3}
+\item Resuelva el sistema mediante el método de la matriz inversa y determine los valores de las tres incógnitas en el contexto del problema. \puntaje{3}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item De un ejemplo de una matriz diagonal $A\in \mathbb{R}^{3\times 3}$ y $b\in \mathbb{R}^{3\times 1}$ que satisfacen la ecuación del sistema matricial $Ax= b$, si se conoce que \puntaje{6}
+        \[
+            \mathrm{det}(A) = 3,
+            \quad 
+            \mathrm{det}(A^{(1)}) = -9, 
+            \quad
+            \mathrm{det}(A^{(2)}) = 12, 
+            \quad
+            \mathrm{det}(A^{(3)}) = 6, 
+            \quad
+        \]
+        
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \item (Ejercicio del deber)    Considere el sistema de ecuaciones lineales: \puntaje{6}
+% $$
+% \begin{cases} x + 2y + z = 4 \\ 2x - y + z = 2 \\ 3x + y - 2z = 2 \end{cases}
+% $$
+% Determine la solución $(x, y, z)$ empleando la Regla de Cramer.
+
+\item (Ejercicio del deber)  Determine la solución $(x, y, z)$ del siguiente sistema empleando la Regla de Cramer.  \puntaje{6}
+$$
+\begin{cases} x + 2y + z = 4 \\ 2x - y + z = 2 \\ 3x + y - 2z = 2 \end{cases}
+$$
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item  Sean $A$ y $B$ dos matrices de orden $n \times n$ tales que son semejantes (es decir, existe una matriz invertible $P$ tal que $A = P B P^{-1}$). Si $\det(A) = 5$, ¿cuál es el valor de $\det(B)$? 
+Justifique su respuesta \puntaje{2}
+    \begin{enumerate}[label=(\alph*), itemsep=2pt]
+        \item $\dfrac{1}{5}$
+        \item $5$
+        \item $-5$
+        \item Depende del valor de $\det(P)$.
+    \end{enumerate}   
+    
+\end{preguntas}
+\final
+\end{document}

@@ -1,0 +1,154 @@
+\documentclass[10pt,a4]{examenEPN0}
+\input{ComandoLocales}
+\examen{Prueba 02: solucionario}
+\makeatletter
+\renewcommand{\@autor}{Departamento de Formación Básica}
+\renewcommand{\@fecha}{GR5E -- Jueves de 7 a 9 -- 05/11/2026}
+\makeatother
+\begin{document}
+\encabezado
+\noindent\textbf{Criterio general.} Se asigna crédito parcial por los pasos
+correctos. Un error aritmético se penaliza donde se origina; los pasos
+posteriores se valoran por su coherencia, sin repetir la penalización.
+Se aceptan procedimientos equivalentes que respeten el método solicitado.
+
+\section*{1. Operaciones por filas y determinante (2 puntos)}
+\noindent\textbf{Rúbrica.}
+\begin{itemize}[itemsep=2pt]
+    \item Justificar el cambio de signo por el intercambio: 0,5 puntos.
+    \item Aplicar el factor 3 por multiplicar una fila: 0,5 puntos.
+    \item Justificar que sumar un múltiplo de otra fila no altera el determinante: 0,5 puntos.
+    \item Obtener el valor y seleccionar la opción correcta: 0,5 puntos.
+\end{itemize}
+Partimos de $\det(A)=5$. El intercambio $F_1\leftrightarrow F_3$
+cambia el signo y produce un determinante de $-5$. La operación
+$F_2\leftarrow3F_2$ lo multiplica por 3, dando $-15$.
+Finalmente, $F_4\leftarrow F_4+2F_1$ no cambia el determinante.
+Por tanto, $\boxed{\det(M)=-15}$, opción \textbf{(b)}.
+
+\section*{2. Precios de los servicios (6 puntos)}
+\noindent\textbf{Rúbrica.}
+\begin{itemize}[itemsep=2pt]
+    \item Definir las variables y sus unidades: 0,5 puntos.
+    \item Plantear las tres ecuaciones: 1,5 puntos (0,5 por ecuación).
+    \item Identificar $A$, $x$ y $b$: 1 punto.
+    \item Construir $[A\mid I_3]$: 0,25 puntos.
+    \item Escalonar identificando las operaciones por filas: 1 punto.
+    \item Reducir hasta $[I_3\mid A^{-1}]$: 1 punto.
+    \item Calcular $A^{-1}b$: 0,5 puntos.
+    \item Interpretar los precios: 0,25 puntos.
+\end{itemize}
+\noindent\textbf{a) Modelo (3 puntos).}
+Sean $r$ el precio de reacondicionar un envase, $e$ el precio de una entrega
+y $d$ el depósito por envase, todos en dólares. El gasto definitivo de la
+primera clienta excluye el depósito devuelto. Así,
+\[
+    \begin{cases}r+e+d=95,\\r+e=65,\\2r+e=105.\end{cases}
+    \qquad
+    A=\begin{pmatrix}1&1&1\\1&1&0\\2&1&0\end{pmatrix},\quad
+    x=\begin{pmatrix}r\\e\\d\end{pmatrix},\quad
+    b=\begin{pmatrix}95\\65\\105\end{pmatrix}.
+\]
+\noindent\textbf{b) Inversa mediante Gauss--Jordan (3 puntos).}
+Aplicamos cada operación a toda la fila de $[A\mid I_3]$.
+Para escalonar, primero anulamos las entradas debajo del primer pivote:
+\[
+    \left[\begin{array}{ccc|ccc}
+        1&1&1&1&0&0\\1&1&0&0&1&0\\2&1&0&0&0&1
+    \end{array}\right]
+    \xrightarrow{\substack{F_2\leftarrow F_2-F_1\\F_3\leftarrow F_3-2F_1}}
+    \left[\begin{array}{ccc|ccc}
+        1&1&1&1&0&0\\0&0&-1&-1&1&0\\0&-1&-2&-2&0&1
+    \end{array}\right].
+\]
+Intercambiamos las filas para obtener la forma escalonada:
+\[
+    \xrightarrow{F_2\leftrightarrow F_3}
+    \left[\begin{array}{ccc|ccc}
+        1&1&1&1&0&0\\0&-1&-2&-2&0&1\\0&0&-1&-1&1&0
+    \end{array}\right]
+    \xrightarrow{\substack{F_2\leftarrow-F_2\\F_3\leftarrow-F_3}}
+    \left[\begin{array}{ccc|ccc}
+        1&1&1&1&0&0\\0&1&2&2&0&-1\\0&0&1&1&-1&0
+    \end{array}\right].
+\]
+Para reducir, anulamos las entradas sobre el tercer pivote y luego sobre el segundo:
+\[
+    \xrightarrow{\substack{F_2\leftarrow F_2-2F_3\\F_1\leftarrow F_1-F_3}}
+    \left[\begin{array}{ccc|ccc}
+        1&1&0&0&1&0\\0&1&0&0&2&-1\\0&0&1&1&-1&0
+    \end{array}\right]
+    \xrightarrow{F_1\leftarrow F_1-F_2}
+    \left[\begin{array}{ccc|ccc}
+        1&0&0&0&-1&1\\0&1&0&0&2&-1\\0&0&1&1&-1&0
+    \end{array}\right].
+\]
+El bloque izquierdo es $I_3$; por tanto,
+\[
+    A^{-1}=\begin{pmatrix}0&-1&1\\0&2&-1\\1&-1&0\end{pmatrix},\qquad
+    x=A^{-1}b=\begin{pmatrix}-65+105\\130-105\\95-65\end{pmatrix}
+    =\begin{pmatrix}40\\25\\30\end{pmatrix}.
+\]
+\textbf{Reacondicionamiento: \$40 por envase; entrega: \$25; depósito: \$30 por envase.}
+Se comprueba que $40+25+30=95$, $40+25=65$ y $2(40)+25=105$.
+
+\newpage
+\section*{3. Sistema de cuatro incógnitas y Cramer (6 puntos)}
+\noindent\textbf{Rúbrica.}
+\begin{itemize}[itemsep=2pt]
+    \item Escribir la matriz $A$ en el orden $(x,y,z,w)$: 1 punto.
+    \item Calcular $\det(A)$ con procedimiento: 1,5 puntos.
+    \item Justificar la unicidad por $\det(A)\ne0$: 0,5 puntos.
+    \item Construir $A^{(1)}$ y $A^{(3)}$: 1 punto (0,5 por matriz).
+    \item Calcular sus determinantes: 1 punto (0,5 por determinante).
+    \item Aplicar los cocientes de Cramer para $x$ y $z$: 1 punto (0,5 por incógnita).
+\end{itemize}
+\noindent\textbf{a) Matriz y determinante (3 puntos).}
+En el orden $(x,y,z,w)$,
+\[
+    A=\begin{pmatrix}2&0&1&3\\0&2&4&0\\0&0&1&3\\0&0&3&2\end{pmatrix},
+    \qquad b=\begin{pmatrix}-7\\2\\-7\\0\end{pmatrix}.
+\]
+Expandiendo sucesivamente por la primera columna,
+\[
+    \det(A)=2\det\begin{pmatrix}2&4&0\\0&1&3\\0&3&2\end{pmatrix}
+    =4\det\begin{pmatrix}1&3\\3&2\end{pmatrix}
+    =4(2-9)=-28\ne0.
+\]
+En consecuencia, el sistema tiene una única solución.
+
+\noindent\textbf{b) Cramer para $x$ y $z$ (3 puntos).}
+Sea $A^{(i)}$ la matriz que reemplaza la columna $i$ de $A$ por $b$:
+\[
+    A^{(1)}=\begin{pmatrix}-7&0&1&3\\2&2&4&0\\-7&0&1&3\\0&0&3&2\end{pmatrix},
+    \qquad
+    A^{(3)}=\begin{pmatrix}2&0&-7&3\\0&2&2&0\\0&0&-7&3\\0&0&0&2\end{pmatrix}.
+\]
+La primera y la tercera fila de $A^{(1)}$ son iguales, luego
+$\det(A^{(1)})=0$. La matriz $A^{(3)}$ es triangular superior, de modo que
+\[
+    \det(A^{(3)})=2\cdot2\cdot(-7)\cdot2=-56.
+\]
+Por la regla de Cramer,
+\[
+    \boxed{x=\frac{\det(A^{(1)})}{\det(A)}=\frac{0}{-28}=0,
+    \qquad z=\frac{\det(A^{(3)})}{\det(A)}=\frac{-56}{-28}=2.}
+\]
+
+\section*{4. Expansión por cofactores (6 puntos)}
+\noindent\textbf{Rúbrica.}
+\begin{itemize}[itemsep=2pt]
+    \item Elegir una fila o columna y escribir la expansión con signos correctos: 2 puntos.
+    \item Formar los menores de los términos no nulos: 2 puntos (1 por menor).
+    \item Calcular los determinantes de orden 2: 1 punto (0,5 por determinante).
+    \item Efectuar la suma y concluir: 1 punto.
+\end{itemize}
+Para $A=\begin{pmatrix}3&-1&-1\\2&1&0\\3&1&1\end{pmatrix}$,
+expandimos por la tercera columna, cuyos signos son $+,-,+$:
+\begin{align*}
+    \det(A)&=(-1)(+1)\det\begin{pmatrix}2&1\\3&1\end{pmatrix}
+        +0(-1)\det\begin{pmatrix}3&-1\\3&1\end{pmatrix}
+        +1(+1)\det\begin{pmatrix}3&-1\\2&1\end{pmatrix}\\
+    &=-1(2-3)+0+1(3+2)=1+5=\boxed{6}.
+\end{align*}
+\end{document}
