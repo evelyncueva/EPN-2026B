@@ -1,0 +1,391 @@
+% !TeX root = anexo_semana03.tex
+% !TeX program = pdflatex
+% Anexo iniciado en la semana 03 y ampliado como lectura previa de la semana 07.
+\documentclass[10pt,a5paper]{article}
+\newif\ifmostrarSoluciones
+\mostrarSolucionestrue
+\usepackage{tikz}
+\usepackage{estilo_apuntes}
+\usetikzlibrary{arrows.meta,positioning,babel}
+\encabezado{Semana 7}{Lectura previa}
+
+\begin{document}
+\tituloclase{Funciones trascendentes}{Trigonométricas, exponenciales y logarítmicas}{Lectura previa · Semana 7}
+
+\begin{objetivos}
+\begin{itemize}
+  \item Interpretar el seno y el coseno como coordenadas de un punto del círculo unitario.
+  \item Identificar su dominio, recorrido, periodicidad y cotas.
+  \item Reconocer las funciones trigonométricas, sus simetrías e identidades básicas.
+  \item Describir las funciones exponenciales y logarítmicas, sus dominios, propiedades y gráficas.
+  \item Aplicar propiedades algebraicas y reconocer la relación de función inversa.
+\end{itemize}
+\end{objetivos}
+
+\begin{resumen}
+Las funciones trigonométricas describen fenómenos periódicos. Las exponenciales modelan factores de crecimiento o decrecimiento constantes, y los logaritmos permiten recuperar sus exponentes. Esta lectura reúne las definiciones y propiedades que se usarán en clase para estudiar límites y continuidad.
+\end{resumen}
+
+\begin{nota}[Cómo usar esta lectura]
+Este documento amplía el anexo de seno y coseno iniciado en la semana 3. Antes de la clase de la semana 7, revise las definiciones, las gráficas, los dominios y las identidades; resuelva la autoevaluación final. En las dos horas presenciales nos concentraremos en límites y continuidad. No se requiere memorizar demostraciones ni utilizar derivadas.
+\end{nota}
+
+\section*{Definición mediante el círculo unitario}
+
+Los ángulos se medirán en \textbf{radianes}. Para cada $t\in\mathbb{R}$, partimos del punto $(1,0)$ y recorremos una distancia $|t|$ sobre el círculo unitario, en sentido antihorario si $t>0$ y horario si $t<0$. Si el punto obtenido es
+\[
+  P(t)=(u,v),
+\]
+definimos
+\[
+  \cos(t)=u
+  \qquad\text{y}\qquad
+  \sin(t)=v.
+\]
+Así, el coseno es la primera coordenada de $P(t)$ y el seno es la segunda.
+
+Una vuelta completa equivale a $2\pi$ radianes y a $360^\circ$; por tanto, $180^\circ=\pi$ radianes. Para convertir grados a radianes se multiplica por $\pi/180$. Por ejemplo, $30^\circ=\pi/6$ y $45^\circ=\pi/4$. Los límites trigonométricos fundamentales se expresan con argumentos en radianes.
+
+La siguiente figura representa el caso $0<t<\pi/2$. Las líneas punteadas proyectan el punto $P(t)$ sobre los ejes y permiten leer sus dos coordenadas.
+\begin{center}
+\begin{tikzpicture}[x=2.15cm,y=2.15cm,every node/.style={font=\scriptsize}]
+  \draw[->,Gris] (-1.25,0)--(1.35,0) node[right] {$u$};
+  \draw[->,Gris] (0,-1.25)--(0,1.35) node[above] {$v$};
+  \draw[Azul!75,thick] (0,0) circle (1);
+  \node[Azul!75,below left] at (-0.72,-0.70) {$u^2+v^2=1$};
+  \coordinate (P) at (50:1);
+  \coordinate (A) at (0.6428,0);
+  \coordinate (B) at (0,0.7660);
+  \draw[Rojo,very thick] (0,0)--(P);
+  \draw[Gris,dashed] (P)--(A);
+  \draw[Gris,dashed] (P)--(B);
+  \draw[->,Rojo,thick] (0.30,0) arc[start angle=0,end angle=50,radius=0.30];
+  \node[Rojo] at (0.38,0.16) {$t$};
+  \fill[Rojo] (P) circle (1.5pt);
+  \node[above right] at (P) {$P(t)=(\cos(t),\sin(t))$};
+  \fill[Gris] (1,0) circle (1.1pt);
+  \node[below right] at (1,0) {$(1,0)$};
+  \node[below] at (A) {$\cos(t)$};
+  \node[left] at (B) {$\sin(t)$};
+  \node[below left] at (0,0) {$O$};
+\end{tikzpicture}
+\end{center}
+
+\begin{definicion}[seno y coseno]
+Las funciones seno y coseno son
+\[
+  \sin\colon\mathbb{R}\longrightarrow[-1,1],
+  \qquad
+  \cos\colon\mathbb{R}\longrightarrow[-1,1].
+\]
+Ambas tienen dominio $\mathbb{R}$ y recorrido $[-1,1]$.
+\end{definicion}
+
+Al dar una vuelta completa se recorren $2\pi$ radianes y se regresa al mismo punto. Por tanto,
+\[
+  \sin(t+2\pi)=\sin(t),
+  \qquad
+  \cos(t+2\pi)=\cos(t).
+\]
+Además, como las coordenadas de un punto del círculo unitario están entre $-1$ y $1$,
+\[
+  -1\leq\sin(t)\leq1,
+  \qquad
+  -1\leq\cos(t)\leq1
+  \qquad (t\in\mathbb{R}).
+\]
+Los valores correspondientes a una vuelta completa son:
+\[
+\begin{array}{c|ccccc}
+  t & 0 & \dfrac{\pi}{2} & \pi & \dfrac{3\pi}{2} & 2\pi \\ \hline
+  \sin(t) & 0 & 1 & 0 & -1 & 0 \\
+  \cos(t) & 1 & 0 & -1 & 0 & 1
+\end{array}
+\]
+
+\section*{Gráficas}
+
+\begin{center}
+\begin{tikzpicture}[x=0.68cm,y=1.05cm,every node/.style={font=\scriptsize}]
+  \draw[->,Gris] (-6.7,0)--(6.8,0) node[right] {$t$};
+  \draw[->,Gris] (0,-1.35)--(0,1.4) node[above] {$y$};
+  \draw[Gris!55,dashed] (-6.4,1)--(6.4,1);
+  \draw[Gris!55,dashed] (-6.4,-1)--(6.4,-1);
+  \draw[Azul,very thick,domain=-6.283:6.283,samples=220]
+    plot (\x,{sin(deg(\x))});
+  \foreach \x/\etiqueta in {-6.283/$-2\pi$,-3.142/$-\pi$,3.142/$\pi$,6.283/$2\pi$}
+    \draw (\x,0.06)--(\x,-0.06) node[below] {\etiqueta};
+  \node[left] at (0,1) {$1$};
+  \node[left] at (0,-1) {$-1$};
+  \node[Azul,above right] at (4.7,-1) {$y=\sin(t)$};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[x=0.68cm,y=1.05cm,every node/.style={font=\scriptsize}]
+  \draw[->,Gris] (-6.7,0)--(6.8,0) node[right] {$t$};
+  \draw[->,Gris] (0,-1.35)--(0,1.4) node[above] {$y$};
+  \draw[Gris!55,dashed] (-6.4,1)--(6.4,1);
+  \draw[Gris!55,dashed] (-6.4,-1)--(6.4,-1);
+  \draw[Rojo,very thick,domain=-6.283:6.283,samples=220]
+    plot (\x,{cos(deg(\x))});
+  \foreach \x/\etiqueta in {-6.283/$-2\pi$,-3.142/$-\pi$,3.142/$\pi$,6.283/$2\pi$}
+    \draw (\x,0.06)--(\x,-0.06) node[below] {\etiqueta};
+  \node[left] at (0,1) {$1$};
+  \node[left] at (0,-1) {$-1$};
+  \node[Rojo,above right] at (5.0,0.25) {$y=\cos(t)$};
+\end{tikzpicture}
+\end{center}
+
+Las gráficas muestran que ambas funciones permanecen entre $-1$ y $1$, y que sus valores se repiten indefinidamente.
+
+\section*{Simetrías, valores e identidades necesarias}
+
+\begin{proposicion}[paridad y periodicidad]
+Para todo $t\in\mathbb{R}$,
+\[
+  \sin(-t)=-\sin t,\qquad \cos(-t)=\cos t.
+\]
+El seno es impar y su gráfica es simétrica respecto del origen; el coseno es par y su gráfica es simétrica respecto del eje vertical. Ambas tienen período fundamental $2\pi$.
+\end{proposicion}
+
+\[
+\begin{array}{c|ccccc}
+  t&0&\pi/6&\pi/4&\pi/3&\pi/2\\ \hline
+  \sin t&0&1/2&\sqrt2/2&\sqrt3/2&1\\
+  \cos t&1&\sqrt3/2&\sqrt2/2&1/2&0
+\end{array}
+\]
+Los signos en los otros cuadrantes se leen en las coordenadas del círculo unitario. Por ejemplo, $\sin(5\pi/6)=1/2$ y $\cos(5\pi/6)=-\sqrt3/2$.
+
+\begin{proposicion}[identidades básicas]
+Para los argumentos en que estén definidas las expresiones,
+\begin{align*}
+  \sin^2t+\cos^2t&=1,\\
+  \sin(u\pm v)&=\sin u\cos v\pm\cos u\sin v,\\
+  \cos(u\pm v)&=\cos u\cos v\mp\sin u\sin v,\\
+  \sin(2t)&=2\sin t\cos t,\\
+  1-\cos t&=2\sin^2(t/2).
+\end{align*}
+Aquí $\sin^2t$ significa $(\sin t)^2$, no $\sin(t^2)$.
+\end{proposicion}
+
+\section*{Las otras funciones trigonométricas}
+
+\begin{definicion}[cocientes y recíprocos]
+\[
+  \tan t=\frac{\sin t}{\cos t},\qquad
+  \cot t=\frac{\cos t}{\sin t},\qquad
+  \sec t=\frac1{\cos t},\qquad
+  \csc t=\frac1{\sin t}.
+\]
+Cada expresión exige que su denominador sea distinto de cero.
+\end{definicion}
+
+En lo siguiente $k\in\mathbb{Z}$. Los dominios y recorridos son:
+\[
+\begin{array}{c|c|c}
+  \text{Función}&\text{Dominio}&\text{Recorrido}\\ \hline
+  \tan&\mathbb{R}\setminus\{\pi/2+k\pi\}&\mathbb{R}\\
+  \cot&\mathbb{R}\setminus\{k\pi\}&\mathbb{R}\\
+  \sec&\mathbb{R}\setminus\{\pi/2+k\pi\}&(-\infty,-1]\cup[1,\infty)\\
+  \csc&\mathbb{R}\setminus\{k\pi\}&(-\infty,-1]\cup[1,\infty)
+\end{array}
+\]
+Tangente y cotangente son impares y tienen período fundamental $\pi$. Secante es par y cosecante es impar; ambas tienen período fundamental $2\pi$. También se cumple
+\[
+  1+\tan^2t=\sec^2t,\qquad 1+\cot^2t=\csc^2t.
+\]
+
+\begin{center}
+\begin{tikzpicture}[x=1.3cm,y=0.7cm,every node/.style={font=\scriptsize}]
+  \draw[->,Gris] (-3.5,0)--(3.5,0) node[right] {$t$};
+  \draw[->,Gris] (0,-3.4)--(0,3.5) node[above] {$y$};
+  \foreach \a in {-1.5708,1.5708}{\draw[Rojo,dashed] (\a,-3.2)--(\a,3.2);}
+  \draw[Azul,thick,domain=-1.25:1.25,samples=90] plot (\x,{tan(deg(\x))});
+  \draw[Azul,thick,domain=-3.25:-1.89,samples=80] plot (\x,{tan(deg(\x))});
+  \draw[Azul,thick,domain=1.89:3.25,samples=80] plot (\x,{tan(deg(\x))});
+  \node[below right] at (1.5708,0) {$\pi/2$};
+  \node[below left] at (-1.5708,0) {$-\pi/2$};
+  \node[Azul,right] at (0.6,2.5) {$y=\tan t$};
+\end{tikzpicture}
+\end{center}
+
+La tangente tiene asíntotas verticales $t=\pi/2+k\pi$. En cada intervalo entre dos de ellas es estrictamente creciente. Las seis funciones trigonométricas son continuas en los puntos de sus dominios; una asíntota no pertenece al dominio.
+
+\begin{ejemplo}[dominio y período después de un cambio de argumento]
+Determine el dominio y el período fundamental de $F(x)=\tan(2x)$.
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+Se exige $\cos(2x)\neq0$, es decir, $2x\neq\pi/2+k\pi$. Por tanto,
+\[
+  D_F=\mathbb{R}\setminus\{\pi/4+k\pi/2:k\in\mathbb{Z}\}.
+\]
+El argumento debe aumentar $\pi$ para repetir la tangente; el período fundamental en $x$ es $\pi/2$.
+\end{solucion}
+\fi
+
+\section*{Una función acotada que oscila: $\sin(1/x)$}
+
+Considere la función
+\[
+  f\colon\mathbb{R}\setminus\{0\}\longrightarrow[-1,1],
+  \qquad
+  f(x)=\sin(1/x).
+\]
+La función no está definida en $x=0$. Sin embargo, para todo punto $x$ en el dominio de la función se cumple
+\[
+  -1\leq\sin(1/x)\leq1.
+\]
+Por tanto, la función permanece acotada entre $-1$ y $1$.
+
+\begin{center}
+\begin{tikzpicture}[x=4.1cm,y=1.55cm,every node/.style={font=\scriptsize}]
+  \draw[->,Gris] (-1.08,0)--(1.10,0) node[right] {$x$};
+  \draw[->,Gris] (0,-1.35)--(0,1.38) node[above] {$y$};
+  \draw[Rojo,dashed] (-1.03,1)--(1.03,1);
+  \draw[Rojo,dashed] (-1.03,-1)--(1.03,-1);
+  \draw[Azul,thick,domain=-1:-0.015,samples=900]
+    plot (\x,{sin(deg(1/\x))});
+  \draw[Azul,thick,domain=0.015:1,samples=900]
+    plot (\x,{sin(deg(1/\x))});
+  \foreach \x/\etiqueta in {-1/$-1$,-0.5/$-0.5$,0.5/$0.5$,1/$1$}
+    \draw (\x,0.04)--(\x,-0.04) node[below] {\etiqueta};
+  \node[left,Rojo] at (0,1) {$1$};
+  \node[left,Rojo] at (0,-1) {$-1$};
+  \node[below right] at (0,-0.08) {$x=0$};
+  \node[Azul,above right] at (0.62,1) {$y=\sin(1/x)$};
+\end{tikzpicture}
+\end{center}
+
+La altura de la gráfica nunca sale de la franja comprendida entre $y=-1$ y $y=1$. En cambio, las oscilaciones se hacen cada vez más rápidas al acercarse a $x=0$: un pequeño cambio en $x$ produce un cambio grande en $1/x$ y hace que el seno recorra repetidamente sus valores entre $-1$ y $1$. Estar acotada no significa que la función se aproxime a un único número.
+
+\section*{Funciones exponenciales}
+
+\begin{definicion}[función exponencial]
+Sea $a>0$, $a\neq1$. La función exponencial de base $a$ es
+\[
+  E_a\colon\mathbb{R}\to(0,\infty),\qquad E_a(x)=a^x.
+\]
+Su dominio es $\mathbb{R}$ y su recorrido es $(0,\infty)$. En particular, $a^0=1$, $a^1=a$ y $a^x>0$ para todo $x$ real.
+\end{definicion}
+
+Para exponentes racionales, $a^{m/n}=\sqrt[n]{a^m}$; la potencia se extiende a exponentes reales conservando las propiedades siguientes. La base $1$ produce una función constante y se excluye para disponer de una función inversa logarítmica.
+
+\begin{proposicion}[propiedades de las potencias]
+Para $a,b>0$ y $u,v\in\mathbb{R}$,
+\[
+  a^{u+v}=a^ua^v,\quad a^{u-v}=\frac{a^u}{a^v},\quad
+  (a^u)^v=a^{uv},\quad (ab)^u=a^ub^u.
+\]
+En particular, $a^{-u}=1/a^u$.
+\end{proposicion}
+
+\begin{itemize}
+  \item Si $a>1$, $a^x$ es estrictamente creciente: al aumentar $x$ en $1$, el valor se multiplica por $a$.
+  \item Si $0<a<1$, $a^x$ es estrictamente decreciente y representa decaimiento exponencial.
+  \item La gráfica pasa por $(0,1)$, nunca corta el eje horizontal y no es par ni impar. No es periódica.
+  \item Es continua en $\mathbb{R}$. La recta $y=0$ es una asíntota horizontal hacia $-\infty$ si $a>1$, y hacia $+\infty$ si $0<a<1$.
+\end{itemize}
+
+La constante $e\approx2.71828$ es la base de la \textbf{exponencial natural} $e^x$. Se trata de una base fija, no de una variable. Sus límites fundamentales se estudiarán en el apunte de clase.
+
+\section*{Funciones logarítmicas e inversas}
+
+\begin{definicion}[logaritmo]
+Para $a>0$, $a\neq1$, el número $\log_a x$ es el exponente al que se debe elevar $a$ para obtener $x$:
+\[
+  \log_a x=y\quad\Longleftrightarrow\quad a^y=x.
+\]
+La función $\log_a\colon(0,\infty)\to\mathbb{R}$ es la inversa de $E_a$.
+\end{definicion}
+
+Su dominio es $(0,\infty)$ y su recorrido es $\mathbb{R}$. Se cumplen
+\[
+  \log_a1=0,\qquad\log_a a=1,\qquad
+  \log_a(a^y)=y,\qquad a^{\log_a x}=x\quad(x>0).
+\]
+El logaritmo natural se escribe $\ln x=\log_e x$. En este material, una base diferente siempre se indica explícitamente.
+
+\begin{itemize}
+  \item Si $a>1$, $\log_a x$ es estrictamente creciente; si $0<a<1$, es estrictamente decreciente.
+  \item Su gráfica pasa por $(1,0)$ y $(a,1)$. Es la reflexión de $y=a^x$ respecto de $y=x$.
+  \item Es continua para $x>0$, y tiene asíntota vertical $x=0$.
+  \item No está definida como función real en $x=0$ ni en números negativos. No es par, impar ni periódica.
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=0.7cm,every node/.style={font=\scriptsize}]
+  \draw[->,Gris] (-2.4,0)--(5.7,0) node[right] {$x$};
+  \draw[->,Gris] (0,-3.4)--(0,6) node[above] {$y$};
+  \draw[Gris,dashed] (-2,-2)--(5.3,5.3) node[above] {$y=x$};
+  \draw[Azul,thick,domain=-2:2.5,samples=80] plot (\x,{pow(2,\x)});
+  \draw[Rojo,thick,domain=0.125:5.4,samples=110] plot (\x,{ln(\x)/ln(2)});
+  \fill[Azul] (0,1) circle (2pt);
+  \fill[Rojo] (1,0) circle (2pt);
+  \node[Azul,right] at (2.3,4.9) {$y=2^x$};
+  \node[Rojo,above] at (4.5,2.17) {$y=\log_2x$};
+  \node[left] at (0,1) {$1$};
+  \node[below] at (1,0) {$1$};
+\end{tikzpicture}
+\end{center}
+
+\begin{proposicion}[propiedades de los logaritmos]
+Para $u,v>0$, $r\in\mathbb{R}$ y una base válida $a$,
+\begin{align*}
+  \log_a(uv)&=\log_a u+\log_a v,\\
+  \log_a(u/v)&=\log_a u-\log_a v,\\
+  \log_a(u^r)&=r\log_a u,\\
+  \log_a u&=\frac{\ln u}{\ln a}.
+\end{align*}
+Las restricciones $u,v>0$ son parte de estas fórmulas.
+\end{proposicion}
+
+\begin{nota}[Errores que se deben evitar]
+En general, $\ln(u+v)\neq\ln u+\ln v$ y $e^{u+v}\neq e^u+e^v$. Además, $\ln(x^2)=2\ln|x|$ para $x\neq0$; la escritura $2\ln x$ solamente es válida si $x>0$.
+\end{nota}
+
+\begin{ejemplo}[restricciones de dominio]
+Determine el dominio de $F(x)=\ln(4-x^2)$ y de $G(x)=1/\ln x$.
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+Para $F$, se exige $4-x^2>0$, por lo que $D_F=(-2,2)$. Para $G$, se exige $x>0$ y $\ln x\neq0$; como $\ln x=0$ solamente en $x=1$, se tiene $D_G=(0,1)\cup(1,\infty)$.
+\end{solucion}
+\fi
+
+\section*{Autoevaluación antes de clase}
+\begin{ejercicios}[definiciones y propiedades]
+\begin{enumerate}
+  \item Convierta $60^\circ$ y $135^\circ$ a radianes.
+  \item Calcule $\sin(-\pi/6)$ y $\cos(2\pi/3)$ usando simetrías y el círculo unitario.
+  \item Determine el dominio y el período fundamental de $\tan(3x)$.
+  \item Escriba $1-\cos(2x)$ en términos de $\sin^2x$.
+  \item Calcule $2^{-3}$, $\log_2(1/8)$, $\ln(e^4)$ y $e^{\ln5}$.
+  \item Determine el dominio de $\ln(x-2)$ y de $\ln(\cos x)$.
+  \item Describa si $(1/3)^x$ y $\log_{1/3}x$ crecen o decrecen.
+  \item Explique por qué $\ln(x+1)$ no se puede reemplazar por $\ln x+\ln1$.
+\end{enumerate}
+\end{ejercicios}
+\ifmostrarSoluciones
+\begin{solucion}[de la autoevaluación]
+\begin{enumerate}
+  \item $\pi/3$ y $3\pi/4$.
+  \item $-1/2$ y $-1/2$.
+  \item Se excluye $x=\pi/6+k\pi/3$ para $k\in\mathbb{Z}$; el período es $\pi/3$.
+  \item $1-\cos(2x)=2\sin^2x$.
+  \item $1/8$, $-3$, $4$ y $5$, respectivamente.
+  \item Para la primera, $(2,\infty)$. Para la segunda, se exige $\cos x>0$, es decir,
+  \[
+    \bigcup_{k\in\mathbb{Z}}(-\pi/2+2k\pi,\pi/2+2k\pi).
+  \]
+  \item Ambas son estrictamente decrecientes en sus respectivos dominios.
+  \item La propiedad corresponde a un producto, no a una suma. Por ejemplo, en $x=1$, $\ln2\neq\ln1+\ln1=0$.
+\end{enumerate}
+\end{solucion}
+\fi
+
+\fuentes{\textbf{Para ampliar:} J. Stewart, \emph{Cálculo de una variable: trascendentes tempranas}, apartados de funciones trigonométricas, exponenciales y logarítmicas; G. Strang--E. Herman, \emph{Cálculo, volumen 1}, OpenStax, §§1.3 y 1.5; \emph{Cálculo en una variable: notas de clase 2018-B}, apartados correspondientes.}
+
+\end{document}

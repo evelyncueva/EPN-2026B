@@ -1,0 +1,136 @@
+% !TeX root = prueba02_version02.tex
+% !TeX program = pdflatex
+% Prueba 2: versión 2, dificultad media, 120 minutos, 10 puntos.
+\documentclass[10pt,a5paper]{article}
+\newif\ifmostrarSoluciones
+\mostrarSolucionestrue
+\usepackage{estilo_apuntes}
+\dosPorCarillafalse % Use \dosPorCarillatrue para imprimir dos copias por carilla.
+\encabezadoprueba{Prueba 2}{Versión 2}
+
+\begin{document}
+\begin{center}
+  {\color{Azul}\large\bfseries Prueba 2 · Versión 2}
+\end{center}
+
+\noindent\textbf{Nombre:} \hrulefill
+
+\medskip
+\noindent\textbf{Indicaciones}
+\begin{itemize}
+  \item La duración de la prueba es de 2 horas. Se califica sobre 10 puntos.
+  \item Escriba el desarrollo de manera clara y ordenada. Justifique las respuestas e indique las propiedades y restricciones utilizadas. Al aplicar un teorema, verifique sus hipótesis y exprese su conclusión. Una respuesta sin justificación recibirá únicamente crédito parcial.
+  \item Resuelva con las herramientas de límites y continuidad estudiadas, sin derivadas ni regla de L'Hôpital. No se solicitan demostraciones de teoremas.
+  \item No se permite el uso de dispositivos electrónicos. Cualquier intento de copia penalizará la evaluación con una calificación total de cero.
+\end{itemize}
+
+\noindent\textbf{Ejercicios}
+\begin{enumerate}
+  \item \textbf{(4 puntos)} Considere
+  \[
+    R(x)=\frac{x+1}{(x-2)^2},\qquad
+    D_R=\mathbb{R}\setminus\{2\},
+  \]
+  y
+  \[
+    H(x)=\sqrt{x^2+4x+8}-x,\qquad D_H=\mathbb{R}.
+  \]
+  \begin{enumerate}
+    \item \textbf{(2 puntos)} Calcule los límites laterales de $R$ en $2$ y determine si se puede expresar su comportamiento mediante un único límite bilateral infinito. Determine todas sus asíntotas verticales.
+    \item \textbf{(2 puntos)} Calcule los límites de $H$ cuando $x\to+\infty$ y $x\to-\infty$. Determine sus asíntotas horizontales e indique a qué extremo corresponde cada una.
+  \end{enumerate}
+
+  \item \textbf{(3 puntos)} Para $a,b\in\mathbb{R}$, sea
+  \[
+    F_{a,b}\colon[-3,\infty)\to\mathbb{R},\qquad
+    F_{a,b}(x)=\begin{cases}
+      \dfrac{\sqrt{x+3}-2}{x-1},&-3\leq x<1,\\[2mm]
+      a,&x=1,\\
+      \dfrac{bx+1}{x+1},&x>1.
+    \end{cases}
+  \]
+  \begin{enumerate}
+    \item \textbf{(2 puntos)} Determine $a,b$ para que $F_{a,b}$ sea continua en todo su dominio. Justifique el comportamiento en el punto de unión, en el extremo $-3$ y en el interior de cada tramo.
+    \item \textbf{(1 punto)} Ahora tome $a=0$, $b=-1/2$. Clasifique la discontinuidad en $x=1$ e indique si se puede eliminar cambiando únicamente $F_{0,-1/2}(1)$. Si es posible, especifique el valor que debe asignarse.
+  \end{enumerate}
+  % Aplicación concreta de máximo--mínimo y valor intermedio.
+  \item \textbf{(3 puntos)} Considere
+  \[
+    g(x)=x+\frac4x,\qquad x\in[1,4].
+  \]
+  \begin{enumerate}
+    \item \textbf{(1 punto)} Justifique que $g$ alcanza un máximo y un mínimo absolutos en $[1,4]$, indicando el teorema y verificando sus hipótesis.
+    \item \textbf{(1 punto)} Determine el valor mínimo y el punto donde se alcanza, sin utilizar derivadas. Puede estudiar el signo de $g(x)-4$.
+    \item \textbf{(1 punto)} Justifique mediante el teorema del valor intermedio que la ecuación
+    \[
+      x+\frac4x=\frac92
+    \]
+    tiene al menos dos soluciones distintas en $(1,4)$, una a cada lado de $x=2$. No se pide calcularlas.
+  \end{enumerate}
+\end{enumerate}
+
+\ifmostrarSoluciones
+\newpage
+\begin{solucion}[de la versión 2]
+\begin{enumerate}
+  \item
+  \begin{enumerate}
+    \item Cerca de $2$, el numerador $x+1$ es positivo y tiende a $3$. El denominador $(x-2)^2$ tiende a $0$ mediante valores positivos desde ambos lados. Por tanto,
+    \[
+      \lim_{x\to2^-}R(x)=+\infty,\qquad
+      \lim_{x\to2^+}R(x)=+\infty.
+    \]
+    Se puede escribir $\lim_{x\to2}R(x)=+\infty$. La única asíntota vertical es $x=2$, pues en los demás puntos el denominador no se anula y el límite es finito.
+    \item El radicando es $(x+2)^2+4>0$ para todo $x$. Para estudiar $x\to+\infty$, racionalizamos para $x>0$:
+    \begin{align*}
+      H(x)&=\frac{4x+8}{\sqrt{x^2+4x+8}+x}\\
+          &=\frac{4+8/x}{\sqrt{1+4/x+8/x^2}+1}.
+    \end{align*}
+    En el segundo paso se usa $\sqrt{x^2}=x$, válido para $x>0$. Así,
+    \[
+      \lim_{x\to+\infty}H(x)=\frac4{1+1}=2.
+    \]
+    Si $x\to-\infty$, la raíz es no negativa y $H(x)\geq-x\to+\infty$. Por comparación,
+    \[
+      \lim_{x\to-\infty}H(x)=+\infty.
+    \]
+    La única asíntota horizontal es $y=2$, hacia $+\infty$. No hay asíntota horizontal hacia $-\infty$.
+  \end{enumerate}
+
+  \item
+  \begin{enumerate}
+    \item Para $-3\leq x<1$, al multiplicar por el conjugado se obtiene
+    \[
+      \frac{\sqrt{x+3}-2}{x-1}=\frac1{\sqrt{x+3}+2}.
+    \]
+    Por ello, el límite izquierdo en $1$ es $1/4$. El límite derecho es $(b+1)/2$, y el valor de la función es $a$. La continuidad exige
+    \[
+      \frac14=a=\frac{b+1}{2},
+    \]
+    de donde $a=1/4$ y $b=-1/2$. En los interiores, las expresiones son continuas y sus denominadores no se anulan. En el extremo $-3$, la expresión simplificada da
+    \[
+      \lim_{x\to-3^+}F_{a,b}(x)=\frac12=F_{a,b}(-3),
+    \]
+    por lo que también hay continuidad lateral en el extremo. Así, con los valores encontrados, la función es continua en todo $[-3,\infty)$.
+    \item Si $a=0$ y $b=-1/2$, ambos límites laterales en $1$ valen $1/4$, pero $F_{0,-1/2}(1)=0$. La discontinuidad es removible: se elimina asignando el valor $1/4$ en $x=1$, sin modificar los demás valores de la función.
+  \end{enumerate}
+  \item
+  \begin{enumerate}
+    \item La función $g(x)=x+4/x$ es continua para $x>0$, en particular en todo $[1,4]$. Como el intervalo es cerrado y acotado, el teorema de máximo--mínimo garantiza que alcanza ambos extremos absolutos.
+    \item Para $x\in[1,4]$,
+    \[
+      g(x)-4=x+\frac4x-4=\frac{(x-2)^2}{x}\geq0,
+    \]
+    porque el numerador es un cuadrado y el denominador es positivo. Por tanto, $g(x)\geq4$. La igualdad ocurre solamente en $x=2$, que pertenece al intervalo. El mínimo absoluto es $4$ y se alcanza únicamente en $x=2$.
+    \item Se tiene $g(1)=5$, $g(2)=4$ y $g(4)=5$. La función es continua en $[1,2]$ y $[2,4]$, y $4<9/2<5$. El teorema del valor intermedio aplicado en cada intervalo garantiza un $c_1\in(1,2)$ y un $c_2\in(2,4)$ tales que
+    \[
+      g(c_1)=g(c_2)=\frac92.
+    \]
+    Las soluciones son distintas porque pertenecen a intervalos disjuntos. No es necesario resolver la ecuación para justificar su existencia.
+  \end{enumerate}
+
+\end{enumerate}
+\end{solucion}
+\fi
+
+\end{document}

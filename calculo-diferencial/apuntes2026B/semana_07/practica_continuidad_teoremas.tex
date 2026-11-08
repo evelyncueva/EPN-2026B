@@ -1,0 +1,134 @@
+% !TeX root = practica_continuidad_teoremas.tex
+% !TeX program = pdflatex
+% Guía para la Prueba 2: tres ejercicios, una hora.
+\documentclass[10pt,a5paper]{article}
+\newif\ifmostrarSoluciones
+\mostrarSolucionestrue
+\usepackage{estilo_apuntes}
+\newtcolorbox[auto counter]{ejerciciopractica}[1][]{
+  breakable,
+  colback=GrisClaro,
+  colframe=Azul,
+  title={\titulonumerado{Ejercicio}{\thetcbcounter}{#1}},
+  fonttitle=\bfseries,
+  arc=2mm,
+  boxrule=0.7pt
+}
+\newenvironment{solucionejercicio}[1]{%
+  \par\medskip\noindent\textbf{Solución del ejercicio #1.}%
+  \enspace\ignorespaces
+}{%
+  \par\medskip
+}
+\encabezado{Semana 7}{Práctica de continuidad}
+
+\begin{document}
+\tituloclase{Práctica de continuidad y teoremas}{Continuidad, imagen de intervalos y localización de ceros}{Semana 7 · 1 hora}
+
+\begin{objetivos}
+\begin{itemize}
+  \item Distinguir el valor de una función, sus límites laterales y su continuidad.
+  \item Diferenciar una conclusión garantizada de una afirmación compatible con los datos.
+  \item Identificar hipótesis indispensables y construir contraejemplos sencillos.
+  \item Determinar imágenes y extremos, y aproximar soluciones mediante bisección.
+\end{itemize}
+\end{objetivos}
+
+\noindent\textbf{Indicaciones.} Dedique aproximadamente 20 minutos a cada ejercicio. Se valoran las explicaciones, la identificación de hipótesis y los contraejemplos; puede apoyarse en bocetos de gráficas. Cuando una afirmación no esté garantizada, explique por qué o describa una función que la contradiga. No se requieren demostraciones de teoremas, derivadas ni calculadora. La primera actividad es conceptual; las otras dos aplican los teoremas a funciones concretas.
+
+\begin{ejerciciopractica}[qué información determina la continuidad · 20 min]
+  De una función $f$ se conoce la siguiente información. En cada caso, los límites laterales indicados existen como números reales.
+  \[
+    \begin{array}{c|c|c|c}
+      a&\lim_{x\to a^-}f(x)&\lim_{x\to a^+}f(x)&f(a)\\ \hline
+      1&2&2&-1\\
+      2&-1&1&0\\
+      3&0&0&\text{no definido}
+    \end{array}
+  \]
+  \begin{enumerate}
+    \item Analice la continuidad en cada punto. Indique qué condición falla y si basta cambiar o asignar únicamente el valor en ese punto para obtener continuidad. Cuando sea posible, especifique el valor adecuado.
+    \item Un estudiante afirma: «Como $f(1)=-1$, la función debe ser negativa en un entorno de $1$, por preservación del signo». ¿Es correcta la aplicación? ¿Qué signo tienen realmente los valores de $f(x)$ suficientemente próximos a $1$, con $x\neq1$?
+    \item Haga dos bocetos locales: uno compatible con los datos en $1$ y otro con los datos en $2$. Use círculos abiertos y puntos llenos para distinguir los límites del valor asignado. Explique por qué cambiar un punto puede reparar uno de los dibujos, pero no el otro.
+  \end{enumerate}
+\end{ejerciciopractica}
+
+\ifmostrarSoluciones
+\begin{solucionejercicio}{1}
+  \begin{enumerate}
+    \item En $1$, el límite bilateral es $2$, pero $f(1)=-1$. Es una discontinuidad removible; se repara asignando $f(1)=2$. En $2$, los límites laterales difieren: hay una discontinuidad de salto y ningún cambio aislado de $f(2)$ la elimina. En $3$, el límite bilateral es $0$, pero no hay valor asignado. Se obtiene una extensión continua definiendo $f(3)=0$.
+    \item La aplicación es incorrecta porque $f$ no es continua en $1$. Como $\lim_{x\to1}f(x)=2>0$, los valores suficientemente cercanos con $x\neq1$ son positivos, aunque el valor aislado $f(1)$ sea negativo. Se debe distinguir la preservación del signo a partir de un límite positivo de la aplicación del teorema de continuidad usando $f(1)$.
+    \item En el primer boceto, ambas ramas se acercan al punto abierto $(1,2)$ y se marca el punto lleno $(1,-1)$. Basta trasladar ese valor aislado a la altura $2$. En el segundo, la rama izquierda se acerca a $(2,-1)$, la derecha a $(2,1)$ y se marca $(2,0)$ como punto lleno. Cambiar este último no modifica las dos alturas laterales distintas.
+  \end{enumerate}
+\end{solucionejercicio}
+\fi
+
+% Adaptación de Bartle--Sherbert, 4.ª ed., §5.3, ejercicio 16.
+\begin{ejerciciopractica}[imagen de un intervalo y extremos · 20 min]
+  Sea
+  \[
+    g(x)=\frac1{1+x^2}.
+  \]
+  \begin{enumerate}
+    \item Justifique que $g$ alcanza máximo y mínimo absolutos en $I=[-2,1]$. Determine sus valores y los puntos donde se alcanzan mediante desigualdades, sin derivadas.
+    \item Determine la imagen $g(I)$ y justifique que se alcanzan todos los valores entre el mínimo y el máximo. ¿Coincide con el intervalo entre $g(-2)$ y $g(1)$?
+    \item Determine la imagen de $J=(-2,1)$. Indique qué extremos se alcanzan y observe si la imagen de este intervalo abierto es necesariamente abierta.
+  \end{enumerate}
+\end{ejerciciopractica}
+
+\ifmostrarSoluciones
+\begin{solucionejercicio}{2}
+  \begin{enumerate}
+    \item El denominador es positivo para todo $x$, así que $g$ es continua en $[-2,1]$. El intervalo es cerrado y acotado; máximo--mínimo garantiza ambos extremos. Para $x\in[-2,1]$,
+    \[
+      0\leq x^2\leq4,\qquad 1\leq1+x^2\leq5,
+    \]
+    de donde
+    \[
+      \frac15\leq g(x)\leq1.
+    \]
+    El mínimo es $1/5$, alcanzado solamente en $x=-2$; el máximo es $1$, alcanzado solamente en $x=0$.
+    \item Por continuidad y valor intermedio, se alcanzan todos los valores entre los extremos absolutos. En consecuencia, $g(I)=[1/5,1]$. No coincide con el intervalo $[g(-2),g(1)]=[1/5,1/2]$: los valores en los extremos del dominio no tienen por qué ser los extremos de la imagen.
+    \item En $J$ se cumple $1/5<g(x)\leq1$. El valor $1$ se alcanza en $0$; el valor $1/5$ no se alcanza porque $x=-2$ no está incluido y $x=2$ tampoco pertenece a $J$. Para cualquier $y\in(1/5,1]$, el punto
+    \[
+      x=-\sqrt{1/y-1}
+    \]
+    pertenece a $(-2,0]$ y satisface $g(x)=y$. Por tanto, $g(J)=(1/5,1]$. Hay máximo, pero no mínimo; la imagen es un intervalo semiabierto, aunque el intervalo de partida sea abierto.
+  \end{enumerate}
+\end{solucionejercicio}
+\fi
+
+% Aplicación de Bolzano y bisección, como en el apunte de la semana 6.
+\begin{ejerciciopractica}[existencia y aproximación de una solución · 20 min]
+  Considere la ecuación
+  \[
+    x^3+x=4.
+  \]
+  \begin{enumerate}
+    \item Defina una función apropiada y utilice Bolzano para justificar que hay al menos una solución en $(1,2)$.
+    \item Realice dos pasos de bisección a partir de $[1,2]$. Registre en cada paso el punto medio, el valor de la función y el intervalo que conserva.
+    \item Use el punto medio del intervalo final como aproximación. Indique una cota del error y explique por qué el procedimiento conserva al menos una solución en cada paso.
+  \end{enumerate}
+\end{ejerciciopractica}
+
+\ifmostrarSoluciones
+\begin{solucionejercicio}{3}
+  \begin{enumerate}
+    \item Definimos $F(x)=x^3+x-4$, continua en $[1,2]$ por ser polinómica. Como $F(1)=-2<0$ y $F(2)=6>0$, Bolzano garantiza al menos un cero en $(1,2)$, es decir, una solución de la ecuación.
+    \item Los dos pasos son
+    \[
+      \begin{array}{c|c|c|c}
+        \text{Paso}&\text{Punto medio}&F(\text{punto medio})&\text{Intervalo conservado}\\ \hline
+        1&3/2&7/8&[1,3/2]\\
+        2&5/4&-51/64&[5/4,3/2]
+      \end{array}
+    \]
+    En cada intervalo conservado los valores de los extremos tienen signos opuestos.
+    \item El punto medio final es $11/8=1.375$. La longitud del intervalo final es $1/4$; por tanto, la distancia de la aproximación a una solución de ese intervalo es a lo sumo $1/8=0.125$. La continuidad y el cambio de signo permiten aplicar Bolzano nuevamente en cada intervalo conservado. No se requiere calcular la solución exacta.
+  \end{enumerate}
+\end{solucionejercicio}
+\fi
+
+\fuentes{\textbf{Referencia de la actividad 2:} R. G. Bartle y D. R. Sherbert, \emph{Introduction to Real Analysis}, 4.ª edición, §5.3, ejercicio 16, adaptado. La actividad 3 sigue el procedimiento de Bolzano y bisección trabajado en la semana 6.}
+
+\end{document}

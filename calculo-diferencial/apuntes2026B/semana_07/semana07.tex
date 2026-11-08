@@ -1,0 +1,280 @@
+% !TeX root = semana07.tex
+% !TeX program = pdflatex
+% Dos horas presenciales, precedidas por lectura autónoma del anexo ampliado.
+\documentclass[10pt,a5paper]{article}
+\newif\ifmostrarSoluciones
+\mostrarSolucionestrue
+\usepackage{tikz}
+\usepackage{estilo_apuntes}
+\usetikzlibrary{arrows.meta,positioning,babel}
+\encabezado{Semana 7}{Apunte semanal}
+
+\begin{document}
+\tituloclase{Límites de funciones trascendentes}{Trigonométricas, exponenciales y logarítmicas}{Semana 7 · 2 horas}
+
+\begin{objetivos}
+\begin{itemize}
+  \item Interpretar el límite fundamental del seno mediante el teorema del Sanduche.
+  \item Aplicar límites trigonométricos con identidades y cambios de variable.
+  \item Utilizar continuidad y restricciones de dominio en funciones trascendentes.
+  \item Calcular límites exponenciales y logarítmicos básicos y reconocer su crecimiento comparado.
+\end{itemize}
+\end{objetivos}
+
+\begin{nota}[Lectura previa necesaria]
+Antes de clase, estudie el anexo \emph{Funciones trascendentes}, iniciado en la semana 3 y ampliado para esta semana: archivo \texttt{anexo\_semana03.tex}, en la carpeta \texttt{semana\_03}. Allí se reúnen las definiciones, dominios, gráficas, simetrías, periodicidad, identidades y propiedades algebraicas. Complete su autoevaluación; traiga las dudas sobre esos prerrequisitos.
+\end{nota}
+
+\begin{resumen}
+La continuidad permite sustituir directamente cuando la expresión está definida en el punto. Si aparece $0/0$, se transforma la expresión para reconocer un límite fundamental. En un cambio de variable se identifica a qué valor y desde qué lado se aproxima el nuevo argumento. Al infinito, se distingue crecimiento logarítmico, potencial y exponencial.
+\end{resumen}
+
+\begin{docente}
+\textbf{Ruta para 120 minutos.} Comprobación de la lectura (10 min); encaje y límites trigonométricos (35 min); cambio de variable y continuidad (25 min); límites exponenciales y logarítmicos (20 min); crecimiento comparado (20 min); comprobación final (10 min).
+
+Se priorizan los ejemplos resueltos. Los ejercicios finales se completan como práctica autónoma. El encaje se trabaja desde su interpretación geométrica; los límites naturales y la comparación de crecimientos se presentan como resultados admitidos, sin recurrir a derivadas, series ni L'Hôpital.
+\end{docente}
+
+\section*{Límites trigonométricos fundamentales}
+
+En todo este apunte los argumentos trigonométricos están en \textbf{radianes}. Del comportamiento en el círculo unitario se tiene
+\[
+  \lim_{t\to0}\sin t=0,\qquad \lim_{t\to0}\cos t=1.
+\]
+La sustitución en $\sin t/t$ produce $0/0$; los dos límites anteriores, por sí solos, no determinan ese cociente.
+
+\subsection*{Encaje del cociente del seno}
+Para $0<t<\pi/2$, la comparación geométrica entre un triángulo interior, un sector circular y un triángulo exterior del círculo unitario da
+\[
+  \sin t<t<\tan t.
+\]
+
+\begin{center}
+\begin{tikzpicture}[x=3cm,y=3cm,every node/.style={font=\scriptsize}]
+  \coordinate (O) at (0,0);
+  \coordinate (A) at (1,0);
+  \coordinate (B) at (40:1);
+  \coordinate (T) at (1,0.8391);
+  \fill[GrisClaro] (O)--(A)--(T)--cycle;
+  \fill[AzulClaro] (O)--(A) arc[start angle=0,end angle=40,radius=1]--cycle;
+  \fill[VerdeClaro] (O)--(A)--(B)--cycle;
+  \draw[Azul,thick] (A) arc[start angle=0,end angle=80,radius=1];
+  \draw[Gris,thick] (O)--(A)--(T)--cycle;
+  \draw[Verde,thick] (O)--(B)--(A);
+  \draw[->,Rojo] (0.3,0) arc[start angle=0,end angle=40,radius=0.3];
+  \node[Rojo] at (0.4,0.13) {$t$};
+  \node[below left] at (O) {$O$};
+  \node[below] at (A) {$A$};
+  \node[above left] at (B) {$B$};
+  \node[above right] at (T) {$T$};
+\end{tikzpicture}
+\end{center}
+
+Las áreas correspondientes son $\tfrac12\sin t$, $\tfrac12t$ y $\tfrac12\tan t$. La comparación encierra el cociente entre
+\[
+  \cos t\leq\frac{\sin t}{t}\leq1.
+\]
+Como $\cos t\to1$, el teorema del Sanduche da el límite por la derecha. El cociente es par, pues $\sin(-t)/(-t)=\sin t/t$, así que se obtiene el mismo límite por la izquierda.
+
+\begin{teorema}[límites trigonométricos fundamentales]
+\[
+  \boxed{\lim_{t\to0}\frac{\sin t}{t}=1},\qquad
+  \lim_{t\to0}\frac{\tan t}{t}=1.
+\]
+Además,
+\[
+  \lim_{t\to0}\frac{1-\cos t}{t}=0,\qquad
+  \lim_{t\to0}\frac{1-\cos t}{t^2}=\frac12.
+\]
+\end{teorema}
+
+Para reconocer los últimos cocientes se usan $\tan t=\sin t/\cos t$ y $1-\cos t=2\sin^2(t/2)$. No se deben intercambiar los denominadores $t$ y $t^2$.
+
+\begin{ejemplo}[igualar el argumento y el denominador]
+Calcule $\displaystyle\lim_{x\to0}\frac{\sin(5x)}{3x}$.
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+Escribimos
+\[
+  \frac{\sin(5x)}{3x}=\frac53\frac{\sin(5x)}{5x}.
+\]
+Con $t=5x$, se tiene $t\to0$ y $t\neq0$ si $x\neq0$. El cociente fundamental tiende a $1$, por lo que el límite es $5/3$.
+\end{solucion}
+\else\vspace{18mm}\fi
+
+\begin{ejemplo}[una identidad antes del cambio de variable]
+Calcule $\displaystyle\lim_{x\to0}\frac{1-\cos(2x)}{x^2}$.
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+La identidad $1-\cos(2x)=2\sin^2x$ da
+\[
+  \frac{1-\cos(2x)}{x^2}=2\left(\frac{\sin x}{x}\right)^2\longrightarrow2.
+\]
+El denominador es cuadrático; usar el límite con denominador lineal daría una conclusión incorrecta.
+\end{solucion}
+\else\vspace{16mm}\fi
+
+\section*{Cambio de variable y continuidad}
+
+\begin{criterio}[reconocer el argumento que tiende a cero]
+Si $u(x)\to0$ y $u(x)\neq0$ en los puntos cercanos considerados, entonces
+\[
+  \frac{\sin(u(x))}{u(x)}\longrightarrow1.
+\]
+No se exige que $u(x)=x$ ni que la aproximación sea bilateral. El cociente se utiliza donde está definido; una extensión con valor $1$ en argumento cero permite tratar también esos puntos si fuera necesario.
+\end{criterio}
+
+\begin{ejemplo}[cambio de variable no lineal]
+Calcule $\displaystyle\lim_{x\to0}\frac{\sin(x^2)}{x}$.
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+Para $x\neq0$,
+\[
+  \frac{\sin(x^2)}{x}=x\frac{\sin(x^2)}{x^2}.
+\]
+Con $t=x^2$, $t\to0^+$ y el segundo factor tiende a $1$. El primero tiende a $0$, así que el límite es $0$. Se debe conservar el factor $x$ que aparece al ajustar el denominador.
+\end{solucion}
+\else\vspace{18mm}\fi
+
+Las funciones seno y coseno son continuas en $\mathbb{R}$. Los cocientes trigonométricos son continuos donde sus denominadores no se anulan. Por ejemplo, $\tan x$ es continua si $x\neq\pi/2+k\pi$. Para una composición también se exige que el argumento pertenezca al dominio de la función exterior.
+
+\begin{ejemplo}[extensión continua de un cociente]
+Determine $c$ para que $F$ sea continua en $0$:
+\[
+  F(x)=\begin{cases}\sin(4x)/x,&x\neq0,\\c,&x=0.\end{cases}
+\]
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+Para $x\neq0$, $\sin(4x)/x=4\sin(4x)/(4x)$, cuyo límite es $4$. La continuidad exige $F(0)=4$, de modo que $c=4$.
+\end{solucion}
+\else\vspace{16mm}\fi
+
+\section*{Límites exponenciales y logarítmicos}
+
+\subsection*{Continuidad y sustitución}
+Para una base válida $a>0$, $a\neq1$, la exponencial $a^x$ es continua en $\mathbb{R}$ y $\log_a x$ es continua en $(0,\infty)$. Así,
+\[
+  u(x)\to L\ \Longrightarrow\ a^{u(x)}\to a^L.
+\]
+Si además $L>0$ y $u(x)>0$ cerca del punto considerado, entonces
+\[
+  \log_a(u(x))\longrightarrow\log_a L.
+\]
+La condición $L>0$ no puede omitirse para sustituir directamente en el logaritmo.
+
+\begin{ejemplo}[sustitución y dominio]
+Calcule $\displaystyle\lim_{x\to0}\frac{\ln(x+2)}{e^x+1}$.
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+El numerador está definido y es continuo para $x>-2$. El denominador es continuo, positivo y en $0$ vale $2$. Por tanto, el límite es $\ln2/2$.
+\end{solucion}
+\else\vspace{14mm}\fi
+
+\subsection*{Dos límites naturales de referencia}
+Los siguientes resultados se admiten en esta sesión y se usan sin derivadas:
+\[
+  \boxed{\lim_{t\to0}\frac{e^t-1}{t}=1},\qquad
+  \boxed{\lim_{t\to0}\frac{\ln(1+t)}{t}=1}.
+\]
+En el segundo se exige $1+t>0$, lo que se cumple para $t$ suficientemente próximo a $0$. Para otras bases válidas,
+\[
+  \lim_{t\to0}\frac{a^t-1}{t}=\ln a,\qquad
+  \lim_{t\to0}\frac{\log_a(1+t)}{t}=\frac1{\ln a}.
+\]
+La constante $1$ de los dos límites naturales corresponde a la base $e$.
+
+\begin{ejemplo}[cambio de variable en un límite mixto]
+Calcule $\displaystyle\lim_{x\to0}\frac{\ln(1+3x)}{\sin(2x)}$.
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+Se exige $x>-1/3$ y $\sin(2x)\neq0$. En un entorno suficientemente pequeño de $0$, basta excluir $x=0$. Allí,
+\[
+  \frac{\ln(1+3x)}{\sin(2x)}
+  =\frac{\ln(1+3x)}{3x}\,\frac{2x}{\sin(2x)}\,\frac32.
+\]
+Los cambios $t=3x$ y $u=2x$ permiten reconocer dos factores con límite $1$. El límite solicitado es $3/2$.
+\end{solucion}
+\else\vspace{22mm}\fi
+
+\section*{Límites en los extremos y crecimiento comparado}
+
+\begin{proposicion}[bases mayores que uno]
+Para $a>1$,
+\[
+  \lim_{x\to+\infty}a^x=+\infty,\qquad
+  \lim_{x\to-\infty}a^x=0,
+\]
+\[
+  \lim_{x\to+\infty}\log_a x=+\infty,\qquad
+  \lim_{x\to0^+}\log_a x=-\infty.
+\]
+Si $0<a<1$, se intercambian los comportamientos de la exponencial: el límite hacia $+\infty$ es $0$ y hacia $-\infty$ es $+\infty$. Para el logaritmo, los límites anteriores cambian de signo.
+\end{proposicion}
+
+Que dos funciones tiendan a $+\infty$ no indica cuál crece más rápido. Tampoco convierte $\infty/\infty$ en un número.
+
+\begin{proposicion}[comparación de crecimientos]
+Para cualesquiera constantes $p>0$ y $k>0$,
+\[
+  \lim_{x\to+\infty}\frac{\ln x}{x^p}=0,
+  \qquad
+  \lim_{x\to+\infty}\frac{x^p}{e^{kx}}=0.
+\]
+En ese sentido, el logaritmo crece más lentamente que cualquier potencia positiva, y una exponencial de exponente $kx$ crece más rápidamente que cualquier potencia positiva. Estos resultados se admiten sin demostración en esta sesión.
+\end{proposicion}
+
+\begin{ejemplo}[usar la comparación en cocientes]
+Calcule
+\[
+  \lim_{x\to+\infty}\frac{\ln x}{\sqrt{x}},\quad
+  \lim_{x\to+\infty}\frac{x^3}{2^x},\quad
+  \lim_{x\to-\infty}x^2e^x.
+\]
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+El primer límite es $0$ por comparación con la potencia $p=1/2$. En el segundo, $2^x=e^{x\ln2}$ con $\ln2>0$; la comparación con $p=3$ da también $0$. Para el tercero, $t=-x\to+\infty$ y $x^2e^x=t^2/e^t\to0$. Los tres límites son $0$, pero el último exige cambiar el extremo de aproximación.
+\end{solucion}
+\else\vspace{22mm}\fi
+
+\section*{Práctica autónoma y comprobación final}
+\begin{ejercicios}[límites y continuidad]
+\begin{enumerate}
+  \item Calcule $\displaystyle\lim_{x\to0}\frac{\sin(3x)}{\sin(5x)}$ y $\displaystyle\lim_{x\to0}\frac{\tan(2x)}x$.
+  \item Calcule $\displaystyle\lim_{x\to\pi}\frac{\sin(x-\pi)}{x-\pi}$ e indique la nueva variable.
+  \item Calcule $\displaystyle\lim_{x\to0}\frac{1-\cos(3x)}{x^2}$.
+  \item Determine $c$ para que $F(x)=(e^{2x}-1)/x$ para $x\neq0$, con $F(0)=c$, sea continua en $0$.
+  \item Calcule $\displaystyle\lim_{x\to0}\frac{\ln(1-2x)}x$ e indique la restricción del logaritmo.
+  \item Determine el dominio y los intervalos de continuidad de $\ln(\cos x)$.
+  \item Calcule $\displaystyle\lim_{x\to+\infty}\frac{\ln x}{x^{1/3}}$ y $\displaystyle\lim_{x\to+\infty}\frac{x^4}{e^{2x}}$.
+  \item Calcule $\displaystyle\lim_{x\to0^+}\ln x$ y $\displaystyle\lim_{x\to+\infty}(1/2)^x$. Indique las asíntotas que justifican.
+\end{enumerate}
+\end{ejercicios}
+\ifmostrarSoluciones
+\begin{solucion}[de la práctica]
+\begin{enumerate}
+  \item $3/5$ y $2$, ajustando cada cociente a su argumento.
+  \item Con $t=x-\pi\to0$, el límite es $1$.
+  \item Es $9/2$, pues se escribe $9(1-\cos(3x))/(3x)^2$.
+  \item $c=2$, ya que $(e^{2x}-1)/x=2(e^{2x}-1)/(2x)\to2$.
+  \item Se exige $1-2x>0$, es decir, $x<1/2$. Con $t=-2x$, el cociente es $-2\ln(1+t)/t$, por lo que el límite es $-2$.
+  \item El dominio es la unión, para $k\in\mathbb{Z}$, de los intervalos $(-\pi/2+2k\pi,\pi/2+2k\pi)$. En cada uno, el coseno es positivo y la composición con el logaritmo es continua.
+  \item Ambos límites son $0$ por comparación de crecimientos.
+  \item Los límites son $-\infty$ y $0$, respectivamente. Para $\ln x$, $x=0$ es una asíntota vertical; para $(1/2)^x$, $y=0$ es una asíntota horizontal hacia $+\infty$.
+\end{enumerate}
+\end{solucion}
+\fi
+
+\begin{nota}[Antes de dar por terminado un límite]
+Compruebe: radianes en trigonometría; denominador ajustado al argumento; argumento positivo en el logaritmo; base válida; lado de aproximación en cambios de variable. La sustitución directa requiere continuidad en el punto, y las formas $0/0$ o $\infty/\infty$ requieren un análisis adicional.
+\end{nota}
+
+\fuentes{\textbf{Para ampliar:} \emph{Cálculo en una variable: notas de clase 2018-B}, Resumen No.~3 (límites trigonométricos) y Resumen No.~11 (logaritmo y exponencial; se seleccionan las propiedades, sin integración ni derivación); J. Stewart, \emph{Cálculo de una variable: trascendentes tempranas}, apartados sobre funciones trascendentes y sus límites; G. Strang--E. Herman, \emph{Cálculo, volumen 1}, OpenStax, §§1.3 y 1.5 para los prerrequisitos.}
+
+\end{document}

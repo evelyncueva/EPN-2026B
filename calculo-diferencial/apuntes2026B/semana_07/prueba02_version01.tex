@@ -1,0 +1,137 @@
+% !TeX root = prueba02_version01.tex
+% !TeX program = pdflatex
+% Prueba 2: versión 1, dificultad media, 120 minutos, 10 puntos.
+\documentclass[10pt,a5paper]{article}
+\newif\ifmostrarSoluciones
+\mostrarSolucionestrue
+\usepackage{estilo_apuntes}
+\dosPorCarillafalse % Use \dosPorCarillatrue para imprimir dos copias por carilla.
+\encabezadoprueba{Prueba 2}{Versión 1}
+
+\begin{document}
+\begin{center}
+  {\color{Azul}\large\bfseries Prueba 2 · Versión 1}
+\end{center}
+
+\noindent\textbf{Nombre:} \hrulefill
+
+\medskip
+\noindent\textbf{Indicaciones}
+\begin{itemize}
+  \item La duración de la prueba es de 2 horas. Se califica sobre 10 puntos.
+  \item Escriba el desarrollo de manera clara y ordenada. Justifique las respuestas e indique las propiedades y restricciones utilizadas. Al aplicar un teorema, verifique sus hipótesis y exprese su conclusión. Una respuesta sin justificación recibirá únicamente crédito parcial.
+  \item Resuelva con las herramientas de límites y continuidad estudiadas, sin derivadas ni regla de L'Hôpital. No se solicitan demostraciones de teoremas.
+  \item No se permite el uso de dispositivos electrónicos. Cualquier intento de copia penalizará la evaluación con una calificación total de cero.
+\end{itemize}
+
+\noindent\textbf{Ejercicios}
+\begin{enumerate}
+  \item \textbf{(4 puntos)} Considere
+  \[
+    R(x)=\frac{x^2-1}{(x-1)(x-3)},\qquad
+    D_R=\mathbb{R}\setminus\{1,3\},
+  \]
+  y
+  \[
+    H(x)=\frac{\sqrt{9x^2+4}}{x+1},\qquad
+    D_H=\mathbb{R}\setminus\{-1\}.
+  \]
+  \begin{enumerate}
+    \item \textbf{(2 puntos)} Calcule el límite de $R$ en $1$ y sus límites laterales en $3$. Determine todas las asíntotas verticales de $R$.
+    \item \textbf{(2 puntos)} Calcule los límites de $H$ cuando $x\to+\infty$ y $x\to-\infty$. Determine sus asíntotas horizontales e indique a qué extremo corresponde cada una.
+  \end{enumerate}
+
+  \item \textbf{(3 puntos)} Para $a,b\in\mathbb{R}$, sea
+  \[
+    F_{a,b}(x)=\begin{cases}
+      \dfrac{x^2-4}{x-2},&x<2,\\[2mm]
+      ax+b,&2\leq x\leq4,\\
+      \sqrt{x+5},&x>4.
+    \end{cases}
+  \]
+  \begin{enumerate}
+    \item \textbf{(2 puntos)} Determine $a,b$ para que $F_{a,b}$ sea continua en $\mathbb{R}$. Verifique los puntos de unión y explique qué ocurre en el interior de cada tramo.
+    \item \textbf{(1 punto)} Ahora tome $a=0$, $b=4$. Clasifique la discontinuidad en $x=4$ e indique si se puede eliminar cambiando únicamente $F_{0,4}(4)$.
+  \end{enumerate}
+
+  % Adaptación de Bartle--Sherbert, Introduction to Real Analysis, 4.ª ed., §5.3, ej. 5.
+  % Se omite la aproximación con calculadora y se incorpora máximo--mínimo.
+  \item \textbf{(3 puntos)} Considere $p(x)=x^4+7x^3-9$ en $[-8,2]$.
+  \begin{enumerate}
+    \item \textbf{(1 punto)} Justifique que $p$ alcanza un máximo y un mínimo absolutos en $[-8,2]$, indicando el teorema y verificando sus hipótesis.
+    \item \textbf{(1,5 puntos)} Justifique que $p$ tiene al menos dos ceros distintos: uno en $(-8,-7)$ y otro en $(1,2)$. No se pide calcularlos ni aproximarlos.
+    \item \textbf{(0,5 puntos)} Sin hallar el punto de mínimo, justifique que el valor mínimo es negativo y que se alcanza en algún punto de $(-8,2)$.
+  \end{enumerate}
+\end{enumerate}
+
+\ifmostrarSoluciones
+\newpage
+\begin{solucion}[de la versión 1]
+\begin{enumerate}
+  \item
+  \begin{enumerate}
+    \item Para $x\neq1,3$, $R(x)=(x+1)/(x-3)$. Por tanto,
+    \[
+      \lim_{x\to1}R(x)=-1.
+    \]
+    Cerca de $3$ el numerador es positivo y tiende a $4$. El denominador es negativo a la izquierda y positivo a la derecha. Así,
+    \[
+      \lim_{x\to3^-}R(x)=-\infty,\qquad
+      \lim_{x\to3^+}R(x)=+\infty.
+    \]
+    La única asíntota vertical es $x=3$. El punto $1$ permanece excluido del dominio, pero el límite allí es finito. En los demás puntos, el denominador no se anula.
+    \item Para $x\neq0$,
+    \[
+      H(x)=\frac{|x|}{x}\,
+      \frac{\sqrt{9+4/x^2}}{1+1/x}.
+    \]
+    El factor $|x|/x$ vale $1$ para $x>0$ y $-1$ para $x<0$. Por ello,
+    \[
+      \lim_{x\to+\infty}H(x)=3,\qquad
+      \lim_{x\to-\infty}H(x)=-3.
+    \]
+    Las asíntotas horizontales son $y=3$ hacia $+\infty$ y $y=-3$ hacia $-\infty$.
+  \end{enumerate}
+
+  \item
+  \begin{enumerate}
+    \item El primer tramo coincide con $x+2$ para $x<2$. La continuidad en $2$ exige
+    \[
+      4=2a+b=F_{a,b}(2).
+    \]
+    La continuidad en $4$ exige
+    \[
+      F_{a,b}(4)=4a+b=\sqrt{4+5}=3.
+    \]
+    Resolviendo simultáneamente, $2a=-1$, de donde
+    \[
+      a=-\frac12,\qquad b=5.
+    \]
+    En los interiores de los tramos hay funciones polinómicas o una raíz de radicando positivo, por lo que son continuas allí. Las dos igualdades verifican la continuidad en los puntos de unión y, por tanto, en todo $\mathbb{R}$.
+    \item Para $a=0$, $b=4$,
+    \[
+      \lim_{x\to4^-}F_{0,4}(x)=4,\qquad
+      \lim_{x\to4^+}F_{0,4}(x)=3.
+    \]
+    Es una discontinuidad de salto. Cambiar solamente el valor en $4$ no modifica los límites laterales y no elimina el salto.
+  \end{enumerate}
+
+  \item
+  \begin{enumerate}
+    \item La función $p$ es polinómica, por lo que es continua en todo $[-8,2]$. Como este intervalo es cerrado y acotado, el teorema de máximo--mínimo garantiza que ambos extremos absolutos se alcanzan.
+    \item Se calculan los valores
+    \[
+      p(-8)=503>0,\qquad p(-7)=-9<0,
+    \]
+    \[
+      p(1)=-1<0,\qquad p(2)=63>0.
+    \]
+    La función es continua en $[-8,-7]$ y en $[1,2]$. Bolzano garantiza un cero en $(-8,-7)$ y otro en $(1,2)$. Son distintos porque los intervalos son disjuntos. Esto establece al menos dos ceros, sin afirmar que sean los únicos.
+    \item Sea $m$ el mínimo absoluto, cuya existencia ya se justificó. Como $0\in[-8,2]$ y $p(0)=-9$, se tiene $m\leq-9<0$. Los extremos del intervalo tienen valores positivos, $p(-8)=503$ y $p(2)=63$, así que ninguno puede ser un punto de mínimo. Por tanto, el mínimo se alcanza en el interior $(-8,2)$.
+  \end{enumerate}
+
+\end{enumerate}
+\end{solucion}
+\fi
+
+\end{document}
