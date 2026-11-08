@@ -22,18 +22,12 @@
 \end{objetivos}
 
 \begin{nota}[Lectura previa necesaria]
-Antes de clase, estudie el anexo \emph{Funciones trascendentes}, iniciado en la semana 3 y ampliado para esta semana: archivo \texttt{anexo\_semana03.tex}, en la carpeta \texttt{semana\_03}. Allí se reúnen las definiciones, dominios, gráficas, simetrías, periodicidad, identidades y propiedades algebraicas. Complete su autoevaluación; traiga las dudas sobre esos prerrequisitos.
+Antes de clase, estudie el anexo \emph{Funciones trascendentes}, iniciado en la semana 3 y ampliado para esta semana con el anexo semana 7. Allí se reúnen las definiciones, dominios, gráficas, simetrías, periodicidad, identidades y propiedades algebraicas. Complete su autoevaluación; traiga las dudas sobre esos prerrequisitos.
 \end{nota}
 
 \begin{resumen}
 La continuidad permite sustituir directamente cuando la expresión está definida en el punto. Si aparece $0/0$, se transforma la expresión para reconocer un límite fundamental. En un cambio de variable se identifica a qué valor y desde qué lado se aproxima el nuevo argumento. Al infinito, se distingue crecimiento logarítmico, potencial y exponencial.
 \end{resumen}
-
-\begin{docente}
-\textbf{Ruta para 120 minutos.} Comprobación de la lectura (10 min); encaje y límites trigonométricos (35 min); cambio de variable y continuidad (25 min); límites exponenciales y logarítmicos (20 min); crecimiento comparado (20 min); comprobación final (10 min).
-
-Se priorizan los ejemplos resueltos. Los ejercicios finales se completan como práctica autónoma. El encaje se trabaja desde su interpretación geométrica; los límites naturales y la comparación de crecimientos se presentan como resultados admitidos, sin recurrir a derivadas, series ni L'Hôpital.
-\end{docente}
 
 \section*{Límites trigonométricos fundamentales}
 
@@ -44,10 +38,7 @@ En todo este apunte los argumentos trigonométricos están en \textbf{radianes}.
 La sustitución en $\sin t/t$ produce $0/0$; los dos límites anteriores, por sí solos, no determinan ese cociente.
 
 \subsection*{Encaje del cociente del seno}
-Para $0<t<\pi/2$, la comparación geométrica entre un triángulo interior, un sector circular y un triángulo exterior del círculo unitario da
-\[
-  \sin t<t<\tan t.
-\]
+Tomamos un círculo de radio $1$, con centro $O=(0,0)$, y un ángulo $0<t<\pi/2$ medido en radianes. El punto $A=(1,0)$ está sobre el eje horizontal y el punto $B=(\cos t,\sin t)$ está sobre el círculo. Prolongamos la semirrecta $OB$ hasta que corte en $T$ a la recta tangente al círculo en $A$. Esta tangente es vertical y tiene ecuación $x=1$.
 
 \begin{center}
 \begin{tikzpicture}[x=3cm,y=3cm,every node/.style={font=\scriptsize}]
@@ -55,12 +46,17 @@ Para $0<t<\pi/2$, la comparación geométrica entre un triángulo interior, un s
   \coordinate (A) at (1,0);
   \coordinate (B) at (40:1);
   \coordinate (T) at (1,0.8391);
+  \coordinate (D) at (0.7660,0);
   \fill[GrisClaro] (O)--(A)--(T)--cycle;
   \fill[AzulClaro] (O)--(A) arc[start angle=0,end angle=40,radius=1]--cycle;
   \fill[VerdeClaro] (O)--(A)--(B)--cycle;
   \draw[Azul,thick] (A) arc[start angle=0,end angle=80,radius=1];
   \draw[Gris,thick] (O)--(A)--(T)--cycle;
   \draw[Verde,thick] (O)--(B)--(A);
+  \draw[Verde,dashed] (B)--(D) node[midway,left] {$\sin t$};
+  \draw[Gris,dashed] (1,-0.08)--(1,1.05);
+  \node[right] at (1,0.38) {$AT=\tan t$};
+  \node[below] at (0.4,0) {$OA=1$};
   \draw[->,Rojo] (0.3,0) arc[start angle=0,end angle=40,radius=0.3];
   \node[Rojo] at (0.4,0.13) {$t$};
   \node[below left] at (O) {$O$};
@@ -70,7 +66,46 @@ Para $0<t<\pi/2$, la comparación geométrica entre un triángulo interior, un s
 \end{tikzpicture}
 \end{center}
 
-Las áreas correspondientes son $\tfrac12\sin t$, $\tfrac12t$ y $\tfrac12\tan t$. La comparación encierra el cociente entre
+La desigualdad se obtiene comparando \textbf{áreas}, no directamente las longitudes de tres segmentos:
+\begin{enumerate}
+  \item \textbf{Triángulo interior $OAB$ (verde).} Su base es $OA=1$. La altura desde $B$ hasta el eje horizontal es $\sin t$, porque esa es la segunda coordenada de $B$. Por tanto,
+  \[
+    \operatorname{Área}(OAB)=\frac{1\cdot\sin t}{2}.
+  \]
+  \item \textbf{Sector circular $OAB$ (entre los radios $OA$ y $OB$).} Una vuelta completa tiene ángulo $2\pi$ y área $\pi$, pues el radio es $1$. El sector de ángulo $t$ ocupa la fracción $t/(2\pi)$ del círculo, así que
+  \[
+    \operatorname{Área}(\text{sector }OAB)=\frac{t}{2\pi}\,\pi=\frac t2.
+  \]
+  Aquí es esencial que $t$ esté expresado en \textbf{radianes}.
+  \item \textbf{Triángulo exterior $OAT$.} Es rectángulo en $A$ y su base es $OA=1$. Como el ángulo en $O$ es $t$,
+  \[
+    \tan t=\frac{AT}{OA}=AT.
+  \]
+  Su altura es, por tanto, $\tan t$, y su área es
+  \[
+    \operatorname{Área}(OAT)=\frac{1\cdot\tan t}{2}.
+  \]
+\end{enumerate}
+
+El triángulo interior está contenido en el sector, y el sector está contenido en el triángulo exterior. Para $0<t<\pi/2$, las áreas son estrictamente distintas. Por ello,
+\[
+  \frac{\sin t}{2}<\frac t2<\frac{\tan t}{2}.
+\]
+Al multiplicar por $2$ se obtiene
+\[
+  \boxed{\sin t<t<\tan t}.
+\]
+
+Para pasar al cociente que nos interesa, usamos que $t>0$ y $\cos t>0$:
+\[
+  \sin t<t\ \Longrightarrow\ \frac{\sin t}{t}<1,
+\]
+\[
+  t<\tan t=\frac{\sin t}{\cos t}
+  \ \Longrightarrow\ t\cos t<\sin t
+  \ \Longrightarrow\ \cos t<\frac{\sin t}{t}.
+\]
+En particular, podemos escribir el encaje
 \[
   \cos t\leq\frac{\sin t}{t}\leq1.
 \]
@@ -156,7 +191,22 @@ Para $x\neq0$, $\sin(4x)/x=4\sin(4x)/(4x)$, cuyo límite es $4$. La continuidad 
 \section*{Límites exponenciales y logarítmicos}
 
 \subsection*{Continuidad y sustitución}
-Para una base válida $a>0$, $a\neq1$, la exponencial $a^x$ es continua en $\mathbb{R}$ y $\log_a x$ es continua en $(0,\infty)$. Así,
+\begin{teorema}[continuidad de la exponencial y del logaritmo]
+Para toda base $a>0$, $a\neq1$:
+\begin{itemize}
+  \item La función exponencial $f(x)=a^x$ es \textbf{continua en todo $\mathbb{R}$}. Por tanto, para cualquier $c\in\mathbb{R}$,
+  \[
+    \lim_{x\to c}a^x=a^c.
+  \]
+  \item La función logarítmica $g(x)=\log_a x$ es \textbf{continua en todo su dominio $(0,\infty)$}. Por tanto, para cualquier $c>0$,
+  \[
+    \lim_{x\to c}\log_a x=\log_a c.
+  \]
+\end{itemize}
+En particular, $e^x$ es continua en $\mathbb{R}$ y $\ln x$ es continua en $(0,\infty)$. Estos resultados se aplican tanto a bases mayores que $1$ como a bases entre $0$ y $1$.
+\end{teorema}
+
+La continuidad permite calcular los límites anteriores por sustitución directa. Combinada con el límite de una composición, también permite escribir
 \[
   u(x)\to L\ \Longrightarrow\ a^{u(x)}\to a^L.
 \]
@@ -176,7 +226,7 @@ El numerador está definido y es continuo para $x>-2$. El denominador es continu
 \else\vspace{14mm}\fi
 
 \subsection*{Dos límites naturales de referencia}
-Los siguientes resultados se admiten en esta sesión y se usan sin derivadas:
+Los siguientes resultados se admiten en esta sesión y su demostración se estudiará luego:
 \[
   \boxed{\lim_{t\to0}\frac{e^t-1}{t}=1},\qquad
   \boxed{\lim_{t\to0}\frac{\ln(1+t)}{t}=1}.
@@ -204,7 +254,7 @@ Los cambios $t=3x$ y $u=2x$ permiten reconocer dos factores con límite $1$. El 
 
 \section*{Límites en los extremos y crecimiento comparado}
 
-\begin{proposicion}[bases mayores que uno]
+\begin{proposicion}[comportamiento según la base]
 Para $a>1$,
 \[
   \lim_{x\to+\infty}a^x=+\infty,\qquad
@@ -214,8 +264,59 @@ Para $a>1$,
   \lim_{x\to+\infty}\log_a x=+\infty,\qquad
   \lim_{x\to0^+}\log_a x=-\infty.
 \]
-Si $0<a<1$, se intercambian los comportamientos de la exponencial: el límite hacia $+\infty$ es $0$ y hacia $-\infty$ es $+\infty$. Para el logaritmo, los límites anteriores cambian de signo.
+Si $0<a<1$,
+\[
+  \lim_{x\to+\infty}a^x=0,\qquad
+  \lim_{x\to-\infty}a^x=+\infty,
+\]
+\[
+  \lim_{x\to+\infty}\log_a x=-\infty,\qquad
+  \lim_{x\to0^+}\log_a x=+\infty.
+\]
 \end{proposicion}
+
+\subsection*{Gráficas de los dos casos}
+Las bases $2$ y $1/2$ ilustran, respectivamente, los casos $a>1$ y $0<a<1$. En azul se representa la base $2$ y en naranja la base $1/2$.
+
+\begin{center}
+\textbf{Exponenciales: $a^x$}\\[2mm]
+\begin{tikzpicture}[x=1.4cm,y=0.52cm,every node/.style={font=\scriptsize}]
+  \draw[->,Gris] (-3.5,0)--(3.5,0) node[right] {$x$};
+  \draw[->,Gris] (0,-0.5)--(0,9) node[above] {$y$};
+  \draw[Azul,very thick,<->,domain=-3:3,samples=100]
+    plot (\x,{pow(2,\x)});
+  \draw[Naranja,very thick,<->,domain=-3:3,samples=100]
+    plot (\x,{pow(2,-\x)});
+  \fill[Gris] (0,1) circle (2pt);
+  \node[above right] at (0,1) {$(0,1)$};
+  \node[Azul,above left] at (2.9,7.8) {$2^x$: $a>1$};
+  \node[Naranja,above right] at (-2.9,7.8) {$(1/2)^x$: $0<a<1$};
+  \foreach \x in {-2,-1,1,2}{\draw (\x,0.12)--(\x,-0.12) node[below] {$\x$};}
+\end{tikzpicture}
+\end{center}
+
+Ambas curvas pasan por $(0,1)$ y permanecen por encima del eje horizontal. La azul se aproxima a $y=0$ hacia la izquierda y crece sin cota hacia la derecha; la naranja hace lo contrario. La recta $y=0$ es una asíntota horizontal y no se alcanza.
+
+\begin{center}
+\textbf{Logaritmos: $\log_a x$}\\[2mm]
+\begin{tikzpicture}[x=1.55cm,y=0.85cm,every node/.style={font=\scriptsize}]
+  \draw[->,Gris] (-0.35,0)--(5.6,0) node[right] {$x$};
+  \draw[->,Rojo,dashed] (0,-3.8)--(0,3.8) node[above] {$x=0$};
+  \draw[Azul,very thick,<->,domain=0.1:5.2,samples=160]
+    plot (\x,{ln(\x)/ln(2)});
+  \draw[Naranja,very thick,<->,domain=0.1:5.2,samples=160]
+    plot (\x,{-ln(\x)/ln(2)});
+  \fill[Gris] (1,0) circle (2pt);
+  \node[below right] at (1,0) {$(1,0)$};
+  \node[Azul,above] at (3.7,2.1) {$\log_2x$: $a>1$};
+  \node[Naranja,below] at (3.7,-2.1) {$\log_{1/2}x$: $0<a<1$};
+  \foreach \x in {2,3,4,5}{\draw (\x,0.07)--(\x,-0.07) node[below] {$\x$};}
+  \node[left] at (0,1) {$1$};
+  \node[left] at (0,-1) {$-1$};
+\end{tikzpicture}
+\end{center}
+
+Las dos curvas están definidas solamente para $x>0$ y pasan por $(1,0)$. Al acercarse a $0$ por la derecha, la azul baja sin cota y la naranja sube sin cota. Cuando $x\to+\infty$, la azul sube sin cota y la naranja baja sin cota. La recta $x=0$ es una asíntota vertical en ambos casos.
 
 Que dos funciones tiendan a $+\infty$ no indica cuál crece más rápido. Tampoco convierte $\infty/\infty$ en un número.
 
