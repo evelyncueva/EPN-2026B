@@ -25,12 +25,12 @@ qué ocurre cuando imponemos simultáneamente dos restricciones geométricas.
 Todas las operaciones de esta clase son las usuales.
 
 \begin{defi}[Recta y plano que pasan por el origen]
-    Una recta por el origen en $\R^3$ tiene la forma
+    Una recta de $\R^3$ que pasa por el origen $(0,0,0)$ tiene la forma
     \[
         L=\{td:t\in\R\},\qquad d\in\R^3,\quad d\ne0.
     \]
     El vector $d$ indica su dirección y $t$ recorre todos los reales.
-    Un plano por el origen tiene la forma
+    Un plano de $\R^3$ que pasa por el origen tiene la forma
     \[
         P=\{(x,y,z)\in\R^3:ax+by+cz=0\},
     \]
@@ -38,22 +38,11 @@ Todas las operaciones de esta clase son las usuales.
     Ambos conjuntos son subespacios de $\R^3$.
 \end{defi}
 
-\begin{ejem}[Una recta contenida en un plano]
-    Sean $d=(1,1,1)$, $L=\{t(1,1,1):t\in\R\}$ y
-    $P=\{(x,y,z):x-y=0\}$. Para todo $t\in\R$, el vector $(t,t,t)$
-    cumple $x-y=t-t=0$. Por tanto, $L\subseteq P$.
-
-    La recta es subespacio porque contiene a $0$ y
-    $sd+td=(s+t)d$, $\alpha(td)=(\alpha t)d$.
-    Para el plano, si $u_1-u_2=0$ y $v_1-v_2=0$, entonces
-    $(u_1+v_1)-(u_2+v_2)=0$ y $\alpha u_1-\alpha u_2=0$;
-    además, el origen satisface su ecuación.
-\end{ejem}
-
 \begin{advertencia}
-    Una recta o un plano trasladados que no contienen al origen no son
-    subespacios con las operaciones usuales. Por ejemplo, $x-y=1$ no
-    define un subespacio de $\R^3$.
+    Una recta o un plano que no contienen al origen no son subespacios
+    con las operaciones usuales. Por ejemplo, el plano de ecuación
+    $x-y=1$ no contiene a $(0,0,0)$ y, por tanto, no es un subespacio
+    de $\R^3$.
 \end{advertencia}
 
 \subsection{Intersección: cumplir las dos condiciones}
@@ -71,31 +60,34 @@ Todas las operaciones de esta clase son las usuales.
 \begin{teo}
     La intersección de dos subespacios de $V$ es un subespacio de $V$.
 \end{teo}
-\begin{proof}
-    Como $0_V$ pertenece a ambos subespacios, pertenece a $U\cap W$.
-    Si $u,v\in U\cap W$, ambos pertenecen a $U$ y a $W$.
-    La cerradura de cada subespacio implica $u+v\in U$ y $u+v\in W$;
-    por tanto, $u+v\in U\cap W$. Del mismo modo, para cualquier
-    $\alpha\in\R$, $\alpha u$ pertenece a ambos y, por tanto, a su
-    intersección. Se cumplen las tres condiciones del criterio.
-\end{proof}
 
-\begin{ejem}[Dos planos cuya intersección es una recta]
-    Consideremos los planos
+\begin{ejem}[Intersección de dos planos]
+    Sean $P$ y $Q$ los subespacios de $\R^3$ dados por
     \[
-        P=\{(x,y,z):x-y=0\},\qquad Q=\{(x,y,z):y-z=0\}.
+        P=\{(x,y,z)\in\R^3:x-y=0\},\qquad
+        Q=\{(x,y,z)\in\R^3:y-z=0\}.
     \]
-    Para pertenecer a $P\cap Q$ resolvemos el sistema homogéneo
+    Determine el subespacio $P\cap Q$, escriba sus elementos en forma
+    paramétrica e interprete geométricamente el resultado.
+
+    \textbf{Solución.} Un vector pertenece a $P\cap Q$ si satisface
+    simultáneamente las condiciones de ambos subespacios. Resolvemos el
+    sistema homogéneo
     \[
         \left\{\begin{aligned}x-y&=0,\\y-z&=0.\end{aligned}\right.
         \qquad
         \left(\begin{array}{ccc|c}1&-1&0&0\\0&1&-1&0\end{array}\right).
     \]
-    Tomando $z=t$, obtenemos $y=t$ y $x=t$. Así,
+    La matriz de coeficientes $A$ y la matriz ampliada $(A\mid0)$ satisfacen
+    \[
+        \rang(A)=\rang(A\mid0)=2<3,
+    \]
+    así, el sistema tiene infinitas soluciones
+    y una variable libre. Tomando $z=t$, obtenemos $y=t$ y $x=t$. Así,
     \[
         \boxed{P\cap Q=\{(t,t,t):t\in\R\}=\{t(1,1,1):t\in\R\}.}
     \]
-    No es un único punto: es la recta completa por el origen de dirección
+    No es un único punto: es la recta completa que pasa por el origen y tiene dirección
     $(1,1,1)$. Por ejemplo, $(2,2,2)$ pertenece a ambos planos.
 \end{ejem}
 
@@ -114,8 +106,6 @@ Todas las operaciones de esta clase son las usuales.
         \node[colordef,left] at (-1,-1,1.8) {$P:x=y$};
         \node[orange!80!black,right] at (2,1.3,1.3) {$Q:y=z$};
     \end{tikzpicture}
-
-    Se dibujan porciones de los planos; ambos se extienden indefinidamente.
 \end{center}
 
 \noindent\textbf{Procedimiento para calcular una intersección.}
@@ -123,60 +113,161 @@ Todas las operaciones de esta clase son las usuales.
     \item Escribir juntas las condiciones de los dos subespacios.
     \item Resolver el sistema resultante, sin eliminar ninguna restricción.
     \item Escribir todos los vectores solución usando parámetros libres.
-    \item Identificar si el resultado es el origen, una recta o un plano,
+    \item En los ejemplos de $\R^3$, identificar si la intersección es $\{(0,0,0)\}$, una recta
+          o un plano que pasan por el origen,
           y comprobarlo en las condiciones originales.
 \end{enumerate}
 
-\begin{ejem}[Recta y plano: dos posibilidades]
-    Sea $H=\{(x,y,z):x+y-z=0\}$.
-    \begin{itemize}
-        \item Para $L_1=\{t(1,1,2):t\in\R\}$, la sustitución da
-              $t+t-2t=0$ para todo $t$. Así, $L_1\subseteq H$ y
-              $L_1\cap H=L_1$.
-        \item Para $L_2=\{t(1,1,1):t\in\R\}$, la condición es
-              $t+t-t=t=0$. Solo sirve $t=0$, de modo que
-              $L_2\cap H=\{(0,0,0)\}$.
-    \end{itemize}
-    Una recta por el origen está contenida en el plano o lo corta solo
-    en el origen. La intersección de subespacios nunca es vacía.
+\begin{ejem}[Intersección de subespacios de matrices]
+    En $\Mat[\R]{2}{2}$, sean los subespacios
+    \[
+        U=\{A\in\Mat[\R]{2}{2}:a_{12}=a_{21}\},\qquad
+        W=\{A\in\Mat[\R]{2}{2}:a_{21}=0\}.
+    \]
+    El primero contiene las matrices simétricas y el segundo, las
+    matrices triangulares superiores. Sus condiciones se conservan al
+    sumar matrices y multiplicarlas por escalares reales; ambos contienen
+    a la matriz nula. Determine $U\cap W$.
+
+    \textbf{Solución.} Escribimos una matriz arbitraria como
+    \[
+        A=\begin{pmatrix}a&b\\c&d\end{pmatrix},\qquad a,b,c,d\in\R.
+    \]
+    Para pertenecer a ambos subespacios debe satisfacer simultáneamente
+    \[
+        \left\{\begin{aligned}b&=c,\\c&=0.\end{aligned}\right.
+    \]
+    Por tanto, $b=c=0$, mientras que $a$ y $d$ son libres. Así,
+    \[
+        \boxed{U\cap W=
+            \left\{\begin{pmatrix}a&0\\0&d\end{pmatrix}:a,d\in\R\right\}.}
+    \]
+    La intersección es el subespacio de las matrices diagonales:
+    son precisamente las matrices que son simétricas y triangulares
+    superiores a la vez.
+\end{ejem}
+
+\begin{ejem}[Intersección de subespacios de polinomios]
+    En $\Pol_2$, sean los subespacios
+    \[
+        U=\{p\in\Pol_2:p(0)=0\},\qquad
+        W=\{p\in\Pol_2:p(1)=0\}.
+    \]
+    Determine $U\cap W$.
+
+    \textbf{Solución.} Sea $p(t)=a_0+a_1t+a_2t^2$, con coeficientes
+    reales. Pertenecer a la intersección equivale a cumplir
+    \[
+        \left\{\begin{aligned}
+            p(0)=0&\ \Longleftrightarrow\ a_0=0,\\
+            p(1)=0&\ \Longleftrightarrow\ a_0+a_1+a_2=0.
+        \end{aligned}\right.
+    \]
+    Para determinar los coeficientes $a_0,a_1,a_2$, debemos resolver el
+    sistema de ecuaciones
+    \[
+        \left\{\begin{aligned}
+            a_0&=0,\\
+            a_0+a_1+a_2&=0.
+        \end{aligned}\right.
+    \]
+    La matriz de coeficientes $A$ y la matriz ampliada $(A\mid0)$ cumplen
+    \[
+        \rang(A)=\rang(A\mid0)=2<3.
+    \]
+    Por tanto, el sistema tiene infinitas soluciones y una variable libre.
+    Tomando $a_2=s$, obtenemos $a_0=0$
+    y $a_1=-s$. Por tanto,
+    \[
+        p(t)=-st+st^2=s(t^2-t),\qquad s\in\R,
+    \]
+    y la intersección es
+    \[
+        \boxed{U\cap W=\{s(t^2-t):s\in\R\}.}
+    \]
+    Sus elementos son todos los múltiplos reales del polinomio $t^2-t$,
+    incluido el polinomio cero.
 \end{ejem}
 
 \begin{obs}[Otras posibilidades en $\R^3$]
-    Dos planos por el origen que son distintos se intersectan en una recta;
-    si coinciden, su intersección es el mismo plano. Dos rectas distintas
-    por el origen se intersectan solo en el origen.
+    Si una recta y un plano de $\R^3$ pasan por el origen, la recta está
+    contenida en el plano o su intersección es únicamente $\{(0,0,0)\}$.
+
+    Si dos planos distintos de $\R^3$ pasan por el origen, su intersección
+    es una recta que también pasa por el origen. Si los planos coinciden,
+    su intersección es ese mismo plano.
+
+    Si dos rectas distintas de $\R^3$ pasan por el origen, su único
+    punto común es $(0,0,0)$; es decir, su intersección es $\{(0,0,0)\}$.
 \end{obs}
 
-\begin{advertencia}[Intersección y unión son diferentes]
-    La unión no siempre es un subespacio. Los ejes $X=\{(t,0,0)\}$ y
-    $Y=\{(0,t,0)\}$ son subespacios, pero $(1,0,0)+(0,1,0)=(1,1,0)$
-    no pertenece a $X\cup Y$. En cambio, $X\cap Y=\{0\}$ sí es subespacio.
-    En estas descripciones $t$ recorre $\R$.
+\begin{advertencia}
+    \textbf{Intersección y unión son diferentes.}
+    La unión no siempre es un subespacio. Los ejes coordenados
+    \[
+        X=\{(t,0,0):t\in\R\},\qquad
+        Y=\{(0,t,0):t\in\R\},
+    \]
+    donde el parámetro $t$ recorre todos los números reales, son
+    subespacios de $\R^3$. Sin embargo,
+    $(1,0,0)+(0,1,0)=(1,1,0)$ no pertenece a $X\cup Y$.
+    En cambio, $X\cap Y=\{(0,0,0)\}$ sí es un subespacio.
 \end{advertencia}
 
+\newpage
 \section{Ejercicios}
+
 \begin{ejer}[Intersección de planos]
-    Para cada pareja, encuentre la intersección en forma paramétrica,
-    interprete el resultado y compruebe un vector no nulo cuando exista:
+    En $\R^3$, sean
+    \[
+        P=\{(x,y,z)\in\R^3:x+y-z=0\},\qquad
+        Q=\{(x,y,z)\in\R^3:x-y=0\}.
+    \]
     \begin{enumerate}
-        \item $P_1=\{(x,y,z):x+y-z=0\}$ y $P_2=\{(x,y,z):x-y=0\}$.
-        \item $P_1=\{(x,y,z):x+y-z=0\}$ y $P_3=\{(x,y,z):2x+2y-2z=0\}$.
-        \item $P_4=\{(x,y,z):x+y+z=0\}$ y $P_5=\{(x,y,z):x-y+z=0\}$.
+        \item Plantee el sistema que define $P\cap Q$, analice su rango
+              y escriba la intersección en forma paramétrica.
+        \item Interprete geométricamente el resultado y compruebe un
+              vector no nulo en las ecuaciones de ambos planos.
     \end{enumerate}
 \end{ejer}
-\begin{ejer}[Una dirección y una restricción]
-    Sea $L=\{t(1,k,2):t\in\R\}$ y $P=\{(x,y,z):x+y-z=0\}$.
-    Determine para qué valores de $k$ la intersección es $L$ y para cuáles
-    es $\{0\}$. Justifique sustituyendo las coordenadas de un vector de $L$.
+
+\begin{ejer}[Intersección de subespacios de matrices]
+    En $\Mat[\R]{2}{2}$, sean
+    \[
+        U=\{A\in\Mat[\R]{2}{2}:a_{12}=a_{21}\},\qquad
+        W=\{A\in\Mat[\R]{2}{2}:a_{11}=a_{22}\}.
+    \]
+    \begin{enumerate}
+        \item Escriba una matriz arbitraria e imponga las condiciones
+              de ambos subespacios. Determine $U\cap W$ mediante
+              parámetros reales.
+        \item Elija una matriz no nula de la intersección y compruebe
+              que pertenece tanto a $U$ como a $W$.
+    \end{enumerate}
 \end{ejer}
-\begin{ejer}[Tres restricciones]
-    Calcule $P\cap Q\cap H$ para $P=\{x-y=0\}$, $Q=\{y-z=0\}$ y
-    $H=\{x+y+z=0\}$, todos en $\R^3$. Explique por qué añadir una
-    restricción puede reducir la intersección. Adapte la demostración
-    del teorema a tres subespacios.
+
+\begin{ejer}[Intersección de subespacios de polinomios]
+    En $\Pol_2$, sean
+    \[
+        U=\{p\in\Pol_2:p(1)=0\},\qquad
+        W=\{p\in\Pol_2:p(-1)=0\}.
+    \]
+    \begin{enumerate}
+        \item Escriba $p(t)=a_0+a_1t+a_2t^2$, plantee el sistema en
+              los coeficientes y analice su rango. Determine $U\cap W$
+              mediante parámetros reales.
+        \item Compruebe un polinomio no nulo de la intersección evaluándolo
+              en 1 y en $-1$.
+    \end{enumerate}
 \end{ejer}
-\begin{ejer}[Salida individual]
-    ¿Puede la intersección de dos subespacios de $\R^3$ ser un único
-    vector distinto de cero? Justifique usando el criterio de subespacio.
+
+\begin{ejer}[Interpretar la intersección]
+    Justifique sus respuestas usando que la intersección es un subespacio.
+    \begin{enumerate}
+        \item ¿Puede la intersección de dos subespacios ser vacía?
+        \item Si la intersección tiene un solo elemento, ¿cuál debe ser?
+              Dé un ejemplo de dos subespacios de $\R^2$ con esa intersección.
+    \end{enumerate}
 \end{ejer}
+
 \end{document}

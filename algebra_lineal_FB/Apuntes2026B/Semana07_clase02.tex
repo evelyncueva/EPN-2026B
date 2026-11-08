@@ -1,4 +1,4 @@
-% Combinación lineal, cápsula y dependencia e independencia lineal.
+% Readaptado de Semana 08 Clase 01 (2025-A), con ejemplos geometricos de 2026B.
 \documentclass[compacto,10pt]{pubciencias-notas}
 \usepackage{comandosEPN}
 \usepackage{tikz}
@@ -34,97 +34,151 @@ vectores. En toda la clase los escalares son reales.
     positivos, negativos o cero.
 \end{defi}
 
-\begin{ejem}[Construir un desplazamiento en $\R^2$]
-    Sean $u=(1,0)$, $v=(1,1)$ y $w=(3,2)$. Buscar $a,b\in\R$ tales que
-    $w=au+bv$ equivale a resolver
+\begin{ejem}
+    Sean $u=(1,0)$, $v=(1,1)$ y $w=(3,2)$ vectores de $\R^2$.
+    Probemos que $w$ es una combinación lineal de $u$ y $v$.
+    Para ello, buscamos escalares $a,b\in\R$ tales que
     \[
-        (a+b,b)=(3,2),\qquad
+        w=au+bv=a(1,0)+b(1,1)=(a+b,b).
+    \]
+    Al igualar las componentes con las de $w=(3,2)$, obtenemos el sistema
+    \[
         \left\{\begin{aligned}a+b&=3,\\b&=2.\end{aligned}\right.
     \]
-    Así, $a=1$, $b=2$ y $w=u+2v$. Geométricamente, recorremos $u$ y
-    después el desplazamiento $2v$; la resultante va del origen a $(3,2)$.
-    Trasladar una flecha para sumar no cambia el vector que representa.
+    De la segunda ecuación, $b=2$; al sustituir en la primera, $a=1$.
+    Por tanto, $w=u+2v$, lo que demuestra que $w$ es una combinación
+    lineal de $u$ y $v$ con coeficientes 1 y 2, respectivamente.
 \end{ejem}
 \begin{center}
-    \begin{tikzpicture}[scale=1.05]
+    \begin{tikzpicture}[scale=0.7,every node/.style={font=\small}]
         \draw[->] (-0.3,0)--(3.9,0) node[right] {$x$};
         \draw[->] (0,-0.3)--(0,2.9) node[above] {$y$};
+        \foreach \x in {1,2,3}
+            \draw (\x,0.05)--(\x,-0.05) node[below] {$\x$};
+        \foreach \y in {1,2}
+            \draw (0.05,\y)--(-0.05,\y) node[left] {$\y$};
         \fill[colordef!8] (0,0)--(1,0)--(3,2)--(2,2)--cycle;
-        \draw[->,thick,colordef] (0,0)--(1,0) node[midway,below] {$u$};
-        \draw[->,thick,orange!80!black] (0,0)--(1,1) node[left] {$v$};
+        \draw[densely dotted,gray] (3,0)--(3,2)--(0,2);
+        \draw[->,thick,colordef] (0,0)--(1,0)
+            node[midway,below=10pt] {$u=(1,0)$};
+        \draw[->,thick,orange!80!black] (0,0)--(1,1)
+            node[above left] {$v$};
         \draw[->,thick,orange!80!black] (1,0)--(3,2)
-            node[midway,right] {$2v$};
+            node[midway,below right] {$2v=(2,2)$};
         \draw[dashed] (0,0)--(2,2)--(3,2);
         \draw[->,very thick,teal!70!black] (0,0)--(3,2)
-            node[above right] {$w=u+2v$};
+            node[above right] {$w=(3,2)$};
         \node[below left] at (0,0) {$0$};
     \end{tikzpicture}
 \end{center}
 
-\begin{obs}[La pregunta se convierte en un sistema]
-    En $\R^n$, ponemos los vectores dados como columnas de una matriz
-    $A=[\,v_1\ \cdots\ v_k\,]$. Entonces $w$ es combinación lineal de
-    ellos si y solo si $Ac=w$ es compatible, donde
-    $c=(\alpha_1,\ldots,\alpha_k)^{\top}$. Las incógnitas son los
-    coeficientes, no las coordenadas del vector objetivo ya fijado.
-\end{obs}
-
 \subsection{Cápsula lineal e interpretación geométrica}
 \begin{defi}[Cápsula lineal]\label{sem07cl02:capsula}
     Sea $S=\{v_1,\ldots,v_k\}\subseteq V$. La \textbf{cápsula lineal}
-    de $S$ es el conjunto de todas sus combinaciones lineales:
+    o \textbf{subespacio generado por $S$}, denotado $\spn(S)$, es el
+    conjunto de todas las combinaciones lineales de sus vectores:
     \[
-        \spn(S)=\{\alpha_1v_1+\cdots+\alpha_kv_k:
-            \alpha_1,\ldots,\alpha_k\in\R\}.
+        \spn(S)=\left\{v\in V:
+            \begin{array}{l}
+                \text{existen }\alpha_1,\ldots,\alpha_k\in\R
+                \text{ tales que}\\
+                v=\alpha_1v_1+\cdots+\alpha_kv_k
+            \end{array}\right\}.
     \]
-    También se llama subespacio generado por $S$ y se denota $\langle S\rangle$.
     Una combinación es un vector; la cápsula es un conjunto de vectores.
 \end{defi}
 
-\begin{teo}
-    La cápsula $\spn(S)$ es un subespacio de $V$ y es el menor subespacio
-    que contiene a $S$: cualquier subespacio que contenga a $S$ contiene
-    también a $\spn(S)$.
-\end{teo}
-\begin{proof}
-    El cero se obtiene tomando todos los coeficientes iguales a cero.
-    Sumar dos combinaciones suma sus coeficientes, y multiplicar una
-    combinación por un escalar multiplica sus coeficientes. Por tanto,
-    se cumplen las dos cerraduras. Además, cada $v_i$ está en la cápsula.
-    Si un subespacio contiene todos los $v_i$, sus cerraduras obligan
-    a que contenga cualquier combinación lineal de ellos.
-\end{proof}
+\begin{ejem}[Calcular la cápsula mediante un sistema]\label{sem07cl02:recta}
+    Sean $u=(2,3)$ y $v=(4,6)$. Determine la cápsula lineal
+    $\spn\{u,v\}$ e interprete geométricamente el resultado.
 
-\begin{ejem}[Una recta en $\R^2$]
-    Para $u=(2,3)$ y $v=(4,6)=2u$,
+    \textbf{Solución.} Sea $S=\{u,v\}$. Por la definición de cápsula,
     \[
-        au+bv=(a+2b)(2,3).
+        \spn(S)=\left\{(x,y)\in\R^2:
+            \begin{array}{l}
+                \text{existen }a,b\in\R\text{ tales que}\\
+                (x,y)=au+bv
+            \end{array}\right\}.
     \]
-    Por tanto,
+    Para determinar qué vectores $(x,y)$ cumplen esta condición,
+    sustituimos $u=(2,3)$ y $v=(4,6)$ en la combinación lineal:
     \[
-        \spn\{u,v\}=\{t(2,3):t\in\R\}=\{(x,y):3x-2y=0\}.
+        (x,y)=a(2,3)+b(4,6)=(2a+4b,3a+6b).
     \]
-    La cápsula es una recta, aunque la lista tenga dos vectores.
-    Para obtener cualquier $t$ basta elegir $a=t$ y $b=0$.
+    Igualar componentes da el sistema en las incógnitas $a,b$:
+    \[
+        \left\{\begin{aligned}2a+4b&=x,\\3a+6b&=y.\end{aligned}\right.
+    \]
+    Reducimos su matriz ampliada mediante $2F_2-3F_1\rightarrow F_2$:
+    \[
+        \left(\begin{array}{cc|c}2&4&x\\3&6&y\end{array}\right)
+        \sim
+        \left(\begin{array}{cc|c}2&4&x\\0&0&2y-3x\end{array}\right).
+    \]
+    La matriz de coeficientes tiene rango 1. Si $2y-3x\ne0$, la matriz
+    ampliada tiene rango 2 y el sistema no tiene solución. Si $2y-3x=0$,
+    ambos rangos son 1 y el sistema sí tiene solución. Por tanto,
+    \[
+        \boxed{\spn\{u,v\}=\{(x,y)\in\R^2:3x-2y=0\}.}
+    \]
+    Las coordenadas $x,y$ describen el vector que queremos construir;
+    las incógnitas del sistema son sus coeficientes $a,b$.
 \end{ejem}
-\begin{ejem}[Todo el plano $\R^2$]
-    Para $u=(1,0)$ y $v=(1,1)$, cualquier $(x,y)$ se escribe como
+
+\begin{defi}[Conjunto generador]\label{sem07cl02:generado}
+    Sea $S=\{v_1,\ldots,v_k\}\subseteq V$.
+    Decimos que $S$ es un \textbf{conjunto generador de $V$} si cada vector
+    de $V$ es una combinación lineal de los elementos de $S$.
+\end{defi}
+
+\begin{teo}
+    La cápsula $\spn(S)$ es el menor subespacio de $V$ que contiene a $S$:
+    está contenida en cualquier subespacio de $V$ que contenga a todos
+    los vectores de $S$. En particular, $S$ genera $V$ si y solo si
+    $\spn(S)=V$.
+\end{teo}
+\begin{ejem}[Generar todo el plano]\label{sem07cl02:generarR2}
+    Sean $u=(1,0)$ y $v=(1,1)$, como en el ejemplo anterior. Para determinar
+    si generan $\R^2$, buscamos coeficientes para un vector arbitrario
+    $(x,y)$:
     \[
-        (x,y)=(x-y)u+yv.
+        a(1,0)+b(1,1)=(x,y)
+        \quad\Longleftrightarrow\quad
+        \left\{\begin{aligned}a+b&=x,\\b&=y.\end{aligned}\right.
     \]
-    Por tanto, $\spn\{u,v\}=\R^2$. A diferencia del ejemplo anterior,
-    las dos direcciones no son paralelas.
+    Para todo $x,y\in\R$ hay solución: $a=x-y$ y $b=y$. Así,
+    $(x,y)=(x-y)u+yv$ y
+    $\spn\{u,v\}=\R^2$.
+    A diferencia del ejemplo \ref{sem07cl02:recta}, no hay una restricción
+    sobre las coordenadas del vector objetivo: se alcanza todo el plano.
 \end{ejem}
 
 \begin{ejem}[Un plano en $\R^3$]\label{sem07cl02:plano}
-    Sean $a=(1,0,1)$ y $b=(0,1,1)$. Sus combinaciones son
+    Sean $a=(1,0,1)$ y $b=(0,1,1)$. Pruebe que
+    $\spn\{a,b\}=P$, donde
     \[
-        sa+tb=(s,t,s+t),\qquad s,t\in\R.
+        P=\{(x,y,z)\in\R^3:x+y-z=0\}.
     \]
-    Todas cumplen $z=x+y$. Recíprocamente, si $(x,y,z)$ cumple $z=x+y$,
-    entonces $(x,y,z)=xa+yb$. Así,
+
+    \textbf{Solución.} Tomemos $(x,y,z)\in P$ y busquemos escalares
+    $s,t\in\R$ que permitan escribirlo como combinación de $a,b$:
     \[
-        \spn\{a,b\}=\{(x,y,z):x+y-z=0\}.
+        s(1,0,1)+t(0,1,1)=(x,y,z).
+    \]
+    Al efectuar las operaciones e igualar componentes, obtenemos
+    \[
+        (s,t,s+t)=(x,y,z)
+        \quad\Longleftrightarrow\quad
+        \left\{\begin{aligned}s&=x,\\t&=y,\\s+t&=z.\end{aligned}\right.
+    \]
+    Las dos primeras ecuaciones dan $s=x$ y $t=y$. La tercera también
+    se cumple, pues $x+y=z$ para todo vector de $P$. Por tanto,
+    $(x,y,z)=xa+yb$ y todo vector del plano pertenece a la cápsula.
+
+    Además, cualquier combinación $sa+tb=(s,t,s+t)$ satisface la
+    ecuación del plano, ya que $s+t-(s+t)=0$. Concluimos que
+    \[
+        \boxed{\spn\{a,b\}=P.}
     \]
     El vector $(2,-1,1)=2a-b$ pertenece al plano, pero $(0,0,1)$ no:
     no satisface su ecuación.
@@ -147,27 +201,9 @@ vectores. En toda la clase los escalares son reales.
     Al variar los dos coeficientes se recorre todo el plano, no solo el paralelogramo.
 \end{center}
 
-\begin{defi}[Conjunto generador]
-    Decimos que $S$ genera $V$ si $\spn(S)=V$; es decir, si cada vector
-    de $V$ se puede escribir como combinación lineal de los elementos de $S$.
-\end{defi}
-\begin{defi}[Vector redundante en una familia]
-    Un vector de una familia es redundante si se puede escribir como
-    combinación lineal de los demás. Quitar ese vector no cambia la cápsula.
-\end{defi}
-\begin{ejem}[Añadir un vector sin ampliar el plano]
-    Con $a,b$ del ejemplo \ref{sem07cl02:plano}, sea $c=(1,1,2)=a+b$.
-    Al sustituir $c=a+b$ obtenemos
-    \[
-        ra+sb+tc=(r+t)a+(s+t)b.
-    \]
-    Por tanto, se tiene
-    $\spn\{a,b,c\}=\spn\{a,b\}$. El vector $c$ es redundante.
-\end{ejem}
-
 \subsection{Dependencia e independencia lineal}
 \begin{defi}[Dependencia e independencia lineal]\label{sem07cl02:independencia}
-    Una familia $v_1,\ldots,v_k$ de vectores de $V$ es
+    Un conjunto $S=\{v_1,\ldots,v_k\}$ de vectores de $V$ es
     \textbf{linealmente independiente (LI)} si la igualdad
     \[
         \alpha_1v_1+\cdots+\alpha_kv_k=0_V
@@ -178,11 +214,38 @@ vectores. En toda la clase los escalares son reales.
 \end{defi}
 
 \begin{ejem}[Una relación de dependencia]
-    Para $u=(2,3)$ y $v=(4,6)$, tenemos $2u-v=0$.
-    Los coeficientes $2,-1$ no son ambos cero; por tanto, la familia es LD.
-    Del mismo modo, los vectores $a,b,c=a+b$ del ejemplo anterior son LD,
-    pues $a+b-c=0$ tiene coeficientes $(1,1,-1)$.
+    Para $u=(2,3)$ y $v=(4,6)$ del ejemplo \ref{sem07cl02:recta},
+    estudiamos si existen escalares $\alpha,\beta\in\R$, no ambos cero,
+    tales que $\alpha u+\beta v=(0,0)$. Sustituimos los vectores y
+    efectuamos las operaciones por componentes:
+    \[
+        \begin{aligned}
+            \alpha(2,3)+\beta(4,6)&=(0,0),\\
+            (2\alpha,3\alpha)+(4\beta,6\beta)&=(0,0),\\
+            (2\alpha+4\beta,3\alpha+6\beta)&=(0,0).
+        \end{aligned}
+    \]
+    Dos vectores son iguales si sus componentes correspondientes son
+    iguales. Al igualar la primera componente a cero y luego la segunda,
+    obtenemos el sistema homogéneo en las incógnitas $\alpha,\beta$:
+    \[
+        \left\{\begin{aligned}2\alpha+4\beta&=0,\\3\alpha+6\beta&=0.\end{aligned}\right.
+    \]
+    El sistema tiene rango 1 y dos incógnitas: $\alpha=-2\beta$.
+    Tiene soluciones no triviales; por ejemplo, $\alpha=2$, $\beta=-1$.
+    Así, $2u-v=0$ demuestra que el conjunto $\{u,v\}$ es LD.
 \end{ejem}
+
+\begin{prop}[Quitar un vector redundante]
+    Si un vector de un conjunto es combinación lineal de los demás,
+    quitarlo no cambia la cápsula. A ese vector lo llamamos redundante.
+\end{prop}
+
+Con $a,b$ del ejemplo \ref{sem07cl02:plano}, el vector $c=a+b$ es redundante:
+$ra+sb+tc=(r+t)a+(s+t)b$. Por tanto,
+$\spn\{a,b,c\}=\spn\{a,b\}$ y el conjunto $\{a,b,c\}$ es LD, pues
+$a+b-c=0$ es una relación con coeficientes no todos nulos.
+
 \begin{ejem}[Comprobar independencia]
     Para $u=(1,0)$ y $v=(1,1)$,
     \[
@@ -191,59 +254,151 @@ vectores. En toda la clase los escalares son reales.
         (\alpha+\beta,\beta)=(0,0).
     \]
     La segunda componente da $\beta=0$ y la primera, $\alpha=0$.
-    La familia es LI: no hay una relación nula con coeficientes no todos cero.
+    El conjunto $\{u,v\}$ es LI.
 \end{ejem}
 
 \begin{obs}[Relación con el rango]
-    En $\R^n$, para $A=[\,v_1\ \cdots\ v_k\,]$, la familia es LI si
+    En $\R^n$, para $S=\{v_1,\ldots,v_k\}$ y
+    $A=[\,v_1\ \cdots\ v_k\,]$, el conjunto $S$ es LI si
     y solo si $Ac=0$ tiene únicamente la solución trivial; equivalentemente,
-    si $\rang(A)=k$. Si $\rang(A)<k$, la familia es LD.
+    si $\rang(A)=k$. Si $\rang(A)<k$, el conjunto $S$ es LD.
     Solo para matrices cuadradas se puede usar directamente $\det(A)\ne0$.
 \end{obs}
 \begin{obs}[Consecuencias y precauciones]
-    \begin{itemize}
-        \item Una familia que contiene al vector cero es LD: asígnele
+    \leavevmode\par
+    \begin{itemize}[leftmargin=*,labelsep=0.5em]
+        \item Un conjunto que contiene al vector cero es LD: asígnele
               coeficiente 1 y a los demás coeficiente 0.
         \item Dos vectores no nulos son LD si uno es múltiplo del otro.
         \item Tres vectores pueden ser LD sin que ningún par sea paralelo:
-              ocurre con $a,b,a+b$. Hay que estudiar la familia completa.
-        \item Una familia LD tiene algún vector redundante: en una relación
+              ocurre con $a,b,a+b$. Hay que estudiar el conjunto completo.
+        \item Un conjunto LD tiene algún vector redundante: en una relación
               no trivial, despeje un vector cuyo coeficiente sea distinto de cero.
         \item Generar y ser LI son preguntas distintas: $a,b$ son LI en
               $\R^3$, pero generan un plano, no todo $\R^3$.
     \end{itemize}
 \end{obs}
 
+\subsection{Ejemplos con matrices y polinomios}
+
+\begin{ejem}[Generar matrices diagonales]
+    En $\Mat[\R]{2}{2}$, sean
+    \[
+        A=\begin{pmatrix}1&0\\0&1\end{pmatrix},\qquad
+        B=\begin{pmatrix}1&0\\0&-1\end{pmatrix}.
+    \]
+    Determine su cápsula y decida si el conjunto $\{A,B\}$ es LI.
+
+    \textbf{Solución.} Para $\alpha,\beta\in\R$,
+    \[
+        \alpha A+\beta B=
+        \begin{pmatrix}\alpha+\beta&0\\0&\alpha-\beta\end{pmatrix}.
+    \]
+    Todas las combinaciones son diagonales. Tomemos una matriz diagonal
+    genérica
+    \[
+        M=\begin{pmatrix}x&0\\0&y\end{pmatrix},\qquad x,y\in\R.
+    \]
+    Para escribir $M$ como combinación de $A$ y $B$, planteamos
+    \[
+        \alpha A+\beta B=M
+        \quad\Longleftrightarrow\quad
+        \begin{pmatrix}\alpha+\beta&0\\0&\alpha-\beta\end{pmatrix}
+        =\begin{pmatrix}x&0\\0&y\end{pmatrix}.
+    \]
+    Al igualar las entradas correspondientes, obtenemos el sistema
+    \[
+        \left\{\begin{aligned}\alpha+\beta&=x,\\\alpha-\beta&=y.\end{aligned}\right.
+        \quad\Longrightarrow\quad
+        \alpha=\frac{x+y}{2},\quad\beta=\frac{x-y}{2}.
+    \]
+    Hay solución para todos $x,y\in\R$. En consecuencia,
+    \[
+        \spn\{A,B\}=
+        \left\{\begin{pmatrix}x&0\\0&y\end{pmatrix}:x,y\in\R\right\}.
+    \]
+    Para la combinación nula, $x=y=0$, las únicas soluciones son
+    $\alpha=\beta=0$. Por tanto, $A,B$ son LI, pero no generan todas
+    las matrices de $\Mat[\R]{2}{2}$: ninguna combinación tiene entradas
+    no nulas fuera de la diagonal.
+\end{ejem}
+
+\begin{ejem}[Polinomios: generar y eliminar redundancias]
+    En $\Pol_2$, considere $S=\{1,t,t^2,1-2t\}$.
+    Determine su cápsula y decida si $S$ es LI o LD.
+
+    \textbf{Solución.} Todo polinomio $p(t)=a_0+a_1t+a_2t^2$ es una
+    combinación de los tres primeros elementos:
+    \[
+        p(t)=a_0\cdot1+a_1t+a_2t^2+0(1-2t).
+    \]
+    Por tanto, $\spn(S)=\Pol_2$. Sin embargo,
+    \[
+        1-2t=1\cdot1-2\cdot t+0\cdot t^2,
+    \]
+    así que el cuarto polinomio es redundante. La igualdad
+    $1\cdot1-2\cdot t+0\cdot t^2-1(1-2t)=0_{\Pol_2}$ demuestra que
+    $S$ es LD: los coeficientes $(1,-2,0,-1)$ no son todos cero.
+
+    Al quitar $1-2t$, queda el conjunto generador $\{1,t,t^2\}$.
+    Para comprobar su independencia, planteamos
+    \[
+        \alpha\cdot1+\beta t+\gamma t^2=0_{\Pol_2}.
+    \]
+    Igualar los coeficientes de cada potencia da
+    $\alpha=\beta=\gamma=0$; por tanto, este conjunto es LI.
+    El cero de la igualdad es el polinomio idénticamente nulo,
+    no el valor del polinomio en un solo punto.
+\end{ejem}
 \section{Ejercicios}
-\begin{ejer}[Combinación y cápsula en $\R^3$]
-    \hspace{0pt}\par
+
+\begin{ejer}[Combinación y cápsula en el espacio]
     Sean $v_1=(3,0,-2)$ y $v_2=(2,-1,-5)$.
     \begin{enumerate}
         \item Determine para qué valor de $k$ el vector $(1,-2,k)$ es
-              combinación lineal de $v_1,v_2$. Encuentre los coeficientes.
-        \item ¿Pertenece $(1,-2,-5)$ a su cápsula? Justifique.
-        \item Escriba una ecuación del plano que forman sus combinaciones.
+              combinación lineal de $v_1,v_2$ y encuentre sus coeficientes.
+        \item Calcule $\spn\{v_1,v_2\}$ planteando el sistema para un
+              vector genérico $(x,y,z)$. Obtenga una ecuación del plano
+              generado a partir de la condición de compatibilidad.
     \end{enumerate}
 \end{ejer}
-\begin{ejer}[Decidir LI o LD]
-    Justifique cada respuesta. Si la familia es LD, exhiba una relación
-    nula con coeficientes no todos cero; si es LI, resuelva el sistema homogéneo.
+
+\begin{ejer}[Generación y dependencia en el plano]
     \begin{enumerate}
-        \item $(1,3),\ (-2,4)$ en $\R^2$.
-        \item $(1,0,1),\ (0,1,1),\ (1,1,2)$ en $\R^3$.
-        \item $(1,0,0),\ (0,1,0),\ (0,0,1)$ en $\R^3$.
-        \item $(1,2),\ (0,0)$ en $\R^2$.
+        \item Compruebe que $(1,3)$ y $(-2,4)$ son LI resolviendo la
+              combinación nula. Determine si generan $\R^2$ planteando
+              el sistema para un vector arbitrario $(x,y)$.
+        \item Añada el vector $(-1,7)$ al conjunto anterior. Exhiba una
+              relación de dependencia y explique por qué añadirlo no
+              cambia el espacio generado.
     \end{enumerate}
 \end{ejer}
-\begin{ejer}[También para polinomios]
-    \hspace{0pt}\par
-    En $\Pol_2$, estudie las familias $1,t,t^2$ y $1,t,1+t$.
-    Escriba la combinación nula e iguale los coeficientes de cada potencia.
-    ¿Cuál genera todo $\Pol_2$? Describa la cápsula de la otra.
+
+\begin{ejer}[Cápsula de un conjunto de matrices]
+    En $\Mat[\R]{2}{2}$, sean
+    \[
+        A=\begin{pmatrix}1&1\\0&0\end{pmatrix},\quad
+        B=\begin{pmatrix}0&0\\0&1\end{pmatrix},\quad
+        C=\begin{pmatrix}1&1\\0&1\end{pmatrix}.
+    \]
+    \begin{enumerate}
+        \item Describa todas las matrices de $\spn\{A,B,C\}$ igualando
+              entradas en una combinación lineal genérica.
+        \item Decida si el conjunto es LI o LD. Identifique una matriz
+              redundante y compruebe si las dos restantes son LI.
+    \end{enumerate}
 \end{ejer}
-\begin{ejer}[Salida individual]
-    Explique la diferencia entre una combinación lineal y una cápsula.
-    Dé una familia de tres vectores no nulos que genere $\R^2$ y sea LD.
-    Identifique un vector que pueda quitar sin cambiar la cápsula.
+
+\begin{ejer}[Generar un espacio de polinomios]
+    En $\Pol_2$, considere $S=\{1+t,1-t,t^2\}$.
+    \begin{enumerate}
+        \item Para $p(t)=a_0+a_1t+a_2t^2$, plantee
+              $p(t)=\alpha(1+t)+\beta(1-t)+\gamma t^2$ e iguale
+              coeficientes. Determine si $S$ genera $\Pol_2$.
+        \item Estudie la combinación nula para decidir si $S$ es LI.
+              Si se añade el polinomio 2, ¿cambian la cápsula y la
+              independencia? Justifique con una relación explícita.
+    \end{enumerate}
 \end{ejer}
+
 \end{document}
