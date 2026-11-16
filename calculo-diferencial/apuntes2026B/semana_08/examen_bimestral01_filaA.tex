@@ -1,39 +1,37 @@
-% !TeX root = examen_bimestral01.tex
+% !TeX root = examen_bimestral01_filaA.tex
 % !TeX program = pdflatex
-% Versión única para ambos cursos. Resolución estimada: 100 min; revisión: 20 min.
+% Fila A. Mismas preguntas y puntajes que la fila B.
 \documentclass[10pt,a5paper]{article}
 \newif\ifmostrarSoluciones
 \mostrarSolucionesfalse
 \usepackage{estilo_apuntes}
 \dosPorCarillatrue% Use \dosPorCarillatrue para dos copias por carilla.
-\encabezadoprueba{Examen bimestral 1}{Semana 8}
+\encabezadoprueba{Examen bimestral 1}{Fila A}
 
 \begin{document}
 \begin{center}
-  {\color{Azul}\large\bfseries Examen del primer bimestre}
+  {\color{Azul}\large\bfseries Examen del primer bimestre · Fila A}
 \end{center}
-\noindent\textbf{Nombre:} \hrulefill
+\noindent\textbf{Nombre:} \hrulefill\quad\textbf{Paralelo:} \makebox[15mm]{\hrulefill}
 \medskip
 
 \noindent\textbf{Indicaciones}
 \begin{itemize}
   \item Duración: 1 hora y 30 minutos.
   \item Justifique sus respuestas de forma breve y precisa. Indique dominios, restricciones e hipótesis de los teoremas utilizados. Se valora el razonamiento.
-  \item En verdadero/falso, una afirmación verdadera requiere un argumento y una falsa, un contraejemplo o un cálculo que la refute. Marcar únicamente V o F no otorga puntaje.
-  \item  Los argumentos trigonométricos están en radianes.
   \item No se permite el uso de dispositivos electrónicos. Cualquier intento de copia penalizará la evaluación con una calificación total de cero.
 \end{itemize}
 
 \noindent\textbf{Bloque I. Verdadero o falso justificado (5 puntos).}
 
 \smallskip
-\noindent Cada afirmación vale 1 punto. Una explicación breve y suficiente es preferible a una respuesta extensa.
+\noindent Indique si cada una de las siguientes afirmaciones es \textbf{verdadera (V) o falsa (F)}. Si es verdadera, justifíquela mediante un argumento matemático; si es falsa, presente un contraejemplo o un cálculo que la refute. Cada afirmación vale 1 punto. Marcar únicamente V o F, sin justificación, no otorga puntaje. Las respuestas deben ser breves y precisas.
 \begin{enumerate}
   \item Sean $f\colon A\to B$ y $g\colon B\to C$. Si $g\circ f$ es inyectiva, entonces $f$ es inyectiva.
   \item Si una función tiene una asíntota horizontal cuando $x\to+\infty$, entonces está acotada en todo su dominio.
   \item Si $f$ está definida cerca de $0$, salvo posiblemente en $0$, y satisface $|f(x)-2|\leq x^2$ allí, entonces $\lim_{x\to0}f(x)=2$.
   \item Si $f$ es continua y estrictamente positiva en $[0,1]$, entonces existe un número $m>0$ tal que $f(x)\geq m$ para todo $x\in[0,1]$.
-  \item En radianes, $\displaystyle\lim_{x\to0}\frac{\sin(3x)}{\sin(2x)}=1$.
+  \item En radianes, se cumple que $\displaystyle\lim_{x\to0}\frac{\sin(3x)}{\sin(2x)}=1$.
 \end{enumerate}
 
 \medskip
@@ -55,18 +53,19 @@
   \[
     f(x)=x^2+\sin x,\qquad x\in\mathbb{R}.
   \]
-  Justifique que $f$ alcanza un mínimo absoluto en $\mathbb{R}$, sin calcularlo. Tenga presente que el teorema de máximo--mínimo no se aplica directamente a todo $\mathbb{R}$.
-  Desarrolle los siguientes pasos:
+  Se desea probar que $f$ alcanza un mínimo absoluto en $\mathbb{R}$, sin calcular su valor.
+  
+  Tenga presente que el teorema de máximo--mínimo (Weierstrass) no se aplica directamente a todo $\mathbb{R}$. Sin embargo, es posible demostrar la afirmación anterior siguiendo los pasos que se indican a continuación:
   \begin{enumerate}
     \item \textbf{(0,75 puntos)} Justifique que $f$ alcanza un mínimo $m$ en el intervalo cerrado $[-1,1]$. Usando el valor $f(0)$, explique por qué $m\leq0$.
     \item \textbf{(0,75 puntos)} Pruebe que, si $|x|>1$, entonces $f(x)>0$.
-    \item \textbf{(1 punto)} Concluya, comparando los valores dentro y fuera de $[-1,1]$, que $m$ es un mínimo absoluto de $f$ en todo $\mathbb{R}$.
+    \item \textbf{(1 punto)} Utilice los resultados de los pasos anteriores para demostrar que $f(x)\geq m$ para todo $x\in\mathbb{R}$ y que ese valor se alcanza. Concluya así la proposición inicial: $m$ es un mínimo absoluto de $f$ en todo $\mathbb{R}$.
   \end{enumerate}
 \end{enumerate}
 
 \ifmostrarSoluciones
 \newpage
-\begin{solucion}[del examen bimestral]
+\begin{solucion}[del examen bimestral · fila A]
 \begin{enumerate}
   \item \textbf{Verdadero.} Si $f(x_1)=f(x_2)$, al aplicar $g$ resulta $(g\circ f)(x_1)=(g\circ f)(x_2)$. Como la composición es inyectiva, se deduce $x_1=x_2$. Esta es la condición de inyectividad de $f$.
   \item \textbf{Falso.} La asíntota describe el comportamiento hacia $+\infty$, no en todo el dominio. Por ejemplo, $f(x)=1/x$ en $(0,\infty)$ tiene asíntota horizontal $y=0$ hacia $+\infty$, pero no está acotada superiormente porque $f(x)\to+\infty$ cuando $x\to0^+$.
