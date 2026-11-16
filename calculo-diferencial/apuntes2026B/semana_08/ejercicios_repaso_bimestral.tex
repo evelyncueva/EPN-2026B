@@ -1,0 +1,135 @@
+% !TeX root = ejercicios_repaso_bimestral.tex
+% !TeX program = pdflatex
+% Seis ejercicios de repaso, con soluciones al final.
+\documentclass[10pt,a5paper]{article}
+\newif\ifmostrarSoluciones
+\mostrarSolucionestrue
+\usepackage{estilo_apuntes}
+\encabezado{Semana 8}{Ejercicios de repaso}
+
+\begin{document}
+\tituloclase{Repaso del primer bimestre}{Límites, continuidad y teoremas}{Semana 8 · seis ejercicios}
+
+\noindent\textbf{Indicaciones.} Justifique sus respuestas indicando las restricciones, propiedades e hipótesis utilizadas. Los argumentos trigonométricos se expresan en radianes. Las soluciones se encuentran al final; intente primero resolver los ejercicios sin consultarlas.
+
+\begin{enumerate}
+  \item \textbf{Continuidad y clasificación de discontinuidades.} Para $a,b\in\mathbb{R}$, se define $G_{a,b}\colon\mathbb{R}\to\mathbb{R}$ por
+  \[
+    G_{a,b}(x)=\begin{cases}
+      \dfrac{|x-1|}{x-1},&x<1,\\[2mm]
+      a,&x=1,\\
+      bx^2-3,&x>1.
+    \end{cases}
+  \]
+  Determine $a,b$ para que la función sea continua en $1$. Después clasifique la discontinuidad en ese punto para los casos $(a,b)=(0,2)$ y $(a,b)=(-1,1)$, e indique si basta cambiar el valor en $1$ para obtener continuidad.
+  \item \textbf{Límites y asíntotas.} Considere
+  \[
+    R(x)=\frac{2x^2+x-1}{x^2-1},\qquad
+    D_R=\mathbb{R}\setminus\{-1,1\}.
+  \]
+  Calcule el límite en $-1$, los límites laterales en $1$ y los límites cuando $x\to\pm\infty$. Determine todas las asíntotas verticales y horizontales. Explique por qué no todos los puntos excluidos del dominio producen una asíntota vertical.
+
+  \item \textbf{Encaje y valor en el punto.} Una función $F$ está definida cerca de $1$, satisface $F(1)=0$ y, para $x\neq1$ suficientemente cercano a $1$,
+  \[
+    |F(x)-3|\leq\frac{|x-1|}{1+(x-1)^2}.
+  \]
+  Determine $\lim_{x\to1}F(x)$, estudie la continuidad en $1$ e indique si se puede obtener una función continua allí cambiando solamente $F(1)$. Explique si los datos permiten asegurar que $F$ sea positiva en un entorno de $1$ que incluya al propio punto.
+
+  \item \textbf{Identidades trigonométricas y continuidad.} Para $k\in\mathbb{R}$ se define, en $(-\pi,\pi)$,
+  \[
+    H_k(x)=\begin{cases}
+      \dfrac{\sin^2(3x)}{1-\cos(2x)},&x\neq0,\\[2mm]
+      k,&x=0.
+    \end{cases}
+  \]
+  Determine $k$ para que $H_k$ sea continua en $0$. Justifique también que la expresión está definida para todos los puntos indicados y que, con el valor encontrado, la función es continua en todo $(-\pi,\pi)$.
+
+  \item \textbf{Bolzano y una ecuación trigonométrica.} Justifique que la ecuación
+  \[
+    2\sin x=x
+  \]
+  tiene al menos tres soluciones distintas en $[-\pi,\pi]$, sin calcularlas ni aproximarlas. Identifique una solución inmediata y localice las otras dos en intervalos que no contengan a la primera. Puede utilizar que $\pi<4$ y la simetría del seno.
+  \item \textbf{Extremos mediante una identidad algebraica.} Considere
+  \[
+    A(x)=x\sqrt{16-x^2},\qquad x\in[0,4].
+  \]
+  Justifique que $A$ alcanza máximo y mínimo absolutos en el intervalo dado. Determine sus valores y todos los puntos donde se alcanzan, utilizando
+  \[
+    A(x)^2=64-(x^2-8)^2.
+  \]
+  Explique por qué en este intervalo se pueden comparar los valores de $A$ a partir de sus cuadrados.
+\end{enumerate}
+
+\ifmostrarSoluciones
+\newpage
+\begin{center}
+  {\color{Azul}\large\bfseries Soluciones}
+\end{center}
+\begin{enumerate}
+  \item Para $x<1$, $x-1<0$ y $|x-1|=-(x-1)$, de modo que el primer tramo vale $-1$. Por tanto,
+  \[
+    \lim_{x\to1^-}G_{a,b}(x)=-1,\qquad
+    \lim_{x\to1^+}G_{a,b}(x)=b-3,\qquad G_{a,b}(1)=a.
+  \]
+  La continuidad exige $-1=b-3=a$. Se obtiene $a=-1$ y $b=2$.
+
+  Para $(a,b)=(0,2)$, ambos límites laterales valen $-1$, pero el valor asignado es $0$. La discontinuidad es removible; se elimina asignando $G(1)=-1$.
+
+  Para $(a,b)=(-1,1)$, el límite izquierdo vale $-1$ y el derecho vale $-2$. La discontinuidad es de salto; cambiar únicamente $G(1)$ no puede eliminarla, porque no modifica los límites laterales.
+  \item Factorizando y conservando el dominio original,
+  \[
+    R(x)=\frac{(2x-1)(x+1)}{(x-1)(x+1)}
+    =\frac{2x-1}{x-1}=2+\frac1{x-1}
+    \quad(x\neq-1,1).
+  \]
+  Entonces
+  \[
+    \lim_{x\to-1}R(x)=\frac32,
+  \]
+  \[
+    \lim_{x\to1^-}R(x)=-\infty,\qquad
+    \lim_{x\to1^+}R(x)=+\infty,
+  \]
+  \[
+    \lim_{x\to+\infty}R(x)=\lim_{x\to-\infty}R(x)=2.
+  \]
+  La única asíntota vertical es $x=1$, y la horizontal es $y=2$ hacia ambos extremos. En $-1$ el límite es finito: la cancelación produce un hueco, no una asíntota vertical. Simplificar no asigna automáticamente un valor a $R(-1)$.
+
+  \item La desigualdad da
+  \[
+    3-\frac{|x-1|}{1+(x-1)^2}
+    \leq F(x)\leq
+    3+\frac{|x-1|}{1+(x-1)^2}.
+  \]
+  Las dos cotas tienden a $3$, así que el teorema del Sanduche garantiza $\lim_{x\to1}F(x)=3$. Como $F(1)=0$, no hay continuidad en $1$: la discontinuidad es removible y se elimina asignando el valor $3$.
+
+  Los valores suficientemente próximos con $x\neq1$ son positivos, porque el límite es positivo. Sin embargo, no puede afirmarse positividad estricta en un entorno que incluya $1$, ya que $F(1)=0$. Tras la corrección del valor, sí se puede aplicar preservación del signo a la función continua en $1$.
+
+  \item La identidad $1-\cos(2x)=2\sin^2x$ muestra que el denominador se anula cuando $x$ es un múltiplo entero de $\pi$. En $(-\pi,\pi)$ el único de esos puntos es $0$, tratado por separado. Para $x\neq0$ suficientemente cercano a $0$,
+  \[
+    \frac{\sin^2(3x)}{1-\cos(2x)}
+    =\frac92\left(\frac{\sin(3x)}{3x}\right)^2
+      \left(\frac{x}{\sin x}\right)^2.
+  \]
+  Los factores entre paréntesis tienden a $1$, por lo que el límite es $9/2$. Se requiere $k=9/2$. En los restantes puntos, numerador y denominador son continuos y el denominador no se anula; por tanto, la función así completada es continua en todo el intervalo.
+
+  \item Definimos $h(x)=2\sin x-x$, continua en todo $[-\pi,\pi]$. Una solución inmediata es $x=0$, pues $h(0)=0$. Para encontrar una solución positiva distinta de cero, observamos que
+  \[
+    h(\pi/2)=2-\frac\pi2>0,\qquad h(\pi)=-\pi<0.
+  \]
+  La primera desigualdad se sigue de $\pi<4$. Por Bolzano existe $c\in(\pi/2,\pi)$ con $h(c)=0$.
+
+  Como el seno es impar, $h$ también es impar: $h(-x)=-h(x)$. Por tanto, $h(-c)=0$ y $-c\in(-\pi,-\pi/2)$. También se puede aplicar Bolzano directamente en $[-\pi,-\pi/2]$, cuyos valores extremos tienen signos opuestos.
+
+  Así, $-c$, $0$ y $c$ son tres soluciones distintas, situadas en regiones disjuntas. El argumento garantiza al menos tres soluciones, sin afirmar que sean las únicas.
+  \item $A$ es continua en $[0,4]$: el radicando es no negativo en todo el intervalo y se utilizan funciones y operaciones continuas, con continuidad lateral en los extremos. Como el intervalo es cerrado y acotado, máximo--mínimo garantiza que alcanza ambos extremos absolutos.
+
+  Además, $x\geq0$ y la raíz es no negativa, de modo que $A(x)\geq0$. Por ello, elevar al cuadrado conserva el orden entre sus valores. Usando la identidad,
+  \[
+    0\leq A(x)^2=64-(x^2-8)^2\leq64,
+  \]
+  se obtiene $0\leq A(x)\leq8$. El máximo $8$ se alcanza si y solo si $x^2=8$, es decir, en $x=2\sqrt2$, que pertenece al intervalo. El mínimo $0$ se alcanza cuando $x=0$ o $16-x^2=0$, es decir, en $x=0$ y $x=4$.
+\end{enumerate}
+\fi
+
+\end{document}

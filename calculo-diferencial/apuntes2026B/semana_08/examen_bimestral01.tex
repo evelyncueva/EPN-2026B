@@ -1,0 +1,114 @@
+% !TeX root = examen_bimestral01.tex
+% !TeX program = pdflatex
+% Versión única para ambos cursos. Resolución estimada: 100 min; revisión: 20 min.
+\documentclass[10pt,a5paper]{article}
+\newif\ifmostrarSoluciones
+\mostrarSolucionesfalse
+\usepackage{estilo_apuntes}
+\dosPorCarillatrue% Use \dosPorCarillatrue para dos copias por carilla.
+\encabezadoprueba{Examen bimestral 1}{Semana 8}
+
+\begin{document}
+\begin{center}
+  {\color{Azul}\large\bfseries Examen del primer bimestre}
+\end{center}
+\noindent\textbf{Nombre:} \hrulefill
+\medskip
+
+\noindent\textbf{Indicaciones}
+\begin{itemize}
+  \item Duración: 1 hora y 30 minutos.
+  \item Justifique sus respuestas de forma breve y precisa. Indique dominios, restricciones e hipótesis de los teoremas utilizados. Se valora el razonamiento.
+  \item En verdadero/falso, una afirmación verdadera requiere un argumento y una falsa, un contraejemplo o un cálculo que la refute. Marcar únicamente V o F no otorga puntaje.
+  \item  Los argumentos trigonométricos están en radianes.
+  \item No se permite el uso de dispositivos electrónicos. Cualquier intento de copia penalizará la evaluación con una calificación total de cero.
+\end{itemize}
+
+\noindent\textbf{Bloque I. Verdadero o falso justificado (5 puntos).}
+
+\smallskip
+\noindent Cada afirmación vale 1 punto. Una explicación breve y suficiente es preferible a una respuesta extensa.
+\begin{enumerate}
+  \item Sean $f\colon A\to B$ y $g\colon B\to C$. Si $g\circ f$ es inyectiva, entonces $f$ es inyectiva.
+  \item Si una función tiene una asíntota horizontal cuando $x\to+\infty$, entonces está acotada en todo su dominio.
+  \item Si $f$ está definida cerca de $0$, salvo posiblemente en $0$, y satisface $|f(x)-2|\leq x^2$ allí, entonces $\lim_{x\to0}f(x)=2$.
+  \item Si $f$ es continua y estrictamente positiva en $[0,1]$, entonces existe un número $m>0$ tal que $f(x)\geq m$ para todo $x\in[0,1]$.
+  \item En radianes, $\displaystyle\lim_{x\to0}\frac{\sin(3x)}{\sin(2x)}=1$.
+\end{enumerate}
+
+\medskip
+\noindent\textbf{Bloque II. Desarrollo (5 puntos).}
+
+\smallskip
+\noindent Justifique los pasos esenciales; no es necesario extender el desarrollo más allá de lo solicitado.
+\begin{enumerate}[resume]
+  \item \textbf{(2,5 puntos)} Para $c\in\mathbb{R}$, se define en $(-\pi/2,\pi/2)$ la función
+  \[
+    F_c(x)=\begin{cases}
+      \dfrac{\sqrt{1+4x^2}-1}{x\sin(2x)},&x\neq0,\\[2mm]
+      c,&x=0.
+    \end{cases}
+  \]
+  Determine el valor de $c$ para que $F_c$ sea continua en $0$, justificando el límite mediante herramientas algebraicas y trigonométricas.
+
+  \item \textbf{(2,5 puntos)} Considere la función
+  \[
+    f(x)=x^2+\sin x,\qquad x\in\mathbb{R}.
+  \]
+  Justifique que $f$ alcanza un mínimo absoluto en $\mathbb{R}$, sin calcularlo. Tenga presente que el teorema de máximo--mínimo no se aplica directamente a todo $\mathbb{R}$.
+  Desarrolle los siguientes pasos:
+  \begin{enumerate}
+    \item \textbf{(0,75 puntos)} Justifique que $f$ alcanza un mínimo $m$ en el intervalo cerrado $[-1,1]$. Usando el valor $f(0)$, explique por qué $m\leq0$.
+    \item \textbf{(0,75 puntos)} Pruebe que, si $|x|>1$, entonces $f(x)>0$.
+    \item \textbf{(1 punto)} Concluya, comparando los valores dentro y fuera de $[-1,1]$, que $m$ es un mínimo absoluto de $f$ en todo $\mathbb{R}$.
+  \end{enumerate}
+\end{enumerate}
+
+\ifmostrarSoluciones
+\newpage
+\begin{solucion}[del examen bimestral]
+\begin{enumerate}
+  \item \textbf{Verdadero.} Si $f(x_1)=f(x_2)$, al aplicar $g$ resulta $(g\circ f)(x_1)=(g\circ f)(x_2)$. Como la composición es inyectiva, se deduce $x_1=x_2$. Esta es la condición de inyectividad de $f$.
+  \item \textbf{Falso.} La asíntota describe el comportamiento hacia $+\infty$, no en todo el dominio. Por ejemplo, $f(x)=1/x$ en $(0,\infty)$ tiene asíntota horizontal $y=0$ hacia $+\infty$, pero no está acotada superiormente porque $f(x)\to+\infty$ cuando $x\to0^+$.
+  \item \textbf{Verdadero.} La desigualdad equivale a
+  \[
+    2-x^2\leq f(x)\leq2+x^2.
+  \]
+  Ambas cotas tienden a $2$ cuando $x\to0$. El teorema del Sanduche garantiza el límite indicado. No hace falta que $f(0)$ esté definido.
+  \item \textbf{Verdadero.} La continuidad en el intervalo cerrado y acotado $[0,1]$ garantiza que se alcanza un mínimo, digamos $m=f(x_m)$. Como todos los valores de $f$ son estrictamente positivos y $x_m$ pertenece al intervalo, $m>0$. Además, por ser el mínimo, $f(x)\geq m$ en todo $[0,1]$.
+  \item \textbf{Falso.} Para $x\neq0$ suficientemente próximo a $0$,
+  \[
+    \frac{\sin(3x)}{\sin(2x)}
+    =\frac32\frac{\sin(3x)}{3x}\frac{2x}{\sin(2x)}
+    \longrightarrow\frac32.
+  \]
+  Que ambos argumentos tiendan a cero no elimina los factores de escala.
+
+  \item Para $x\neq0$ en el intervalo indicado, el denominador no se anula. Al racionalizar,
+  \begin{align*}
+    \frac{\sqrt{1+4x^2}-1}{x\sin(2x)}
+    &=\frac{4x}{\sin(2x)(\sqrt{1+4x^2}+1)}\\
+    &=\frac{2x}{\sin(2x)}\,
+      \frac{2}{\sqrt{1+4x^2}+1}.
+  \end{align*}
+  El primer factor tiende a $1$ por el límite fundamental del seno, y el segundo tiende a $1$ por continuidad de la raíz y de las operaciones involucradas. El límite es $1$, así que la continuidad en $0$ exige y se obtiene con $c=1$.
+
+  \item
+  \begin{enumerate}
+    \item La función es continua en $[-1,1]$, por ser suma de funciones continuas. En ese intervalo cerrado y acotado, máximo--mínimo garantiza un punto $c$ donde alcanza su mínimo $m=f(c)$. Como $0\in[-1,1]$, se cumple $m\leq f(0)=0$.
+    \item Como $\sin x\geq-1$, se tiene $f(x)\geq x^2-1$. Si $|x|>1$, entonces $x^2>1$, de modo que
+    \[
+      f(x)\geq x^2-1>0.
+    \]
+    \item Dentro de $[-1,1]$, se cumple $f(x)\geq m$ por definición de mínimo. Fuera del intervalo, $f(x)>0\geq m$. Por tanto,
+    \[
+      f(x)\geq m=f(c)\qquad\text{para todo }x\in\mathbb{R}.
+    \]
+    Como $m$ se alcanza en $c\in[-1,1]$, es un mínimo absoluto en todo $\mathbb{R}$.
+  \end{enumerate}
+\end{enumerate}
+
+\end{solucion}
+\fi
+
+\end{document}
