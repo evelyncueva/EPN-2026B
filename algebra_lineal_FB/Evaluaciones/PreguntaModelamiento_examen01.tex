@@ -1,0 +1,74 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.},leftmargin=*,itemsep=1em}
+\setlist[enumerate,2]{label=\alph*),leftmargin=1cm}
+\setlength{\parindent}{0pt}
+\title{\textbf{Modelamiento de sistemas lineales\\Examen 01}}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\begin{enumerate}
+\item \textbf{Servicios de un taller.} Un taller cobra tarifas fijas por diagnóstico, ajuste y limpieza de un equipo. Un servicio que incluye las tres tareas cuesta \$60. Si el cliente solicita únicamente ajuste y limpieza, paga \$35. Además, el diagnóstico cuesta \$10 más que la limpieza. Determine la tarifa de cada tarea.
+
+\begin{enumerate}
+    \item Defina las tres variables, plantee el sistema de ecuaciones lineales que modela la situación y escriba su representación matricial $A\mathbf{x}=b$, identificando $A$, $\mathbf{x}$ y $b$.
+    \item Resuelva el sistema mediante el método de la matriz inversa e interprete los valores obtenidos en el contexto del problema.
+\end{enumerate}
+\item \textbf{Alquiler de equipos.} Una empresa alquila proyectores, pantallas y sistemas de sonido con tarifas diarias constantes. Alquilar una unidad de cada equipo durante un día cuesta \$65. Dos proyectores y una pantalla, durante el mismo tiempo, cuestan \$80. La tarifa diaria de una pantalla supera en \$5 la de un sistema de sonido. Determine las tres tarifas.
+
+\begin{enumerate}
+    \item Defina las tres variables, plantee el sistema de ecuaciones lineales que modela la situación y escriba su representación matricial $A\mathbf{x}=b$, identificando $A$, $\mathbf{x}$ y $b$.
+    \item Resuelva el sistema mediante la regla de Cramer e interprete los valores obtenidos en el contexto del problema.
+\end{enumerate}
+\item \textbf{Kits de laboratorio.} Un laboratorio prepara kits de tres tipos. Cada kit A contiene un tubo, dos frascos y una pipeta; cada kit B contiene dos tubos, un frasco y una pipeta; cada kit C contiene un tubo, un frasco y dos pipetas. Se utilizaron exactamente 11 tubos, 12 frascos y 13 pipetas. Determine cuántos kits de cada tipo se prepararon.
+
+\begin{enumerate}
+    \item Defina las tres variables, plantee el sistema de ecuaciones lineales que modela la situación y escriba su representación matricial $A\mathbf{x}=b$, identificando $A$, $\mathbf{x}$ y $b$.
+    \item Resuelva el sistema mediante la regla de Cramer e interprete los valores obtenidos en el contexto del problema.
+\end{enumerate}
+\newpage
+\item \textbf{Mezcla de concentrados.} Se prepara una mezcla con tres concentrados A, B y C. Cada litro de A aporta dos gramos de la sustancia P y no contiene la sustancia Q. Cada litro de B aporta un gramo de P y uno de Q. Cada litro de C no contiene P y aporta tres gramos de Q. Los volúmenes se consideran aditivos. Se necesitan 9 litros de mezcla que contengan exactamente 7 gramos de P y 15 gramos de Q. Determine cuántos litros de cada concentrado deben utilizarse.
+
+\begin{enumerate}
+    \item Defina las tres variables, plantee el sistema de ecuaciones lineales que modela la situación y escriba su representación matricial $A\mathbf{x}=b$, identificando $A$, $\mathbf{x}$ y $b$.
+    \item Resuelva el sistema mediante el método de la matriz inversa e interprete los valores obtenidos en el contexto del problema.
+\end{enumerate}
+\item \textbf{Producción de paneles.} Una fábrica produce paneles de los modelos A, B y C. Cada panel A requiere dos horas de corte, una hora de ensamblaje y una hora de acabado. Cada panel B requiere una hora de corte y dos horas de ensamblaje, sin pasar por acabado. Cada panel C requiere una hora de corte y una de acabado, sin pasar por ensamblaje. En una jornada se emplearon exactamente 13 horas de corte, 10 de ensamblaje y 6 de acabado. Determine la producción de cada modelo.
+
+\begin{enumerate}
+    \item Defina las tres variables, plantee el sistema de ecuaciones lineales que modela la situación y escriba su representación matricial $A\mathbf{x}=b$, identificando $A$, $\mathbf{x}$ y $b$.
+    \item Resuelva el sistema mediante la regla de Cramer e interprete los valores obtenidos en el contexto del problema.
+\end{enumerate}
+\item \textbf{Entradas a una exposición.} Una exposición ofrece entradas generales, estudiantiles e infantiles a precios constantes. Una familia paga \$22 por una entrada de cada categoría. El precio de una entrada general es el doble del precio de una estudiantil. Otra familia paga \$28 por dos entradas generales y una infantil. Determine el precio de cada categoría.
+
+\begin{enumerate}
+    \item Defina las tres variables, plantee el sistema de ecuaciones lineales que modela la situación y escriba su representación matricial $A\mathbf{x}=b$, identificando $A$, $\mathbf{x}$ y $b$.
+    \item Resuelva el sistema mediante el método de la matriz inversa e interprete los valores obtenidos en el contexto del problema.
+\end{enumerate}
+\newpage
+\item \textbf{Transporte de carga.} Una empresa utiliza vehículos de tres tipos para un único viaje por vehículo. Cada vehículo A transporta una tonelada y requiere dos conductores; cada vehículo B transporta dos toneladas y requiere un conductor; cada vehículo C transporta tres toneladas y requiere un conductor. Ese día salieron nueve vehículos, todos a su capacidad máxima, con 17 toneladas de carga y 12 conductores en total. Determine cuántos vehículos de cada tipo salieron.
+
+\begin{enumerate}
+    \item Defina las tres variables, plantee el sistema de ecuaciones lineales que modela la situación y escriba su representación matricial $A\mathbf{x}=b$, identificando $A$, $\mathbf{x}$ y $b$.
+    \item Resuelva el sistema mediante la regla de Cramer e interprete los valores obtenidos en el contexto del problema.
+\end{enumerate}
+\item \textbf{Calibración de señales.} Un equipo registra la suma de las contribuciones de tres fuentes de señal A, B y C. Por cada unidad de intensidad, A aporta una unidad al canal 1, ninguna al canal 2 y dos al canal 3; B aporta dos unidades al canal 1, una al canal 2 y una al canal 3; C no aporta al canal 1 y aporta una unidad a cada uno de los canales 2 y 3. Las lecturas son 8, 4 y 8 unidades en los canales 1, 2 y 3, respectivamente. Determine la intensidad de cada fuente.
+
+\begin{enumerate}
+    \item Defina las tres variables, plantee el sistema de ecuaciones lineales que modela la situación y escriba su representación matricial $A\mathbf{x}=b$, identificando $A$, $\mathbf{x}$ y $b$.
+    \item Resuelva el sistema mediante el método de la matriz inversa e interprete los valores obtenidos en el contexto del problema.
+\end{enumerate}
+\item \textbf{Paquetes de impresión.} Una imprenta despacha paquetes de tres tipos. Cada paquete A contiene dos cuadernos y un bloc; cada paquete B contiene un cuaderno y dos blocs; cada paquete C contiene tres cuadernos y un bloc. En un pedido se entregaron seis paquetes, con un total de 10 cuadernos y 9 blocs. Determine cuántos paquetes de cada tipo se entregaron.
+
+\begin{enumerate}
+    \item Defina las tres variables, plantee el sistema de ecuaciones lineales que modela la situación y escriba su representación matricial $A\mathbf{x}=b$, identificando $A$, $\mathbf{x}$ y $b$.
+    \item Resuelva el sistema mediante la regla de Cramer e interprete los valores obtenidos en el contexto del problema.
+\end{enumerate}
+\end{enumerate}
+\end{document}

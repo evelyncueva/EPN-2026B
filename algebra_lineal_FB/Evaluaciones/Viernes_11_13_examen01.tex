@@ -1,0 +1,77 @@
+%\documentclass[10pt,respuestas,a4]{examenEPN}
+\documentclass[10pt,a4]{examenEPN0}
+\examen{Examen 01}
+\input{ComandoLocales}
+%\imprimirDoble
+\begin{document}
+\encabezado
+\datosAlgebra{GR6M}{17/11/2026}
+%Poner el grupo y la fecha, o dejar las llaves vacías.
+\indicacionesPrueba
+\begin{preguntas}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item Sea $\alpha \in \mathbb{R}$. Considere el siguiente sistema de ecuaciones:
+    $$
+    \left\{
+    \begin{alignedat}{4}
+        x_1  & - \alpha x_2       & + 4x_3           &= 4 \\
+        2x_1 & - (\alpha + 3)x_2  & + (2\alpha + 9)x_3 &= 10 \\
+        x_1  & - \alpha x_2       & + (\alpha + 9)x_3  &= 3
+    \end{alignedat}
+    \right.
+    $$
+    \begin{enumerate}
+        \item Halle el determinante de la matriz de coeficientes, e indique para qué valores de $\alpha$ el sistema tiene solución única. 
+        \item Para $\alpha = 3$, halle el conjunto solución. 
+    \end{enumerate}
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Sean los vectores de \(\mathbb{R}^3\):
+\[
+v_1 = (1, 2, 1), \quad v_2 = (2, 1, -1), \quad v_3 = (1, -4, k),
+\]
+donde \(k \in \mathbb{R}\) es un parámetro.
+
+\begin{enumerate}
+    \item Determine \textbf{para qué valores de \(k\)}, el vector \(v_3\) es combinación lineal de \(v_1\) y \(v_2\).
+    \item Determine el \(\operatorname{span}\{v_1, v_2\}\) e interprete geométricamente si el espacio generado es una recta o un plano en \(\mathbb{R}^3\). Justifique.
+    \item Dado el vector \(v = (4, 5, 1)\). Determine si el vector \(v\) pertenece a \(\operatorname{span}\{v_1, v_2\}\).
+   \item Para el valor de \(k\) hallado en el literal (a), determine si se cumple que \(\operatorname{span}\{v_1, v_2, v_3\} = \operatorname{span}\{v_1, v_2\}\). Justifique su respuesta.
+\end{enumerate}
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item  Considere S y T subespacios vectoriales $\mathcal{P}_2$ y, $p(x)=ax^2+bx+c$, 
+\begin{center}
+$S=\{p \in \mathcal{P}_2 : a+b=0\},\qquad
+T=\{p\in \mathcal{P}_2 : b+c=0,\ a-c=0\}.$
+\end{center}
+\begin{itemize}
+\item[(a)] Hallar $S\cap T$ de forma explícita.
+\item[(b)] Hallar $k\in\R$ tal que $p(x)=(k+1)x^2-3x+(2k-1)\in S\cap T$.
+\end{itemize}
+
+\vspace*{30\baselineskip}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item (Ejercicio del deber) Analice si el siguiente conjunto es un subespacio vectorial de $\R^{3 \times 3}$:
+    \[
+    W = \left\{ A \in \R^{3 \times 3} \colon \operatorname{tr}(A) = 0 \right\}
+    \] 
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item \textbf{Servicios de un taller.} Un taller cobra tarifas fijas por diagnóstico, ajuste y limpieza de un equipo. Un servicio que incluye las tres tareas cuesta \$60. Si el cliente solicita únicamente ajuste y limpieza, paga \$35. Además, el diagnóstico cuesta \$10 más que la limpieza. Determine la tarifa de cada tarea.
+
+\begin{enumerate}
+    \item Defina las tres variables, plantee el sistema de ecuaciones lineales que modela la situación y escriba su representación matricial $A\mathbf{x}=b$, identificando $A$, $\mathbf{x}$ y $b$.
+    \item Resuelva el sistema e indique la tarifa de las tareas (servicios) detalladas en el problema. 
+\end{enumerate}
+
+   
+
+\end{preguntas}
+
+\end{document}

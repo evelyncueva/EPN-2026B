@@ -1,0 +1,287 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{xcolor}
+
+\definecolor{comentcolor}{HTML}{0070C0}
+
+\newcommand{\coment}[1]{%
+    \textcolor{comentcolor}{\textbf{#1}}%
+}
+
+% =========================================================
+% PAQUETES
+% =========================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{titlesec}
+
+% =========================================================
+% CONFIGURACIÓN DE MÁRGENES
+% =========================================================
+\geometry{
+    top=2.5cm,
+    bottom=2.5cm,
+    left=2.5cm,
+    right=2.5cm
+}
+
+% =========================================================
+% CONFIGURACIÓN DE TÍTULOS
+% =========================================================
+\renewcommand{\thesection}{\Roman{section}}
+
+\titleformat{\section}
+    {\large\bfseries}
+    {\thesection.}
+    {0.5em}
+    {\MakeUppercase}
+
+% =========================================================
+% CONFIGURACIÓN DE LISTAS
+% =========================================================
+\setlist[enumerate,1]{
+    label=\textbf{\arabic*.},
+    leftmargin=*,
+    itemsep=1em,
+    topsep=0.5em
+}
+
+\setlist[enumerate,2]{
+    label=\alph*),
+    leftmargin=1.5cm,
+    itemsep=0.3em
+}
+
+\setlist[itemize]{
+    label=--,
+    leftmargin=1.5cm,
+    itemsep=0.2em
+}
+
+% =========================================================
+% INFORMACIÓN DEL DOCUMENTO
+% =========================================================
+\title{\textbf{Ejercicios}}
+\author{Modelo sistema: Matriz Inversa / Regla de Cramer}
+\date{}
+
+% =========================================================
+% INICIO DEL DOCUMENTO
+% =========================================================
+\begin{document}
+
+\maketitle
+
+% =========================================================
+% SECCIÓN I
+% =========================================================
+
+
+\begin{enumerate}
+
+\item Una plataforma digital procesa solicitudes mediante tres operaciones: \emph{análisis con inteligencia artificial}, \emph{verificación de identidad} y \emph{almacenamiento cifrado}. Cada operación consume una cantidad fija de créditos computacionales por solicitud. Se quiere determinar el consumo individual de estas operaciones para optimizar el servicio.
+
+Una solicitud que utiliza las tres operaciones requiere {95 créditos}. Cuando el análisis con inteligencia artificial no se ejecuta, la misma solicitud requiere {55 créditos}. Por último, en esa solicitud reducida se reemplaza el almacenamiento cifrado por el análisis con inteligencia artificial, manteniendo la verificación de identidad; el consumo total {aumenta 15 créditos} respecto de los 55 créditos anteriores.
+
+
+
+
+\begin{enumerate}
+\item Defina las tres variables, plantee el sistema de ecuaciones lineales que modela la situación y escriba su representación matricial $Ax=b$, identificando $A$, $x$ y $b$.
+\item Resuelva el sistema mediante el método de la matriz inversa y determine los valores de las tres incógnitas en el contexto del problema.
+\end{enumerate}
+
+\item  Una empresa de envases reutilizables cobra a sus clientes por tres conceptos: \emph{reacondicionamiento de cada envase}, \emph{servicio de entrega} y \emph{depósito reembolsable}. Este último se devuelve íntegramente cuando el cliente retorna el envase. La empresa quiere identificar cuánto corresponde a cada concepto, suponiendo precios constantes.
+
+Una clienta paga inicialmente {\$95} por reacondicionar un envase, recibir una entrega y dejar el depósito. Cuando devuelve el envase, su gasto definitivo es de {\$65}. Por otra parte, un cliente lleva {dos envases propios} para reacondicionarlos y solicita {una sola entrega}. Como no necesita dejar depósito, paga un total de {\$105}.
+
+
+
+
+\begin{enumerate}
+\item Defina las tres variables, plantee el sistema de ecuaciones lineales que modela la situación y escriba su representación matricial $Ax=b$, identificando $A$, $x$ y $b$.
+\item Resuelva el sistema mediante el método de la matriz inversa y determine los valores de las tres incógnitas en el contexto del problema.
+\end{enumerate}
+
+\item Un centro de datos ejecuta simultáneamente tres tipos de
+procesos informáticos:
+
+\begin{itemize}
+\item Procesos de análisis de datos (A),
+\item Procesos de respaldo y almacenamiento de información (B),
+\item Procesos de inteligencia artificial para reconocimiento de patrones (C).
+\end{itemize}
+
+Cada proceso consume recursos computacionales del servidor.
+Un proceso de análisis de datos utiliza 2 unidades de CPU,
+1 unidad de memoria RAM y 1 unidad de almacenamiento.
+Un proceso de respaldo utiliza 3 unidades de CPU y 2 unidades
+de memoria RAM. Por su parte, un proceso de inteligencia
+artificial utiliza 2 unidades de CPU, 1 unidad de memoria RAM
+y 2 unidades de almacenamiento. Durante una hora de operación se registró un consumo total de 21 unidades de CPU, 12 unidades de memoria RAM y
+10 unidades de almacenamiento.
+
+\begin{enumerate}
+\item Defina las tres variables, plantee el sistema de ecuaciones
+lineales que modela la situación y escriba su representación
+matricial $Ax=b$, identificando $A$, $x$ y $b$.
+
+\item Resuelva el sistema mediante la regla de Cramer y determine los valores de las tres incógnitas
+en el contexto del problema.
+\end{enumerate}
+
+\item Una empresa constructora fabrica tres tipos de elementos
+prefabricados de hormigón: vigas, columnas y losas.
+Para producirlos se emplean cemento, arena y grava.
+
+Cada viga requiere 2 unidades de cemento, 1 unidad de arena
+y 1 unidad de grava. Cada columna requiere 3 unidades de
+cemento y 2 unidades de arena. Cada losa requiere 2 unidades
+de cemento, 1 unidad de arena y 2 unidades de grava.Durante una jornada de producción se consumieron exactamente 28 unidades de cemento, 16 unidades de arena y
+13 unidades de grava.
+
+\begin{enumerate}
+\item Defina las tres variables, plantee el sistema de ecuaciones
+lineales que modela la situación y escriba su representación
+matricial $Ax=b$, identificando $A$, $x$ y $b$.
+
+\item Resuelva el sistema mediante la regla de Cramer y determine los valores de las tres incógnitas
+en el contexto del problema.
+\end{enumerate}
+
+\item Una fábrica produce tres modelos de sillas.
+Para confeccionar una unidad del Modelo 1, se requieren
+2 horas de carpintería, 1 kg de barniz y 1 hora de tapizado.
+Para una silla del Modelo 2, se necesita 1 hora de carpintería,
+2 kg de barniz y 1 hora de tapizado.
+Por último, el Modelo 3 consume 1 hora de carpintería,
+1 kg de barniz y 1 hora de tapizado. Al finalizar esta semana, los registros de producción indicaron que se emplearon exactamente 6 horas de carpintería,
+6 kg de barniz y 4 horas de tapizado, sin que sobrara
+ningún recurso.
+
+
+
+
+\begin{enumerate}
+\item Defina las tres variables, plantee el sistema de ecuaciones lineales que modela la situación y escriba su representación matricial $Ax=b$, identificando $A$, $x$ y $b$.
+\item Resuelva el sistema mediante la regla de Cramer  y determine los valores de las tres incógnitas en el contexto del problema.
+\end{enumerate}
+
+
+\item Una planta de producción química utiliza tres reactivos,
+$R_1$, $R_2$ y $R_3$, para elaborar una solución industrial
+empleada en el tratamiento de aguas. Cada reactivo aporta
+diferentes cantidades de tres sustancias activas denominadas
+A, B y C, las cuales son necesarias para garantizar las
+propiedades químicas del producto final.
+
+Se sabe que cada litro del reactivo $R_1$ aporta
+3 unidades de la sustancia A, 3 unidades de la sustancia B
+y 2 unidades de la sustancia C.
+Cada litro del reactivo $R_2$ aporta 2 unidades de la sustancia A,
+3 unidades de la sustancia B y 2 unidades de la sustancia C.
+Finalmente, cada litro del reactivo $R_3$ aporta
+2 unidades de la sustancia A y 1 unidad de la sustancia C.
+
+Después de realizar la mezcla, el laboratorio de control
+de calidad determinó que la solución obtenida contiene
+exactamente 9 unidades de la sustancia A,
+6 unidades de la sustancia B y 6 unidades de la sustancia C.
+
+\begin{enumerate}
+\item Defina las tres variables, plantee el sistema de ecuaciones
+lineales que modela la situación y escriba su representación
+matricial $Ax=b$, identificando $A$, $x$ y $b$.
+
+\item Resuelva el sistema mediante la regla de Cramer y determine los valores de las tres incógnitas
+en el contexto del problema.
+\end{enumerate}
+
+\item En un laboratorio de instrumentación electrónica se
+emplean tres sensores, $S_1$, $S_2$ y $S_3$, para monitorear
+una variable física mediante un sistema de adquisición de
+datos compuesto por tres canales de medición. La señal registrada en cada canal corresponde a la suma de las contribuciones generadas por los tres sensores.
+Por cada unidad de señal emitida:
+
+El sensor $S_1$ aporta 2 unidades al Canal 1
+y 2 unidades al Canal 2. El sensor $S_2$ aporta 1 unidad al Canal 1,
+2 unidades al Canal 2 y 1 unidad al Canal 3. El sensor $S_3$ aporta 1 unidad al Canal 2. Durante una prueba de calibración, el sistema registró
+un total de 10 unidades de señal en el Canal 1,
+16 unidades en el Canal 2 y 4 unidades en el Canal 3.
+
+\begin{enumerate}
+\item Defina las tres variables, plantee el sistema de ecuaciones
+lineales que modela la situación y escriba su representación
+matricial $Ax=b$, identificando $A$, $x$ y $b$.
+
+\item Resuelva el sistema mediante el método de la matriz inversa y determine los valores de las tres
+incógnitas en el contexto del problema.
+\end{enumerate}
+
+\item Se desea montar una placa triangular de acero de
+espesor uniforme. La placa se va a suspender horizontalmente
+desde el techo del taller mediante 3 cables verticales
+ubicados en sus tres vértices A, B y C.
+
+Se necesita calcular la tensión en cada cable para
+seleccionar el diámetro correcto.
+
+La suma de las tres tensiones debe soportar el peso total
+de la placa que es de 6 kN.
+
+Por equilibrio de momentos respecto al borde $x$,
+la tensión $T_2$ aporta el doble que $T_3$ y $T_1$
+no aporta momento; el momento total requerido respecto
+al borde $x$ es de 7 kNm.
+
+Por equilibrio de momentos respecto a $y$,
+$T_1$ aporta 1 vez, $T_2$ aporta 2 veces y
+$T_3$ aporta 2 veces; el momento total requerido
+respecto a $y$ es de 10 kNm.
+
+
+
+
+\begin{enumerate}
+\item Defina las tres variables, plantee el sistema de ecuaciones lineales que modela la situación y escriba su representación matricial $Ax=b$, identificando $A$, $x$ y $b$.
+\item Resuelva el sistema mediante la regla de Cramer y determine los valores de las tres incógnitas en el contexto del problema.
+\end{enumerate}
+
+\item Se desea preparar un fertilizante que contenga
+tres tipos de abono.
+
+\begin{itemize}
+\item El abono A: no contiene Nitrógeno,
+contiene 2 kg de Fósforo y 1 kg de Potasio por saco.
+
+\item El abono B: contiene 1 kg de Nitrógeno,
+1 kg de Fósforo y 1 kg de Potasio por saco.
+
+\item El abono C: contiene 2 kg de Nitrógeno,
+3 kg de Fósforo y 1 kg de Potasio por saco.
+\end{itemize}
+
+La mezcla del fertilizante requerido debe contener
+exactamente 7 kg de Nitrógeno, 14 kg de Fósforo
+y 6 kg de Potasio.
+
+
+
+
+\begin{enumerate}
+\item Defina las tres variables, plantee el sistema de ecuaciones lineales que modela la situación y escriba su representación matricial $Ax=b$, identificando $A$, $x$ y $b$.
+\item Resuelva el sistema mediante el método de la matriz inversa y determine los valores de las tres incógnitas en el contexto del problema.
+\end{enumerate}
+
+\end{enumerate}
+
+% =========================================================
+% FIN DEL DOCUMENTO
+% =========================================================
+\end{document}
