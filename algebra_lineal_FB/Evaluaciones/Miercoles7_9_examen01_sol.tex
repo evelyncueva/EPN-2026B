@@ -1,0 +1,103 @@
+\documentclass[10pt,a4]{examenEPN0}
+\input{ComandoLocales}
+\examen{Examen 01: solucionario y rúbrica}
+\makeatletter
+\renewcommand{\@autor}{Departamento de Formación Básica}
+\renewcommand{\@fecha}{Miércoles de 7 a 9 -- 18/11/2026}
+\makeatother
+\begin{document}
+\encabezado
+\noindent\textbf{Criterio general (20 puntos).} Se asigna crédito parcial por
+los pasos correctos. Un error aritmético se penaliza donde se origina;
+los pasos posteriores se valoran por su coherencia, sin repetir la penalización.
+Se aceptan procedimientos equivalentes debidamente justificados.
+
+\section*{1. Matriz con parámetro (4 puntos)}
+\noindent\textbf{Rúbrica.}
+\begin{itemize}[itemsep=2pt]
+    \item Calcular el determinante con procedimiento: 1,5 puntos; establecer la condición de invertibilidad: 0,5 puntos.
+    \item Sustituir $\alpha=0$ y reducir el sistema: 1 punto; expresar todas las soluciones con una variable libre: 1 punto.
+\end{itemize}
+Aplicando $F_2\leftarrow F_2-2F_1$ y
+$F_3\leftarrow F_3-3F_1$, el determinante es
+\[
+    \det(A)=\det\begin{pmatrix}1&\alpha&2\\0&\alpha&2\\0&\alpha&\alpha-4\end{pmatrix}
+    =\alpha(\alpha-4)-2\alpha=\alpha(\alpha-6).
+\]
+Por tanto, $A$ es invertible si y solo si $\alpha\notin\{0,6\}$.
+Para $\alpha=0$, las ecuaciones son $x+2z=1$, $2x+6z=2$ y
+$3x+2z=3$. Restando dos veces la primera de la segunda se obtiene
+$2z=0$; así $x=1$ y $y$ es libre. La tercera ecuación se satisface.
+El conjunto solución es $\boxed{\{(1,t,0):t\in\R\}}$.
+
+\section*{2. Intersección de subespacios de matrices (4 puntos)}
+\noindent\textbf{Rúbrica.}
+\begin{itemize}[itemsep=2pt]
+    \item Imponer simultáneamente las condiciones de $S$ y $T$: 1 punto; parametrizar la intersección: 1 punto.
+    \item Plantear las condiciones sobre $k$: 1 punto; hallar el valor y verificar todas las condiciones: 1 punto.
+\end{itemize}
+En $T$ las matrices tienen la forma $\begin{pmatrix}a&b\\b&a\end{pmatrix}$.
+La condición de $S$ exige $2a+2b=0$, luego
+\[
+    \boxed{S\cap T=\left\{t\begin{pmatrix}1&-1\\-1&1\end{pmatrix}:t\in\R\right\}.}
+\]
+Para la matriz dada, $k+1=3k-1$ y $k-3=2k-4$ dan $k=1$.
+La suma de entradas es $7k-7$, que también se anula para ese valor.
+La matriz resultante es $\begin{pmatrix}2&-2\\-2&2\end{pmatrix}$.
+
+\section*{3. Espacio generado (4 puntos)}
+\noindent\textbf{Rúbrica.}
+\begin{itemize}[itemsep=2pt]
+    \item Formar la matriz de generadores: 0,5 puntos; calcular su determinante: 1 punto; concluir los valores de $k$: 0,5 puntos.
+    \item Para $k=2$, describir el plano: 0,5 puntos; justificar su dimensión y que no es $\R^3$: 0,5 puntos.
+    \item Dar un vector permitido del plano y justificarlo: 0,5 puntos; dar un vector exterior y justificarlo: 0,5 puntos.
+\end{itemize}
+Se tiene $u\times v=(5,-3,-1)$ y
+$\det[u\ v\ w]=(u\times v)\cdot w=2-k$.
+Los tres vectores generan $\R^3$ exactamente cuando $k\ne2$.
+Si $k=2$, $w=v-u$, y $u,v$ son independientes (no son proporcionales).
+Por tanto,
+\[
+    \operatorname{span}\{u,v,w\}=\{(x,y,z)\in\R^3:5x-3y-z=0\}.
+\]
+Es un plano por el origen, de dimensión 2, y no todo $\R^3$.
+Por ejemplo, $u+v=(3,5,0)$ pertenece al plano y es distinto de cero y de
+los tres generadores. El vector $(1,0,0)$ no pertenece porque $5\ne0$.
+
+\section*{4. Vehículos (4 puntos)}
+\noindent\textbf{Rúbrica.}
+\begin{itemize}[itemsep=2pt]
+    \item Definir las variables: 0,25 puntos; plantear las tres ecuaciones: 0,75 puntos (0,25 por ecuación); identificar $A$, $\mathbf{x}$ y $b$: 1 punto.
+    \item Resolver el sistema con procedimiento: 1,5 puntos; interpretar y comprobar las cantidades: 0,5 puntos.
+\end{itemize}
+Sean $a,b,c$ las cantidades de vehículos A, B y C, enteras no negativas.
+El modelo y su representación matricial son
+\[
+    a+b+c=9,\qquad a+2b+3c=17,\qquad 2a+b+c=12,
+\]
+\[
+    A=\begin{pmatrix}1&1&1\\1&2&3\\2&1&1\end{pmatrix},\quad
+    \mathbf{x}=\begin{pmatrix}a\\b\\c\end{pmatrix},\quad
+    b_{\rm modelo}=\begin{pmatrix}9\\17\\12\end{pmatrix}.
+\]
+Restando la primera ecuación de la tercera, $a=3$. Entonces $b+c=6$
+y $2b+3c=14$, de donde $c=2$ y $b=4$.
+Salieron \textbf{3 vehículos A, 4 B y 2 C}:
+$3+4+2=9$, $3+8+6=17$ y $6+4+2=12$.
+
+\section*{5. Subespacio de polinomios (4 puntos)}
+\noindent\textbf{Rúbrica.}
+\begin{itemize}[itemsep=2pt]
+    \item Verificar que el polinomio cero pertenece a $W$: 1 punto.
+    \item Demostrar la cerradura bajo suma usando ambas condiciones: 1,5 puntos.
+    \item Demostrar la cerradura bajo producto por escalar usando ambas condiciones: 1 punto.
+    \item Concluir que es subespacio: 0,5 puntos.
+\end{itemize}
+El polinomio cero satisface $p(2)=p'(0)=0$. Si $p,q\in W$, entonces
+$(p+q)(2)=p(2)+q(2)=0$ y $(p+q)'(0)=p'(0)+q'(0)=0$.
+Para $\lambda\in\R$, $(\lambda p)(2)=\lambda p(2)=0$ y
+$(\lambda p)'(0)=\lambda p'(0)=0$. La suma y el producto por escalar
+permanecen en $\mathcal P_3(\R)$, luego $W$ es un subespacio.
+También se acepta justificarlo como intersección de los núcleos de las
+aplicaciones lineales $p\mapsto p(2)$ y $p\mapsto p'(0)$.
+\end{document}

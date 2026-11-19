@@ -1,0 +1,108 @@
+\documentclass[10pt,a4]{examenEPN0}
+\input{ComandoLocales}
+\examen{Examen 01: solucionario y rúbrica}
+\makeatletter
+\renewcommand{\@autor}{Departamento de Formación Básica}
+\renewcommand{\@fecha}{GR6M -- Viernes de 11 a 13}
+\makeatother
+\begin{document}
+\encabezado
+\noindent\textbf{Criterio general (20 puntos).} Se asigna crédito parcial por
+los pasos correctos. Un error aritmético se penaliza donde se origina;
+los pasos posteriores se valoran por su coherencia, sin repetir la penalización.
+Se aceptan procedimientos equivalentes debidamente justificados.
+\par\noindent\textbf{Distribución de puntajes.} El enunciado no especifica
+puntajes; esta rúbrica asigna 4 puntos a cada pregunta.
+La fecha del archivo fuente es 17/11/2026; se conserva sin modificar el examen.
+
+\section*{1. Sistema con parámetro (4 puntos)}
+\noindent\textbf{Rúbrica.}
+\begin{itemize}[itemsep=2pt]
+    \item Calcular el determinante con procedimiento: 1,5 puntos; establecer cuándo hay solución única: 0,5 puntos.
+    \item Sustituir $\alpha=3$ y reducir: 1 punto; exhibir una contradicción: 0,5 puntos; concluir que el conjunto solución es vacío: 0,5 puntos.
+\end{itemize}
+Mediante $F_2\leftarrow F_2-2F_1$ y $F_3\leftarrow F_3-F_1$,
+\[
+    \det(A)=\det\begin{pmatrix}1&-\alpha&4\\0&\alpha-3&2\alpha+1\\0&0&\alpha+5\end{pmatrix}
+    =(\alpha-3)(\alpha+5).
+\]
+Hay solución única exactamente para $\alpha\notin\{3,-5\}$.
+Para $\alpha=3$, las mismas operaciones sobre las ecuaciones producen
+$7x_3=2$ y $8x_3=-1$. Como $2/7\ne-1/8$, el sistema es
+incompatible y su conjunto solución es $\boxed{\varnothing}$.
+
+\section*{2. Combinaciones lineales y espacio generado (4 puntos)}
+\noindent\textbf{Rúbrica.}
+\begin{itemize}[itemsep=2pt]
+    \item Plantear la combinación y hallar los coeficientes: 0,5 puntos; obtener $k$: 0,5 puntos.
+    \item Describir el espacio generado: 0,5 puntos; justificar que es un plano: 0,5 puntos.
+    \item Comprobar la pertenencia del vector dado: 0,75 puntos; concluir: 0,25 puntos.
+    \item Justificar la igualdad de los espacios generados para el $k$ obtenido: 1 punto.
+\end{itemize}
+Si $v_3=a v_1+b v_2$, las primeras coordenadas dan
+$a+2b=1$ y $2a+b=-4$. Por tanto, $a=-3$, $b=2$ y
+$k=a-b=-5$; en ese caso $v_3=-3v_1+2v_2$.
+Como $v_1\times v_2=(-3,3,-3)\ne0$,
+\[
+    \operatorname{span}\{v_1,v_2\}
+    =\{a(1,2,1)+b(2,1,-1):a,b\in\R\}
+    =\{(x,y,z):x-y+z=0\}.
+\]
+Es un plano por el origen. Para $v=(4,5,1)$ se tiene
+$4-5+1=0$, por lo que \textbf{sí pertenece}; explícitamente,
+$v=2v_1+v_2$.
+Para $k=-5$, añadir $v_3$, que ya es combinación de $v_1,v_2$,
+no cambia el espacio generado. Una inclusión se sigue de esa combinación
+y la otra de que $v_1,v_2$ están entre los tres generadores.
+
+\section*{3. Intersección de subespacios de polinomios (4 puntos)}
+\noindent\textbf{Rúbrica.}
+\begin{itemize}[itemsep=2pt]
+    \item Resolver las condiciones sobre $a,b,c$: 1 punto; expresar la intersección: 1 punto.
+    \item Plantear las condiciones sobre $k$: 1 punto; hallar el valor y verificar: 1 punto.
+\end{itemize}
+Las condiciones $a+b=0$, $b+c=0$ y $a-c=0$ equivalen a
+$a=c=t$ y $b=-t$. Así,
+\[
+    \boxed{S\cap T=\{t(x^2-x+1):t\in\R\}.}
+\]
+Para el polinomio dado, $a+b=k-2$, $b+c=2k-4$ y
+$a-c=2-k$. Se anulan simultáneamente para $k=2$, y el
+polinomio es $3x^2-3x+3$.
+
+\section*{4. Matrices de traza cero (4 puntos)}
+\noindent\textbf{Rúbrica.}
+\begin{itemize}[itemsep=2pt]
+    \item Verificar que la matriz cero pertenece a $W$: 1 punto.
+    \item Demostrar cerradura bajo suma por linealidad de la traza: 1,5 puntos.
+    \item Demostrar cerradura bajo producto por escalar: 1 punto.
+    \item Concluir que es subespacio: 0,5 puntos.
+\end{itemize}
+La matriz cero tiene traza cero. Si $A,B\in W$ y $\lambda\in\R$,
+\[
+    \operatorname{tr}(A+B)=\operatorname{tr}(A)+\operatorname{tr}(B)=0,
+    \qquad \operatorname{tr}(\lambda A)=\lambda\operatorname{tr}(A)=0.
+\]
+Por tanto, $W$ es subespacio de $\R^{3\times3}$. También se acepta
+identificar $W$ como núcleo de la aplicación lineal traza.
+
+\section*{5. Servicios del taller (4 puntos)}
+\noindent\textbf{Rúbrica.}
+\begin{itemize}[itemsep=2pt]
+    \item Definir las variables y unidades: 0,25 puntos; plantear las ecuaciones: 0,75 puntos (0,25 por ecuación); identificar $A$, $\mathbf{x}$ y $b$: 1 punto.
+    \item Resolver con procedimiento: 1,5 puntos; interpretar y comprobar las tarifas: 0,5 puntos.
+\end{itemize}
+Sean $d,a,l$ las tarifas de diagnóstico, ajuste y limpieza, en dólares.
+\[
+    d+a+l=60,\qquad a+l=35,\qquad d-l=10.
+\]
+\[
+    A=\begin{pmatrix}1&1&1\\0&1&1\\1&0&-1\end{pmatrix},\quad
+    \mathbf{x}=\begin{pmatrix}d\\a\\l\end{pmatrix},\quad
+    b=\begin{pmatrix}60\\35\\10\end{pmatrix}.
+\]
+Restando las dos primeras ecuaciones, $d=25$. De $d-l=10$,
+$l=15$; luego $a=20$. Las tarifas son \textbf{\$25 por diagnóstico,
+\$20 por ajuste y \$15 por limpieza}. Se comprueba
+$25+20+15=60$, $20+15=35$ y $25-15=10$.
+\end{document}
