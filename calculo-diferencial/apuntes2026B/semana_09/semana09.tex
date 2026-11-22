@@ -1,0 +1,451 @@
+% !TeX root = semana09.tex
+% !TeX program = pdflatex
+% Apunte de clase: definición, interpretaciones y reglas de derivación.
+\documentclass[10pt,a5paper]{article}
+\newif\ifmostrarSoluciones
+\mostrarSolucionestrue
+\usepackage{tikz}
+\usepackage{estilo_apuntes}
+\usepackage{needspace}
+\usetikzlibrary{arrows.meta,positioning,babel}
+% Encabezados compactos, solo para este apunte.
+\makeatletter
+\renewcommand\section{\@startsection{section}{1}{\z@}%
+  {-2.5ex plus -0.5ex minus -0.2ex}{1ex plus 0.2ex}%
+  {\normalfont\normalsize\bfseries\color{Azul}}}
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+  {-1.8ex plus -0.4ex minus -0.2ex}{0.7ex plus 0.2ex}%
+  {\normalfont\normalsize\bfseries}}
+\newcommand{\espacioprevio}[1]{\if@nobreak\else\Needspace{#1}\fi}
+\makeatother
+% Mantener los encabezados junto al comienzo de su contenido.
+\AddToHook{cmd/section/before}{\Needspace{7\baselineskip}}
+\AddToHook{cmd/subsection/before}{\Needspace{6\baselineskip}}
+\AddToHook{env/definicion/before}{\espacioprevio{6\baselineskip}}
+\AddToHook{env/teorema/before}{\espacioprevio{6\baselineskip}}
+\AddToHook{env/criterio/before}{\espacioprevio{6\baselineskip}}
+\AddToHook{env/proposicion/before}{\espacioprevio{6\baselineskip}}
+\AddToHook{env/ejemplo/before}{\espacioprevio{6\baselineskip}}
+\AddToHook{env/solucion/before}{\espacioprevio{5\baselineskip}}
+\AddToHook{env/nota/before}{\espacioprevio{5\baselineskip}}
+\AddToHook{env/ejercicios/before}{\espacioprevio{7\baselineskip}}
+\encabezado{Semana 9}{Apunte semanal}
+
+\begin{document}
+\begin{center}
+  {\color{Azul}\large\bfseries La derivada}\\[2pt]
+  {\small Semana 9}
+\end{center}
+
+La derivada se define como el límite de una razón de cambio promedio. Su existencia permite asociar a una función una pendiente y una razón de cambio instantáneas. En esta clase se estudian la definición, sus interpretaciones y las reglas básicas de cálculo.
+
+\section*{Cociente incremental}
+
+Sea $f\colon I\to\mathbb{R}$ una función definida en un intervalo $I$. Sean $a,a+h\in I$, con $h\neq0$. El incremento de la variable es $\Delta x=h$, y el incremento de la función es
+\[
+  \Delta y=f(a+h)-f(a).
+\]
+
+\begin{definicion}[cociente incremental]
+Dados $a,a+h\in I$, con $h\neq0$, el \textbf{cociente incremental} de $f$ en $a$, correspondiente al incremento $h$, es
+\[
+  \frac{\Delta y}{\Delta x}=\frac{f(a+h)-f(a)}h
+\]
+También se denomina \textbf{tasa de variación media} o \textbf{razón de cambio promedio} entre $a$ y $a+h$. Es la pendiente de la recta secante que pasa por los puntos $P=(a,f(a))$ y $Q=(a+h,f(a+h))$ de la gráfica.
+\end{definicion}
+
+\begin{center}
+\begin{tikzpicture}[x=1.5cm,y=1.15cm,every node/.style={font=\scriptsize}]
+  \draw[->,Gris] (0,0)--(4.1,0) node[right] {$x$};
+  \draw[->,Gris] (0,0)--(0,3.8) node[above] {$y$};
+  \draw[Azul,thick,domain=0.2:3.6,samples=80]
+    plot (\x,{0.2*(\x-1)^2+0.4*(\x-1)+1});
+  \draw[Rojo,thick,domain=0.3:3.8] plot (\x,{0.8*\x+0.2});
+  \draw[Gris,dashed] (1,0)--(1,1);
+  \draw[Gris,dashed] (3,0)--(3,2.6);
+  \draw[Gris,dashed] (0,1)--(1,1);
+  \draw[Gris,dashed] (0,2.6)--(3,2.6);
+  \draw[Verde,dashed,thick] (1,1)--(3,1)--(3,2.6);
+  \draw[<->,Verde] (1,0.5)--(3,0.5) node[midway,below] {$\Delta x=h$};
+  \draw[<->,Verde] (3.45,1)--(3.45,2.6)
+    node[midway,right] {$\Delta y=f(a+h)-f(a)$};
+  \fill[Rojo] (1,1) circle (2pt);
+  \fill[Rojo] (3,2.6) circle (2pt);
+  \node[above left] at (1,1) {$P=(a,f(a))$};
+  \node[above left] at (3,2.6) {$Q=(a+h,f(a+h))$};
+  \node[Rojo,above] at (3.5,3.1) {secante $PQ$};
+  \node[below] at (1,0) {$a$};
+  \node[below] at (3,0) {$a+h$};
+  \node[left] at (0,1) {$f(a)$};
+  \node[left] at (0,2.6) {$f(a+h)$};
+\end{tikzpicture}
+\end{center}
+
+La figura representa el caso $h>0$. El triángulo indicado relaciona los incrementos horizontal y vertical; la pendiente de la secante es $\Delta y/\Delta x$. Su ecuación es
+\[
+  y-f(a)=\frac{f(a+h)-f(a)}h(x-a).
+\]
+La definición también admite $h<0$: los incrementos son diferencias con signo, no necesariamente longitudes positivas.
+
+\begin{ejemplo}[secantes de una parábola]
+Para $f(x)=x^2$ y $a=1$, calcule el cociente incremental y observe su comportamiento al acercar el segundo punto al primero.
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+Para $h\neq0$,
+\[
+  \frac{f(1+h)-f(1)}h
+  =\frac{(1+h)^2-1}h=2+h.
+\]
+\[
+  \begin{array}{c|rrrrrr}
+    h&-0.5&-0.1&-0.01&0.01&0.1&0.5\\ \hline
+    2+h&1.5&1.9&1.99&2.01&2.1&2.5
+  \end{array}
+\]
+Las pendientes se aproximan a $2$ desde ambos lados. La tabla ilustra el comportamiento; la igualdad algebraica permite justificar el límite.
+\end{solucion}
+\else\vspace{22mm}\fi
+
+\begin{center}
+\begin{tikzpicture}[x=1.7cm,y=0.85cm,every node/.style={font=\scriptsize}]
+  \draw[->,Gris] (-0.2,0)--(2.7,0) node[right] {$x$};
+  \draw[->,Gris] (0,-0.5)--(0,5.8) node[above] {$y$};
+  \draw[Azul,thick,domain=0:2.3,samples=70] plot (\x,{\x*\x});
+  \draw[Naranja,dashed,domain=0.5:2.4] plot (\x,{3*\x-2});
+  \draw[Verde,dashed,domain=0.5:2.4] plot (\x,{2.5*\x-1.5});
+  \draw[Rojo,thick,domain=0.3:2.5] plot (\x,{2*\x-1});
+  \foreach \x/\y in {1/1,1.5/2.25,2/4}{\fill[Azul] (\x,\y) circle (2pt);}
+  \node[below right] at (1,1) {$P=(1,1)$};
+  \node[above left] at (2,4) {$Q$};
+  \node[Naranja,right] at (2.35,5.05) {secante};
+  \node[Rojo,right] at (2.35,3.7) {tangente};
+\end{tikzpicture}
+\end{center}
+
+El punto $P$ queda fijo y el segundo punto se aproxima a él sobre la curva. Si las pendientes de las secantes tienen un mismo límite finito por ambos lados, ese límite será la pendiente de la tangente.
+
+\section*{Derivada en un punto}
+
+\begin{definicion}[derivada en un punto]
+Sea $f\colon I\to\mathbb{R}$, donde $I$ es un intervalo, y sea $a$ un punto interior de $I$. La función $f$ es \textbf{derivable} o \textbf{diferenciable en $a$} si existe como número real finito el límite
+\[
+  \boxed{f'(a)=\lim_{h\to0}\frac{f(a+h)-f(a)}h.}
+\]
+Equivalentemente, con $x=a+h$,
+\[
+  f'(a)=\lim_{x\to a}\frac{f(x)-f(a)}{x-a}.
+\]
+\end{definicion}
+
+El cociente se considera para $h\neq0$ y $a+h\in I$. Si $f$ es continua en $a$, la sustitución formal $h=0$ produce la indeterminación $0/0$ y no determina el límite. Si el cociente tiende a $+\infty$ o $-\infty$, no existe una derivada real finita en ese punto.
+
+\begin{ejemplo}[derivada de $x^2$]
+Calcule por definición la derivada de $f(x)=x^2$ en $a\in\mathbb{R}$.
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+\[
+  \frac{f(a+h)-f(a)}h
+  =\frac{a^2+2ah+h^2-a^2}h=2a+h\quad(h\neq0).
+\]
+Por tanto, $f'(a)=2a$. En particular, $f'(1)=2$. El resultado depende del punto de evaluación $a$; el incremento $h$ interviene únicamente en el proceso de límite.
+\end{solucion}
+\else\vspace{18mm}\fi
+
+\begin{criterio}[cálculo por definición]
+Escriba $f(a+h)$ y $f(a)$, forme su diferencia y divida entre $h$. Simplifique para $h\neq0$ y calcule el límite cuando $h\to0$. Revise los dos lados si aparece un valor absoluto o un cambio de tramo.
+\end{criterio}
+
+\subsection*{Recta tangente}
+
+Si $f'(a)$ existe, la recta tangente en $(a,f(a))$ tiene ecuación
+\[
+  y-f(a)=f'(a)(x-a).
+\]
+Se necesitan dos datos distintos: el valor $f(a)$ localiza el punto y la derivada $f'(a)$ proporciona la pendiente.
+
+\begin{ejemplo}[ecuación de una tangente]
+Determine la tangente a $y=x^2$ en $x=1$.
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+Como $f(1)=1$ y $f'(1)=2$, se obtiene $y-1=2(x-1)$, es decir, $y=2x-1$. La pendiente es $2$; el punto de tangencia es $(1,1)$.
+\end{solucion}
+\else\vspace{12mm}\fi
+
+\begin{nota}
+La recta tangente puede atravesar la gráfica. Por ejemplo, la tangente a $y=x^3$ en el origen es $y=0$, y la función cambia de signo en ese punto. La tangencia se caracteriza mediante el límite de las pendientes de las secantes, no por el número de intersecciones con la curva.
+\end{nota}
+
+\subsection*{Velocidad instantánea}
+
+Si $s(t)$ describe una posición en metros y $t$ está en segundos, entonces
+\[
+  \frac{s(t+h)-s(t)}h
+\]
+es una velocidad promedio en metros por segundo. Si existe el límite, la velocidad instantánea es $v(t)=s'(t)$, también en $\mathrm{m/s}$. Su signo expresa el sentido del movimiento respecto del eje elegido; la rapidez es $|v(t)|$.
+
+\begin{ejemplo}[velocidad y rapidez]
+La posición de una partícula es $s(t)=t^2-4t+3$ metros, para $t\geq0$. Calcule la velocidad promedio entre $t=1$ y $t=3$, y la velocidad instantánea y la rapidez en $t=1$.
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+$s(1)=s(3)=0$, así que la velocidad promedio es $(0-0)/(3-1)=0\,\mathrm{m/s}$. Para la velocidad instantánea,
+\[
+  \frac{s(1+h)-s(1)}h=\frac{-2h+h^2}h=-2+h.
+\]
+Por tanto, $s'(1)=-2\,\mathrm{m/s}$ y la rapidez es $2\,\mathrm{m/s}$. El promedio nulo no significa que la partícula haya permanecido inmóvil: solo que las posiciones inicial y final coinciden.
+\end{solucion}
+\else\vspace{22mm}\fi
+
+\section*{Función derivada}
+
+\begin{definicion}[función derivada]
+Sea $f\colon I\to\mathbb{R}$. Se denomina \textbf{función derivada} a la función $f'$ que asigna a cada punto interior de $I$ donde $f$ es derivable el valor de su derivada. Su dominio está formado por esos puntos.
+\end{definicion}
+
+Para $f(x)=x^2$, se tiene $f'(x)=2x$. La expresión $f'(2)=4$ representa un valor de la derivada, mientras que $f'(x)=2x$ describe la función derivada.
+
+En este apunte se utilizan las notaciones equivalentes
+\[
+  f'(x)=\frac{d}{dx}[f(x)],
+\]
+ambas referidas a la derivada respecto de $x$.
+
+\section*{Continuidad y diferenciabilidad}
+
+\begin{teorema}[diferenciabilidad y continuidad]
+Si $f$ es diferenciable en $a$, entonces es continua en $a$. La afirmación recíproca es falsa: una función puede ser continua en un punto y no tener derivada allí.
+\end{teorema}
+
+La continuidad es una condición necesaria para la diferenciabilidad, pero no suficiente. Una función continua puede tener cocientes incrementales con límites laterales distintos o no finitos.
+
+\begin{criterio}[derivadas laterales]
+En un punto interior donde $f(a)$ está definido, se comparan
+\[
+  f'_-(a)=\lim_{h\to0^-}\frac{f(a+h)-f(a)}h,\qquad
+  f'_+(a)=\lim_{h\to0^+}\frac{f(a+h)-f(a)}h.
+\]
+La derivada existe si ambos límites existen como números reales finitos y son iguales. En los extremos de un intervalo puede estudiarse la derivada lateral disponible; no se exige allí un límite desde puntos fuera del intervalo.
+\end{criterio}
+
+\subsection*{Casos de no diferenciabilidad}
+
+\begin{ejemplo}[esquina: $f(x)=|x|$ en $0$]
+Compruebe que $f$ es continua en $0$, pero no diferenciable allí.
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+Se tiene $\lim_{x\to0}|x|=0=f(0)$. Sin embargo,
+\[
+  \frac{f(h)-f(0)}h=\frac{|h|}h
+  =\begin{cases}-1,&h<0,\\1,&h>0.\end{cases}
+\]
+Las derivadas laterales son finitas, pero diferentes: $f'_-(0)=-1$ y $f'_+(0)=1$. Hay una esquina y no existe $f'(0)$.
+\end{solucion}
+\else\vspace{18mm}\fi
+
+\begin{ejemplo}[cúspide: $g(x)=|x|^{2/3}$ en $0$]
+Analice el cociente incremental en $0$.
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+La función es continua en $0$ y $g(0)=0$. Para $h\neq0$,
+\[
+  \frac{g(h)-g(0)}h=\frac{|h|^{2/3}}h
+  =\begin{cases}-|h|^{-1/3},&h<0,\\|h|^{-1/3},&h>0.\end{cases}
+\]
+El límite izquierdo es $-\infty$ y el derecho es $+\infty$. No existe una derivada finita. Las dos ramas se aproximan a una dirección vertical con sentidos de pendiente opuestos: este comportamiento se denomina cúspide.
+\end{solucion}
+\else\vspace{20mm}\fi
+
+\begin{ejemplo}[{tangente vertical: $q(x)=\sqrt[3]{x}$ en $0$}]
+Estudie la existencia de la derivada y la dirección de la tangente.
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+La función es continua en $0$. Para $h\neq0$,
+\[
+  \frac{q(h)-q(0)}h=\frac{\sqrt[3]h}{h}
+  =\frac1{|h|^{2/3}}\longrightarrow+\infty.
+\]
+Las pendientes crecen sin cota por ambos lados. La tangente es la recta vertical $x=0$, pero $q'(0)$ no existe como número real finito.
+\end{solucion}
+\else\vspace{18mm}\fi
+
+\begin{center}
+\begin{tikzpicture}[x=0.85cm,y=0.85cm,every node/.style={font=\scriptsize}]
+  \draw[->,Gris] (-1.6,0)--(1.6,0);
+  \draw[->,Gris] (0,-0.3)--(0,1.8);
+  \draw[Azul,thick] (-1.4,1.4)--(0,0)--(1.4,1.4);
+  \node[below] at (0,-0.45) {esquina: $|x|$};
+\end{tikzpicture}
+\hspace{3mm}
+\begin{tikzpicture}[x=0.85cm,y=0.85cm,every node/.style={font=\scriptsize}]
+  \draw[->,Gris] (-1.6,0)--(1.6,0);
+  \draw[->,Gris] (0,-0.3)--(0,1.8);
+  \draw[Azul,thick,domain=-1.1:1.1,samples=130,variable=\t] plot ({(\t)^3},{(\t)^2});
+  \node[below] at (0,-0.45) {cúspide: $|x|^{2/3}$};
+\end{tikzpicture}
+\hspace{3mm}
+\begin{tikzpicture}[x=0.85cm,y=0.85cm,every node/.style={font=\scriptsize}]
+  \draw[->,Gris] (-1.6,0)--(1.6,0);
+  \draw[->,Gris] (0,-1.5)--(0,1.8);
+  \draw[Rojo,dashed] (0,-1.4)--(0,1.5);
+  \draw[Azul,thick,domain=-1.1:1.1,samples=130,variable=\t] plot ({\t^3},{\t});
+  \node[below] at (0,-1.6) {vertical: $\sqrt[3]x$};
+\end{tikzpicture}
+\end{center}
+
+\begin{nota}[Clasificación local]
+En una esquina hay pendientes laterales finitas distintas. En la cúspide mostrada, los cocientes tienden a infinitos de signos opuestos. En la tangente vertical mostrada, tienden al mismo infinito. Las ramas de una cúspide también pueden tener dirección vertical; lo que distingue los ejemplos es el comportamiento de los cocientes laterales. En ninguno existe una derivada real finita en $0$.
+\end{nota}
+
+\begin{ejemplo}[función discontinua]
+Sea $r(x)=x$ para $x\neq0$, con $r(0)=1$. ¿Es diferenciable en $0$?
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+No. Como $\lim_{x\to0}r(x)=0\neq1=r(0)$, la función no es continua en $0$ y, por tanto, no puede ser diferenciable allí. Es esencial usar el valor real $r(0)$; derivar solo la expresión $x$ ignoraría el cambio de valor en el punto.
+\end{solucion}
+\else\vspace{16mm}\fi
+
+\section*{Reglas de derivación}
+
+Las reglas siguientes permiten calcular la derivada definida mediante límites. En las fórmulas se escriben explícitamente los valores de las funciones y de sus derivadas en el mismo punto $x$.
+
+\begin{proposicion}[funciones básicas]
+Para la función constante $f(x)=c$, con $c\in\mathbb{R}$, y la función identidad $i(x)=x$,
+\[
+  f'(x)=0,\qquad i'(x)=1.
+\]
+Si $p_n(x)=x^n$, con $n\in\mathbb{Z}\setminus\{0\}$, entonces
+\[
+  p_n'(x)=nx^{n-1}.
+\]
+Si $n>0$, la fórmula vale en todo $\mathbb{R}$; si $n<0$, se exige $x\neq0$. El caso $n=0$ corresponde a la función constante $1$. Para $r(x)=\sqrt{x}$,
+\[
+  r'(x)=\frac1{2\sqrt{x}},\qquad x>0.
+\]
+\end{proposicion}
+
+\Needspace{0.78\textheight}
+\begin{teorema}[operaciones con funciones derivables]
+Sea $I$ un intervalo abierto y sean $u,v\colon I\to\mathbb{R}$ funciones derivables en un punto $x\in I$. Sea $\alpha\in\mathbb{R}$ una constante.
+\begin{enumerate}
+  \item \textbf{Linealidad.} Las funciones $\alpha u$ y $u\pm v$ son derivables en $x$, y
+  \[
+    (\alpha u)'(x)=\alpha u'(x),
+  \]
+  \[
+    (u\pm v)'(x)=u'(x)\pm v'(x).
+  \]
+  \item \textbf{Producto.} La función $uv$ es derivable en $x$, y
+  \[
+    (uv)'(x)
+    =u'(x)v(x)+u(x)v'(x).
+  \]
+  \item \textbf{Cociente.} Si además $v(x)\neq0$, la función $u/v$ es derivable en $x$, y
+  \[
+    \left(\frac uv\right)'(x)
+    =\frac{u'(x)v(x)-u(x)v'(x)}{[v(x)]^2}.
+  \]
+\end{enumerate}
+\end{teorema}
+
+La condición $v(x)\neq0$ se refiere al valor del denominador en el punto de derivación. Como $v$ es continua allí, el denominador tampoco se anula en un entorno suficientemente pequeño de ese punto. Si $u$ y $v$ son derivables en todo $I$, las fórmulas se aplican en cada punto del intervalo donde se cumplan las condiciones indicadas.
+
+\begin{ejemplo}[linealidad]
+Calcule $p'(x)$ si $p(x)=3x^4-2x^2+5x-7$.
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+Derivamos cada término:
+\[
+  p'(x)=12x^3-4x+5.
+\]
+El término constante $-7$ tiene derivada cero. Por ejemplo, $p'(1)=13$ es la pendiente en el punto de abscisa $1$, no el valor $p(1)$.
+\end{solucion}
+\else\vspace{14mm}\fi
+
+\begin{ejemplo}[regla del producto]
+Calcule la derivada de $u(x)=(x^2+1)(x-3)$.
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+Se identifican los factores $f(x)=x^2+1$ y $g(x)=x-3$, con $f'(x)=2x$ y $g'(x)=1$. Como $u(x)=f(x)g(x)$, la regla del producto da
+\[
+  u'(x)=f'(x)g(x)+f(x)g'(x)
+  =2x(x-3)+(x^2+1)\cdot1.
+\]
+Al simplificar, $u'(x)=3x^2-6x+1$.
+También se verifica expandiendo primero: $u(x)=x^3-3x^2+x-3$. Multiplicar solamente $2x$ por $1$ no da la derivada del producto.
+\end{solucion}
+\else\vspace{16mm}\fi
+
+\begin{ejemplo}[regla del cociente]
+Calcule la derivada de $v(x)=(x^2+1)/(x-1)$.
+\end{ejemplo}
+\ifmostrarSoluciones
+\begin{solucion}
+El numerador $p(x)=x^2+1$ tiene derivada $p'(x)=2x$; el denominador $q(x)=x-1$ tiene derivada $q'(x)=1$. Para $x\neq1$, la regla del cociente da
+\[
+  v'(x)=\frac{p'(x)q(x)-p(x)q'(x)}{[q(x)]^2}
+  =\frac{2x(x-1)-(x^2+1)}{(x-1)^2}.
+\]
+Así, $v'(x)=(x^2-2x-1)/(x-1)^2$.
+La derivada de un cociente no es, en general, el cociente de las derivadas. En $1$ la función original no está definida y no se puede hablar de su derivada allí.
+\end{solucion}
+\else\vspace{18mm}\fi
+
+\begin{nota}[Extremo de un intervalo]
+La fórmula $(\sqrt{x})'=1/(2\sqrt{x})$ vale para $x>0$. En $0$, el cociente lateral $\sqrt{h}/h=1/\sqrt{h}$ tiende a $+\infty$: hay continuidad por la derecha, pero no una derivada lateral finita. Los puntos especiales se estudian con la definición.
+\end{nota}
+
+\section*{Ejercicios}
+\begin{ejercicios}[concepto e interpretación]
+\begin{enumerate}
+  \item Calcule por definición $f'(a)$ para $f(x)=3x^2-1$. Determine la tangente en $a=-1$.
+  \item Una posición es $s(t)=2t^2+t$ metros. Calcule la velocidad promedio entre $1$ y $2$ segundos y la instantánea en $1$ segundo. Indique unidades.
+  \item Analice en $0$ la continuidad y las derivadas laterales de $F(x)=x^2$ si $x\leq0$, y $F(x)=2x$ si $x>0$. ¿Hay una esquina?
+  \item Clasifique el comportamiento en $0$ de $|x|$, $-|x|^{2/3}$ y $\sqrt[3]x$. Justifique con los cocientes incrementales.
+\end{enumerate}
+\end{ejercicios}
+\ifmostrarSoluciones
+\begin{solucion}[de concepto e interpretación]
+\begin{enumerate}
+  \item El cociente es $6a+3h$, así que $f'(a)=6a$. Como $f(-1)=2$ y $f'(-1)=-6$, la tangente es $y-2=-6(x+1)$.
+  \item $s(1)=3$, $s(2)=10$, por lo que la velocidad promedio es $7\,\mathrm{m/s}$. La derivada es $s'(t)=4t+1$ y la velocidad instantánea en $1$ es $5\,\mathrm{m/s}$.
+  \item Los dos límites de $F$ y su valor en $0$ son $0$. Es continua. El cociente izquierdo es $h\to0$ y el derecho es $2$; las pendientes laterales son $0$ y $2$. Hay una esquina y no existe $F'(0)$.
+  \item Para $|x|$, las pendientes laterales son $-1$ y $1$: esquina. Para $-|x|^{2/3}$, el cociente tiende a $+\infty$ por la izquierda y a $-\infty$ por la derecha: cúspide. Para $\sqrt[3]x$, tiende a $+\infty$ por ambos lados: tangente vertical. Las tres son continuas en $0$, pero ninguna tiene derivada finita allí.
+\end{enumerate}
+\end{solucion}
+\fi
+
+\begin{ejercicios}[reglas y análisis de resultados]
+\begin{enumerate}
+  \item Derive $p(x)=2x^5-3x+4$ y $q(x)=4/x+\sqrt{x}$, indicando dónde valen las fórmulas.
+  \item Derive $r(x)=(x^2-1)(x^2+2)$ mediante el producto y compruebe expandiendo.
+  \item Derive $w(x)=(x+2)/(x^2+1)$. ¿Hay puntos reales excluidos por el denominador?
+  \item Un estudiante afirma que de $f'(a)=0$ se deduce $f(a)=0$. Decida si es correcto y justifique con un ejemplo.
+\end{enumerate}
+\end{ejercicios}
+\ifmostrarSoluciones
+\begin{solucion}[de reglas y resultados]
+\begin{enumerate}
+  \item $p'(x)=10x^4-3$ en $\mathbb{R}$. Para $q$, la derivada es $q'(x)=-4/x^2+1/(2\sqrt{x})$, válida para $x>0$.
+  \item $r'(x)=2x(x^2+2)+2x(x^2-1)=4x^3+2x$. La expansión $r(x)=x^4+x^2-2$ da el mismo resultado.
+  \item $w'(x)=[x^2+1-2x(x+2)]/(x^2+1)^2=(-x^2-4x+1)/(x^2+1)^2$. Vale para todo $x\in\mathbb{R}$, pues $x^2+1>0$.
+  \item Es falso. Por ejemplo, $f(x)=x^2+3$ satisface $f'(0)=0$ y $f(0)=3$. Una pendiente nula no implica altura nula.
+\end{enumerate}
+\end{solucion}
+\fi
+
+\begin{nota}[Síntesis]
+Explique con sus palabras qué diferencia una secante de una tangente, por qué la continuidad no basta para la diferenciabilidad y qué significa una velocidad negativa. Antes de usar una regla, identifique si hay suma, producto o cociente y revise los puntos donde la función está definida.
+\end{nota}
+
+\fuentes{\textbf{Para ampliar:} R. G. Bartle y D. R. Sherbert, \emph{Introduction to Real Analysis}, 4.ª edición, §6.1, teorema 6.1.3 (reglas de derivación); \emph{Cálculo en una variable: notas de clase 2018-B}, Resumen No.~4; J. Stewart, \emph{Cálculo de una variable: trascendentes tempranas}, §§2.7--2.8 y reglas básicas del capítulo 3; G. Strang--E. Herman, \emph{Cálculo, volumen 1}, OpenStax, §§3.1--3.3. Ejemplos adaptados para esta introducción.}
+
+\end{document}

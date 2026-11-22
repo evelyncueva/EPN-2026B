@@ -1,0 +1,337 @@
+% Readaptado de Semana 09 Clase 02 (2025-A): dimension y construccion de bases.
+\documentclass[compacto,10pt]{pubciencias-notas}
+\usepackage{comandosEPN}
+\autor{Departamento de Formación Básica}
+\materia{Álgebra Lineal}
+\nota{Semana 10 Clase 02}
+\fecha{Semestre 2026-B}
+\logouno[1.1cm]{Logo_EPN.eps}
+\logodos[1.7cm]{Logo_DFB.eps}
+\definecolor{colordef}{cmyk}{0.81,0.62,0.00,0.22}
+\raggedbottom
+
+\begin{document}
+\encabezado
+\vspace*{-8mm}
+\setcounter{section}{3}
+\section{Espacios vectoriales}
+\subsection{Cardinalidad de las bases y dimensión}
+
+Un espacio vectorial puede admitir distintas bases. Por ejemplo,
+$\{1,t\}$ y $\{1+t,1-t\}$ son bases de $\Pol_1$, ambas con dos elementos.
+En esta clase se supone que $V$ es un espacio vectorial real de dimensión
+finita; es decir, existe un conjunto finito $S\subseteq V$ que genera $V$.
+Al eliminar los vectores redundantes de un conjunto generador finito,
+se obtiene una base finita de $V$.
+
+\begin{defi}[Cardinalidad]
+    Sea $S$ un conjunto finito. Se denomina \textbf{cardinalidad de $S$}
+    al número de elementos que lo componen y se denota por $\card(S)$.
+    Por ejemplo, $\card(\{1,t\})=2$.
+\end{defi}
+
+El siguiente resultado establece que todas las bases
+de $V$ tienen la misma cardinalidad. Se utilizará la abreviatura
+\textbf{l.i.} para ``linealmente independiente''.
+
+\begin{teo}[Número de elementos de una base]\label{sem10cl02:cardinalidad}
+    Sea $B$ una base finita de $V$. Si $L\subseteq V$ es un conjunto
+    finito linealmente independiente y $G\subseteq V$ es un conjunto finito que genera $V$,
+    entonces
+    \[
+        \card(L)\le\card(B)\le\card(G).
+    \]
+    En particular, todas las bases de $V$ tienen el mismo número de elementos.
+\end{teo}
+
+\begin{defi}[Dimensión]\label{sem10cl02:dimension}
+    Sea $V$ un espacio vectorial real de dimensión finita y sea $B$ una base de $V$.
+    Se define la \textbf{dimensión de $V$}, denotada $\dim(V)$, como
+    la cardinalidad de $B$:
+    \[
+        \dim(V)=\card(B).
+    \]
+    El resultado anterior garantiza que este número no depende de la
+    base elegida. Para el espacio $\{0_V\}$, se toma como base el conjunto
+    vacío y se define $\dim(\{0_V\})=0$.
+\end{defi}
+
+\begin{obs}
+    El conjunto $\{0_V\}$ es linealmente dependiente y, por tanto,
+    no constituye una base. La base del espacio nulo es $\emptyset$,
+    cuya cardinalidad es cero.
+\end{obs}
+
+\begin{ejem}[Un plano dentro de un espacio de dimensión 3]
+    Para el subespacio $P=\{(x,y,z)\in\R^3:x+y-z=0\}$, se ha demostrado que
+    \[
+        B=\{(1,0,1),(0,1,1)\}
+    \]
+    es una base. Por tanto, $\dim(P)=2$. Sus vectores tienen tres
+    componentes, sujetas a la restricción $z=x+y$; en consecuencia,
+    la tercera componente queda determinada por las dos primeras.
+
+    Por su parte, $\dim(\R^3)=3$. Así, el número de componentes de un
+    vector no determina la dimensión del subespacio al que pertenece.
+\end{ejem}
+
+\subsection{Dimensiones de los espacios conocidos}
+
+\begin{teo}[Dimensiones de los espacios usuales]\label{sem10cl02:dimensiones}
+    Sean $m,n\ge1$ enteros y sea $r\ge0$ un entero. Con las operaciones
+    usuales y escalares reales, se tiene:
+    \[
+        \begin{aligned}
+            \dim(\R^n)&=n,\\
+            \dim(\Mat[\R]{m}{n})&=mn,\\
+            \dim(\Pol_r)&=r+1.
+        \end{aligned}
+    \]
+\end{teo}
+
+Estas igualdades se obtienen de las cardinalidades de las bases canónicas.
+La base de $\Pol_r$ contiene los $r+1$ polinomios $1,t,\ldots,t^r$;
+la base de $\Mat[\R]{m}{n}$ contiene una matriz $E_{ij}$ por cada
+una de las $mn$ posiciones.
+
+\begin{ejem}[Dos bases de un mismo subespacio de matrices]
+    Sea $D$ el subespacio de matrices diagonales de $\Mat[\R]{2}{2}$.
+    Una base es
+    \[
+        B=\left\{\begin{pmatrix}1&0\\0&0\end{pmatrix},
+                  \begin{pmatrix}0&0\\0&1\end{pmatrix}\right\}.
+    \]
+    También lo es el conjunto
+    \[
+        C=\left\{\begin{pmatrix}1&0\\0&1\end{pmatrix},
+                  \begin{pmatrix}1&0\\0&-1\end{pmatrix}\right\}.
+    \]
+    En efecto, para una matriz diagonal genérica,
+    \[
+        \begin{pmatrix}x&0\\0&y\end{pmatrix}
+        =\frac{x+y}{2}\begin{pmatrix}1&0\\0&1\end{pmatrix}
+        +\frac{x-y}{2}\begin{pmatrix}1&0\\0&-1\end{pmatrix}.
+    \]
+    Los coeficientes son únicos, por comparación de las entradas
+    diagonales. Ambas bases tienen dos elementos: $\dim(D)=2$.
+    En cambio, $\dim(\Mat[\R]{2}{2})=4$.
+\end{ejem}
+
+\begin{ejem}[Base y dimensión mediante una parametrización]
+    Determine una base y la dimensión de
+    \[
+        W=\{(a,b,c,d)\in\R^4:a+2b=0,\ c-d=0\}.
+    \]
+    \textbf{Solución.} Las ecuaciones que definen $W$ implican
+    $a=-2b$ y $c=d$. Por tanto,
+    \[
+        (a,b,c,d)=(-2b,b,d,d)
+        =b(-2,1,0,0)+d(0,0,1,1).
+    \]
+    Los dos vectores generan $W$. La combinación nula
+    $\alpha(-2,1,0,0)+\beta(0,0,1,1)=(0,0,0,0)$ implica
+    $\alpha=0$ por la segunda componente y $\beta=0$ por la cuarta.
+    Así, constituyen una base y $\dim(W)=2$.
+\end{ejem}
+
+\begin{advertencia}
+    El número de parámetros de una expresión no determina, por sí solo,
+    la dimensión. Es necesario verificar que los vectores que multiplican
+    a dichos parámetros constituyen una base. Por ejemplo, la expresión
+    $(s+t)(1,2)$ contiene dos parámetros, pero describe una recta.
+\end{advertencia}
+
+\subsection{Criterios de base en dimensión finita}
+
+\begin{teo}\label{sem10cl02:criterio}
+    Sea $\dim(V)=n$ y sea $B\subseteq V$ un conjunto con exactamente
+    $n$ elementos. Entonces:
+    \begin{enumerate}
+        \item si $B$ es linealmente independiente, es una base de $V$;
+        \item si $B$ genera $V$, es una base de $V$.
+    \end{enumerate}
+\end{teo}
+
+Si la dimensión del espacio es conocida y el conjunto tiene esa misma
+cardinalidad, basta verificar generación o independencia lineal.
+Todo conjunto con más de $n$ elementos es linealmente dependiente, y ningún conjunto con
+menos de $n$ elementos genera $V$.
+
+\begin{ejem}[Comprobar una base de polinomios]
+    En $\Pol_2$, sea $B=\{1,1+t,1+t+t^2\}$. Como $\dim(\Pol_2)=3$
+    y $B$ tiene tres elementos, basta comprobar su independencia lineal. Planteamos
+    \[
+        \alpha\cdot1+\beta(1+t)+\gamma(1+t+t^2)=0_{\Pol_2}.
+    \]
+    Al reunir términos e igualar coeficientes obtenemos
+    \[
+        \left\{\begin{aligned}
+            \alpha+\beta+\gamma&=0,\\
+            \beta+\gamma&=0,\\
+            \gamma&=0.
+        \end{aligned}\right.
+    \]
+    Por sustitución regresiva se obtiene $\gamma=\beta=\alpha=0$. Por tanto, $B$ es
+    linealmente independiente y es una base de $\Pol_2$.
+\end{ejem}
+
+\subsection{Extracción y extensión de bases}
+
+\begin{prop}
+    En un espacio vectorial de dimensión finita:
+    \begin{enumerate}
+        \item de un conjunto finito que genera el espacio se puede
+              extraer una base, eliminando vectores redundantes;
+        \item un conjunto linealmente independiente puede completarse hasta una base, añadiendo
+              vectores que no pertenezcan a la cápsula de los ya elegidos.
+    \end{enumerate}
+\end{prop}
+
+\begin{ejem}[Extraer una base de un conjunto generador]
+    Sean $a=(1,0,1)$, $b=(0,1,1)$, $c=(1,1,2)$ y $d=(2,-1,1)$.
+    Determine una base de $W=\spn\{a,b,c,d\}$.
+
+    \textbf{Solución.} Examinamos los vectores en el orden dado.
+    Conservamos cada vector que no pertenece a la cápsula de los
+    previamente conservados y descartamos los que sí pertenecen a ella.
+    \begin{enumerate}
+        \item Como $a=(1,0,1)\ne(0,0,0)$, conservamos $a$.
+        \item Para determinar si $b$ es combinación de $a$, buscamos
+              $\lambda\in\R$ tal que
+              \[
+                  \lambda(1,0,1)=(0,1,1).
+              \]
+              La segunda componente exigiría $0=1$, por lo que no existe
+              solución. Así, $b\notin\spn\{a\}$ y conservamos $b$.
+        \item Para $c$, planteamos $\alpha a+\beta b=c$. Al igualar
+              componentes se obtiene
+              \[
+                  \left\{\begin{aligned}
+                      \alpha&=1,\\\beta&=1,\\\alpha+\beta&=2.
+                  \end{aligned}\right.
+              \]
+              La solución es $\alpha=\beta=1$. Por tanto, $c=a+b$ y
+              descartamos $c$, pues no modifica la cápsula.
+        \item Para $d$, basta considerar los vectores conservados $a,b$,
+              ya que $c\in\spn\{a,b\}$. Planteamos
+              $\alpha a+\beta b=d$ y obtenemos
+              \[
+                  \left\{\begin{aligned}
+                      \alpha&=2,\\\beta&=-1,\\\alpha+\beta&=1.
+                  \end{aligned}\right.
+              \]
+              La solución es $\alpha=2$, $\beta=-1$. Así, $d=2a-b$ y
+              también descartamos $d$.
+    \end{enumerate}
+    Como $c=a+b$ y $d=2a-b$, ambos vectores son redundantes. Por la
+    Proposición 2 de la semana 07, clase 02,
+    su eliminación no modifica el subespacio generado.
+    En consecuencia, $W=\spn\{a,b\}$.
+
+    Para verificar que $B=\{a,b\}$ es linealmente independiente,
+    planteamos la combinación nula
+    \[
+        \alpha a+\beta b
+        =(\alpha,\beta,\alpha+\beta)=(0,0,0).
+    \]
+    Al igualar las componentes obtenemos
+    \[
+        \left\{\begin{aligned}
+            \alpha&=0,\\
+            \beta&=0,\\
+            \alpha+\beta&=0.
+        \end{aligned}\right.
+    \]
+    La única solución es $\alpha=\beta=0$, por lo que $B$ es
+    linealmente independiente. Como además genera $W$, concluimos que
+    \[
+        B=\{(1,0,1),(0,1,1)\}\text{ es una base de }W,
+        \qquad\dim(W)=2.
+    \]
+    Geométricamente, los cuatro vectores pertenecen al plano generado
+    por $a,b$; los vectores $c,d$ son redundantes.
+\end{ejem}
+
+\begin{ejem}[Extensión de un conjunto linealmente independiente]\label{sem10cl02:completar}
+    Sean $u=(1,0,1)$ y $v=(1,-1,0)$. Complete $\{u,v\}$ hasta obtener
+    una base de $\R^3$.
+
+    \textbf{Solución.} El conjunto es linealmente independiente, ya que de
+    $\alpha u+\beta v=(\alpha+\beta,-\beta,\alpha)=(0,0,0)$ se obtiene
+    $\alpha=\beta=0$.
+    Para completar el conjunto, consideraremos los vectores de la base
+    canónica de $\R^3$:
+    \[
+        e_1=(1,0,0),\qquad e_2=(0,1,0),\qquad e_3=(0,0,1).
+    \]
+    Es suficiente añadir uno que no sea combinación lineal de $u,v$.
+    Comenzamos con $e_1$ y planteamos
+    \[
+        su+tv=e_1
+        \quad\Longleftrightarrow\quad
+        (s+t,-t,s)=(1,0,0).
+    \]
+    Al igualar componentes obtenemos
+    \[
+        \left\{\begin{aligned}
+            s+t&=1,\\
+            -t&=0,\\
+            s&=0.
+        \end{aligned}\right.
+    \]
+    Las dos últimas ecuaciones implican $s=t=0$, lo que contradice
+    la primera. El sistema no tiene solución; por tanto,
+    $e_1\notin\spn\{u,v\}$ y lo incorporamos al conjunto.
+    Si $e_1$ hubiese sido combinación de $u,v$, se habría continuado
+    con $e_2$ y, de ser necesario, con $e_3$.
+    El conjunto $\{u,v,e_1\}$ es linealmente independiente.
+    Como el conjunto tiene tres elementos y
+    $\dim(\R^3)=3$, entonces  $\{u,v,e_1\}$ constituye una base de $\R^3$.
+\end{ejem}
+
+\section{Ejercicios}
+
+\begin{ejer}[Base y dimensión en un subespacio]
+    Sea $W=\{(x,y,z)\in\R^3:x-2y+z=0\}$.
+    \begin{enumerate}
+        \item Determine una base de $W$ y deduzca su dimensión.
+        \item Complete esa base hasta obtener una base de $\R^3$.
+              Justifique la elección del vector añadido.
+    \end{enumerate}
+\end{ejer}
+
+\begin{ejer}[Dos bases de un subespacio de matrices]
+    Sea
+    \[
+        W=\left\{\begin{pmatrix}a&b\\c&d\end{pmatrix}
+        \in\Mat[\R]{2}{2}:a-2b-c=0,\ a+3d=0\right\}.
+    \]
+    \begin{enumerate}
+        \item Exprese una matriz genérica usando parámetros, obtenga una
+              base y determine $\dim(W)$.
+        \item Construya otra base distinta y compruebe que ambas tienen
+              el mismo número de elementos.
+    \end{enumerate}
+\end{ejer}
+
+\begin{ejer}[Completar una base de polinomios]
+    Sea $T=\{p\in\Pol_2:p(0)=p(1)=0\}$.
+    \begin{enumerate}
+        \item Escriba $p(t)=a_0+a_1t+a_2t^2$, resuelva las condiciones
+              y obtenga una base de $T$ y su dimensión.
+        \item Añada polinomios hasta completar esa base a una base de
+              $\Pol_2$. Verifique la independencia lineal y utilice la
+              dimensión para concluir.
+    \end{enumerate}
+\end{ejer}
+
+\begin{ejer}[Consecuencias de la dimensión]
+    \begin{enumerate}
+        \item ¿Puede un conjunto de tres matrices generar
+              $\Mat[\R]{2}{2}$? Justifique sin plantear un sistema.
+        \item ¿Es necesariamente una base de $\Pol_2$ todo conjunto de
+              tres polinomios? Indique qué condición falta y dé un contraejemplo.
+    \end{enumerate}
+\end{ejer}
+
+\end{document}
