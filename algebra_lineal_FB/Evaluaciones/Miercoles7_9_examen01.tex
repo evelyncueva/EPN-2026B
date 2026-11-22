@@ -1,0 +1,75 @@
+%\documentclass[10pt,respuestas,a4]{examenEPN}
+\documentclass[10pt,a4]{examenEPN0}
+\examen{Examen 01}
+\input{ComandoLocales}
+%\imprimirDoble
+\begin{document}
+\encabezado
+\datosAlgebra{GR}{18/11/2026}
+%Poner el grupo y la fecha, o dejar las llaves vacías.
+\indicacionesPrueba
+\begin{preguntas}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item Considere las matrices 
+\[
+    A=\begin{pmatrix}
+        1 & \alpha & 2 \\
+        2 & 3\alpha & 6\\
+        3 & 4\alpha & \alpha + 2
+    \end{pmatrix} \texty 
+    b=\begin{pmatrix}
+        1\\\alpha + 2\\\alpha + 3    
+    \end{pmatrix}
+\]
+\begin{enumerate}
+    \item Calcule $\det(A)$ y determine el valor de $\alpha\in\mathbb{R}$ para que la matriz sea invertible. \puntaje{2.0}
+    \item Para $\alpha=0$, halle la solución del sistema $Ax=b$. \puntaje{2.0}
+    
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Considere S y T subespacios vectoriales de $\R^{2\times2}$
+\begin{center}
+$S=\{A : a_{11}+a_{12}+a_{21}+a_{22}=0\},\qquad
+T=\{A : a_{11}=a_{22},\ a_{12}=a_{21}\}.$
+\end{center}
+\begin{enumerate}
+\item Hallar $S\cap T$ de forma explícita. \puntaje{2.0}
+\item Hallar $k\in\R$ tal que $A=\begin{pmatrix}k+1&k-3\\2k-4&3k-1\end{pmatrix}\in S\cap T$. \puntaje{2.0}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Sean \(u = (1, 2, -1)\), \(v = (2, 3, 1)\) y \(w = (1, 1, k)\) vectores de \(\mathbb{R}^3\), con \(k \in \mathbb{R}\).
+
+\begin{enumerate}
+    \item Determine \textbf{para qué valores de \(k\)} el conjunto \(\{u, v, w\}\) genera todo \(\mathbb{R}^3\). \puntaje{2.0} 
+    \item Calcule \(\operatorname{span}\{u, v, w\}\) para \(k = 2\) e interprételo geométricamente. ¿Es todo \(\mathbb{R}^3\)? Justifique. \puntaje{1.0} 
+    \item Para \(k = 2\), encuentre un vector en \(\operatorname{span}\{u, v, w\}\) distinto del vector nulo y de los generadores \(u, v, w\), y otro vector en \(\mathbb{R}^3\) que \textbf{no} pertenezca a \(\operatorname{span}\{u, v, w\}\). Justifique ambos casos. \puntaje{1.0} 
+\end{enumerate}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Una empresa utiliza vehículos de tres tipos para un único viaje por vehículo. Cada vehículo A transporta una tonelada y requiere dos conductores; cada vehículo B transporta dos toneladas y requiere un conductor; cada vehículo C transporta tres toneladas y requiere un conductor. Ese día salieron nueve vehículos, todos a su capacidad máxima, con 17 toneladas de carga y 12 conductores en total. Determine cuántos vehículos de cada tipo salieron.
+
+\begin{enumerate}
+    \item Defina las tres variables, plantee el sistema de ecuaciones lineales que modela la situación y escriba su representación matricial $A\mathbf{x}=b$, identificando $A$, $\mathbf{x}$ y $b$. \puntaje{2.0}
+    \item Resuelva el sistema e indique la cantidad de vehículos que salieron a circulación. \puntaje{2.0}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item (Ejercicio del deber)  Sea $V = \mathcal{P}_3(\R)$ el espacio de polinomios de grado menor o igual a tres con coeficientes reales. Determine si el siguiente conjunto es un subespacio de $V$: \puntaje{4.0}
+    \[
+    W = \left\{ p(x) \in \mathcal{P}_3(\R) : p(2) = 0 \quad \text{y} \quad p'(0) = 0 \right\}
+    \]    
+
+
+
+
+\end{preguntas}
+\final
+\end{document}

@@ -1,0 +1,103 @@
+\documentclass[10pt,a4]{examenEPN0}
+\input{ComandoLocales}
+\examen{Examen 01: solucionario y rúbrica}
+\makeatletter
+\renewcommand{\@autor}{Departamento de Formación Básica}
+\renewcommand{\@fecha}{GR5E -- Jueves de 7 a 9 -- 19/11/2026}
+\makeatother
+\begin{document}
+\encabezado
+\noindent\textbf{Criterio general (20 puntos).} Se asigna crédito parcial por
+los pasos correctos. Un error aritmético se penaliza donde se origina;
+los pasos posteriores se valoran por su coherencia, sin repetir la penalización.
+Se aceptan procedimientos equivalentes debidamente justificados.
+
+\section*{1. Alquiler de equipos (4 puntos)}
+\noindent\textbf{Rúbrica.}
+\begin{itemize}[itemsep=2pt]
+    \item Definir las variables y unidades: 0,25 puntos; plantear las ecuaciones: 0,75 puntos (0,25 por ecuación); identificar $A$, $\mathbf{x}$ y $b$: 1 punto.
+    \item Resolver con procedimiento: 1,5 puntos; interpretar y comprobar las tarifas: 0,5 puntos.
+\end{itemize}
+Sean $p,t,s$ las tarifas diarias en dólares de proyector, pantalla y sonido.
+\[
+    p+t+s=65,\qquad 2p+t=80,\qquad t-s=5.
+\]
+\[
+    A=\begin{pmatrix}1&1&1\\2&1&0\\0&1&-1\end{pmatrix},\quad
+    \mathbf{x}=\begin{pmatrix}p\\t\\s\end{pmatrix},\quad
+    b=\begin{pmatrix}65\\80\\5\end{pmatrix}.
+\]
+De $t=s+5$ resulta $p+2s=60$ y $2p+s=75$; por tanto,
+$s=15$, $p=30$ y $t=20$.
+Las tarifas son \textbf{\$30, \$20 y \$15 diarios}, respectivamente.
+Se verifica $30+20+15=65$, $60+20=80$ y $20-15=5$.
+
+\section*{2. Sistema con parámetro (4 puntos)}
+\noindent\textbf{Rúbrica.}
+\begin{itemize}[itemsep=2pt]
+    \item Calcular el determinante con procedimiento: 1,5 puntos; establecer cuándo hay solución única: 0,5 puntos.
+    \item Sustituir $\alpha=2$ y reducir: 1 punto; exhibir una contradicción: 0,5 puntos; concluir que el conjunto solución es vacío: 0,5 puntos.
+\end{itemize}
+Sumando la primera fila a la segunda en la matriz de coeficientes,
+\[
+    \det(A)=\det\begin{pmatrix}1&\alpha&2\\0&\alpha-2&\alpha\\0&\alpha-2&2\alpha+2\end{pmatrix}
+    =(\alpha-2)(\alpha+2).
+\]
+Hay solución única si y solo si $\alpha\notin\{-2,2\}$.
+Para $\alpha=2$, sumar las dos primeras ecuaciones da $2x_3=0$,
+mientras que la tercera exige $6x_3=1$. Son incompatibles:
+\textbf{no hay solución}, y el conjunto solución es $\varnothing$.
+
+\section*{3. Intersección de subespacios de matrices (4 puntos)}
+\noindent\textbf{Rúbrica.}
+\begin{itemize}[itemsep=2pt]
+    \item Imponer todas las condiciones de $S$ y $T$: 1 punto; parametrizar la intersección: 1 punto.
+    \item Plantear las condiciones sobre $k$: 1 punto; hallar el valor y verificar todas las condiciones: 1 punto.
+\end{itemize}
+Si $a_{11}=t$, las restricciones implican $a_{12}=a_{21}=t$ y
+$a_{22}=-t$. Por tanto,
+\[
+    \boxed{S\cap T=\left\{t\begin{pmatrix}1&1\\1&-1\end{pmatrix}:t\in\R\right\}.}
+\]
+Para la matriz dada se exige $3=2k-1$, $2k-4=0$ y $k+1-3=0$.
+Todas se cumplen exactamente cuando $k=2$, que produce
+$\begin{pmatrix}3&3\\3&-3\end{pmatrix}$.
+
+\section*{4. Espacio generado (4 puntos)}
+\noindent\textbf{Rúbrica.}
+\begin{itemize}[itemsep=2pt]
+    \item Describir el espacio generado en forma paramétrica o cartesiana: 1 punto; justificar independencia y que es un plano: 1 punto.
+    \item Obtener $m=4$: 0,5 puntos; expresar $w$ como combinación lineal: 0,5 puntos.
+    \item Comprobar la pertenencia o no pertenencia del vector dado: 0,75 puntos; concluir: 0,25 puntos.
+\end{itemize}
+Como $u\times v=(7,-5,-3)\ne0$, los vectores son independientes y
+\[
+    \operatorname{span}\{u,v\}=\{a(1,2,-1)+b(2,1,3):a,b\in\R\}
+    =\{(x,y,z):7x-5y-3z=0\}.
+\]
+Es un plano por el origen. Para $w$, la condición es
+$7+5-3m=0$, así que $m=4$ y $w=v-u$.
+Para $x=(-1,2,2)$, $7(-1)-5(2)-3(2)=-23\ne0$;
+por tanto, $x$ no pertenece al espacio generado.
+
+\section*{5. Subespacio de polinomios (4 puntos)}
+\noindent\textbf{Rúbrica.}
+\begin{itemize}[itemsep=2pt]
+    \item Verificar la pertenencia del polinomio cero: 1 punto.
+    \item Demostrar cerradura bajo suma usando ambas restricciones: 1,5 puntos.
+    \item Demostrar cerradura bajo producto por escalar usando ambas restricciones: 1 punto.
+    \item Concluir que es subespacio: 0,5 puntos.
+\end{itemize}
+El polinomio cero satisface las dos condiciones. Si $p,q\in W$ y
+$\lambda\in\R$, entonces
+\[
+    (p+q)(2)=0,\quad (p+q)'(0)=p'(0)+q'(0)=0,
+\]
+\[
+    (\lambda p)(2)=\lambda p(2)=0,\quad
+    (\lambda p)'(0)=\lambda p'(0)=0.
+\]
+Como estas operaciones permanecen en $\mathcal P_3(\R)$, $W$ es subespacio.
+Se acepta también identificarlo como intersección de núcleos de las
+aplicaciones lineales $p\mapsto p(2)$ y $p\mapsto p'(0)$.
+\end{document}
