@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Una neurona con dos variables económicas</title>
+<style>
+__ESTILOS__
+    .numero { font-size:26px; overflow-wrap:anywhere; }
+    #red { max-height:265px; }
+    .controles-hogar { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    summary { cursor:pointer; font-weight:600; margin:12px 0; }
+    @media(max-width:650px) { .metricas,.controles-hogar { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<main>
+    <header>
+        <h1>Predecir el gasto de un hogar con dos entradas</h1>
+        <p>Ingreso y número de integrantes → una neurona → gasto mensual en alimentación.</p>
+        <p class="secundario">25 observaciones sintéticas · dos pesos y un sesgo · una sola salida</p>
+    </header>
+    <section class="tarjeta controles" aria-label="Reproducción del entrenamiento">
+        <button id="reproducir" class="principal" type="button">Reproducir</button>
+        <button id="avanzar" type="button">Siguiente estado</button>
+        <button id="reiniciar" type="button">Volver al inicio</button>
+        <div class="rango"><label for="epoca"><span>Estado del entrenamiento</span><strong id="etiqueta-epoca"></strong></label>
+            <input id="epoca" type="range" min="0" max="1" step="1" value="0"></div>
+    </section>
+    <section class="metricas" aria-label="Resultados del estado seleccionado">
+        <div class="tarjeta">Época<output class="numero" id="numero-epoca"></output><span class="secundario">Un recorrido por los 25 hogares.</span></div>
+        <div class="tarjeta">MSE de entrenamiento<output class="numero" id="numero-mse"></output><span class="secundario">Unidades monetarias al cuadrado.</span></div>
+        <div class="tarjeta">Gasto mensual predicho<output class="numero" id="numero-prediccion"></output><span class="secundario" id="referencia-probe"></span></div>
+    </section>
+    <div class="paneles">
+        <section class="tarjeta">
+            <h2 id="titulo-vista"></h2>
+            <div class="leyenda"><span class="clave">Modelo actual</span><span class="clave datos">Hogares observados</span><span class="clave referencia">Referencia</span></div>
+            <canvas id="ajuste" role="img" aria-label="Predicción de gasto según el ingreso, manteniendo fijo el número de integrantes"></canvas>
+            <p class="secundario">Eje horizontal: ingreso en miles de u.m. Eje vertical: gasto en u.m. La gráfica fija x₂; el MSE usa las 25 observaciones.</p>
+            <div class="consulta">
+                <strong>Consultar un hogar</strong>
+                <div class="controles-hogar">
+                    <div><label for="ingreso">Ingreso mensual (u.m.)</label>
+                        <input id="ingreso" type="range" min="1000" max="4000" step="50" value="2500">
+                        <output id="ingreso-valor"></output></div>
+                    <div><label for="integrantes">Integrantes del hogar</label>
+                        <input id="integrantes" type="range" min="1" max="5" step="1" value="3">
+                        <output id="integrantes-valor"></output></div>
+                </div>
+                <p class="secundario" id="tipo-entrada"></p>
+            </div>
+            <details><summary>Ver las 25 observaciones sintéticas</summary>
+                <div class="tabla"><table><caption>x₁: ingreso en miles de u.m.; x₂: integrantes; y: gasto mensual en u.m.</caption>
+                    <thead><tr><th>Hogar</th><th>x₁</th><th>x₂</th><th>y</th></tr></thead><tbody id="observaciones"></tbody></table></div>
+            </details>
+            <h2>La pérdida durante el entrenamiento</h2>
+            <canvas id="perdida" role="img" aria-label="MSE por época, en escala logarítmica"></canvas>
+        </section>
+        <section class="tarjeta">
+            <h2>Dos entradas, una neurona</h2>
+            <svg id="red" viewBox="0 0 520 270" role="img" aria-label="Ingreso e integrantes conectados a una sola neurona con dos pesos y un sesgo"></svg>
+            <div class="formula">
+                <p><strong>Modelo:</strong> ŷ = w₁x₁ + w₂x₂ + b</p>
+                <p id="calculo"></p>
+                <p>Activación identidad: la salida es la combinación.</p>
+            </div>
+            <div class="tabla"><table aria-label="Los tres parámetros estimados"><thead><tr><th>Parámetro</th><th>Valor actual</th></tr></thead><tbody id="parametros"></tbody></table></div>
+            <div class="formula">Se <strong>estiman w₁, w₂ y b</strong> con las observaciones. Después se predice el gasto ŷ de un hogar nuevo.</div>
+            <p class="secundario">Con más entradas, esta neurona usa más pesos. Mantiene una sola salida.</p>
+        </section>
+    </div>
+    <footer class="pie">
+        <p><strong>Un peso para cada variable explicativa y un sesgo común.</strong> La familia del modelo sigue siendo afín; en dos entradas, su gráfica es un plano.</p>
+        <p class="secundario">Datos creados con y = 60x₁ + 40x₂ + 50, sin ruido, para comprender el entrenamiento. Son ejemplos didácticos, no observaciones de una economía real. Las asociaciones del ejemplo no demuestran causalidad.</p>
+        <p class="secundario">Descenso por gradiente de lote completo · tasa 0.02 · 6000 épocas. El hogar (2.5, 3) no se utilizó para estimar los parámetros.</p>
+    </footer>
+</main>
+<script id="datos" type="application/json">__DATOS_JSON__</script>
+<script>
+"use strict";
+const datos=JSON.parse(document.getElementById("datos").textContent);
+const el=Object.fromEntries(["reproducir","avanzar","reiniciar","epoca","etiqueta-epoca","numero-epoca","numero-mse","numero-prediccion","referencia-probe","titulo-vista","ajuste","perdida","ingreso","ingreso-valor","integrantes","integrantes-valor","tipo-entrada","observaciones","red","calculo","parametros"].map(id=>[id,document.getElementById(id)]));
+let indice=0, ingreso=2500, integrantes=3, timer=null;
+const f=(n,d=3)=>Number(n).toFixed(d);
+function evaluar(x1,x2,p) { return p[0]*x1+p[1]*x2+p[2]; }
+function referencia(x1,x2) { return evaluar(x1,x2,datos.referencia); }
+function canvas(c) {
+    const r=c.getBoundingClientRect(),w=Math.max(250,r.width),h=Math.max(130,r.height),s=window.devicePixelRatio||1;
+    c.width=Math.round(w*s);c.height=Math.round(h*s);const ctx=c.getContext("2d");
+    ctx.setTransform(s,0,0,s,0,0);ctx.clearRect(0,0,w,h);return {ctx,w,h};
+}
+function linea(ctx,xs,ys,px,py,color,guion=[]) {
+    ctx.beginPath();ctx.strokeStyle=color;ctx.lineWidth=2.3;ctx.setLineDash(guion);
+    xs.forEach((x,i)=>i?ctx.lineTo(px(x),py(ys[i])):ctx.moveTo(px(x),py(ys[i])));ctx.stroke();ctx.setLineDash([]);
+}
+function punto(ctx,x,y,color,r=4) { ctx.beginPath();ctx.fillStyle=color;ctx.arc(x,y,r,0,2*Math.PI);ctx.fill(); }
+function dibujarAjuste(e) {
+    const {ctx,w,h}=canvas(el.ajuste),px=x=>47+(x-0.9)/3.2*(w-65),py=y=>15+(550-y)/600*(h-48);
+    ctx.font="12px Segoe UI,Arial";
+    for(let x=1;x<=4;x++) {
+        ctx.strokeStyle="#e4e9f0";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(px(x),15);ctx.lineTo(px(x),h-33);ctx.stroke();
+        ctx.fillStyle="#667588";ctx.textAlign="center";ctx.fillText(x,px(x),h-12);
+    }
+    for(let y=0;y<=500;y+=100) {
+        ctx.strokeStyle="#e4e9f0";ctx.beginPath();ctx.moveTo(47,py(y));ctx.lineTo(w-18,py(y));ctx.stroke();
+        ctx.fillStyle="#667588";ctx.textAlign="right";ctx.fillText(y,40,py(y)+4);
+    }
+    const xs=Array.from({length:100},(_,i)=>1+3*i/99);
+    linea(ctx,xs,xs.map(x=>referencia(x,integrantes)),px,py,"#8b96a4",[5,5]);
+    linea(ctx,xs,xs.map(x=>evaluar(x,integrantes,e.parametros)),px,py,"#087f6b");
+    datos.x.forEach((x,i)=>{if(x[1]===integrantes)punto(ctx,px(x[0]),py(datos.y[i]),"#12315a");});
+    punto(ctx,px(ingreso/1000),py(evaluar(ingreso/1000,integrantes,e.parametros)),"#d65324",6);
+}
+function dibujarPerdida() {
+    const {ctx,w,h}=canvas(el.perdida),px=x=>50+x/6000*(w-68),py=y=>12+(5-Math.log10(Math.max(y,1e-12)))/17*(h-43);
+    ctx.font="11px Segoe UI,Arial";
+    for(const y of [1e4,1,1e-6,1e-12]) {
+        ctx.beginPath();ctx.strokeStyle="#e4e9f0";ctx.lineWidth=1;ctx.moveTo(50,py(y));ctx.lineTo(w-18,py(y));ctx.stroke();
+        ctx.fillStyle="#667588";ctx.textAlign="right";ctx.fillText(y.toExponential(0),44,py(y)+4);
+    }
+    const estados=datos.estados.slice(0,indice+1),e=datos.estados[indice];
+    linea(ctx,estados.map(t=>t.epoca),estados.map(t=>t.mse),px,py,"#087f6b");punto(ctx,px(e.epoca),py(e.mse),"#087f6b");
+    ctx.fillStyle="#667588";ctx.textAlign="left";ctx.fillText("0",50,h-10);ctx.textAlign="right";ctx.fillText("6000 épocas · mínimo representado: 10⁻¹²",w-18,h-10);
+}
+function dibujarRed(pred) {
+    el.red.innerHTML=`<title>Dos entradas y una neurona de salida</title>
+        <path d="M90 75 L230 135 M90 205 L230 135 M290 135 L420 135" stroke="#087f6b" stroke-width="2.5" fill="none"/>
+        <circle cx="65" cy="75" r="25" fill="#edf6f3" stroke="#087f6b"/><circle cx="65" cy="205" r="25" fill="#edf6f3" stroke="#087f6b"/>
+        <circle cx="260" cy="135" r="30" fill="#edf6f3" stroke="#12315a" stroke-width="2"/>
+        <g fill="#12315a" text-anchor="middle"><text x="65" y="81">x₁</text><text x="65" y="211">x₂</text><text x="260" y="142">Σ</text>
+        <text x="65" y="35" font-size="14">Ingreso / 1000</text><text x="65" y="255" font-size="14">Integrantes</text>
+        <text x="160" y="77">w₁</text><text x="160" y="211">w₂</text><text x="260" y="196">+ sesgo b</text>
+        <text x="455" y="126">ŷ</text><text x="455" y="153" font-size="14">${f(pred,2)} u.m.</text></g>`;
+}
+function actualizar() {
+    const e=datos.estados[indice],p=e.parametros,x1=ingreso/1000,pred=evaluar(x1,integrantes,p);
+    el.epoca.value=indice;el.epoca.setAttribute("aria-valuetext","Época "+e.epoca);
+    el["etiqueta-epoca"].textContent="Época "+e.epoca;el["numero-epoca"].textContent=e.epoca;
+    el["numero-mse"].textContent=e.mse<1e-4?e.mse.toExponential(3):f(e.mse,4);
+    el["numero-prediccion"].textContent=f(pred,2)+" u.m.";
+    el["referencia-probe"].textContent="Referencia sintética: "+f(referencia(x1,integrantes),2)+" u.m.";
+    el["titulo-vista"].textContent=`Vista con x₂ fijo: ${integrantes} integrante${integrantes===1?'':'s'}`;
+    el["ingreso-valor"].textContent=ingreso+" u.m. → x₁ = "+f(x1,2);
+    el["integrantes-valor"].textContent="x₂ = "+integrantes;
+    el["tipo-entrada"].textContent=datos.x.some(x=>Math.abs(x[0]-x1)<1e-8&&x[1]===integrantes)?"Esta combinación se usó al entrenar.":"Esta combinación no se usó al entrenar.";
+    el.calculo.textContent=`ŷ = (${f(p[0])}) × ${f(x1,2)} + (${f(p[1])}) × ${integrantes} + (${f(p[2])}) ≈ ${f(pred,2)} u.m.`;
+    el.parametros.innerHTML=["w₁: ingreso","w₂: integrantes","b: sesgo"].map((s,j)=>`<tr><td>${s}</td><td>${f(p[j],4)}</td></tr>`).join("");
+    el.avanzar.disabled=indice===datos.estados.length-1;dibujarAjuste(e);dibujarPerdida();dibujarRed(pred);
+}
+function pausar() { if(timer!==null)clearInterval(timer);timer=null;el.reproducir.textContent="Reproducir"; }
+function irAlEstado(i) { pausar();indice=Math.min(datos.estados.length-1,Math.max(0,Math.round(i)));actualizar(); }
+function cambiarEntradas(x1,x2) {
+    if(!Number.isFinite(Number(x1))||!Number.isFinite(Number(x2)))return;
+    ingreso=Math.min(4000,Math.max(1000,Number(x1)*1000));integrantes=Math.min(5,Math.max(1,Math.round(Number(x2))));
+    el.ingreso.value=ingreso;el.integrantes.value=integrantes;actualizar();
+}
+el.epoca.max=datos.estados.length-1;
+el.observaciones.innerHTML=datos.x.map((x,i)=>`<tr><td>${i+1}</td><td>${f(x[0],1)}</td><td>${x[1]}</td><td>${f(datos.y[i],0)}</td></tr>`).join("");
+el.epoca.addEventListener("input",()=>irAlEstado(Number(el.epoca.value)));
+el.reproducir.addEventListener("click",()=>{
+    if(timer!==null){pausar();return;}if(indice===datos.estados.length-1)indice=0;
+    el.reproducir.textContent="Pausar";timer=setInterval(()=>{indice++;actualizar();if(indice===datos.estados.length-1)pausar();},120);
+});
+el.reiniciar.addEventListener("click",()=>irAlEstado(0));el.avanzar.addEventListener("click",()=>irAlEstado(indice+1));
+el.ingreso.addEventListener("input",()=>cambiarEntradas(Number(el.ingreso.value)/1000,integrantes));
+el.integrantes.addEventListener("input",()=>cambiarEntradas(ingreso/1000,Number(el.integrantes.value)));
+window.addEventListener("resize",actualizar);
+window.simulacionMultivariable={datos,evaluar,irAlEstado,cambiarEntradas,estado:()=>({indice,ingreso,integrantes,reproduciendo:timer!==null})};
+actualizar();
+</script>
+</body>
+</html>

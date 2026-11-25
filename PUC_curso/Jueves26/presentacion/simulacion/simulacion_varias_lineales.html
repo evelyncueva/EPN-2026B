@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Entrenamiento de relaciones lineales</title>
+<style>
+
+    :root { --azul:#12315a; --verde:#087f6b; --naranja:#d65324; --gris:#667588; --borde:#dce3eb; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:#f4f6f9; color:var(--azul); font:16px/1.5 "Segoe UI",Arial,sans-serif; }
+    main { max-width:1360px; margin:auto; padding:24px; }
+    h1 { font-size:clamp(23px,3vw,34px); line-height:1.2; margin:4px 0 8px; }
+    h2 { font-size:19px; margin:0 0 10px; }
+    p { margin:5px 0; }
+    .secundario { color:var(--gris); font-size:14px; }
+    .tarjeta { background:white; padding:18px; border:1px solid var(--borde); border-radius:10px; }
+    .controles { margin:18px 0 12px; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+    button,select,input[type=number] { font:inherit; border:1px solid #aab8ca; border-radius:5px; padding:8px 12px; background:white; color:var(--azul); }
+    button { cursor:pointer; }
+    button:disabled { cursor:default; opacity:.5; }
+    button.principal { background:var(--azul); color:white; border-color:var(--azul); min-width:140px; }
+    button:focus-visible,select:focus-visible,input:focus-visible { outline:3px solid #e49848; outline-offset:2px; }
+    input[type=range] { accent-color:var(--verde); width:100%; cursor:pointer; }
+    input[type=checkbox] { accent-color:var(--verde); }
+    .fila { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+    .rango { flex:1; min-width:240px; }
+    .rango label { display:flex; justify-content:space-between; gap:16px; }
+    .metricas { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:14px; }
+    .numero { display:block; font-size:29px; font-variant-numeric:tabular-nums; font-weight:650; }
+    .paneles { display:grid; grid-template-columns:1.1fr 1fr; gap:14px; }
+    canvas { display:block; width:100%; }
+    #ajuste { height:310px; }
+    #perdida { height:155px; }
+    #red { width:100%; height:auto; display:block; }
+    .leyenda { display:flex; gap:15px; flex-wrap:wrap; font-size:13px; margin:6px 0; }
+    .clave::before { content:""; display:inline-block; width:20px; height:3px; margin:0 6px 3px 0; background:var(--verde); }
+    .datos::before { width:7px; height:7px; border-radius:50%; background:var(--azul); }
+    .referencia::before { height:0; border-top:2px dashed var(--gris); background:none; }
+    .lineal::before { background:var(--naranja); }
+    .consulta { padding:12px; background:#edf6f3; border-radius:6px; margin:12px 0; }
+    .consulta input[type=number] { width:100px; }
+    .consulta input[type=range] { flex:1; min-width:130px; }
+    .formula { background:#edf6f3; padding:12px; border-radius:6px; margin:10px 0; font-size:18px; font-variant-numeric:tabular-nums; overflow-wrap:anywhere; }
+    .formula p + p { margin-top:9px; }
+    table { width:100%; border-collapse:collapse; font-size:14px; font-variant-numeric:tabular-nums; }
+    th,td { padding:5px 7px; text-align:right; border-bottom:1px solid var(--borde); }
+    th:first-child,td:first-child { text-align:left; }
+    tr.activa { background:#edf6f3; font-weight:650; }
+    .tabla { overflow-x:auto; }
+    .pie { margin-top:16px; font-size:14px; }
+    @media (max-width:850px) { main { padding:14px; } .paneles { grid-template-columns:1fr; } .metricas { gap:7px; } .numero { font-size:23px; } .tarjeta { padding:13px; } }
+    @media (prefers-reduced-motion:reduce) { * { scroll-behavior:auto; } }
+
+    .numero { font-size:26px; overflow-wrap:anywhere; }
+    #red { max-height:270px; }
+    @media(max-width:650px) { .metricas { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<main>
+    <header>
+        <h1 id="titulo"></h1>
+        <p id="arquitectura"></p>
+    </header>
+    <section class="tarjeta controles" aria-label="Reproducción del entrenamiento">
+        <button id="reproducir" class="principal" type="button">Reproducir</button>
+        <button id="avanzar" type="button">Siguiente estado</button>
+        <button id="reiniciar" type="button">Volver al inicio</button>
+        <div class="rango"><label for="epoca"><span>Estado del entrenamiento</span><strong id="etiqueta-epoca"></strong></label>
+            <input id="epoca" type="range" min="0" max="1" step="1" value="0"></div>
+    </section>
+    <section class="metricas" aria-label="Resultados del estado seleccionado">
+        <div class="tarjeta">Época<output class="numero" id="numero-epoca"></output><span class="secundario">Un recorrido por los 21 datos.</span></div>
+        <div class="tarjeta">Error cuadrático medio<output class="numero" id="numero-mse"></output><span class="secundario">Promedio sobre datos y salidas.</span></div>
+        <div class="tarjeta"><span id="etiqueta-prediccion"></span><output class="numero" id="numero-prediccion"></output><span class="secundario" id="referencia-probe"></span></div>
+    </section>
+    <div class="paneles">
+        <section class="tarjeta">
+            <h2 id="relacion"></h2>
+            <div class="leyenda" id="leyenda"></div>
+            <canvas id="ajuste" role="img" aria-label="Datos y predicciones de las relaciones lineales"></canvas>
+            <p class="secundario">Puntos: ejemplos de entrenamiento. Líneas continuas: predicciones. Referencias discontinuas.</p>
+            <div class="consulta">
+                <label for="entrada"><strong>Consultar la red con los parámetros actuales</strong></label>
+                <div class="fila"><input id="entrada" type="range" min="-2" max="2" step="0.05" value="1.5">
+                    <input id="entrada-numero" aria-label="Número de entrada" type="number" min="-2" max="2" step="0.05" value="1.5"></div>
+                <p class="secundario" id="tipo-entrada"></p>
+            </div>
+            <h2>La pérdida durante el entrenamiento</h2>
+            <canvas id="perdida" role="img" aria-label="MSE por época con escala logarítmica"></canvas>
+        </section>
+        <section class="tarjeta">
+            <h2>Pesos, sesgos y salidas</h2>
+            <svg id="red" viewBox="0 0 520 270" role="img" aria-label="Entrada conectada a las neuronas de salida"></svg>
+            <div class="fila"><label for="neurona">Observar la neurona</label><select id="neurona"></select></div>
+            <div class="formula"><p><strong>Combinar:</strong> z = peso × entrada + sesgo</p>
+                <p id="calculo-z"></p><p id="calculo-a"></p></div>
+            <div class="tabla"><table aria-label="Parámetros de cada neurona"><thead><tr><th>Neurona</th><th>Peso w</th><th>Sesgo b</th><th>Predicción</th></tr></thead><tbody id="parametros"></tbody></table></div>
+            <div class="formula" id="interpretacion"></div>
+            <p class="secundario">Al cambiar la entrada se consultan los mismos parámetros. Al avanzar el entrenamiento se ajustan los pesos y sesgos.</p>
+        </section>
+    </div>
+    <footer class="pie">
+        <p><strong id="mensaje"></strong></p>
+        <p class="secundario">Reproducción de un entrenamiento real: 400 épocas, descenso por gradiente, tasa 0.05. El dato 1.5 no se usó al entrenar. El MSE muy pequeño se muestra en notación científica.</p>
+    </footer>
+</main>
+<script id="datos" type="application/json">{"salidas":2,"x":[-2.0,-1.8,-1.6,-1.4,-1.2,-1.0,-0.7999999999999998,-0.5999999999999999,-0.3999999999999999,-0.19999999999999996,0.0,0.20000000000000018,0.40000000000000036,0.6000000000000001,0.8000000000000003,1.0,1.2000000000000002,1.4000000000000004,1.6,1.8000000000000003,2.0],"y":[[-3.0,4.0],[-2.6,3.8],[-2.2,3.6],[-1.7999999999999998,3.4],[-1.4,3.2],[-1.0,3.0],[-0.5999999999999996,2.8],[-0.19999999999999973,2.5999999999999996],[0.20000000000000018,2.4],[0.6000000000000001,2.2],[1.0,2.0],[1.4000000000000004,1.7999999999999998],[1.8000000000000007,1.5999999999999996],[2.2,1.4],[2.6000000000000005,1.1999999999999997],[3.0,1.0],[3.4000000000000004,0.7999999999999998],[3.8000000000000007,0.5999999999999996],[4.2,0.3999999999999999],[4.6000000000000005,0.19999999999999973],[5.0,0.0]],"estados":[{"epoca":0,"mse":11.233333333333333,"parametros":[-0.5,0.0,0.5,-1.0]},{"epoca":1,"mse":9.865132592592593,"parametros":[-0.31666666666666665,0.05000000000000002,0.39,-0.85]},{"epoca":2,"mse":8.668896330954734,"parametros":[-0.14677777777777776,0.09750000000000002,0.2880666666666667,-0.7075]},{"epoca":3,"mse":7.622409218863949,"parametros":[0.010652592592592686,0.14262500000000003,0.19360844444444447,-0.572125]},{"epoca":4,"mse":6.706391775282746,"parametros":[0.15653806913580257,0.18549375000000004,0.10607715851851857,-0.44351874999999996]},{"epoca":5,"mse":5.904105350661142,"parametros":[0.2917252773991771,0.22621906250000007,0.02496483356049385,-0.32134281249999996]},{"epoca":6,"mse":5.201010992313199,"parametros":[0.41699875705657075,0.2649081093750001,-0.05019925423394235,-0.20527567187499995]},{"epoca":7,"mse":4.584474767303616,"parametros":[0.5330855148724222,0.3016627039062501,-0.11985130892345322,-0.09501188828124996]},{"epoca":8,"mse":4.043513148664047,"parametros":[0.640659243781778,0.3365795687109376,-0.18439554626906662,0.009738706132812538]},{"epoca":9,"mse":3.568572957634836,"parametros":[0.7403442325711143,0.3697505902753907,-0.2442065395426684,0.10925177082617193]},{"epoca":10,"mse":3.1513411178118877,"parametros":[0.8327189888492326,0.40126306076162116,-0.2996313933095394,0.2037891822848633]},{"epoca":15,"mse":1.7076864583221503,"parametros":[1.2023853417916859,0.5367087698402467,-0.5214312050750114,0.6101263095207399]},{"epoca":20,"mse":0.9388132663300918,"parametros":[1.4549820164027367,0.6415140775914578,-0.6729892098416418,0.9245422327743733]},{"epoca":25,"mse":0.5230488357840251,"parametros":[1.6275838221031702,0.722610426878166,-0.7765502932619018,1.167831280634498]},{"epoca":30,"mse":0.2949341674128983,"parametros":[1.7455243428044938,0.7853612360570625,-0.847314605682696,1.3560837081711874]},{"epoca":35,"mse":0.16807407035812627,"parametros":[1.8261142669182737,0.8339166160123926,-0.8956685601509641,1.5017498480371778]},{"epoca":40,"mse":0.09665690411479469,"parametros":[1.8811821590222293,0.8714878434348967,-0.9287092954133375,1.61446353030469]},{"epoca":45,"mse":0.05601596523287863,"parametros":[1.9188105942654683,0.9005597430129076,-0.9512863565592807,1.7016792290387226]},{"epoca":50,"mse":0.03267219440288186,"parametros":[1.9445224761762867,0.9230550247232868,-0.9667134857057719,1.76916507416986]},{"epoca":55,"mse":0.019157407898196768,"parametros":[1.962091659351786,0.9404614448944706,-0.9772549956110715,1.821384334683411]},{"epoca":60,"mse":0.011281315503763203,"parametros":[1.974096855957966,0.953930201013048,-0.9844581135747794,1.8617906030391436]},{"epoca":65,"mse":0.006666325497200383,"parametros":[1.9823001255188422,0.9643520677494398,-0.9893800753113051,1.893056203248319]},{"epoca":70,"mse":0.003950186731329948,"parametros":[1.9879055007322524,0.972416309563225,-0.9927433004393513,1.917248928689675]},{"epoca":75,"mse":0.002345891248021708,"parametros":[1.9917357090473569,0.9786562661541225,-0.9950414254284141,1.9359687984623672]},{"epoca":80,"mse":0.001395592336101926,"parametros":[1.9943529282661525,0.9834846256149865,-0.9966117569596914,1.950453876844959]},{"epoca":85,"mse":0.0008314000860503984,"parametros":[1.996141300040142,0.9872207181252007,-0.9976847800240851,1.961662154375602]},{"epoca":90,"mse":0.0004958323669351184,"parametros":[1.9973633121585894,0.9901116352903411,-0.9984179872951537,1.9703349058710233]},{"epoca":95,"mse":0.00029595913729804033,"parametros":[1.998198325123652,0.9923485718846183,-0.9989189950741911,1.9770457156538548]},{"epoca":100,"mse":0.00017677490238426875,"parametros":[1.9987688977401559,0.9940794707796661,-0.9992613386440935,1.9822384123389982]},{"epoca":120,"mse":2.259530931271058e-05,"parametros":[1.9997316108514953,0.9978775736213019,-0.9998389665108969,1.9936327208639055]},{"epoca":140,"mse":2.8979539117260375e-06,"parametros":[1.9999414892349852,0.9992391400218881,-0.9999648935409909,1.9977174200656642]},{"epoca":160,"mse":3.7214579316745174e-07,"parametros":[1.9999872442323334,0.9997272424089227,-0.9999923465393998,1.9991817272267687]},{"epoca":180,"mse":4.7812116534317153e-08,"parametros":[1.9999972191508908,0.9999022202433689,-0.9999983314905346,1.9997066607301066]},{"epoca":200,"mse":6.143813608806337e-09,"parametros":[1.9999993937548906,0.9999649473337513,-0.9999996362529342,1.9998948420012534]},{"epoca":220,"mse":7.895250510849129e-10,"parametros":[1.9999998678342052,0.9999874341126068,-0.999999920700523,1.999962302337821]},{"epoca":240,"mse":1.0146215611789434e-10,"parametros":[1.999999971186906,0.999995495306267,-0.9999999827121434,1.9999864859188012]},{"epoca":260,"mse":1.3039053439115189e-11,"parametros":[1.9999999937185384,0.9999983851307122,-0.9999999962311229,1.9999951553921358]},{"epoca":280,"mse":1.6756736901133875e-12,"parametros":[1.9999999986305963,0.9999994210920936,-0.9999999991783576,1.9999982632762812]},{"epoca":300,"mse":2.1534428809855097e-13,"parametros":[1.9999999997014604,0.9999997924696654,-0.9999999998208761,1.9999993774089957]},{"epoca":320,"mse":2.767435165610467e-14,"parametros":[1.999999999934916,0.9999999256032965,-0.9999999999609497,1.9999997768098896]},{"epoca":340,"mse":3.5564902605876236e-15,"parametros":[1.9999999999858113,0.9999999733298293,-0.9999999999914866,1.9999999199894876]},{"epoca":360,"mse":4.570522255623286e-16,"parametros":[1.9999999999969067,0.9999999904391192,-0.9999999999981442,1.9999999713173573]},{"epoca":380,"mse":5.873676700895438e-17,"parametros":[1.9999999999993257,0.9999999965725588,-0.9999999999995952,1.9999999897176763]},{"epoca":400,"mse":7.548387846202259e-18,"parametros":[1.9999999999998528,0.9999999987713105,-0.9999999999999117,1.9999999963139319]}],"resumen":{"salidas":2,"parametros_entrenables":4,"epocas":400,"tasa":0.05,"mse_inicial":11.233333333333333,"mse_final":7.548387846202259e-18,"parametros_finales":[1.9999999999998528,0.9999999987713105,-0.9999999999999117,1.9999999963139319],"entrada_reservada":1.5,"prediccion_reservada":[3.9999999987710897,0.4999999963140642],"gradiente_verificado":true}}</script>
+<script>
+"use strict";
+const datos = JSON.parse(document.getElementById("datos").textContent);
+const el = Object.fromEntries(["titulo","arquitectura","relacion","leyenda","reproducir","avanzar","reiniciar","epoca","etiqueta-epoca","numero-epoca","numero-mse","etiqueta-prediccion","numero-prediccion","referencia-probe","ajuste","perdida","entrada","entrada-numero","tipo-entrada","red","neurona","calculo-z","calculo-a","parametros","interpretacion","mensaje"].map(id => [id,document.getElementById(id)]));
+let indice=0, entrada=1.5, neurona=0, timer=null;
+const f=(n,d=4)=>Number(n).toFixed(d), colores=["#087f6b","#8052a0"];
+function evaluar(x,p) { return Array.from({length:datos.salidas},(_,j)=>p[2*j]*x+p[2*j+1]); }
+function referencia(x) { return [2*x+1,-x+2].slice(0,datos.salidas); }
+function canvas(c) {
+    const r=c.getBoundingClientRect(), w=Math.max(250,r.width), h=Math.max(130,r.height), s=window.devicePixelRatio||1;
+    c.width=Math.round(w*s); c.height=Math.round(h*s); const ctx=c.getContext("2d");
+    ctx.setTransform(s,0,0,s,0,0); ctx.clearRect(0,0,w,h); return {ctx,w,h};
+}
+function linea(ctx,xs,ys,px,py,color,guion=[]) {
+    ctx.beginPath();ctx.strokeStyle=color;ctx.lineWidth=2.3;ctx.setLineDash(guion);
+    xs.forEach((x,i)=>i?ctx.lineTo(px(x),py(ys[i])):ctx.moveTo(px(x),py(ys[i])));ctx.stroke();ctx.setLineDash([]);
+}
+function punto(ctx,x,y,color,r=4) { ctx.beginPath();ctx.fillStyle=color;ctx.arc(x,y,r,0,Math.PI*2);ctx.fill(); }
+function dibujarAjuste(e) {
+    const {ctx,w,h}=canvas(el.ajuste), px=x=>42+(x+2.1)/4.2*(w-60), py=y=>15+(6-y)/10*(h-48);
+    ctx.font="12px Segoe UI,Arial";
+    for(let x=-2;x<=2;x++) {
+        ctx.strokeStyle="#e4e9f0";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(px(x),15);ctx.lineTo(px(x),h-33);ctx.stroke();
+        ctx.fillStyle="#667588";ctx.textAlign="center";ctx.fillText(x,px(x),h-12);
+    }
+    for(let y=-4;y<=6;y+=2) {
+        ctx.strokeStyle="#e4e9f0";ctx.beginPath();ctx.moveTo(42,py(y));ctx.lineTo(w-18,py(y));ctx.stroke();
+        ctx.fillStyle="#667588";ctx.textAlign="right";ctx.fillText(y,35,py(y)+4);
+    }
+    const xs=Array.from({length:100},(_,i)=>-2+4*i/99);
+    for(let j=0;j<datos.salidas;j++) {
+        linea(ctx,xs,xs.map(x=>referencia(x)[j]),px,py,"#8b96a4",[5,5]);
+        linea(ctx,xs,xs.map(x=>evaluar(x,e.parametros)[j]),px,py,colores[j]);
+        datos.x.forEach((x,i)=>punto(ctx,px(x),py(datos.y[i][j]),colores[j],3.3));
+        punto(ctx,px(entrada),py(evaluar(entrada,e.parametros)[j]),"#d65324",6);
+    }
+    ctx.fillStyle="#12315a";ctx.textAlign="right";ctx.fillText("x",w-2,h-12);
+}
+function dibujarPerdida() {
+    const {ctx,w,h}=canvas(el.perdida), px=x=>48+x/400*(w-66), py=y=>12+(2-Math.log10(Math.max(y,1e-12)))/14*(h-43);
+    ctx.font="11px Segoe UI,Arial";
+    for(const y of [10,1e-4,1e-8,1e-12]) {
+        ctx.beginPath();ctx.strokeStyle="#e4e9f0";ctx.lineWidth=1;ctx.moveTo(48,py(y));ctx.lineTo(w-18,py(y));ctx.stroke();
+        ctx.fillStyle="#667588";ctx.textAlign="right";ctx.fillText(y.toExponential(0),42,py(y)+4);
+    }
+    const estados=datos.estados.slice(0,indice+1), actual=datos.estados[indice];
+    linea(ctx,estados.map(e=>e.epoca),estados.map(e=>e.mse),px,py,colores[0]);punto(ctx,px(actual.epoca),py(actual.mse),colores[0]);
+    ctx.fillStyle="#667588";ctx.textAlign="left";ctx.fillText("0",48,h-10);ctx.textAlign="right";ctx.fillText("400 épocas · escala logarítmica (mínimo 10⁻¹²)",w-18,h-10);
+}
+function dibujarRed(pred) {
+    let s='<title>Una entrada y '+datos.salidas+' neuronas de salida con activación identidad</title>';
+    s+='<circle cx="50" cy="135" r="22" fill="#edf6f3" stroke="#087f6b"/><text x="50" y="141" text-anchor="middle" fill="#12315a">x</text>';
+    for(let j=0;j<datos.salidas;j++) {
+        const y=datos.salidas===1?135:75+j*120, color=colores[j];
+        s+=`<path d="M72 135 L218 ${y} M282 ${y} L430 ${y}" stroke="${color}" stroke-width="${j===neurona?3:1.5}" fill="none"/>`;
+        s+=`<circle cx="250" cy="${y}" r="32" fill="${j===neurona?'#edf6f3':'#ffffff'}" stroke="${color}" stroke-width="2"/><text x="250" y="${y+6}" text-anchor="middle" fill="#12315a">Σ</text>`;
+        s+=`<text x="250" y="${y-44}" text-anchor="middle" font-size="14" fill="#12315a">Neurona ${j+1}</text><text x="250" y="${y+53}" text-anchor="middle" font-size="14" fill="#12315a">+ sesgo b${j+1}</text>`;
+        s+=`<text x="146" y="${y-8}" text-anchor="middle" font-size="14" fill="#12315a">w${j+1}</text><text x="452" y="${y-10}" text-anchor="middle" fill="#12315a">ŷ${j+1}</text><text x="452" y="${y+16}" text-anchor="middle" font-size="14" fill="#12315a">${f(pred[j],3)}</text>`;
+    }
+    s+='<text x="50" y="182" text-anchor="middle" font-size="14" fill="#12315a">'+f(entrada,2)+'</text>';
+    el.red.innerHTML=s;
+}
+function actualizar() {
+    const e=datos.estados[indice], p=e.parametros, pred=evaluar(entrada,p), ref=referencia(entrada);
+    el.epoca.value=String(indice);el.epoca.setAttribute("aria-valuetext","Época "+e.epoca);
+    el["etiqueta-epoca"].textContent="Época "+e.epoca;el["numero-epoca"].textContent=e.epoca;
+    el["numero-mse"].textContent=e.mse<0.0001?e.mse.toExponential(3):f(e.mse,5);
+    el["etiqueta-prediccion"].textContent="Predicción para x = "+f(entrada,2);
+    el["numero-prediccion"].textContent=pred.map(n=>f(n,3)).join(" ; ");
+    el["referencia-probe"].textContent="Referencia: "+ref.map(n=>f(n,3)).join(" ; ");
+    el["tipo-entrada"].textContent=datos.x.some(x=>Math.abs(x-entrada)<1e-8)?"Esta entrada se usó al entrenar.":"Esta entrada no se usó al entrenar.";
+    el["calculo-z"].textContent=`z${neurona+1} = (${f(p[2*neurona])}) × ${f(entrada,2)} + (${f(p[2*neurona+1])}) ≈ ${f(pred[neurona])}`;
+    el["calculo-a"].textContent=`Activación identidad: ŷ${neurona+1} = z${neurona+1}.`;
+    el.parametros.innerHTML=pred.map((n,j)=>`<tr class="${j===neurona?'activa':''}"><td>${j+1}</td><td>${f(p[2*j])}</td><td>${f(p[2*j+1])}</td><td>${f(n)}</td></tr>`).join("");
+    el.avanzar.disabled=indice===datos.estados.length-1;
+    dibujarAjuste(e);dibujarPerdida();dibujarRed(pred);
+}
+function pausar() { if(timer!==null)clearInterval(timer);timer=null;el.reproducir.textContent="Reproducir"; }
+function irAlEstado(i) { pausar();indice=Math.min(datos.estados.length-1,Math.max(0,Math.round(i)));actualizar(); }
+function cambiarEntrada(x) {
+    if(!Number.isFinite(Number(x)))return;entrada=Math.min(2,Math.max(-2,Number(x)));
+    el.entrada.value=entrada;el["entrada-numero"].value=entrada;actualizar();
+}
+el.titulo.textContent=datos.salidas===1?"Una relación lineal: una neurona":"Varias relaciones lineales: dos salidas";
+el.arquitectura.textContent=`Una entrada → ${datos.salidas} neurona${datos.salidas===1?'':'s'} con activación identidad → ${datos.salidas} salida${datos.salidas===1?'':'s'}. ${2*datos.salidas} parámetros entrenables.`;
+el.relacion.textContent=datos.salidas===1?"Aprender y = 2x + 1":"Aprender y₁ = 2x + 1 e y₂ = −x + 2";
+el.leyenda.innerHTML=datos.salidas===1?'<span class="clave">Predicción</span><span class="clave referencia">Referencia</span>':'<span class="clave">Salida 1</span><span class="clave" style="--verde:#8052a0">Salida 2</span><span class="clave referencia">Referencias</span>';
+el.interpretacion.textContent=datos.salidas===1?"El peso controla la pendiente; el sesgo desplaza la recta.":"Cada salida tiene su peso y su sesgo: dos neuronas aprenden dos relaciones en paralelo.";
+el.mensaje.textContent=datos.salidas===1?"Una sola neurona representa esta función afín.":"Aquí hay más neuronas porque pedimos más salidas. Todas las relaciones siguen siendo afines.";
+el.neurona.innerHTML=Array.from({length:datos.salidas},(_,j)=>`<option value="${j}">${j+1}</option>`).join("");
+el.epoca.max=datos.estados.length-1;
+el.epoca.addEventListener("input",()=>irAlEstado(Number(el.epoca.value)));
+el.reproducir.addEventListener("click",()=>{
+    if(timer!==null){pausar();return;}if(indice===datos.estados.length-1)indice=0;
+    el.reproducir.textContent="Pausar";timer=setInterval(()=>{indice++;actualizar();if(indice===datos.estados.length-1)pausar();},150);
+});
+el.reiniciar.addEventListener("click",()=>irAlEstado(0));
+el.avanzar.addEventListener("click",()=>irAlEstado(indice+1));
+el.entrada.addEventListener("input",()=>cambiarEntrada(el.entrada.value));
+el["entrada-numero"].addEventListener("change",()=>cambiarEntrada(el["entrada-numero"].value));
+el.neurona.addEventListener("change",()=>{neurona=Number(el.neurona.value);actualizar();});
+window.addEventListener("resize",actualizar);
+window.simulacionAfin={datos,evaluar,irAlEstado,cambiarEntrada,estado:()=>({indice,entrada,neurona,reproduciendo:timer!==null})};
+actualizar();
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>De una neurona a una red no lineal</title>
+<style>
+    * { box-sizing:border-box; }
+    body { margin:0; background:#f4f6f9; color:#12315a; font:16px/1.5 "Segoe UI",Arial,sans-serif; }
+    header { max-width:1360px; padding:24px 24px 0; margin:auto; }
+    h1 { margin:0 0 8px; font-size:30px; }
+    nav { display:flex; flex-wrap:wrap; gap:10px; margin:18px 0 12px; }
+    button { padding:11px 18px; border:1px solid #aab8ca; border-radius:6px; background:white; color:#12315a; font:inherit; cursor:pointer; }
+    button[aria-pressed=true] { background:#12315a; color:white; }
+    button:focus-visible { outline:3px solid #d65324; outline-offset:2px; }
+    #idea { padding:12px 15px; margin-bottom:0; background:#fffbdc; }
+    iframe { display:block; border:0; width:100%; min-height:1100px; }
+    @media(max-width:700px) { header { padding:15px 14px 0; } h1 { font-size:25px; } }
+</style>
+</head>
+<body>
+<header>
+    <h1>Una entrada → dos entradas → una red no lineal</h1>
+    <p>La arquitectura responde a la tarea: cuántas entradas, cuántas salidas y qué relaciones queremos representar.</p>
+    <nav aria-label="Etapas de la demostración">
+        <button data-caso="0" type="button" aria-pressed="true">1. Una relación lineal</button>
+        <button data-caso="1" type="button" aria-pressed="false">2. Dos variables económicas</button>
+        <button data-caso="2" type="button" aria-pressed="false">3. Una relación cuadrática</button>
+    </nav>
+    <p id="idea"></p>
+</header>
+<iframe id="visor" title="Simulación de entrenamiento de la etapa seleccionada"></iframe>
+<script id="paginas-data" type="application/json">__PAGINAS_JSON__</script>
+<script>
+"use strict";
+const paginas = JSON.parse(document.getElementById("paginas-data").textContent);
+const mensajes = [
+    "Una entrada y una salida afín: basta una neurona con peso y sesgo. Aprendemos y = 2x + 1.",
+    "Dos entradas y una salida: una neurona estima w₁, w₂ y b con observaciones de hogares. Después predice su gasto a partir del ingreso y el número de integrantes.",
+    "Para aproximar x² desde la entrada x introducimos activaciones no lineales. Añadir capas de neuronas afines mantiene una función afín."
+];
+const visor = document.getElementById("visor");
+let casoActual = 0, observador = null;
+function verCaso(i) {
+    casoActual = Math.max(0, Math.min(2, Number(i)));
+    if (observador) observador.disconnect();
+    document.querySelectorAll("[data-caso]").forEach(b => b.setAttribute("aria-pressed", String(Number(b.dataset.caso) === casoActual)));
+    document.getElementById("idea").textContent = mensajes[casoActual];
+    visor.srcdoc = paginas[casoActual];
+}
+visor.addEventListener("load", () => {
+    const ajustar = () => { visor.style.height = (visor.contentDocument.body.scrollHeight + 12) + "px"; };
+    observador = new ResizeObserver(ajustar);
+    observador.observe(visor.contentDocument.body); ajustar();
+});
+document.querySelectorAll("[data-caso]").forEach(b => b.addEventListener("click", () => verCaso(b.dataset.caso)));
+window.simulacionProgresiva = { verCaso, caso:() => casoActual };
+const inicial = { "#lineal":0, "#multivariable":1, "#varias":1, "#cuadratica":2 }[location.hash] ?? 0;
+verCaso(inicial);
+</script>
+</body>
+</html>

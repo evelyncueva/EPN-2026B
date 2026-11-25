@@ -1,0 +1,145 @@
+% !TeX program = pdflatex
+\documentclass[10pt,a5paper]{article}
+\newif\ifmostrarSoluciones
+\mostrarSolucionestrue
+\usepackage{estilo_apuntes}
+\geometry{a4paper,margin=20mm}
+\encabezado{Tutoría}{Logaritmos y exponenciales}
+\begin{document}
+\begin{center}
+  {\large\bfseries\color{Azul} Tutoría: $\ln$ y $\exp$}\\[3pt]
+  23 de noviembre de 2026 · 60 minutos
+\end{center}
+
+\textbf{Objetivo.} Resolver ejercicios de dominio, ecuaciones y límites con $\ln x$ y $\exp(x)=e^x$, justificando las restricciones y los cambios de variable.
+
+\section*{0--8 min: activar lo anterior}
+\begin{ejercicios}[repaso breve]
+Calcule y explique por qué no basta sustituir directamente:
+\[
+ \text{a) }\lim_{x\to2}\frac{x^2-4}{x-2},
+ \qquad
+ \text{b) }\lim_{x\to0}\frac{\sin(3x)}{2x}.
+\]
+En b), los ángulos están en radianes.
+\end{ejercicios}
+
+\section*{8--18 min: dominio y propiedades}
+\begin{ejercicios}[antes de operar]
+\begin{enumerate}
+  \item Determine el dominio de $f(x)=\ln\!\left(\dfrac{x-1}{x+2}\right)$.
+  \item Simplifique $e^{\ln(x-1)}$ y $\ln(e^{2x-1})$, indicando el dominio de cada expresión original.
+  \item ¿Es cierto que $\ln(a+b)=\ln a+\ln b$ para $a,b>0$? Dé un contraejemplo.
+\end{enumerate}
+\end{ejercicios}
+
+\section*{18--30 min: resolver y comprobar}
+\begin{ejercicios}[ecuaciones]
+Resuelva en $\mathbb R$. Escriba primero las restricciones.
+\begin{enumerate}
+  \item $\ln(x-1)+\ln(x+1)=\ln 8$.
+  \item $e^{2x}-3e^x+2=0$. Sugerencia: $u=e^x>0$.
+\end{enumerate}
+\end{ejercicios}
+
+\section*{30--47 min: límites con $\ln$ y $\exp$}
+Recordar únicamente las herramientas que se van a usar:
+\[
+ \lim_{t\to0}\frac{e^t-1}{t}=1,
+ \qquad
+ \lim_{t\to0}\frac{\ln(1+t)}{t}=1.
+\]
+$e^x$ es continua en $\mathbb R$ y $\ln x$ en $(0,\infty)$.
+\begin{ejercicios}[de menor a mayor dificultad]
+\begin{enumerate}
+  \item $\displaystyle\lim_{x\to0}\frac{\ln(2+e^x)}{1+e^x}$.
+  \item $\displaystyle\lim_{x\to0}\frac{e^{3x}-1}{2x}$.
+  \item $\displaystyle\lim_{x\to0}\frac{\ln(1-2x)}{e^{3x}-1}$.
+\end{enumerate}
+En cada caso: revisar dominio, intentar sustitución y, si aparece $0/0$, ajustar el cociente al límite fundamental. En el tercero, hacer explícitos los factores $-2$ y $3$.
+\end{ejercicios}
+
+\section*{47--55 min: conectar con continuidad}
+\begin{ejercicios}[función por tramos]
+Determine $k$ para que $F$ sea continua en $0$:
+\[
+ F(x)=\begin{cases}
+ \dfrac{\ln(1+2x)}{e^x-1},&x\ne0,\quad x>-\tfrac12,\\[5pt]
+ k,&x=0.
+ \end{cases}
+\]
+¿Qué datos se comparan para justificar la continuidad?
+\end{ejercicios}
+
+\section*{55--60 min: propuestos}
+Calcule $\displaystyle\lim_{x\to0}\frac{\ln(1+4x)}{e^{2x}-1}$ e indique la restricción del logaritmo. Justifique sin derivar.
+
+\textbf{Reserva (fuera de los 60 minutos).} Calcule
+\[
+ \lim_{x\to0}\frac{\ln(1+3x)}{\sin(2x)},\qquad
+ \lim_{x\to+\infty}\frac{\ln x}{\sqrt{x}},\qquad
+ \lim_{x\to+\infty}\frac{x^2}{e^x}.
+\]
+
+\ifmostrarSoluciones
+\newpage
+\section*{Soluciones para dirigir la tutoría}
+\textbf{Repaso.} a) Para $x\ne2$, $(x^2-4)/(x-2)=x+2$; el límite es $4$. b) Escribimos $\frac32\frac{\sin(3x)}{3x}$; el límite es $3/2$. En ambos, $0/0$ es una indeterminación, no el resultado.
+
+\textbf{Dominio y propiedades.}
+\begin{enumerate}
+  \item Se exige $(x-1)/(x+2)>0$. Los puntos críticos son $-2$ y $1$; numerador y denominador tienen el mismo signo en $(-\infty,-2)$ y $(1,\infty)$. Ese es el dominio. No se puede separar en $\ln(x-1)-\ln(x+2)$ en todo el dominio: en $x<-2$ ambos argumentos serían negativos.
+  \item $e^{\ln(x-1)}=x-1$ para $x>1$. La simplificación conserva esa restricción. Por otra parte, $\ln(e^{2x-1})=2x-1$ para todo $x\in\mathbb R$, pues la exponencial siempre es positiva.
+  \item Con $a=b=1$, el lado izquierdo vale $\ln2$ y el derecho $0$. La propiedad correcta es $\ln(ab)=\ln a+\ln b$ para $a,b>0$.
+\end{enumerate}
+
+\textbf{Ecuaciones.}
+\begin{enumerate}
+  \item Las condiciones $x-1>0$ y $x+1>0$ dan $x>1$. Entonces
+  \[
+    \ln((x-1)(x+1))=\ln8
+    \ \Longrightarrow\ x^2-1=8.
+  \]
+  Los candidatos son $\pm3$; solo $x=3$ cumple el dominio. Al comprobar: $\ln2+\ln4=\ln8$.
+  \item Con $u=e^x>0$, $(u-1)(u-2)=0$. Ambos valores son positivos; por tanto, $x=0$ o $x=\ln2$.
+\end{enumerate}
+
+\textbf{Límites.}
+\begin{enumerate}
+  \item Por continuidad, el límite es $\ln3/2$. El argumento $2+e^x$ y el denominador son positivos para todo $x$.
+  \item Para $x\ne0$,
+  \[
+    \frac{e^{3x}-1}{2x}=\frac32\frac{e^{3x}-1}{3x}
+    \longrightarrow\frac32.
+  \]
+  \item El logaritmo exige $x<1/2$, condición que se cumple en un entorno de $0$. Para $x\ne0$ en ese entorno,
+  \[
+    \frac{\ln(1-2x)}{e^{3x}-1}
+    =\frac{\ln(1-2x)}{-2x}
+     \frac{3x}{e^{3x}-1}\left(-\frac23\right)
+    \longrightarrow-\frac23.
+  \]
+  Los argumentos $-2x$ y $3x$ tienden a $0$. El segundo factor tiende a $1$ porque es el recíproco de un cociente cuyo límite es $1\ne0$.
+\end{enumerate}
+
+\textbf{Continuidad.} Para $x\ne0$ cercano a $0$,
+\[
+ \frac{\ln(1+2x)}{e^x-1}
+ =2\frac{\ln(1+2x)}{2x}\frac{x}{e^x-1}
+ \longrightarrow2.
+\]
+Los límites izquierdo y derecho valen $2$; deben coincidir con $F(0)=k$. Por tanto, $k=2$. La fórmula del cociente no define el valor en $0$; ese valor se asigna mediante el tramo $k$.
+
+\textbf{Salida.} La restricción es $x>-1/4$. Para $x\ne0$ cercano a $0$,
+\[
+ \frac{\ln(1+4x)}{e^{2x}-1}
+ =2\frac{\ln(1+4x)}{4x}\frac{2x}{e^{2x}-1}
+ \longrightarrow2.
+\]
+\textbf{Reserva.} Los resultados son $3/2$, $0$ y $0$. En el primero se usa
+$\frac{\ln(1+3x)}{3x}\frac{2x}{\sin(2x)}\frac32$.
+Los otros dos se justifican por el crecimiento comparado visto en semana 7: el logaritmo crece más lentamente que cualquier potencia positiva y la exponencial más rápidamente que cualquier potencia.
+
+\textbf{Criterio de cierre.} El estudiante identifica el dominio, reconoce cuándo puede sustituir y muestra los factores necesarios para aplicar los límites fundamentales. Si hay dificultad con esos factores, retomar el segundo límite antes de avanzar al cociente mixto.
+\fi
+\end{document}

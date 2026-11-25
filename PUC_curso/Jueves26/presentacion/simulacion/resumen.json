@@ -1,0 +1,19 @@
+{
+  "epocas": 12000,
+  "tasa": 0.02,
+  "semilla": 7,
+  "arquitectura": [
+    1,
+    6,
+    1
+  ],
+  "parametros_entrenables": 19,
+  "mse_inicial": 4.246362992240509,
+  "mse_final": 0.0032150151257534267,
+  "mse_malla_nueva": 0.002518224841813233,
+  "entrada_reservada": 1.5,
+  "prediccion_reservada": 2.307118713004878,
+  "referencia_reservada": 2.25,
+  "mse_lineal_final": 1.7091555555555558,
+  "gradiente_verificado": true
+}

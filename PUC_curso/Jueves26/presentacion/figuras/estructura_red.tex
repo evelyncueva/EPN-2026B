@@ -1,0 +1,50 @@
+% Recreación vectorial del esquema de DL_MRI_presentation.pdf, p. 10/51.
+% La función se motiva a la izquierda y su implementación como red a la derecha.
+\begin{tikzpicture}[x=1cm,y=1cm,>=Latex,
+    every node/.style={font=\small},
+    conexion/.style={draw=fondo!60,line width=0.6pt},
+    neurona/.style={circle,draw=fondo,line width=0.8pt,fill=white,minimum size=4mm,inner sep=0pt},
+    proceso/.style={draw=fondo,rounded corners=2pt,fill=fondo!7,align=center,inner sep=3mm}]
+    \path[use as bounding box] (-0.2,-2.05) rectangle (13.55,1.8);
+
+    % Una función ajustable: entrada y salida en sentido de izquierda a derecha.
+    \node[font=\small\bfseries] at (2.5,1.55) {Una función con parámetros};
+    \node[draw=verde,text=verde,inner sep=2mm] (entradafuncion) at (0.1,0.45) {$x$};
+    \node[proceso,minimum width=15mm,minimum height=12mm] (funcion) at (2.4,0.45) {$f_{\theta}$};
+    \node[draw=naranja,text=naranja,inner sep=2mm] (salidafuncion) at (4.85,0.45) {$\hat y=f_{\theta}(x)$};
+    \draw[->,conexion] (entradafuncion) -- (funcion);
+    \draw[->,conexion] (funcion) -- (salidafuncion);
+    \node[below=2mm of entradafuncion,font=\scriptsize] {entrada};
+    \node[below=2mm of salidafuncion,font=\scriptsize] {predicción};
+    \node[proceso,fill=verde!9,draw=verde!55,text width=47mm,font=\small] (ajuste) at (2.5,-1.3)
+        {Ajustar los parámetros $\theta$ con ejemplos $(x,y)$ para que la predicción se aproxime a $y$.};
+    \draw[->,verde] (ajuste.north) -- (funcion.south);
+
+    % Una red realiza esa función. Se distinguen parámetros y valores predichos.
+    \draw[fondo!15] (6.15,-1.9) -- (6.15,1.75);
+    \node[font=\small\bfseries] at (9.7,1.55) {Una red implementa esa función};
+    \node[neurona,fill=verde!20,draw=verde] (entrada) at (7.0,0.35) {};
+    \foreach \i/\altura in {1/1.0,2/0.35,3/-0.3} {
+        \node[neurona] (a\i) at (8.5,\altura) {};
+        \node[neurona] (b\i) at (10.0,\altura) {};
+        \draw[conexion] (entrada) -- (a\i);
+    }
+    \foreach \i in {1,2,3} {
+        \foreach \j in {1,2,3} {
+            \draw[conexion] (a\i) -- (b\j);
+        }
+    }
+    \node[neurona,fill=naranja!25,draw=naranja] (salida) at (11.5,0.35) {};
+    \foreach \i in {1,2,3} {\draw[conexion] (b\i) -- (salida);}
+    \node[above=2mm of entrada,text=verde,font=\scriptsize] {entrada $x$};
+    \node[above=2mm of salida,text=naranja,font=\scriptsize] {predicción $\hat y$};
+    \node[proceso,text width=29mm,font=\scriptsize] (optimizar) at (8.15,-1.4)
+        {Entrenamiento\\actualizar parámetros};
+    \node[proceso,draw=naranja,fill=naranja!8,text width=21mm,font=\scriptsize] (perdida) at (11.4,-1.4)
+        {Función de pérdida};
+    \draw[->,conexion] (salida.south) -- (perdida.north);
+    \node[text=verde,font=\scriptsize,align=center] (referencia) at (13.0,-0.65) {referencia\\$y$};
+    \draw[->,verde] (referencia.south) |- (perdida.east);
+    \draw[->,conexion] (perdida.west) -- (optimizar.east);
+    \draw[->,conexion] (optimizar.north) -- (a3.south);
+\end{tikzpicture}

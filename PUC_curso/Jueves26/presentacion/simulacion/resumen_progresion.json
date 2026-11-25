@@ -1,0 +1,41 @@
+[
+  {
+    "salidas": 1,
+    "parametros_entrenables": 2,
+    "epocas": 400,
+    "tasa": 0.05,
+    "mse_inicial": 10.166666666666666,
+    "mse_final": 9.725762797256075e-31,
+    "parametros_finales": [
+      1.9999999999999993,
+      0.9999999999999994
+    ],
+    "entrada_reservada": 1.5,
+    "prediccion_reservada": [
+      3.9999999999999987
+    ],
+    "gradiente_verificado": true
+  },
+  {
+    "entradas": 2,
+    "salidas": 1,
+    "observaciones": 25,
+    "parametros_entrenables": 3,
+    "epocas": 6000,
+    "tasa": 0.02,
+    "mse_inicial": 69725.0,
+    "mse_final": 3.1096254800694545e-18,
+    "parametros_finales": [
+      60.000000001128996,
+      40.00000000082373,
+      49.99999999440867
+    ],
+    "entrada_reservada": [
+      2.5,
+      3.0
+    ],
+    "prediccion_reservada": 319.99999999970237,
+    "gradiente_verificado": true,
+    "datos_sinteticos": true
+  }
+]
