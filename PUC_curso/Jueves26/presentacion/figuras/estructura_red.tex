@@ -40,11 +40,11 @@
     \node[above=2mm of salida,text=naranja,font=\scriptsize] {predicción $\hat y$};
     \node[proceso,text width=29mm,font=\scriptsize] (optimizar) at (8.15,-1.4)
         {Entrenamiento\\actualizar parámetros};
-    \node[proceso,draw=naranja,fill=naranja!8,text width=21mm,font=\scriptsize] (perdida) at (11.4,-1.4)
+    \node[proceso,draw=naranja,fill=naranja!8,text width=21mm,font=\scriptsize] (perdida) at (11.85,-1.4)
         {Función de pérdida};
     \draw[->,conexion] (salida.south) -- (perdida.north);
     \node[text=verde,font=\scriptsize,align=center] (referencia) at (13.0,-0.65) {referencia\\$y$};
-    \draw[->,verde] (referencia.south) |- (perdida.east);
+    \draw[->,verde] (referencia.south) -- ++(0.5,0) |- (perdida.east);
     \draw[->,conexion] (perdida.west) -- (optimizar.east);
     \draw[->,conexion] (optimizar.north) -- (a3.south);
 \end{tikzpicture}

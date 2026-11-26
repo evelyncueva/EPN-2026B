@@ -56,6 +56,17 @@ def guardar(figura, nombre):
     plt.close(figura)
 
 
+def generar_tasas_aprendizaje():
+    x, y = datos()
+    fig, ax = plt.subplots(figsize=(9, 3.5), layout="constrained")
+    for lr, color in [(0.1, VERDE), (0.01, NARANJA), (0.001, GRIS)]:
+        tr = entrenar(x, y, lr=lr, epocas=50)
+        ax.semilogy(np.arange(51), tr[:, 2], lw=2.2, color=color, label=fr"$\eta={lr:g}$")
+    ax.set(xlabel="Época (0 = inicialización)", ylabel="MSE · escala logarítmica")
+    ax.legend(loc="center left", bbox_to_anchor=(1, 0.5))
+    guardar(fig, "tasas_aprendizaje")
+
+
 def main():
     DESTINO.mkdir(parents=True, exist_ok=True)
 
@@ -116,13 +127,7 @@ def main():
     ax_loss.set(xlabel="Peso w", ylabel="MSE", title="Aprender = recorrer la función de pérdida")
     guardar(fig, "ejemplo_1")
 
-    fig, ax = plt.subplots(figsize=(9, 3.5), layout="constrained")
-    for lr, color in [(0.001, GRIS), (0.1, VERDE), (5.0, NARANJA)]:
-        tr = entrenar(x, y, lr=lr, epocas=50)
-        ax.semilogy(np.arange(51), tr[:, 2], lw=2.2, color=color, label=fr"$\eta={lr:g}$")
-    ax.set(xlabel="Época (0 = inicialización)", ylabel="MSE · escala logarítmica")
-    ax.legend(loc="center left", bbox_to_anchor=(1, 0.5))
-    guardar(fig, "tasas_aprendizaje")
+    generar_tasas_aprendizaje()
 
     x2, y2 = datos(pendiente=4, sesgo=3)
     tr2 = entrenar(x2, y2, epocas=100, con_sesgo=True)

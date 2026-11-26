@@ -82,11 +82,9 @@
     \smallskip{\small\insertinstitute\par}
     \vspace{3mm}{\small\insertdate\par}
     \vfill
-    {\scriptsize Basado en la guía de clase, el resumen y el notebook de Andrés Merino.}
-    \note{Propuesta de clase activa. Los tiempos y las respuestas sugeridas están en GUIA_DOCENTE.md. La presentación concentra el trabajo en regresión con activación identidad.}
 \end{frame}
 
-\begin{frame}{¿Qué deberíamos poder hacer al terminar?}
+\begin{frame}{Objetivos de la clase}
     \begin{enumerate}
         \item \tcg{Explicar} la inspiración biológica y los componentes de una neurona artificial.
         \item \tcg{Calcular} una predicción y relacionar combinación, activación y pérdida.
@@ -95,58 +93,50 @@
     \vspace{4mm}
     \begin{caja}[greenbox]
         \textbf{El recorrido de hoy}\par\medskip
-        Lectura previa $\longrightarrow$ modelo $\longrightarrow$ aprendizaje
-        $\longrightarrow$ notebook $\longrightarrow$ conclusiones.
+        Motivación $\longrightarrow$ Modelos simples $\longrightarrow$ Cómo aprende una red
+        $\longrightarrow$ Práctica $\longrightarrow$ Conclusiones.
     \end{caja}
-    \note{Corresponde a los tres resultados de aprendizaje de Clase12.pdf. Solicitar predicciones antes de mostrar las figuras del notebook.}
 \end{frame}
 
-\section{De la lectura previa a una neurona artificial}
+\section{Motivación: de la biología a un modelo artificial}
 
-\begin{frame}{Pongamos a prueba lo que leímos}
-    \actividad{Piensa, conversa y justifica}{
-        Si una neurona biológica responde a estímulos, ¿cómo representamos esa idea con números?}
-    \vspace{3mm}
-    Decide si estas afirmaciones son verdaderas y explica por qué:
-    \begin{enumerate}
-        \item Una neurona artificial reproduce el funcionamiento completo de una neurona biológica.
-        \item Toda función de activación devuelve únicamente cero o uno.
-        \item Entrenar una red consiste en ajustar sus parámetros usando datos.
-    \end{enumerate}
-    \vspace{3mm}
-    \tcg{Trae a la discusión una duda de los videos, la lectura o tu conversación con ChatGPT.}
-    \note{Respuestas: falso, falso, verdadero. Recoger dos dudas del aula invertida 03Est-RedesNeuronales.pdf. Aclarar que el escalón es solo una opción de activación.}
-\end{frame}
-
-\begin{frame}{De la neurona biológica a la neurona artificial}
+\begin{frame}{¿Cómo se comporta una neurona biológica?}
     \begin{columns}[c]
-        \begin{column}{0.57\textwidth}
+        \begin{column}{0.49\textwidth}
             \centering
             \resizebox{\linewidth}{!}{\input{figuras/neurona_biologica.tex}}
             \par\smallskip
             {\scriptsize Esquema simplificado de una neurona biológica.}
         \end{column}
-        \begin{column}{0.40\textwidth}
-            \begin{caja}[greenbox]
-                \textbf{La asociación que usaremos}\par\medskip
-                \small
-                Recepción de señales\par
-                $\longrightarrow$ \tcg{entradas}\par\medskip
-                Influencia de las conexiones\par
-                $\longrightarrow$ \tcg{pesos}\par\medskip
-                Integración de señales\par
-                $\longrightarrow$ \tcg{combinación}\par\medskip
-                Respuesta transmitida\par
-                $\longrightarrow$ \tcg{salida}
-            \end{caja}
+        \begin{column}{0.48\textwidth}
+            \small
+            \begin{enumerate}
+                \setlength{\itemsep}{2pt}
+                \item \textbf{Recibe señales} mediante sinapsis, frecuentemente en las dendritas. Sus efectos pueden ser excitadores o inhibidores.
+                \item \textbf{Integra las señales} en el espacio y en el tiempo, a lo largo de las dendritas y el cuerpo celular.
+                \item \textbf{Genera un impulso} si se alcanza el umbral en la región inicial del axón: un potencial de acción.
+                \item \textbf{Transmite la información} por el axón; en sus terminales puede liberar neurotransmisores.
+                \item \textbf{Modifica sus conexiones}: la eficacia de algunas sinapsis cambia con la actividad y la experiencia.
+            \end{enumerate}
         \end{column}
     \end{columns}
-    \vspace{4mm}
+    \vspace{2mm}
     \begin{caja}[yellowbox]
-        \textbf{Primero, la idea:} recibir señales, combinarlas y producir una respuesta.\par\smallskip
-        La neurona artificial toma esta inspiración y la convierte en un modelo simplificado.
+        \small \textbf{Idea central:} recibir, integrar y transmitir señales; la influencia de las conexiones puede cambiar.
     \end{caja}
-    \note{No introducir todavía fórmulas ni notación de parámetros. Recorrer dendritas, cuerpo celular, axón y terminales; pedir que identifiquen dónde se reciben y se transmiten señales. Las conexiones sinápticas pueden ejercer distinta influencia: esa idea motiva los pesos. La integración biológica está distribuida y la analogía no reproduce su complejidad; no equiparar literalmente cada operación artificial con una estructura anatómica. El sesgo y la activación se definirán al construir el modelo.}
+    \note{Explicar primero el comportamiento biológico sin fórmulas artificiales. Identificar cada estructura en la ilustración. Excitación e inhibición modifican la probabilidad de generar un impulso; no equivalen directamente a una etiqueta positiva o negativa del neurotransmisor. La integración está distribuida en dendritas y soma. El potencial de acción es aproximadamente todo o nada: la frecuencia y los tiempos de los impulsos también transportan información. La plasticidad sináptica participa en el aprendizaje. Se presenta el caso habitual de sinapsis químicas; también existen sinapsis eléctricas.}
+\end{frame}
+
+
+\begin{frame}{¿Cómo se organiza una red neuronal?}
+    Una \textbf{capa} agrupa las unidades de un mismo nivel de la red.
+    \par\smallskip
+    \centering
+    \includegraphics[width=\textwidth,height=4.4cm,keepaspectratio]{red_general.pdf}
+    \par\smallskip
+    \smallskip
+    \href{run:simulacion/propagacion_red.gif}{\small\textbf{Ver el recorrido de las señales en la red}}
+    \note{Mostrar primero la forma general de una red, con un ejemplo numérico, antes de la fórmula general y de la analogía con una función matemática: esa formalización viene después. Recorrer las flechas de las etiquetas: entradas, una neurona, conexiones, activación y salida. La activación es la respuesta numérica que una neurona entrega a las siguientes; su color indica intensidad. En el ejemplo hay respuestas cero y respuestas positivas de distintos tamaños, no solo encendido o apagado. Abrir simulacion/propagacion_red.gif: representa tres entradas distintas con parámetros fijos, sin entrenamiento. El blanco con puntos suspensivos significa por calcular; gris con cero es una respuesta calculada y nula. El GIF ordena el cálculo por grupos para explicarlo y no representa el tiempo físico de un cerebro. Retomar la analogía biológica de recibir, integrar y transmitir señales. Los pesos motivan la distinta influencia de las conexiones; aprender implicará ajustarlos más adelante. El sesgo no es una estructura anatómica.}
 \end{frame}
 
 \begin{frame}{Historia de las redes neuronales: 1943--1986}
@@ -169,11 +159,7 @@
                 Difunden el uso de la retropropagación para entrenar redes neuronales.};
         \end{tikzpicture}
     \end{center}
-    \begin{caja}[yellowbox]
-        \small Modelo de neurona $\longrightarrow$ aprendizaje $\longrightarrow$ limitaciones $\longrightarrow$ entrenamiento multicapa.
-    \end{caja}
-    \smallskip{\scriptsize Fuente: \textit{Resumen12.pdf}, sección Historia, p. 1.}
-    \note{Primera mitad de los ocho hitos de Resumen12.pdf: conservar fechas, protagonistas y temas. Comentar que el modelo matemático permite representar una neurona, el perceptrón incorpora aprendizaje y sus limitaciones motivan modelos más expresivos. En 1969 se destacan limitaciones del perceptrón, no de todas las redes neuronales. El resumen dice que en 1986 se introduce la retropropagación; se usa difusión para evitar atribuir a esa fecha la invención del método. La línea de tiempo ordena eventos sin escala temporal proporcional.}
+
 \end{frame}
 
 \begin{frame}{Historia de las redes neuronales: 1989--2017}
@@ -199,13 +185,61 @@
     \begin{caja}[yellowbox]
         \small Los avances combinan modelos, algoritmos, datos y capacidad de cómputo.
     \end{caja}
-    \smallskip{\scriptsize Fuente: \textit{Resumen12.pdf}, sección Historia, p. 1.}
-    \note{Segunda mitad de los hitos de Resumen12.pdf. Comentar brevemente la transición a aplicaciones de reconocimiento, la capacidad de cómputo para entrenar y la aparición de nuevas arquitecturas. Mantener las fechas de la cronología del resumen: 1989, 2010, 2012 y 2017. No desarrollar LeNet ni Transformers en esta clase. Cerrar preguntando: qué comparten estos modelos, y conectar con aprender una relación entre entradas y salidas ajustando parámetros. La línea de tiempo no tiene escala temporal proporcional.}
+\end{frame}
+
+\begin{frame}{Una función matemática: de la entrada a la salida}
+    \begin{columns}[c]
+        \begin{column}{0.45\textwidth}
+            Una función asigna a cada entrada una única salida.
+            \begin{caja}[greenbox]
+                \centering
+                \textbf{Ejemplo: una regla conocida}
+                \[f(x)=2x+1,\qquad y=f(x).\]
+                Entrada $1\ \longrightarrow\ f\ \longrightarrow\ $ salida $3$.
+            \end{caja}
+            \medskip
+            \centering
+            \begin{tabular}{cc}
+                \toprule
+                Entrada $x$ & Salida $f(x)$\\
+                \midrule
+                $-1$ & $-1$\\
+                $0$ & $1$\\
+                $1$ & $3$\\
+                $2$ & $5$\\
+                \bottomrule
+            \end{tabular}
+        \end{column}
+        \begin{column}{0.50\textwidth}
+            \centering
+            \begin{tikzpicture}[x=1.05cm,y=0.48cm,>=Latex,every node/.style={font=\small}]
+                \draw[gray!18,step=1] (-2,-3) grid (2,5);
+                \draw[->,fondo!70] (-2.4,0)--(2.6,0) node[right] {$x$};
+                \draw[->,fondo!70] (0,-3.6)--(0,5.9) node[above] {$y$};
+                \foreach \x in {-2,-1,1,2} {
+                    \draw (\x,0.09)--(\x,-0.09) node[below] {$\x$};
+                }
+                \foreach \y in {-3,-1,1,3,5} {
+                    \draw (0.05,\y)--(-0.05,\y) node[left] {$\y$};
+                }
+                \draw[verde,line width=1.3pt] (-2,-3)--(2,5);
+                \node[text=verde,anchor=west] at (0.75,5.6) {$y=2x+1$};
+                \draw[naranja,dashed] (1,0)--(1,3)--(0,3);
+                \fill[naranja] (1,3) circle (2pt);
+                \node[anchor=west,text=naranja] at (1.08,3) {$(1,3)$};
+            \end{tikzpicture}
+        \end{column}
+    \end{columns}
+    \medskip
+    \begin{caja}[yellowbox]
+        El gráfico representa los pares \textbf{entrada--salida} que cumplen la regla de la función.
+    \end{caja}
+    \note{Primero explicar la función matemática, sin hablar todavía de pesos, entrenamiento ni redes. Calcular dos filas de la tabla y ubicarlas en la recta. Una función asigna una única salida a cada entrada, aunque distintas entradas pueden compartir una salida en otras funciones. Aquí la regla se conoce de antemano. En la siguiente diapositiva se introducirá una familia de funciones ajustables que puede aprender a aproximar una relación a partir de ejemplos.}
 \end{frame}
 
 % Recrea en TikZ el esquema de la página 10/51 de la presentación de MRI.
 % La función se presenta primero a la izquierda; la red aparece a la derecha.
-\begin{frame}{Estructura general de una red neuronal}
+\begin{frame}{Una red neuronal como función ajustable}
     \begin{center}
         \resizebox{0.95\linewidth}{!}{\input{figuras/estructura_red.tex}}
     \end{center}
@@ -219,9 +253,31 @@
     \note{Esquema recreado en TikZ a partir de DL_MRI_presentation.pdf, página 10/51, con la función a la izquierda. Empezar por entrada, función ajustable y salida; pasar a la red que implementa la función. La predicción se compara con una referencia y la pérdida guía el ajuste. Theta agrupa los parámetros; para la neurona lineal serán pesos y sesgo. La referencia se utiliza para entrenar o evaluar, no se necesita para producir una predicción después del entrenamiento.}
 \end{frame}
 
+\section{Modelos con una neurona o más neuronas}
+
 \begin{frame}{1. Una relación lineal: una neurona}
-    \centering
-    \includegraphics[width=0.83\textwidth,height=3.1cm,keepaspectratio]{simulacion_lineal.pdf}
+    \begin{columns}[c]
+        \begin{column}{0.25\textwidth}
+            \centering\small
+            \textbf{Datos de entrenamiento}\par\smallskip
+            \begin{tabular}{rr}
+                \toprule
+                Entrada $x$ & Salida $y$\\
+                \midrule
+                $-2$ & $-3$\\
+                $-1$ & $-1$\\
+                $0$ & $1$\\
+                $1$ & $3$\\
+                $2$ & $5$\\
+                \bottomrule
+            \end{tabular}
+            \par\smallskip{\scriptsize Muestra: 5 de los 21 pares.}
+        \end{column}
+        \begin{column}{0.72\textwidth}
+            \centering
+            \includegraphics[width=\linewidth,height=2.8cm,keepaspectratio]{simulacion_lineal.pdf}
+        \end{column}
+    \end{columns}
     \par\medskip
     \begin{columns}[c]
         \begin{column}{0.55\textwidth}
@@ -233,15 +289,25 @@
             \end{caja}
         \end{column}
         \begin{column}{0.40\textwidth}
-            \raggedright
-            Datos de referencia: $y=2x+1$.\par\medskip
-            Después de entrenar: $w\approx2$, $b\approx1$.\par\medskip
+            \centering
+            \begin{tikzpicture}[>=Latex,every node/.style={font=\small},
+                neurona/.style={draw=fondo,circle,fill=verde!10,minimum size=8mm}]
+                \node (x) at (0,0) {$x$};
+                \node[neurona] (suma) at (1.7,0) {$\Sigma$};
+                \node (y) at (3.5,0) {$\hat y$};
+                \node (b) at (1.7,-0.9) {$b$};
+                \draw[->] (x)--node[above] {$w$} (suma);
+                \draw[->] (b)--(suma); \draw[->] (suma)--(y);
+            \end{tikzpicture}
+            \par\smallskip\raggedright\small
+            Datos de referencia: $y=2x+1$.\par\smallskip
+            Después de entrenar: $w\approx2$, $b\approx1$.\par\smallskip
             Nueva entrada: $1.5\mapsto\hat y\approx4$.
         \end{column}
     \end{columns}
     \medskip
     \href{run:simulacion/simulacion_progresiva.html}{\textbf{Abrir la simulación progresiva}}
-    \note{Primera etapa de simulacion/simulacion_progresiva.html. Preguntar qué cambia al modificar pendiente y desplazamiento. Reproducir la trayectoria de una neurona de activación identidad: 21 datos, tasa 0.05 y 400 épocas. La entrada 1.5 no aparece en los datos de entrenamiento. El modelo aprende aproximadamente 2 y 1 como peso y sesgo. En terminología estricta, al incluir el sesgo la función es afín; se mantiene lineal por su uso habitual en regresión.}
+    \note{Primera etapa de simulacion/simulacion_progresiva.html. La tabla presenta cinco pares reales del conjunto sintético de 21 observaciones: x se distribuye uniformemente entre -2 y 2 e y=2x+1. Son referencias conocidas que se proporcionan durante el entrenamiento, no predicciones del modelo. Localizar las filas en los puntos del gráfico. Preguntar qué cambia al modificar pendiente y desplazamiento. Reproducir la trayectoria de una neurona de activación identidad: tasa 0.05 y 400 épocas. La entrada 1.5 no aparece en los datos de entrenamiento y se consulta después. El modelo aprende aproximadamente 2 y 1 como peso y sesgo. En terminología estricta, al incluir el sesgo la función es afín; se mantiene lineal por su uso habitual en regresión.}
 \end{frame}
 
 \begin{frame}{2. Dos variables explican una salida}
@@ -284,11 +350,11 @@
             \par\smallskip
             \begin{caja}[greenbox]
                 \centering
-                \textbf{Una neurona, tres parámetros:}
-                \[\hat y=w_1x_1+w_2x_2+b.\]
+                \textbf{Una neurona, tres parámetros:}\par\smallskip
+                {\large $\hat y=w_1x_1+w_2x_2+b.$}\par\smallskip
                 \small Estimamos $w_1$, $w_2$ y $b$ con los datos.
             \end{caja}
-            \par\medskip\small
+            \par\smallskip\small
             Después de entrenar:\par\smallskip
             $w_1\approx60,\quad w_2\approx40,\quad b\approx50$.
         \end{column}
@@ -301,88 +367,39 @@
     \note{Segunda etapa de simulacion/simulacion_progresiva.html, también disponible en simulacion/simulacion_multivariable.html. Es regresión lineal múltiple: una variable respuesta depende de dos variables explicativas. Se estiman los parámetros; se predice el gasto. Hay una sola neurona con dos pesos y un sesgo. Los 25 hogares son datos sintéticos sin ruido, generados con y=60x1+40x2+50. Los identificadores de la tabla corresponden a las filas del CSV completo. El ingreso se expresa en miles: 2500 u.m. se introduce como 2.5; el gasto conserva unidades monetarias. El hogar (2.5,3) no se usa para entrenar. Comparar hogares con el mismo ingreso y distinto número de integrantes para motivar w2; mantener integrantes y variar ingreso para motivar w1. Las asociaciones del ejemplo no demuestran causalidad ni describen una economía real.}
 \end{frame}
 
-\begin{frame}{¿Combinar más neuronas lineales produce una curva?}
-    \begin{caja}
-        \textbf{Dos neuronas con activación identidad reciben el mismo número:}
-        \[h_1=w_1x+b_1,\qquad h_2=w_2x+b_2.\]
-    \end{caja}
-    \vspace{3mm}
-    Una tercera neurona combina sus salidas:
+\begin{frame}{Entre capas: composición de funciones}
+    \centering
+    \begin{tikzpicture}[>=Latex,every node/.style={font=\small},
+        capa/.style={draw=fondo,rounded corners,fill=verde!10,minimum width=23mm,minimum height=10mm}]
+        \node (x) at (0,0) {$x$};
+        \node[capa] (f1) at (2,0) {$f_1$};
+        \node (h) at (4,0) {$h=f_1(x)$};
+        \node[capa] (f2) at (6.2,0) {$f_2$};
+        \node (y) at (8.6,0) {$\hat y=f_2(h)$};
+        \draw[->] (x)--(f1); \draw[->] (f1)--(h);
+        \draw[->] (h)--(f2); \draw[->] (f2)--(y);
+    \end{tikzpicture}
+    \par\medskip
+    {\small Con activación identidad:
+    $f_1(x)=w_1x+b_1$ y $f_2(h)=w_2h+b_2$.}\par
     \begin{align*}
-        \hat y &= v_1h_1+v_2h_2+c\\
-               &=\underbrace{(v_1w_1+v_2w_2)}_{A}\,x+
-                 \underbrace{(v_1b_1+v_2b_2+c)}_{B}.
+        \hat y &=(f_2\circ f_1)(x)=f_2(f_1(x))\\
+               &=w_2(w_1x+b_1)+b_2\\
+               &=\underbrace{(w_2w_1)}_{A}\,x+
+                 \underbrace{(w_2b_1+b_2)}_{B}.
     \end{align*}
     \begin{caja}[orangebox]
-        \textbf{El resultado sigue siendo una recta:} $\hat y=Ax+B$.
+        \textbf{Componer funciones afines sigue dando una función afín:} $\hat y=Ax+B$.
     \end{caja}
-    \vspace{3mm}
+    \smallskip
     \begin{caja}[yellowbox]
-        Para ampliar el modelo a relaciones curvas, introduciremos \textbf{activaciones no lineales}.
+        \small Para representar relaciones curvas, introduciremos \textbf{activaciones no lineales}.
     \end{caja}
-    \note{Puente entre modelos afines y una relación curva. Volver a una sola entrada x para analizar qué ocurriría al añadir neuronas. El cálculo corresponde a dos neuronas intermedias y una de salida, todas con identidad. Sustituir h1 y h2 muestra que aumentar ancho o profundidad de una red afín no amplía su familia a funciones no lineales. Esta afirmación usa x como entrada sin añadir características no lineales. No afirmar que toda función más compleja exige necesariamente una red más grande: depende de la representación de entrada, la arquitectura y el error requerido.}
+    \smallskip\scriptsize Dentro de una neurona se suman entradas ponderadas; entre capas se componen funciones.
+    \note{Distinguir explícitamente dos niveles: cada neurona combina sus entradas mediante una suma ponderada y un sesgo; la salida de una capa alimenta a la siguiente y eso es composición. El ejemplo escalar usa una neurona por capa para mostrar la composición sin notación matricial. El argumento también vale para capas de varias neuronas: F2(F1(x))=A2(A1x+b1)+b2 sigue siendo afín si todas las activaciones son identidad. La expresión anterior con v1h1+v2h2+c era la combinación dentro de la neurona de salida, pero no explicitaba suficientemente la composición de capas. Se asume que no se añaden características no lineales a la entrada.}
 \end{frame}
 
-\begin{frame}{3. Aprender una relación cuadrática}
-    \begin{columns}[T]
-        \begin{column}{0.25\textwidth}
-            \textbf{1. Dar ejemplos}\par\medskip
-            \centering
-            \begin{tabular}{cc}
-                \toprule
-                Entrada & Salida\\
-                $x$ & $y$\\
-                \midrule
-                $-2$ & $4$\\
-                $-1$ & $1$\\
-                $0$ & $0$\\
-                $1$ & $1$\\
-                $2$ & $4$\\
-                \bottomrule
-            \end{tabular}
-            \par\medskip
-            \raggedright\small Relación de referencia: $y=x^2$.
-        \end{column}
-        \begin{column}{0.35\textwidth}
-            \textbf{2. Ajustar la red}\par\medskip
-            \centering
-            \begin{tikzpicture}[>=Latex,every node/.style={font=\small},
-                paso/.style={draw=fondo,rounded corners=2pt,align=center,inner sep=2mm}]
-                \node[paso,fill=fondo!7,minimum width=30mm] (red) at (0,0) {Red\\con parámetros};
-                \node[left=5mm of red,text=verde] (x) {$x$};
-                \node[right=5mm of red,text=naranja] (pred) {$\hat y$};
-                \draw[->] (x) -- (red);
-                \draw[->] (red) -- (pred);
-                \node[paso,fill=naranja!8,text width=34mm] (error) at (0,-1.5)
-                    {Comparar con la salida $y$};
-                \draw[->] (pred.south) |- (error.east);
-                \draw[->,verde] (error.west) -- ++(-0.4,0) |- (red.south west);
-            \end{tikzpicture}
-            \par\medskip
-            \raggedright\small Repetimos: predecir, comparar y actualizar los parámetros.
-        \end{column}
-        \begin{column}{0.32\textwidth}
-            \textbf{3. Predecir un dato nuevo}\par\medskip
-            \begin{caja}[greenbox]
-                \centering
-                Entrada no usada al entrenar:\smallskip
-                \par\smallskip{\large $x_{\mathrm{nuevo}}=1.5$}\par\smallskip
-                $\downarrow$\par\smallskip
-                \textbf{Red entrenada}\par\smallskip
-                $\downarrow$\par\smallskip
-                \textbf{¿Qué salida predice?}
-            \end{caja}
-            \medskip\small Queremos que aproxime el valor de referencia: $1.5^2=2.25$.
-        \end{column}
-    \end{columns}
-    \vspace{3mm}
-    \begin{caja}[yellowbox]
-        \textbf{El objetivo es predecir también para entradas nuevas.}\par\smallskip
-        Comprobamos la precisión con datos que no usamos para ajustar la red.
-    \end{caja}
-    \smallskip\scriptsize Este ejemplo anticipa una red no lineal. Hoy empezaremos por una relación lineal, como $y=2x$.
-    \note{Tercera etapa, después de una relación lineal, varias salidas lineales y el límite de combinar neuronas afines. Preguntar la salida esperada para 1.5 antes de comentar 2.25. Generamos etiquetas con la regla x al cuadrado, pero entrenamos proporcionando pares de datos, sin programar esa regla como función del modelo. La tabla ilustra cinco de los 21 pares de la simulación, sin incluir 1.5. La predicción se consulta con parámetros fijos. La entrada está dentro del intervalo de entrenamiento, de modo que no demuestra extrapolación. Volver al notebook del perceptrón lineal para estudiar en detalle pesos, sesgos y entrenamiento.}
-\end{frame}
+\input{figuras/motivacion_cuadratica.tex}
 
 \begin{frame}{Simulación: ¿qué cambia cuando la red aprende?}
     \input{figuras/simulacion_resultados.tex}
@@ -415,7 +432,7 @@
 
 \begin{frame}{Una neurona: entradas, pesos, sesgo y salida}
     \centering
-    \begin{tikzpicture}[>=Latex, every node/.style={font=\small},
+    \begin{tikzpicture}[scale=0.82,transform shape,>=Latex, every node/.style={font=\small},
         entrada/.style={circle,draw=fondo,minimum size=8mm},
         operacion/.style={draw=fondo,rounded corners,fill=fondo!5,minimum height=12mm}]
         \node[entrada] (x1) at (0,1.1) {$x_1$};
@@ -433,41 +450,53 @@
         \draw[->] (sum) -- (act);
         \draw[->] (act) -- node[above] {salida} (out);
     \end{tikzpicture}
-    \vspace{3mm}
-    \begin{caja}
-        \raggedright
-        $\bm x\in\R^d$: características de una observación.\quad
-        $\bm w\in\R^d$, $b\in\R$: parámetros.\par\medskip
-        Con $d$ entradas y una salida hay \tcg{$d+1$ parámetros entrenables}, si incluimos el sesgo.
+    \par\smallskip
+    \begin{columns}[c]
+        \begin{column}{0.33\textwidth}
+            \centering\small
+            \textbf{Vectores columna}
+            \[\bm x=\begin{pmatrix}x_1\\\vdots\\x_d\end{pmatrix},\qquad
+              \bm w=\begin{pmatrix}w_1\\\vdots\\w_d\end{pmatrix}.\]
+        \end{column}
+        \begin{column}{0.63\textwidth}
+            \centering\small
+            \textbf{La suma ponderada es un producto interno}
+            \[\bm w^{\top}\bm x=
+              \begin{pmatrix}w_1&\cdots&w_d\end{pmatrix}
+              \begin{pmatrix}x_1\\\vdots\\x_d\end{pmatrix}
+              =\sum_{j=1}^d w_jx_j.\]
+            $z=\bm w^{\top}\bm x+b,\qquad\hat y=\sigma(\bm w^{\top}\bm x+b).$
+        \end{column}
+    \end{columns}
+    \smallskip
+    \begin{caja}[greenbox]
+        \small $\bm x,\bm w\in\R^d$, $b\in\R$; $\bm w^{\top}\bm x$ es un escalar.\quad
+        \textbf{Parámetros entrenables:} $d$ pesos y un sesgo, es decir, $d+1$.
     \end{caja}
-    \note{Dibujar una neurona evita que se confunda la complejidad del esquema con el número de parámetros. Con una entrada hay dos parámetros si el sesgo se entrena.}
+    \note{Presentar x y w como vectores columna de tamaño d por 1. La transposición convierte w en una fila de tamaño 1 por d; al multiplicarla por x se obtiene un escalar, equivalente a la suma ponderada del esquema. El sesgo se añade después del producto interno. No confundir el producto interno con el producto elemento a elemento. Los componentes de x son características de una observación; los pesos y el sesgo son parámetros entrenables.}
 \end{frame}
 
-\begin{frame}{Hagamos una predicción a mano}
-    \begin{caja}[greenbox]
-        \centering
-        $\bm x=(2,1)^\top,\qquad \bm w=(0.5,-1)^\top,\qquad b=0.2$
-    \end{caja}
-    \vspace{3mm}
-    \begin{align*}
-        z &= w_1x_1+w_2x_2+b\\
-          &=0.5(2)-1(1)+0.2=0.2,\\[2mm]
-        \hat y&=\sigma(z)=z=0.2\qquad\text{si la activación es identidad.}
-    \end{align*}
-    \actividad{Discute con tu compañero}{¿Qué cambia si quitamos el sesgo? ¿Cuántos parámetros estamos usando?}
-    \note{Dar 60 segundos antes de recorrer el cálculo. Sin sesgo z=0; se usan dos pesos y un sesgo. Distinguir entradas conocidas de parámetros por aprender.}
-\end{frame}
 
 \begin{frame}{La activación transforma la combinación}
     \centering
-    \includegraphics[width=\textwidth]{activaciones.pdf}
-    \vspace{3mm}
-    \begin{caja}[yellowbox]
-        \raggedright
-        \textbf{Hoy: identidad para una salida numérica continua.}\par\smallskip
-        El escalón produce una decisión binaria. Sigmoide, tanh y ReLU introducen no linealidad.
-    \end{caja}
-    \note{Panorama breve de las cuatro activaciones solicitadas por la guía y de la identidad que usa el notebook. La sigmoide toma valores en (0,1), tanh en (-1,1), ReLU en [0,infinito). No atribuir interpretación probabilística a cualquier uso de sigmoide.}
+    \includegraphics[width=\textwidth,height=2.3cm,keepaspectratio]{activaciones.pdf}
+    \par\smallskip
+    {\small
+    \renewcommand{\arraystretch}{1.15}
+    \begin{tabular}{@{}p{0.13\textwidth}p{0.43\textwidth}p{0.37\textwidth}@{}}
+        \toprule
+        \textbf{Activación} & \textbf{¿Dónde y para qué?} & \textbf{Ejemplo de tarea} \\
+        \midrule
+        Identidad & Salida continua en regresión. & Predecir un precio o consumo. \\
+        Escalón & Salida binaria del perceptrón clásico. & Separar dos clases con un umbral. \\
+        Sigmoide & Salida entre 0 y 1 en clasificación binaria. & Estimar si un correo es spam. \\
+        $\tanh$ & Capas ocultas: representar relaciones no lineales. & Aproximar $x^2$, como en la simulación. \\
+        ReLU & Capas ocultas de redes profundas. & Aprender patrones para clasificar imágenes. \\
+        \bottomrule
+    \end{tabular}
+    }
+    \par\smallskip
+    \note{Son usos habituales, no una correspondencia exclusiva entre activación y tarea. Hoy usamos identidad para regresión. El escalón da una decisión dura y no se usa con el descenso de gradiente habitual. La sigmoide puede interpretarse como probabilidad de una clase cuando el modelo se entrena para clasificación binaria con una pérdida adecuada, como entropía cruzada binaria; su rango por sí solo no garantiza esa interpretación. Tanh también se usa en estados de redes recurrentes. ReLU es habitual en capas ocultas de redes densas y convolucionales; la activación final depende de la tarea.}
 \end{frame}
 
 \begin{frame}{¿Qué significa ``perceptrón lineal'' en esta clase?}
@@ -490,8 +519,6 @@
         \end{column}
     \end{columns}
     \vspace{5mm}
-    \textbf{Con identidad y pérdida cuadrática recuperamos la regresión lineal.}\par\medskip
-    \small Con sesgo, la expresión es una función afín de las entradas.
     \note{La distinción evita mezclar la regla clásica del perceptrón con descenso de gradiente de MSE. Para esta clase todos los gradientes y las aplicaciones corresponden a la columna derecha.}
 \end{frame}
 
@@ -543,6 +570,29 @@
     \note{Preguntar por qué no basta con promediar residuos con signo. La figura usa los datos del Ejemplo 1 y una recta ilustrativa de pendiente 1.2.}
 \end{frame}
 
+\begin{frame}{Recordatorio: el gradiente señala la mayor subida}
+    {\small Ejemplo con dos parámetros:
+    $\mathcal L(w,b)=2(w-2)^2+(b+1)^2$, con mínimo en $(w,b)=(2,-1)$.}
+    \par\smallskip
+    \centering
+    \includegraphics[width=\textwidth,height=3.65cm,keepaspectratio]{gradiente_paraboloide.pdf}
+    \par
+    {\small
+    $\displaystyle\nabla\mathcal L=
+    \begin{pmatrix}\partial_w\mathcal L\\\partial_b\mathcal L\end{pmatrix}
+    =\begin{pmatrix}4(w-2)\\2(b+1)\end{pmatrix}.$
+    \quad En $(0,1)$: $\nabla\mathcal L=(-8,4)^\top$.}
+    \par\smallskip
+    \begin{caja}[greenbox]
+        \small\raggedright
+        $+\nabla\mathcal L$: mayor crecimiento local.
+        $-\nabla\mathcal L$: mayor descenso local.\par\smallskip
+        Con $\eta=0.2$: $(0,1)-0.2(-8,4)=(1.6,0.2)$;
+        la pérdida baja de $12$ a $1.76$. Repetimos para acercarnos al mínimo.
+    \end{caja}
+    \note{Cada punto del plano representa una elección de peso y sesgo, no una observación de los datos. La altura representa la pérdida. Las curvas unen parámetros con igual pérdida; el gradiente es perpendicular a ellas y apunta hacia valores mayores. Las flechas se escalan para facilitar la lectura; los puntos verdes usan pasos reales con eta=0.2. Esta pérdida es exactamente el MSE de dos datos sintéticos: x=+-sqrt(2), y=2x-1. El gradiente indica el mayor crecimiento local por unidad de distancia en la norma euclídea; su opuesto es una dirección de descenso si el gradiente no es cero y el paso es suficientemente pequeño. No apunta necesariamente en línea recta al mínimo. En este paraboloide convexo, con la tasa elegida, los pasos convergen al mínimo global; en una red no lineal no hay esa garantía general.}
+\end{frame}
+
 \begin{frame}{¿Cómo sabemos hacia dónde cambiar el modelo?}
     Para una entrada, $\hat y^{(i)}=wx^{(i)}+b$ y $\sigma'(z)=1$:
     \begin{align*}
@@ -586,16 +636,17 @@
     \begin{caja}[yellowbox]
         \raggedright
         \textbf{Mismos datos, misma inicialización, distinta $\eta$.}\par\smallskip
-        Una tasa pequeña puede avanzar lentamente; una demasiado grande puede hacer crecer la pérdida.
+        Comparamos $\eta=0.1$, $0.01$ y $0.001$: con las mismas 50 épocas, una tasa menor avanza más lentamente en este ejemplo.
     \end{caja}
     \note{Curvas del Ejemplo 1, b=0, 50 épocas; MSE calculado después de cada actualización. Preguntar qué curva elegirían y qué observarían para decidir. Las tasas no son universales: dependen de la escala de los datos y del objetivo.}
 \end{frame}
 
 \begin{frame}{Época, lote y actualización: tres ideas distintas}
     \begin{caja}
-        \textbf{Época:} un recorrido completo de los datos de entrenamiento.\par\medskip
-        \textbf{Lote:} subconjunto usado para calcular un gradiente.\par\medskip
-        \textbf{Actualización:} un cambio de parámetros con ese gradiente.
+        \textbf{Época (\textit{epoch}):} un recorrido completo de los datos de entrenamiento.\par\medskip
+        \textbf{Lote (\textit{batch}):} subconjunto de observaciones usado para calcular un gradiente.
+        Su tamaño, $B$, se llama \textbf{\textit{batch size}}.\par\medskip
+        \textbf{Actualización (\textit{update} o \textit{training step}):} un paso que modifica los pesos y el sesgo entrenables usando el gradiente de un lote y la tasa de aprendizaje.
     \end{caja}
     \vspace{3mm}
     \centering
@@ -604,7 +655,7 @@
 
     \begin{tabular}{lcc}
         \toprule
-        Modalidad & Tamaño del lote & Actualizaciones por época\\
+        Modalidad & Tamaño del lote ($B$) & Actualizaciones por época\\
         \midrule
         Lote completo & 30 & 1\\
         Minilotes & 10 & 3\\
@@ -715,50 +766,34 @@ for lote in [30, 10, 1]:
     \note{Extensión opcional si falta tiempo. Ejecutar primero la celda completa que redefine datos y funciones en Entrenamiento por bloques (celda 36). El orden de las muestras es fijo. No afirmar que lote 1 siempre es mejor basándose en esta comparación.}
 \end{frame}
 
-\section{Cerrar: qué aprendimos y qué falta}
 
-\begin{frame}{¿Qué puede representar una sola neurona lineal?}
-    \begin{caja}[greenbox]
-        Con una entrada: $\hat y=wx+b$ representa una recta.\par\medskip
-        Con varias entradas: $\hat y=\bm w^\top\bm x+b$ representa una relación afín.
-    \end{caja}
-    \vspace{4mm}
-    \actividad{Pregunta para discutir}{Si los datos siguen una curva como $y=x^2$, ¿basta con entrenar esta misma neurona durante más épocas?}
-    \vspace{4mm}
-    \textbf{Más entrenamiento no cambia la familia de funciones del modelo.}\par\medskip
-    Podemos construir nuevas características o combinar capas con activaciones no lineales.
-    \note{Respuesta: no se puede representar exactamente x^2 en un intervalo usando solo wx+b. Usar x^2 como característica cambia el problema; eso no contradice la limitación. Componer capas afines sin no linealidades sigue dando una función afín. No afirmar que cualquier red aproxima cualquier función sin condiciones.}
-\end{frame}
 
-\begin{frame}{Verificación de salida}
-    Responde brevemente y usa un ejemplo de lo que ejecutaste:
-    \begin{enumerate}
-        \item ¿Cuáles son los componentes de una neurona y qué parámetros aprende?
-        \item ¿Cómo reconoces una tasa demasiado pequeña o demasiado grande?
-        \item ¿Por qué cambia el ajuste al incorporar un sesgo?
-    \end{enumerate}
-    \vspace{4mm}
-    \begin{caja}[yellowbox]
-        \textbf{Para el lunes 30:} revisar los videos sobre funciones de activación indicados en el aula virtual.\par\medskip
-        Pasaremos de una salida continua a clasificación con sigmoide y softmax.
-    \end{caja}
-    \medskip\small No se añade tarea evaluada, de acuerdo con la guía de esta clase.
-    \note{Recoger una respuesta por estudiante en papel o aula virtual. La guía solicita Funciones de activación a detalle y Funciones de Activación de Redes Neuronales. No inventar enlaces: remitir a los publicados por el curso.}
-\end{frame}
-
-\begin{frame}{Materiales de esta sesión}
-    \begin{itemize}
-        \item Andrés Merino, \textbf{Clase12.pdf}: resultados de aprendizaje y secuencia de actividades.
-        \item Andrés Merino, \textbf{03Est-RedesNeuronales.pdf}: preparación del aula invertida.
-        \item Andrés Merino, \textbf{Resumen12.pdf}: notación, modelo y entrenamiento.
-        \item Andrés Merino, \textbf{12-Perceptron-Lineal.ipynb}: ejemplos y experimentos en Python.
-        \item Evelyn Cueva, \textbf{DL\_MRI\_class}: referencia para el diseño de la presentación.
-    \end{itemize}
-    \vspace{3mm}
-    \begin{caja}
-        \small Esquema general de la red: recreado en TikZ a partir de la página 10/51 de la presentación de MRI. Otros diagramas: TikZ. Gráficas: NumPy y Matplotlib, con las semillas y los datos del notebook.
-    \end{caja}
-    \note{Material adaptado para la sesión del jueves 26. Se conservan los documentos y el notebook originales. Las aclaraciones matemáticas están documentadas en GUIA_DOCENTE.md.}
+\begin{frame}{Resumen: de una neurona a las próximas clases}
+    \begin{columns}[T]
+        \begin{column}{0.48\textwidth}
+            \begin{caja}[greenbox]
+                \textbf{Lo aprendido hoy}\par\medskip
+                \small
+                \begin{itemize}
+                    \item Una neurona combina entradas mediante pesos y sesgo, y aplica una activación.
+                    \item Con identidad, $\hat y=\bm w^\top\bm x+b$: un modelo para regresión lineal.
+                    \item La pérdida mide el error; el gradiente indica cómo cambia con los parámetros.
+                    \item Aprender es actualizar pesos y sesgo en dirección $-\nabla\mathcal L$, con una tasa adecuada.
+                \end{itemize}
+            \end{caja}
+        \end{column}
+        \begin{column}{0.49\textwidth}
+            \begin{caja}
+                \textbf{Lo que construiremos sobre esta base}\par\medskip
+                \small
+                \textbf{Lunes 30: clasificación.} Sigmoide y softmax; elegir la activación de salida y la pérdida según las clases.\par\medskip
+                \textbf{Martes 1: perceptrón multicapa.} Componer capas con activaciones no lineales para aprender relaciones más complejas.\par\medskip
+                \textbf{Miércoles 2: entrenamiento.} Retropropagación para calcular gradientes; optimizadores y regularización para mejorar el aprendizaje y la generalización.
+            \end{caja}
+        \end{column}
+    \end{columns}
+    \medskip
+    \note{Antes de cerrar, pedir que expliquen con sus palabras qué cambia al entrenar y qué papel tienen la activación, la pérdida y la tasa de aprendizaje. Las próximas clases mantienen este ciclo: cambian las salidas y pérdidas para clasificación, se componen más capas y se calculan sus gradientes con la regla de la cadena. Recordar que reducir el error de entrenamiento no garantiza acertar en datos nuevos; esa distinción motivará la validación y la regularización. Contenidos futuros tomados de las guías Clase13.pdf, Clase14.pdf y Clase15.pdf.}
 \end{frame}
 
 \end{document}
