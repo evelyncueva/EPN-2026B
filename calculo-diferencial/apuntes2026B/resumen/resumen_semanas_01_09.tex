@@ -1,0 +1,895 @@
+% !TeX program = pdflatex
+% Compilar dos veces desde la carpeta resumen.
+\documentclass[8pt,a4paper,landscape]{extarticle}
+\makeatletter
+\def\input@path{{../semana_03/}}
+\makeatother
+\usepackage{estilo_apuntes}
+\geometry{a4paper,landscape,left=8mm,right=8mm,top=17mm,bottom=10mm,headheight=26pt,headsep=3mm,footskip=5mm}
+\usepackage{multicol}
+\usepackage{needspace}
+\usepackage{tikz}
+\usetikzlibrary{babel,arrows.meta}
+\tikzset{ejes/.style={->,Gris,thin},curva/.style={Azul,thick},every node/.style={font=\scriptsize}}
+\newenvironment{grafico}[1]{\par\smallskip\noindent\begin{minipage}{\linewidth}\centering\def\leyendagrafico{#1}}{\par\smallskip{\scriptsize\leyendagrafico}\par\end{minipage}\par\smallskip}
+% Cada pareja permanece unida: fórmulas a la izquierda, gráfico a la derecha.
+\newcommand{\formulagrafico}[2]{%
+  \par\smallskip\noindent\begin{minipage}{\linewidth}%
+  \begin{minipage}[c]{0.54\linewidth}#1\end{minipage}\hfill
+  \begin{minipage}[c]{0.44\linewidth}\centering #2\end{minipage}%
+  \end{minipage}\par\smallskip}
+\setlength{\columnsep}{4mm}
+\setlength{\columnseprule}{0.2pt}
+\setlength{\parskip}{2pt}
+\AtBeginDocument{%
+  \setlength{\abovedisplayskip}{4pt plus 1pt minus 1pt}%
+  \setlength{\belowdisplayskip}{4pt plus 1pt minus 1pt}%
+  \setlength{\abovedisplayshortskip}{2pt plus 1pt}%
+  \setlength{\belowdisplayshortskip}{4pt plus 1pt minus 1pt}%
+}
+\setlist[itemize]{leftmargin=3mm,itemsep=1pt,topsep=2pt}
+\setlist[enumerate]{leftmargin=4mm,itemsep=2pt,topsep=2pt}
+% Texto corrido: solo los títulos identifican por color el tipo de resultado.
+\newcommand{\tituloresultado}[3]{\par\addvspace{6pt}\needspace{4\baselineskip}\noindent{\color{#1}\bfseries #2: #3}\par\nobreak\smallskip\noindent\ignorespaces}
+\renewenvironment{definicion}[1][]{\tituloresultado{Azul}{Definición}{#1}}{\par}
+\renewenvironment{teorema}[1][]{\tituloresultado{Verde}{Teorema}{#1}}{\par}
+\renewenvironment{proposicion}[1][]{\tituloresultado{Violeta}{Proposición}{#1}}{\par}
+\raggedcolumns
+\newenvironment{observacion}[1]{\tituloresultado{Naranja}{Observación}{#1}}{\par}
+\makeatletter
+\renewcommand\section{\@startsection{section}{1}{\z@}{7pt plus 2pt minus 1pt}{4pt}{\normalfont\normalsize\bfseries}}
+\makeatother
+\newcommand{\tema}[1]{\par\needspace{7\baselineskip}\section*{#1}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Dom}{\operatorname{Dom}}
+\newcommand{\Img}{\operatorname{Im}}
+\encabezado{Cálculo Diferencial}{Resumen de consulta · 2026B}
+\pagestyle{fancy}
+\begin{document}
+\begin{center}
+  {\LARGE\bfseries\color{Azul} Cálculo Diferencial: resultados esenciales}\\[3pt]
+  Resumen de consulta del curso
+\end{center}
+\textbf{Cómo usar esta guía.} Identifique el concepto, compruebe las hipótesis y luego aplique el resultado. Los colores distinguen \textcolor{Azul}{\textbf{definiciones}}, \textcolor{Verde}{\textbf{teoremas}}, \textcolor{Violeta}{\textbf{proposiciones}} y \textcolor{Naranja}{\textbf{observaciones}}.
+\begin{multicols}{4}
+\textbf{Convenciones.} Salvo indicación contraria, se consideran funciones reales de variable real. En los teoremas sobre límites en $a$, las funciones están definidas para todas las entradas suficientemente cercanas a $a$, sin tomar el punto $a$. Los intervalos $[a,b]$ satisfacen $a<b$.
+\tema{1. Funciones y dominio}
+\begin{definicion}[función, imagen y gráfica]
+Sean $A,B$ conjuntos no vacíos. Una función $f:A\to B$ es una relación $f\subseteq A\times B$ tal que para cada $x\in A$ existe un único $y\in B$ con $(x,y)\in f$; se escribe $y=f(x)$. $A$ es el \textbf{dominio}, $B$ el \textbf{codominio} y
+\[
+  \Img(f)=\{f(x):x\in A\}\subseteq B.
+\]
+Su gráfica es el conjunto
+\[
+  G_f=\{(x,f(x)):x\in A\}.
+\]
+Para $C\subseteq A$, la restricción es la función $f|_C:C\to B$ definida por
+\[
+  (f|_C)(x)=f(x),\qquad x\in C.
+\]
+\end{definicion}
+\begin{proposicion}[dominio natural y criterio gráfico]
+Para hallar el dominio real de una expresión, imponga \textbf{simultáneamente}:
+\begin{itemize}
+  \item denominadores distintos de cero;
+  \item radicandos de raíces pares mayores o iguales que cero;
+  \item argumentos de logaritmos estrictamente positivos.
+\end{itemize}
+Una gráfica representa una función de $x$ si cada recta vertical la corta a lo sumo una vez.
+\end{proposicion}
+\begin{definicion}[familias algebraicas]
+Una función $f:\R\to\R$ pertenece a las siguientes familias según su ley de asignación:
+\begin{itemize}
+  \item \textbf{Lineal:} $f(x)=mx$, con $m\in\R$.
+  \item \textbf{Afín:} $f(x)=mx+b$, con $m,b\in\R$.
+  \item \textbf{Cuadrática:}
+  \[
+    f(x)=ax^2+bx+c,
+  \]
+  con $a,b,c\in\R$ y $a\ne0$.
+\end{itemize}
+
+Una función polinómica tiene la forma
+\[
+  p(x)=\sum_{k=0}^{n}a_kx^k,
+\]
+con $n\in\mathbb N\cup\{0\}$ y $a_k\in\R$. Una función racional es $r:D\to\R$, definida por
+\[
+  r(x)=\frac{p(x)}{q(x)},\qquad
+  D=\{x\in\R:q(x)\ne0\},
+\]
+donde $p,q$ son polinomios y $q$ no es el polinomio nulo.
+
+Para $n\in\mathbb N$, $n\ge2$, la raíz $n$-ésima es la inversa de $x\mapsto x^n$: de $[0,\infty)$ sobre sí mismo si $n$ es par, y de $\R$ sobre sí mismo si $n$ es impar.
+\end{definicion}
+\begin{definicion}[operaciones y composición]
+Sean $f:A\to\R$, $g:B\to\R$ y $D=A\cap B$.
+\begin{itemize}
+  \item La suma, diferencia y producto, de $D$ en $\R$, se definen por
+  \[
+  \begin{aligned}
+    (f\pm g)(x)&=f(x)\pm g(x),\\
+    (fg)(x)&=f(x)g(x).
+  \end{aligned}
+  \]
+  \item Para $c\in\R$, el múltiplo escalar se define en $A$ por
+  \[
+    (cf)(x)=cf(x).
+  \]
+  \item El cociente se define por
+  \[
+    \left(\frac fg\right)(x)=\frac{f(x)}{g(x)},
+  \]
+  en el dominio $\{x\in D:g(x)\ne0\}$.
+\end{itemize}
+
+La composición de $f$ con $g$ se define por
+\[
+  (f\circ g)(x)=f(g(x)),
+\]
+\[
+  \Dom(f\circ g)=\{x\in\Dom(g):g(x)\in\Dom(f)\}.
+\]
+Primero se aplica $g$ y después $f$.
+\end{definicion}
+
+\begin{definicion}[simetría y monotonía]
+Un conjunto $A\subseteq\R$ es simétrico respecto de $0$ si $x\in A$ implica $-x\in A$. Sea $f:A\to\R$, con $A$ simétrico.
+\begin{itemize}
+  \item $f$ es \textbf{par} si, para todo $x\in A$,
+  \[
+    f(-x)=f(x).
+  \]
+  \item $f$ es \textbf{impar} si, para todo $x\in A$,
+  \[
+    f(-x)=-f(x).
+  \]
+\end{itemize}
+
+Sea $I\subseteq A$ un intervalo. Para todo $u,v\in I$:
+\begin{itemize}
+  \item $f$ es \textbf{creciente} en $I$ si
+  \[
+    u<v\ \Longrightarrow\ f(u)\le f(v).
+  \]
+  \item $f$ es \textbf{decreciente} en $I$ si
+  \[
+    u<v\ \Longrightarrow\ f(u)\ge f(v).
+  \]
+\end{itemize}
+Es estrictamente creciente o decreciente si las respectivas desigualdades son estrictas. Es monótona si es creciente o decreciente.
+\end{definicion}
+\begin{definicion}[inyectividad y sobreyectividad]
+Para $f:A\to B$:
+\begin{itemize}
+  \item \textbf{Inyectiva:} para todo $u,v\in A$,
+  \[
+    f(u)=f(v)\ \Longrightarrow\ u=v.
+  \]
+  \item \textbf{Sobreyectiva:} para todo $y\in B$ existe $x\in A$ tal que
+  \[
+    f(x)=y.
+  \]
+  Equivalentemente, $\Img(f)=B$.
+  \item \textbf{Biyectiva:} cumple ambas propiedades.
+\end{itemize}
+\end{definicion}
+\begin{teorema}[función inversa]
+Una función $g:B\to A$ es inversa de $f:A\to B$ si se cumplen ambas identidades:
+\[
+\begin{aligned}
+  g(f(x))&=x&&\text{para todo }x\in A,\\
+  f(g(y))&=y&&\text{para todo }y\in B.
+\end{aligned}
+\]
+Tal función existe si y solo si $f$ es biyectiva; en ese caso es única y se denota $f^{-1}$. Para $x\in A$, $y\in B$,
+\[
+ f^{-1}(y)=x\iff f(x)=y,
+\]
+\[
+ f^{-1}(f(x))=x,\qquad f(f^{-1}(y))=y.
+\]
+Las gráficas se reflejan respecto de $y=x$.
+\begin{grafico}{La restricción de $x^2$ a $[0,\infty)$ tiene inversa $\sqrt{x}$.}
+\begin{tikzpicture}[x=0.65cm,y=0.65cm]
+  \draw[ejes] (-0.15,0)--(3.3,0) node[right] {$x$};
+  \draw[ejes] (0,-0.15)--(0,3.3) node[above] {$y$};
+  \draw[Gris,dashed] (0,0)--(3,3) node[above] {$y=x$};
+  \draw[curva,domain=0:1.7,samples=40] plot (\x,{\x*\x});
+  \draw[Violeta,thick,domain=0:3,samples=50] plot (\x,{sqrt(\x)});
+  \node[Azul] at (1.05,2.8) {$x^2$};
+  \node[Violeta] at (2.7,1.3) {$\sqrt{x}$};
+\end{tikzpicture}
+\end{grafico}
+\end{teorema}
+\begin{observacion}{dominio e inversa}
+$f^{-1}$ no significa $1/f$. Para invertir $x^2$, se puede restringir a $[0,\infty)$: su inversa es $\sqrt{x}$. Cancelar factores de una fracción no restituye los puntos excluidos del dominio original.
+\end{observacion}
+
+\tema{2. Límites: significado y herramientas}
+\begin{definicion}[noción de límite y límites laterales]
+Sea $f:D\to\R$ y suponga que existen puntos de $D$ distintos de $a$ arbitrariamente próximos a $a$. La expresión
+\[
+  \lim_{x\to a}f(x)=L
+\]
+indica que los valores $f(x)$ se aproximan a $L$ tanto como se desee al tomar entradas del dominio suficientemente próximas a $a$, con $x\ne a$.
+\begin{itemize}
+  \item Por la izquierda,
+  \[
+    \lim_{x\to a^-}f(x)=L,
+  \]
+  se consideran únicamente entradas $x<a$.
+  \item Por la derecha,
+  \[
+    \lim_{x\to a^+}f(x)=L,
+  \]
+  se consideran únicamente entradas $x>a$.
+\end{itemize}
+%En cada caso debe ser posible aproximarse por el lado indicado. Esta es la noción intuitiva trabajada en clase; su formulación con cuantificadores se reserva para la lectura opcional.
+\end{definicion}
+\begin{teorema}[unicidad y criterio lateral]
+El límite, si existe, es único. Cuando es posible aproximarse por ambos lados,
+\[
+ \lim_{x\to a}f(x)=L
+ \iff
+ \begin{cases}
+ \lim_{x\to a^-}f(x)=L,\\
+ \lim_{x\to a^+}f(x)=L.
+ \end{cases}
+\]
+\end{teorema}
+\begin{observacion}{el valor en el punto}
+El límite no depende de $f(a)$: puede existir aunque $f(a)$ no esté definido o sea distinto de $L$. Si dos funciones coinciden cerca de $a$, excepto quizá en $a$, tienen el mismo límite allí.
+\begin{grafico}{Existe el límite $L$, aunque $f(a)\ne L$.}
+\begin{tikzpicture}[x=0.8cm,y=0.6cm]
+  \draw[ejes] (-0.2,0)--(3.7,0) node[right] {$x$};
+  \draw[ejes] (0,-0.15)--(0,3.1) node[above] {$y$};
+  \draw[Gris,dashed] (0,1.5) node[left] {$L$}--(2,1.5)--(2,0) node[below] {$a$};
+  \draw[curva] (0.4,0.7)--(3.3,2.15);
+  \filldraw[fill=white,draw=Azul,thick] (2,1.5) circle (2pt);
+  \fill[Naranja] (2,2.7) circle (2pt) node[right] {$f(a)$};
+\end{tikzpicture}
+\end{grafico}
+\end{observacion}
+\begin{teorema}[álgebra de límites finitos]
+Sean $L,M,c\in\R$. Si
+\[
+  \lim_{x\to a}f(x)=L,\qquad \lim_{x\to a}g(x)=M,
+\]
+entonces
+\[
+\begin{aligned}
+ \lim_{x\to a}cf(x)&=cL,\\
+ \lim_{x\to a}(f(x)\pm g(x))&=L\pm M,\\
+ \lim_{x\to a}f(x)g(x)&=LM,\\
+ \lim_{x\to a}\frac{f(x)}{g(x)}&=\frac{L}{M}\quad(M\ne0).
+\end{aligned}
+\]
+Además,
+\[
+  \lim_{x\to a}c=c,\qquad \lim_{x\to a}x=a.
+\]
+Se obtienen límites de potencias y raíces cuando estas están definidas y son continuas en el valor límite.
+\end{teorema}
+\begin{proposicion}[sustitución directa]
+\begin{itemize}
+  \item Para un polinomio $p$ y $a\in\R$,
+  \[
+    \lim_{x\to a}p(x)=p(a).
+  \]
+  \item Para una función racional, si $q(a)\ne0$,
+  \[
+    \lim_{x\to a}\frac{p(x)}{q(x)}=\frac{p(a)}{q(a)}.
+  \]
+\end{itemize}
+En raíces se debe respetar el dominio y el lado de aproximación.
+\end{proposicion}
+\begin{observacion}{indeterminaciones y método}
+$0/0$ no es un valor ni determina el límite. Factorice, racionalice o reduzca a común denominador; simplifique solo para $x\ne a$ y vuelva a calcular.
+\[
+ \frac{x^2-1}{x-1}=x+1\quad(x\ne1),
+ \qquad\lim_{x\to1}\frac{x^2-1}{x-1}=2.
+\]
+Las formas $\infty/\infty$, $\infty-\infty$ y $0\cdot\infty$ también requieren análisis. El símbolo $\infty$ no es un número real.
+\end{observacion}
+\begin{teorema}[comparación y signo]
+Suponga que, para entradas suficientemente próximas a $a$, distintas de $a$,
+\[
+  f(x)\le g(x).
+\]
+Si los límites finitos satisfacen
+\[
+  \lim_{x\to a}f(x)=L,\qquad \lim_{x\to a}g(x)=M,
+\]
+entonces $L\le M$. Una desigualdad estricta puede convertirse en igualdad al pasar al límite.
+
+Si
+\[
+  \lim_{x\to a}f(x)=L>0,
+\]
+entonces, para entradas suficientemente próximas a $a$, distintas de $a$,
+\[
+  f(x)>0.
+\]
+Si $L<0$, se obtiene análogamente $f(x)<0$.
+\end{teorema}
+\begin{teorema}[del Sanduche o encaje]
+Si, para entradas suficientemente próximas a $a$, distintas de $a$,
+\[
+  g(x)\le f(x)\le h(x),
+\]
+y
+\[
+ \lim_{x\to a}g(x)=\lim_{x\to a}h(x)=L\in\R,
+\]
+entonces
+\[
+  \lim_{x\to a}f(x)=L.
+\]
+
+En particular, si $|f(x)|\le r(x)$ para todas las entradas suficientemente cercanas a $a$, sin tomar el punto $a$, y
+\[
+  \lim_{x\to a}r(x)=0,
+\]
+entonces $\displaystyle\lim_{x\to a}f(x)=0$.
+\begin{grafico}{Encaje: $-x^2\le x^2\sin(8x)\le x^2$; el límite en $0$ es $0$.}
+\begin{tikzpicture}[x=1.25cm,y=0.7cm]
+  \draw[ejes] (-1.3,0)--(1.4,0) node[right] {$x$};
+  \draw[ejes] (0,-1.5)--(0,1.6) node[above] {$y$};
+  \draw[Verde,dashed,domain=-1.15:1.15,samples=50] plot (\x,{\x*\x});
+  \draw[Verde,dashed,domain=-1.15:1.15,samples=50] plot (\x,{-\x*\x});
+  \draw[curva,domain=-1.15:1.15,samples=180] plot (\x,{\x*\x*sin(8*\x r)});
+  \node[Verde,right] at (1.05,1.2) {$x^2$};
+  \node[Verde,right] at (1.05,-1.2) {$-x^2$};
+\end{tikzpicture}
+\end{grafico}
+\end{teorema}
+\tema{3. Infinito y asíntotas}
+\begin{definicion}[noción de límites infinitos y al infinito]
+Sea $f:D\to\R$.
+\begin{itemize}
+  \item Se escribe
+  \[
+    \lim_{x\to a}f(x)=+\infty
+  \]
+  si $f(x)$ supera cualquier cota positiva al tomar entradas del dominio suficientemente próximas a $a$, con $x\ne a$. Para límite $-\infty$, los valores son negativos y su magnitud supera cualquier cota positiva.
+  \item Se escribe
+  \[
+    \lim_{x\to+\infty}f(x)=L\in\R
+  \]
+  si $f(x)$ se aproxima a $L$ tanto como se desee para entradas positivas suficientemente grandes. En $-\infty$ se consideran entradas negativas de magnitud suficientemente grande. El dominio debe permitir esas entradas.
+  \item En expresiones como
+  \[
+    \lim_{x\to+\infty}f(x)=+\infty,
+  \]
+  también los valores de la función superan cualquier cota positiva para entradas suficientemente grandes. Los restantes signos se interpretan de manera análoga.
+\end{itemize}
+Estas descripciones son intuitivas; el símbolo $\infty$ no representa un número real.
+\end{definicion}
+
+\begin{definicion}[asíntotas]
+La recta $x=a$ es una \textbf{asíntota vertical} de la gráfica de $f$ si al menos uno de los límites
+\[
+  \lim_{x\to a^-}f(x),\qquad \lim_{x\to a^+}f(x)
+\]
+es $+\infty$ o $-\infty$.
+
+La recta $y=L$, con $L\in\R$, es una \textbf{asíntota horizontal} si se cumple al menos una de las igualdades
+\[
+  \lim_{x\to+\infty}f(x)=L,\qquad \lim_{x\to-\infty}f(x)=L.
+\]
+Cada dirección se estudia por separado.
+\begin{grafico}{Para $f(x)=1/x$, las asíntotas son $x=0$ e $y=0$.}
+\begin{tikzpicture}[x=0.65cm,y=0.5cm]
+  \draw[ejes,dashed] (-2.4,0)--(2.5,0) node[right] {$x$};
+  \draw[ejes,dashed] (0,-2.5)--(0,2.6) node[above] {$y$};
+  \draw[curva,domain=0.43:2.2,samples=60] plot (\x,{1/\x});
+  \draw[curva,domain=-2.2:-0.43,samples=60] plot (\x,{1/\x});
+\end{tikzpicture}
+\end{grafico}
+\end{definicion}
+\begin{observacion}{signos y raíces}
+Un denominador que tiende a cero exige estudiar signos. Por ejemplo,
+\[
+  \lim_{x\to0^-}\frac1x=-\infty,\qquad
+  \lim_{x\to0^+}\frac1x=+\infty.
+\]
+Al simplificar raíces, recuerde que
+\[
+  \sqrt{x^2}=|x|=
+  \begin{cases}
+    x,&x\ge0,\\
+    -x,&x<0.
+  \end{cases}
+\]
+\end{observacion}
+
+\begin{proposicion}[racionales al infinito]
+Sean $p,q$ polinomios no nulos, de grados $m,n$ y coeficientes principales $a_m,b_n$.
+\begin{itemize}
+  \item Si $m<n$,
+  \[
+   \lim_{x\to+\infty}\frac{p(x)}{q(x)}=\lim_{x\to-\infty}\frac{p(x)}{q(x)}=0.
+  \]
+  \item Si $m=n$,
+  \[
+   \lim_{x\to+\infty}\frac{p(x)}{q(x)}=\lim_{x\to-\infty}\frac{p(x)}{q(x)}=\frac{a_m}{b_n}.
+  \]
+  \item Si $m>n$, sea $d=m-n$ y $c=a_m/b_n$. En $+\infty$ el límite es $+\infty$ si $c>0$ y $-\infty$ si $c<0$. En $-\infty$ se aplica el mismo criterio al signo de $c(-1)^d$.
+\end{itemize}
+Dividir entre la mayor potencia del denominador permite justificar estos resultados.
+\end{proposicion}
+
+\tema{4. Continuidad}
+\begin{definicion}[continuidad]
+Sea $f:D\to\R$ y sea $a\in D$ un punto al que se puede aproximar mediante otras entradas del dominio. Se dice que $f$ es continua en $a$ si
+\[
+  \lim_{x\to a}f(x)=f(a).
+\]
+Se comprueban tres condiciones:
+\begin{itemize}
+  \item $f(a)$ está definido;
+  \item existe el límite finito en $a$;
+  \item el límite coincide con $f(a)$.
+\end{itemize}
+Una función es continua en un intervalo si es continua en todos sus puntos, usando el lado disponible en los extremos incluidos. Para $f:[a,b]\to\R$, se exige continuidad en $(a,b)$ y
+\[
+  \lim_{x\to a^+}f(x)=f(a),\qquad
+  \lim_{x\to b^-}f(x)=f(b).
+\]
+\end{definicion}
+\begin{definicion}[discontinuidades]
+Sea $f$ definida para todas las entradas suficientemente cercanas a $a$, sin tomar el punto $a$.
+\begin{itemize}
+  \item \textbf{Removible:} existe el límite finito
+  \[
+    \lim_{x\to a}f(x)=L\in\R,
+  \]
+  pero $f(a)$ no está definido o $f(a)\ne L$. La extensión que asigna $f(a)=L$ es continua en $a$.
+  \item \textbf{De salto:} existen en $\R$ los límites
+  \[
+    L_-=\lim_{x\to a^-}f(x),\qquad
+    L_+=\lim_{x\to a^+}f(x),
+  \]
+  y $L_-\ne L_+$.
+  \item \textbf{Infinita:} alguno de los límites laterales es $+\infty$ o $-\infty$.
+\end{itemize}
+Estas clases no agotan todos los casos de falta de continuidad.
+\end{definicion}
+\begin{teorema}[operaciones y composición]
+Sumas, diferencias, múltiplos y productos de funciones continuas en $a$ son continuos allí. El cociente lo es si el denominador no se anula en $a$.
+
+Si $g$ es continua en $a$ y $f$ es continua en $g(a)$, entonces $f\circ g$ es continua en $a$.
+
+Más generalmente, suponga que
+\[
+  \lim_{x\to a}u(x)=L\in\Dom(f).
+\]
+Si $f$ es continua en $L$, entonces
+\[
+ \lim_{x\to a}f(u(x))=f(L),
+\]
+siempre que la composición esté definida para todas las entradas suficientemente cercanas a $a$, sin tomar el punto $a$.
+\end{teorema}
+\begin{observacion}{funciones por tramos}
+En cada unión, calcule ambos límites laterales y el valor asignado. Para continuidad deben coincidir los tres. Ajustar parámetros requiere resolver esas igualdades y verificar que respeten el dominio.
+\end{observacion}
+\begin{definicion}[cotas y extremos absolutos]
+Sea $f:D\to\R$ y $\varnothing\ne A\subseteq D$.
+\begin{itemize}
+  \item Está \textbf{acotada superiormente} en $A$ si existe $M\in\R$ tal que
+  \[
+    f(x)\le M\qquad\text{para todo }x\in A.
+  \]
+  \item Está \textbf{acotada inferiormente} en $A$ si existe $m\in\R$ tal que
+  \[
+    m\le f(x)\qquad\text{para todo }x\in A.
+  \]
+  \item Está \textbf{acotada} si cumple ambas condiciones; equivalentemente, existe $K>0$ tal que
+  \[
+    |f(x)|\le K\qquad\text{para todo }x\in A.
+  \]
+  \item Alcanza un \textbf{mínimo absoluto} en $x_m\in A$ si
+  \[
+    f(x_m)\le f(x)\qquad\text{para todo }x\in A.
+  \]
+  \item Alcanza un \textbf{máximo absoluto} en $x_M\in A$ si
+  \[
+    f(x)\le f(x_M)\qquad\text{para todo }x\in A.
+  \]
+\end{itemize}
+\end{definicion}
+\begin{teorema}[consecuencias locales]
+Sea $f:D\to\R$ continua en $a\in D$.
+\begin{itemize}
+  \item Existe $K>0$ tal que, para todas las entradas del dominio suficientemente próximas a $a$,
+  \[
+    |f(x)|\le K.
+  \]
+  \item Si $f(a)\ne0$, para todas las entradas del dominio suficientemente próximas a $a$,
+  \[
+    f(x)f(a)>0.
+  \]
+\end{itemize}
+\end{teorema}
+\begin{teorema}[Weierstrass: máximo y mínimo]
+Si $f$ es continua en un intervalo \textbf{cerrado y acotado} $[a,b]$, alcanza máximo y mínimo absolutos: existen $x_m,x_M\in[a,b]$ tales que
+\[
+ f(x_m)\le f(x)\le f(x_M)\quad(x\in[a,b]).
+\]
+En particular, está acotada en todo el intervalo.
+\end{teorema}
+\begin{teorema}[Bolzano (localización de raíces)]
+\formulagrafico{%
+Sea $f:[a,b]\to\R$ continua. Si
+\[
+  f(a)f(b)<0,
+\]
+existe $c\in(a,b)$ tal que
+\[
+  f(c)=0.
+\]
+}{%
+\begin{tikzpicture}[x=0.65cm,y=0.6cm]
+  \draw[ejes] (-0.3,0)--(3.1,0) node[right] {$x$};
+  \draw[ejes] (0,-1.5)--(0,1.8) node[above] {$y$};
+  \draw[curva,domain=0.35:2.65,samples=60] plot (\x,{0.65*(\x-1.5)+0.25*(\x-1.5)^3});
+  \draw[Gris,dashed] (0.35,0) node[above] {$a$}--(0.35,-1.1277);
+  \draw[Gris,dashed] (2.65,0) node[below] {$b$}--(2.65,1.1277);
+  \draw[Gris,dotted] (0,-1.1277)--(0.35,-1.1277);
+  \draw[Gris,dotted] (0,1.1277)--(2.65,1.1277);
+  \node[Azul,anchor=north west,inner sep=1pt] at (0,-1.1277) {$f(a)$};
+  \node[Azul,anchor=south west,inner sep=1pt] at (0,1.1277) {$f(b)$};
+  \fill[Verde] (1.5,0) circle (2pt) node[below] {$c$};
+  \fill[Azul] (0.35,-1.1277) circle (1.5pt);
+  \fill[Azul] (2.65,1.1277) circle (1.5pt);
+\end{tikzpicture}
+}
+\end{teorema}
+\begin{teorema}[valor intermedio]
+Sea $f:[a,b]\to\R$ continua y sea $k\in\R$ tal que
+\[
+  f(a)<k<f(b)\quad\text{o}\quad
+  f(a)>k>f(b).
+\]
+Existe $c\in(a,b)$ con
+\[
+  f(c)=k.
+\]
+Si se incluyen los valores extremos, se permite $c\in[a,b]$.
+\end{teorema}
+
+\tema{5. Funciones trascendentes}
+\begin{definicion}[funciones trigonométricas]
+Sea $t\in\R$. En el círculo unitario
+\[
+  S^1=\{(u,v)\in\R^2:u^2+v^2=1\},
+\]
+sea $P(t)$ el punto obtenido al recorrer desde $(1,0)$ una longitud orientada $t$ (sentido antihorario positivo). El parámetro $t$ se mide en \textbf{radianes}. Si $P(t)=(u,v)$, se definen las funciones
+\formulagrafico{%
+\[
+\begin{aligned}
+  \cos&:\R\to[-1,1]
+\end{aligned}
+\]
+\[
+\begin{aligned}
+  \sin&:\R\to[-1,1]
+\end{aligned}
+\]
+}{%
+\begin{tikzpicture}[x=0.76cm,y=0.76cm]
+  \draw[Gris] (0,0) circle (1);
+  \draw[ejes] (-1.15,0)--(1.3,0) node[right] {$u$};
+  \draw[ejes] (0,-1.15)--(0,1.3) node[above] {$v$};
+  \coordinate (P) at ({cos(55)},{sin(55)});
+  \draw[Gris,dotted] (P)--(0,{sin(55)});
+  \draw[Gris,dotted] (P)--({cos(55)},0);
+  \draw[curva] (0,0)--(P) node[midway,above left,inner sep=1pt] {$1$};
+  \draw[Violeta,very thick] (0,0)--({cos(55)},0);
+  \draw[Verde,very thick] (0,0)--(0,{sin(55)});
+  \node[Violeta,below,inner sep=1pt] at (0.35,0) {$\cos t$};
+  \node[Verde,left,inner sep=1pt] at (0,0.5) {$\sin t$};
+  \draw[Azul] (0.3,0) arc (0:55:0.3);
+  \node[Azul,inner sep=1pt] at (0.43,0.22) {$t$};
+  \fill[Azul] (P) circle (1.4pt) node[above right,inner sep=1pt] {$P(t)=(u,v)$};
+  \node[below right,inner sep=1pt] at (1,0) {$1$};
+\end{tikzpicture}
+}
+El coseno es la componente horizontal y el seno es la componente vertical de $P(t)$. El dibujo representa un ángulo del primer cuadrante; para cualquier $t\in\R$ las componentes conservan su signo correspondiente.
+
+Las restantes funciones se definen con los dominios y conjuntos de llegada
+\[
+  \tan,\sec:D_c\to\R,\qquad
+  \cot,\csc:D_s\to\R,
+\]
+mediante
+\[
+ \tan t=\frac{\sin t}{\cos t},\quad \sec t=\frac1{\cos t},
+\]
+\[
+ \cot t=\frac{\cos t}{\sin t},\quad \csc t=\frac1{\sin t}.
+\]
+Se excluyen los ceros de cada denominador: $\cos t=0$ en $t=\pi/2+k\pi$; $\sin t=0$ en $t=k\pi$, $k\in\mathbb Z$.
+\end{definicion}
+\begin{proposicion}[identidades esenciales]
+\[
+ \sin^2t+\cos^2t=1,\qquad |\sin t|\le1,|\cos t|\le1.
+\]
+El seno es impar y el coseno es par. Además,
+\[
+ 1-\cos t=2\sin^2(t/2).
+\]
+Los valores de referencia son
+\[
+\renewcommand{\arraystretch}{1.5}
+\begin{array}{c|ccccc}
+  t&0&\pi/6&\pi/4&\pi/3&\pi/2\\\hline
+  \sin t&0&1/2&\sqrt2/2&\sqrt3/2&1\\
+  \cos t&1&\sqrt3/2&\sqrt2/2&1/2&0
+\end{array}
+\]
+\end{proposicion}
+\begin{teorema}[límites trigonométricos]
+\[
+ \lim_{t\to0}\frac{\sin t}{t}=1,\qquad
+ \lim_{t\to0}\frac{1-\cos t}{t}=0.
+\]
+También se cumple
+\[
+  \lim_{t\to0}\frac{\tan t}{t}=1.
+\]
+Por cambio de variable, para $a,b\in\R$ con $b\ne0$,
+\[
+ \lim_{x\to0}\frac{\sin(ax)}{bx}=\frac ab.
+\]
+Las funciones trigonométricas son continuas en sus dominios.
+\end{teorema}
+\begin{definicion}[exponencial y logaritmo]
+Sea $a>0$, $a\ne1$. La función exponencial de base $a$ es $E_a:\R\to(0,\infty)$, $E_a(x)=a^x$. Para $a>1$ y $x\in\R$, la potencia real se define por
+\[
+ a^x=\sup\{a^r:r\in\mathbb Q,\ r\le x\},
+\]
+donde $a^{m/n}$ es la raíz positiva $n$-ésima de $a^m$, para $m\in\mathbb Z$ y $n$ entero positivo. Si $0<a<1$, se define $a^x=(1/a)^{-x}$.
+
+$E_a$ es biyectiva. Su inversa es el logaritmo $\log_a:(0,\infty)\to\R$, caracterizado, para $x>0$ y $y\in\R$, por
+\[
+ \log_a x=y\iff a^y=x.
+\]
+Ambas son estrictamente crecientes si $a>1$ y estrictamente decrecientes si $0<a<1$. El logaritmo natural se define por
+\[
+  \ln x=\log_e x,\qquad x>0,
+\]
+donde
+\[
+  e=\lim_{n\to\infty}\left(1+\frac1n\right)^n.
+\]
+\end{definicion}
+\begin{proposicion}[leyes exponenciales y logarítmicas]
+Para $a>0$, $a\ne1$, $u,v,r\in\R$ y $X,Y>0$,
+\[
+ a^{u+v}=a^ua^v,\quad a^{u-v}=a^u/a^v,\quad (a^u)^v=a^{uv},
+\]
+\[
+ \log_a(XY)=\log_a X+\log_a Y,
+\]
+\[
+ \log_a(X/Y)=\log_a X-\log_a Y,
+\]
+\[
+ \log_a(X^r)=r\log_a X,\quad
+ \log_a X=\frac{\ln X}{\ln a}.
+\]
+Además,
+\[
+  \ln(e^u)=u,\qquad e^{\ln X}=X.
+\]
+\end{proposicion}
+\begin{teorema}[continuidad y límites naturales]
+La exponencial es continua en $\R$ y el logaritmo en $(0,\infty)$; se puede sustituir en puntos de esos dominios.
+\[
+ \lim_{t\to0}\frac{e^t-1}{t}=1,\qquad
+ \lim_{t\to0}\frac{\ln(1+t)}{t}=1.
+\]
+En el segundo cociente se exige $1+t>0$. Para otras bases,
+\[
+ \lim_{t\to0}\frac{a^t-1}{t}=\ln a,\qquad
+ \lim_{t\to0}\frac{\log_a(1+t)}{t}=\frac1{\ln a}.
+\]
+Estos límites fundamentales permiten resolver indeterminaciones exponenciales y logarítmicas.
+\end{teorema}
+\begin{proposicion}[extremos y crecimiento]
+\textbf{Base mayor que uno.} Si $a>1$:
+\formulagrafico{%
+\[
+\begin{aligned}
+  \lim_{x\to+\infty}a^x&=+\infty,\\
+  \lim_{x\to-\infty}a^x&=0.
+\end{aligned}
+\]
+}{%
+\begin{tikzpicture}[x=0.39cm,y=0.28cm]
+  \draw[ejes] (-2.7,0)--(2.4,0) node[right] {$x$};
+  \draw[ejes] (0,-0.25)--(0,4.8) node[above] {$y$};
+  \draw[Gris,dashed] (-2.6,0)--(2.2,0);
+  \draw[curva,arrows={Stealth[length=2pt,width=2pt]-Stealth[length=2pt,width=2pt]},domain=-2.6:2.1,samples=65] plot (\x,{pow(2,\x)});
+  \fill[Azul] (0,1) circle (1.7pt);
+  \node[left] at (0,1) {$1$};
+  \node[Azul,left] at (2,3.8) {$y=2^x$};
+\end{tikzpicture}
+}
+\formulagrafico{%
+\[
+\begin{aligned}
+  \lim_{x\to0^+}\log_a x&=-\infty,\\
+  \lim_{x\to+\infty}\log_a x&=+\infty.
+\end{aligned}
+\]
+}{%
+\begin{tikzpicture}[x=0.44cm,y=0.22cm]
+  \draw[ejes] (-0.35,0)--(4.3,0) node[right] {$x$};
+  \draw[ejes] (0,-3.5)--(0,3.2) node[above] {$y$};
+  \draw[Gris,dashed] (0,-3.4)--(0,3.1);
+  \draw[curva,arrows={Stealth[length=2pt,width=2pt]-Stealth[length=2pt,width=2pt]},domain=0.1:4.05,samples=110] plot (\x,{ln(\x)/ln(2)});
+  \fill[Azul] (1,0) circle (1.7pt) node[below] {$1$};
+  \node[Azul,above] at (2.7,2.1) {$y=\log_2x$};
+\end{tikzpicture}
+}
+\textbf{Base entre cero y uno.} Si $0<a<1$:
+\formulagrafico{%
+\[
+\begin{aligned}
+  \lim_{x\to+\infty}a^x&=0,\\
+  \lim_{x\to-\infty}a^x&=+\infty.
+\end{aligned}
+\]
+}{%
+\begin{tikzpicture}[x=0.39cm,y=0.28cm]
+  \draw[ejes] (-2.4,0)--(2.7,0) node[right] {$x$};
+  \draw[ejes] (0,-0.25)--(0,4.8) node[above] {$y$};
+  \draw[Gris,dashed] (-2.2,0)--(2.6,0);
+  \draw[Violeta,thick,arrows={Stealth[length=2pt,width=2pt]-Stealth[length=2pt,width=2pt]},domain=-2.1:2.6,samples=65] plot (\x,{pow(0.5,\x)});
+  \fill[Violeta] (0,1) circle (1.7pt);
+  \node[right] at (0,1) {$1$};
+  \node[Violeta,right] at (-1.9,3.8) {$y=(1/2)^x$};
+\end{tikzpicture}
+}
+\formulagrafico{%
+\[
+\begin{aligned}
+  \lim_{x\to0^+}\log_a x&=+\infty,\\
+  \lim_{x\to+\infty}\log_a x&=-\infty.
+\end{aligned}
+\]
+}{%
+\begin{tikzpicture}[x=0.44cm,y=0.22cm]
+  \draw[ejes] (-0.35,0)--(4.3,0) node[right] {$x$};
+  \draw[ejes] (0,-3.2)--(0,3.5) node[above] {$y$};
+  \draw[Gris,dashed] (0,-3.1)--(0,3.4);
+  \draw[Violeta,thick,arrows={Stealth[length=2pt,width=2pt]-Stealth[length=2pt,width=2pt]},domain=0.1:4.05,samples=110] plot (\x,{ln(\x)/ln(0.5)});
+  \fill[Violeta] (1,0) circle (1.7pt) node[above] {$1$};
+  \node[Violeta,below] at (2.7,-2.1) {$y=\log_{1/2}x$};
+\end{tikzpicture}
+}
+\textbf{Dominio, recorrido y asíntota} (en ambos casos):
+\begin{itemize}
+  \item Exponencial $a^x$: dominio $\R$, recorrido $(0,\infty)$ y asíntota $y=0$.
+  \item Logaritmo $\log_a x$: dominio $(0,\infty)$, recorrido $\R$ y asíntota $x=0$.
+\end{itemize}
+Los gráficos ilustran las bases $2$ y $1/2$.
+Las flechas indican la continuación de las curvas; ninguna de estas curvas corta su eje asintótico.
+
+Para $p>0$ y $a>1$,
+\[
+ \lim_{x\to+\infty}\frac{\ln x}{x^p}=0,\qquad
+ \lim_{x\to+\infty}\frac{x^p}{a^x}=0.
+\]
+\end{proposicion}
+\begin{observacion}{antes de transformar}
+No existe una ley que separe $\ln(X+Y)$ en suma de logaritmos. En ecuaciones logarítmicas, determine primero el dominio y compruebe allí las soluciones obtenidas.
+\end{observacion}
+
+\tema{6. Introducción a la derivada}
+\begin{definicion}[cociente incremental y derivada]
+Sea $f:I\to\R$, con $I$ un intervalo abierto, y sea $a\in I$. Para $h\ne0$ tal que $a+h\in I$, el cociente incremental es
+\[
+ \frac{f(a+h)-f(a)}h,\qquad h\ne0.
+\]
+Es la pendiente de la secante entre las abscisas $a$ y $a+h$. La derivada es el límite \textbf{finito}
+\[
+ f'(a)=\lim_{h\to0}\frac{f(a+h)-f(a)}h
+       =\lim_{x\to a}\frac{f(x)-f(a)}{x-a},
+\]
+cuando existe. Se dice entonces que $f$ es derivable en $a$. Sea
+\[
+  D_f=\{a\in I:f\text{ es derivable en }a\}.
+\]
+La función derivada es $f':D_f\to\R$, que asigna a cada $a\in D_f$ el valor del límite anterior.
+\end{definicion}
+\begin{proposicion}[interpretaciones]
+\formulagrafico{%
+Si $f'(a)$ existe, la recta tangente es
+\[
+\begin{aligned}
+ y&=f(a)+f'(a)(x-a).
+\end{aligned}
+\]
+}{%
+\begin{tikzpicture}[x=0.6cm,y=0.45cm]
+  \draw[ejes] (-0.2,0)--(3.4,0) node[right] {$x$};
+  \draw[ejes] (0,-0.25)--(0,4.1) node[above] {$y$};
+  \draw[curva,domain=0.25:3.05,samples=50] plot (\x,{0.4*\x*\x});
+  \draw[Verde,thick,domain=0.35:3] plot (\x,{0.96*\x-0.576});
+  \draw[Naranja,dashed,domain=0.8:2.9] plot (\x,{1.44*\x-1.152});
+  \fill[Azul] (1.2,0.576) circle (2pt);
+  \fill[Azul] (2.4,2.304) circle (2pt);
+  \draw[Gris,dotted] (1.2,0) node[below] {$a$}--(1.2,0.576);
+  \draw[Gris,dotted] (2.4,0) node[below] {$a+h$}--(2.4,2.304);
+\end{tikzpicture}
+}
+La tangente (verde) tiene pendiente $f'(a)$; la secante (naranja) aproxima esa pendiente.
+Si $s(t)$ es la posición, la velocidad media entre $t$ y $t+h$ es
+\[
+  v_{\mathrm{media}}=\frac{s(t+h)-s(t)}h,\qquad h\ne0.
+\]
+La velocidad instantánea, si existe la derivada, es
+\[
+  v(t)=s'(t).
+\]
+Sus unidades son unidades de posición por unidad de tiempo.
+\end{proposicion}
+\begin{teorema}[derivabilidad y continuidad]
+Si $f$ es derivable en $a$, es continua en $a$. La continuidad es necesaria para la derivabilidad.
+\end{teorema}
+\begin{observacion}{el recíproco falla}
+$f(x)=|x|$ es continua en $0$, pero sus cocientes laterales tienden a $-1$ y $1$: no es derivable allí. Para derivabilidad interior se requieren ambos límites laterales \textbf{finitos e iguales}.
+
+Una discontinuidad, una esquina o una cúspide impiden la derivada finita. Una tangente vertical tampoco representa una derivada real finita. Para $\sqrt{x}$ en $0$, el cociente por la derecha tiende a $+\infty$.
+\end{observacion}
+\begin{proposicion}[derivadas básicas]
+Para $c\in\R$,
+\[
+ (c)'=0,\qquad (x)'=1,\qquad (x^n)'=nx^{n-1}.
+\]
+Para potencias con $n\in\mathbb Z\setminus\{0\}$: si $n>0$, vale en $\R$; si $n<0$, se exige $x\ne0$. Para $n=0$ se deriva la constante $1$.
+\[
+ (\sqrt{x})'=\frac1{2\sqrt{x}},\qquad x>0.
+\]
+\end{proposicion}
+\begin{teorema}[reglas de derivación]
+Sean $u,v:I\to\R$, con $I$ abierto, derivables en $x\in I$, y sea $c\in\R$. Entonces
+\[
+ (cu)'(x)=cu'(x),
+\]
+\[
+ (u\pm v)'(x)=u'(x)\pm v'(x),
+\]
+\[
+ (uv)'(x)=u'(x)v(x)+u(x)v'(x).
+\]
+Si además $v(x)\ne0$, entonces
+\[
+ \left(\frac uv\right)'(x)=
+ \frac{u'(x)v(x)-u(x)v'(x)}{[v(x)]^2}.
+\]
+\end{teorema}
+\begin{observacion}{errores que conviene evitar}
+En general, las siguientes igualdades son falsas:
+\[
+  (uv)'=u'v',\qquad
+  \left(\frac uv\right)'=\frac{u'}{v'}.
+\]
+Distinga $f(a)$, que es una altura, de $f'(a)$, que es una pendiente. En funciones por tramos, compruebe continuidad en la unión y calcule allí la derivada mediante su definición.
+\end{observacion}
+\tema{7. Elegir una herramienta}
+\begin{observacion}{ruta de consulta}
+\begin{enumerate}
+  \item \textbf{Dominio:} reúna restricciones antes de simplificar, componer o invertir.
+  \item \textbf{Límite:} intente sustitución. Si aparece $0/0$, transforme; si hay oscilación acotada, busque encaje. Para infinito, compare términos dominantes y signos.
+  \item \textbf{Continuidad:} compare límite y valor. En uniones o extremos, use los lados correspondientes.
+  \item \textbf{Existencia:} en un intervalo cerrado y acotado, compruebe continuidad antes de usar Weierstrass, Bolzano o valor intermedio.
+  \item \textbf{Derivada:} use las reglas en puntos ordinarios; en puntos especiales, vuelva al cociente incremental.
+\end{enumerate}
+\end{observacion}
+\end{multicols}
+\end{document}

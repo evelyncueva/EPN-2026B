@@ -370,7 +370,7 @@
 \begin{frame}{Entre capas: composición de funciones}
     \centering
     \begin{tikzpicture}[>=Latex,every node/.style={font=\small},
-        capa/.style={draw=fondo,rounded corners,fill=verde!10,minimum width=23mm,minimum height=10mm}]
+        capa/.style={draw=fondo,rounded corners,fill=verde!10,minimum width=16mm,minimum height=10mm}]
         \node (x) at (0,0) {$x$};
         \node[capa] (f1) at (2,0) {$f_1$};
         \node (h) at (4,0) {$h=f_1(x)$};
@@ -401,7 +401,7 @@
 
 \input{figuras/motivacion_cuadratica.tex}
 
-\begin{frame}{Simulación: ¿qué cambia cuando la red aprende?}
+\begin{frame}{Simulación: relaciones no lineales}
     \input{figuras/simulacion_resultados.tex}
     \centering
     \includegraphics[width=0.97\textwidth,height=3.5cm,keepaspectratio]{simulacion_cuadrado.pdf}
@@ -422,7 +422,7 @@
         \end{column}
     \end{columns}
     \medskip
-    \href{run:simulacion/simulacion_cuadrado.html}{\textbf{Abrir simulación interactiva: pesos, sesgos y predicciones}}
+    \href{run:simulacion/simulacion_cuadrado.html}{\scriptsize\textbf{Abrir simulación interactiva: pesos, sesgos y predicciones}}
     \par\smallskip
     {\scriptsize Red 1--6--1 con tanh, 21 pares, semilla 7 y descenso por gradiente. El punto naranja consulta $x=1.5$.}
     \note{Usar la etapa 3 de simulacion/simulacion_progresiva.html o la demostración original simulacion/simulacion_cuadrado.html. Funcionan sin internet. Los estados proceden de un entrenamiento real. Mostrar inicio, 500 y 12000 épocas, y seguir el cálculo z=wx+b seguido de tanh en una neurona. La salida combina las seis respuestas con pesos v y su propio sesgo c. Cambiar la entrada después de entrenar mantiene los parámetros fijos. Comparar con la neurona lineal. Cerrar la progresión: una entrada afín usa un peso y un sesgo; dos entradas afines usan dos pesos y un sesgo en la misma neurona; una relación curva motiva no linealidad. Una función con detalles más variados puede necesitar más capacidad, pero no hay una regla universal que asigne un tamaño de red a cada complejidad. El GIF conserva la animación cuadrática y el PDF muestra tres estados estáticos.}
@@ -522,9 +522,10 @@
     \note{La distinción evita mezclar la regla clásica del perceptrón con descenso de gradiente de MSE. Para esta clase todos los gradientes y las aplicaciones corresponden a la columna derecha.}
 \end{frame}
 
-\section{Aprender: medir el error y actualizar parámetros}
+\section{Aprendizaje: cuantificar el error y actualizar los parámetros}
 
-\begin{frame}{¿Qué significa aprender a partir de ejemplos?}
+\begin{frame}{¿Qué significa que una red neuronal aprenda?}
+    Para un modelo supervisado, si $\bm x^{(i)}$ es la entrada de un ejemplo y $y^{(i)}$ su salida de referencia, el aprendizaje consiste en ajustar los parámetros $\bm w$ y $b$ para que la predicción $\hat y^{(i)}$ se acerque a $y^{(i)}$.
     \[\mathcal D=\{(\bm x^{(i)},y^{(i)})\}_{i=1}^{N},\qquad
       \hat y^{(i)}=\bm w^\top\bm x^{(i)}+b.\]
     \vspace{1mm}
@@ -534,7 +535,7 @@
                 minimum height=12mm,text width=18mm,inner sep=2mm,font=\small}]
             \node[paso] (datos) {Datos\\$(\bm x,y)$};
             \node[paso,right=of datos] (modelo) {Modelo\\$\hat y$};
-            \node[paso,right=of modelo] (loss) {Pérdida\\$\mathcal L$};
+            \node[paso,right=of modelo] (loss) {Función de pérdida\\$\mathcal L$};
             \node[paso,right=of loss] (grad) {Gradiente\\$\nabla\mathcal L$};
             \node[paso,right=of grad] (update) {Actualizar\\$\bm w,b$};
             \draw[->] (datos)--(modelo);
@@ -551,6 +552,37 @@
     \note{Las etiquetas y las entradas permanecen fijas en este experimento; cambiamos parámetros. Aclarar que disminuir pérdida de entrenamiento no prueba generalización a datos nuevos.}
 \end{frame}
 
+\begin{frame}{Recordatorio: vector gradiente}
+    \begin{caja}[yellowbox]
+        \small
+        \textbf{En este ejemplo:} $\mathcal L(w,b)=2(w-2)^2+(b+1)^2$.
+        Su mínimo está en $(w,b)=(2,-1)$.
+    \end{caja}
+    \par\smallskip
+    \centering
+    \includegraphics[width=\textwidth,height=2.8cm,keepaspectratio]{gradiente_paraboloide.pdf}
+    \par
+    {\scriptsize
+    $\displaystyle\nabla\mathcal L=
+    \begin{pmatrix}\partial_w\mathcal L\\\partial_b\mathcal L\end{pmatrix}
+    =\begin{pmatrix}4(w-2)\\2(b+1)\end{pmatrix}.$
+    \quad En $(0,1)$: $\nabla\mathcal L=
+    \begin{pmatrix}4(0-2)\\2(1+1)\end{pmatrix}
+    =\begin{pmatrix}-8\\4\end{pmatrix}$.}
+    \par\smallskip
+    \begin{caja}[greenbox]
+        \small
+        \textbf{Paso de descenso del gradiente (máximo descenso):}\par\smallskip
+        $\displaystyle
+        \underbrace{\bm\theta_{t+1}}_{\text{parámetros nuevos}}
+        =\underbrace{\bm\theta_t}_{\text{parámetros actuales}}
+        -\underbrace{\eta}_{\text{tasa de aprendizaje}}\,\nabla\mathcal L(\bm\theta_t),
+        \qquad \bm\theta_t=\begin{pmatrix}w_t\\b_t\end{pmatrix},\quad\eta>0.$\par\smallskip
+        La tasa $\eta$ controla el paso de descenso. $+\nabla\mathcal L$: dirección de mayor crecimiento local y $-\nabla\mathcal L$: dirección de mayor descenso local.
+    \end{caja}
+    \note{Cada punto del plano representa una elección de peso y sesgo, no una observación de los datos. La altura representa la pérdida. Las curvas unen parámetros con igual pérdida; el gradiente es perpendicular a ellas y apunta hacia valores mayores. Las flechas se escalan para facilitar la lectura; los puntos verdes usan pasos reales con eta=0.2. Esta pérdida es exactamente el MSE de dos datos sintéticos: x=+-sqrt(2), y=2x-1. El gradiente indica el mayor crecimiento local por unidad de distancia en la norma euclídea; su opuesto es una dirección de descenso si el gradiente no es cero y el paso es suficientemente pequeño. No apunta necesariamente en línea recta al mínimo. En este paraboloide convexo, con la tasa elegida, los pasos convergen al mínimo global; en una red no lineal no hay esa garantía general.}
+\end{frame}
+
 \begin{frame}{Una pérdida para regresión: error cuadrático medio}
     \begin{columns}[c]
         \begin{column}{0.53\textwidth}
@@ -560,7 +592,7 @@
             \begin{caja}
                 \textbf{Residuo de una observación}
                 \[e_i=\hat y^{(i)}-y^{(i)}.\]
-                \textbf{Promedio de los errores al cuadrado}
+                \textbf{Promedio de los errores al cuadrado (MSE)}
                 \[\mathcal L(\bm w,b)=\frac1N\sum_{i=1}^N e_i^2.\]
             \end{caja}
             \medskip
@@ -570,31 +602,12 @@
     \note{Preguntar por qué no basta con promediar residuos con signo. La figura usa los datos del Ejemplo 1 y una recta ilustrativa de pendiente 1.2.}
 \end{frame}
 
-\begin{frame}{Recordatorio: el gradiente señala la mayor subida}
-    {\small Ejemplo con dos parámetros:
-    $\mathcal L(w,b)=2(w-2)^2+(b+1)^2$, con mínimo en $(w,b)=(2,-1)$.}
-    \par\smallskip
-    \centering
-    \includegraphics[width=\textwidth,height=3.65cm,keepaspectratio]{gradiente_paraboloide.pdf}
-    \par
-    {\small
-    $\displaystyle\nabla\mathcal L=
-    \begin{pmatrix}\partial_w\mathcal L\\\partial_b\mathcal L\end{pmatrix}
-    =\begin{pmatrix}4(w-2)\\2(b+1)\end{pmatrix}.$
-    \quad En $(0,1)$: $\nabla\mathcal L=(-8,4)^\top$.}
-    \par\smallskip
-    \begin{caja}[greenbox]
-        \small\raggedright
-        $+\nabla\mathcal L$: mayor crecimiento local.
-        $-\nabla\mathcal L$: mayor descenso local.\par\smallskip
-        Con $\eta=0.2$: $(0,1)-0.2(-8,4)=(1.6,0.2)$;
-        la pérdida baja de $12$ a $1.76$. Repetimos para acercarnos al mínimo.
-    \end{caja}
-    \note{Cada punto del plano representa una elección de peso y sesgo, no una observación de los datos. La altura representa la pérdida. Las curvas unen parámetros con igual pérdida; el gradiente es perpendicular a ellas y apunta hacia valores mayores. Las flechas se escalan para facilitar la lectura; los puntos verdes usan pasos reales con eta=0.2. Esta pérdida es exactamente el MSE de dos datos sintéticos: x=+-sqrt(2), y=2x-1. El gradiente indica el mayor crecimiento local por unidad de distancia en la norma euclídea; su opuesto es una dirección de descenso si el gradiente no es cero y el paso es suficientemente pequeño. No apunta necesariamente en línea recta al mínimo. En este paraboloide convexo, con la tasa elegida, los pasos convergen al mínimo global; en una red no lineal no hay esa garantía general.}
-\end{frame}
 
-\begin{frame}{¿Cómo sabemos hacia dónde cambiar el modelo?}
-    Para una entrada, $\hat y^{(i)}=wx^{(i)}+b$ y $\sigma'(z)=1$:
+
+\begin{frame}{Gradiente del MSE para una neurona lineal}
+    Dada
+    \[\mathcal L(\bm w,b)=\frac1N\sum_{i=1}^N (\hat y^{(i)}-y^{(i)})^2.\]
+    con $\hat y^{(i)}=\bm w^\top\bm x^{(i)}+b$ y $\sigma(z)=z$ tal que $\sigma'(z)=1$. Entonces
     \begin{align*}
         \frac{\partial\mathcal L}{\partial w}
             &=\frac{2}{N}\sum_{i=1}^N
@@ -604,10 +617,6 @@
             &=\frac{2}{N}\sum_{i=1}^N
               (\hat y^{(i)}-y^{(i)})\underbrace{1}_{\partial\hat y^{(i)}/\partial b}.
     \end{align*}
-    \begin{caja}[orangebox]
-        \textbf{El sesgo también aprende si forma parte del modelo.}\par\smallskip
-        En el Ejemplo 1 se fija $b=0$ y solo se entrena $w$.
-    \end{caja}
     \note{Derivar en pizarra un término con la regla de la cadena. Resumen12.pdf, p. 2, muestra un factor cero en la derivada respecto de b: corregirlo para el modelo wx+b. En el notebook del Ejemplo 1, b no participa en la predicción. Para d entradas sustituir x por el vector de características.}
 \end{frame}
 
@@ -626,7 +635,6 @@
         w_{\mathrm{nuevo}}&=2.2, & b_{\mathrm{nuevo}}&=0.6,
         & \hat y_{\mathrm{nueva}}&=5.
     \end{align*}
-    \actividad{Comprueba el signo}{¿Por qué restar un gradiente negativo aumenta el parámetro?}
     \note{La predicción nueva da pérdida cero solo en este ejemplo de un dato y con esta tasa. No generalizar a otros datos ni afirmar que un paso siempre mejora la pérdida. Ambos gradientes se calculan antes de actualizar.}
 \end{frame}
 
@@ -641,27 +649,17 @@
     \note{Curvas del Ejemplo 1, b=0, 50 épocas; MSE calculado después de cada actualización. Preguntar qué curva elegirían y qué observarían para decidir. Las tasas no son universales: dependen de la escala de los datos y del objetivo.}
 \end{frame}
 
-\begin{frame}{Época, lote y actualización: tres ideas distintas}
+\begin{frame}{Época, lote y actualización}
     \begin{caja}
-        \textbf{Época (\textit{epoch}):} un recorrido completo de los datos de entrenamiento.\par\medskip
+        \small
+        \textbf{Época (\textit{epoch}):} un recorrido completo de los datos de entrenamiento.\par\smallskip
         \textbf{Lote (\textit{batch}):} subconjunto de observaciones usado para calcular un gradiente.
-        Su tamaño, $B$, se llama \textbf{\textit{batch size}}.\par\medskip
+        Su tamaño, $B$, se llama \textbf{\textit{batch size}}.\par\smallskip
         \textbf{Actualización (\textit{update} o \textit{training step}):} un paso que modifica los pesos y el sesgo entrenables usando el gradiente de un lote y la tasa de aprendizaje.
     \end{caja}
-    \vspace{3mm}
+    \par\smallskip
     \centering
-    Para $N=30$ observaciones, sin descartar el último lote:
-    \medskip
-
-    \begin{tabular}{lcc}
-        \toprule
-        Modalidad & Tamaño del lote ($B$) & Actualizaciones por época\\
-        \midrule
-        Lote completo & 30 & 1\\
-        Minilotes & 10 & 3\\
-        Una observación por paso & 1 & 30\\
-        \bottomrule
-    \end{tabular}
+    \resizebox{\linewidth}{!}{\input{figuras/ejemplo_batches.tex}}
     \note{En general hay ceil(N/B) actualizaciones por época si se incluye el último lote incompleto. Resumen12.pdf equipara actualización y época; eso solo coincide en el caso de lote completo del notebook. El bloque final no baraja observaciones.}
 \end{frame}
 

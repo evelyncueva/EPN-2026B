@@ -1,0 +1,31 @@
+% Cada bloque representa una observación (entrada y etiqueta).
+\begin{tikzpicture}[>=Latex, font=\small]
+    \node[anchor=west,font=\small\bfseries] at (0,2.7)
+        {Dataset: 30 observaciones; cada bloque es un par $(\bm x^{(i)},y^{(i)})$};
+    \foreach \i in {1,...,30} {
+        \pgfmathsetmacro{\posx}{(\i-1)*0.4}
+        \node[draw=fondo,fill=fondo!6,minimum width=0.36cm,
+              minimum height=0.38cm,inner sep=0pt,font=\tiny]
+            at (\posx,2.15) {\i};
+    }
+    \foreach \grupo/\colorlote in {0/verde,1/naranja,2/fondo} {
+        \pgfmathsetmacro{\inicio}{\grupo*4.15}
+        \pgfmathtruncatemacro{\numero}{\grupo+1}
+        \draw[->,thick,\colorlote]
+            ({\grupo*4+1.8},1.88) -- ({\inicio+1.62},1.35);
+        \node[text=\colorlote,font=\small\bfseries]
+            at ({\inicio+1.62},1.08) {Batch \numero: 10 datos};
+        \draw[rounded corners,draw=\colorlote,fill=\colorlote!5]
+            ({\inicio-0.24},0.18) rectangle ({\inicio+3.48},0.83);
+        \foreach \j in {1,...,10} {
+            \pgfmathtruncatemacro{\dato}{\grupo*10+\j}
+            \node[draw=\colorlote,fill=\colorlote!15,minimum width=0.32cm,
+                  minimum height=0.38cm,inner sep=0pt,font=\tiny]
+                at ({\inicio+(\j-1)*0.36},0.5) {\dato};
+        }
+        \node[font=\scriptsize,text=\colorlote]
+            at ({\inicio+1.62},-0.12) {Gradiente $\to$ actualización \numero};
+    }
+    \node[font=\small\bfseries,text=verde] at (5.95,-0.7)
+        {Batch size $=10$ \quad $\Longrightarrow$ \quad 3 batches = 3 actualizaciones = 1 epoch};
+\end{tikzpicture}

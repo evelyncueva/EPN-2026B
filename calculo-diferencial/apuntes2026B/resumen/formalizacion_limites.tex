@@ -1,0 +1,102 @@
+% !TeX program = pdflatex
+% Lectura opcional: no forma parte del resumen de contenidos ya vistos.
+\documentclass[10pt,a4paper]{article}
+\makeatletter
+\def\input@path{{../semana_03/}}
+\makeatother
+\usepackage{estilo_apuntes}
+\geometry{a4paper,left=14mm,right=14mm,top=22mm,bottom=16mm,headheight=32pt}
+\usepackage{multicol}
+\setlength{\columnsep}{7mm}
+\newcommand{\R}{\mathbb{R}}
+\renewenvironment{definicion}[1][]{\par\medskip\noindent{\color{Azul}\bfseries Definición: #1}\par\nobreak\smallskip}{\par}
+\encabezado{Lectura opcional}{Formalización de límites}
+\pagestyle{fancy}
+\begin{document}
+\begin{center}
+  {\Large\bfseries\color{Azul} Formalización de límites y continuidad}
+\end{center}
+\textbf{Para un estudio posterior.} Estas definiciones se reservan para cuando se introduzcan los cuantificadores y la formulación precisa de proximidad. No forman parte de los contenidos ya desarrollados en clase.
+
+\textbf{Lectura de los símbolos.} La condición $|x-a|<\delta$ controla la distancia de la entrada a $a$; $|f(x)-L|<\varepsilon$ controla la distancia de la imagen a $L$. Primero se fija una tolerancia arbitraria $\varepsilon>0$ y luego se busca un $\delta>0$ que garantice la condición para todas las entradas indicadas. El valor de $\delta$ puede depender de $\varepsilon$, pero no de cada entrada $x$.
+\begin{multicols}{2}
+\begin{definicion}[límite y límites laterales]
+Sea $f:D\to\R$ y sea $a$ un punto de acumulación de $D$: para todo $\delta>0$ existe $x\in D$ con $0<|x-a|<\delta$. Para $L\in\R$, se define
+\[
+ \lim_{x\to a}f(x)=L
+\]
+si para todo $\varepsilon>0$ existe $\delta>0$ tal que, para todo $x\in D$,
+\[
+ 0<|x-a|<\delta\ \Longrightarrow\ |f(x)-L|<\varepsilon.
+\]
+Los límites laterales se definen con los mismos cuantificadores:
+\begin{itemize}
+  \item Por la izquierda se escribe
+  \[
+    \lim_{x\to a^-}f(x)=L,
+  \]
+  y se exige
+  \[
+    a-\delta<x<a\ \Longrightarrow\ |f(x)-L|<\varepsilon.
+  \]
+  \item Por la derecha se escribe
+  \[
+    \lim_{x\to a^+}f(x)=L,
+  \]
+  y se exige
+  \[
+    a<x<a+\delta\ \Longrightarrow\ |f(x)-L|<\varepsilon.
+  \]
+\end{itemize}
+En cada caso, $a$ debe ser punto de acumulación del dominio por el lado correspondiente.
+\end{definicion}
+
+\begin{definicion}[límites infinitos y al infinito]
+Sea $f:D\to\R$ y sea $a$ punto de acumulación de $D$. Se escribe
+\[
+  \lim_{x\to a}f(x)=+\infty
+\]
+si para todo $M>0$ existe $\delta>0$ tal que, para todo $x\in D$,
+\[
+ 0<|x-a|<\delta\ \Longrightarrow\ f(x)>M.
+\]
+Para $\lim_{x\to a}f(x)=-\infty$, se sustituye la conclusión por $f(x)<-M$. Los límites laterales infinitos se definen restringiendo $x$ al lado correspondiente.
+
+Si $D$ no está acotado superiormente y $L\in\R$, se escribe
+\[
+  \lim_{x\to+\infty}f(x)=L
+\]
+si para todo $\varepsilon>0$ existe $A>0$ tal que, para todo $x\in D$,
+\[
+ x>A\ \Longrightarrow\ |f(x)-L|<\varepsilon.
+\]
+En $\lim_{x\to-\infty}f(x)=L$ se exige que $D$ no esté acotado inferiormente y se sustituye $x>A$ por $x<-A$.
+
+Se define
+\[
+  \lim_{x\to+\infty}f(x)=+\infty
+\]
+si para todo $M>0$ existe $A>0$ tal que, para todo $x\in D$,
+\[
+  x>A\ \Longrightarrow\ f(x)>M.
+\]
+Para límite $-\infty$ se exige $f(x)<-M$; en $x\to-\infty$ se usa $x<-A$, con el dominio no acotado inferiormente.
+\end{definicion}
+
+\begin{definicion}[continuidad]
+Sea $f:D\to\R$ y $a\in D$. Se dice que $f$ es continua en $a$ si para todo $\varepsilon>0$ existe $\delta>0$ tal que, para todo $x\in D$,
+\[
+ |x-a|<\delta\ \Longrightarrow\ |f(x)-f(a)|<\varepsilon.
+\]
+Si $a$ es punto de acumulación de $D$, esta condición equivale a
+\[
+ \lim_{x\to a}f(x)=f(a).
+\]
+Una función es continua en un conjunto si es continua en cada uno de sus puntos. Para $f:[a,b]\to\R$, esto equivale a continuidad en $(a,b)$ y a
+\[
+ \lim_{x\to a^+}f(x)=f(a),\qquad
+ \lim_{x\to b^-}f(x)=f(b).
+\]
+\end{definicion}
+\end{multicols}
+\end{document}
